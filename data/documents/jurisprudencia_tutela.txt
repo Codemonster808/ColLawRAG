@@ -1,0 +1,9 @@
+# Corte Constitucional — Acción de Tutela (Mock)
+
+La acción de tutela protege los derechos fundamentales cuando resulten vulnerados o amenazados por la acción u omisión de cualquier autoridad pública.
+
+Artículo 86 — Constitución Política de Colombia.
+Toda persona tendrá acción de tutela para reclamar ante los jueces, en todo momento y lugar, mediante un procedimiento preferente y sumario.
+
+Doctrina constitucional relevante.
+La tutela procede de manera excepcional frente a particulares cuando hay indefensión o subordinación. 

@@ -1,0 +1,10 @@
+# Ley 393 de 1997 — Acción de Cumplimiento (Mock)
+
+Objeto de la ley.
+Reglamenta la acción de cumplimiento para hacer efectivo el cumplimiento de normas con fuerza material de ley o actos administrativos.
+
+Artículo 1 — Finalidad.
+Toda persona podrá acudir ante la autoridad judicial para hacer efectivo el cumplimiento de normas aplicables con fuerza material de ley.
+
+Artículo 5 — Requisitos de la demanda.
+La demanda deberá identificar la norma incumplida y la autoridad responsable. 

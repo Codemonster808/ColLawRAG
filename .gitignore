@@ -1,0 +1,7 @@
+node_modules/
+.next/
+.env.local
+.env*
+.data/
+data/index.json
+/data/feedback.log 
