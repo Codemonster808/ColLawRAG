@@ -7,8 +7,11 @@ import { type RagQuery, type RagResponse } from './types'
 export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
   const { query, filters, locale = 'es' } = params
 
+  console.log('[rag] retrieve chunks start')
   const retrieved = await retrieveRelevantChunks(query, filters, 8)
+  console.log('[rag] retrieved=%d', retrieved.length)
   const answer = await generateAnswerSpanish({ query, chunks: retrieved })
+  console.log('[rag] generation done. answer length=%d', (answer || '').length)
 
   const safeAnswer = filterSensitivePII(answer || '')
 

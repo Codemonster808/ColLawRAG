@@ -87,7 +87,28 @@ function fakeEmbed(text, dim = 768) {
 }
 
 async function embedBatch(texts) {
+  const provider = process.env.EMB_PROVIDER || 'hf'
+  if (provider === 'local') {
+    console.warn('⚠️  Usando embeddings locales (fake). Para embeddings reales, configure HUGGINGFACE_API_KEY y EMB_PROVIDER=hf')
+    return texts.map(t => fakeEmbed(t))
+  }
+  if (provider === 'xenova') {
+    try {
+      const { pipeline } = await import('@xenova/transformers')
+      const model = process.env.EMB_MODEL || 'Xenova/all-MiniLM-L6-v2'
+      const extractor = await pipeline('feature-extraction', model)
+      const outputs = await extractor(texts, { pooling: 'mean', normalize: true })
+      const toArray = (x) => Array.from(x.data || x)
+      return Array.isArray(outputs) ? outputs.map(toArray) : [toArray(outputs)]
+    } catch (e) {
+      console.error('⚠️  Error con Xenova, usando embeddings locales:', e.message)
+      return texts.map(t => fakeEmbed(t))
+    }
+  }
+  // Default: Hugging Face - requiere API key
   if (!process.env.HUGGINGFACE_API_KEY) {
+    console.error('❌ HUGGINGFACE_API_KEY no configurada. Configure la variable de entorno para usar embeddings reales.')
+    console.error('   Usando embeddings locales (fake) como fallback.')
     return texts.map(t => fakeEmbed(t))
   }
   const { HfInference } = await import('@huggingface/inference')
@@ -124,6 +145,14 @@ async function upsertPinecone(chunks) {
 }
 
 async function main() {
+  // Validar configuración de embeddings
+  const provider = process.env.EMB_PROVIDER || 'hf'
+  if (provider === 'hf' && !process.env.HUGGINGFACE_API_KEY) {
+    console.error('❌ Error: EMB_PROVIDER=hf requiere HUGGINGFACE_API_KEY')
+    console.error('   Configure HUGGINGFACE_API_KEY en .env.local o use EMB_PROVIDER=local para desarrollo')
+    process.exit(1)
+  }
+
   if (!fs.existsSync(DOCS_DIR)) {
     console.error('Directorio no encontrado:', DOCS_DIR)
     process.exit(1)
@@ -134,6 +163,8 @@ async function main() {
     console.error('No se encontraron documentos en', DOCS_DIR)
     process.exit(1)
   }
+  
+  console.log(`📚 Procesando ${files.length} documento(s) con provider=${provider}`)
 
   const chunks = []
 

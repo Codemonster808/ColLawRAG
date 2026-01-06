@@ -3,5 +3,12 @@ node_modules/
 .env.local
 .env*
 .data/
-data/index.json
-/data/feedback.log 
+/data/feedback.log
+# Archivos sensibles
+huggin_face_api_key.txt
+*_api_key.txt
+# Archivos de prueba/debug
+**/test-*.mjs
+**/debug/
+hf-gen-test.mjs
+# data/index.json - incluido en build para Vercel 

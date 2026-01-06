@@ -3,6 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   experimental: {
     typedRoutes: true,
+    serverComponentsExternalPackages: ['@xenova/transformers'],
   },
 };
 

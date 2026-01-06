@@ -57,7 +57,7 @@ Respuesta:
 
 ## Modelos por defecto
 - Embeddings: `sentence-transformers/paraphrase-multilingual-mpnet-base-v2` (multilingüe con buen desempeño en ES).
-- Generación: `meta-llama/Meta-Llama-3-8B-Instruct` (puedes cambiar por `mistralai/Mistral-7B-Instruct-v0.2` si no tienes acceso).
+- Generación: `mistralai/Mistral-7B-Instruct-v0.3` (accesible sin gate, optimizado para español).
 
 ## Pruebas locales
 - Consultas sugeridas:
@@ -79,6 +79,30 @@ Respuesta:
 - `scripts/ingest.ts`: ingesta y vectorización
 - `data/`: documentos y `index.json` local
 - `styles/`: Tailwind
+
+## Despliegue en Vercel
+
+Ver [VERCEL_DEPLOY.md](VERCEL_DEPLOY.md) para instrucciones detalladas.
+
+**Resumen rápido:**
+```bash
+npm i -g vercel
+vercel login
+vercel --prod
+```
+
+Configura las variables de entorno en Vercel Dashboard:
+- `HUGGINGFACE_API_KEY`
+- `HF_EMBEDDING_MODEL`
+- `HF_GENERATION_MODEL`
+- `EMB_PROVIDER=hf`
+- `GEN_PROVIDER=hf`
+
+## Datos Actuales
+
+- **10 documentos legales** indexados (Constitución, Código Laboral, Ley 100, etc.)
+- **Índice vectorial**: 1.3MB (embeddings reales)
+- **Fuentes**: Funcion Pública, SUIN-Juriscol, documentos manuales
 
 ## Notas legales
 Este proyecto es educativo y no sustituye asesoría legal. Verifica en fuentes oficiales (Diario Oficial, Corte Constitucional, MinTrabajo). 
