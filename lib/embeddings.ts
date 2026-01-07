@@ -7,7 +7,11 @@ const EMB_MODEL = process.env.EMB_MODEL || 'Xenova/all-MiniLM-L6-v2'
 let hf: HfInference | null = null
 function getHf() {
   if (!hf) {
-    hf = new HfInference(process.env.HUGGINGFACE_API_KEY)
+    // Use the new router endpoint instead of the deprecated api-inference endpoint
+    // @ts-ignore - endpoint option exists but may not be in types yet
+    hf = new HfInference(process.env.HUGGINGFACE_API_KEY, {
+      endpoint: 'https://router.huggingface.co'
+    } as any)
   }
   return hf
 }
@@ -47,9 +51,9 @@ export async function embedTexts(texts: string[]): Promise<number[][]> {
       const extractor: any = await pipeline('feature-extraction', EMB_MODEL)
       const outputs: any = await extractor(texts, { pooling: 'mean', normalize: true })
       // outputs can be a single tensor or array; normalize to number[][]
-      const toArray = (x: any) => Array.from(x.data || x)
+      const toArray = (x: any): number[] => Array.from(x.data || x) as number[]
       if (Array.isArray(outputs)) {
-        return outputs.map(toArray)
+        return outputs.map(toArray) as number[][]
       }
       return [toArray(outputs)]
     } catch (e) {

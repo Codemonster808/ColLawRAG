@@ -12,3 +12,5 @@ huggin_face_api_key.txt
 **/debug/
 hf-gen-test.mjs
 # data/index.json - incluido en build para Vercel 
+.vercel
+.env*.local

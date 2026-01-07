@@ -113,7 +113,10 @@ async function embedBatch(texts) {
   }
   const { HfInference } = await import('@huggingface/inference')
   const model = process.env.HF_EMBEDDING_MODEL || 'sentence-transformers/paraphrase-multilingual-mpnet-base-v2'
-  const hf = new HfInference(process.env.HUGGINGFACE_API_KEY)
+  // Use the new router endpoint instead of the deprecated api-inference endpoint
+  const hf = new HfInference(process.env.HUGGINGFACE_API_KEY, {
+    endpoint: 'https://router.huggingface.co'
+  })
   const out = await hf.featureExtraction({ model, inputs: texts })
   return out
 }

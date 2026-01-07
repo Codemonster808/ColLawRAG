@@ -6,7 +6,11 @@ const HF_MODEL_GENERATION_DEFAULT = 'mistralai/Mistral-7B-Instruct-v0.3'
 let hf: HfInference | null = null
 function getHf() {
   if (!hf) {
-    hf = new HfInference(process.env.HUGGINGFACE_API_KEY)
+    // Use the new router endpoint instead of the deprecated api-inference endpoint
+    // @ts-ignore - endpoint option exists but may not be in types yet
+    hf = new HfInference(process.env.HUGGINGFACE_API_KEY, {
+      endpoint: 'https://router.huggingface.co'
+    } as any)
   }
   return hf
 }

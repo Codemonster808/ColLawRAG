@@ -47,12 +47,16 @@ Esto abrirá tu navegador para autenticarte. Si no tienes cuenta:
 
 ---
 
-### Paso 3: Primer Deploy (Preview)
+### Paso 3: Linkear Proyecto con Vercel (Sin Deploy Aún)
+
+**⚠️ IMPORTANTE:** Este paso solo linkea el proyecto. **NO** haremos deploy todavía. Primero debemos configurar las variables de entorno.
+
+#### Opción A: Desde CLI
 
 Ejecuta:
 
 ```bash
-vercel
+vercel link
 ```
 
 **Preguntas que te hará Vercel:**
@@ -63,13 +67,42 @@ vercel
 - `In which directory is your code located?` → **./** (presiona Enter)
 - `Want to override the settings?` → **N** (No)
 
-Esto creará un deploy de preview. Anota la URL que te dé (algo como `https://col-law-rag-xxxxx.vercel.app`)
+**Resultado esperado:** Verás el mensaje "🔗 Linked to [tu-proyecto]". Esto crea el archivo `.vercel/project.json`.
+
+**Si ves error de telemetría/Docker:**
+Si ves un error como `ENXIO: no such device or address` o `spawn ENOMEM`, **no te preocupes**. El proyecto SÍ se linkeó correctamente si viste "🔗 Linked to...".
+
+**Solución rápida:**
+```bash
+# Deshabilitar telemetría
+export VERCEL_TELEMETRY_DISABLED=1
+vercel link
+```
+
+#### Opción B: Desde Dashboard (Si CLI da problemas)
+
+1. Ve a https://vercel.com/dashboard
+2. Haz clic en **Add New...** → **Project**
+3. Si tienes repositorio en GitHub:
+   - Selecciona tu repositorio `col-law-rag`
+   - Vercel detectará automáticamente Next.js
+   - **NO hagas clic en Deploy todavía** - primero configura variables
+4. Si NO tienes repositorio:
+   - Puedes crear el proyecto manualmente desde el Dashboard
+   - O usar `vercel link` después de crear el proyecto
+
+**Verificación:**
+```bash
+# Verificar que el proyecto está linkeado
+ls -la .vercel
+cat .vercel/project.json
+```
 
 ---
 
 ### Paso 4: Configurar Variables de Entorno en Vercel
 
-**IMPORTANTE:** Este paso es crítico para que la aplicación funcione.
+**⚠️ CRÍTICO:** Este paso **DEBE** hacerse **ANTES** de cualquier deploy. Si intentas deployar sin las variables de entorno, verás un error como `Environment Variable "HUGGINGFACE_API_KEY" references Secret "...", which does not exist.`
 
 #### Opción A: Desde el Dashboard (Recomendado)
 
@@ -86,53 +119,107 @@ Esto creará un deploy de preview. Anota la URL que te dé (algo como `https://c
 | `EMB_PROVIDER` | `hf` |
 | `GEN_PROVIDER` | `hf` |
 
-5. Para cada variable, selecciona los ambientes:
+5. Para **TODAS** las variables, selecciona **SOLO** estos ambientes:
    - ✅ **Production**
    - ✅ **Preview**
-   - ✅ **Development**
+   - ❌ **Development** (NO seleccionar - Development es para desarrollo local con `.env.local`, no para Vercel)
+
+   **Nota:** Las variables de entorno en Vercel son para los deploys en Vercel (Production y Preview). Para desarrollo local, usa un archivo `.env.local` en tu máquina.
 
 6. Haz clic en **Save** después de cada variable
 
 #### Opción B: Desde CLI
 
+**⚠️ IMPORTANTE:** Para **TODAS** las variables, selecciona **SOLO** Production y Preview. **NO** selecciones Development (es para desarrollo local, no para Vercel).
+
 ```bash
+# Para TODAS las variables, cuando pregunte por ambientes, selecciona:
+#   - ✅ Production
+#   - ✅ Preview
+#   - ❌ Development (NO seleccionar)
+
 vercel env add HUGGINGFACE_API_KEY
 # Pega: TU_HUGGINGFACE_API_KEY
-# Selecciona: Production, Preview, Development
+# Selecciona: Production, Preview (NO Development)
 
 vercel env add HF_EMBEDDING_MODEL
 # Pega: sentence-transformers/paraphrase-multilingual-mpnet-base-v2
-# Selecciona: Production, Preview, Development
+# Selecciona: Production, Preview (NO Development)
 
 vercel env add HF_GENERATION_MODEL
 # Pega: mistralai/Mistral-7B-Instruct-v0.3
-# Selecciona: Production, Preview, Development
+# Selecciona: Production, Preview (NO Development)
 
 vercel env add EMB_PROVIDER
 # Pega: hf
-# Selecciona: Production, Preview, Development
+# Selecciona: Production, Preview (NO Development)
 
 vercel env add GEN_PROVIDER
 # Pega: hf
-# Selecciona: Production, Preview, Development
+# Selecciona: Production, Preview (NO Development)
 ```
+
+**Nota:** Development en Vercel es para desarrollo local usando `vercel dev`. Si necesitas variables de entorno localmente, créalas en un archivo `.env.local` en tu proyecto.
+
+**✅ Verificación:** Una vez agregadas todas las variables, deberías ver 5 variables en la lista (HUGGINGFACE_API_KEY, HF_EMBEDDING_MODEL, HF_GENERATION_MODEL, EMB_PROVIDER, GEN_PROVIDER).
 
 ---
 
-### Paso 5: Deploy a Producción
+### Paso 5: Primer Deploy (Preview)
 
-Una vez configuradas las variables de entorno:
+**Ahora sí podemos hacer el deploy.** Las variables de entorno ya están configuradas.
+
+#### Opción A: Desde CLI
+
+```bash
+# Si tienes problemas con telemetría
+export VERCEL_TELEMETRY_DISABLED=1
+
+# Deploy preview
+vercel --prod=false
+```
+
+O simplemente:
+
+```bash
+vercel
+```
+
+Esto creará un deploy de preview. Anota la URL que te dé (algo como `https://col-law-rag-xxxxx.vercel.app`)
+
+#### Opción B: Desde Dashboard
+
+1. Ve a https://vercel.com/dashboard
+2. Haz clic en tu proyecto `col-law-rag`
+3. Haz clic en **Deploy** (si no aparece, ve a **Deployments** → **Create Deployment**)
+4. Espera a que termine el build (3-5 minutos)
+
+**Si ves errores durante el build:**
+- Revisa los logs en el Dashboard
+- Verifica que todas las variables de entorno estén configuradas
+- Asegúrate de que `data/index.json` esté en el repositorio
+
+---
+
+### Paso 6: Deploy a Producción
+
+Una vez que el deploy preview funcione correctamente:
 
 ```bash
 vercel --prod
 ```
+
+O desde el Dashboard:
+1. Ve a **Deployments**
+2. Haz clic en los tres puntos (...) del último deploy
+3. Selecciona **Promote to Production**
 
 Esto desplegará tu aplicación a producción. Te dará una URL como:
 `https://col-law-rag.vercel.app`
 
 ---
 
-### Paso 6: Verificar el Deploy
+### Paso 7: Verificar el Deploy
 
 1. Visita la URL de producción
 2. Prueba una consulta:
@@ -175,6 +262,40 @@ git push -u origin main
 
 ## 🐛 Troubleshooting
 
+### Error: "ENXIO: no such device or address" o "spawn ENOMEM" en Paso 3
+
+Este error ocurre cuando Vercel CLI intenta enviar telemetría y encuentra problemas con Docker o recursos del sistema. **¡Buenas noticias!** Si viste el mensaje "🔗 Linked to...", el proyecto SÍ se configuró correctamente.
+
+**Soluciones:**
+
+1. **Deshabilitar telemetría:**
+   ```bash
+   export VERCEL_TELEMETRY_DISABLED=1
+   vercel link  # O vercel --prod=false para deploy
+   ```
+
+2. **Usar Dashboard de Vercel (Recomendado):**
+   - Ve a https://vercel.com/dashboard
+   - El proyecto `col-law-rag` debería aparecer en tu lista
+   - Configura las variables de entorno (Paso 4)
+   - Luego haz clic en **Deploy**
+
+3. **Verificar estado del proyecto:**
+   ```bash
+   # Verificar que el proyecto está linkeado
+   cat .vercel/project.json
+   
+   # Si existe, puedes continuar con el Paso 4 (variables) y luego deployar
+   ```
+
+4. **Si Docker está causando problemas:**
+   ```bash
+   # Cerrar Docker Desktop si está corriendo
+   # O ignorar el error y continuar con el Dashboard
+   ```
+
+**Importante:** Este error NO impide el linkeo ni el deploy. El proyecto está linkeado y puedes continuar con el Paso 4.
+
 ### Error: "data/index.json not found"
 
 **Solución:**
@@ -192,8 +313,43 @@ git push
 
 **Solución:**
 1. Verifica en Vercel Dashboard → Settings → Environment Variables
-2. Asegúrate de que esté en Production, Preview y Development
-3. Haz un nuevo deploy después de agregar variables
+2. Asegúrate de que esté en **Production** y **Preview** (NO Development)
+3. Si acabas de agregar variables, haz un nuevo deploy:
+   ```bash
+   vercel --prod=false  # Para preview
+   # O
+   vercel --prod        # Para producción
+   ```
+
+### Error: "Command 'npm run build' exited with 1"
+
+Este error indica un problema de compilación TypeScript o de build. Para diagnosticarlo:
+
+**1. Ejecuta el build localmente para ver el error específico:**
+```bash
+cd /home/lesaint/Documentos/Cursor/ColLawRAG
+npm run build
+```
+
+**2. Errores comunes y soluciones:**
+
+- **Error de tipos TypeScript:**
+  - Revisa los mensajes de error en la salida del build
+  - Los errores más comunes están en `lib/embeddings.ts` o archivos de tipos
+  - Asegúrate de que todos los tipos estén correctamente definidos
+
+- **Dependencias faltantes:**
+  ```bash
+  npm install
+  ```
+
+- **Problemas con `data/index.json`:**
+  - Asegúrate de que el archivo existe: `ls -la data/index.json`
+  - Si no existe, ejecuta: `npm run ingest`
+
+**3. Si el build funciona localmente pero falla en Vercel:**
+- Verifica que todas las dependencias estén en `package.json` (no solo en `node_modules`)
+- Revisa los logs detallados en Vercel Dashboard → Deployments → [tu deploy] → Build Logs
 
 ### Error: Build timeout
 
@@ -208,6 +364,36 @@ git push
 - Vercel tiene límite de 50MB por función
 - Si `data/index.json` crece mucho, considera migrar a Pinecone
 - Por ahora, 1.3MB está bien dentro del límite
+
+### Error: "api-inference.huggingface.co is no longer supported"
+
+**Síntoma:** La aplicación no devuelve resultados y en los logs aparece:
+```
+Error: "https://api-inference.huggingface.co is no longer supported. Please use https://router.huggingface.co instead."
+```
+
+**Solución:**
+Este error ya está corregido en el código. El SDK de Hugging Face ahora usa el nuevo endpoint `router.huggingface.co` automáticamente. Si ves este error:
+
+1. **Asegúrate de tener la versión más reciente del SDK:**
+   ```bash
+   npm install @huggingface/inference@latest
+   ```
+
+2. **Verifica que el código esté actualizado:**
+   - Los archivos `lib/generation.ts` y `lib/embeddings.ts` ya están configurados para usar el nuevo endpoint
+   - El script `scripts/ingest.mjs` también está actualizado
+
+3. **Haz un nuevo deploy:**
+   ```bash
+   git add .
+   git commit -m "Fix: Update Hugging Face endpoint to router.huggingface.co"
+   git push
+   # O
+   vercel --prod
+   ```
+
+**Nota:** Este fix ya está incluido en el código actual. Si aún ves el error, asegúrate de que el deploy incluya los cambios más recientes.
 
 ---
 
