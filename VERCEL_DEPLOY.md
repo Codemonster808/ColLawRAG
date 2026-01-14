@@ -42,19 +42,26 @@ git push -u origin main
 
 ### Configurar Variables de Entorno en Vercel
 
+**📝 Obtener tu Hugging Face API Key:**
+1. Ve a https://huggingface.co/settings/tokens
+2. Haz clic en **New token**
+3. Dale un nombre (ej: "ColLawRAG")
+4. Selecciona permisos **Read** (suficiente para la API)
+5. Copia el token (empieza con `hf_`)
+
 1. En el Dashboard de Vercel, ve a tu proyecto
 2. Settings → Environment Variables
 3. Agrega las siguientes variables:
 
 ```
-HUGGINGFACE_API_KEY=TU_HUGGINGFACE_API_KEY
+HUGGINGFACE_API_KEY=TU_HUGGINGFACE_API_KEY (reemplaza con tu token de Hugging Face)
 HF_EMBEDDING_MODEL=sentence-transformers/paraphrase-multilingual-mpnet-base-v2
 HF_GENERATION_MODEL=mistralai/Mistral-7B-Instruct-v0.3
 EMB_PROVIDER=hf
 GEN_PROVIDER=hf
 ```
 
-4. Aplica a: Production, Preview, Development
+4. Aplica a: Production, Preview (NO Development - ver Paso 4 en PASOS_DEPLOY.md)
 
 ### Notas Importantes
 

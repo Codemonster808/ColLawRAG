@@ -7,6 +7,9 @@ node_modules/
 # Archivos sensibles
 huggin_face_api_key.txt
 *_api_key.txt
+*.key
+*.pem
+*.p12
 # Archivos de prueba/debug
 **/test-*.mjs
 **/debug/
@@ -14,3 +17,6 @@ hf-gen-test.mjs
 # data/index.json - incluido en build para Vercel 
 .vercel
 .env*.local
+# Logs que pueden contener información sensible
+*.log
+logs/

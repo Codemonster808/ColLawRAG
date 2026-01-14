@@ -104,6 +104,13 @@ cat .vercel/project.json
 
 **⚠️ CRÍTICO:** Este paso **DEBE** hacerse **ANTES** de cualquier deploy. Si intentas deployar sin las variables de entorno, verás un error como `Environment Variable "HUGGINGFACE_API_KEY" references Secret "...", which does not exist.`
 
+**📝 Obtener tu Hugging Face API Key:**
+1. Ve a https://huggingface.co/settings/tokens
+2. Haz clic en **New token**
+3. Dale un nombre (ej: "ColLawRAG")
+4. Selecciona permisos **Read** (suficiente para la API)
+5. Copia el token (empieza con `hf_`)
+
 #### Opción A: Desde el Dashboard (Recomendado)
 
 1. Ve a https://vercel.com/dashboard
@@ -113,7 +120,7 @@ cat .vercel/project.json
 
 | Variable | Valor |
 |----------|-------|
-| `HUGGINGFACE_API_KEY` | `TU_HUGGINGFACE_API_KEY` |
+| `HUGGINGFACE_API_KEY` | `TU_HUGGINGFACE_API_KEY` (obtén tu token en https://huggingface.co/settings/tokens) |
 | `HF_EMBEDDING_MODEL` | `sentence-transformers/paraphrase-multilingual-mpnet-base-v2` |
 | `HF_GENERATION_MODEL` | `mistralai/Mistral-7B-Instruct-v0.3` |
 | `EMB_PROVIDER` | `hf` |
@@ -139,7 +146,7 @@ cat .vercel/project.json
 #   - ❌ Development (NO seleccionar)
 
 vercel env add HUGGINGFACE_API_KEY
-# Pega: TU_HUGGINGFACE_API_KEY
+# Pega: TU_HUGGINGFACE_API_KEY (obtén tu token en https://huggingface.co/settings/tokens)
 # Selecciona: Production, Preview (NO Development)
 
 vercel env add HF_EMBEDDING_MODEL

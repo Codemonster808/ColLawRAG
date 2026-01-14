@@ -55,6 +55,11 @@ Respuesta:
 - Filtro básico de PII (correos, teléfonos, cédula, NIT) en las respuestas.
 - (Opcional) `RAG_API_KEY` para proteger el endpoint con header `x-api-key`.
 
+**🔒 Seguridad:**
+- Ver [SECURITY.md](./SECURITY.md) para buenas prácticas de seguridad
+- Si expusiste un token, sigue [FIX_SECRET_EXPOSURE.md](./FIX_SECRET_EXPOSURE.md)
+- **NUNCA** commitees archivos `.env` o tokens en el código
+
 ## Modelos por defecto
 - Embeddings: `sentence-transformers/paraphrase-multilingual-mpnet-base-v2` (multilingüe con buen desempeño en ES).
 - Generación: `mistralai/Mistral-7B-Instruct-v0.3` (accesible sin gate, optimizado para español).
