@@ -23,6 +23,7 @@ if [ "$confirm" != "yes" ]; then
 fi
 
 # Token expuesto (reemplazar con el token real que se expuso)
+# Ejemplo: OLD_TOKEN="hf_XXXXXXXXXXXX"
 OLD_TOKEN="hf_XXXXXXXXXXXX"
 REPLACEMENT="TU_HUGGINGFACE_API_KEY"
 

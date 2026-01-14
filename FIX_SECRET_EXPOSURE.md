@@ -16,7 +16,7 @@ Este documento guía el proceso completo para resolver la exposición del token 
 ### Paso 1: Revocar el Token Expuesto ⏱️ 2 minutos
 
 1. Ve a https://huggingface.co/settings/tokens
-2. Busca el token que empieza con `hf_XXXXXXXXXXXX`
+2. Busca el token expuesto (empieza con `hf_`)
 3. Haz clic en **Delete** o **Revoke**
 4. ✅ **Confirmación:** El token ya no aparece en la lista
 
