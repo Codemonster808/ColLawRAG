@@ -52,8 +52,9 @@ export async function embedTexts(texts: string[]): Promise<number[][]> {
   }
   try {
     // Use direct API call to router.huggingface.co since SDK may not respect endpoint config
+    // The router API format: https://router.huggingface.co/hf-inference/models/{model}
     const apiKey = process.env.HUGGINGFACE_API_KEY
-    const response = await fetch(`https://router.huggingface.co/models/${HF_MODEL}`, {
+    const response = await fetch(`https://router.huggingface.co/hf-inference/models/${HF_MODEL}`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
