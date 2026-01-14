@@ -47,6 +47,8 @@ export async function generateAnswerSpanish(params: {
       throw new Error('HUGGINGFACE_API_KEY not set')
     }
     
+    // Use router.huggingface.co API endpoint for text generation
+    // The router API uses a different format than the old inference API
     const response = await fetch(`https://router.huggingface.co/models/${hfModel}`, {
       method: 'POST',
       headers: {
@@ -59,8 +61,7 @@ export async function generateAnswerSpanish(params: {
           max_new_tokens: 300,
           temperature: 0.2,
           return_full_text: false,
-        },
-        options: { wait_for_model: true }
+        }
       })
     })
     
