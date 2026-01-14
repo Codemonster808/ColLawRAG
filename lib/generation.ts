@@ -1,6 +1,7 @@
 import { type DocumentChunk } from './types'
 
-const HF_MODEL_GENERATION_DEFAULT = 'mistralai/Mistral-7B-Instruct-v0.3'
+// Default model for text generation using router.huggingface.co/novita endpoint
+const HF_MODEL_GENERATION_DEFAULT = 'meta-llama/llama-3.3-70b-instruct'
 
 export async function generateAnswerSpanish(params: {
   query: string
@@ -37,21 +38,19 @@ export async function generateAnswerSpanish(params: {
       return data.response || ''
     }
 
-    // Default: Hugging Face Inference API
+    // Default: Hugging Face Inference API via router.huggingface.co
     const hfModel = process.env.HF_GENERATION_MODEL || HF_MODEL_GENERATION_DEFAULT
     console.log('[generation] using HF model=%s', hfModel)
     
-    // Use direct API call to router.huggingface.co since SDK may not respect endpoint config
     const apiKey = process.env.HUGGINGFACE_API_KEY
     if (!apiKey) {
       throw new Error('HUGGINGFACE_API_KEY not set')
     }
     
-    // Use router.huggingface.co API endpoint for text generation
-    // The router API format: https://router.huggingface.co/hf-inference/models/{model}/pipeline/text-generation
-    // IMPORTANT: router.huggingface.co is the new endpoint, NOT api-inference.huggingface.co
-    const apiUrl = `https://router.huggingface.co/hf-inference/models/${hfModel}/pipeline/text-generation`
-    console.log('[generation] Calling HF API:', apiUrl)
+    // Use router.huggingface.co with OpenAI-compatible chat completions API
+    // Format: https://router.huggingface.co/novita/v3/openai/chat/completions
+    const apiUrl = 'https://router.huggingface.co/novita/v3/openai/chat/completions'
+    console.log('[generation] Calling HF API:', apiUrl, 'with model:', hfModel)
     
     const response = await fetch(apiUrl, {
       method: 'POST',
@@ -60,12 +59,19 @@ export async function generateAnswerSpanish(params: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-      inputs: prompt,
-      parameters: {
-        max_new_tokens: 300,
+        model: hfModel,
+        messages: [
+          {
+            role: 'system',
+            content: 'Eres un asistente jurídico especializado en la normativa colombiana. Responde en español claro y preciso, citando entre corchetes el número de la fuente relevante (por ejemplo, [1], [2]). Si la pregunta excede el contexto, explica la limitación y sugiere fuentes oficiales.'
+          },
+          {
+            role: 'user',
+            content: `Pregunta: ${query}\n\nContexto:\n${contextBlocks}\n\nRespuesta (máximo 10 oraciones, con citas):`
+          }
+        ],
+        max_tokens: 500,
         temperature: 0.2,
-        return_full_text: false,
-        }
       })
     })
     
@@ -74,12 +80,12 @@ export async function generateAnswerSpanish(params: {
       throw new Error(`HF API error: ${response.status} - ${errorText}`)
     }
     
-    const data = await response.json()
-    // Handle both array and object responses
-    if (Array.isArray(data) && data.length > 0) {
-      return data[0].generated_text || ''
+    const data = await response.json() as { choices?: Array<{ message?: { content?: string } }> }
+    // Extract content from OpenAI-compatible response
+    if (data.choices && data.choices.length > 0 && data.choices[0].message?.content) {
+      return data.choices[0].message.content
     }
-    return (data as any)?.generated_text || ''
+    return ''
   } catch (e) {
     console.error('[generation] error', e)
     // Fallback simple concatenation if model call fails
