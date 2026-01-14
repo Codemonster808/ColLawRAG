@@ -49,19 +49,22 @@ export async function generateAnswerSpanish(params: {
     
     // Use router.huggingface.co API endpoint for text generation
     // The router API format: https://router.huggingface.co/models/{model}
-    // Note: router.huggingface.co redirects to the correct inference endpoint
-    const response = await fetch(`https://router.huggingface.co/models/${hfModel}`, {
+    // IMPORTANT: router.huggingface.co is the new endpoint, NOT api-inference.huggingface.co
+    const apiUrl = `https://router.huggingface.co/models/${hfModel}`
+    console.log('[generation] Calling HF API:', apiUrl)
+    
+    const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        inputs: prompt,
-        parameters: {
-          max_new_tokens: 300,
-          temperature: 0.2,
-          return_full_text: false,
+      inputs: prompt,
+      parameters: {
+        max_new_tokens: 300,
+        temperature: 0.2,
+        return_full_text: false,
         }
       })
     })

@@ -60,7 +60,7 @@ export async function embedTexts(texts: string[]): Promise<number[][]> {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        inputs: texts,
+      inputs: texts,
       })
     })
     
