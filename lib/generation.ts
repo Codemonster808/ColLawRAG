@@ -7,10 +7,21 @@ let hf: HfInference | null = null
 function getHf() {
   if (!hf) {
     // Use the new router endpoint instead of the deprecated api-inference endpoint
-    // @ts-ignore - endpoint option exists but may not be in types yet
-    hf = new HfInference(process.env.HUGGINGFACE_API_KEY, {
-      endpoint: 'https://router.huggingface.co'
-    } as any)
+    // Try multiple ways to configure the endpoint
+    const apiKey = process.env.HUGGINGFACE_API_KEY
+    try {
+      // Method 1: Try with endpoint option
+      // @ts-ignore - endpoint option may exist but not in types
+      hf = new HfInference(apiKey, {
+        endpoint: 'https://router.huggingface.co'
+      } as any)
+    } catch (e) {
+      // Method 2: Try with baseUrl option
+      // @ts-ignore
+      hf = new HfInference(apiKey, {
+        baseUrl: 'https://router.huggingface.co'
+      } as any)
+    }
   }
   return hf
 }
@@ -53,18 +64,41 @@ export async function generateAnswerSpanish(params: {
     // Default: Hugging Face Inference API
     const hfModel = process.env.HF_GENERATION_MODEL || HF_MODEL_GENERATION_DEFAULT
     console.log('[generation] using HF model=%s', hfModel)
-    const client = getHf()
-    const out = await client.textGeneration({
-      model: hfModel,
-      inputs: prompt,
-      parameters: {
-        max_new_tokens: 300,
-        temperature: 0.2,
-        return_full_text: false,
+    
+    // Use direct API call to router.huggingface.co since SDK may not respect endpoint config
+    const apiKey = process.env.HUGGINGFACE_API_KEY
+    if (!apiKey) {
+      throw new Error('HUGGINGFACE_API_KEY not set')
+    }
+    
+    const response = await fetch(`https://router.huggingface.co/models/${hfModel}`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
       },
-      options: { wait_for_model: true }
+      body: JSON.stringify({
+        inputs: prompt,
+        parameters: {
+          max_new_tokens: 300,
+          temperature: 0.2,
+          return_full_text: false,
+        },
+        options: { wait_for_model: true }
+      })
     })
-    return (out as any)?.generated_text || ''
+    
+    if (!response.ok) {
+      const errorText = await response.text()
+      throw new Error(`HF API error: ${response.status} - ${errorText}`)
+    }
+    
+    const data = await response.json()
+    // Handle both array and object responses
+    if (Array.isArray(data) && data.length > 0) {
+      return data[0].generated_text || ''
+    }
+    return (data as any)?.generated_text || ''
   } catch (e) {
     console.error('[generation] error', e)
     // Fallback simple concatenation if model call fails

@@ -65,13 +65,36 @@ export async function embedTexts(texts: string[]): Promise<number[][]> {
     return texts.map(t => fakeEmbed(t))
   }
   try {
-    const client = getHf()
-    const responses = await client.featureExtraction({
-      model: HF_MODEL,
-      inputs: texts,
-    }) as number[][]
-    return responses
+    // Use direct API call to router.huggingface.co since SDK may not respect endpoint config
+    const apiKey = process.env.HUGGINGFACE_API_KEY
+    const response = await fetch(`https://router.huggingface.co/models/${HF_MODEL}`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        inputs: texts,
+      })
+    })
+    
+    if (!response.ok) {
+      const errorText = await response.text()
+      throw new Error(`HF API error: ${response.status} - ${errorText}`)
+    }
+    
+    const data = await response.json()
+    // Handle both array and object responses
+    if (Array.isArray(data)) {
+      return data as number[][]
+    }
+    // If single embedding, wrap in array
+    if (Array.isArray(data[0])) {
+      return data as number[][]
+    }
+    return [data as number[]]
   } catch (e) {
+    console.error('[embeddings] HF API error:', e)
     // Fallback to local embeddings if HF fails
     return texts.map(t => fakeEmbed(t))
   }
