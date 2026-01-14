@@ -9,7 +9,15 @@ export async function generateAnswerSpanish(params: {
 }): Promise<string> {
   const { query, chunks } = params
 
-  const contextBlocks = chunks.map((r, i) => `Fuente [${i + 1}] (${r.chunk.metadata.title}${r.chunk.metadata.article ? ` — ${r.chunk.metadata.article}` : ''}):\n${r.chunk.content}`).join('\n\n')
+  // Limit context to avoid API errors (max ~4000 chars to stay within token limits)
+  const MAX_CONTEXT_CHARS = 4000
+  let contextBlocks = ''
+  for (let i = 0; i < chunks.length; i++) {
+    const r = chunks[i]
+    const block = `Fuente [${i + 1}] (${r.chunk.metadata.title}${r.chunk.metadata.article ? ` — ${r.chunk.metadata.article}` : ''}):\n${r.chunk.content}`
+    if (contextBlocks.length + block.length > MAX_CONTEXT_CHARS) break
+    contextBlocks += (i > 0 ? '\n\n' : '') + block
+  }
 
   const prompt = `Eres un asistente jurídico especializado en la normativa colombiana. Responde en español claro y preciso, citando entre corchetes el número de la fuente relevante (por ejemplo, [1], [2]). Si la pregunta excede el contexto, explica la limitación y sugiere fuentes oficiales.\n\nPregunta: ${query}\n\nContexto:\n${contextBlocks}\n\nRespuesta (máximo 10 oraciones, con citas):`
 
