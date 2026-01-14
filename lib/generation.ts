@@ -50,7 +50,9 @@ export async function generateAnswerSpanish(params: {
     // Use router.huggingface.co with OpenAI-compatible chat completions API
     // Format: https://router.huggingface.co/novita/v3/openai/chat/completions
     const apiUrl = 'https://router.huggingface.co/novita/v3/openai/chat/completions'
-    console.log('[generation] Calling HF API:', apiUrl, 'with model:', hfModel)
+    console.log('[generation] Calling HF API:', apiUrl)
+    console.log('[generation] model:', hfModel)
+    console.log('[generation] context length:', contextBlocks.length)
     
     const response = await fetch(apiUrl, {
       method: 'POST',
