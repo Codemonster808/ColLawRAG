@@ -51,17 +51,20 @@ export async function embedTexts(texts: string[]): Promise<number[][]> {
     return texts.map(t => fakeEmbed(t))
   }
   try {
-    // Use direct API call to router.huggingface.co since SDK may not respect endpoint config
-    // The router API format: https://router.huggingface.co/hf-inference/models/{model}
+    // Use direct API call to router.huggingface.co for feature extraction
+    // The router API format: https://router.huggingface.co/hf-inference/models/{model}/pipeline/feature-extraction
     const apiKey = process.env.HUGGINGFACE_API_KEY
-    const response = await fetch(`https://router.huggingface.co/hf-inference/models/${HF_MODEL}`, {
+    const apiUrl = `https://router.huggingface.co/hf-inference/models/${HF_MODEL}/pipeline/feature-extraction`
+    console.log('[embeddings] Calling HF API:', apiUrl)
+    
+    const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-      inputs: texts,
+        inputs: texts,
       })
     })
     
