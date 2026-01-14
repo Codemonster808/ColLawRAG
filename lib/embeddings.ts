@@ -1,20 +1,6 @@
-import { HfInference } from '@huggingface/inference'
-
 const HF_MODEL = process.env.HF_EMBEDDING_MODEL || 'sentence-transformers/paraphrase-multilingual-mpnet-base-v2'
 const EMB_PROVIDER = process.env.EMB_PROVIDER || 'hf'
 const EMB_MODEL = process.env.EMB_MODEL || 'Xenova/all-MiniLM-L6-v2'
-
-let hf: HfInference | null = null
-function getHf() {
-  if (!hf) {
-    // Use the new router endpoint instead of the deprecated api-inference endpoint
-    // @ts-ignore - endpoint option exists but may not be in types yet
-    hf = new HfInference(process.env.HUGGINGFACE_API_KEY, {
-      endpoint: 'https://router.huggingface.co'
-    } as any)
-  }
-  return hf
-}
 
 function stringHash(str: string): number {
   let hash = 2166136261

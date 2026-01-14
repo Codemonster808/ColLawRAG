@@ -1,30 +1,6 @@
-import { HfInference } from '@huggingface/inference'
 import { type DocumentChunk } from './types'
 
 const HF_MODEL_GENERATION_DEFAULT = 'mistralai/Mistral-7B-Instruct-v0.3'
-
-let hf: HfInference | null = null
-function getHf() {
-  if (!hf) {
-    // Use the new router endpoint instead of the deprecated api-inference endpoint
-    // Try multiple ways to configure the endpoint
-    const apiKey = process.env.HUGGINGFACE_API_KEY
-    try {
-      // Method 1: Try with endpoint option
-      // @ts-ignore - endpoint option may exist but not in types
-      hf = new HfInference(apiKey, {
-        endpoint: 'https://router.huggingface.co'
-      } as any)
-    } catch (e) {
-      // Method 2: Try with baseUrl option
-      // @ts-ignore
-      hf = new HfInference(apiKey, {
-        baseUrl: 'https://router.huggingface.co'
-      } as any)
-    }
-  }
-  return hf
-}
 
 export async function generateAnswerSpanish(params: {
   query: string
