@@ -140,7 +140,8 @@ export async function POST(req: NextRequest) {
       includeStructuredResponse: true
     })
     
-    // Mapear a flags del pipeline (tiers no incluye includeFactualValidation, usar default)
+    // Mapear a flags del pipeline
+    // Nota: includeFactualValidation no está en tiers, usar variable de entorno
     const enableFactualValidation = process.env.ENABLE_FACTUAL_VALIDATION === 'true'
     const enableStructuredResponse = tierAdjustedParams.includeStructuredResponse
     const enableCalculations = tierAdjustedParams.includeCalculations
@@ -169,9 +170,9 @@ export async function POST(req: NextRequest) {
         filters, 
         locale,
         userId,
-        enableFactualValidation: tierAdjustedParams.includeFactualValidation,
-        enableStructuredResponse: tierAdjustedParams.includeStructuredResponse,
-        enableCalculations: tierAdjustedParams.includeCalculations
+        enableFactualValidation,
+        enableStructuredResponse,
+        enableCalculations
       }),
       PIPELINE_TIMEOUT_MS
     )

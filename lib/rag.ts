@@ -320,7 +320,7 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
           
           if (relevantProcedures.length > 0) {
             procedures = relevantProcedures.slice(0, 3) // Máximo 3 procedimientos
-            console.log('[rag] Procedures found:', procedures.length)
+            console.log('[rag] Procedures found:', procedures?.length || 0)
           }
         }
       } catch (error) {

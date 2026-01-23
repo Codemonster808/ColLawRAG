@@ -54,6 +54,22 @@ export function getUser(userId: string): User | null {
 }
 
 /**
+ * Autentica un usuario por ID (simplificado)
+ * En producción, esto debería validar tokens, sesiones, etc.
+ */
+export function authenticateUser(userIdOrToken: string): User | null {
+  // Si es un ID de usuario directo, retornar el usuario
+  const user = users.get(userIdOrToken)
+  if (user) {
+    return user
+  }
+  
+  // En producción, aquí se validaría un token JWT, sesión, etc.
+  // Por ahora, crear un usuario temporal si no existe
+  return createUser({ id: userIdOrToken, tier: 'free' })
+}
+
+/**
  * Actualiza el tier de un usuario
  */
 export function updateUserTier(userId: string, tier: UserTier): boolean {
