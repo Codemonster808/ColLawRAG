@@ -4,19 +4,83 @@ node_modules/
 .env*
 .data/
 /data/feedback.log
-# Archivos sensibles
+
+# ============================================
+# ARCHIVOS SENSIBLES - CLAVES Y TOKENS
+# ============================================
+# Archivos con API keys y tokens
 huggin_face_api_key.txt
 *_api_key.txt
+*api*key*.txt
+*api*key*.md
+*secret*.txt
+*secret*.md
+*token*.txt
+*token*.md
+*credential*.txt
+*credential*.md
+
+# Archivos de claves y certificados
 *.key
 *.pem
 *.p12
-# Archivos de prueba/debug
+*.pfx
+*.crt
+*.cer
+
+# Variables de entorno (todos los tipos)
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+.env*.local
+.env*.backup
+.env*.old
+
+# Archivos de configuración con credenciales
+config/credentials.env
+config/secrets.json
+secrets.json
+credentials.json
+*.credentials
+
+# ============================================
+# ARCHIVOS DE PRUEBA/DEBUG
+# ============================================
 **/test-*.mjs
 **/debug/
 hf-gen-test.mjs
+
+# ============================================
+# ARCHIVOS DE BUILD Y CACHE
+# ============================================
 # data/index.json - incluido en build para Vercel 
 .vercel
-.env*.local
+.vercel/
+
+# ============================================
+# LOGS Y ARCHIVOS TEMPORALES
+# ============================================
 # Logs que pueden contener información sensible
 *.log
 logs/
+log_errores/
+*.log.*
+
+# Archivos temporales
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# ============================================
+# OTROS
+# ============================================
+# TypeScript build info
+tsconfig.tsbuildinfo
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db

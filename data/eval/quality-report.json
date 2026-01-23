@@ -1,0 +1,2835 @@
+{
+  "timestamp": "2026-01-15T20:36:58.642Z",
+  "summary": {
+    "totalQueries": 25,
+    "successfulQueries": 25,
+    "failedQueries": 0,
+    "overallPrecision": 0.9822222222222223,
+    "totalCitations": 104,
+    "totalValidCitations": 100,
+    "citationPrecision": 0.9615384615384616
+  },
+  "byCategory": {
+    "constitucional": {
+      "total": 8,
+      "validCitations": 32,
+      "totalCitations": 33,
+      "precision": 0.9696969696969697
+    },
+    "laboral": {
+      "total": 11,
+      "validCitations": 43,
+      "totalCitations": 45,
+      "precision": 0.9555555555555556
+    },
+    "seguridad_social": {
+      "total": 6,
+      "validCitations": 25,
+      "totalCitations": 26,
+      "precision": 0.9615384615384616
+    }
+  },
+  "detailedResults": [
+    {
+      "query": "¿Qué es la acción de tutela?",
+      "category": "constitucional",
+      "answer": "La acción de tutela es un mecanismo jurídico establecido en la Constitución Política de Colombia [2] que busca proteger los derechos fundamentales de las personas cuando estos resulten vulnerados o amenazados por la acción u omisión de cualquier autoridad pública. Según el Artículo 86 de la Constitución [2], toda persona tiene derecho a presentar una acción de tutela en cualquier momento y lugar, mediante un procedimiento preferente y sumario. La acción de tutela procede de manera excepcional frente a particulares cuando hay indefensión o subordinación, como lo establece la doctrina constitucional relevante [2]. No se relaciona directamente con el Código Sustantivo del Trabajo, específicamente con el artículo 168 sobre recargo por trabajo nocturno [1], ya que este trata sobre derechos laborales específicos y no sobre la protección de derechos fundamentales en general. La acción de tutela es un recurso importante para garantizar la protección de los derechos humanos y fundamentales en Colombia. Es importante destacar que la acción de tutela no reemplaza los recursos ordinarios, sino que es un mecanismo especial para situaciones en que los derechos fundamentales están en peligro. Para más información, se recomienda consultar directamente la Constitución Política de Colombia y las sentencias de la Corte Constitucional [2].",
+      "citations": [
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 168",
+          "score": 0.05149153874441633
+        },
+        {
+          "id": "doc-jurisprudencia_tutela",
+          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "type": "jurisprudencia",
+          "article": "Artículo 86",
+          "score": 0.02745406931656765
+        },
+        {
+          "id": "doc-estatuto_codigo_civil",
+          "title": "Codigo Civil",
+          "type": "estatuto",
+          "score": 0.010820768830368957
+        },
+        {
+          "id": "doc-reglamento_accion_cumplimiento",
+          "title": "Ley 393 de 1997 — Acción de Cumplimiento (Mock)",
+          "type": "reglamento",
+          "article": "Artículo 1 y Artículo 5",
+          "score": -0.00027419054154376795
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
+          "title": "Codigo Sustantivo del Trabajo",
+          "type": "estatuto",
+          "score": -0.008100182428656847
+        },
+        {
+          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
+          "title": "Ley 100 de 1993 - Seguridad Social",
+          "type": "estatuto",
+          "score": -0.01964987310904178
+        },
+        {
+          "id": "doc-estatuto_codigo_de_comercio",
+          "title": "Codigo de Comercio",
+          "type": "estatuto",
+          "score": -0.020404676873003815
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia_extractos",
+          "title": "Constitucion Politica de Colombia - Extractos Principales",
+          "type": "estatuto",
+          "score": -0.02488400176985318
+        }
+      ],
+      "validation": {
+        "totalCitations": 2,
+        "validCitations": 2,
+        "precision": 1,
+        "invalidCitations": [],
+        "validCitationsList": [
+          {
+            "citationRef": "[1]",
+            "isValid": true,
+            "sourceTitle": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 0,
+            "actualIndex": 0
+          },
+          {
+            "citationRef": "[2]",
+            "isValid": true,
+            "sourceTitle": "Corte Constitucional — Acción de Tutela (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 1,
+            "actualIndex": 1
+          }
+        ]
+      },
+      "expectedSources": [
+        "Constitucion Politica de Colombia",
+        "Articulo 86"
+      ],
+      "expectedAnswerContains": [
+        "tutela",
+        "derechos fundamentales",
+        "procedimiento preferente"
+      ]
+    },
+    {
+      "query": "¿Cuántas horas extras puede trabajar un empleado en Colombia?",
+      "category": "laboral",
+      "answer": "En Colombia, la jornada laboral máxima es de 48 horas a la semana [1]. Sin embargo, los empleados pueden trabajar horas extras, siempre y cuando no excedan el límite establecido por la ley. Según el Código Sustantivo del Trabajo, los empleados pueden trabajar hasta 2 horas extras al día y 12 horas extras a la semana [2]. Es importante destacar que el trabajo en horas extras debe ser remunerado con un recargo del 25% o 50% sobre el salario ordinario, dependiendo del caso [3]. Además, los empleados tienen derecho a un descanso mínimo de 24 horas consecutivas después de trabajar 6 días consecutivos [4]. Es fundamental consultar el contrato laboral y la normativa vigente para conocer los detalles específicos sobre horas extras y su remuneración. La normativa laboral en Colombia es amplia y puede variar dependiendo de la industria o sector [5]. Para más información, se recomienda consultar el Ministerio del Trabajo de Colombia o un abogado laboralista [6].",
+      "citations": [
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
+          "title": "Codigo Sustantivo del Trabajo",
+          "type": "estatuto",
+          "score": 0.04120808110384664
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia",
+          "title": "Constitucion Politica de Colombia",
+          "type": "estatuto",
+          "score": 0.031732842078657654
+        },
+        {
+          "id": "doc-estatuto_codigo_de_comercio",
+          "title": "Codigo de Comercio",
+          "type": "estatuto",
+          "score": 0.02517816381098308
+        },
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 168",
+          "score": 0.017128775713444195
+        },
+        {
+          "id": "doc-jurisprudencia_tutela",
+          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "type": "jurisprudencia",
+          "article": "Artículo 86",
+          "score": 0.0049143160191801455
+        },
+        {
+          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
+          "title": "Ley 100 de 1993 - Seguridad Social",
+          "type": "estatuto",
+          "score": -0.013750874378912648
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo_extractos",
+          "title": "Codigo Sustantivo del Trabajo - Extractos Principales",
+          "type": "estatuto",
+          "score": -0.015256278555489236
+        },
+        {
+          "id": "doc-estatuto_codigo_civil",
+          "title": "Codigo Civil",
+          "type": "estatuto",
+          "score": -0.025228140752535207
+        }
+      ],
+      "validation": {
+        "totalCitations": 6,
+        "validCitations": 6,
+        "precision": 1,
+        "invalidCitations": [],
+        "validCitationsList": [
+          {
+            "citationRef": "[1]",
+            "isValid": true,
+            "sourceTitle": "Codigo Sustantivo del Trabajo",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 0,
+            "actualIndex": 0
+          },
+          {
+            "citationRef": "[2]",
+            "isValid": true,
+            "sourceTitle": "Constitucion Politica de Colombia",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 1,
+            "actualIndex": 1
+          },
+          {
+            "citationRef": "[3]",
+            "isValid": true,
+            "sourceTitle": "Codigo de Comercio",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 2,
+            "actualIndex": 2
+          },
+          {
+            "citationRef": "[4]",
+            "isValid": true,
+            "sourceTitle": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 3,
+            "actualIndex": 3
+          },
+          {
+            "citationRef": "[5]",
+            "isValid": true,
+            "sourceTitle": "Corte Constitucional — Acción de Tutela (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 4,
+            "actualIndex": 4
+          },
+          {
+            "citationRef": "[6]",
+            "isValid": true,
+            "sourceTitle": "Ley 100 de 1993 - Seguridad Social",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 5,
+            "actualIndex": 5
+          }
+        ]
+      },
+      "expectedSources": [
+        "Codigo Sustantivo del Trabajo",
+        "Articulo 159"
+      ],
+      "expectedAnswerContains": [
+        "horas extras",
+        "25%",
+        "recargo"
+      ]
+    },
+    {
+      "query": "¿Qué es el salario mínimo en Colombia?",
+      "category": "laboral",
+      "answer": "La información proporcionada se refiere a la acción de tutela en Colombia, específicamente al artículo 86 de la Constitución Política [1], que establece el procedimiento para proteger los derechos fundamentales. Sin embargo, no se menciona el salario mínimo en este contexto. \n\nPara encontrar información sobre el salario mínimo en Colombia, es necesario consultar fuentes como el Ministerio del Trabajo o la ley que anualmente fija el salario mínimo [2]. El salario mínimo es un tema regulado por normas laborales y económicas, no directamente relacionado con la acción de tutela o la protección de derechos fundamentales.\n\nEs importante buscar en fuentes oficiales como el Ministerio del Trabajo de Colombia o en leyes específicas que regulen el salario mínimo para obtener la información más actualizada y precisa. La Corte Constitucional, aunque importante en la interpretación de la Constitución, no es la fuente directa para este tipo de información [1]. \n\nEn resumen, el salario mínimo en Colombia no se encuentra especificado en el contexto proporcionado, y se recomienda consultar fuentes laborales o económicas oficiales para obtener la información más reciente.",
+      "citations": [
+        {
+          "id": "doc-jurisprudencia_tutela",
+          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "type": "jurisprudencia",
+          "article": "Artículo 86",
+          "score": 0.02450915916578344
+        },
+        {
+          "id": "doc-estatuto_codigo_de_comercio",
+          "title": "Codigo de Comercio",
+          "type": "estatuto",
+          "score": 0.020015842327413533
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia",
+          "title": "Constitucion Politica de Colombia",
+          "type": "estatuto",
+          "score": 0.015063120746408514
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
+          "title": "Codigo Sustantivo del Trabajo",
+          "type": "estatuto",
+          "score": 0.010142819273213416
+        },
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 168",
+          "score": 0.006287088173855768
+        },
+        {
+          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
+          "title": "Ley 100 de 1993 - Seguridad Social",
+          "type": "estatuto",
+          "score": 0.0017806506172503968
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia_extractos",
+          "title": "Constitucion Politica de Colombia - Extractos Principales",
+          "type": "estatuto",
+          "score": 0.00009989786373378925
+        },
+        {
+          "id": "doc-estatuto_codigo_civil",
+          "title": "Codigo Civil",
+          "type": "estatuto",
+          "score": -0.005521673738974449
+        }
+      ],
+      "validation": {
+        "totalCitations": 2,
+        "validCitations": 2,
+        "precision": 1,
+        "invalidCitations": [],
+        "validCitationsList": [
+          {
+            "citationRef": "[1]",
+            "isValid": true,
+            "sourceTitle": "Corte Constitucional — Acción de Tutela (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 0,
+            "actualIndex": 0
+          },
+          {
+            "citationRef": "[2]",
+            "isValid": true,
+            "sourceTitle": "Codigo de Comercio",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 1,
+            "actualIndex": 1
+          }
+        ]
+      },
+      "expectedSources": [
+        "Codigo Sustantivo del Trabajo",
+        "Articulo 128"
+      ],
+      "expectedAnswerContains": [
+        "salario minimo",
+        "Gobierno Nacional"
+      ]
+    },
+    {
+      "query": "¿Cuánto tiempo tiene un trabajador para descansar en su jornada?",
+      "category": "laboral",
+      "answer": "Según la normativa colombiana, específicamente en el Código Sustantivo del Trabajo [1], los trabajadores tienen derecho a un descanso durante su jornada laboral. Este descanso se conoce como \"descanso intermedio\" o \"descanso dentro de la jornada\". La ley establece que, para jornadas de 8 horas, el trabajador tiene derecho a un descanso de al menos 30 minutos [2]. Sin embargo, es importante mencionar que el tiempo exacto de descanso puede variar dependiendo de la naturaleza del trabajo, el tipo de empresa y los acuerdos colectivos o convenciones laborales aplicables [3]. En general, el objetivo es que el trabajador pueda descansar y recuperarse durante su jornada para evitar el agotamiento y mantener su productividad y seguridad en el trabajo [4]. Es recomendable consultar el Código Sustantivo del Trabajo y las normas específicas aplicables a cada sector o empresa para obtener información detallada sobre los descansos laborales [5]. Además, la Ministra del Trabajo y otras entidades gubernamentales pueden proporcionar orientación y clarificar dudas sobre esta materia [6]. En resumen, aunque el tiempo mínimo de descanso es de 30 minutos para jornadas de 8 horas, las condiciones específicas pueden variar [7]. Es fundamental consultar las fuentes oficiales y las normas laborales vigentes para obtener información precisa [8]. La consulta directa con un asesor laboral o una entidad gubernamental también puede ser útil [9].",
+      "citations": [
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
+          "title": "Codigo Sustantivo del Trabajo",
+          "type": "estatuto",
+          "score": 0.03703588292784088
+        },
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 168",
+          "score": 0.0224013138169782
+        },
+        {
+          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
+          "title": "Ley 100 de 1993 - Seguridad Social",
+          "type": "estatuto",
+          "score": 0.01271971300526007
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia",
+          "title": "Constitucion Politica de Colombia",
+          "type": "estatuto",
+          "score": -0.0016325068536664886
+        },
+        {
+          "id": "doc-jurisprudencia_tutela",
+          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "type": "jurisprudencia",
+          "article": "Artículo 86",
+          "score": -0.004780653520108219
+        },
+        {
+          "id": "doc-estatuto_codigo_de_comercio",
+          "title": "Codigo de Comercio",
+          "type": "estatuto",
+          "score": -0.005571815003405624
+        },
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 159 y Artículo 160",
+          "score": -0.0230979589908362
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo_extractos",
+          "title": "Codigo Sustantivo del Trabajo - Extractos Principales",
+          "type": "estatuto",
+          "score": -0.030023365706078234
+        }
+      ],
+      "validation": {
+        "totalCitations": 9,
+        "validCitations": 8,
+        "precision": 0.8888888888888888,
+        "invalidCitations": [
+          {
+            "citationRef": "[9]",
+            "isValid": false,
+            "sourceTitle": null,
+            "articleMatch": false,
+            "confidence": 0,
+            "expectedIndex": 8,
+            "errorMessage": "Cita fuera de rango: [9] (hay 8 fuentes disponibles)"
+          }
+        ],
+        "validCitationsList": [
+          {
+            "citationRef": "[1]",
+            "isValid": true,
+            "sourceTitle": "Codigo Sustantivo del Trabajo",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 0,
+            "actualIndex": 0
+          },
+          {
+            "citationRef": "[2]",
+            "isValid": true,
+            "sourceTitle": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 1,
+            "actualIndex": 1
+          },
+          {
+            "citationRef": "[3]",
+            "isValid": true,
+            "sourceTitle": "Ley 100 de 1993 - Seguridad Social",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 2,
+            "actualIndex": 2
+          },
+          {
+            "citationRef": "[4]",
+            "isValid": true,
+            "sourceTitle": "Constitucion Politica de Colombia",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 3,
+            "actualIndex": 3
+          },
+          {
+            "citationRef": "[5]",
+            "isValid": true,
+            "sourceTitle": "Corte Constitucional — Acción de Tutela (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 4,
+            "actualIndex": 4
+          },
+          {
+            "citationRef": "[6]",
+            "isValid": true,
+            "sourceTitle": "Codigo de Comercio",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 5,
+            "actualIndex": 5
+          },
+          {
+            "citationRef": "[7]",
+            "isValid": true,
+            "sourceTitle": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 6,
+            "actualIndex": 6
+          },
+          {
+            "citationRef": "[8]",
+            "isValid": true,
+            "sourceTitle": "Codigo Sustantivo del Trabajo - Extractos Principales",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 7,
+            "actualIndex": 7
+          }
+        ]
+      },
+      "expectedSources": [
+        "Codigo Sustantivo del Trabajo",
+        "Articulo 161"
+      ],
+      "expectedAnswerContains": [
+        "descanso",
+        "15 minutos"
+      ]
+    },
+    {
+      "query": "¿Qué son las cesantías?",
+      "category": "laboral",
+      "answer": "Las cesantías son una prestación social laboral en Colombia que se otorga a los trabajadores después de un año de servicio continuo o discontinuo con un empleador [1]. Esta prestación busca reconocer el esfuerzo y la dedicación del trabajador durante su período de servicio. Según la ley, las cesantías equivalen a un mes de salario por cada año de servicio, más un quinceavo de salario por cada mes de fracción de año [2]. Estas pueden ser pagadas de manera anticipada o al final del año, dependiendo del acuerdo entre el empleador y el trabajador [3]. Es importante destacar que las cesantías son obligatorias para todos los trabajadores que laboran bajo un contrato de trabajo [4]. El pago de cesantías está regulado por el Código Sustantivo del Trabajo y la ley 50 de 1990 [5]. Los trabajadores tienen derecho a recibir esta prestación social, siempre y cuando cumplan con los requisitos establecidos por la ley [6]. En caso de duda, se recomienda consultar el sitio web del Ministerio del Trabajo o la legislación laboral vigente [7]. Es fundamental recordar que las cesantías son un derecho adquirido por los trabajadores y deben ser respetadas por los empleadores [8]. Para más información, se puede consultar la página oficial del Ministerio del Trabajo de Colombia [9].",
+      "citations": [
+        {
+          "id": "doc-estatuto_codigo_civil",
+          "title": "Codigo Civil",
+          "type": "estatuto",
+          "score": 0.03612294645358237
+        },
+        {
+          "id": "doc-jurisprudencia_tutela",
+          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "type": "jurisprudencia",
+          "article": "Artículo 86",
+          "score": 0.03371367545243992
+        },
+        {
+          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
+          "title": "Ley 100 de 1993 - Seguridad Social",
+          "type": "estatuto",
+          "score": 0.02459132528455116
+        },
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 168",
+          "score": 0.014088990820879796
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia",
+          "title": "Constitucion Politica de Colombia",
+          "type": "estatuto",
+          "score": 0.009408829495094277
+        },
+        {
+          "id": "doc-reglamento_accion_cumplimiento",
+          "title": "Ley 393 de 1997 — Acción de Cumplimiento (Mock)",
+          "type": "reglamento",
+          "article": "Artículo 1 y Artículo 5",
+          "score": 0.007100520832048919
+        },
+        {
+          "id": "doc-estatuto_codigo_de_comercio",
+          "title": "Codigo de Comercio",
+          "type": "estatuto",
+          "score": -0.004600094979790425
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo_extractos",
+          "title": "Codigo Sustantivo del Trabajo - Extractos Principales",
+          "type": "estatuto",
+          "score": -0.007176257547503147
+        }
+      ],
+      "validation": {
+        "totalCitations": 9,
+        "validCitations": 8,
+        "precision": 0.8888888888888888,
+        "invalidCitations": [
+          {
+            "citationRef": "[9]",
+            "isValid": false,
+            "sourceTitle": null,
+            "articleMatch": false,
+            "confidence": 0,
+            "expectedIndex": 8,
+            "errorMessage": "Cita fuera de rango: [9] (hay 8 fuentes disponibles)"
+          }
+        ],
+        "validCitationsList": [
+          {
+            "citationRef": "[1]",
+            "isValid": true,
+            "sourceTitle": "Codigo Civil",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 0,
+            "actualIndex": 0
+          },
+          {
+            "citationRef": "[2]",
+            "isValid": true,
+            "sourceTitle": "Corte Constitucional — Acción de Tutela (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 1,
+            "actualIndex": 1
+          },
+          {
+            "citationRef": "[3]",
+            "isValid": true,
+            "sourceTitle": "Ley 100 de 1993 - Seguridad Social",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 2,
+            "actualIndex": 2
+          },
+          {
+            "citationRef": "[4]",
+            "isValid": true,
+            "sourceTitle": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 3,
+            "actualIndex": 3
+          },
+          {
+            "citationRef": "[5]",
+            "isValid": true,
+            "sourceTitle": "Constitucion Politica de Colombia",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 4,
+            "actualIndex": 4
+          },
+          {
+            "citationRef": "[6]",
+            "isValid": true,
+            "sourceTitle": "Ley 393 de 1997 — Acción de Cumplimiento (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 5,
+            "actualIndex": 5
+          },
+          {
+            "citationRef": "[7]",
+            "isValid": true,
+            "sourceTitle": "Codigo de Comercio",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 6,
+            "actualIndex": 6
+          },
+          {
+            "citationRef": "[8]",
+            "isValid": true,
+            "sourceTitle": "Codigo Sustantivo del Trabajo - Extractos Principales",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 7,
+            "actualIndex": 7
+          }
+        ]
+      },
+      "expectedSources": [
+        "Codigo Sustantivo del Trabajo",
+        "Articulo 233"
+      ],
+      "expectedAnswerContains": [
+        "cesantias",
+        "mes de salario",
+        "ano de servicio"
+      ]
+    },
+    {
+      "query": "¿Qué es el Sistema General de Seguridad Social?",
+      "category": "seguridad_social",
+      "answer": "El Sistema General de Seguridad Social en Colombia es un conjunto de normas y políticas que buscan proteger a los ciudadanos contra los riesgos de la vida, como la enfermedad, la vejez, el desempleo y la discapacidad. Este sistema está regulado por la Ley 100 de 1993 [3], que establece los principios y objetivos del sistema. El Sistema General de Seguridad Social comprende varios componentes, incluyendo el régimen contributivo, el régimen subsidiado, el sistema de pensiones y el sistema de salud. Aunque las fuentes proporcionadas [1] y [2] se refieren a aspectos laborales y a la acción de tutela, respectivamente, no abordan directamente el Sistema General de Seguridad Social. Para obtener información detallada sobre este tema, se recomienda consultar la Ley 100 de 1993 y otras normas relacionadas. La Corte Constitucional también ha emitido sentencias relevantes sobre la seguridad social, como la Sentencia T-760 de 2008 [4], que analiza la protección de los derechos fundamentales en el contexto de la seguridad social. Es importante destacar que la seguridad social es un derecho fundamental en Colombia, reconocido en la Constitución Política [5]. Para una comprensión más profunda, se sugiere consultar fuentes oficiales como el Ministerio de Salud y Protección Social o la Superintendencia de la Seguridad Social.",
+      "citations": [
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 168",
+          "score": 0.0510899995838664
+        },
+        {
+          "id": "doc-jurisprudencia_tutela",
+          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "type": "jurisprudencia",
+          "article": "Artículo 86",
+          "score": 0.00989550155986695
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia_extractos",
+          "title": "Constitucion Politica de Colombia - Extractos Principales",
+          "type": "estatuto",
+          "score": 0.007596835796895744
+        },
+        {
+          "id": "doc-estatuto_codigo_civil",
+          "title": "Codigo Civil",
+          "type": "estatuto",
+          "score": -0.0020278445361692748
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo_extractos",
+          "title": "Codigo Sustantivo del Trabajo - Extractos Principales",
+          "type": "estatuto",
+          "score": -0.008601005136241723
+        },
+        {
+          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
+          "title": "Ley 100 de 1993 - Seguridad Social",
+          "type": "estatuto",
+          "score": -0.010762077585848405
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
+          "title": "Codigo Sustantivo del Trabajo",
+          "type": "estatuto",
+          "score": -0.02660213211046958
+        },
+        {
+          "id": "doc-reglamento_accion_cumplimiento",
+          "title": "Ley 393 de 1997 — Acción de Cumplimiento (Mock)",
+          "type": "reglamento",
+          "article": "Artículo 1 y Artículo 5",
+          "score": -0.030808299433226452
+        }
+      ],
+      "validation": {
+        "totalCitations": 5,
+        "validCitations": 5,
+        "precision": 1,
+        "invalidCitations": [],
+        "validCitationsList": [
+          {
+            "citationRef": "[1]",
+            "isValid": true,
+            "sourceTitle": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 0,
+            "actualIndex": 0
+          },
+          {
+            "citationRef": "[2]",
+            "isValid": true,
+            "sourceTitle": "Corte Constitucional — Acción de Tutela (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 1,
+            "actualIndex": 1
+          },
+          {
+            "citationRef": "[3]",
+            "isValid": true,
+            "sourceTitle": "Constitucion Politica de Colombia - Extractos Principales",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 2,
+            "actualIndex": 2
+          },
+          {
+            "citationRef": "[4]",
+            "isValid": true,
+            "sourceTitle": "Codigo Civil",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 3,
+            "actualIndex": 3
+          },
+          {
+            "citationRef": "[5]",
+            "isValid": true,
+            "sourceTitle": "Codigo Sustantivo del Trabajo - Extractos Principales",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 4,
+            "actualIndex": 4
+          }
+        ]
+      },
+      "expectedSources": [
+        "Ley 100 de 1993",
+        "Articulo 1"
+      ],
+      "expectedAnswerContains": [
+        "seguridad social",
+        "calidad de vida",
+        "contingencias"
+      ]
+    },
+    {
+      "query": "¿Cuáles son los principios del Sistema de Seguridad Social?",
+      "category": "seguridad_social",
+      "answer": "Los principios del Sistema de Seguridad Social en Colombia se encuentran establecidos en la Constitución Política y en leyes específicas. Según la Ley 100 de 1993 [3], el Sistema de Seguridad Social Integral tiene como principios la universalidad, la integralidad, la unidad y la eficiencia. La universalidad se refiere a la cobertura de todos los ciudadanos, mientras que la integralidad abarca las diferentes áreas de la seguridad social, como la salud, la pensión y el riesgo laboral [3]. La unidad se relaciona con la coordinación de las diferentes entidades involucradas en el sistema, y la eficiencia se enfoca en la gestión adecuada de los recursos [3]. Es importante destacar que estas fuentes no están proporcionadas en el contexto de la pregunta, por lo que se sugiere consultar la Ley 100 de 1993 y la Constitución Política de Colombia para una comprensión más profunda [3]. Las fuentes proporcionadas en el contexto ([1] y [2]) se refieren a aspectos laborales y de protección de derechos fundamentales, pero no abordan directamente los principios del Sistema de Seguridad Social. Para una información más precisa y actualizada, se recomienda consultar fuentes oficiales como el Ministerio de Salud y Protección Social o la Superintendencia de la Seguridad Social.",
+      "citations": [
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 168",
+          "score": 0.04820080313302676
+        },
+        {
+          "id": "doc-jurisprudencia_tutela",
+          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "type": "jurisprudencia",
+          "article": "Artículo 86",
+          "score": 0.020844174834582608
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia_extractos",
+          "title": "Constitucion Politica de Colombia - Extractos Principales",
+          "type": "estatuto",
+          "score": 0.019781223465842716
+        },
+        {
+          "id": "doc-estatuto_codigo_civil",
+          "title": "Codigo Civil",
+          "type": "estatuto",
+          "score": 0.007098493624596507
+        },
+        {
+          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
+          "title": "Ley 100 de 1993 - Seguridad Social",
+          "type": "estatuto",
+          "score": 0.0029224008653809847
+        },
+        {
+          "id": "doc-reglamento_accion_cumplimiento",
+          "title": "Ley 393 de 1997 — Acción de Cumplimiento (Mock)",
+          "type": "reglamento",
+          "article": "Artículo 1 y Artículo 5",
+          "score": -0.014542977960959508
+        },
+        {
+          "id": "doc-estatuto_codigo_de_comercio",
+          "title": "Codigo de Comercio",
+          "type": "estatuto",
+          "score": -0.02351070261831623
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
+          "title": "Codigo Sustantivo del Trabajo",
+          "type": "estatuto",
+          "score": -0.03311536465237568
+        }
+      ],
+      "validation": {
+        "totalCitations": 3,
+        "validCitations": 3,
+        "precision": 1,
+        "invalidCitations": [],
+        "validCitationsList": [
+          {
+            "citationRef": "[1]",
+            "isValid": true,
+            "sourceTitle": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 0,
+            "actualIndex": 0
+          },
+          {
+            "citationRef": "[2]",
+            "isValid": true,
+            "sourceTitle": "Corte Constitucional — Acción de Tutela (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 1,
+            "actualIndex": 1
+          },
+          {
+            "citationRef": "[3]",
+            "isValid": true,
+            "sourceTitle": "Constitucion Politica de Colombia - Extractos Principales",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 2,
+            "actualIndex": 2
+          }
+        ]
+      },
+      "expectedSources": [
+        "Ley 100 de 1993",
+        "Articulo 3"
+      ],
+      "expectedAnswerContains": [
+        "eficiencia",
+        "universalidad",
+        "solidaridad"
+      ]
+    },
+    {
+      "query": "¿Qué es un Estado social de derecho?",
+      "category": "constitucional",
+      "answer": "Un Estado social de derecho se refiere a un sistema de gobierno en el que se busca equilibrar la libertad individual con la justicia social y la protección de los derechos fundamentales de los ciudadanos [1]. En este contexto, el Estado tiene la responsabilidad de garantizar el bienestar y la dignidad de sus habitantes, lo que incluye la protección de los derechos laborales. La Constitución Política de Colombia establece los principios fundamentales de este modelo, como la dignidad humana, la justicia y la igualdad [2]. En el ámbito laboral, esto se traduce en normas como el Código Sustantivo del Trabajo, que regula aspectos como el trabajo nocturno y las horas extras, como se menciona en el Artículo 168 [1]. Este artículo establece un recargo nocturno para el trabajo realizado entre las 9:00 p.m. y las 6:00 a.m., lo que demuestra la preocupación del Estado por la protección de los trabajadores. Además, el parágrafo del artículo subraya la importancia de autorizar las horas extras y de no afectar los derechos mínimos de los trabajadores. Esto refleja el compromiso del Estado social de derecho con la justicia social y la protección de los derechos laborales. En resumen, un Estado social de derecho busca garantizar la justicia, la igualdad y la dignidad de todos los ciudadanos, incluyendo los trabajadores, a través de normas y regulaciones que protejan sus derechos fundamentales. Es importante consultar fuentes oficiales como la Constitución Política de Colombia y el Código Sustantivo del Trabajo para profundizar en estos temas [3].",
+      "citations": [
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 168",
+          "score": 0.0861356474040958
+        },
+        {
+          "id": "doc-estatuto_codigo_civil",
+          "title": "Codigo Civil",
+          "type": "estatuto",
+          "score": 0.041027342867168276
+        },
+        {
+          "id": "doc-jurisprudencia_tutela",
+          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "type": "jurisprudencia",
+          "article": "Artículo 86",
+          "score": 0.027453972242991422
+        },
+        {
+          "id": "doc-estatuto_codigo_de_comercio",
+          "title": "Codigo de Comercio",
+          "type": "estatuto",
+          "score": 0.0016593340508899482
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo_extractos",
+          "title": "Codigo Sustantivo del Trabajo - Extractos Principales",
+          "type": "estatuto",
+          "score": -0.0007544063015573895
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia_extractos",
+          "title": "Constitucion Politica de Colombia - Extractos Principales",
+          "type": "estatuto",
+          "score": -0.009973352904017407
+        },
+        {
+          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
+          "title": "Ley 100 de 1993 - Seguridad Social",
+          "type": "estatuto",
+          "score": -0.0149466103153302
+        },
+        {
+          "id": "doc-reglamento_accion_cumplimiento",
+          "title": "Ley 393 de 1997 — Acción de Cumplimiento (Mock)",
+          "type": "reglamento",
+          "article": "Artículo 1 y Artículo 5",
+          "score": -0.0220600716873755
+        }
+      ],
+      "validation": {
+        "totalCitations": 3,
+        "validCitations": 3,
+        "precision": 1,
+        "invalidCitations": [],
+        "validCitationsList": [
+          {
+            "citationRef": "[1]",
+            "isValid": true,
+            "sourceTitle": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 0,
+            "actualIndex": 0
+          },
+          {
+            "citationRef": "[2]",
+            "isValid": true,
+            "sourceTitle": "Codigo Civil",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 1,
+            "actualIndex": 1
+          },
+          {
+            "citationRef": "[3]",
+            "isValid": true,
+            "sourceTitle": "Corte Constitucional — Acción de Tutela (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 2,
+            "actualIndex": 2
+          }
+        ]
+      },
+      "expectedSources": [
+        "Constitucion Politica de Colombia",
+        "Articulo 1"
+      ],
+      "expectedAnswerContains": [
+        "Estado social de derecho",
+        "Republica unitaria"
+      ]
+    },
+    {
+      "query": "¿Cuáles son los fines esenciales del Estado?",
+      "category": "constitucional",
+      "answer": "Los fines esenciales del Estado en Colombia se establecen en la Constitución Política [2], que en su artículo 2° establece que son \"garantizar la vida, la convivencia, la justicia, la igualdad, el conocimiento, la libertad y la paz, dentro de un marco jurídico, democrático y participativo que garantice un orden político, económico y social justo\". Estos fines buscan asegurar el bienestar general y la protección de los derechos fundamentales de los ciudadanos. La protección al trabajador, como se menciona en el artículo 168 del Código Sustantivo del Trabajo [1], se enmarca dentro de estos fines al garantizar condiciones laborales justas y seguras. La Constitución también establece la importancia de la justicia social y la protección de los derechos laborales [2]. Es importante destacar que la normativa laboral en Colombia busca equilibrar los intereses de los empleadores y los trabajadores, promoviendo un ambiente de trabajo digno y respetuoso. Para profundizar en los detalles específicos de los fines del Estado y la legislación laboral, se recomienda consultar la Constitución Política de Colombia [2] y el Código Sustantivo del Trabajo [1]. Estas fuentes ofrecen una visión completa y detallada de los marcos legales que rigen estas materias.",
+      "citations": [
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 168",
+          "score": 0.06283410421751151
+        },
+        {
+          "id": "doc-estatuto_codigo_civil",
+          "title": "Codigo Civil",
+          "type": "estatuto",
+          "score": 0.03134496062575588
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia_extractos",
+          "title": "Constitucion Politica de Colombia - Extractos Principales",
+          "type": "estatuto",
+          "score": 0.014743611229307415
+        },
+        {
+          "id": "doc-jurisprudencia_tutela",
+          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "type": "jurisprudencia",
+          "article": "Artículo 86",
+          "score": 0.013866378630251787
+        },
+        {
+          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
+          "title": "Ley 100 de 1993 - Seguridad Social",
+          "type": "estatuto",
+          "score": -0.006260741322568937
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo_extractos",
+          "title": "Codigo Sustantivo del Trabajo - Extractos Principales",
+          "type": "estatuto",
+          "score": -0.00798096215705969
+        },
+        {
+          "id": "doc-estatuto_codigo_de_comercio",
+          "title": "Codigo de Comercio",
+          "type": "estatuto",
+          "score": -0.01659712865572794
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
+          "title": "Codigo Sustantivo del Trabajo",
+          "type": "estatuto",
+          "score": -0.017555223920633356
+        }
+      ],
+      "validation": {
+        "totalCitations": 2,
+        "validCitations": 2,
+        "precision": 1,
+        "invalidCitations": [],
+        "validCitationsList": [
+          {
+            "citationRef": "[1]",
+            "isValid": true,
+            "sourceTitle": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 0,
+            "actualIndex": 0
+          },
+          {
+            "citationRef": "[2]",
+            "isValid": true,
+            "sourceTitle": "Codigo Civil",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 1,
+            "actualIndex": 1
+          }
+        ]
+      },
+      "expectedSources": [
+        "Constitucion Politica de Colombia",
+        "Articulo 2"
+      ],
+      "expectedAnswerContains": [
+        "servir a la comunidad",
+        "prosperidad general"
+      ]
+    },
+    {
+      "query": "¿Qué es la jornada ordinaria de trabajo?",
+      "category": "laboral",
+      "answer": "La jornada ordinaria de trabajo en Colombia se refiere al período de tiempo durante el cual un trabajador está obligado a prestar sus servicios laborales de manera regular. Según el Código Sustantivo del Trabajo, la jornada ordinaria de trabajo no se define explícitamente en el artículo 168 [1], que se enfoca en el recargo por trabajo nocturno. Sin embargo, es importante mencionar que la jornada ordinaria de trabajo en Colombia generalmente se considera como un máximo de 8 horas diarias y 48 horas semanales, según lo establecido en el artículo 161 del Código Sustantivo del Trabajo [no citado en la fuente proporcionada]. El trabajo realizado fuera de esta jornada puede ser considerado como horas extras, las cuales deben ser autorizadas y no pueden afectar los derechos mínimos del trabajador, como se establece en el parágrafo del artículo 168 [1]. Es importante consultar el Código Sustantivo del Trabajo y otras fuentes oficiales para obtener información más detallada y precisa sobre la jornada ordinaria de trabajo en Colombia. La jornada ordinaria de trabajo es un aspecto fundamental en la relación laboral, ya que afecta directamente la salud, el bienestar y la productividad de los trabajadores. Para obtener información más específica, se recomienda consultar fuentes oficiales como el Ministerio del Trabajo de Colombia o la ley laboral vigente.",
+      "citations": [
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 168",
+          "score": 0.04625683478080246
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
+          "title": "Codigo Sustantivo del Trabajo",
+          "type": "estatuto",
+          "score": 0.02822286614510638
+        },
+        {
+          "id": "doc-estatuto_codigo_de_comercio",
+          "title": "Codigo de Comercio",
+          "type": "estatuto",
+          "score": 0.01603821557994084
+        },
+        {
+          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
+          "title": "Ley 100 de 1993 - Seguridad Social",
+          "type": "estatuto",
+          "score": 0.006211829504577845
+        },
+        {
+          "id": "doc-jurisprudencia_tutela",
+          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "type": "jurisprudencia",
+          "article": "Artículo 86",
+          "score": 0.0027612048878629556
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia",
+          "title": "Constitucion Politica de Colombia",
+          "type": "estatuto",
+          "score": 0.0016591599450074105
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo_extractos",
+          "title": "Codigo Sustantivo del Trabajo - Extractos Principales",
+          "type": "estatuto",
+          "score": -0.01399044092852632
+        },
+        {
+          "id": "doc-estatuto_codigo_civil",
+          "title": "Codigo Civil",
+          "type": "estatuto",
+          "score": -0.020915298583630802
+        }
+      ],
+      "validation": {
+        "totalCitations": 1,
+        "validCitations": 1,
+        "precision": 1,
+        "invalidCitations": [],
+        "validCitationsList": [
+          {
+            "citationRef": "[1]",
+            "isValid": true,
+            "sourceTitle": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 0,
+            "actualIndex": 0
+          }
+        ]
+      },
+      "expectedSources": [
+        "Codigo Sustantivo del Trabajo",
+        "Articulo 160"
+      ],
+      "expectedAnswerContains": [
+        "jornada ordinaria",
+        "8 horas",
+        "48 horas semanales"
+      ]
+    },
+    {
+      "query": "¿Cuál es el recargo por trabajo nocturno?",
+      "category": "laboral",
+      "answer": "Según el artículo 168 del Código Sustantivo del Trabajo [1], el trabajo realizado entre las 9:00 p. m. y las 6:00 a. m. tiene un recargo nocturno. Esto significa que los trabajadores que laboran durante estas horas tienen derecho a un recargo sobre su salario normal. El recargo por trabajo nocturno es del 35% sobre el valor de la hora diurna [no especificado en la fuente proporcionada]. Es importante destacar que las horas extras, incluidas las nocturnas, deben ser autorizadas y no pueden afectar los derechos mínimos de los trabajadores, como se establece en el parágrafo del artículo 168 [1]. La protección al trabajador es fundamental en estos casos. Sin embargo, la fuente proporcionada no especifica el monto exacto del recargo, por lo que se recomienda consultar la normativa completa del Código Sustantivo del Trabajo para obtener información detallada [1]. En resumen, el recargo por trabajo nocturno es una compensación adicional por laborar en horarios nocturnos, pero es necesario consultar fuentes oficiales para obtener el porcentaje exacto [1].",
+      "citations": [
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 168",
+          "score": 0.07033652575688311
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
+          "title": "Codigo Sustantivo del Trabajo",
+          "type": "estatuto",
+          "score": 0.03631220874025241
+        },
+        {
+          "id": "doc-estatuto_codigo_de_comercio",
+          "title": "Codigo de Comercio",
+          "type": "estatuto",
+          "score": 0.03161965227066941
+        },
+        {
+          "id": "doc-jurisprudencia_tutela",
+          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "type": "jurisprudencia",
+          "article": "Artículo 86",
+          "score": 0.01436294790096355
+        },
+        {
+          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
+          "title": "Ley 100 de 1993 - Seguridad Social",
+          "type": "estatuto",
+          "score": 0.004647521136329407
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia",
+          "title": "Constitucion Politica de Colombia",
+          "type": "estatuto",
+          "score": 0.003941923676340708
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo_extractos",
+          "title": "Codigo Sustantivo del Trabajo - Extractos Principales",
+          "type": "estatuto",
+          "score": -0.033779775458799635
+        },
+        {
+          "id": "doc-estatuto_codigo_civil",
+          "title": "Codigo Civil",
+          "type": "estatuto",
+          "score": -0.045020577639756615
+        }
+      ],
+      "validation": {
+        "totalCitations": 1,
+        "validCitations": 1,
+        "precision": 1,
+        "invalidCitations": [],
+        "validCitationsList": [
+          {
+            "citationRef": "[1]",
+            "isValid": true,
+            "sourceTitle": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 0,
+            "actualIndex": 0
+          }
+        ]
+      },
+      "expectedSources": [
+        "Codigo Sustantivo del Trabajo",
+        "Articulo 168"
+      ],
+      "expectedAnswerContains": [
+        "trabajo nocturno",
+        "35%",
+        "recargo"
+      ]
+    },
+    {
+      "query": "¿Qué es el derecho a la vida según la Constitución?",
+      "category": "constitucional",
+      "answer": "El derecho a la vida es un derecho fundamental consagrado en la Constitución Política de Colombia. Según el artículo 11 de la Constitución, \"todo ser humano tiene derecho a la vida\" [1]. Este derecho es considerado inherente a la persona humana y es inviolable. La Constitución establece que nadie puede ser privado de la vida arbitrariamente, y que el Estado tiene la obligación de proteger y garantizar este derecho [2]. El derecho a la vida se entiende como el derecho a existir y a vivir con dignidad, y abarca no solo la protección contra la muerte, sino también contra cualquier forma de daño o lesión que pueda afectar la integridad física o psicológica de la persona [3]. La Corte Constitucional ha interpretado este derecho de manera amplia, incluyendo la protección del derecho a la vida desde la concepción hasta la muerte natural [4]. Es importante destacar que este derecho no es absoluto y puede ser limitado en ciertas circunstancias, como en caso de legítima defensa o en situaciones de conflicto armado [5]. En cualquier caso, la limitación del derecho a la vida debe ser proporcional y respetar los principios de humanidad y dignidad [6]. Es fundamental consultar la Constitución Política de Colombia y la jurisprudencia de la Corte Constitucional para una comprensión más profunda de este derecho [7].",
+      "citations": [
+        {
+          "id": "doc-estatuto_codigo_de_comercio",
+          "title": "Codigo de Comercio",
+          "type": "estatuto",
+          "score": 0.051251474627912075
+        },
+        {
+          "id": "doc-estatuto_codigo_civil",
+          "title": "Codigo Civil",
+          "type": "estatuto",
+          "score": 0.04159674911970775
+        },
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 168",
+          "score": 0.026420284597031305
+        },
+        {
+          "id": "doc-jurisprudencia_tutela",
+          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "type": "jurisprudencia",
+          "article": "Artículo 86",
+          "score": 0.021663694914411863
+        },
+        {
+          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
+          "title": "Ley 100 de 1993 - Seguridad Social",
+          "type": "estatuto",
+          "score": -0.006014621950005421
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia",
+          "title": "Constitucion Politica de Colombia",
+          "type": "estatuto",
+          "score": -0.009472854033597485
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
+          "title": "Codigo Sustantivo del Trabajo",
+          "type": "estatuto",
+          "score": -0.010462062527413265
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo_extractos",
+          "title": "Codigo Sustantivo del Trabajo - Extractos Principales",
+          "type": "estatuto",
+          "score": -0.0199937555573584
+        }
+      ],
+      "validation": {
+        "totalCitations": 7,
+        "validCitations": 7,
+        "precision": 1,
+        "invalidCitations": [],
+        "validCitationsList": [
+          {
+            "citationRef": "[1]",
+            "isValid": true,
+            "sourceTitle": "Codigo de Comercio",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 0,
+            "actualIndex": 0
+          },
+          {
+            "citationRef": "[2]",
+            "isValid": true,
+            "sourceTitle": "Codigo Civil",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 1,
+            "actualIndex": 1
+          },
+          {
+            "citationRef": "[3]",
+            "isValid": true,
+            "sourceTitle": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 2,
+            "actualIndex": 2
+          },
+          {
+            "citationRef": "[4]",
+            "isValid": true,
+            "sourceTitle": "Corte Constitucional — Acción de Tutela (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 3,
+            "actualIndex": 3
+          },
+          {
+            "citationRef": "[5]",
+            "isValid": true,
+            "sourceTitle": "Ley 100 de 1993 - Seguridad Social",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 4,
+            "actualIndex": 4
+          },
+          {
+            "citationRef": "[6]",
+            "isValid": true,
+            "sourceTitle": "Constitucion Politica de Colombia",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 5,
+            "actualIndex": 5
+          },
+          {
+            "citationRef": "[7]",
+            "isValid": true,
+            "sourceTitle": "Codigo Sustantivo del Trabajo",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 6,
+            "actualIndex": 6
+          }
+        ]
+      },
+      "expectedSources": [
+        "Constitucion Politica de Colombia",
+        "Articulo 11"
+      ],
+      "expectedAnswerContains": [
+        "derecho a la vida",
+        "inviolable",
+        "pena de muerte"
+      ]
+    },
+    {
+      "query": "¿Qué establece el artículo 13 de la Constitución sobre igualdad?",
+      "category": "constitucional",
+      "answer": "El artículo 13 de la Constitución Política de Colombia establece el principio de igualdad, según el cual todas las personas nacen libres e iguales ante la ley y gozan de los mismos derechos, libertades y oportunidades sin distinción de raza, sexo, origen nacional o familiar, lengua, religión, opinión política o filosófica [1]. Este principio busca garantizar que no haya discriminación y que todos los ciudadanos sean tratados de manera justa y equitativa. La igualdad es un derecho fundamental que se aplica en todos los ámbitos, incluyendo el laboral, el educativo y el acceso a servicios públicos. Es importante destacar que la Constitución colombiana promueve la igualdad de oportunidades y la no discriminación, lo que significa que todas las personas deben tener las mismas posibilidades de acceder a empleos, educación y servicios sin importar su condición o características personales. Sin embargo, la fuente proporcionada [1] se refiere al Código Sustantivo del Trabajo y no contiene información directa sobre el artículo 13 de la Constitución. Para obtener información precisa sobre este artículo, se recomienda consultar la Constitución Política de Colombia directamente [2]. La igualdad es un pilar fundamental de la democracia y el Estado de derecho, y su aplicación efectiva es crucial para la justicia social y la cohesión de la sociedad. En resumen, el artículo 13 de la Constitución colombiana consagra el principio de igualdad como un derecho fundamental y universal.",
+      "citations": [
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 168",
+          "score": 0.04250394842596963
+        },
+        {
+          "id": "doc-estatuto_codigo_de_comercio",
+          "title": "Codigo de Comercio",
+          "type": "estatuto",
+          "score": 0.023013428213478355
+        },
+        {
+          "id": "doc-jurisprudencia_tutela",
+          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "type": "jurisprudencia",
+          "article": "Artículo 86",
+          "score": 0.02285492471916957
+        },
+        {
+          "id": "doc-estatuto_codigo_civil",
+          "title": "Codigo Civil",
+          "type": "estatuto",
+          "score": 0.020366068876612364
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
+          "title": "Codigo Sustantivo del Trabajo",
+          "type": "estatuto",
+          "score": 0.01789803864462778
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo_extractos",
+          "title": "Codigo Sustantivo del Trabajo - Extractos Principales",
+          "type": "estatuto",
+          "score": 0.008470827325015395
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia_extractos",
+          "title": "Constitucion Politica de Colombia - Extractos Principales",
+          "type": "estatuto",
+          "score": -0.019662050291331935
+        },
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 159 y Artículo 160",
+          "score": -0.03742281833800437
+        }
+      ],
+      "validation": {
+        "totalCitations": 2,
+        "validCitations": 2,
+        "precision": 1,
+        "invalidCitations": [],
+        "validCitationsList": [
+          {
+            "citationRef": "[1]",
+            "isValid": true,
+            "sourceTitle": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 0,
+            "actualIndex": 0
+          },
+          {
+            "citationRef": "[2]",
+            "isValid": true,
+            "sourceTitle": "Codigo de Comercio",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 1,
+            "actualIndex": 1
+          }
+        ]
+      },
+      "expectedSources": [
+        "Constitucion Politica de Colombia",
+        "Articulo 13"
+      ],
+      "expectedAnswerContains": [
+        "igualdad",
+        "discriminacion",
+        "misma proteccion"
+      ]
+    },
+    {
+      "query": "¿Qué es el trabajo según la Constitución?",
+      "category": "constitucional",
+      "answer": "Según la Constitución Política de Colombia [2], el trabajo es un derecho y una obligación social que goza de la especial protección del Estado. En el artículo 25 de la Constitución, se establece que \"el trabajo es un derecho y una obligación social y goza, en todas sus modalidades, de la especial protección del Estado\". \n\nAdemás, el artículo 53 de la Constitución [2] establece los principios mínimos fundamentales para garantizar los derechos de los trabajadores, como la igualdad de oportunidades, la remuneración mínima vital y móvil, la jornada máxima, el descanso necesario y la protección contra el despido injusto. \n\nEs importante destacar que, aunque la fuente [1] proporcionada se refiere al Código Sustantivo del Trabajo, específicamente al recargo por trabajo nocturno y la protección al trabajador en cuanto a horas extras, la definición y protección constitucional del trabajo se encuentran en la Constitución Política de Colombia [2]. \n\nPara una comprensión más profunda del tema, se recomienda consultar directamente la Constitución Política de Colombia [2] y el Código Sustantivo del Trabajo [1], así como otras fuentes jurídicas relevantes.",
+      "citations": [
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 168",
+          "score": 0.04680246658414617
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
+          "title": "Codigo Sustantivo del Trabajo",
+          "type": "estatuto",
+          "score": 0.030973581035996803
+        },
+        {
+          "id": "doc-jurisprudencia_tutela",
+          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "type": "jurisprudencia",
+          "article": "Artículo 86",
+          "score": 0.004570559834431415
+        },
+        {
+          "id": "doc-estatuto_codigo_de_comercio",
+          "title": "Codigo de Comercio",
+          "type": "estatuto",
+          "score": 0.0020591470754522446
+        },
+        {
+          "id": "doc-estatuto_codigo_civil",
+          "title": "Codigo Civil",
+          "type": "estatuto",
+          "score": -0.0021494659110184245
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia_extractos",
+          "title": "Constitucion Politica de Colombia - Extractos Principales",
+          "type": "estatuto",
+          "score": -0.004349854035481206
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia",
+          "title": "Constitucion Politica de Colombia",
+          "type": "estatuto",
+          "score": -0.011072134242832977
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo_extractos",
+          "title": "Codigo Sustantivo del Trabajo - Extractos Principales",
+          "type": "estatuto",
+          "score": -0.02674039090697601
+        }
+      ],
+      "validation": {
+        "totalCitations": 2,
+        "validCitations": 2,
+        "precision": 1,
+        "invalidCitations": [],
+        "validCitationsList": [
+          {
+            "citationRef": "[1]",
+            "isValid": true,
+            "sourceTitle": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 0,
+            "actualIndex": 0
+          },
+          {
+            "citationRef": "[2]",
+            "isValid": true,
+            "sourceTitle": "Codigo Sustantivo del Trabajo",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 1,
+            "actualIndex": 1
+          }
+        ]
+      },
+      "expectedSources": [
+        "Constitucion Politica de Colombia",
+        "Articulo 25"
+      ],
+      "expectedAnswerContains": [
+        "trabajo",
+        "derecho",
+        "obligacion social"
+      ]
+    },
+    {
+      "query": "¿Qué es el Sistema General de Pensiones?",
+      "category": "seguridad_social",
+      "answer": "El Sistema General de Pensiones en Colombia se encuentra regulado en la Ley 100 de 1993 [2], la cual establece un sistema de pensiones que busca garantizar a los ciudadanos una cobertura adecuada para su vejez. Según la Constitución Política de Colombia, el Estado tiene como fin esencial \"garantizar la efectividad de los principios, derechos y deberes consagrados en la Constitución\" [1, Artículo 2], lo que incluye el derecho a la seguridad social. El Sistema General de Pensiones es parte de este esfuerzo por garantizar la seguridad social y el bienestar de los ciudadanos. La Constitución también establece que \"el trabajo es un derecho y una obligación social y goza, en todas sus modalidades, de la especial protección del Estado\" [1, Artículo 25], lo que implica que el Estado debe proteger y garantizar los derechos laborales, incluyendo el derecho a una pensión. El Sistema General de Pensiones ofrece diferentes regímenes, como el régimen de prima media con prestación definida y el régimen de ahorro individual con solidaridad, para que los trabajadores puedan elegir el que mejor se adapte a sus necesidades [2]. Es importante mencionar que, aunque la Constitución Política de Colombia [1] establece los principios generales, la regulación específica del Sistema General de Pensiones se encuentra en la Ley 100 de 1993 [2] y sus normas reglamentarias. Para obtener información detallada y actualizada sobre el Sistema General de Pensiones, se recomienda consultar la Ley 100 de 1993 [2] y las fuentes oficiales del Gobierno de Colombia.",
+      "citations": [
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia_extractos",
+          "title": "Constitucion Politica de Colombia - Extractos Principales",
+          "type": "estatuto",
+          "score": 0.04273892180002527
+        },
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 168",
+          "score": 0.022006820149059567
+        },
+        {
+          "id": "doc-estatuto_codigo_civil",
+          "title": "Codigo Civil",
+          "type": "estatuto",
+          "score": 0.0000614216130987644
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo_extractos",
+          "title": "Codigo Sustantivo del Trabajo - Extractos Principales",
+          "type": "estatuto",
+          "score": -0.0020752223231467796
+        },
+        {
+          "id": "doc-jurisprudencia_tutela",
+          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "type": "jurisprudencia",
+          "article": "Artículo 86",
+          "score": -0.0053069870082350454
+        },
+        {
+          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
+          "title": "Ley 100 de 1993 - Seguridad Social",
+          "type": "estatuto",
+          "score": -0.009654628138574343
+        },
+        {
+          "id": "doc-reglamento_accion_cumplimiento",
+          "title": "Ley 393 de 1997 — Acción de Cumplimiento (Mock)",
+          "type": "reglamento",
+          "article": "Artículo 1 y Artículo 5",
+          "score": -0.016402814492242426
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
+          "title": "Codigo Sustantivo del Trabajo",
+          "type": "estatuto",
+          "score": -0.025914696667016308
+        }
+      ],
+      "validation": {
+        "totalCitations": 2,
+        "validCitations": 2,
+        "precision": 1,
+        "invalidCitations": [],
+        "validCitationsList": [
+          {
+            "citationRef": "[1]",
+            "isValid": true,
+            "sourceTitle": "Constitucion Politica de Colombia - Extractos Principales",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 0,
+            "actualIndex": 0
+          },
+          {
+            "citationRef": "[2]",
+            "isValid": true,
+            "sourceTitle": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 1,
+            "actualIndex": 1
+          }
+        ]
+      },
+      "expectedSources": [
+        "Ley 100 de 1993",
+        "Articulo 10"
+      ],
+      "expectedAnswerContains": [
+        "pensiones",
+        "vejez",
+        "invalidez",
+        "muerte"
+      ]
+    },
+    {
+      "query": "¿Cuáles son los regímenes del Sistema General de Pensiones?",
+      "category": "seguridad_social",
+      "answer": "La Constitución Política de Colombia [1] establece los principios fundamentales del Estado, pero no especifica directamente los regímenes del Sistema General de Pensiones. Sin embargo, es importante mencionar que el Sistema General de Pensiones en Colombia se encuentra regulado por la Ley 100 de 1993 [2], la cual define los regímenes de pensiones como el Régimen de Prima Media con Prestación Definida y el Régimen de Ahorro Individual con Solidaridad. Estos regímenes ofrecen diferentes opciones para que los trabajadores puedan acceder a una pensión una vez cumplan con los requisitos establecidos. Es recomendable consultar la Ley 100 de 1993 [2] y otras fuentes oficiales para obtener información detallada y actualizada sobre los regímenes del Sistema General de Pensiones en Colombia. La Constitución Política [1] sí garantiza el derecho a la seguridad social, incluyendo las pensiones, como parte de los derechos fundamentales de los ciudadanos.",
+      "citations": [
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia_extractos",
+          "title": "Constitucion Politica de Colombia - Extractos Principales",
+          "type": "estatuto",
+          "score": 0.04227465763797049
+        },
+        {
+          "id": "doc-estatuto_codigo_civil",
+          "title": "Codigo Civil",
+          "type": "estatuto",
+          "score": 0.020265031893848495
+        },
+        {
+          "id": "doc-jurisprudencia_tutela",
+          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "type": "jurisprudencia",
+          "article": "Artículo 86",
+          "score": 0.006325296701466439
+        },
+        {
+          "id": "doc-reglamento_accion_cumplimiento",
+          "title": "Ley 393 de 1997 — Acción de Cumplimiento (Mock)",
+          "type": "reglamento",
+          "article": "Artículo 1 y Artículo 5",
+          "score": 0.004074028891931929
+        },
+        {
+          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
+          "title": "Ley 100 de 1993 - Seguridad Social",
+          "type": "estatuto",
+          "score": 0.0006152617585279454
+        },
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 168",
+          "score": -0.0010201682954346803
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo_extractos",
+          "title": "Codigo Sustantivo del Trabajo - Extractos Principales",
+          "type": "estatuto",
+          "score": -0.012740191251942102
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
+          "title": "Codigo Sustantivo del Trabajo",
+          "type": "estatuto",
+          "score": -0.022521171485128055
+        }
+      ],
+      "validation": {
+        "totalCitations": 2,
+        "validCitations": 2,
+        "precision": 1,
+        "invalidCitations": [],
+        "validCitationsList": [
+          {
+            "citationRef": "[1]",
+            "isValid": true,
+            "sourceTitle": "Constitucion Politica de Colombia - Extractos Principales",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 0,
+            "actualIndex": 0
+          },
+          {
+            "citationRef": "[2]",
+            "isValid": true,
+            "sourceTitle": "Codigo Civil",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 1,
+            "actualIndex": 1
+          }
+        ]
+      },
+      "expectedSources": [
+        "Ley 100 de 1993",
+        "Articulo 11"
+      ],
+      "expectedAnswerContains": [
+        "regimen",
+        "prima media",
+        "ahorro individual"
+      ]
+    },
+    {
+      "query": "¿Qué es el Sistema General de Seguridad Social en Salud?",
+      "category": "seguridad_social",
+      "answer": "El Sistema General de Seguridad Social en Salud (SGSSS) es un conjunto de normas y entidades que buscan garantizar el acceso a servicios de salud de alta calidad a todos los habitantes de Colombia [2]. Este sistema se estableció con el fin de proteger a la población contra los riesgos que puedan afectar su salud y bienestar. La Ley 100 de 1993 es la base legal del SGSSS, que define los principios y objetivos del sistema [3]. El SGSSS se financia a través de contribuciones de los empleadores y trabajadores, así como de recursos del Estado. Los afiliados al sistema tienen derecho a recibir servicios de salud de acuerdo con el Plan Obligatorio de Salud (POS) [4]. El SGSSS está compuesto por entidades como las Empresas Promotoras de Salud (EPS), las Instituciones Prestadoras de Salud (IPS) y el Fondo de Solidaridad y Garantía (FOSYGA) [5]. Es importante destacar que la información proporcionada en el contexto sobre el Código Sustantivo del Trabajo y el recargo por trabajo nocturno no está directamente relacionada con el Sistema General de Seguridad Social en Salud. Para obtener más información sobre el SGSSS, se recomienda consultar la Ley 100 de 1993 y otros documentos oficiales del Ministerio de Salud y Protección Social de Colombia [6].",
+      "citations": [
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 168",
+          "score": 0.0519518956158804
+        },
+        {
+          "id": "doc-estatuto_codigo_civil",
+          "title": "Codigo Civil",
+          "type": "estatuto",
+          "score": 0.01920705368487169
+        },
+        {
+          "id": "doc-jurisprudencia_tutela",
+          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "type": "jurisprudencia",
+          "article": "Artículo 86",
+          "score": 0.0006341043670690441
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo_extractos",
+          "title": "Codigo Sustantivo del Trabajo - Extractos Principales",
+          "type": "estatuto",
+          "score": 0.00044209635172960497
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia_extractos",
+          "title": "Constitucion Politica de Colombia - Extractos Principales",
+          "type": "estatuto",
+          "score": -0.0021468185527486897
+        },
+        {
+          "id": "doc-reglamento_accion_cumplimiento",
+          "title": "Ley 393 de 1997 — Acción de Cumplimiento (Mock)",
+          "type": "reglamento",
+          "article": "Artículo 1 y Artículo 5",
+          "score": -0.018944946681374437
+        },
+        {
+          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
+          "title": "Ley 100 de 1993 - Seguridad Social",
+          "type": "estatuto",
+          "score": -0.02129122182163646
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
+          "title": "Codigo Sustantivo del Trabajo",
+          "type": "estatuto",
+          "score": -0.03357928915291714
+        }
+      ],
+      "validation": {
+        "totalCitations": 5,
+        "validCitations": 5,
+        "precision": 1,
+        "invalidCitations": [],
+        "validCitationsList": [
+          {
+            "citationRef": "[2]",
+            "isValid": true,
+            "sourceTitle": "Codigo Civil",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 1,
+            "actualIndex": 1
+          },
+          {
+            "citationRef": "[3]",
+            "isValid": true,
+            "sourceTitle": "Corte Constitucional — Acción de Tutela (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 2,
+            "actualIndex": 2
+          },
+          {
+            "citationRef": "[4]",
+            "isValid": true,
+            "sourceTitle": "Codigo Sustantivo del Trabajo - Extractos Principales",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 3,
+            "actualIndex": 3
+          },
+          {
+            "citationRef": "[5]",
+            "isValid": true,
+            "sourceTitle": "Constitucion Politica de Colombia - Extractos Principales",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 4,
+            "actualIndex": 4
+          },
+          {
+            "citationRef": "[6]",
+            "isValid": true,
+            "sourceTitle": "Ley 393 de 1997 — Acción de Cumplimiento (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 5,
+            "actualIndex": 5
+          }
+        ]
+      },
+      "expectedSources": [
+        "Ley 100 de 1993",
+        "Articulo 152"
+      ],
+      "expectedAnswerContains": [
+        "seguridad social en salud",
+        "servicio publico",
+        "acceso"
+      ]
+    },
+    {
+      "query": "¿Cuáles son los componentes del Sistema de Salud?",
+      "category": "seguridad_social",
+      "answer": "El Sistema de Salud en Colombia se compone de varios componentes clave. Según la Ley 100 de 1993 [1], el Sistema de Salud se divide en dos regímenes: el Régimen Contributivo y el Régimen Subsidiado. El Régimen Contributivo se financia a través de las cotizaciones de los trabajadores y empleadores [2], mientras que el Régimen Subsidiado se financia a través de recursos públicos y privados para cubrir a la población más vulnerable [3]. Otro componente importante es la red de prestadores de servicios de salud, que incluye hospitales, clínicas y centros de salud [4]. La Superintendencia Nacional de Salud [5] es el ente regulador y vigilante del Sistema de Salud. Además, la Ley 1438 de 2011 [6] establece la política de atención integral en salud, que busca mejorar la calidad y acceso a los servicios de salud. El Ministerio de Salud y Protección Social [7] es el ente rector del Sistema de Salud y se encarga de formular y implementar las políticas de salud. Es importante mencionar que la normativa colombiana sobre salud es amplia y compleja, por lo que para una comprensión más detallada, se recomienda consultar las fuentes oficiales como la página web del Ministerio de Salud y Protección Social [8] o la Gaceta Oficial [9]. En resumen, el Sistema de Salud en Colombia es un conjunto de componentes que trabajan juntos para brindar atención en salud a la población.",
+      "citations": [
+        {
+          "id": "doc-estatuto_codigo_civil",
+          "title": "Codigo Civil",
+          "type": "estatuto",
+          "score": 0.051902248703695246
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo_extractos",
+          "title": "Codigo Sustantivo del Trabajo - Extractos Principales",
+          "type": "estatuto",
+          "score": 0.027471523914557157
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia_extractos",
+          "title": "Constitucion Politica de Colombia - Extractos Principales",
+          "type": "estatuto",
+          "score": 0.02737216878112814
+        },
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 168",
+          "score": 0.027085602855864407
+        },
+        {
+          "id": "doc-reglamento_accion_cumplimiento",
+          "title": "Ley 393 de 1997 — Acción de Cumplimiento (Mock)",
+          "type": "reglamento",
+          "article": "Artículo 1 y Artículo 5",
+          "score": 0.00610374837212722
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
+          "title": "Codigo Sustantivo del Trabajo",
+          "type": "estatuto",
+          "score": -0.01560492958689963
+        },
+        {
+          "id": "doc-jurisprudencia_tutela",
+          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "type": "jurisprudencia",
+          "article": "Artículo 86",
+          "score": -0.017325995229782676
+        },
+        {
+          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
+          "title": "Ley 100 de 1993 - Seguridad Social",
+          "type": "estatuto",
+          "score": -0.02631929748640203
+        }
+      ],
+      "validation": {
+        "totalCitations": 9,
+        "validCitations": 8,
+        "precision": 0.8888888888888888,
+        "invalidCitations": [
+          {
+            "citationRef": "[9]",
+            "isValid": false,
+            "sourceTitle": null,
+            "articleMatch": false,
+            "confidence": 0,
+            "expectedIndex": 8,
+            "errorMessage": "Cita fuera de rango: [9] (hay 8 fuentes disponibles)"
+          }
+        ],
+        "validCitationsList": [
+          {
+            "citationRef": "[1]",
+            "isValid": true,
+            "sourceTitle": "Codigo Civil",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 0,
+            "actualIndex": 0
+          },
+          {
+            "citationRef": "[2]",
+            "isValid": true,
+            "sourceTitle": "Codigo Sustantivo del Trabajo - Extractos Principales",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 1,
+            "actualIndex": 1
+          },
+          {
+            "citationRef": "[3]",
+            "isValid": true,
+            "sourceTitle": "Constitucion Politica de Colombia - Extractos Principales",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 2,
+            "actualIndex": 2
+          },
+          {
+            "citationRef": "[4]",
+            "isValid": true,
+            "sourceTitle": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 3,
+            "actualIndex": 3
+          },
+          {
+            "citationRef": "[5]",
+            "isValid": true,
+            "sourceTitle": "Ley 393 de 1997 — Acción de Cumplimiento (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 4,
+            "actualIndex": 4
+          },
+          {
+            "citationRef": "[6]",
+            "isValid": true,
+            "sourceTitle": "Codigo Sustantivo del Trabajo",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 5,
+            "actualIndex": 5
+          },
+          {
+            "citationRef": "[7]",
+            "isValid": true,
+            "sourceTitle": "Corte Constitucional — Acción de Tutela (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 6,
+            "actualIndex": 6
+          },
+          {
+            "citationRef": "[8]",
+            "isValid": true,
+            "sourceTitle": "Ley 100 de 1993 - Seguridad Social",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 7,
+            "actualIndex": 7
+          }
+        ]
+      },
+      "expectedSources": [
+        "Ley 100 de 1993",
+        "Articulo 153"
+      ],
+      "expectedAnswerContains": [
+        "regimen contributivo",
+        "regimen subsidiado"
+      ]
+    },
+    {
+      "query": "¿Qué son los intereses sobre cesantías?",
+      "category": "laboral",
+      "answer": "Los intereses sobre cesantías son un concepto relevante en la legislación laboral colombiana. Según la ley, los trabajadores tienen derecho a recibir intereses sobre las cesantías, que son un porcentaje del valor de las cesantías causadas [1]. Estos intereses se calculan sobre el valor de las cesantías y se pagan al trabajador al momento de la liquidación de las mismas [2]. La tasa de interés es fijada por el gobierno y puede variar anualmente [3]. Es importante destacar que los intereses sobre cesantías son un derecho adquirido por el trabajador y deben ser pagados por el empleador [4]. La ley establece que los intereses sobre cesantías deben ser pagados anualmente, aunque también se pueden pagar al final del año o al momento de la liquidación de las cesantías [5]. Para más información, se recomienda consultar el Código Sustantivo del Trabajo y la ley 50 de 1990 [6]. También se puede consultar la página web del Ministerio del Trabajo para obtener información actualizada sobre los intereses sobre cesantías [7]. Es importante tener en cuenta que la legislación laboral puede cambiar, por lo que es recomendable consultar fuentes oficiales para obtener información actualizada [8].",
+      "citations": [
+        {
+          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
+          "title": "Ley 100 de 1993 - Seguridad Social",
+          "type": "estatuto",
+          "score": 0.04754349529387906
+        },
+        {
+          "id": "doc-estatuto_codigo_civil",
+          "title": "Codigo Civil",
+          "type": "estatuto",
+          "score": 0.045611366475511846
+        },
+        {
+          "id": "doc-jurisprudencia_tutela",
+          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "type": "jurisprudencia",
+          "article": "Artículo 86",
+          "score": 0.04069649986466424
+        },
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 168",
+          "score": 0.005152714969751368
+        },
+        {
+          "id": "doc-estatuto_codigo_de_comercio",
+          "title": "Codigo de Comercio",
+          "type": "estatuto",
+          "score": 0.004024982177701035
+        },
+        {
+          "id": "doc-reglamento_accion_cumplimiento",
+          "title": "Ley 393 de 1997 — Acción de Cumplimiento (Mock)",
+          "type": "reglamento",
+          "article": "Artículo 1 y Artículo 5",
+          "score": -0.0009237067360065321
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo_extractos",
+          "title": "Codigo Sustantivo del Trabajo - Extractos Principales",
+          "type": "estatuto",
+          "score": -0.019189303022630395
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
+          "title": "Codigo Sustantivo del Trabajo",
+          "type": "estatuto",
+          "score": -0.02866616590654719
+        }
+      ],
+      "validation": {
+        "totalCitations": 8,
+        "validCitations": 8,
+        "precision": 1,
+        "invalidCitations": [],
+        "validCitationsList": [
+          {
+            "citationRef": "[1]",
+            "isValid": true,
+            "sourceTitle": "Ley 100 de 1993 - Seguridad Social",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 0,
+            "actualIndex": 0
+          },
+          {
+            "citationRef": "[2]",
+            "isValid": true,
+            "sourceTitle": "Codigo Civil",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 1,
+            "actualIndex": 1
+          },
+          {
+            "citationRef": "[3]",
+            "isValid": true,
+            "sourceTitle": "Corte Constitucional — Acción de Tutela (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 2,
+            "actualIndex": 2
+          },
+          {
+            "citationRef": "[4]",
+            "isValid": true,
+            "sourceTitle": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 3,
+            "actualIndex": 3
+          },
+          {
+            "citationRef": "[5]",
+            "isValid": true,
+            "sourceTitle": "Codigo de Comercio",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 4,
+            "actualIndex": 4
+          },
+          {
+            "citationRef": "[6]",
+            "isValid": true,
+            "sourceTitle": "Ley 393 de 1997 — Acción de Cumplimiento (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 5,
+            "actualIndex": 5
+          },
+          {
+            "citationRef": "[7]",
+            "isValid": true,
+            "sourceTitle": "Codigo Sustantivo del Trabajo - Extractos Principales",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 6,
+            "actualIndex": 6
+          },
+          {
+            "citationRef": "[8]",
+            "isValid": true,
+            "sourceTitle": "Codigo Sustantivo del Trabajo",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 7,
+            "actualIndex": 7
+          }
+        ]
+      },
+      "expectedSources": [
+        "Codigo Sustantivo del Trabajo",
+        "Articulo 236"
+      ],
+      "expectedAnswerContains": [
+        "intereses",
+        "cesantias",
+        "12%",
+        "anual"
+      ]
+    },
+    {
+      "query": "¿Cuál es la definición de salario?",
+      "category": "laboral",
+      "answer": "La definición de salario se encuentra regulada en el Código Sustantivo del Trabajo [2], el cual establece que el salario es la remuneración que recibe el trabajador a cambio de sus servicios. Según el artículo 14 del Código Sustantivo del Trabajo, el salario comprende no solo la remuneración en dinero, sino también las prestaciones y beneficios que recibe el trabajador [2]. La Corte Constitucional ha señalado que el salario es un derecho fundamental que debe ser protegido [3]. En este sentido, la acción de tutela puede ser un mecanismo para proteger el derecho al salario cuando resulte vulnerado o amenazado [1]. Sin embargo, es importante destacar que la acción de tutela es un mecanismo excepcional que procede cuando hay indefensión o subordinación [1]. En cuanto a la definición de salario, es importante consultar el Código Sustantivo del Trabajo y la jurisprudencia laboral [2]. La definición de salario también puede variar dependiendo del contexto y la legislación aplicable [4]. En resumen, el salario es la remuneración que recibe el trabajador a cambio de sus servicios, y su definición se encuentra regulada en el Código Sustantivo del Trabajo [2]. Es recomendable consultar fuentes oficiales como el Ministerio del Trabajo o la Corte Constitucional para obtener información actualizada y precisa sobre el tema [5].",
+      "citations": [
+        {
+          "id": "doc-jurisprudencia_tutela",
+          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "type": "jurisprudencia",
+          "article": "Artículo 86",
+          "score": 0.055878766844388035
+        },
+        {
+          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
+          "title": "Ley 100 de 1993 - Seguridad Social",
+          "type": "estatuto",
+          "score": 0.03842312504490445
+        },
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 168",
+          "score": 0.033258754563907526
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
+          "title": "Codigo Sustantivo del Trabajo",
+          "type": "estatuto",
+          "score": 0.001707856845450018
+        },
+        {
+          "id": "doc-estatuto_codigo_de_comercio",
+          "title": "Codigo de Comercio",
+          "type": "estatuto",
+          "score": 0.0013705868270273013
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia_extractos",
+          "title": "Constitucion Politica de Colombia - Extractos Principales",
+          "type": "estatuto",
+          "score": -0.014314911771781307
+        },
+        {
+          "id": "doc-reglamento_accion_cumplimiento",
+          "title": "Ley 393 de 1997 — Acción de Cumplimiento (Mock)",
+          "type": "reglamento",
+          "article": "Artículo 1 y Artículo 5",
+          "score": -0.029448055703754007
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia",
+          "title": "Constitucion Politica de Colombia",
+          "type": "estatuto",
+          "score": -0.03200933804492844
+        }
+      ],
+      "validation": {
+        "totalCitations": 5,
+        "validCitations": 5,
+        "precision": 1,
+        "invalidCitations": [],
+        "validCitationsList": [
+          {
+            "citationRef": "[1]",
+            "isValid": true,
+            "sourceTitle": "Corte Constitucional — Acción de Tutela (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 0,
+            "actualIndex": 0
+          },
+          {
+            "citationRef": "[2]",
+            "isValid": true,
+            "sourceTitle": "Ley 100 de 1993 - Seguridad Social",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 1,
+            "actualIndex": 1
+          },
+          {
+            "citationRef": "[3]",
+            "isValid": true,
+            "sourceTitle": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 2,
+            "actualIndex": 2
+          },
+          {
+            "citationRef": "[4]",
+            "isValid": true,
+            "sourceTitle": "Codigo Sustantivo del Trabajo",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 3,
+            "actualIndex": 3
+          },
+          {
+            "citationRef": "[5]",
+            "isValid": true,
+            "sourceTitle": "Codigo de Comercio",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 4,
+            "actualIndex": 4
+          }
+        ]
+      },
+      "expectedSources": [
+        "Codigo Sustantivo del Trabajo",
+        "Articulo 127"
+      ],
+      "expectedAnswerContains": [
+        "salario",
+        "pago en dinero",
+        "prestacion del servicio"
+      ]
+    },
+    {
+      "query": "¿Qué establece la Constitución sobre la soberanía?",
+      "category": "constitucional",
+      "answer": "La Constitución de Colombia establece que la soberanía reside exclusivamente en el pueblo [1]. Esto significa que el poder político y la autoridad suprema emanan del pueblo y se ejercen por medio de sus representantes, según las normas constitucionales [2]. La soberanía es inalienable e imprescriptible, lo que implica que no puede ser transferida o renunciada [3]. El Estado colombiano es un Estado social de derecho, fundado en la soberanía popular, la democracia participativa y la protección de los derechos humanos [4]. La Constitución también establece que el pueblo puede ejercer su soberanía a través de mecanismos como el referendo, la consulta popular y la revocatoria del mandato [5]. Estos mecanismos permiten al pueblo participar directamente en la toma de decisiones políticas y controlar el ejercicio del poder público [6]. La soberanía nacional también se refleja en la independencia del país y su capacidad para autogobernarse sin interferencias externas [7]. En resumen, la Constitución colombiana consagra la soberanía como un principio fundamental del ordenamiento jurídico y político del país [8]. Es importante consultar la Constitución Política de Colombia para obtener información detallada y actualizada sobre este tema [9].",
+      "citations": [
+        {
+          "id": "doc-estatuto_codigo_de_comercio",
+          "title": "Codigo de Comercio",
+          "type": "estatuto",
+          "score": 0.028361182168361705
+        },
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 168",
+          "score": 0.028123411158217454
+        },
+        {
+          "id": "doc-estatuto_codigo_civil",
+          "title": "Codigo Civil",
+          "type": "estatuto",
+          "score": 0.01754720282730703
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia_extractos",
+          "title": "Constitucion Politica de Colombia - Extractos Principales",
+          "type": "estatuto",
+          "score": 0.016403497827106376
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
+          "title": "Codigo Sustantivo del Trabajo",
+          "type": "estatuto",
+          "score": 0.01184101504608297
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo_extractos",
+          "title": "Codigo Sustantivo del Trabajo - Extractos Principales",
+          "type": "estatuto",
+          "score": 0.004121973555244114
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia",
+          "title": "Constitucion Politica de Colombia",
+          "type": "estatuto",
+          "score": -0.001954570061604215
+        },
+        {
+          "id": "doc-jurisprudencia_tutela",
+          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "type": "jurisprudencia",
+          "article": "Artículo 86",
+          "score": -0.00575862200471238
+        }
+      ],
+      "validation": {
+        "totalCitations": 9,
+        "validCitations": 8,
+        "precision": 0.8888888888888888,
+        "invalidCitations": [
+          {
+            "citationRef": "[9]",
+            "isValid": false,
+            "sourceTitle": null,
+            "articleMatch": false,
+            "confidence": 0,
+            "expectedIndex": 8,
+            "errorMessage": "Cita fuera de rango: [9] (hay 8 fuentes disponibles)"
+          }
+        ],
+        "validCitationsList": [
+          {
+            "citationRef": "[1]",
+            "isValid": true,
+            "sourceTitle": "Codigo de Comercio",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 0,
+            "actualIndex": 0
+          },
+          {
+            "citationRef": "[2]",
+            "isValid": true,
+            "sourceTitle": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 1,
+            "actualIndex": 1
+          },
+          {
+            "citationRef": "[3]",
+            "isValid": true,
+            "sourceTitle": "Codigo Civil",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 2,
+            "actualIndex": 2
+          },
+          {
+            "citationRef": "[4]",
+            "isValid": true,
+            "sourceTitle": "Constitucion Politica de Colombia - Extractos Principales",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 3,
+            "actualIndex": 3
+          },
+          {
+            "citationRef": "[5]",
+            "isValid": true,
+            "sourceTitle": "Codigo Sustantivo del Trabajo",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 4,
+            "actualIndex": 4
+          },
+          {
+            "citationRef": "[6]",
+            "isValid": true,
+            "sourceTitle": "Codigo Sustantivo del Trabajo - Extractos Principales",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 5,
+            "actualIndex": 5
+          },
+          {
+            "citationRef": "[7]",
+            "isValid": true,
+            "sourceTitle": "Constitucion Politica de Colombia",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 6,
+            "actualIndex": 6
+          },
+          {
+            "citationRef": "[8]",
+            "isValid": true,
+            "sourceTitle": "Corte Constitucional — Acción de Tutela (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 7,
+            "actualIndex": 7
+          }
+        ]
+      },
+      "expectedSources": [
+        "Constitucion Politica de Colombia",
+        "Articulo 3"
+      ],
+      "expectedAnswerContains": [
+        "soberania",
+        "pueblo",
+        "poder publico"
+      ]
+    },
+    {
+      "query": "¿Cuánto tiempo tiene el juez para resolver una tutela?",
+      "category": "constitucional",
+      "answer": "En Colombia, el juez tiene un plazo determinado para resolver una tutela. Según el artículo 86 de la Constitución Política de Colombia, el juez debe resolver la tutela en un plazo de 10 días [1]. Este plazo se cuenta a partir de la fecha en que se recibe la solicitud de tutela. El juez puede prorrogar el plazo por 5 días más si lo considera necesario, pero debe informar al solicitante de la prórroga [2]. Es importante destacar que el juez debe resolver la tutela de manera prioritaria y preferente, según lo establecido en el artículo 3 del Decreto 2591 de 1991 [3]. Si el juez no resuelve la tutela dentro del plazo establecido, el solicitante puede acudir a la segunda instancia o a la Corte Constitucional para solicitar la protección de sus derechos [4]. Es fundamental mencionar que la resolución de la tutela debe ser motivada y fundada en el ordenamiento jurídico [5]. En caso de que el juez no cumpla con estos requisitos, la resolución puede ser objeto de recurso [6]. En resumen, el juez tiene un plazo de 10 días, prorrogable por 5 días, para resolver una tutela en Colombia. \n\nReferencias:\n[1] Constitución Política de Colombia, artículo 86.\n[2] Decreto 2591 de 1991, artículo 33.\n[3] Decreto 2591 de 1991, artículo 3.\n[4] Código General del Proceso, artículo 31.\n[5] Constitución Política de Colombia, artículo 29.\n[6] Código General del Proceso, artículo 327.",
+      "citations": [
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
+          "title": "Codigo Sustantivo del Trabajo",
+          "type": "estatuto",
+          "score": 0.06582561545185772
+        },
+        {
+          "id": "doc-jurisprudencia_tutela",
+          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "type": "jurisprudencia",
+          "article": "Artículo 86",
+          "score": 0.012602038515517923
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo_extractos",
+          "title": "Codigo Sustantivo del Trabajo - Extractos Principales",
+          "type": "estatuto",
+          "score": 0.0030998653622973512
+        },
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 168",
+          "score": -0.009057938678157039
+        },
+        {
+          "id": "doc-estatuto_codigo_civil",
+          "title": "Codigo Civil",
+          "type": "estatuto",
+          "score": -0.025530819644910163
+        },
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 159 y Artículo 160",
+          "score": -0.033013661175794205
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia_extractos",
+          "title": "Constitucion Politica de Colombia - Extractos Principales",
+          "type": "estatuto",
+          "score": -0.03500397671833779
+        },
+        {
+          "id": "doc-estatuto_codigo_de_comercio",
+          "title": "Codigo de Comercio",
+          "type": "estatuto",
+          "score": -0.039259711245099256
+        }
+      ],
+      "validation": {
+        "totalCitations": 6,
+        "validCitations": 6,
+        "precision": 1,
+        "invalidCitations": [],
+        "validCitationsList": [
+          {
+            "citationRef": "[1]",
+            "isValid": true,
+            "sourceTitle": "Codigo Sustantivo del Trabajo",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 0,
+            "actualIndex": 0
+          },
+          {
+            "citationRef": "[2]",
+            "isValid": true,
+            "sourceTitle": "Corte Constitucional — Acción de Tutela (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 1,
+            "actualIndex": 1
+          },
+          {
+            "citationRef": "[3]",
+            "isValid": true,
+            "sourceTitle": "Codigo Sustantivo del Trabajo - Extractos Principales",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 2,
+            "actualIndex": 2
+          },
+          {
+            "citationRef": "[4]",
+            "isValid": true,
+            "sourceTitle": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 3,
+            "actualIndex": 3
+          },
+          {
+            "citationRef": "[5]",
+            "isValid": true,
+            "sourceTitle": "Codigo Civil",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 4,
+            "actualIndex": 4
+          },
+          {
+            "citationRef": "[6]",
+            "isValid": true,
+            "sourceTitle": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 5,
+            "actualIndex": 5
+          }
+        ]
+      },
+      "expectedSources": [
+        "Constitucion Politica de Colombia",
+        "Articulo 86"
+      ],
+      "expectedAnswerContains": [
+        "diez dias",
+        "resolucion",
+        "tutela"
+      ]
+    },
+    {
+      "query": "¿Qué es el recargo por horas extras diurnas?",
+      "category": "laboral",
+      "answer": "El recargo por horas extras diurnas se refiere al pago adicional que debe recibir un trabajador por laborar más allá de su jornada laboral habitual durante el día. Según el Código Sustantivo del Trabajo, aunque el artículo 168 [1] se centra en el recargo por trabajo nocturno, estableciendo que el trabajo realizado entre las 9:00 p. m. y las 6:00 a. m. tiene un recargo nocturno, es importante considerar que las horas extras, tanto diurnas como nocturnas, deben ser autorizadas y no pueden afectar los derechos mínimos de los trabajadores, como se menciona en el parágrafo del artículo 168 [1]. \n\nPara entender específicamente el recargo por horas extras diurnas, es necesario consultar otros artículos del Código Sustantivo del Trabajo que traten directamente sobre horas extras y su compensación. El artículo 159 [no citado explícitamente en la fuente proporcionada] del Código Sustantivo del Trabajo colombiano establece que el trabajo extra diurno se remunera con un recargo del 25% sobre el salario hora ordinaria. \n\nEs crucial consultar fuentes oficiales y actualizadas del Ministerio del Trabajo de Colombia o el Código Sustantivo del Trabajo para obtener información precisa y detallada sobre los recargos por horas extras diurnas y nocturnas, así como sobre cualquier otro aspecto laboral. La legislación laboral puede variar, por lo que es importante estar al tanto de las últimas reformas y regulaciones.",
+      "citations": [
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 168",
+          "score": 0.06049355458039964
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
+          "title": "Codigo Sustantivo del Trabajo",
+          "type": "estatuto",
+          "score": 0.05328872869025473
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia",
+          "title": "Constitucion Politica de Colombia",
+          "type": "estatuto",
+          "score": 0.02768035416378789
+        },
+        {
+          "id": "doc-estatuto_codigo_de_comercio",
+          "title": "Codigo de Comercio",
+          "type": "estatuto",
+          "score": 0.018033660735042565
+        },
+        {
+          "id": "doc-jurisprudencia_tutela",
+          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "type": "jurisprudencia",
+          "article": "Artículo 86",
+          "score": 0.013326610109866861
+        },
+        {
+          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
+          "title": "Ley 100 de 1993 - Seguridad Social",
+          "type": "estatuto",
+          "score": 0.005286798157989269
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo_extractos",
+          "title": "Codigo Sustantivo del Trabajo - Extractos Principales",
+          "type": "estatuto",
+          "score": -0.0178874145538217
+        },
+        {
+          "id": "doc-estatuto_codigo_civil",
+          "title": "Codigo Civil",
+          "type": "estatuto",
+          "score": -0.029072383226014846
+        }
+      ],
+      "validation": {
+        "totalCitations": 1,
+        "validCitations": 1,
+        "precision": 1,
+        "invalidCitations": [],
+        "validCitationsList": [
+          {
+            "citationRef": "[1]",
+            "isValid": true,
+            "sourceTitle": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 0,
+            "actualIndex": 0
+          }
+        ]
+      },
+      "expectedSources": [
+        "Codigo Sustantivo del Trabajo",
+        "Articulo 159"
+      ],
+      "expectedAnswerContains": [
+        "horas extras",
+        "25%",
+        "diurno"
+      ]
+    },
+    {
+      "query": "¿Cuál es el recargo por horas extras nocturnas?",
+      "category": "laboral",
+      "answer": "Según el Código Sustantivo del Trabajo, específicamente en el artículo 168 [1], el trabajo realizado entre las 9:00 p. m. y las 6:00 a. m. tiene un recargo nocturno. Sin embargo, el artículo no especifica el porcentaje exacto del recargo por horas extras nocturnas. Es importante mencionar que las horas extras deben ser autorizadas y no pueden afectar derechos mínimos, como se establece en el parágrafo del artículo 168 [1]. Para determinar el recargo por horas extras nocturnas, es necesario consultar la normativa laboral colombiana vigente, como el Código Sustantivo del Trabajo o la Ley 50 de 1990 [2]. En general, el recargo por horas extras en Colombia es del 25% o del 50% dependiendo de si se realizan en días hábiles o en días festivos, pero el recargo nocturno puede variar. Es recomendable consultar fuentes oficiales, como el Ministerio del Trabajo de Colombia, para obtener información actualizada y precisa sobre el recargo por horas extras nocturnas. En resumen, aunque el artículo 168 [1] establece el recargo nocturno, no especifica el porcentaje, por lo que se requiere consultar normativa adicional. Es importante tener en cuenta que la normativa laboral puede cambiar, por lo que es fundamental consultar fuentes actualizadas.",
+      "citations": [
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 168",
+          "score": 0.0616859076215144
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
+          "title": "Codigo Sustantivo del Trabajo",
+          "type": "estatuto",
+          "score": 0.039276501018277524
+        },
+        {
+          "id": "doc-estatuto_codigo_de_comercio",
+          "title": "Codigo de Comercio",
+          "type": "estatuto",
+          "score": 0.02845991703831714
+        },
+        {
+          "id": "doc-jurisprudencia_tutela",
+          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "type": "jurisprudencia",
+          "article": "Artículo 86",
+          "score": 0.00987988506063113
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia",
+          "title": "Constitucion Politica de Colombia",
+          "type": "estatuto",
+          "score": 0.006598129622724677
+        },
+        {
+          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
+          "title": "Ley 100 de 1993 - Seguridad Social",
+          "type": "estatuto",
+          "score": 0.00477543690118922
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo_extractos",
+          "title": "Codigo Sustantivo del Trabajo - Extractos Principales",
+          "type": "estatuto",
+          "score": -0.01262783832023737
+        },
+        {
+          "id": "doc-estatuto_codigo_civil",
+          "title": "Codigo Civil",
+          "type": "estatuto",
+          "score": -0.041233225385483324
+        }
+      ],
+      "validation": {
+        "totalCitations": 2,
+        "validCitations": 2,
+        "precision": 1,
+        "invalidCitations": [],
+        "validCitationsList": [
+          {
+            "citationRef": "[1]",
+            "isValid": true,
+            "sourceTitle": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 0,
+            "actualIndex": 0
+          },
+          {
+            "citationRef": "[2]",
+            "isValid": true,
+            "sourceTitle": "Codigo Sustantivo del Trabajo",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 1,
+            "actualIndex": 1
+          }
+        ]
+      },
+      "expectedSources": [
+        "Codigo Sustantivo del Trabajo",
+        "Articulo 159"
+      ],
+      "expectedAnswerContains": [
+        "horas extras",
+        "75%",
+        "nocturno"
+      ]
+    },
+    {
+      "query": "¿Qué es la jornada nocturna?",
+      "category": "laboral",
+      "answer": "Según el artículo 168 del Código Sustantivo del Trabajo [1], la jornada nocturna se refiere al trabajo realizado entre las 9:00 p. m. y las 6:00 a. m. Este período de tiempo tiene un recargo nocturno, lo que significa que los trabajadores que laboran durante estas horas tienen derecho a una remuneración adicional. Es importante destacar que las horas extras deben ser autorizadas [1] para garantizar la protección de los derechos mínimos de los trabajadores. El objetivo de este recargo es compensar a los trabajadores por el esfuerzo y la incomodidad que implica trabajar durante la noche. La normativa busca equilibrar la carga laboral y el descanso adecuado para los trabajadores. En resumen, la jornada nocturna es un período específico de trabajo que conlleva un recargo nocturno y requiere autorización para horas extras [1]. La protección al trabajador es fundamental en este contexto. Es recomendable consultar el Código Sustantivo del Trabajo [1] para obtener más información sobre los derechos y obligaciones relacionados con la jornada nocturna.",
+      "citations": [
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 168",
+          "score": 0.073070843908254
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
+          "title": "Codigo Sustantivo del Trabajo",
+          "type": "estatuto",
+          "score": 0.012822833364824229
+        },
+        {
+          "id": "doc-estatuto_codigo_de_comercio",
+          "title": "Codigo de Comercio",
+          "type": "estatuto",
+          "score": 0.006038802227044344
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia",
+          "title": "Constitucion Politica de Colombia",
+          "type": "estatuto",
+          "score": -0.003252779026526382
+        },
+        {
+          "id": "doc-jurisprudencia_tutela",
+          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "type": "jurisprudencia",
+          "article": "Artículo 86",
+          "score": -0.0052558956221673715
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo_extractos",
+          "title": "Codigo Sustantivo del Trabajo - Extractos Principales",
+          "type": "estatuto",
+          "score": -0.008284239562003592
+        },
+        {
+          "id": "doc-estatuto_codigo_civil",
+          "title": "Codigo Civil",
+          "type": "estatuto",
+          "score": -0.008322932655278713
+        },
+        {
+          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
+          "title": "Ley 100 de 1993 - Seguridad Social",
+          "type": "estatuto",
+          "score": -0.03882892648714277
+        }
+      ],
+      "validation": {
+        "totalCitations": 1,
+        "validCitations": 1,
+        "precision": 1,
+        "invalidCitations": [],
+        "validCitationsList": [
+          {
+            "citationRef": "[1]",
+            "isValid": true,
+            "sourceTitle": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+            "articleMatch": true,
+            "confidence": 1,
+            "expectedIndex": 0,
+            "actualIndex": 0
+          }
+        ]
+      },
+      "expectedSources": [
+        "Codigo Sustantivo del Trabajo",
+        "Articulo 160"
+      ],
+      "expectedAnswerContains": [
+        "jornada nocturna",
+        "6:00 p.m.",
+        "6:00 a.m."
+      ]
+    }
+  ]
+}

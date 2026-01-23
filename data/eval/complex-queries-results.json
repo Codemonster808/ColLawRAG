@@ -1,0 +1,546 @@
+{
+  "timestamp": "2026-01-15T21:07:46.183Z",
+  "results": [
+    {
+      "query": "Trabajo 10 horas diarias de lunes a sábado. Mi empleador me dice que no me debe pagar horas extras porque estoy en un contrato de prestación de servicios. ¿Tengo derecho a horas extras y cómo puedo reclamarlas?",
+      "category": "laboral_complejo",
+      "complexity": "alta",
+      "answer": "En Colombia, el contrato de prestación de servicios es regulado por el Código Civil y el Código de Comercio [1]. Aunque este tipo de contrato es más flexible en cuanto a la jornada laboral, el trabajador tiene derecho a un trato justo y equitativo. Sin embargo, es importante destacar que el contrato de prestación de servicios no está regulado por el Código Sustantivo del Trabajo, que es el que regula las horas extras para los trabajadores con contrato laboral [2]. Para determinar si tienes derecho a horas extras, es necesario revisar el contrato de prestación de servicios y verificar si se establece una jornada laboral específica o si se pactó un pago adicional por horas extras [3]. Si consideras que tienes derecho a horas extras, puedes reclamarlas ante el Ministerio del Trabajo o un juez laboral [4]. Es recomendable consultar con un abogado especializado en derecho laboral para evaluar tu caso específico y determinar el mejor curso de acción [5]. También puedes consultar la página web del Ministerio del Trabajo para obtener más información sobre tus derechos laborales [6]. Recuerda que es importante conservar todos los documentos relacionados con tu contrato y tu jornada laboral para poder presentar pruebas en caso de una reclamación [7]. Es importante mencionar que la ley colombiana establece que los trabajadores tienen derecho a un descanso mínimo de 11 horas entre jornadas laborales y a un día de descanso semanal [8]. Si consideras que tus derechos laborales han sido vulnerados, no dudes en buscar asesoría legal para proteger tus intereses [9].",
+      "citations": [
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
+          "title": "Codigo Sustantivo del Trabajo",
+          "type": "estatuto",
+          "score": 0.029304662203818
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia",
+          "title": "Constitucion Politica de Colombia",
+          "type": "estatuto",
+          "score": 0.027183755492664816
+        },
+        {
+          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
+          "title": "Ley 100 de 1993 - Seguridad Social",
+          "type": "estatuto",
+          "score": 0.022508140935042553
+        },
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 168",
+          "score": 0.019613821491986136
+        },
+        {
+          "id": "doc-estatuto_codigo_de_comercio",
+          "title": "Codigo de Comercio",
+          "type": "estatuto",
+          "score": 0.016619705286631762
+        },
+        {
+          "id": "doc-jurisprudencia_tutela",
+          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "type": "jurisprudencia",
+          "article": "Artículo 86",
+          "score": 0.0012108455482089523
+        },
+        {
+          "id": "doc-estatuto_codigo_civil",
+          "title": "Codigo Civil",
+          "type": "estatuto",
+          "score": -0.004087013396482735
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo_extractos",
+          "title": "Codigo Sustantivo del Trabajo - Extractos Principales",
+          "type": "estatuto",
+          "score": -0.0176028047127844
+        }
+      ],
+      "metrics": {
+        "answerLength": 1575,
+        "citationCount": 9,
+        "uniqueCitations": 9,
+        "sourcesAvailable": 8,
+        "hasAdvice": true,
+        "hasProcedure": true,
+        "responseTime": "0.01"
+      }
+    },
+    {
+      "query": "Me despidieron sin justa causa después de 3 años de trabajo. No me pagaron las prestaciones sociales completas. ¿Qué debo hacer para reclamar mis derechos laborales?",
+      "category": "laboral_complejo",
+      "complexity": "alta",
+      "answer": "Para reclamar tus derechos laborales, debes seguir el procedimiento establecido en la ley laboral colombiana. Primero, es recomendable que intentes un acuerdo directo con tu ex empleador para obtener el pago de las prestaciones sociales completas [1]. Si esto no es posible, puedes acudir a la inspección de trabajo o a un juez laboral para solicitar el pago de las prestaciones sociales adeudadas. La acción de tutela es un mecanismo excepcional que puede ser utilizado cuando se vulneran derechos fundamentales, pero en este caso, es más adecuado seguir el procedimiento laboral ordinario [1]. Debes presentar una demanda laboral ante el juez competente, aportando todas las pruebas necesarias para demostrar tu derecho a las prestaciones sociales. Es importante que consultes con un abogado laboralista para que te asesore y te represente en el proceso [1]. La Corte Constitucional ha establecido que la tutela procede de manera excepcional frente a particulares cuando hay indefensión o subordinación, pero en este caso, el procedimiento laboral es el más adecuado [1]. Recuerda que es fundamental actuar con prontitud, ya que hay un plazo límite para presentar la demanda laboral. Puedes consultar la página web del Ministerio de Trabajo o acudir a una oficina de asesoría laboral para obtener más información sobre el procedimiento a seguir.",
+      "citations": [
+        {
+          "id": "doc-jurisprudencia_tutela",
+          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "type": "jurisprudencia",
+          "article": "Artículo 86",
+          "score": 0.02254350685693252
+        },
+        {
+          "id": "doc-estatuto_codigo_de_comercio",
+          "title": "Codigo de Comercio",
+          "type": "estatuto",
+          "score": 0.021152597038796583
+        },
+        {
+          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
+          "title": "Ley 100 de 1993 - Seguridad Social",
+          "type": "estatuto",
+          "score": 0.011015998289704098
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
+          "title": "Codigo Sustantivo del Trabajo",
+          "type": "estatuto",
+          "score": -0.0030762043352332504
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia_extractos",
+          "title": "Constitucion Politica de Colombia - Extractos Principales",
+          "type": "estatuto",
+          "score": -0.00863748576245968
+        },
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 168",
+          "score": -0.010515307481401151
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia",
+          "title": "Constitucion Politica de Colombia",
+          "type": "estatuto",
+          "score": -0.013974681960456373
+        },
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 159 y Artículo 160",
+          "score": -0.019409721369970694
+        }
+      ],
+      "metrics": {
+        "answerLength": 1347,
+        "citationCount": 4,
+        "uniqueCitations": 1,
+        "sourcesAvailable": 8,
+        "hasAdvice": true,
+        "hasProcedure": true,
+        "responseTime": "0.01"
+      }
+    },
+    {
+      "query": "Mi empleador me está obligando a trabajar los domingos sin pagarme el recargo dominical. ¿Es legal esto y qué puedo hacer?",
+      "category": "laboral_complejo",
+      "complexity": "media",
+      "answer": "Según el Código Sustantivo del Trabajo, específicamente en el Artículo 168, se establece el recargo por trabajo nocturno, pero no se menciona explícitamente el recargo dominical [2]. Sin embargo, es importante considerar que el trabajo en domingos y festivos puede estar regulado por otras disposiciones. \n\nEn el contexto colombiano, el trabajo en domingos y festivos puede generar un recargo sobre el salario ordinario, pero esto debe ser consultado en la normativa específica que regula la jornada de trabajo y los descansos [3]. El Artículo 159 del Código Sustantivo del Trabajo establece que el trabajo suplementario o de horas extras debe ser remunerado con recargo del veinticinco por ciento (25%) sobre el salario ordinario en el diurno [3]. \n\nSi considera que sus derechos laborales están siendo vulnerados, puede buscar asesoría en una entidad laboral competente o considerar la acción de tutela para proteger sus derechos fundamentales, según lo establecido en el Artículo 86 de la Constitución Política de Colombia [1]. Es importante recordar que la tutela procede de manera excepcional frente a particulares cuando hay indefensión o subordinación. \n\nPara resolver su situación, es recomendable consultar directamente con el Ministerio del Trabajo o una entidad laboral competente para obtener orientación específica sobre su caso y los pasos a seguir. También puede ser útil revisar los contratos laborales y acuerdos colectivos que puedan aplicar en su situación laboral.",
+      "citations": [
+        {
+          "id": "doc-jurisprudencia_tutela",
+          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "type": "jurisprudencia",
+          "article": "Artículo 86",
+          "score": 0.03652875388404459
+        },
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 168",
+          "score": 0.031420723082483164
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo_extractos",
+          "title": "Codigo Sustantivo del Trabajo - Extractos Principales",
+          "type": "estatuto",
+          "score": 0.019637815269092473
+        },
+        {
+          "id": "doc-estatuto_codigo_civil",
+          "title": "Codigo Civil",
+          "type": "estatuto",
+          "score": 0.014444410243445591
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia",
+          "title": "Constitucion Politica de Colombia",
+          "type": "estatuto",
+          "score": 0.012290964395554322
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
+          "title": "Codigo Sustantivo del Trabajo",
+          "type": "estatuto",
+          "score": 0.012052932195909733
+        },
+        {
+          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
+          "title": "Ley 100 de 1993 - Seguridad Social",
+          "type": "estatuto",
+          "score": 0.0050519046641573665
+        },
+        {
+          "id": "doc-estatuto_codigo_de_comercio",
+          "title": "Codigo de Comercio",
+          "type": "estatuto",
+          "score": -0.01653878698917399
+        }
+      ],
+      "metrics": {
+        "answerLength": 1484,
+        "citationCount": 4,
+        "uniqueCitations": 3,
+        "sourcesAvailable": 8,
+        "hasAdvice": true,
+        "hasProcedure": true,
+        "responseTime": "0.02"
+      }
+    },
+    {
+      "query": "Necesito saber si puedo presentar una acción de tutela para que me reconozcan mi pensión. Tengo 62 años y he cotizado 20 años, pero la administradora me dice que no cumplo los requisitos.",
+      "category": "constitucional_seguridad_social",
+      "complexity": "alta",
+      "answer": "La acción de tutela es un mecanismo constitucional para proteger los derechos fundamentales [1]. En este caso, si consideras que tu derecho a la pensión está siendo vulnerado, podrías presentar una acción de tutela. Sin embargo, es importante verificar si cumples con los requisitos establecidos en la ley para acceder a la pensión, como lo establece el artículo 33 de la Ley 100 de 1993 [2]. La edad y el tiempo de cotización son factores clave para determinar la elegibilidad para una pensión. Si has cotizado 20 años y tienes 62 años, es posible que cumples con los requisitos para una pensión de vejez, según lo establecido en el artículo 12 de la Ley 100 de 1993 [3]. Te recomiendo consultar el reglamento específico de la administradora de pensiones y la legislación vigente para entender mejor tus derechos y obligaciones. También podrías considerar consultar a un abogado especializado en derecho laboral o a la Superintendencia de la Protección Social [4] para obtener orientación personalizada. La acción de tutela debe ser presentada ante el juez competente, quien evaluará si hay una vulneración de tus derechos fundamentales [5]. Es crucial tener en cuenta que la acción de tutela no es un mecanismo para resolver disputas contractuales o laborales comunes, sino para proteger derechos fundamentales [6].",
+      "citations": [
+        {
+          "id": "doc-estatuto_codigo_civil",
+          "title": "Codigo Civil",
+          "type": "estatuto",
+          "score": 0.019479569993535877
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia_extractos",
+          "title": "Constitucion Politica de Colombia - Extractos Principales",
+          "type": "estatuto",
+          "score": 0.013974818333551856
+        },
+        {
+          "id": "doc-reglamento_accion_cumplimiento",
+          "title": "Ley 393 de 1997 — Acción de Cumplimiento (Mock)",
+          "type": "reglamento",
+          "article": "Artículo 1 y Artículo 5",
+          "score": 0.0018079171559382612
+        },
+        {
+          "id": "doc-jurisprudencia_tutela",
+          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "type": "jurisprudencia",
+          "article": "Artículo 86",
+          "score": 0.00030145075761176215
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
+          "title": "Codigo Sustantivo del Trabajo",
+          "type": "estatuto",
+          "score": -0.018146557229989153
+        },
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 168",
+          "score": -0.021447663722084304
+        },
+        {
+          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
+          "title": "Ley 100 de 1993 - Seguridad Social",
+          "type": "estatuto",
+          "score": -0.026768566029955282
+        },
+        {
+          "id": "doc-estatuto_codigo_de_comercio",
+          "title": "Codigo de Comercio",
+          "type": "estatuto",
+          "score": -0.03010217232959272
+        }
+      ],
+      "metrics": {
+        "answerLength": 1317,
+        "citationCount": 6,
+        "uniqueCitations": 6,
+        "sourcesAvailable": 8,
+        "hasAdvice": true,
+        "hasProcedure": true,
+        "responseTime": "0.01"
+      }
+    },
+    {
+      "query": "Mi empresa me está descontando de mi salario el valor de la seguridad social, pero no está haciendo los aportes. ¿Qué derechos tengo y cómo puedo protegerlos?",
+      "category": "laboral_seguridad_social",
+      "complexity": "alta",
+      "answer": "Si tu empresa te está descontando el valor de la seguridad social de tu salario pero no está haciendo los aportes correspondientes, tienes derecho a reclamar el cumplimiento de esta obligación. Según la Constitución Política de Colombia, específicamente el Artículo 86 [1], puedes interponer una acción de tutela para proteger tus derechos fundamentales, aunque generalmente se aplica contra autoridades públicas, puede proceder contra particulares en casos de indefensión o subordinación. La Corte Constitucional ha establecido que los derechos laborales, incluidos los relacionados con la seguridad social, son fundamentales y deben ser protegidos [1]. Es importante que recopiles toda la documentación que respalde tus descuentos y la falta de aportes por parte de tu empleador. Puedes comenzar por hablar con el departamento de recursos humanos de tu empresa para resolver el asunto de manera amistosa. Si no se resuelve, considera acudir a la autoridad laboral competente o a un abogado especializado en derecho laboral para obtener asesoría específica y proceder con la acción de tutela si es necesario. La acción de tutela es un mecanismo preferente y sumario [1], diseñado para la protección inmediata de los derechos fundamentales. Recuerda que, para que proceda la tutela contra un particular, debe haber una relación de subordinación o indefensión, lo cual puede darse en el contexto laboral. Es crucial actuar con prontitud para evitar que se agrave la situación. Para más información, te sugiero consultar directamente con un profesional del derecho o con las autoridades laborales competentes en Colombia.",
+      "citations": [
+        {
+          "id": "doc-jurisprudencia_tutela",
+          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "type": "jurisprudencia",
+          "article": "Artículo 86",
+          "score": 0.02632009528667053
+        },
+        {
+          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
+          "title": "Ley 100 de 1993 - Seguridad Social",
+          "type": "estatuto",
+          "score": 0.019877149392959002
+        },
+        {
+          "id": "doc-estatuto_codigo_de_comercio",
+          "title": "Codigo de Comercio",
+          "type": "estatuto",
+          "score": 0.013496994827302329
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia_extractos",
+          "title": "Constitucion Politica de Colombia - Extractos Principales",
+          "type": "estatuto",
+          "score": 0.0075117590310947585
+        },
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 168",
+          "score": -0.011125039426878584
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia",
+          "title": "Constitucion Politica de Colombia",
+          "type": "estatuto",
+          "score": -0.015333296221561604
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
+          "title": "Codigo Sustantivo del Trabajo",
+          "type": "estatuto",
+          "score": -0.026634414578761367
+        },
+        {
+          "id": "doc-reglamento_accion_cumplimiento",
+          "title": "Ley 393 de 1997 — Acción de Cumplimiento (Mock)",
+          "type": "reglamento",
+          "article": "Artículo 1 y Artículo 5",
+          "score": -0.034855340962376996
+        }
+      ],
+      "metrics": {
+        "answerLength": 1619,
+        "citationCount": 3,
+        "uniqueCitations": 1,
+        "sourcesAvailable": 8,
+        "hasAdvice": true,
+        "hasProcedure": true,
+        "responseTime": "14.51"
+      }
+    },
+    {
+      "query": "Trabajo como independiente pero mi cliente me trata como empleado: me exige horarios fijos, me paga quincenal y me da órdenes directas. ¿Puedo reclamar relación laboral?",
+      "category": "laboral_complejo",
+      "complexity": "alta",
+      "answer": "En Colombia, la relación laboral se caracteriza por la subordinación del trabajador al empleador, lo que incluye el cumplimiento de horarios fijos, la recepción de órdenes directas y el pago periódico [1]. Si como trabajador independiente estás siendo tratado de esta manera por tu cliente, es posible que puedas reclamar una relación laboral. La Corte Constitucional ha establecido que la acción de tutela puede proceder contra particulares cuando hay una relación de subordinación o indefensión [1]. En tu caso, el hecho de que te exijan horarios fijos, te paguen quincenalmente y te den órdenes directas podría indicar una relación de subordinación. Sin embargo, para determinar si realmente existe una relación laboral, sería necesario analizar todos los elementos de la relación laboral, como la dependencia económica y la falta de autonomía [2]. Te recomiendo consultar a un abogado laboralista para evaluar tu situación específica y determinar las mejores opciones legales. La acción de tutela podría ser una vía para reclamar tus derechos, pero es importante seguir el procedimiento establecido en el artículo 86 de la Constitución Política de Colombia [1]. Recuerda que la tutela es un mecanismo excepcional, por lo que es crucial demostrar la vulneración de tus derechos fundamentales.",
+      "citations": [
+        {
+          "id": "doc-jurisprudencia_tutela",
+          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "type": "jurisprudencia",
+          "article": "Artículo 86",
+          "score": 0.05888883562037293
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
+          "title": "Codigo Sustantivo del Trabajo",
+          "type": "estatuto",
+          "score": 0.03763000192809664
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia",
+          "title": "Constitucion Politica de Colombia",
+          "type": "estatuto",
+          "score": 0.029015313227231644
+        },
+        {
+          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
+          "title": "Ley 100 de 1993 - Seguridad Social",
+          "type": "estatuto",
+          "score": 0.02629701845044753
+        },
+        {
+          "id": "doc-estatuto_codigo_civil",
+          "title": "Codigo Civil",
+          "type": "estatuto",
+          "score": 0.01461718392065988
+        },
+        {
+          "id": "doc-estatuto_codigo_de_comercio",
+          "title": "Codigo de Comercio",
+          "type": "estatuto",
+          "score": 0.014434944951928123
+        },
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 168",
+          "score": 0.009738193590096852
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia_extractos",
+          "title": "Constitucion Politica de Colombia - Extractos Principales",
+          "type": "estatuto",
+          "score": 0.0034342715270815186
+        }
+      ],
+      "metrics": {
+        "answerLength": 1295,
+        "citationCount": 4,
+        "uniqueCitations": 2,
+        "sourcesAvailable": 8,
+        "hasAdvice": true,
+        "hasProcedure": true,
+        "responseTime": "13.36"
+      }
+    },
+    {
+      "query": "Mi empleador me está negando el pago de las cesantías argumentando que no he cumplido un año completo. Llevo 11 meses trabajando. ¿Tengo derecho a cesantías?",
+      "category": "laboral_complejo",
+      "complexity": "media",
+      "answer": "Según la legislación laboral colombiana, las cesantías son un derecho laboral que se genera con el paso del tiempo de servicio [2]. Aunque no he encontrado una fuente específica en el contexto proporcionado, en la legislación laboral colombiana, como se establece en el Código Sustantivo del Trabajo [3], los trabajadores tienen derecho a cesantías después de un año de servicio. Sin embargo, es importante mencionar que, aunque no has cumplido un año completo, es posible que tengas derecho a una proporción de cesantías según el tiempo trabajado, siempre y cuando se cumplan los requisitos establecidos por la ley [4]. Te recomiendo consultar el Código Sustantivo del Trabajo o acudir a un profesional del derecho para obtener asesoramiento específico sobre tu caso. La acción de tutela mencionada en la fuente [1] se refiere a la protección de derechos fundamentales y no directamente a disputas laborales como la tuya. Para resolver tu situación, deberías considerar las leyes laborales específicas y no solo la acción de tutela [5]. Es importante recordar que la información proporcionada en el contexto no aborda directamente el tema de las cesantías, por lo que te sugiero buscar fuentes oficiales como el Ministerio del Trabajo de Colombia para obtener información precisa [6].",
+      "citations": [
+        {
+          "id": "doc-jurisprudencia_tutela",
+          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "type": "jurisprudencia",
+          "article": "Artículo 86",
+          "score": 0.05328353824452399
+        },
+        {
+          "id": "doc-estatuto_codigo_civil",
+          "title": "Codigo Civil",
+          "type": "estatuto",
+          "score": 0.012090558828149257
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia",
+          "title": "Constitucion Politica de Colombia",
+          "type": "estatuto",
+          "score": -0.0007094951002153969
+        },
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 168",
+          "score": -0.0032165188209580978
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
+          "title": "Codigo Sustantivo del Trabajo",
+          "type": "estatuto",
+          "score": -0.00873857408327779
+        },
+        {
+          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
+          "title": "Ley 100 de 1993 - Seguridad Social",
+          "type": "estatuto",
+          "score": -0.011462570955665495
+        },
+        {
+          "id": "doc-estatuto_codigo_de_comercio",
+          "title": "Codigo de Comercio",
+          "type": "estatuto",
+          "score": -0.011983004334345347
+        },
+        {
+          "id": "doc-reglamento_accion_cumplimiento",
+          "title": "Ley 393 de 1997 — Acción de Cumplimiento (Mock)",
+          "type": "reglamento",
+          "article": "Artículo 1 y Artículo 5",
+          "score": -0.018868193066889673
+        }
+      ],
+      "metrics": {
+        "answerLength": 1285,
+        "citationCount": 6,
+        "uniqueCitations": 6,
+        "sourcesAvailable": 8,
+        "hasAdvice": true,
+        "hasProcedure": true,
+        "responseTime": "11.28"
+      }
+    },
+    {
+      "query": "Necesito saber si puedo demandar a mi empleador por no pagarme el salario mínimo. Trabajo 48 horas semanales pero me pagan menos del mínimo legal.",
+      "category": "laboral_complejo",
+      "complexity": "media",
+      "answer": "En Colombia, el salario mínimo es establecido por el gobierno y es obligatorio para todos los empleadores [1]. Si usted trabaja 48 horas semanales y recibe un pago inferior al mínimo legal, puede tener derecho a reclamar el pago de las diferencias salariales. Debe verificar su contrato laboral y los recibos de pago para determinar el monto exacto que se le adeuda [2]. Es recomendable que consulte con un abogado laboralista para evaluar su caso y determinar las mejores opciones legales. También puede acercarse a la Dirección de Trabajo o a la Inspección de Trabajo de su localidad para presentar una denuncia y solicitar asesoramiento [3]. La Ley 1562 de 2012 establece que los empleadores deben pagar el salario mínimo y puede ser sancionado si no cumple con esta obligación [4]. Es importante que actúe con prontitud, ya que el plazo para presentar una demanda laboral es de tres años contados a partir de la fecha en que se produjo el incumplimiento [5]. Puede consultar la página web del Ministerio de Trabajo para obtener más información sobre los derechos laborales y los trámites para reclamar el pago de salarios [6]. Recuerde que, como trabajador, tiene derecho a un salario justo y a condiciones laborales dignas.",
+      "citations": [
+        {
+          "id": "doc-estatuto_codigo_de_comercio",
+          "title": "Codigo de Comercio",
+          "type": "estatuto",
+          "score": 0.037967742817412595
+        },
+        {
+          "id": "doc-jurisprudencia_tutela",
+          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "type": "jurisprudencia",
+          "article": "Artículo 86",
+          "score": 0.03367206654871749
+        },
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 159 y Artículo 160",
+          "score": 0.028021357258251074
+        },
+        {
+          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
+          "title": "Codigo Sustantivo del Trabajo",
+          "type": "estatuto",
+          "score": 0.027988573338871666
+        },
+        {
+          "id": "doc-estatuto_codigo_civil",
+          "title": "Codigo Civil",
+          "type": "estatuto",
+          "score": 0.008509073966102457
+        },
+        {
+          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
+          "title": "Ley 100 de 1993 - Seguridad Social",
+          "type": "estatuto",
+          "score": 0.008417095644251846
+        },
+        {
+          "id": "doc-estatuto_constitucion_politica_de_colombia",
+          "title": "Constitucion Politica de Colombia",
+          "type": "estatuto",
+          "score": -0.0002388968216741915
+        },
+        {
+          "id": "doc-estatuto_horas_extras",
+          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "type": "estatuto",
+          "article": "Artículo 168",
+          "score": -0.011467754083303036
+        }
+      ],
+      "metrics": {
+        "answerLength": 1228,
+        "citationCount": 6,
+        "uniqueCitations": 6,
+        "sourcesAvailable": 8,
+        "hasAdvice": true,
+        "hasProcedure": true,
+        "responseTime": "12.77"
+      }
+    }
+  ]
+}

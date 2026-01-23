@@ -57,32 +57,49 @@ export async function embedTexts(texts: string[]): Promise<number[][]> {
     const apiUrl = `https://router.huggingface.co/hf-inference/models/${HF_MODEL}/pipeline/feature-extraction`
     console.log('[embeddings] Calling HF API:', apiUrl)
     
-    const response = await fetch(apiUrl, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        inputs: texts,
+    // Configure timeout for embeddings API call
+    const EMB_TIMEOUT_MS = parseInt(process.env.HF_API_TIMEOUT_MS || '30000', 10) // 30 seconds default
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), EMB_TIMEOUT_MS)
+    
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          inputs: texts,
+        }),
+        signal: controller.signal
       })
-    })
-    
-    if (!response.ok) {
-      const errorText = await response.text()
-      throw new Error(`HF API error: ${response.status} - ${errorText}`)
+      
+      clearTimeout(timeoutId)
+      
+      if (!response.ok) {
+        const errorText = await response.text()
+        throw new Error(`HF API error: ${response.status} - ${errorText}`)
+      }
+      
+      const data = await response.json()
+      // Handle both array and object responses
+      if (Array.isArray(data)) {
+        return data as number[][]
+      }
+      // If single embedding, wrap in array
+      if (Array.isArray(data[0])) {
+        return data as number[][]
+      }
+      return [data as number[]]
+    } catch (fetchError: any) {
+      clearTimeout(timeoutId)
+      if (fetchError.name === 'AbortError') {
+        console.error('[embeddings] Timeout after', EMB_TIMEOUT_MS, 'ms')
+        throw new Error(`Request timeout: Hugging Face embeddings API did not respond within ${EMB_TIMEOUT_MS}ms`)
+      }
+      throw fetchError
     }
-    
-    const data = await response.json()
-    // Handle both array and object responses
-    if (Array.isArray(data)) {
-      return data as number[][]
-    }
-    // If single embedding, wrap in array
-    if (Array.isArray(data[0])) {
-      return data as number[][]
-    }
-    return [data as number[]]
   } catch (e) {
     console.error('[embeddings] HF API error:', e)
     // Fallback to local embeddings if HF fails

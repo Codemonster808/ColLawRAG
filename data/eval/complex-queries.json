@@ -1,0 +1,53 @@
+{
+  "queries": [
+    {
+      "question": "Trabajo 10 horas diarias de lunes a sábado. Mi empleador me dice que no me debe pagar horas extras porque estoy en un contrato de prestación de servicios. ¿Tengo derecho a horas extras y cómo puedo reclamarlas?",
+      "category": "laboral_complejo",
+      "complexity": "alta",
+      "requires": ["análisis de relación laboral", "cálculo de horas extras", "derechos del trabajador", "procedimiento de reclamación"]
+    },
+    {
+      "question": "Me despidieron sin justa causa después de 3 años de trabajo. No me pagaron las prestaciones sociales completas. ¿Qué debo hacer para reclamar mis derechos laborales?",
+      "category": "laboral_complejo",
+      "complexity": "alta",
+      "requires": ["prestaciones sociales", "despido sin justa causa", "procedimiento legal", "cesantías", "vacaciones"]
+    },
+    {
+      "question": "Mi empleador me está obligando a trabajar los domingos sin pagarme el recargo dominical. ¿Es legal esto y qué puedo hacer?",
+      "category": "laboral_complejo",
+      "complexity": "media",
+      "requires": ["descanso dominical", "recargo dominical", "derechos del trabajador"]
+    },
+    {
+      "question": "Necesito saber si puedo presentar una acción de tutela para que me reconozcan mi pensión. Tengo 62 años y he cotizado 20 años, pero la administradora me dice que no cumplo los requisitos.",
+      "category": "constitucional_seguridad_social",
+      "complexity": "alta",
+      "requires": ["acción de tutela", "derecho a pensión", "requisitos de pensión", "procedimiento constitucional"]
+    },
+    {
+      "question": "Mi empresa me está descontando de mi salario el valor de la seguridad social, pero no está haciendo los aportes. ¿Qué derechos tengo y cómo puedo protegerlos?",
+      "category": "laboral_seguridad_social",
+      "complexity": "alta",
+      "requires": ["seguridad social", "aportes patronales", "derechos del trabajador", "procedimiento de reclamación"]
+    },
+    {
+      "question": "Trabajo como independiente pero mi cliente me trata como empleado: me exige horarios fijos, me paga quincenal y me da órdenes directas. ¿Puedo reclamar relación laboral?",
+      "category": "laboral_complejo",
+      "complexity": "alta",
+      "requires": ["relación laboral", "contrato de prestación de servicios", "subordinación", "derechos laborales"]
+    },
+    {
+      "question": "Mi empleador me está negando el pago de las cesantías argumentando que no he cumplido un año completo. Llevo 11 meses trabajando. ¿Tengo derecho a cesantías?",
+      "category": "laboral_complejo",
+      "complexity": "media",
+      "requires": ["cesantías", "proporcionalidad", "derechos del trabajador"]
+    },
+    {
+      "question": "Necesito saber si puedo demandar a mi empleador por no pagarme el salario mínimo. Trabajo 48 horas semanales pero me pagan menos del mínimo legal.",
+      "category": "laboral_complejo",
+      "complexity": "media",
+      "requires": ["salario mínimo", "jornada laboral", "derechos del trabajador", "procedimiento legal"]
+    }
+  ]
+}
+

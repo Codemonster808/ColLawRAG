@@ -1,0 +1,217 @@
+============================================================
+REPORTE DE EVALUACIÓN DE CALIDAD DE CITAS
+============================================================
+Fecha: 15/1/2026, 3:36:58 p. m.
+
+RESUMEN GENERAL
+------------------------------------------------------------
+Total de consultas: 25
+Consultas exitosas: 25
+Consultas fallidas: 0
+Precisión promedio: 98.2%
+Total de citas: 104
+Citas válidas: 100
+Precisión de citas: 96.2%
+
+POR CATEGORÍA
+------------------------------------------------------------
+constitucional:
+  Consultas: 8
+  Citas válidas: 32/33
+  Precisión: 97.0%
+
+laboral:
+  Consultas: 11
+  Citas válidas: 43/45
+  Precisión: 95.6%
+
+seguridad_social:
+  Consultas: 6
+  Citas válidas: 25/26
+  Precisión: 96.2%
+
+RESULTADOS DETALLADOS
+------------------------------------------------------------
+
+[1] ¿Qué es la acción de tutela?
+Categoría: constitucional
+Respuesta: La acción de tutela es un mecanismo jurídico establecido en la Constitución Política de Colombia [2] que busca proteger los derechos fundamentales de las personas cuando estos resulten vulnerados o am...
+Citas encontradas: 2
+Citas válidas: 2
+Precisión: 100.0%
+
+[2] ¿Cuántas horas extras puede trabajar un empleado en Colombia?
+Categoría: laboral
+Respuesta: En Colombia, la jornada laboral máxima es de 48 horas a la semana [1]. Sin embargo, los empleados pueden trabajar horas extras, siempre y cuando no excedan el límite establecido por la ley. Según el C...
+Citas encontradas: 6
+Citas válidas: 6
+Precisión: 100.0%
+
+[3] ¿Qué es el salario mínimo en Colombia?
+Categoría: laboral
+Respuesta: La información proporcionada se refiere a la acción de tutela en Colombia, específicamente al artículo 86 de la Constitución Política [1], que establece el procedimiento para proteger los derechos fun...
+Citas encontradas: 2
+Citas válidas: 2
+Precisión: 100.0%
+
+[4] ¿Cuánto tiempo tiene un trabajador para descansar en su jornada?
+Categoría: laboral
+Respuesta: Según la normativa colombiana, específicamente en el Código Sustantivo del Trabajo [1], los trabajadores tienen derecho a un descanso durante su jornada laboral. Este descanso se conoce como "descanso...
+Citas encontradas: 9
+Citas válidas: 8
+Precisión: 88.9%
+Citas inválidas:
+  - [9]: Cita fuera de rango: [9] (hay 8 fuentes disponibles)
+
+[5] ¿Qué son las cesantías?
+Categoría: laboral
+Respuesta: Las cesantías son una prestación social laboral en Colombia que se otorga a los trabajadores después de un año de servicio continuo o discontinuo con un empleador [1]. Esta prestación busca reconocer ...
+Citas encontradas: 9
+Citas válidas: 8
+Precisión: 88.9%
+Citas inválidas:
+  - [9]: Cita fuera de rango: [9] (hay 8 fuentes disponibles)
+
+[6] ¿Qué es el Sistema General de Seguridad Social?
+Categoría: seguridad_social
+Respuesta: El Sistema General de Seguridad Social en Colombia es un conjunto de normas y políticas que buscan proteger a los ciudadanos contra los riesgos de la vida, como la enfermedad, la vejez, el desempleo y...
+Citas encontradas: 5
+Citas válidas: 5
+Precisión: 100.0%
+
+[7] ¿Cuáles son los principios del Sistema de Seguridad Social?
+Categoría: seguridad_social
+Respuesta: Los principios del Sistema de Seguridad Social en Colombia se encuentran establecidos en la Constitución Política y en leyes específicas. Según la Ley 100 de 1993 [3], el Sistema de Seguridad Social I...
+Citas encontradas: 3
+Citas válidas: 3
+Precisión: 100.0%
+
+[8] ¿Qué es un Estado social de derecho?
+Categoría: constitucional
+Respuesta: Un Estado social de derecho se refiere a un sistema de gobierno en el que se busca equilibrar la libertad individual con la justicia social y la protección de los derechos fundamentales de los ciudada...
+Citas encontradas: 3
+Citas válidas: 3
+Precisión: 100.0%
+
+[9] ¿Cuáles son los fines esenciales del Estado?
+Categoría: constitucional
+Respuesta: Los fines esenciales del Estado en Colombia se establecen en la Constitución Política [2], que en su artículo 2° establece que son "garantizar la vida, la convivencia, la justicia, la igualdad, el con...
+Citas encontradas: 2
+Citas válidas: 2
+Precisión: 100.0%
+
+[10] ¿Qué es la jornada ordinaria de trabajo?
+Categoría: laboral
+Respuesta: La jornada ordinaria de trabajo en Colombia se refiere al período de tiempo durante el cual un trabajador está obligado a prestar sus servicios laborales de manera regular. Según el Código Sustantivo ...
+Citas encontradas: 1
+Citas válidas: 1
+Precisión: 100.0%
+
+[11] ¿Cuál es el recargo por trabajo nocturno?
+Categoría: laboral
+Respuesta: Según el artículo 168 del Código Sustantivo del Trabajo [1], el trabajo realizado entre las 9:00 p. m. y las 6:00 a. m. tiene un recargo nocturno. Esto significa que los trabajadores que laboran duran...
+Citas encontradas: 1
+Citas válidas: 1
+Precisión: 100.0%
+
+[12] ¿Qué es el derecho a la vida según la Constitución?
+Categoría: constitucional
+Respuesta: El derecho a la vida es un derecho fundamental consagrado en la Constitución Política de Colombia. Según el artículo 11 de la Constitución, "todo ser humano tiene derecho a la vida" [1]. Este derecho ...
+Citas encontradas: 7
+Citas válidas: 7
+Precisión: 100.0%
+
+[13] ¿Qué establece el artículo 13 de la Constitución sobre igualdad?
+Categoría: constitucional
+Respuesta: El artículo 13 de la Constitución Política de Colombia establece el principio de igualdad, según el cual todas las personas nacen libres e iguales ante la ley y gozan de los mismos derechos, libertade...
+Citas encontradas: 2
+Citas válidas: 2
+Precisión: 100.0%
+
+[14] ¿Qué es el trabajo según la Constitución?
+Categoría: constitucional
+Respuesta: Según la Constitución Política de Colombia [2], el trabajo es un derecho y una obligación social que goza de la especial protección del Estado. En el artículo 25 de la Constitución, se establece que "...
+Citas encontradas: 2
+Citas válidas: 2
+Precisión: 100.0%
+
+[15] ¿Qué es el Sistema General de Pensiones?
+Categoría: seguridad_social
+Respuesta: El Sistema General de Pensiones en Colombia se encuentra regulado en la Ley 100 de 1993 [2], la cual establece un sistema de pensiones que busca garantizar a los ciudadanos una cobertura adecuada para...
+Citas encontradas: 2
+Citas válidas: 2
+Precisión: 100.0%
+
+[16] ¿Cuáles son los regímenes del Sistema General de Pensiones?
+Categoría: seguridad_social
+Respuesta: La Constitución Política de Colombia [1] establece los principios fundamentales del Estado, pero no especifica directamente los regímenes del Sistema General de Pensiones. Sin embargo, es importante m...
+Citas encontradas: 2
+Citas válidas: 2
+Precisión: 100.0%
+
+[17] ¿Qué es el Sistema General de Seguridad Social en Salud?
+Categoría: seguridad_social
+Respuesta: El Sistema General de Seguridad Social en Salud (SGSSS) es un conjunto de normas y entidades que buscan garantizar el acceso a servicios de salud de alta calidad a todos los habitantes de Colombia [2]...
+Citas encontradas: 5
+Citas válidas: 5
+Precisión: 100.0%
+
+[18] ¿Cuáles son los componentes del Sistema de Salud?
+Categoría: seguridad_social
+Respuesta: El Sistema de Salud en Colombia se compone de varios componentes clave. Según la Ley 100 de 1993 [1], el Sistema de Salud se divide en dos regímenes: el Régimen Contributivo y el Régimen Subsidiado. E...
+Citas encontradas: 9
+Citas válidas: 8
+Precisión: 88.9%
+Citas inválidas:
+  - [9]: Cita fuera de rango: [9] (hay 8 fuentes disponibles)
+
+[19] ¿Qué son los intereses sobre cesantías?
+Categoría: laboral
+Respuesta: Los intereses sobre cesantías son un concepto relevante en la legislación laboral colombiana. Según la ley, los trabajadores tienen derecho a recibir intereses sobre las cesantías, que son un porcenta...
+Citas encontradas: 8
+Citas válidas: 8
+Precisión: 100.0%
+
+[20] ¿Cuál es la definición de salario?
+Categoría: laboral
+Respuesta: La definición de salario se encuentra regulada en el Código Sustantivo del Trabajo [2], el cual establece que el salario es la remuneración que recibe el trabajador a cambio de sus servicios. Según el...
+Citas encontradas: 5
+Citas válidas: 5
+Precisión: 100.0%
+
+[21] ¿Qué establece la Constitución sobre la soberanía?
+Categoría: constitucional
+Respuesta: La Constitución de Colombia establece que la soberanía reside exclusivamente en el pueblo [1]. Esto significa que el poder político y la autoridad suprema emanan del pueblo y se ejercen por medio de s...
+Citas encontradas: 9
+Citas válidas: 8
+Precisión: 88.9%
+Citas inválidas:
+  - [9]: Cita fuera de rango: [9] (hay 8 fuentes disponibles)
+
+[22] ¿Cuánto tiempo tiene el juez para resolver una tutela?
+Categoría: constitucional
+Respuesta: En Colombia, el juez tiene un plazo determinado para resolver una tutela. Según el artículo 86 de la Constitución Política de Colombia, el juez debe resolver la tutela en un plazo de 10 días [1]. Este...
+Citas encontradas: 6
+Citas válidas: 6
+Precisión: 100.0%
+
+[23] ¿Qué es el recargo por horas extras diurnas?
+Categoría: laboral
+Respuesta: El recargo por horas extras diurnas se refiere al pago adicional que debe recibir un trabajador por laborar más allá de su jornada laboral habitual durante el día. Según el Código Sustantivo del Traba...
+Citas encontradas: 1
+Citas válidas: 1
+Precisión: 100.0%
+
+[24] ¿Cuál es el recargo por horas extras nocturnas?
+Categoría: laboral
+Respuesta: Según el Código Sustantivo del Trabajo, específicamente en el artículo 168 [1], el trabajo realizado entre las 9:00 p. m. y las 6:00 a. m. tiene un recargo nocturno. Sin embargo, el artículo no especi...
+Citas encontradas: 2
+Citas válidas: 2
+Precisión: 100.0%
+
+[25] ¿Qué es la jornada nocturna?
+Categoría: laboral
+Respuesta: Según el artículo 168 del Código Sustantivo del Trabajo [1], la jornada nocturna se refiere al trabajo realizado entre las 9:00 p. m. y las 6:00 a. m. Este período de tiempo tiene un recargo nocturno,...
+Citas encontradas: 1
+Citas válidas: 1
+Precisión: 100.0%

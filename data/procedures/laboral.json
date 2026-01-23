@@ -1,0 +1,140 @@
+{
+  "procedures": [
+    {
+      "id": "reclamo_prestaciones_sociales",
+      "name": "Reclamo de Prestaciones Sociales",
+      "area": "laboral",
+      "description": "Procedimiento para reclamar el pago de prestaciones sociales adeudadas",
+      "steps": [
+        {
+          "step": 1,
+          "action": "Intento de conciliación directa con el empleador",
+          "description": "Contactar al empleador por escrito solicitando el pago de las prestaciones adeudadas",
+          "plazo": "Sin plazo específico, pero se recomienda hacerlo dentro de los primeros 30 días",
+          "documentos": [
+            "Copia del contrato de trabajo",
+            "Certificados de trabajo",
+            "Comprobantes de pago de nómina",
+            "Carta de solicitud de pago"
+          ]
+        },
+        {
+          "step": 2,
+          "action": "Solicitud ante Inspección de Trabajo",
+          "description": "Si la conciliación falla, presentar solicitud ante la Inspección de Trabajo",
+          "plazo": "3 años desde la fecha en que se causó el derecho (plazo de prescripción)",
+          "documentos": [
+            "Formulario de solicitud (disponible en el Ministerio del Trabajo)",
+            "Copia del contrato de trabajo",
+            "Certificados de trabajo",
+            "Comprobantes de pago de nómina",
+            "Copia de la carta de solicitud al empleador",
+            "Copia de la cédula de ciudadanía"
+          ],
+          "costo": "Gratuito",
+          "tiempo_resolucion": "30-60 días hábiles"
+        },
+        {
+          "step": 3,
+          "action": "Demanda laboral ante juez competente",
+          "description": "Si la inspección no resuelve, presentar demanda ante el juez laboral",
+          "plazo": "3 años desde la fecha en que se causó el derecho",
+          "documentos": [
+            "Demanda laboral (debe ser redactada por abogado)",
+            "Todos los documentos del paso anterior",
+            "Poder notarial si se actúa por apoderado"
+          ],
+          "costo": "Aproximadamente $500.000 - $1.500.000 COP (honorarios de abogado + costas procesales)",
+          "tiempo_resolucion": "6 meses a 2 años (dependiendo de la complejidad)"
+        }
+      ],
+      "entidad_competente": "Ministerio del Trabajo - Inspección de Trabajo / Juzgados Laborales",
+      "plazo_prescripcion": "3 años",
+      "notas": [
+        "Es recomendable contar con asesoría legal desde el inicio",
+        "Conservar todos los documentos relacionados con la relación laboral",
+        "Los plazos pueden variar según el caso específico"
+      ]
+    },
+    {
+      "id": "reclamo_horas_extras",
+      "name": "Reclamo de Horas Extras",
+      "area": "laboral",
+      "description": "Procedimiento para reclamar el pago de horas extras trabajadas",
+      "steps": [
+        {
+          "step": 1,
+          "action": "Recopilar evidencia",
+          "description": "Recopilar evidencia de las horas extras trabajadas",
+          "plazo": "Inmediato",
+          "documentos": [
+            "Registros de asistencia",
+            "Fotografías de horarios",
+            "Testimonios de compañeros",
+            "Comunicaciones con el empleador sobre las horas extras",
+            "Comprobantes de pago de nómina (para verificar que no se pagaron)"
+          ]
+        },
+        {
+          "step": 2,
+          "action": "Solicitud ante Inspección de Trabajo",
+          "description": "Presentar solicitud ante la Inspección de Trabajo",
+          "plazo": "3 años desde la fecha en que se trabajaron las horas extras",
+          "documentos": [
+            "Formulario de solicitud",
+            "Toda la evidencia recopilada",
+            "Copia del contrato de trabajo",
+            "Copia de la cédula de ciudadanía"
+          ],
+          "costo": "Gratuito",
+          "tiempo_resolucion": "30-60 días hábiles"
+        }
+      ],
+      "entidad_competente": "Ministerio del Trabajo - Inspección de Trabajo",
+      "plazo_prescripcion": "3 años",
+      "notas": [
+        "Las horas extras deben haber sido autorizadas previamente por el empleador",
+        "Máximo 2 horas extras por día según el Código Sustantivo del Trabajo",
+        "Recargo del 25% sobre el salario ordinario diurno"
+      ]
+    },
+    {
+      "id": "accion_tutela",
+      "name": "Acción de Tutela",
+      "area": "constitucional",
+      "description": "Mecanismo de protección de derechos fundamentales",
+      "steps": [
+        {
+          "step": 1,
+          "action": "Verificar que procede la tutela",
+          "description": "Verificar que se trata de un derecho fundamental vulnerado",
+          "plazo": "Inmediato",
+          "documentos": [
+            "Evidencia de la vulneración del derecho fundamental"
+          ]
+        },
+        {
+          "step": 2,
+          "action": "Presentar acción de tutela",
+          "description": "Presentar la acción de tutela ante el juez competente",
+          "plazo": "Sin plazo específico, pero debe ser inmediata",
+          "documentos": [
+            "Formulario de acción de tutela (disponible en juzgados)",
+            "Evidencia de la vulneración",
+            "Copia de la cédula de ciudadanía"
+          ],
+          "costo": "Gratuito",
+          "tiempo_resolucion": "10 días hábiles (resolución de primera instancia)"
+        }
+      ],
+      "entidad_competente": "Juzgados de cualquier instancia / Tribunales",
+      "plazo_prescripcion": "No aplica (debe ser inmediata)",
+      "notas": [
+        "Solo procede para derechos fundamentales",
+        "Procede de manera excepcional frente a particulares cuando hay indefensión o subordinación",
+        "La acción de tutela es gratuita y puede ser presentada sin abogado"
+      ]
+    }
+  ]
+}
+

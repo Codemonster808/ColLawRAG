@@ -33,32 +33,110 @@ function splitByArticles(content) {
   const lines = content.split(/\r?\n/)
   let buffer = []
   let currentArticle
+  let currentTitle
+  let currentChapter
+  let currentSection
+  
   const pushBuffer = () => {
     if (buffer.length === 0) return
-    parts.push({ text: buffer.join('\n').trim(), article: currentArticle })
+    const articleText = buffer.join('\n').trim()
+    if (articleText.length < 50) return // Ignorar buffers muy pequeños
+    
+    parts.push({ 
+      text: articleText, 
+      article: currentArticle,
+      title: currentTitle,
+      chapter: currentChapter,
+      section: currentSection
+    })
     buffer = []
   }
+  
   for (const line of lines) {
-    const art = line.match(/^(Art[íi]culo|ART[ÍI]CULO)\s+([0-9A-Za-z\.\-]+)/)
-    if (art) {
+    // Detectar Títulos (TÍTULO, TITULO, Título)
+    const titleMatch = line.match(/^(T[íi]tulo|T[ÍI]TULO)\s+([IVX]+|PRIMERO|SEGUNDO|TERCERO|CUARTO|QUINTO|SEXTO|SÉPTIMO|OCTAVO|NOVENO|DÉCIMO)/i)
+    if (titleMatch) {
       pushBuffer()
-      currentArticle = `Artículo ${art[2]}`
+      currentTitle = `Título ${titleMatch[2]}`
+      currentChapter = null
+      currentSection = null
+      buffer.push(line)
+      continue
     }
+    
+    // Detectar Capítulos (CAPÍTULO, Capitulo, Capítulo)
+    const chapterMatch = line.match(/^(Cap[íi]tulo|CAP[ÍI]TULO)\s+([IVX]+|[0-9]+)/i)
+    if (chapterMatch) {
+      pushBuffer()
+      currentChapter = `Capítulo ${chapterMatch[2]}`
+      currentSection = null
+      buffer.push(line)
+      continue
+    }
+    
+    // Detectar Secciones (SECCIÓN, Seccion, Sección)
+    const sectionMatch = line.match(/^(Secci[oó]n|SECCI[OÓ]N)\s+([IVX]+|[0-9]+)/i)
+    if (sectionMatch) {
+      pushBuffer()
+      currentSection = `Sección ${sectionMatch[2]}`
+      buffer.push(line)
+      continue
+    }
+    
+    // Detectar Artículos con múltiples formatos
+    // Formato 1: "Artículo X" o "ARTÍCULO X"
+    // Formato 2: "Art. X" o "Art X"
+    // Formato 3: "Artículo X.-" (con guion)
+    const artMatch = line.match(/^(Art[íi]culo|ART[ÍI]CULO|Art\.?)\s+([0-9A-Za-z\.\-]+)/i)
+    if (artMatch) {
+      pushBuffer()
+      currentArticle = `Artículo ${artMatch[2]}`
+      buffer.push(line)
+      continue
+    }
+    
+    // Detectar numerales (1., 2., a), b), etc.)
+    const numeralMatch = line.match(/^(\d+[\.\)]|[a-z][\.\)])\s+/)
+    if (numeralMatch && currentArticle) {
+      // Es un numeral dentro de un artículo, agregar al buffer
+      buffer.push(line)
+      continue
+    }
+    
     buffer.push(line)
   }
   pushBuffer()
+  
+  // Mejorar la fusión de partes pequeñas
   const merged = []
   let acc = null
+  
   for (const p of parts) {
-    if (!acc) { acc = { ...p } ; continue }
-    if ((acc.text.length + p.text.length) < 1200) {
+    if (!acc) { 
+      acc = { ...p }
+      continue
+    }
+    
+    // Si ambas partes son del mismo artículo o muy pequeñas, fusionar
+    const sameArticle = acc.article === p.article
+    const totalLength = acc.text.length + p.text.length
+    
+    if (sameArticle && totalLength < 1500) {
+      // Fusionar partes del mismo artículo si no exceden el límite
       acc.text += '\n\n' + p.text
+    } else if (!sameArticle && totalLength < 800 && acc.text.length < 400) {
+      // Fusionar partes pequeñas de diferentes artículos si ambas son muy pequeñas
+      acc.text += '\n\n' + p.text
+      acc.article = acc.article ? `${acc.article} y ${p.article}` : p.article
     } else {
+      // Guardar el acumulador y empezar uno nuevo
       merged.push(acc)
       acc = { ...p }
     }
   }
+  
   if (acc) merged.push(acc)
+  
   return merged
 }
 
@@ -180,15 +258,26 @@ async function main() {
     const articleChunks = splitByArticles(raw)
     for (const part of articleChunks) {
       const id = randomUUID()
+      
+      // Construir jerarquía completa para mejor citación
+      const articleHierarchy = []
+      if (part.title) articleHierarchy.push(part.title)
+      if (part.chapter) articleHierarchy.push(part.chapter)
+      if (part.section) articleHierarchy.push(part.section)
+      if (part.article) articleHierarchy.push(part.article)
+      
       const metadata = {
         id: `doc-${path.parse(file).name}`,
         title,
         type,
         article: part.article,
+        articleHierarchy: articleHierarchy.length > 0 ? articleHierarchy.join(' > ') : undefined,
+        chapter: part.chapter,
+        section: part.section,
         url: undefined,
         sourcePath: `data/documents/${file}`
       }
-        chunks.push({ id, content: part.text, metadata })
+      chunks.push({ id, content: part.text, metadata })
     }
   }
 

@@ -1,0 +1,155 @@
+{
+  "queries": [
+    {
+      "question": "¿Qué es la acción de tutela?",
+      "expectedSources": ["Constitucion Politica de Colombia", "Articulo 86"],
+      "category": "constitucional",
+      "expectedAnswerContains": ["tutela", "derechos fundamentales", "procedimiento preferente"]
+    },
+    {
+      "question": "¿Cuántas horas extras puede trabajar un empleado en Colombia?",
+      "expectedSources": ["Codigo Sustantivo del Trabajo", "Articulo 159"],
+      "category": "laboral",
+      "expectedAnswerContains": ["horas extras", "25%", "recargo"]
+    },
+    {
+      "question": "¿Qué es el salario mínimo en Colombia?",
+      "expectedSources": ["Codigo Sustantivo del Trabajo", "Articulo 128"],
+      "category": "laboral",
+      "expectedAnswerContains": ["salario minimo", "Gobierno Nacional"]
+    },
+    {
+      "question": "¿Cuánto tiempo tiene un trabajador para descansar en su jornada?",
+      "expectedSources": ["Codigo Sustantivo del Trabajo", "Articulo 161"],
+      "category": "laboral",
+      "expectedAnswerContains": ["descanso", "15 minutos"]
+    },
+    {
+      "question": "¿Qué son las cesantías?",
+      "expectedSources": ["Codigo Sustantivo del Trabajo", "Articulo 233"],
+      "category": "laboral",
+      "expectedAnswerContains": ["cesantias", "mes de salario", "ano de servicio"]
+    },
+    {
+      "question": "¿Qué es el Sistema General de Seguridad Social?",
+      "expectedSources": ["Ley 100 de 1993", "Articulo 1"],
+      "category": "seguridad_social",
+      "expectedAnswerContains": ["seguridad social", "calidad de vida", "contingencias"]
+    },
+    {
+      "question": "¿Cuáles son los principios del Sistema de Seguridad Social?",
+      "expectedSources": ["Ley 100 de 1993", "Articulo 3"],
+      "category": "seguridad_social",
+      "expectedAnswerContains": ["eficiencia", "universalidad", "solidaridad"]
+    },
+    {
+      "question": "¿Qué es un Estado social de derecho?",
+      "expectedSources": ["Constitucion Politica de Colombia", "Articulo 1"],
+      "category": "constitucional",
+      "expectedAnswerContains": ["Estado social de derecho", "Republica unitaria"]
+    },
+    {
+      "question": "¿Cuáles son los fines esenciales del Estado?",
+      "expectedSources": ["Constitucion Politica de Colombia", "Articulo 2"],
+      "category": "constitucional",
+      "expectedAnswerContains": ["servir a la comunidad", "prosperidad general"]
+    },
+    {
+      "question": "¿Qué es la jornada ordinaria de trabajo?",
+      "expectedSources": ["Codigo Sustantivo del Trabajo", "Articulo 160"],
+      "category": "laboral",
+      "expectedAnswerContains": ["jornada ordinaria", "8 horas", "48 horas semanales"]
+    },
+    {
+      "question": "¿Cuál es el recargo por trabajo nocturno?",
+      "expectedSources": ["Codigo Sustantivo del Trabajo", "Articulo 168"],
+      "category": "laboral",
+      "expectedAnswerContains": ["trabajo nocturno", "35%", "recargo"]
+    },
+    {
+      "question": "¿Qué es el derecho a la vida según la Constitución?",
+      "expectedSources": ["Constitucion Politica de Colombia", "Articulo 11"],
+      "category": "constitucional",
+      "expectedAnswerContains": ["derecho a la vida", "inviolable", "pena de muerte"]
+    },
+    {
+      "question": "¿Qué establece el artículo 13 de la Constitución sobre igualdad?",
+      "expectedSources": ["Constitucion Politica de Colombia", "Articulo 13"],
+      "category": "constitucional",
+      "expectedAnswerContains": ["igualdad", "discriminacion", "misma proteccion"]
+    },
+    {
+      "question": "¿Qué es el trabajo según la Constitución?",
+      "expectedSources": ["Constitucion Politica de Colombia", "Articulo 25"],
+      "category": "constitucional",
+      "expectedAnswerContains": ["trabajo", "derecho", "obligacion social"]
+    },
+    {
+      "question": "¿Qué es el Sistema General de Pensiones?",
+      "expectedSources": ["Ley 100 de 1993", "Articulo 10"],
+      "category": "seguridad_social",
+      "expectedAnswerContains": ["pensiones", "vejez", "invalidez", "muerte"]
+    },
+    {
+      "question": "¿Cuáles son los regímenes del Sistema General de Pensiones?",
+      "expectedSources": ["Ley 100 de 1993", "Articulo 11"],
+      "category": "seguridad_social",
+      "expectedAnswerContains": ["regimen", "prima media", "ahorro individual"]
+    },
+    {
+      "question": "¿Qué es el Sistema General de Seguridad Social en Salud?",
+      "expectedSources": ["Ley 100 de 1993", "Articulo 152"],
+      "category": "seguridad_social",
+      "expectedAnswerContains": ["seguridad social en salud", "servicio publico", "acceso"]
+    },
+    {
+      "question": "¿Cuáles son los componentes del Sistema de Salud?",
+      "expectedSources": ["Ley 100 de 1993", "Articulo 153"],
+      "category": "seguridad_social",
+      "expectedAnswerContains": ["regimen contributivo", "regimen subsidiado"]
+    },
+    {
+      "question": "¿Qué son los intereses sobre cesantías?",
+      "expectedSources": ["Codigo Sustantivo del Trabajo", "Articulo 236"],
+      "category": "laboral",
+      "expectedAnswerContains": ["intereses", "cesantias", "12%", "anual"]
+    },
+    {
+      "question": "¿Cuál es la definición de salario?",
+      "expectedSources": ["Codigo Sustantivo del Trabajo", "Articulo 127"],
+      "category": "laboral",
+      "expectedAnswerContains": ["salario", "pago en dinero", "prestacion del servicio"]
+    },
+    {
+      "question": "¿Qué establece la Constitución sobre la soberanía?",
+      "expectedSources": ["Constitucion Politica de Colombia", "Articulo 3"],
+      "category": "constitucional",
+      "expectedAnswerContains": ["soberania", "pueblo", "poder publico"]
+    },
+    {
+      "question": "¿Cuánto tiempo tiene el juez para resolver una tutela?",
+      "expectedSources": ["Constitucion Politica de Colombia", "Articulo 86"],
+      "category": "constitucional",
+      "expectedAnswerContains": ["diez dias", "resolucion", "tutela"]
+    },
+    {
+      "question": "¿Qué es el recargo por horas extras diurnas?",
+      "expectedSources": ["Codigo Sustantivo del Trabajo", "Articulo 159"],
+      "category": "laboral",
+      "expectedAnswerContains": ["horas extras", "25%", "diurno"]
+    },
+    {
+      "question": "¿Cuál es el recargo por horas extras nocturnas?",
+      "expectedSources": ["Codigo Sustantivo del Trabajo", "Articulo 159"],
+      "category": "laboral",
+      "expectedAnswerContains": ["horas extras", "75%", "nocturno"]
+    },
+    {
+      "question": "¿Qué es la jornada nocturna?",
+      "expectedSources": ["Codigo Sustantivo del Trabajo", "Articulo 160"],
+      "category": "laboral",
+      "expectedAnswerContains": ["jornada nocturna", "6:00 p.m.", "6:00 a.m."]
+    }
+  ]
+}
+
