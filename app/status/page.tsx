@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   description: 'Dashboard de estado y métricas del servicio RAG'
 }
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 async function getHealthStatus() {
   try {
     const baseUrl = process.env.VERCEL_URL 
@@ -12,8 +15,7 @@ async function getHealthStatus() {
       : process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
     
     const res = await fetch(`${baseUrl}/api/health`, {
-      cache: 'no-store',
-      next: { revalidate: 30 }
+      cache: 'no-store'
     })
     
     if (!res.ok) {

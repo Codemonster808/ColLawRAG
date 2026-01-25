@@ -10,7 +10,8 @@ export interface LogContext {
   userId?: string
   userTier?: string
   query?: string
-  responseTime?: number
+  responseTime?: number | string
+  responseTimeMs?: number
   [key: string]: any
 }
 
@@ -83,7 +84,8 @@ class Logger {
     this[level](`[${method}] ${path} ${statusCode}`, {
       ...context,
       statusCode,
-      responseTime: `${responseTime}ms`
+      responseTimeMs: responseTime,
+      responseTime: `${responseTime}ms` as string
     })
   }
 

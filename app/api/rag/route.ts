@@ -41,6 +41,8 @@ function withTimeout<T>(promise: Promise<T>, timeoutMs: number): Promise<T> {
 export async function POST(req: NextRequest) {
   const startTime = Date.now()
   let requestId: string | undefined
+  let userId: string | undefined
+  let userTier: 'free' | 'premium' = 'free'
   
   try {
     // Check Content-Length header to prevent large payloads
@@ -63,8 +65,6 @@ export async function POST(req: NextRequest) {
     })
     
     // Autenticación y autorización
-    let userId: string | undefined
-    let userTier: 'free' | 'premium' = 'free'
     
     // 1. Verificar API key (si está configurada)
     // Nota: Las requests del mismo origen (frontend en el mismo dominio) no requieren API key
@@ -105,7 +105,7 @@ export async function POST(req: NextRequest) {
       if (!isSameOrigin) {
         const headerKey = req.headers.get('x-api-key')
         if (headerKey !== process.env.RAG_API_KEY) {
-          logger.warn('Unauthorized request - invalid API key', undefined, {
+          logger.warn('Unauthorized request - invalid API key', {
             origin: req.headers.get('origin')
           })
           return NextResponse.json(
@@ -129,7 +129,7 @@ export async function POST(req: NextRequest) {
         // Verificar límites de uso
         const usageCheck = checkUsageLimit(userTier, userId)
         if (!usageCheck.allowed) {
-          logger.warn('Usage limit exceeded', undefined, { userId, userTier })
+          logger.warn('Usage limit exceeded', { userId, userTier })
           return NextResponse.json(
             { 
               error: 'Límite de uso excedido', 
@@ -160,7 +160,7 @@ export async function POST(req: NextRequest) {
 
     const parsed = RagBodySchema.safeParse(json)
     if (!parsed.success) {
-      logger.warn('Validation error', undefined, { errors: parsed.error.flatten() })
+      logger.warn('Validation error', { errors: parsed.error.flatten() })
       return NextResponse.json(
         { 
           error: 'Consulta inválida', 

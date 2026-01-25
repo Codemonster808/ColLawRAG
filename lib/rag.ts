@@ -12,6 +12,9 @@ type FactualValidator = typeof import('./factual-validator')
 type ResponseStructure = typeof import('./response-structure')
 type LegalCalculator = typeof import('./legal-calculator')
 
+// Import type for calculations
+import type { CalculationResult } from './legal-calculator'
+
 /**
  * Detecta si una consulta requiere cálculos legales
  */
@@ -259,9 +262,9 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
     
     // Si hay errores críticos, agregar advertencia a la respuesta
     if (!factualValidation.isValid && factualValidation.errors.length > 0) {
-      logger.warn('Factual validation errors detected', undefined, { 
-        requestId, 
-        errors: factualValidation.errors 
+      logger.warn('Factual validation errors detected', {
+        requestId,
+        errors: factualValidation.errors
       })
     }
   }
@@ -341,7 +344,7 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
           }
         }
       } catch (error) {
-        logger.warn('Error loading procedures', error, { requestId })
+        logger.error('Error loading procedures', error, { requestId })
       }
     }
   }
