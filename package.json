@@ -19,7 +19,9 @@
     "test-complex": "node scripts/test-complex-queries.mjs",
     "analyze-advice": "node scripts/analyze-legal-advice-quality.mjs",
     "verify-env": "node scripts/verify-env.mjs",
+    "pre-deploy-check": "node scripts/pre-deploy-check.mjs",
     "deploy-check": "node scripts/deploy-check.mjs",
+    "test-production": "node scripts/test-production.mjs",
     "postbuild": "test -f data/index.json || echo '⚠️  data/index.json no encontrado. Ejecuta npm run ingest antes del build.'"
   },
   "dependencies": {

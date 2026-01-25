@@ -49,6 +49,8 @@ credentials.json
 # ARCHIVOS DE PRUEBA/DEBUG
 # ============================================
 **/test-*.mjs
+# Excepción: script de testing de producción (necesario para CI/CD)
+!scripts/test-production.mjs
 **/debug/
 hf-gen-test.mjs
 
