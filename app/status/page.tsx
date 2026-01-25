@@ -10,12 +10,18 @@ export const revalidate = 0
 
 async function getHealthStatus() {
   try {
+    // En producción, usar la URL absoluta del mismo dominio
     const baseUrl = process.env.VERCEL_URL 
       ? `https://${process.env.VERCEL_URL}` 
-      : process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
+      : process.env.VERCEL 
+        ? `https://col-law-rag.vercel.app`
+        : process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
     
     const res = await fetch(`${baseUrl}/api/health`, {
-      cache: 'no-store'
+      cache: 'no-store',
+      headers: {
+        'Origin': baseUrl
+      }
     })
     
     if (!res.ok) {
