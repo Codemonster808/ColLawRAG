@@ -102,7 +102,24 @@ async function testRAGAPI() {
     'Requisitos de la acción de cumplimiento'
   ]
   
-  for (const query of testQueries) {
+  // Consultas complejas para verificar retry y fallback
+  const complexQueries = [
+    'Trabajé durante 3 años y 8 meses con un salario de $3.500.000 mensuales. Trabajé 15 horas extras en el último mes y también trabajé los domingos sin pago adicional. Si me despiden sin justa causa, ¿cuánto me deben de indemnización, prestaciones sociales y horas extras?',
+    'Explícame el procedimiento completo para interponer una acción de tutela en Colombia: requisitos, plazos, competencia, efectos y recursos disponibles.',
+    '¿Cuáles son las diferencias entre acción de tutela, acción de cumplimiento y acción popular? Incluye cuándo procede cada una y sus efectos legales.'
+  ]
+  
+  // Combinar queries simples y complejas
+  const allQueries = [...testQueries, ...complexQueries]
+  
+  let successfulComplexQueries = 0
+  let totalComplexQueries = 0
+  
+  for (const query of allQueries) {
+    const isComplex = complexQueries.includes(query)
+    if (isComplex) {
+      totalComplexQueries++
+    }
     await test(`Request retorna 200 para: "${query.substring(0, 30)}..."`, async () => {
       const startTime = Date.now()
       const res = await fetch(`${BASE_URL}/api/rag`, {
@@ -134,6 +151,17 @@ async function testRAGAPI() {
       
       if (!data.answer || typeof data.answer !== 'string' || data.answer.trim().length === 0) {
         throw new Error('Answer is missing, not a string, or empty')
+      }
+      
+      // Verificar que no es el mensaje de error genérico
+      const errorMessage = 'No fue posible generar la respuesta en este momento. Intenta nuevamente más tarde.'
+      if (data.answer === errorMessage) {
+        throw new Error('Answer is generic error message (generation failed)')
+      }
+      
+      // Si es consulta compleja y tiene respuesta válida, contar como exitosa
+      if (isComplex && data.answer !== errorMessage && data.answer.length > 50) {
+        successfulComplexQueries++
       }
     })
     
@@ -182,6 +210,18 @@ async function testRAGAPI() {
       
       if (responseTime >= 30000) {
         throw new Error(`Response time ${responseTime}ms exceeds 30s limit`)
+      }
+    })
+  }
+  
+  // Verificar tasa de éxito de consultas complejas
+  if (totalComplexQueries > 0) {
+    await test(`Tasa de éxito consultas complejas > 95%`, async () => {
+      const successRate = (successfulComplexQueries / totalComplexQueries) * 100
+      log(`\n📊 Tasa de éxito consultas complejas: ${successRate.toFixed(1)}% (${successfulComplexQueries}/${totalComplexQueries})`, 'blue')
+      
+      if (successRate < 95) {
+        throw new Error(`Success rate ${successRate.toFixed(1)}% is below 95% target`)
       }
     })
   }
@@ -342,7 +382,14 @@ async function generateReport() {
   log(`Total de tests: ${totalTests}`, 'blue')
   log(`✅ Pasados: ${passedTests}`, 'green')
   log(`❌ Fallidos: ${failedTests}`, failedTests > 0 ? 'red' : 'green')
-  log(`Tasa de éxito: ${((passedTests / totalTests) * 100).toFixed(1)}%`, 'blue')
+  const successRate = (passedTests / totalTests) * 100
+  log(`Tasa de éxito: ${successRate.toFixed(1)}%`, successRate >= 95 ? 'green' : 'yellow')
+  
+  if (successRate >= 95) {
+    log('✅ Tasa de éxito cumple objetivo de 95%+', 'green')
+  } else {
+    log('⚠️  Tasa de éxito por debajo del objetivo de 95%', 'yellow')
+  }
   
   if (failures.length > 0) {
     log('\n❌ Tests Fallidos:', 'red')

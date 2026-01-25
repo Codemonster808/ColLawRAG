@@ -1,23 +1,206 @@
 import { type DocumentChunk } from './types'
 import { generatePrompts, type PromptContext } from './prompt-templates'
+import { logger } from './logger'
 
 // Default model for text generation using router.huggingface.co/novita endpoint
 // Cambiado a Mistral 7B para mejor rendimiento y velocidad
 // Alternativas: meta-llama/Llama-3.1-8B-Instruct, Qwen/Qwen2.5-7B-Instruct
 const HF_MODEL_GENERATION_DEFAULT = 'mistralai/Mistral-7B-Instruct-v0.3'
+const HF_MODEL_FALLBACK_DEFAULT = 'mistralai/Mistral-7B-Instruct-v0.3'
+
+// Helper function to sleep
+function sleep(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}
+
+// Check if error is retryable (temporary errors)
+function isRetryableError(error: any): boolean {
+  if (!error) return false
+  
+  // Network errors, timeouts, and 5xx errors are retryable
+  if (error.name === 'AbortError' || error.message?.includes('timeout')) {
+    return true
+  }
+  
+  // 5xx server errors are retryable
+  if (error.message?.includes('HF API error: 5')) {
+    return true
+  }
+  
+  // Network errors
+  if (error.message?.includes('fetch failed') || error.message?.includes('network')) {
+    return true
+  }
+  
+  return false
+}
 
 // Maximum number of citations to include in context
 const MAX_CITATIONS = 8
 // Limit context to avoid API errors (max ~4000 chars to stay within token limits)
 const MAX_CONTEXT_CHARS = 4000
 
+/**
+ * Generate answer using a specific model with retry logic
+ */
+async function generateWithModel(
+  model: string,
+  systemPrompt: string,
+  userPrompt: string,
+  maxTokens: number,
+  timeoutMs: number
+): Promise<string> {
+  const apiKey = process.env.HUGGINGFACE_API_KEY
+  if (!apiKey) {
+    throw new Error('HUGGINGFACE_API_KEY not set')
+  }
+  
+  const apiUrl = 'https://router.huggingface.co/novita/v3/openai/chat/completions'
+  const controller = new AbortController()
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs)
+  
+  try {
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model,
+        messages: [
+          {
+            role: 'system',
+            content: systemPrompt
+          },
+          {
+            role: 'user',
+            content: userPrompt
+          }
+        ],
+        max_tokens: maxTokens,
+        temperature: 0.2,
+      }),
+      signal: controller.signal
+    })
+    
+    clearTimeout(timeoutId)
+    
+    if (!response.ok) {
+      const errorText = await response.text()
+      const error = new Error(`HF API error: ${response.status} - ${errorText}`)
+      ;(error as any).statusCode = response.status
+      throw error
+    }
+    
+    const data = await response.json() as { choices?: Array<{ message?: { content?: string } }> }
+    // Extract content from OpenAI-compatible response
+    if (data.choices && data.choices.length > 0 && data.choices[0].message?.content) {
+      const content = data.choices[0].message.content.trim()
+      if (content.length === 0) {
+        throw new Error('Empty response from model')
+      }
+      return content
+    }
+    throw new Error('No content in response')
+  } catch (fetchError: any) {
+    clearTimeout(timeoutId)
+    if (fetchError.name === 'AbortError') {
+      const timeoutError = new Error(`Request timeout: Hugging Face API did not respond within ${timeoutMs}ms`)
+      ;(timeoutError as any).isTimeout = true
+      throw timeoutError
+    }
+    throw fetchError
+  }
+}
+
+/**
+ * Generate answer with retry logic and exponential backoff
+ */
+async function generateWithRetry(
+  model: string,
+  systemPrompt: string,
+  userPrompt: string,
+  maxTokens: number,
+  timeoutMs: number,
+  requestId?: string
+): Promise<string> {
+  const maxRetries = parseInt(process.env.HF_RETRY_ATTEMPTS || '3', 10)
+  let lastError: any = null
+  
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      const startTime = Date.now()
+      const result = await generateWithModel(model, systemPrompt, userPrompt, maxTokens, timeoutMs)
+      const responseTime = Date.now() - startTime
+      
+      if (attempt > 1) {
+        logger.info('Generation succeeded after retry', {
+          requestId,
+          model,
+          attempt,
+          responseTime
+        })
+      }
+      
+      logger.logMetric('generation_success', responseTime, 'ms', {
+        requestId,
+        model,
+        attempt,
+        retried: attempt > 1
+      })
+      
+      return result
+    } catch (error: any) {
+      lastError = error
+      
+      // Log error details
+      logger.warn('Generation attempt failed', {
+        requestId,
+        model,
+        attempt,
+        maxRetries,
+        error: error.message,
+        statusCode: error.statusCode,
+        isTimeout: error.isTimeout || error.message?.includes('timeout'),
+        isRetryable: isRetryableError(error)
+      })
+      
+      // Don't retry if it's the last attempt or error is not retryable
+      if (attempt === maxRetries || !isRetryableError(error)) {
+        logger.error('Generation failed after all retries', error, {
+          requestId,
+          model,
+          attempts: attempt,
+          finalError: error.message
+        })
+        throw error
+      }
+      
+      // Exponential backoff: 1s, 2s, 4s
+      const backoffMs = 1000 * Math.pow(2, attempt - 1)
+      logger.debug('Retrying generation with exponential backoff', {
+        requestId,
+        model,
+        attempt,
+        nextAttempt: attempt + 1,
+        backoffMs
+      })
+      await sleep(backoffMs)
+    }
+  }
+  
+  throw lastError || new Error('Generation failed after retries')
+}
+
 export async function generateAnswerSpanish(params: {
   query: string
   chunks: Array<{ chunk: DocumentChunk; score: number }>
   legalArea?: string
   includeWarnings?: boolean
+  requestId?: string
 }): Promise<string> {
-  const { query, chunks, legalArea, includeWarnings = true } = params
+  const { query, chunks, legalArea, includeWarnings = true, requestId } = params
 
   // Limit chunks to MAX_CITATIONS and MAX_CONTEXT_CHARS
   const limitedChunks: Array<{ chunk: DocumentChunk; score: number }> = []
@@ -63,10 +246,17 @@ export async function generateAnswerSpanish(params: {
 
   try {
     const provider = (process.env.GEN_PROVIDER || 'hf').toLowerCase()
-    console.log('[generation] provider=%s', provider)
+    logger.debug('Provider configuration', {
+      requestId,
+      provider,
+      GEN_PROVIDER: process.env.GEN_PROVIDER,
+      OLLAMA_MODEL: process.env.OLLAMA_MODEL,
+      EMB_PROVIDER: process.env.EMB_PROVIDER
+    })
+    
     if (provider === 'ollama') {
       const ollamaModel = process.env.OLLAMA_MODEL || 'qwen2.5:1.5b-instruct'
-      console.log('[generation] using Ollama model=%s', ollamaModel)
+      logger.info('Using Ollama model', { requestId, model: ollamaModel })
       // Local generation via Ollama
       const fullPrompt = `${systemPrompt}\n\n${userPrompt}`
       const res = await fetch('http://127.0.0.1:11434/api/generate', {
@@ -76,11 +266,11 @@ export async function generateAnswerSpanish(params: {
           model: ollamaModel,
           prompt: fullPrompt,
           stream: false,
-          options: { temperature: 0.2, num_predict: 600 }, // Increased for structured responses
+          options: { temperature: 0.2, num_predict: 600 },
         })
       })
       if (!res.ok) {
-        console.error('[generation] Ollama HTTP error', res.status)
+        logger.error('Ollama HTTP error', new Error(`Ollama error ${res.status}`), { requestId, status: res.status })
         throw new Error(`Ollama error ${res.status}`)
       }
       const data = await res.json() as { response?: string }
@@ -88,75 +278,100 @@ export async function generateAnswerSpanish(params: {
     }
 
     // Default: Hugging Face Inference API via router.huggingface.co
-    const hfModel = process.env.HF_GENERATION_MODEL || HF_MODEL_GENERATION_DEFAULT
-    console.log('[generation] using HF model=%s', hfModel)
+    const primaryModel = process.env.HF_GENERATION_MODEL || HF_MODEL_GENERATION_DEFAULT
+    const fallbackModel = process.env.HF_GENERATION_MODEL_FALLBACK || HF_MODEL_FALLBACK_DEFAULT
+    const maxTokens = parseInt(process.env.HF_MAX_TOKENS || '2000', 10)
+    const timeoutMs = parseInt(process.env.HF_API_TIMEOUT_MS || '60000', 10) // Increased to 60s default
     
-    const apiKey = process.env.HUGGINGFACE_API_KEY
-    if (!apiKey) {
-      throw new Error('HUGGINGFACE_API_KEY not set')
-    }
-    
-    // Use router.huggingface.co with OpenAI-compatible chat completions API
-    // Format: https://router.huggingface.co/novita/v3/openai/chat/completions
-    const apiUrl = 'https://router.huggingface.co/novita/v3/openai/chat/completions'
-    console.log('[generation] Calling HF API:', apiUrl)
-    console.log('[generation] model:', hfModel)
-    console.log('[generation] chunks used:', limitedChunks.length, 'of', chunks.length)
-    console.log('[generation] legal area:', promptContext.legalArea || 'auto-detected')
-    
-    // Configure timeout for Hugging Face API call
-    const HF_TIMEOUT_MS = parseInt(process.env.HF_API_TIMEOUT_MS || '30000', 10) // 30 seconds default
-    const controller = new AbortController()
-    const timeoutId = setTimeout(() => controller.abort(), HF_TIMEOUT_MS)
+    logger.info('Starting generation with Hugging Face', {
+      requestId,
+      primaryModel,
+      fallbackModel,
+      maxTokens,
+      timeoutMs,
+      chunksUsed: limitedChunks.length,
+      totalChunks: chunks.length,
+      legalArea: promptContext.legalArea || 'auto-detected'
+    })
     
     try {
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${apiKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          model: hfModel,
-          messages: [
-            {
-              role: 'system',
-              content: systemPrompt
-            },
-            {
-              role: 'user',
-              content: userPrompt
-            }
-          ],
-          max_tokens: 1000, // Increased for structured responses
-          temperature: 0.2,
-        }),
-        signal: controller.signal
+      // Try primary model with retry
+      const startTime = Date.now()
+      const result = await generateWithRetry(
+        primaryModel,
+        systemPrompt,
+        userPrompt,
+        maxTokens,
+        timeoutMs,
+        requestId
+      )
+      const responseTime = Date.now() - startTime
+      
+      logger.logMetric('generation_total_time', responseTime, 'ms', {
+        requestId,
+        model: primaryModel,
+        usedFallback: false
       })
       
-      clearTimeout(timeoutId)
-      
-      if (!response.ok) {
-        const errorText = await response.text()
-        throw new Error(`HF API error: ${response.status} - ${errorText}`)
+      return result
+    } catch (primaryError: any) {
+      // If primary model fails and we have a fallback, try it
+      if (fallbackModel && fallbackModel !== primaryModel) {
+        logger.warn('Primary model failed, trying fallback', {
+          requestId,
+          primaryModel,
+          fallbackModel,
+          error: primaryError.message,
+          statusCode: primaryError.statusCode
+        })
+        
+        try {
+          const startTime = Date.now()
+          const result = await generateWithRetry(
+            fallbackModel,
+            systemPrompt,
+            userPrompt,
+            maxTokens,
+            timeoutMs,
+            requestId
+          )
+          const responseTime = Date.now() - startTime
+          
+          logger.logMetric('generation_total_time', responseTime, 'ms', {
+            requestId,
+            model: fallbackModel,
+            usedFallback: true,
+            primaryModelFailed: true
+          })
+          
+          logger.info('Fallback model succeeded', {
+            requestId,
+            fallbackModel,
+            responseTime
+          })
+          
+          return result
+        } catch (fallbackError: any) {
+          logger.error('Both primary and fallback models failed', fallbackError, {
+            requestId,
+            primaryModel,
+            fallbackModel,
+            primaryError: primaryError.message,
+            fallbackError: fallbackError.message
+          })
+          throw fallbackError
+        }
+      } else {
+        // No fallback available, throw the primary error
+        throw primaryError
       }
-      
-      const data = await response.json() as { choices?: Array<{ message?: { content?: string } }> }
-      // Extract content from OpenAI-compatible response
-      if (data.choices && data.choices.length > 0 && data.choices[0].message?.content) {
-        return data.choices[0].message.content
-      }
-      return ''
-    } catch (fetchError: any) {
-      clearTimeout(timeoutId)
-      if (fetchError.name === 'AbortError') {
-        console.error('[generation] Timeout after', HF_TIMEOUT_MS, 'ms')
-        throw new Error(`Request timeout: Hugging Face API did not respond within ${HF_TIMEOUT_MS}ms`)
-      }
-      throw fetchError
     }
-  } catch (e) {
-    console.error('[generation] error', e)
+  } catch (e: any) {
+    logger.error('Generation pipeline error', e, {
+      requestId,
+      errorMessage: e?.message,
+      errorStack: process.env.NODE_ENV === 'development' ? e?.stack : undefined
+    })
     // Fallback simple concatenation if model call fails
     return 'No fue posible generar la respuesta en este momento. Intenta nuevamente más tarde.'
   }

@@ -241,7 +241,8 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
     query,
     chunks: retrieved,
     legalArea: detectedLegalArea,
-    includeWarnings: true
+    includeWarnings: true,
+    requestId
   })
   logger.logPipelineStep('Answer generated', requestId, { answerLength: answer.length })
 

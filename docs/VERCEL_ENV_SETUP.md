@@ -135,8 +135,30 @@ Environment: Production, Preview
 
 ```
 Name: HF_API_TIMEOUT_MS
-Value: 30000
+Value: 60000
 Environment: Production, Preview
+Description: Timeout para llamadas a API de Hugging Face (aumentado de 30000 a 60000 para consultas complejas)
+```
+
+```
+Name: HF_GENERATION_MODEL_FALLBACK
+Value: mistralai/Mistral-7B-Instruct-v0.3
+Environment: Production, Preview
+Description: Modelo alternativo si el modelo principal falla (opcional, pero recomendado)
+```
+
+```
+Name: HF_MAX_TOKENS
+Value: 2000
+Environment: Production, Preview
+Description: Máximo de tokens para respuestas generadas (aumentado de 1000 a 2000 para respuestas más completas)
+```
+
+```
+Name: HF_RETRY_ATTEMPTS
+Value: 3
+Environment: Production, Preview
+Description: Número de intentos de retry con backoff exponencial (default: 3)
 ```
 
 #### CORS

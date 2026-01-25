@@ -59,8 +59,23 @@ const optionalVars = [
   },
   {
     name: 'HF_API_TIMEOUT_MS',
-    description: 'Timeout de API de Hugging Face en ms (default: 30000)',
-    default: '30000'
+    description: 'Timeout de API de Hugging Face en ms (default: 60000)',
+    default: '60000'
+  },
+  {
+    name: 'HF_GENERATION_MODEL_FALLBACK',
+    description: 'Modelo de generación alternativo si el principal falla (default: mistralai/Mistral-7B-Instruct-v0.3)',
+    default: 'mistralai/Mistral-7B-Instruct-v0.3'
+  },
+  {
+    name: 'HF_MAX_TOKENS',
+    description: 'Máximo de tokens para generación (default: 2000)',
+    default: '2000'
+  },
+  {
+    name: 'HF_RETRY_ATTEMPTS',
+    description: 'Número de intentos de retry para generación (default: 3)',
+    default: '3'
   },
   {
     name: 'MAX_REQUEST_SIZE',
