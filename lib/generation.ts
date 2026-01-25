@@ -2,7 +2,9 @@ import { type DocumentChunk } from './types'
 import { generatePrompts, type PromptContext } from './prompt-templates'
 
 // Default model for text generation using router.huggingface.co/novita endpoint
-const HF_MODEL_GENERATION_DEFAULT = 'meta-llama/llama-3.3-70b-instruct'
+// Cambiado a Mistral 7B para mejor rendimiento y velocidad
+// Alternativas: meta-llama/Llama-3.1-8B-Instruct, Qwen/Qwen2.5-7B-Instruct
+const HF_MODEL_GENERATION_DEFAULT = 'mistralai/Mistral-7B-Instruct-v0.3'
 
 // Maximum number of citations to include in context
 const MAX_CITATIONS = 8

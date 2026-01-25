@@ -20,8 +20,8 @@ const requiredVars = [
   {
     name: 'HF_GENERATION_MODEL',
     required: false,
-    description: 'Modelo de generación (default: meta-llama/llama-3.3-70b-instruct)',
-    default: 'meta-llama/llama-3.3-70b-instruct'
+    description: 'Modelo de generación (default: mistralai/Mistral-7B-Instruct-v0.3)',
+    default: 'mistralai/Mistral-7B-Instruct-v0.3'
   },
   {
     name: 'EMB_PROVIDER',

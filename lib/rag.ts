@@ -4,15 +4,13 @@ import { generateAnswerSpanish } from './generation'
 import { filterSensitivePII } from './pii'
 import { type RagQuery, type RagResponse } from './types'
 import { detectLegalArea } from './prompt-templates'
-import { validateFactual } from './factual-validator'
-import { structureResponse, formatStructuredResponse } from './response-structure'
-import { 
-  calculateAllPrestaciones, 
-  calculateHorasExtras, 
-  calculateRecargoDominical,
-  calculateIndemnizacionDespido,
-  type CalculationResult 
-} from './legal-calculator'
+import { logger } from './logger'
+
+// Lazy load heavy modules to optimize cold starts
+// These are only imported when actually needed
+type FactualValidator = typeof import('./factual-validator')
+type ResponseStructure = typeof import('./response-structure')
+type LegalCalculator = typeof import('./legal-calculator')
 
 /**
  * Detecta si una consulta requiere cálculos legales
@@ -140,14 +138,23 @@ function detectCalculationNeeds(query: string, answer: string): {
 
 /**
  * Ejecuta cálculos legales según el tipo detectado
+ * Nota: Las funciones de cálculo se cargan dinámicamente cuando se necesitan
  */
-function performCalculations(
+async function performCalculations(
   calculationType: string,
   extractedParams: Record<string, any>
-): CalculationResult[] {
+): Promise<CalculationResult[]> {
   const results: CalculationResult[] = []
   
   try {
+    // Lazy load legal calculator module
+    const { 
+      calculateAllPrestaciones, 
+      calculateHorasExtras, 
+      calculateRecargoDominical,
+      calculateIndemnizacionDespido 
+    } = await import('./legal-calculator') as LegalCalculator
+    
     if (calculationType === 'prestaciones' && extractedParams.salarioMensual && extractedParams.mesesTrabajados) {
       const prestaciones = calculateAllPrestaciones({
         salarioMensual: extractedParams.salarioMensual,
@@ -180,7 +187,7 @@ function performCalculations(
       results.push(indemnizacion)
     }
   } catch (error) {
-    console.error('[rag] Error en cálculos:', error)
+    logger.error('Error en cálculos', error, { calculationType })
   }
   
   return results
@@ -201,16 +208,19 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
 
   const requestId = uuidv4()
   
-  console.log('[rag] Pipeline start', { requestId, queryLength: query.length, userId })
+  logger.logPipelineStep('Pipeline start', requestId, { queryLength: query.length, userId })
 
   // 1. Detectar área legal si no se proporciona
   const detectedLegalArea = providedLegalArea || detectLegalArea(query)
-  console.log('[rag] Legal area detected:', detectedLegalArea)
+  logger.logPipelineStep('Legal area detected', requestId, { legalArea: detectedLegalArea })
 
   // 2. Retrieval con re-ranking (ya integrado en retrieveRelevantChunks)
-  console.log('[rag] Retrieving chunks...')
+  logger.logPipelineStep('Retrieving chunks', requestId)
   const retrieved = await retrieveRelevantChunks(query, filters, 8)
-  console.log('[rag] Retrieved chunks:', retrieved.length, 'scores:', retrieved.map(r => r.score.toFixed(3)))
+  logger.logPipelineStep('Chunks retrieved', requestId, { 
+    count: retrieved.length, 
+    scores: retrieved.map(r => r.score.toFixed(3)) 
+  })
 
   if (retrieved.length === 0) {
     return {
@@ -223,68 +233,75 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
   }
 
   // 3. Generación con prompts mejorados (ya integrado en generateAnswerSpanish)
-  console.log('[rag] Generating answer...')
+  logger.logPipelineStep('Generating answer', requestId)
   const answer = await generateAnswerSpanish({
     query,
     chunks: retrieved,
     legalArea: detectedLegalArea,
     includeWarnings: true
   })
-  console.log('[rag] Answer generated, length:', answer.length)
+  logger.logPipelineStep('Answer generated', requestId, { answerLength: answer.length })
 
   // 4. Filtrar PII
   const safeAnswer = filterSensitivePII(answer || '')
 
-  // 5. Validación factual (opcional)
+  // 5. Validación factual (opcional) - Lazy loaded
   let factualValidation
   if (enableFactualValidation) {
-    console.log('[rag] Running factual validation...')
+    logger.logPipelineStep('Running factual validation', requestId)
+    const { validateFactual } = await import('./factual-validator') as FactualValidator
     factualValidation = validateFactual(safeAnswer, retrieved)
-    console.log('[rag] Factual validation:', {
+    logger.logPipelineStep('Factual validation completed', requestId, {
       isValid: factualValidation.isValid,
-      warnings: factualValidation.warnings.length,
+      warningsCount: factualValidation.warnings.length,
       articlesValidated: factualValidation.validatedFacts.articles.length
     })
     
     // Si hay errores críticos, agregar advertencia a la respuesta
     if (!factualValidation.isValid && factualValidation.errors.length > 0) {
-      console.warn('[rag] Factual validation errors detected:', factualValidation.errors)
+      logger.warn('Factual validation errors detected', undefined, { 
+        requestId, 
+        errors: factualValidation.errors 
+      })
     }
   }
 
-  // 6. Estructuración de respuesta (opcional)
+  // 6. Estructuración de respuesta (opcional) - Lazy loaded
   let structuredResponse
   if (enableStructuredResponse) {
-    console.log('[rag] Structuring response...')
+    logger.logPipelineStep('Structuring response', requestId)
+    const { structureResponse } = await import('./response-structure') as ResponseStructure
     structuredResponse = structureResponse(safeAnswer, retrieved)
     const validation = structuredResponse.analisisJuridico && structuredResponse.conclusion
       ? { isValid: true, missingSections: [] }
       : { isValid: false, missingSections: [] }
     
     if (!validation.isValid) {
-      console.log('[rag] Structured response missing some sections, using original format')
+      logger.logPipelineStep('Structured response missing sections, using original format', requestId)
     } else {
-      console.log('[rag] Response successfully structured')
+      logger.logPipelineStep('Response successfully structured', requestId)
     }
   }
 
-  // 7. Detección y ejecución de cálculos (opcional)
+  // 7. Detección y ejecución de cálculos (opcional) - Lazy loaded
   let calculations
   if (enableCalculations) {
-    console.log('[rag] Detecting calculation needs...')
+    logger.logPipelineStep('Detecting calculation needs', requestId)
     const calcNeeds = detectCalculationNeeds(query, safeAnswer)
     
     if (calcNeeds.needsCalculation && calcNeeds.extractedParams) {
-      console.log('[rag] Calculation needed:', calcNeeds.calculationType)
-      calculations = performCalculations(calcNeeds.calculationType!, calcNeeds.extractedParams)
+      logger.logPipelineStep('Calculation needed', requestId, { 
+        calculationType: calcNeeds.calculationType 
+      })
+      calculations = await performCalculations(calcNeeds.calculationType!, calcNeeds.extractedParams)
       
       if (calculations.length > 0) {
-        console.log('[rag] Calculations performed:', calculations.length)
-        // Agregar cálculos a la respuesta si es premium o si está habilitado
-        // (En producción, esto dependería del tier del usuario)
+        logger.logPipelineStep('Calculations performed', requestId, { 
+          count: calculations.length 
+        })
       }
     } else if (calcNeeds.needsCalculation) {
-      console.log('[rag] Calculation needed but parameters not extracted from query')
+      logger.logPipelineStep('Calculation needed but parameters not extracted', requestId)
     }
   }
 
@@ -320,11 +337,11 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
           
           if (relevantProcedures.length > 0) {
             procedures = relevantProcedures.slice(0, 3) // Máximo 3 procedimientos
-            console.log('[rag] Procedures found:', procedures?.length || 0)
+            logger.logPipelineStep('Procedures found', requestId, { count: procedures?.length || 0 })
           }
         }
       } catch (error) {
-        console.warn('[rag] Error loading procedures:', error)
+        logger.warn('Error loading procedures', error, { requestId })
       }
     }
   }
@@ -391,8 +408,7 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
     }))
   }
 
-  console.log('[rag] Pipeline complete', {
-    requestId,
+  logger.logPipelineStep('Pipeline complete', requestId, {
     responseTime: `${responseTime}ms`,
     answerLength: safeAnswer.length,
     citationsCount: citations.length,
@@ -400,6 +416,8 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
     hasFactualValidation: !!factualValidation,
     hasCalculations: !!(calculations && calculations.length > 0)
   })
+  
+  logger.logMetric('pipeline_response_time', responseTime, 'ms', { requestId })
 
   return response
 } 

@@ -3,6 +3,7 @@ import { runRagPipeline } from '@/lib/rag'
 import { RagBodySchema } from './schema'
 import { getUserTier, checkUsageLimit, trackUsage, adjustQueryForTier } from '@/lib/tiers'
 import { authenticateUser } from '@/lib/auth'
+import { logger } from '@/lib/logger'
 
 // Simple in-memory cache with TTL to avoid dependency issues
 const CACHE_TTL_MS = 60 * 1000
@@ -54,24 +55,66 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    console.log('[api/rag] Incoming request')
-    console.log('[api/rag] GEN_PROVIDER=%s, OLLAMA_MODEL=%s, EMB_PROVIDER=%s', process.env.GEN_PROVIDER, process.env.OLLAMA_MODEL, process.env.EMB_PROVIDER)
+    logger.logRequest('POST', '/api/rag')
+    logger.debug('Provider configuration', {
+      GEN_PROVIDER: process.env.GEN_PROVIDER,
+      OLLAMA_MODEL: process.env.OLLAMA_MODEL,
+      EMB_PROVIDER: process.env.EMB_PROVIDER
+    })
     
     // Autenticación y autorización
     let userId: string | undefined
     let userTier: 'free' | 'premium' = 'free'
     
     // 1. Verificar API key (si está configurada)
+    // Nota: Las requests del mismo origen (frontend en el mismo dominio) no requieren API key
+    // La API key solo se requiere para requests externas (APIs de terceros)
     if (process.env.RAG_API_KEY) {
-      const headerKey = req.headers.get('x-api-key')
-      if (headerKey !== process.env.RAG_API_KEY) {
-        console.warn('[api/rag] Unauthorized request - invalid API key')
-        return NextResponse.json(
-          { error: 'No autorizado', message: 'Invalid API key' },
-          { status: 401 }
-        )
+      const origin = req.headers.get('origin')
+      const referer = req.headers.get('referer')
+      
+      // Detectar si es request del mismo origen:
+      // - No hay origin header (request del mismo origen en navegador)
+      // - Origin coincide con el servidor
+      // - Referer indica que viene del mismo dominio
+      let isSameOrigin = false
+      try {
+        if (origin === null) {
+          // No hay origin header = request del mismo origen
+          isSameOrigin = true
+        } else if (origin) {
+          const originUrl = new URL(origin)
+          isSameOrigin = originUrl.origin === req.nextUrl.origin
+        }
+        
+        // Si no se detectó por origin, verificar referer
+        if (!isSameOrigin && referer) {
+          try {
+            const refererUrl = new URL(referer)
+            isSameOrigin = refererUrl.origin === req.nextUrl.origin
+          } catch {
+            // Referer inválido, ignorar
+          }
+        }
+      } catch {
+        // Error al parsear URLs, asumir que no es mismo origen
+        isSameOrigin = false
       }
-      // Si hay API key válida, tratar como usuario premium
+      
+      // Si es request externa (no mismo origen), requerir API key
+      if (!isSameOrigin) {
+        const headerKey = req.headers.get('x-api-key')
+        if (headerKey !== process.env.RAG_API_KEY) {
+          logger.warn('Unauthorized request - invalid API key', undefined, {
+            origin: req.headers.get('origin')
+          })
+          return NextResponse.json(
+            { error: 'No autorizado', message: 'Invalid API key' },
+            { status: 401 }
+          )
+        }
+      }
+      // Si hay API key válida o es mismo origen, tratar como usuario premium
       userTier = 'premium'
     }
     
@@ -86,7 +129,7 @@ export async function POST(req: NextRequest) {
         // Verificar límites de uso
         const usageCheck = checkUsageLimit(userTier, userId)
         if (!usageCheck.allowed) {
-          console.warn(`[api/rag] Usage limit exceeded for user ${userId}`)
+          logger.warn('Usage limit exceeded', undefined, { userId, userTier })
           return NextResponse.json(
             { 
               error: 'Límite de uso excedido', 
@@ -108,7 +151,7 @@ export async function POST(req: NextRequest) {
     try {
       json = await req.json()
     } catch (parseError) {
-      console.error('[api/rag] JSON parse error:', parseError)
+      logger.error('JSON parse error', parseError)
       return NextResponse.json(
         { error: 'Invalid JSON', message: 'Request body must be valid JSON' },
         { status: 400 }
@@ -117,7 +160,7 @@ export async function POST(req: NextRequest) {
 
     const parsed = RagBodySchema.safeParse(json)
     if (!parsed.success) {
-      console.warn('[api/rag] Validation error:', parsed.error.flatten())
+      logger.warn('Validation error', undefined, { errors: parsed.error.flatten() })
       return NextResponse.json(
         { 
           error: 'Consulta inválida', 
@@ -129,7 +172,12 @@ export async function POST(req: NextRequest) {
     }
 
     const { query, filters, locale = 'es' } = parsed.data
-    console.log('[api/rag] Body parsed. query length=%d, filters=%o, locale=%s, userTier=%s', query?.length || 0, filters, locale, userTier)
+    logger.info('Request body parsed', { 
+      queryLength: query?.length || 0, 
+      filters, 
+      locale, 
+      userTier 
+    })
     
     // Ajustar parámetros según tier del usuario
     const tierAdjustedParams = adjustQueryForTier(userTier, {
@@ -150,20 +198,26 @@ export async function POST(req: NextRequest) {
     const cacheKey = JSON.stringify({ q: query.trim(), f: filters, l: locale })
     const cached = cacheGet(cacheKey)
     if (cached) {
-      console.log('[api/rag] Cache hit')
+      logger.info('Cache hit', { requestId })
+      const responseTime = Date.now() - startTime
+      logger.logResponse('POST', '/api/rag', 200, responseTime, { requestId, cached: true })
       return NextResponse.json(
         { ...cached, cached: true },
         { 
           headers: { 
             'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=60',
-            'X-Cache': 'HIT'
+            'X-Cache': 'HIT',
+            'X-Response-Time': `${responseTime}ms`
           } 
         }
       )
     }
 
     // Execute pipeline with timeout y parámetros ajustados por tier
-    console.log('[api/rag] Executing pipeline with timeout:', PIPELINE_TIMEOUT_MS, 'ms, tier:', userTier)
+    logger.info('Executing pipeline', { 
+      timeout: PIPELINE_TIMEOUT_MS, 
+      tier: userTier 
+    })
     const result = await withTimeout(
       runRagPipeline({ 
         query, 
@@ -179,7 +233,14 @@ export async function POST(req: NextRequest) {
     
     requestId = result.requestId
     const responseTime = Date.now() - startTime
-    console.log('[api/rag] Pipeline completed in', responseTime, 'ms. Request ID:', requestId)
+    logger.logMetric('rag_response_time', responseTime, 'ms', { requestId, userTier })
+    logger.logResponse('POST', '/api/rag', 200, responseTime, { 
+      requestId, 
+      userId, 
+      userTier,
+      retrieved: result.retrieved,
+      citationsCount: result.citations.length
+    })
 
     // Cache successful results
     cacheSet(cacheKey, result)
@@ -196,15 +257,13 @@ export async function POST(req: NextRequest) {
     const errorMessage = e?.message || 'Error interno'
     const isTimeout = errorMessage.includes('timeout')
     
-    console.error('[api/rag] Error after', responseTime, 'ms:', errorMessage)
-    if (requestId) {
-      console.error('[api/rag] Request ID:', requestId)
-    }
-    
-    // Log stack trace in development
-    if (process.env.NODE_ENV === 'development') {
-      console.error('[api/rag] Stack:', e?.stack)
-    }
+    logger.error('Pipeline error', e, { 
+      requestId, 
+      responseTime, 
+      userId, 
+      userTier,
+      isTimeout 
+    })
     
     const statusCode = isTimeout ? 504 : 500
     

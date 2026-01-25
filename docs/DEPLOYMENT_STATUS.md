@@ -70,6 +70,35 @@ Este documento rastrea el estado actual del deployment del sistema RAG.
 
 ---
 
+## Estado de data/index.json
+
+**Última verificación**: 2024-01-15
+
+### Información del Índice
+
+- **Tamaño**: 1.4 MB
+- **Formato**: JSON válido (array de chunks)
+- **Estructura**: Array de objetos con `id`, `content`, `metadata`, y `embedding`
+- **Estado**: ✅ Listo para deployment
+- **Ubicación en repo**: ✅ Confirmado (`git ls-files` muestra `data/index.json`)
+
+### Validación
+
+- ✅ Archivo existe y es accesible
+- ✅ JSON válido (parseable)
+- ✅ Estructura correcta (contiene chunks con embeddings)
+- ✅ Tamaño < 50MB (límite de Vercel)
+- ✅ Incluido en repositorio Git
+
+### Notas
+
+- El archivo contiene embeddings vectoriales generados con el modelo configurado
+- Cada chunk incluye metadata con información del documento fuente
+- El tamaño actual (1.4 MB) está muy por debajo del límite de Vercel (50 MB)
+- Si el índice crece mucho en el futuro, considerar migrar a Pinecone
+
+---
+
 ## Notas
 
 ### Variables de Entorno Requeridas

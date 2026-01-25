@@ -87,6 +87,8 @@ Respuesta:
 
 ## Despliegue en Vercel
 
+✅ **Servicio en Producción**: https://col-law-rag.vercel.app
+
 Ver [VERCEL_DEPLOY.md](VERCEL_DEPLOY.md) para instrucciones detalladas.
 
 **Resumen rápido:**
@@ -102,6 +104,45 @@ Configura las variables de entorno en Vercel Dashboard:
 - `HF_GENERATION_MODEL`
 - `EMB_PROVIDER=hf`
 - `GEN_PROVIDER=hf`
+
+**URLs de Producción:**
+- 🌐 **Frontend**: https://col-law-rag.vercel.app
+- 🔍 **Health Check**: https://col-law-rag.vercel.app/api/health
+- 📊 **Status Dashboard**: https://col-law-rag.vercel.app/status
+- 📡 **API RAG**: https://col-law-rag.vercel.app/api/rag
+
+Ver [PRODUCTION_URLS.md](PRODUCTION_URLS.md) para más detalles.
+
+## Monitoreo y Estado
+
+### Health Check
+
+Verifica el estado del servicio:
+```bash
+curl https://col-law-rag.vercel.app/api/health
+```
+
+### Dashboard de Estado
+
+Visita `/status` para ver el dashboard de estado del servicio con:
+- Estado general del servicio
+- Verificaciones de salud (índice, API keys)
+- Información de versión
+- Enlaces rápidos
+
+### Documentación
+
+- **[PUBLIC_ACCESS.md](./PUBLIC_ACCESS.md)**: Guía de acceso público y uso de la API
+- **[docs/MONITORING.md](./docs/MONITORING.md)**: Guía completa de monitoreo y métricas
+- **[docs/DEPLOYMENT_CHECKLIST.md](./docs/DEPLOYMENT_CHECKLIST.md)**: Checklist de deployment
+
+### Optimizaciones Implementadas
+
+- ✅ **Lazy Loading**: Módulos pesados se cargan solo cuando se necesitan (cold start < 5s)
+- ✅ **Structured Logging**: Logs estructurados con Request ID y métricas
+- ✅ **Caching**: Cache con TTL de 60s para queries frecuentes
+- ✅ **Rate Limiting**: 10 requests/minuto por IP
+- ✅ **Performance Monitoring**: Métricas de tiempo de respuesta y errores
 
 ## Datos Actuales
 
