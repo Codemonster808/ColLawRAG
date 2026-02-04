@@ -1,7 +1,7 @@
 {
   "framework": "nextjs",
   "regions": ["iad1"],
-  "buildCommand": "npm run build",
+  "buildCommand": "npm run ingest && npm run build",
   "devCommand": "npm run dev",
   "installCommand": "npm install"
 }
