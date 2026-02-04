@@ -1,0 +1,14 @@
+{
+  "slug": "codigo_civil",
+  "nombre": "Código Civil (Ley 84 de 1873)",
+  "tipo": "codigo",
+  "area": "civil",
+  "fuente": "senado",
+  "url": "http://www.secretariasenado.gov.co/senado/basedoc/codigo_civil.html",
+  "paginated": true,
+  "enabled": true,
+  "filename": "codigo_codigo_civil.txt",
+  "size": 1233898,
+  "scrapedAt": "2026-02-01T22:01:40.291Z",
+  "textLength": 1233650
+}

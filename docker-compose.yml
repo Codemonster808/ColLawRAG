@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - HUGGINGFACE_API_KEY=${HUGGINGFACE_API_KEY}
+      - HF_EMBEDDING_MODEL=${HF_EMBEDDING_MODEL:-sentence-transformers/paraphrase-multilingual-mpnet-base-v2}
+      - HF_GENERATION_MODEL=${HF_GENERATION_MODEL:-mistralai/Mistral-7B-Instruct-v0.3}
+      - EMB_PROVIDER=${EMB_PROVIDER:-hf}
+      - GEN_PROVIDER=${GEN_PROVIDER:-hf}
+      - PINECONE_API_KEY=${PINECONE_API_KEY:-}
+      - PINECONE_INDEX=${PINECONE_INDEX:-}
+      - RAG_API_KEY=${RAG_API_KEY:-}
+    volumes:
+      - ./data:/app/data
+      - ./.env.local:/app/.env.local:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s

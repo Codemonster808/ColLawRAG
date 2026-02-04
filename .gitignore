@@ -57,7 +57,9 @@ hf-gen-test.mjs
 # ============================================
 # ARCHIVOS DE BUILD Y CACHE
 # ============================================
-# data/index.json - incluido en build para Vercel 
+# Índices grandes generados localmente (se regeneran con npm run ingest)
+data/index.json
+data/bm25-index.json
 .vercel
 .vercel/
 

@@ -1,0 +1,15 @@
+{
+  "slug": "estatuto_tributario",
+  "nombre": "Estatuto Tributario (Decreto 624 de 1989)",
+  "tipo": "codigo",
+  "area": "tributario",
+  "fuente": "senado",
+  "url": "http://www.secretariasenado.gov.co/senado/basedoc/estatuto_tributario.html",
+  "fpId": 6533,
+  "paginated": true,
+  "enabled": true,
+  "filename": "codigo_estatuto_tributario.txt",
+  "size": 1927032,
+  "scrapedAt": "2026-02-01T22:01:40.291Z",
+  "textLength": 1926753
+}

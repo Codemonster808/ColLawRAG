@@ -1,0 +1,515 @@
+{
+  "id": "ejecutivo",
+  "nombre": "Proceso Ejecutivo",
+  "descripcion": "Procedimiento abreviado para el cobro de obligaciones claras, expresas y exigibles contenidas en un título ejecutivo",
+  "normas_ref": [
+    "Código General del Proceso (Ley 1564 de 2012) - Arts. 422-450",
+    "Código de Procedimiento Civil (aplicable supletoriamente)",
+    "Código de Comercio (para títulos valores)"
+  ],
+  "etapas": [
+    {
+      "nombre": "Verificación del título ejecutivo",
+      "orden": 1,
+      "plazos": {
+        "dias": 0,
+        "descripcion": "Antes de presentar la demanda, verificar que el título cumpla requisitos de ejecutividad",
+        "hitos": [
+          "Verificar que la obligación sea clara, expresa y exigible",
+          "Verificar que el título no haya prescrito",
+          "Verificar que el título no esté alterado o falsificado",
+          "Confirmar que la obligación sea líquida o liquidable"
+        ]
+      },
+      "documentos": [
+        "Título ejecutivo original (pagaré, letra de cambio, cheque, factura con aceptación, sentencia, contrato con cuantía líquida, etc.)",
+        "Certificado de tradición (si es hipoteca o prenda)",
+        "Extractos o estados de cuenta (si es crédito bancario)",
+        "Liquidación de la deuda (capital, intereses, mora)"
+      ],
+      "entidades": [
+        {
+          "rol": "acreedor",
+          "descripcion": "Persona natural o jurídica que tiene el derecho de cobro"
+        },
+        {
+          "rol": "deudor",
+          "descripcion": "Persona obligada al pago según el título ejecutivo"
+        }
+      ]
+    },
+    {
+      "nombre": "Presentación de la demanda ejecutiva",
+      "orden": 2,
+      "plazos": {
+        "dias": 0,
+        "descripcion": "Dentro del término de prescripción de la obligación (varía según el título)",
+        "hitos": [
+          "Radicación de la demanda ante el juzgado competente",
+          "Pago de la tarifa judicial"
+        ]
+      },
+      "documentos": [
+        "Demanda ejecutiva",
+        "Título ejecutivo original",
+        "Liquidación del crédito (capital, intereses corrientes, intereses moratorios, costas)",
+        "Pruebas de la existencia de la obligación",
+        "Poder del apoderado (si actúa por medio de abogado)",
+        "Certificado de existencia y representación legal (si el demandante es persona jurídica)"
+      ],
+      "entidades": [
+        {
+          "rol": "demandante_ejecutante",
+          "descripcion": "Acreedor que inicia el proceso ejecutivo"
+        },
+        {
+          "rol": "demandado_ejecutado",
+          "descripcion": "Deudor contra quien se dirige el proceso"
+        },
+        {
+          "rol": "juzgado",
+          "descripcion": "Juzgado Civil del Circuito, Municipal, o de Familia según competencia"
+        }
+      ]
+    },
+    {
+      "nombre": "Auto de mandamiento de pago",
+      "orden": 3,
+      "plazos": {
+        "dias": 5,
+        "descripcion": "Dentro de los 5 días siguientes a la radicación",
+        "hitos": [
+          "Revisión del título ejecutivo por el juez",
+          "Libramiento del mandamiento de pago",
+          "Orden de embargo y secuestro de bienes (si se solicita medida cautelar)"
+        ]
+      },
+      "documentos": [
+        "Auto de mandamiento de pago",
+        "Orden de embargo y secuestro de bienes",
+        "Oficio al demandado ordenando el pago"
+      ],
+      "entidades": [
+        {
+          "rol": "juez",
+          "descripcion": "Juez que libra el mandamiento de pago"
+        },
+        {
+          "rol": "secretaria",
+          "descripcion": "Secretaría que expide el mandamiento"
+        }
+      ]
+    },
+    {
+      "nombre": "Notificación del mandamiento de pago",
+      "orden": 4,
+      "plazos": {
+        "dias": 10,
+        "descripcion": "Máximo 10 días para lograr la notificación personal",
+        "hitos": [
+          "Notificación personal al deudor",
+          "Entrega de copia del mandamiento y de la demanda",
+          "Si no es posible notificación personal, se procede por aviso"
+        ]
+      },
+      "documentos": [
+        "Constancia de notificación personal",
+        "Aviso (si no fue posible notificación personal)",
+        "Copia del mandamiento de pago y de la demanda"
+      ],
+      "entidades": [
+        {
+          "rol": "notificador",
+          "descripcion": "Oficial o notificador del juzgado"
+        },
+        {
+          "rol": "deudor",
+          "descripcion": "Ejecutado que es notificado"
+        }
+      ]
+    },
+    {
+      "nombre": "Pago o proposición de excepciones",
+      "orden": 5,
+      "plazos": {
+        "dias": 10,
+        "descripcion": "10 días hábiles desde la notificación para pagar o proponer excepciones",
+        "hitos": [
+          "Pago total de la deuda (termina el proceso)",
+          "Proposición de excepciones de mérito",
+          "Silencio del deudor (se ordena seguir adelante la ejecución)"
+        ]
+      },
+      "documentos": [
+        "Comprobante de pago (si paga)",
+        "Escrito de excepciones (si se opone)",
+        "Pruebas de las excepciones",
+        "Garantía para suspender el proceso (si solicita suspensión)"
+      ],
+      "entidades": [
+        {
+          "rol": "deudor",
+          "descripcion": "Ejecutado que paga o propone excepciones"
+        },
+        {
+          "rol": "apoderado_deudor",
+          "descripcion": "Abogado del deudor (si contrata uno)"
+        }
+      ]
+    },
+    {
+      "nombre": "Traslado de excepciones al demandante",
+      "orden": 6,
+      "plazos": {
+        "dias": 3,
+        "descripcion": "3 días hábiles para que el demandante se pronuncie sobre las excepciones",
+        "hitos": [
+          "Pronunciamiento del demandante sobre las excepciones",
+          "Aporte de pruebas adicionales por el demandante"
+        ]
+      },
+      "documentos": [
+        "Escrito del demandante pronunciándose sobre las excepciones",
+        "Pruebas adicionales"
+      ],
+      "entidades": [
+        {
+          "rol": "demandante",
+          "descripcion": "Acreedor que responde a las excepciones"
+        }
+      ]
+    },
+    {
+      "nombre": "Decreto y práctica de pruebas (si hay excepciones)",
+      "orden": 7,
+      "plazos": {
+        "dias": 10,
+        "descripcion": "10 días para decretar y practicar pruebas",
+        "hitos": [
+          "Auto de decreto de pruebas",
+          "Práctica de pruebas documentales, testimoniales o periciales",
+          "Cierre del período probatorio"
+        ]
+      },
+      "documentos": [
+        "Auto de pruebas",
+        "Actas de testimonios",
+        "Documentos adicionales",
+        "Dictámenes periciales (si aplica)"
+      ],
+      "entidades": [
+        {
+          "rol": "juez",
+          "descripcion": "Juez que decreta las pruebas"
+        },
+        {
+          "rol": "partes",
+          "descripcion": "Demandante y demandado que aportan pruebas"
+        }
+      ]
+    },
+    {
+      "nombre": "Sentencia sobre excepciones",
+      "orden": 8,
+      "plazos": {
+        "dias": 10,
+        "descripcion": "10 días después del vencimiento del término de pruebas para proferir sentencia",
+        "hitos": [
+          "Valoración de las excepciones y pruebas",
+          "Sentencia que acoge o rechaza las excepciones",
+          "Notificación de la sentencia"
+        ]
+      },
+      "documentos": [
+        "Sentencia sobre excepciones",
+        "Notificación por estado"
+      ],
+      "entidades": [
+        {
+          "rol": "juez",
+          "descripcion": "Juez que profiere la sentencia sobre excepciones"
+        }
+      ]
+    },
+    {
+      "nombre": "Recursos contra la sentencia de excepciones",
+      "orden": 9,
+      "plazos": {
+        "dias": 5,
+        "descripcion": "5 días hábiles para interponer recurso de apelación",
+        "hitos": [
+          "Interposición del recurso de apelación",
+          "Concesión del recurso",
+          "Remisión al superior"
+        ]
+      },
+      "documentos": [
+        "Escrito de apelación",
+        "Auto que concede o niega el recurso",
+        "Oficio de remisión"
+      ],
+      "entidades": [
+        {
+          "rol": "apelante",
+          "descripcion": "Parte que apela (demandante o demandado)"
+        },
+        {
+          "rol": "tribunal",
+          "descripcion": "Tribunal Superior o juez de segunda instancia"
+        }
+      ]
+    },
+    {
+      "nombre": "Auto que ordena seguir adelante la ejecución",
+      "orden": 10,
+      "plazos": {
+        "dias": 3,
+        "descripcion": "3 días después de ejecutoriada la sentencia que rechaza las excepciones o del vencimiento del término para excepcionar sin oposición",
+        "hitos": [
+          "Auto que ordena seguir adelante con la ejecución",
+          "Orden de remate de bienes embargados"
+        ]
+      },
+      "documentos": [
+        "Auto que ordena seguir adelante la ejecución",
+        "Orden de remate"
+      ],
+      "entidades": [
+        {
+          "rol": "juez",
+          "descripcion": "Juez que ordena continuar con la ejecución"
+        }
+      ]
+    },
+    {
+      "nombre": "Embargo y secuestro de bienes",
+      "orden": 11,
+      "plazos": {
+        "dias": 10,
+        "descripcion": "Dentro de los 10 días siguientes al auto de seguir adelante",
+        "hitos": [
+          "Identificación de bienes del deudor",
+          "Embargo de bienes muebles o inmuebles",
+          "Secuestro de los bienes embargados",
+          "Registro del embargo (si son bienes inmuebles o vehículos)"
+        ]
+      },
+      "documentos": [
+        "Oficio de embargo",
+        "Acta de secuestro",
+        "Registro de embargo en oficina de registro (inmuebles)",
+        "Oficio a entidades financieras (cuentas bancarias)"
+      ],
+      "entidades": [
+        {
+          "rol": "secuestre",
+          "descripcion": "Persona designada para custodiar los bienes embargados"
+        },
+        {
+          "rol": "juez",
+          "descripcion": "Juez que ordena el embargo"
+        },
+        {
+          "rol": "deudor",
+          "descripcion": "Ejecutado cuyos bienes son embargados"
+        }
+      ]
+    },
+    {
+      "nombre": "Avalúo de los bienes embargados",
+      "orden": 12,
+      "plazos": {
+        "dias": 15,
+        "descripcion": "15 días para practicar el avalúo",
+        "hitos": [
+          "Designación de perito avaluador",
+          "Práctica del avalúo",
+          "Presentación del avalúo al juzgado",
+          "Notificación del avalúo a las partes"
+        ]
+      },
+      "documentos": [
+        "Auto de designación de perito",
+        "Avalúo pericial",
+        "Notificación del avalúo"
+      ],
+      "entidades": [
+        {
+          "rol": "perito_avaluador",
+          "descripcion": "Experto designado para avaluar los bienes"
+        },
+        {
+          "rol": "juez",
+          "descripcion": "Juez que designa al perito"
+        }
+      ]
+    },
+    {
+      "nombre": "Remate de los bienes",
+      "orden": 13,
+      "plazos": {
+        "dias": 20,
+        "descripcion": "20 días desde el avalúo para señalar fecha de remate",
+        "hitos": [
+          "Publicación del aviso de remate",
+          "Celebración de la audiencia de remate",
+          "Adjudicación de los bienes al mejor postor",
+          "Expedición del auto aprobatorio del remate"
+        ]
+      },
+      "documentos": [
+        "Aviso de remate publicado",
+        "Acta de audiencia de remate",
+        "Auto aprobatorio del remate",
+        "Comprobante de pago del rematante"
+      ],
+      "entidades": [
+        {
+          "rol": "rematante",
+          "descripcion": "Persona que adquiere los bienes en remate"
+        },
+        {
+          "rol": "juez",
+          "descripcion": "Juez que dirige la audiencia de remate"
+        },
+        {
+          "rol": "secretaria",
+          "descripcion": "Secretaría que lleva el acta del remate"
+        }
+      ]
+    },
+    {
+      "nombre": "Liquidación del crédito y pago al acreedor",
+      "orden": 14,
+      "plazos": {
+        "dias": 5,
+        "descripcion": "5 días después del remate para liquidar y pagar",
+        "hitos": [
+          "Liquidación final del crédito",
+          "Pago al demandante con el producto del remate",
+          "Devolución del excedente al deudor (si lo hay)",
+          "Expedición de paz y salvo"
+        ]
+      },
+      "documentos": [
+        "Liquidación final del crédito",
+        "Orden de pago al demandante",
+        "Comprobante de pago",
+        "Paz y salvo",
+        "Auto que declara terminado el proceso"
+      ],
+      "entidades": [
+        {
+          "rol": "demandante",
+          "descripcion": "Acreedor que recibe el pago"
+        },
+        {
+          "rol": "deudor",
+          "descripcion": "Ejecutado que recibe el excedente si lo hay"
+        },
+        {
+          "rol": "juez",
+          "descripcion": "Juez que ordena el pago y declara terminado el proceso"
+        }
+      ]
+    }
+  ],
+  "excepciones_procedentes": [
+    {
+      "tipo": "Excepción de pago",
+      "descripcion": "El deudor prueba que ya pagó total o parcialmente la obligación"
+    },
+    {
+      "tipo": "Excepción de prescripción",
+      "descripcion": "Ha transcurrido el término legal para exigir el pago (varía según el título)"
+    },
+    {
+      "tipo": "Excepción de compensación",
+      "descripcion": "El deudor tiene un crédito contra el acreedor que compensa la deuda"
+    },
+    {
+      "tipo": "Excepción de novación",
+      "descripcion": "La obligación original fue sustituida por una nueva"
+    },
+    {
+      "tipo": "Excepción de remisión",
+      "descripcion": "El acreedor perdonó la deuda"
+    },
+    {
+      "tipo": "Excepción de nulidad del título",
+      "descripcion": "El título ejecutivo adolece de nulidad absoluta o relativa"
+    },
+    {
+      "tipo": "Excepción de falsedad del título",
+      "descripcion": "El título es falso o ha sido alterado"
+    },
+    {
+      "tipo": "Excepción de falta de exigibilidad",
+      "descripcion": "La obligación no es aún exigible (plazo no vencido, condición no cumplida)"
+    }
+  ],
+  "titulos_ejecutivos": [
+    {
+      "titulo": "Sentencias judiciales",
+      "descripcion": "Sentencias de condena ejecutoriadas",
+      "prescripcion": "5 años"
+    },
+    {
+      "titulo": "Pagaré",
+      "descripcion": "Título valor con promesa incondicional de pago",
+      "prescripcion": "3 años desde vencimiento"
+    },
+    {
+      "titulo": "Letra de cambio",
+      "descripcion": "Orden incondicional de pago a la vista o a plazo",
+      "prescripcion": "1 año desde vencimiento (contra aceptante), 6 meses (contra endosantes)"
+    },
+    {
+      "titulo": "Cheque",
+      "descripcion": "Orden de pago girada contra un banco",
+      "prescripcion": "6 meses desde presentación"
+    },
+    {
+      "titulo": "Factura con aceptación",
+      "descripcion": "Factura de venta a crédito aceptada por el comprador",
+      "prescripcion": "3 años"
+    },
+    {
+      "titulo": "Títulos de crédito hipotecario",
+      "descripcion": "Títulos que garantizan con hipoteca",
+      "prescripcion": "10 años (acción real hipotecaria)"
+    },
+    {
+      "titulo": "Contrato con cuantía líquida",
+      "descripcion": "Contrato que cumple requisitos de claridad, expresión y exigibilidad",
+      "prescripcion": "Varía según naturaleza del contrato"
+    },
+    {
+      "titulo": "Acta de conciliación",
+      "descripcion": "Acta suscrita ante conciliador judicial o centro de conciliación",
+      "prescripcion": "5 años"
+    }
+  ],
+  "notas": [
+    "El proceso ejecutivo es más rápido que el ordinario porque se basa en un título ejecutivo que goza de presunción de autenticidad",
+    "El deudor solo puede defenderse mediante excepciones taxativas (limitadas por la ley)",
+    "Si el deudor no propone excepciones en el término legal, pierde la oportunidad de defenderse",
+    "El embargo puede practicarse antes de notificar el mandamiento de pago si el juez lo considera necesario (medida cautelar)",
+    "El deudor puede pagar en cualquier momento del proceso para evitar el remate",
+    "Los bienes embargados deben ser proporcionales a la deuda reclamada",
+    "El acreedor puede solicitar embargo preventivo de bienes antes de iniciar el proceso ejecutivo",
+    "Si los bienes embargados no alcanzan para cubrir la deuda, se pueden embargar bienes adicionales",
+    "El rematante debe pagar el precio del remate en el acto o en el término que señale el juez (máximo 5 días)",
+    "La competencia depende de la cuantía: Juzgados Civiles Municipales (hasta 30 SMLMV), Juzgados Civiles del Circuito (más de 30 SMLMV)",
+    "En procesos ejecutivos de menor cuantía (hasta 40 SMLMV), los términos pueden reducirse a la mitad"
+  ],
+  "costos_estimados": {
+    "tarifa_judicial": "Variable según cuantía (desde 2 hasta 30 SMLMV o más)",
+    "honorarios_apoderado": "Usualmente entre 10% y 30% del monto recuperado, según acuerdo",
+    "secuestre": "Honorarios del secuestre (variable según valor de los bienes)",
+    "avaluador": "Honorarios del perito avaluador (variable según tipo de bien)",
+    "publicaciones": "Costo de publicación del aviso de remate en diario",
+    "registro": "Costo de registro del embargo en oficina de registro (para inmuebles)",
+    "nota": "Estos costos se cargan a la deuda del ejecutado si se obtiene sentencia favorable"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "slug": "codigo_procedimiento_penal_ley906",
+  "nombre": "Código de Procedimiento Penal (Ley 906 de 2004)",
+  "tipo": "codigo",
+  "area": "penal",
+  "fuente": "senado",
+  "url": "http://www.secretariasenado.gov.co/senado/basedoc/ley_0906_2004.html",
+  "fpId": 14787,
+  "paginated": true,
+  "enabled": true,
+  "filename": "codigo_codigo_procedimiento_penal_ley906.txt",
+  "size": 528401,
+  "scrapedAt": "2026-02-01T22:01:40.291Z",
+  "textLength": 528114
+}

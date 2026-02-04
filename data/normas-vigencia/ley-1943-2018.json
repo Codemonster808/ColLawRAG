@@ -1,0 +1,30 @@
+{
+  "normaId": "ley-1943-2018",
+  "nombre": "Ley 1943 de 2018 (Ley de Financiamiento)",
+  "tipo": "ley",
+  "vigenteDesde": "2018-12-28",
+  "vigenteHasta": "2020-01-01",
+  "derogadaPor": "corte-constitucional-sentencia-c481-2019",
+  "derogadaDesde": "2020-01-01",
+  "estado": "derogada",
+  "modificaciones": [
+    {
+      "norma": "ley-2010-2019",
+      "fecha": "2019-12-27",
+      "tipo": "subrogacion",
+      "descripcion": "Ley de crecimiento económico que sustituyó las disposiciones de la Ley 1943 tras su inexequibilidad"
+    }
+  ],
+  "notas": [
+    "Ley de financiamiento declarada INEXEQUIBLE por la Corte Constitucional mediante Sentencia C-481 de 2019",
+    "La inexequibilidad se produjo por vicios de procedimiento legislativo (convocatoria de sesiones extraordinarias)",
+    "Fue declarada inexequible el 16 de octubre de 2019, con efectos diferidos hasta el 1° de enero de 2020",
+    "Durante el año 2019 estuvo vigente de forma transitoria",
+    "La Ley 2010 de 2019 (Ley de Crecimiento Económico) reemplazó sus disposiciones",
+    "Principal objetivo: recaudo de $14 billones para financiar el déficit fiscal",
+    "Modificaba IVA, renta, normalización tributaria, y régimen simple",
+    "Eliminaba algunas exenciones del IVA (canasta familiar)",
+    "A pesar de su inexequibilidad, sentó las bases para la Ley 2010 de 2019",
+    "Es un caso emblemático de control de constitucionalidad sobre reformas tributarias"
+  ]
+}

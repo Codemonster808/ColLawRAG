@@ -1,0 +1,15 @@
+{
+  "slug": "codigo_infancia_adolescencia_ley1098",
+  "nombre": "Código de la Infancia y la Adolescencia (Ley 1098 de 2006)",
+  "tipo": "codigo",
+  "area": "familia",
+  "fuente": "senado",
+  "url": "http://www.secretariasenado.gov.co/senado/basedoc/ley_1098_2006.html",
+  "fpId": null,
+  "paginated": true,
+  "enabled": true,
+  "filename": "codigo_codigo_infancia_adolescencia_ley1098.txt",
+  "size": 236595,
+  "scrapedAt": "2026-02-01T22:01:40.291Z",
+  "textLength": 236292
+}

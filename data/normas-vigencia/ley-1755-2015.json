@@ -1,0 +1,28 @@
+{
+  "normaId": "ley-1755-2015",
+  "nombre": "Ley 1755 de 2015 (Derecho Fundamental de Petición)",
+  "tipo": "ley",
+  "vigenteDesde": "2015-06-30",
+  "vigenteHasta": null,
+  "estado": "vigente",
+  "modificaciones": [
+    {
+      "norma": "decreto-1166-2016",
+      "fecha": "2016-07-22",
+      "tipo": "modificacion",
+      "descripcion": "Reglamentación del derecho de petición ante autoridades administrativas"
+    }
+  ],
+  "notas": [
+    "Regula el derecho fundamental de petición consagrado en el artículo 23 de la Constitución",
+    "Unifica y actualiza el régimen del derecho de petición en todas las modalidades",
+    "Establece términos de respuesta: 15 días hábiles (general), 10 días (consultas), 30 días (peticiones entre entidades)",
+    "Regula el silencio administrativo positivo (se entiende aceptada la solicitud si no hay respuesta en 3 meses)",
+    "Define las modalidades: petición de información, consulta, queja, reclamo, solicitud de documentos",
+    "No requiere apoderado: cualquier persona puede presentar peticiones directamente",
+    "Las entidades deben dar trámite preferencial a peticiones de personas en situación de vulnerabilidad",
+    "Establece sanciones para funcionarios que no respondan oportunamente",
+    "La negativa o no respuesta puede dar lugar a tutela por violación del derecho de petición",
+    "Aplica a todas las entidades públicas y a particulares que ejerzan funciones públicas"
+  ]
+}

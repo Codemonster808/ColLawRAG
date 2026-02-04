@@ -1,0 +1,14 @@
+{
+  "slug": "codigo_comercio",
+  "nombre": "Código de Comercio (Decreto 410 de 1971)",
+  "tipo": "codigo",
+  "area": "comercial",
+  "fuente": "senado",
+  "url": "http://www.secretariasenado.gov.co/senado/basedoc/codigo_comercio.html",
+  "paginated": true,
+  "enabled": true,
+  "filename": "codigo_codigo_comercio.txt",
+  "size": 1250291,
+  "scrapedAt": "2026-02-01T22:01:40.291Z",
+  "textLength": 1250022
+}

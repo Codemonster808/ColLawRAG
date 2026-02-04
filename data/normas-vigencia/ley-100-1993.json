@@ -1,0 +1,59 @@
+{
+  "normaId": "ley-100-1993",
+  "nombre": "Ley 100 de 1993",
+  "tipo": "ley",
+  "vigenteDesde": "1993-12-23",
+  "vigenteHasta": null,
+  "estado": "parcialmente_derogada",
+  "derogacionesParciales": [
+    {
+      "articulo": "Art. 13",
+      "derogadoPor": "ley-797-2003",
+      "derogadaDesde": "2003-01-29",
+      "razon": "Modificación del régimen de pensiones"
+    },
+    {
+      "articulo": "Art. 33",
+      "derogadoPor": "ley-797-2003",
+      "derogadaDesde": "2003-01-29",
+      "razon": "Ajuste de condiciones para pensión de vejez"
+    },
+    {
+      "articulo": "Art. 36",
+      "derogadoPor": "ley-797-2003",
+      "derogadaDesde": "2003-01-29",
+      "razon": "Modificación de requisitos de edad"
+    }
+  ],
+  "modificaciones": [
+    {
+      "norma": "ley-797-2003",
+      "fecha": "2003-01-29",
+      "tipo": "modificacion",
+      "descripcion": "Reforma al sistema general de pensiones"
+    },
+    {
+      "norma": "ley-860-2003",
+      "fecha": "2003-12-26",
+      "tipo": "modificacion",
+      "descripcion": "Regulación del régimen de transición pensional"
+    },
+    {
+      "norma": "ley-1122-2007",
+      "fecha": "2007-01-09",
+      "tipo": "modificacion",
+      "descripcion": "Modificaciones al Sistema General de Seguridad Social en Salud"
+    },
+    {
+      "norma": "ley-1438-2011",
+      "fecha": "2011-01-19",
+      "tipo": "modificacion",
+      "descripcion": "Reforma al Sistema General de Seguridad Social en Salud"
+    }
+  ],
+  "notas": [
+    "Ley marco del Sistema de Seguridad Social Integral",
+    "Crea el sistema de pensiones, salud y riesgos profesionales",
+    "Ha sido modificada extensamente pero sigue siendo la norma base del sistema"
+  ]
+}

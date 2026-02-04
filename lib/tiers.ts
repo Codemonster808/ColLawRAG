@@ -1,6 +1,9 @@
 /**
  * Sistema de tiers para modelo freemium
+ * Conectado con lib/auth.ts para persistencia en SQLite
  */
+
+import { getUser, getUserStats, logQuery } from './auth'
 
 export type UserTier = 'free' | 'premium'
 
@@ -74,39 +77,103 @@ export function hasFeature(tier: UserTier, feature: keyof TierLimits): boolean {
 }
 
 /**
- * Obtiene el tier de un usuario (simplificado - en producción usar auth.ts)
+ * Obtiene el tier de un usuario desde la base de datos
  */
 export function getUserTier(userId: string): UserTier {
-  // En producción, esto debería consultar la base de datos de usuarios
-  // Por ahora, retornamos 'free' por defecto
-  // Si hay un usuario autenticado con API key, podría ser 'premium'
-  return 'free'
+  try {
+    const user = getUser(userId)
+    return user?.tier || 'free'
+  } catch (error) {
+    console.error('[tiers] Error getting user tier:', error)
+    return 'free'
+  }
 }
 
 /**
- * Verifica límites de uso para un usuario
+ * Verifica límites de uso para un usuario (consulta DB)
  */
 export function checkUsageLimit(tier: UserTier, userId: string): { allowed: boolean; reason?: string } {
-  // En producción, esto debería consultar la base de datos para obtener queriesThisMonth
-  // Por ahora, siempre permite (implementación simplificada)
-  const limits = TIER_LIMITS[tier]
-  
-  if (limits.maxQueriesPerMonth === -1) {
+  try {
+    const limits = TIER_LIMITS[tier]
+    
+    if (limits.maxQueriesPerMonth === -1) {
+      return { allowed: true }
+    }
+    
+    // Consultar queriesThisMonth desde base de datos
+    const stats = getUserStats(userId)
+    const queriesThisMonth = stats?.queriesThisMonth || 0
+    
+    if (queriesThisMonth >= limits.maxQueriesPerMonth) {
+      return {
+        allowed: false,
+        reason: `Has alcanzado el límite de ${limits.maxQueriesPerMonth} consultas mensuales. Actualiza a Premium para consultas ilimitadas.`
+      }
+    }
+    
+    return { allowed: true }
+  } catch (error) {
+    console.error('[tiers] Error checking usage limit:', error)
+    // En caso de error, permitir la request
     return { allowed: true }
   }
-  
-  // TODO: Consultar queriesThisMonth desde base de datos
-  // Por ahora, siempre permite
-  return { allowed: true }
 }
 
 /**
- * Trackea el uso de un usuario
+ * Trackea el uso de un usuario (actualiza DB)
  */
-export function trackUsage(userId: string, tier: UserTier): void {
-  // En producción, esto debería actualizar la base de datos
-  // Por ahora, solo loguea (implementación simplificada)
-  console.log(`[tiers] Tracking usage for user ${userId}, tier: ${tier}`)
+export function trackUsage(userId: string, tier: UserTier, query?: string, responseTime?: number, success?: boolean): void {
+  try {
+    // Asegurar que el usuario existe
+    const user = getUser(userId)
+    if (!user) {
+      // Crear usuario si no existe
+      const { createUser } = require('./auth')
+      createUser({ id: userId, tier })
+    }
+    
+    // Si se proporcionan detalles de la consulta, usar logQuery
+    if (query !== undefined && responseTime !== undefined && success !== undefined) {
+      logQuery({
+        userId,
+        query,
+        responseTime,
+        success
+      })
+    } else {
+      // Solo actualizar contador mensual (más ligero)
+      // logQuery ya maneja el incremento de contadores, pero podemos hacerlo explícito aquí
+      const stats = getUserStats(userId)
+      const now = new Date()
+      const lastQueryAt = stats?.lastQueryAt
+      
+      // Resetear contador si es nuevo mes
+      let queriesThisMonth = stats?.queriesThisMonth || 0
+      if (lastQueryAt) {
+        const lastMonth = lastQueryAt.getMonth()
+        const lastYear = lastQueryAt.getFullYear()
+        const currentMonth = now.getMonth()
+        const currentYear = now.getFullYear()
+        
+        if (lastMonth !== currentMonth || lastYear !== currentYear) {
+          queriesThisMonth = 0
+        }
+      }
+      
+      // Incrementar contador (logQuery lo hará cuando se llame con detalles)
+      queriesThisMonth++
+      
+      // Actualizar en DB (usar logQuery con valores mínimos si no tenemos detalles)
+      logQuery({
+        userId,
+        query: query || 'tracked',
+        responseTime: responseTime || 0,
+        success: success !== undefined ? success : true
+      })
+    }
+  } catch (error) {
+    console.error('[tiers] Error tracking usage:', error)
+  }
 }
 
 /**
@@ -144,4 +211,3 @@ export function adjustQueryForTier(
       : limits.includeStructuredResponse
   }
 }
-

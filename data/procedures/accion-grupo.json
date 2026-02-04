@@ -1,0 +1,460 @@
+{
+  "id": "accion-grupo",
+  "nombre": "Acción de Grupo",
+  "descripcion": "Mecanismo para la protección de derechos e intereses colectivos cuando un grupo de personas ha sufrido el mismo daño",
+  "normas_ref": [
+    "Constitución Política - Art. 88",
+    "Ley 472 de 1998",
+    "Código de Procedimiento Administrativo y de lo Contencioso Administrativo (Ley 1437 de 2011) - Arts. 145-162"
+  ],
+  "etapas": [
+    {
+      "nombre": "Requisitos previos y verificación de viabilidad",
+      "orden": 1,
+      "plazos": {
+        "dias": 0,
+        "descripcion": "Antes de presentar la demanda, verificar requisitos de procedibilidad",
+        "hitos": [
+          "Identificación del grupo afectado (mínimo 20 personas)",
+          "Verificación de que el daño sea común y causado por la misma fuente",
+          "Comprobación de que han pasado menos de 2 años desde el daño o su conocimiento",
+          "Verificación de que no existan acciones individuales pendientes por los mismos hechos"
+        ]
+      },
+      "documentos": [
+        "Listado preliminar de afectados (mínimo 20 personas con identificación)",
+        "Descripción del daño común",
+        "Evidencia de la causa común del daño",
+        "Cuantificación preliminar de los perjuicios"
+      ],
+      "entidades": [
+        {
+          "rol": "grupo_afectado",
+          "descripcion": "Mínimo 20 personas que sufrieron el mismo daño por la misma causa"
+        },
+        {
+          "rol": "representante",
+          "descripcion": "Persona natural o jurídica que actúa en representación del grupo"
+        },
+        {
+          "rol": "apoderado",
+          "descripcion": "Abogado que representa al grupo (opcional pero recomendado)"
+        }
+      ]
+    },
+    {
+      "nombre": "Presentación de la demanda",
+      "orden": 2,
+      "plazos": {
+        "dias": 730,
+        "descripcion": "Máximo 2 años desde que ocurrió el daño o desde que el grupo tuvo conocimiento del mismo",
+        "hitos": [
+          "Radicación de la demanda ante el Tribunal Administrativo o Juzgado competente",
+          "Pago de la tarifa judicial (si aplica según cuantía)"
+        ]
+      },
+      "documentos": [
+        "Demanda de acción de grupo",
+        "Identificación del representante y del grupo",
+        "Descripción detallada de los hechos que causaron el daño",
+        "Identificación del demandado",
+        "Prueba del daño común y de la causa única",
+        "Listado de afectados con datos de contacto",
+        "Cuantificación de perjuicios (discriminando por tipo: morales, materiales, lucro cesante, etc.)",
+        "Pretensiones (indemnización, medidas de reparación)",
+        "Pruebas disponibles",
+        "Poder del apoderado (si aplica)"
+      ],
+      "entidades": [
+        {
+          "rol": "demandante",
+          "descripcion": "Representante del grupo de afectados"
+        },
+        {
+          "rol": "demandado",
+          "descripcion": "Entidad pública, persona natural o jurídica causante del daño"
+        },
+        {
+          "rol": "tribunal_o_juzgado",
+          "descripcion": "Tribunal Administrativo (si el demandado es entidad pública) o Juzgado Civil del Circuito (si es particular)"
+        }
+      ]
+    },
+    {
+      "nombre": "Admisión de la demanda",
+      "orden": 3,
+      "plazos": {
+        "dias": 10,
+        "descripcion": "10 días hábiles desde la radicación para admitir o inadmitir",
+        "hitos": [
+          "Verificación de requisitos formales",
+          "Verificación de que existe un grupo (mínimo 20 personas)",
+          "Verificación de que el daño es común",
+          "Auto admisorio o de inadmisión"
+        ]
+      },
+      "documentos": [
+        "Auto admisorio de la demanda",
+        "Auto de corrección (si la demanda tiene defectos subsanables)",
+        "Auto de rechazo (si no cumple requisitos insubsanables)"
+      ],
+      "entidades": [
+        {
+          "rol": "juez_o_magistrado",
+          "descripcion": "Juez o Magistrado ponente que revisa la demanda"
+        },
+        {
+          "rol": "secretaria",
+          "descripcion": "Secretaría del despacho judicial"
+        }
+      ]
+    },
+    {
+      "nombre": "Notificación y publicación de la demanda",
+      "orden": 4,
+      "plazos": {
+        "dias": 20,
+        "descripcion": "Dentro de los 20 días siguientes a la admisión",
+        "hitos": [
+          "Notificación personal o por aviso al demandado",
+          "Publicación de la demanda en un medio de amplia circulación nacional",
+          "Publicación en la página web de la Rama Judicial",
+          "Término de 30 días para que otras personas se integren al grupo"
+        ]
+      },
+      "documentos": [
+        "Oficio de notificación al demandado",
+        "Constancia de publicación en prensa",
+        "Constancia de publicación en página web",
+        "Listado actualizado de integrantes del grupo"
+      ],
+      "entidades": [
+        {
+          "rol": "demandado",
+          "descripcion": "Entidad o persona notificada"
+        },
+        {
+          "rol": "secretaria",
+          "descripcion": "Secretaría que coordina las publicaciones"
+        },
+        {
+          "rol": "nuevos_integrantes",
+          "descripcion": "Personas que se integran al grupo después de la publicación"
+        }
+      ]
+    },
+    {
+      "nombre": "Integración de nuevos miembros al grupo",
+      "orden": 5,
+      "plazos": {
+        "dias": 30,
+        "descripcion": "30 días hábiles desde la última publicación para integrarse al grupo",
+        "hitos": [
+          "Solicitudes de integración de nuevos afectados",
+          "Verificación de que los nuevos integrantes tienen el mismo daño",
+          "Actualización del listado del grupo"
+        ]
+      },
+      "documentos": [
+        "Solicitudes de integración al grupo",
+        "Pruebas del daño de los nuevos integrantes",
+        "Listado consolidado y actualizado del grupo"
+      ],
+      "entidades": [
+        {
+          "rol": "nuevos_integrantes",
+          "descripcion": "Personas que solicitan ser parte del grupo"
+        },
+        {
+          "rol": "representante",
+          "descripcion": "Representante del grupo que verifica las solicitudes"
+        },
+        {
+          "rol": "juez",
+          "descripcion": "Juez que aprueba las integraciones"
+        }
+      ]
+    },
+    {
+      "nombre": "Contestación de la demanda",
+      "orden": 6,
+      "plazos": {
+        "dias": 30,
+        "descripcion": "30 días hábiles desde la notificación para contestar",
+        "hitos": [
+          "Presentación de la contestación por el demandado",
+          "Proposición de excepciones",
+          "Aporte de pruebas"
+        ]
+      },
+      "documentos": [
+        "Escrito de contestación",
+        "Excepciones previas o de fondo",
+        "Pruebas documentales",
+        "Relación de testigos"
+      ],
+      "entidades": [
+        {
+          "rol": "demandado",
+          "descripcion": "Entidad o persona que contesta la demanda"
+        },
+        {
+          "rol": "apoderado_demandado",
+          "descripcion": "Abogado del demandado"
+        }
+      ]
+    },
+    {
+      "nombre": "Audiencia de conciliación",
+      "orden": 7,
+      "plazos": {
+        "dias": 40,
+        "descripcion": "Dentro de los 40 días siguientes al vencimiento del término de contestación",
+        "hitos": [
+          "Citación a audiencia de conciliación",
+          "Intento de acuerdo entre las partes",
+          "Acuerdo conciliatorio (si se logra)",
+          "Continuación del proceso (si no hay acuerdo)"
+        ]
+      },
+      "documentos": [
+        "Auto de citación a audiencia",
+        "Acta de audiencia de conciliación",
+        "Acuerdo conciliatorio (si se logra)",
+        "Auto que aprueba el acuerdo"
+      ],
+      "entidades": [
+        {
+          "rol": "juez",
+          "descripcion": "Juez que dirige la audiencia de conciliación"
+        },
+        {
+          "rol": "demandante",
+          "descripcion": "Representante del grupo"
+        },
+        {
+          "rol": "demandado",
+          "descripcion": "Entidad o persona demandada"
+        },
+        {
+          "rol": "ministerio_publico",
+          "descripcion": "Representante del Ministerio Público (puede participar)"
+        }
+      ]
+    },
+    {
+      "nombre": "Decreto y práctica de pruebas",
+      "orden": 8,
+      "plazos": {
+        "dias": 60,
+        "descripcion": "Hasta 60 días para decretar y practicar las pruebas",
+        "hitos": [
+          "Auto de decreto de pruebas",
+          "Práctica de testimonios",
+          "Práctica de dictámenes periciales",
+          "Inspecciones judiciales (si aplica)",
+          "Recepción de documentos adicionales"
+        ]
+      },
+      "documentos": [
+        "Auto de pruebas",
+        "Actas de testimonios",
+        "Dictámenes periciales (valoración del daño)",
+        "Actas de inspección judicial",
+        "Oficios de solicitud de información"
+      ],
+      "entidades": [
+        {
+          "rol": "juez",
+          "descripcion": "Juez que decreta y practica las pruebas"
+        },
+        {
+          "rol": "peritos",
+          "descripcion": "Peritos designados para cuantificar el daño"
+        },
+        {
+          "rol": "testigos",
+          "descripcion": "Testigos citados"
+        }
+      ]
+    },
+    {
+      "nombre": "Alegatos de conclusión",
+      "orden": 9,
+      "plazos": {
+        "dias": 10,
+        "descripcion": "10 días comunes para presentar alegatos escritos",
+        "hitos": [
+          "Vencimiento del término probatorio",
+          "Presentación de alegatos del demandante",
+          "Presentación de alegatos del demandado"
+        ]
+      },
+      "documentos": [
+        "Alegatos de conclusión del demandante",
+        "Alegatos de conclusión del demandado"
+      ],
+      "entidades": [
+        {
+          "rol": "demandante",
+          "descripcion": "Representante del grupo"
+        },
+        {
+          "rol": "demandado",
+          "descripcion": "Entidad o persona demandada"
+        }
+      ]
+    },
+    {
+      "nombre": "Sentencia",
+      "orden": 10,
+      "plazos": {
+        "dias": 60,
+        "descripcion": "60 días después del vencimiento del término de alegatos para proferir sentencia",
+        "hitos": [
+          "Estudio del expediente y valoración de pruebas",
+          "Elaboración del proyecto de sentencia",
+          "Aprobación de la sentencia en Sala (si es Tribunal)",
+          "Notificación de la sentencia"
+        ]
+      },
+      "documentos": [
+        "Proyecto de sentencia",
+        "Sentencia definitiva",
+        "Notificación por estado o personal"
+      ],
+      "entidades": [
+        {
+          "rol": "juez_o_magistrado",
+          "descripcion": "Juez o Magistrado ponente que profiere la sentencia"
+        },
+        {
+          "rol": "sala",
+          "descripcion": "Sala del Tribunal que aprueba la sentencia (si es Tribunal)"
+        }
+      ]
+    },
+    {
+      "nombre": "Recursos",
+      "orden": 11,
+      "plazos": {
+        "dias": 10,
+        "descripcion": "10 días hábiles desde la notificación para interponer recurso de apelación",
+        "hitos": [
+          "Interposición del recurso de apelación",
+          "Sustentación del recurso",
+          "Concesión del recurso",
+          "Remisión al Consejo de Estado o superior jerárquico"
+        ]
+      },
+      "documentos": [
+        "Escrito de apelación",
+        "Sustentación del recurso",
+        "Auto que concede o niega el recurso",
+        "Oficio de remisión"
+      ],
+      "entidades": [
+        {
+          "rol": "apelante",
+          "descripcion": "Parte que apela (demandante o demandado)"
+        },
+        {
+          "rol": "tribunal_o_consejo",
+          "descripcion": "Tribunal Superior o Consejo de Estado (segunda instancia)"
+        }
+      ]
+    },
+    {
+      "nombre": "Liquidación del daño y determinación de beneficiarios",
+      "orden": 12,
+      "plazos": {
+        "dias": 90,
+        "descripcion": "Hasta 90 días después de ejecutoriada la sentencia para liquidar el daño individual",
+        "hitos": [
+          "Nombramiento de liquidador (puede ser perito)",
+          "Determinación del monto individual para cada miembro del grupo",
+          "Elaboración del listado de beneficiarios con montos",
+          "Aprobación judicial de la liquidación"
+        ]
+      },
+      "documentos": [
+        "Auto de nombramiento de liquidador",
+        "Informe de liquidación del daño",
+        "Listado de beneficiarios con montos individuales",
+        "Auto aprobatorio de la liquidación"
+      ],
+      "entidades": [
+        {
+          "rol": "liquidador",
+          "descripcion": "Perito o experto designado para liquidar el daño"
+        },
+        {
+          "rol": "juez",
+          "descripcion": "Juez que aprueba la liquidación"
+        },
+        {
+          "rol": "beneficiarios",
+          "descripcion": "Integrantes del grupo que recibirán indemnización"
+        }
+      ]
+    },
+    {
+      "nombre": "Ejecución de la sentencia y pago",
+      "orden": 13,
+      "plazos": {
+        "dias": 30,
+        "descripcion": "30 días para que el condenado cumpla con el pago",
+        "hitos": [
+          "Requerimiento de pago al demandado condenado",
+          "Pago voluntario o inicio de ejecución forzada",
+          "Distribución de los dineros a los beneficiarios",
+          "Rendición de cuentas del representante del grupo"
+        ]
+      },
+      "documentos": [
+        "Requerimiento de pago",
+        "Consignación o pago",
+        "Medidas cautelares (embargo de bienes si no hay pago voluntario)",
+        "Comprobantes de pago a beneficiarios",
+        "Informe de rendición de cuentas"
+      ],
+      "entidades": [
+        {
+          "rol": "demandado_condenado",
+          "descripcion": "Entidad o persona condenada al pago"
+        },
+        {
+          "rol": "representante",
+          "descripcion": "Representante del grupo que administra y distribuye los fondos"
+        },
+        {
+          "rol": "beneficiarios",
+          "descripcion": "Integrantes del grupo que reciben el pago"
+        },
+        {
+          "rol": "juez",
+          "descripcion": "Juez que supervisa el cumplimiento y la distribución"
+        }
+      ]
+    }
+  ],
+  "notas": [
+    "La acción de grupo requiere un mínimo de 20 personas afectadas por el mismo daño y la misma causa",
+    "El plazo de prescripción es de 2 años desde el daño o desde que el grupo tuvo conocimiento del mismo",
+    "La cuantía determina la tarifa judicial: varía según el monto total reclamado por todo el grupo",
+    "Es fundamental la publicación de la demanda para que otros afectados puedan integrarse al grupo",
+    "El juez puede rechazar la demanda si considera que el daño no es común o que no hay grupo suficiente",
+    "La sentencia beneficia a todos los integrantes del grupo identificado, incluso a quienes se integren después",
+    "El representante del grupo debe rendir cuentas ante el juez sobre la distribución de los dineros",
+    "Pueden existir acciones de grupo contra entidades públicas o particulares",
+    "La competencia es del Tribunal Administrativo (si es contra entidad pública) o Juzgado Civil del Circuito (si es contra particular)",
+    "El incumplimiento del pago puede llevar a medidas de ejecución forzada (embargo, remate de bienes)"
+  ],
+  "costos_estimados": {
+    "tarifa_judicial": "Según cuantía total del grupo (puede ser entre 5 y 50 SMLMV o más)",
+    "honorarios_apoderado": "Variable, se recomienda acordar porcentaje sobre el monto recuperado",
+    "peritos": "Si se requiere perito para cuantificar el daño, el costo lo asume el demandante inicialmente",
+    "publicaciones": "Costo de publicación en diario de circulación nacional (varios millones de pesos)",
+    "nota": "Los costos iniciales pueden ser altos, pero se pueden repartir entre los miembros del grupo"
+  }
+}

@@ -10,45 +10,104 @@ export interface RerankedChunk {
 }
 
 /**
+ * Jerarquía legal colombiana con boost values
+ */
+const LEGAL_HIERARCHY_BOOST: Record<string, number> = {
+  constitucion: 0.30,
+  codigo: 0.25,
+  ley_organica: 0.22,
+  ley_estatutaria: 0.22,
+  ley: 0.20,
+  decreto_ley: 0.18,
+  decreto: 0.10,
+  resolucion: 0.05,
+  jurisprudencia_corte_constitucional: 0.15,
+  jurisprudencia_corte_suprema: 0.12,
+  jurisprudencia_consejo_estado: 0.12,
+  jurisprudencia: 0.08,
+  concepto: 0.03,
+  default: 0
+}
+
+/**
  * Determina el nivel de jerarquía legal de un documento
- * Retorna un score de boost: Constitución > Ley > Decreto > Reglamento > Jurisprudencia
+ * Retorna un score de boost basado en la pirámide normativa colombiana
  */
 export function getLegalHierarchyScore(chunk: DocumentChunk): number {
   const title = chunk.metadata.title.toLowerCase()
+  const content = chunk.content.toLowerCase().slice(0, 500) // Solo revisar inicio
   const type = chunk.metadata.type
   
   // Constitución tiene máxima jerarquía
   if (title.includes('constitución') || title.includes('constitucion')) {
-    return 0.3
+    return LEGAL_HIERARCHY_BOOST.constitucion
   }
   
-  // Leyes orgánicas y estatutarias
-  if (title.includes('ley orgánica') || title.includes('ley estatutaria')) {
-    return 0.25
+  // Códigos (Civil, Penal, Laboral, Comercio, etc.)
+  if (title.includes('código') || title.includes('codigo')) {
+    return LEGAL_HIERARCHY_BOOST.codigo
+  }
+  
+  // Leyes orgánicas y estatutarias (mayor jerarquía que leyes ordinarias)
+  if (title.includes('ley orgánica') || title.includes('ley organica')) {
+    return LEGAL_HIERARCHY_BOOST.ley_organica
+  }
+  if (title.includes('ley estatutaria')) {
+    return LEGAL_HIERARCHY_BOOST.ley_estatutaria
   }
   
   // Leyes ordinarias
-  if (type === 'estatuto' && title.includes('ley')) {
-    return 0.2
+  if (title.match(/\bley\s+\d+/) || (type === 'estatuto' && title.includes('ley'))) {
+    return LEGAL_HIERARCHY_BOOST.ley
   }
   
-  // Códigos (son leyes pero con boost menor)
-  if (title.includes('código') || title.includes('codigo')) {
-    return 0.18
+  // Decretos con fuerza de ley
+  if (title.includes('decreto ley') || title.includes('decreto-ley')) {
+    return LEGAL_HIERARCHY_BOOST.decreto_ley
   }
   
   // Decretos reglamentarios
   if (title.includes('decreto') || type === 'reglamento') {
-    return 0.1
+    return LEGAL_HIERARCHY_BOOST.decreto
   }
   
-  // Jurisprudencia (importante pero no es norma)
+  // Resoluciones
+  if (title.includes('resolución') || title.includes('resolucion')) {
+    return LEGAL_HIERARCHY_BOOST.resolucion
+  }
+  
+  // Jurisprudencia - diferenciar por corte
   if (type === 'jurisprudencia') {
-    return 0.05
+    if (title.includes('corte constitucional') || content.includes('corte constitucional')) {
+      return LEGAL_HIERARCHY_BOOST.jurisprudencia_corte_constitucional
+    }
+    if (title.includes('corte suprema') || content.includes('corte suprema de justicia')) {
+      return LEGAL_HIERARCHY_BOOST.jurisprudencia_corte_suprema
+    }
+    if (title.includes('consejo de estado') || content.includes('consejo de estado')) {
+      return LEGAL_HIERARCHY_BOOST.jurisprudencia_consejo_estado
+    }
+    return LEGAL_HIERARCHY_BOOST.jurisprudencia
   }
   
-  // Por defecto, sin boost
-  return 0
+  // Conceptos y circulares
+  if (title.includes('concepto') || title.includes('circular')) {
+    return LEGAL_HIERARCHY_BOOST.concepto
+  }
+  
+  // Por defecto
+  return LEGAL_HIERARCHY_BOOST.default
+}
+
+/**
+ * Obtiene el nombre de la jerarquía para logging/debug
+ */
+export function getLegalHierarchyName(chunk: DocumentChunk): string {
+  const score = getLegalHierarchyScore(chunk)
+  for (const [name, value] of Object.entries(LEGAL_HIERARCHY_BOOST)) {
+    if (value === score) return name
+  }
+  return 'default'
 }
 
 /**

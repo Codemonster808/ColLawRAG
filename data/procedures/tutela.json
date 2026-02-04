@@ -1,0 +1,305 @@
+{
+  "id": "tutela",
+  "nombre": "Acción de Tutela",
+  "descripcion": "Mecanismo constitucional para la protección inmediata de derechos fundamentales",
+  "normas_ref": [
+    "Constitución Política - Art. 86",
+    "Decreto 2591 de 1991",
+    "Decreto 1382 de 2000"
+  ],
+  "etapas": [
+    {
+      "nombre": "Presentación de la solicitud",
+      "orden": 1,
+      "plazos": {
+        "dias": 0,
+        "descripcion": "Sin plazo específico, pero debe interponerse dentro de un término razonable desde la vulneración",
+        "hitos": [
+          "Momento de presentación de la tutela ante el juez competente"
+        ]
+      },
+      "documentos": [
+        "Escrito de tutela (identificación del accionante y accionado)",
+        "Descripción de los hechos",
+        "Derechos fundamentales vulnerados",
+        "Pruebas (si las hay)",
+        "Pretensiones"
+      ],
+      "entidades": [
+        {
+          "rol": "accionante",
+          "descripcion": "Persona natural o jurídica titular del derecho fundamental"
+        },
+        {
+          "rol": "accionado",
+          "descripcion": "Autoridad pública o particular responsable de la vulneración"
+        },
+        {
+          "rol": "juez",
+          "descripcion": "Juez de conocimiento competente"
+        }
+      ]
+    },
+    {
+      "nombre": "Admisión y reparto",
+      "orden": 2,
+      "plazos": {
+        "dias": 1,
+        "descripcion": "Inmediatamente después de recibida",
+        "hitos": [
+          "Verificación de requisitos formales",
+          "Asignación del juez de conocimiento"
+        ]
+      },
+      "documentos": [
+        "Auto de admisión",
+        "Auto de reparto"
+      ],
+      "entidades": [
+        {
+          "rol": "secretaria",
+          "descripcion": "Secretaría del juzgado"
+        },
+        {
+          "rol": "juez",
+          "descripcion": "Juez competente asignado"
+        }
+      ]
+    },
+    {
+      "nombre": "Notificación y traslado",
+      "orden": 3,
+      "plazos": {
+        "dias": 1,
+        "descripcion": "Dentro de las 24 horas siguientes a la admisión",
+        "hitos": [
+          "Notificación al accionado",
+          "Solicitud de informe al accionado"
+        ]
+      },
+      "documentos": [
+        "Auto de notificación",
+        "Oficio al accionado solicitando informe"
+      ],
+      "entidades": [
+        {
+          "rol": "juez",
+          "descripcion": "Juez de conocimiento"
+        },
+        {
+          "rol": "accionado",
+          "descripcion": "Entidad o persona notificada"
+        }
+      ]
+    },
+    {
+      "nombre": "Respuesta del accionado",
+      "orden": 4,
+      "plazos": {
+        "dias": 2,
+        "descripcion": "Dos días después de la notificación para rendir informe",
+        "hitos": [
+          "Presentación del informe por parte del accionado",
+          "Anexo de pruebas por el accionado"
+        ]
+      },
+      "documentos": [
+        "Informe del accionado",
+        "Pruebas documentales",
+        "Excepciones si las hay"
+      ],
+      "entidades": [
+        {
+          "rol": "accionado",
+          "descripcion": "Entidad que rinde el informe"
+        },
+        {
+          "rol": "juez",
+          "descripcion": "Juez receptor del informe"
+        }
+      ]
+    },
+    {
+      "nombre": "Decreto y práctica de pruebas",
+      "orden": 5,
+      "plazos": {
+        "dias": 3,
+        "descripcion": "El juez puede decretar pruebas de oficio",
+        "hitos": [
+          "Auto de decreto de pruebas",
+          "Práctica de pruebas testimoniales, documentales o periciales"
+        ]
+      },
+      "documentos": [
+        "Auto de pruebas",
+        "Testimonios",
+        "Documentos adicionales",
+        "Dictámenes periciales (si aplica)"
+      ],
+      "entidades": [
+        {
+          "rol": "juez",
+          "descripcion": "Juez que decreta las pruebas"
+        },
+        {
+          "rol": "secretaria",
+          "descripcion": "Secretaría que coordina las diligencias"
+        },
+        {
+          "rol": "testigos",
+          "descripcion": "Testigos citados (si aplica)"
+        }
+      ]
+    },
+    {
+      "nombre": "Sentencia de primera instancia",
+      "orden": 6,
+      "plazos": {
+        "dias": 10,
+        "descripcion": "Máximo 10 días desde la presentación para proferir sentencia",
+        "hitos": [
+          "Análisis del caso",
+          "Valoración de pruebas",
+          "Emisión de la sentencia"
+        ]
+      },
+      "documentos": [
+        "Sentencia de primera instancia",
+        "Notificación de la sentencia"
+      ],
+      "entidades": [
+        {
+          "rol": "juez",
+          "descripcion": "Juez de primera instancia"
+        },
+        {
+          "rol": "secretaria",
+          "descripcion": "Secretaría que notifica"
+        }
+      ]
+    },
+    {
+      "nombre": "Impugnación",
+      "orden": 7,
+      "plazos": {
+        "dias": 3,
+        "descripcion": "3 días hábiles desde la notificación para impugnar",
+        "hitos": [
+          "Presentación del recurso de impugnación",
+          "Sustentación del recurso"
+        ]
+      },
+      "documentos": [
+        "Escrito de impugnación",
+        "Sustentación del recurso"
+      ],
+      "entidades": [
+        {
+          "rol": "accionante",
+          "descripcion": "Si impugna el accionante"
+        },
+        {
+          "rol": "accionado",
+          "descripcion": "Si impugna el accionado"
+        },
+        {
+          "rol": "juez",
+          "descripcion": "Juez de primera instancia que recibe la impugnación"
+        }
+      ]
+    },
+    {
+      "nombre": "Sentencia de segunda instancia",
+      "orden": 8,
+      "plazos": {
+        "dias": 20,
+        "descripcion": "Máximo 20 días desde la recepción del expediente",
+        "hitos": [
+          "Remisión del expediente al superior",
+          "Revisión del caso",
+          "Sentencia de segunda instancia"
+        ]
+      },
+      "documentos": [
+        "Sentencia de segunda instancia",
+        "Notificación de la sentencia"
+      ],
+      "entidades": [
+        {
+          "rol": "juez_superior",
+          "descripcion": "Tribunal o juez de segunda instancia"
+        },
+        {
+          "rol": "secretaria",
+          "descripcion": "Secretaría del despacho superior"
+        }
+      ]
+    },
+    {
+      "nombre": "Eventual selección para revisión",
+      "orden": 9,
+      "plazos": {
+        "dias": 30,
+        "descripcion": "La Corte Constitucional puede seleccionar el caso para revisión",
+        "hitos": [
+          "Envío automático del expediente a la Corte Constitucional",
+          "Selección discrecional por las salas de selección",
+          "Revisión eventual por la Corte"
+        ]
+      },
+      "documentos": [
+        "Expediente completo",
+        "Auto de selección (si aplica)",
+        "Sentencia de revisión (si aplica)"
+      ],
+      "entidades": [
+        {
+          "rol": "corte_constitucional",
+          "descripcion": "Corte Constitucional - Sala de Selección"
+        },
+        {
+          "rol": "magistrado_ponente",
+          "descripcion": "Magistrado designado para revisar (si se selecciona)"
+        }
+      ]
+    },
+    {
+      "nombre": "Cumplimiento de la sentencia",
+      "orden": 10,
+      "plazos": {
+        "dias": 48,
+        "descripcion": "48 horas para iniciar el cumplimiento de la orden",
+        "hitos": [
+          "Notificación de la sentencia al accionado",
+          "Inicio del cumplimiento",
+          "Verificación del cumplimiento"
+        ]
+      },
+      "documentos": [
+        "Oficio de cumplimiento",
+        "Informes de avance",
+        "Certificación de cumplimiento"
+      ],
+      "entidades": [
+        {
+          "rol": "accionado",
+          "descripcion": "Entidad obligada a cumplir"
+        },
+        {
+          "rol": "juez",
+          "descripcion": "Juez que verifica el cumplimiento"
+        },
+        {
+          "rol": "accionante",
+          "descripcion": "Beneficiario de la sentencia"
+        }
+      ]
+    }
+  ],
+  "notas": [
+    "El término total desde la presentación hasta la sentencia de primera instancia no puede exceder 10 días",
+    "Si hay impugnación, el proceso completo puede tomar hasta 20 días adicionales",
+    "La tutela es un mecanismo preferente y sumario",
+    "El incumplimiento puede generar desacato"
+  ]
+}

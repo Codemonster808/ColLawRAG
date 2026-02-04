@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-// Rate limiting store (in-memory)
-// In production, consider using Redis or Vercel KV for distributed rate limiting
+// Rate limiting persistente usando SQLite (puede fallback a memoria si falla)
+let checkRateLimitPersistent: (clientId: string, limit: number, windowMs: number) => any
+
+// Fallback a rate limiting en memoria
 interface RateLimitEntry {
   count: number
   resetAt: number
 }
-
 const rateLimitStore = new Map<string, RateLimitEntry>()
 
 // Cleanup old entries every 5 minutes
@@ -18,6 +19,48 @@ setInterval(() => {
     }
   }
 }, 5 * 60 * 1000)
+
+function initRateLimit() {
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const rateLimitModule = require('@/lib/rate-limit-persistent')
+    checkRateLimitPersistent = rateLimitModule.checkRateLimit
+  } catch (error) {
+    console.warn('[middleware] Rate limiting persistente no disponible, usando memoria:', error)
+    // Fallback a rate limiting en memoria
+    checkRateLimitPersistent = (clientId: string, limit: number, windowMs: number) => {
+      const now = Date.now()
+      const entry = rateLimitStore.get(clientId)
+      
+      if (!entry || now > entry.resetAt) {
+        rateLimitStore.set(clientId, {
+          count: 1,
+          resetAt: now + windowMs
+        })
+        return { allowed: true, remaining: limit - 1, resetAt: now + windowMs }
+      }
+      
+      if (entry.count >= limit) {
+        return {
+          allowed: false,
+          remaining: 0,
+          resetAt: entry.resetAt,
+          retryAfter: Math.ceil((entry.resetAt - now) / 1000)
+        }
+      }
+      
+      entry.count++
+      return {
+        allowed: true,
+        remaining: limit - entry.count,
+        resetAt: entry.resetAt
+      }
+    }
+  }
+}
+
+// Inicializar al cargar el módulo
+initRateLimit()
 
 function getClientId(req: NextRequest): string {
   // Try to get IP from various headers (Vercel, Cloudflare, etc.)
@@ -36,24 +79,8 @@ function getClientId(req: NextRequest): string {
 }
 
 function checkRateLimit(clientId: string, limit: number, windowMs: number): boolean {
-  const now = Date.now()
-  const entry = rateLimitStore.get(clientId)
-  
-  if (!entry || now > entry.resetAt) {
-    // Create new entry
-    rateLimitStore.set(clientId, {
-      count: 1,
-      resetAt: now + windowMs
-    })
-    return true
-  }
-  
-  if (entry.count >= limit) {
-    return false
-  }
-  
-  entry.count++
-  return true
+  const result = checkRateLimitPersistent(clientId, limit, windowMs)
+  return result.allowed
 }
 
 export function middleware(req: NextRequest) {
@@ -76,8 +103,8 @@ export function middleware(req: NextRequest) {
   const allowed = checkRateLimit(clientId, limit, windowMs)
   
   if (!allowed) {
-    const entry = rateLimitStore.get(clientId)
-    const retryAfter = entry ? Math.ceil((entry.resetAt - Date.now()) / 1000) : 60
+    const result = checkRateLimitPersistent(clientId, limit, windowMs)
+    const retryAfter = result.retryAfter || 60
     
     return NextResponse.json(
       { 
@@ -91,22 +118,19 @@ export function middleware(req: NextRequest) {
           'Retry-After': retryAfter.toString(),
           'X-RateLimit-Limit': limit.toString(),
           'X-RateLimit-Remaining': '0',
-          'X-RateLimit-Reset': entry?.resetAt.toString() || (Date.now() + windowMs).toString()
+          'X-RateLimit-Reset': result.resetAt.toString()
         }
       }
     )
   }
   
-  const entry = rateLimitStore.get(clientId)
-  const remaining = entry ? Math.max(0, limit - entry.count) : limit - 1
+  const result = checkRateLimitPersistent(clientId, limit, windowMs)
   
   // Add rate limit headers to response
   const response = NextResponse.next()
   response.headers.set('X-RateLimit-Limit', limit.toString())
-  response.headers.set('X-RateLimit-Remaining', remaining.toString())
-  if (entry) {
-    response.headers.set('X-RateLimit-Reset', entry.resetAt.toString())
-  }
+  response.headers.set('X-RateLimit-Remaining', result.remaining.toString())
+  response.headers.set('X-RateLimit-Reset', result.resetAt.toString())
   
   return response
 }

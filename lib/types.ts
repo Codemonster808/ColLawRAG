@@ -1,4 +1,4 @@
-export type DocType = 'estatuto' | 'jurisprudencia' | 'reglamento'
+export type DocType = 'estatuto' | 'jurisprudencia' | 'reglamento' | 'procedimiento'
 
 export type DocumentMetadata = {
   id: string
@@ -8,6 +8,9 @@ export type DocumentMetadata = {
   articleHierarchy?: string  // "Título I > Capítulo 1 > Artículo 5"
   chapter?: string            // Capítulo
   section?: string            // Sección
+  areaLegal?: string          // Área legal detectada (laboral, comercial, civil, penal, administrativo, tributario, constitucional, general)
+  entidadEmisora?: string     // Entidad que emitió la norma (Congreso, Presidencia, Corte Constitucional, etc.)
+  fechaVigencia?: string      // Fecha aproximada de vigencia (YYYY-MM-DD)
   url?: string
   sourcePath?: string
 }
@@ -31,6 +34,7 @@ export type RagQuery = {
   enableFactualValidation?: boolean
   enableStructuredResponse?: boolean
   enableCalculations?: boolean
+  enableCitationValidation?: boolean
   legalArea?: string
   userId?: string // Para tracking y límites de tier
 }
@@ -63,12 +67,22 @@ export type RagResponse = {
       numbers: Array<{ value: string; verified: boolean; source: string }>
     }
   }
+  citationValidation?: {
+    totalCitations: number
+    validCitations: number
+    precision: number
+    invalidCitations: Array<{ ref: string; error?: string }>
+  }
   calculations?: Array<{
     type: string
     amount: number
     formula: string
     breakdown: Record<string, number | string>
   }>
+  vigenciaValidation?: {
+    warnings: string[]
+    byNorma: Array<{ normaId: string; title: string; estado: string; derogadaPor?: string; derogadaDesde?: string }>
+  }
   detectedLegalArea?: string
   metadata?: {
     responseTime?: number

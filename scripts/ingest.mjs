@@ -4,6 +4,24 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { randomUUID } from 'node:crypto'
 
+// Cargar variables de entorno desde .env.local
+const envPath = path.join(process.cwd(), '.env.local')
+if (fs.existsSync(envPath)) {
+  const envContent = fs.readFileSync(envPath, 'utf-8')
+  for (const line of envContent.split('\n')) {
+    const trimmed = line.trim()
+    if (trimmed && !trimmed.startsWith('#')) {
+      const [key, ...valueParts] = trimmed.split('=')
+      if (key && valueParts.length > 0) {
+        const value = valueParts.join('=').replace(/^["']|["']$/g, '')
+        if (!process.env[key]) {
+          process.env[key] = value
+        }
+      }
+    }
+  }
+}
+
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
@@ -11,10 +29,88 @@ const DOCS_DIR = path.join(process.cwd(), 'data', 'documents')
 const OUT_PATH = path.join(process.cwd(), 'data', 'index.json')
 
 function guessTypeFromFilename(name) {
-  if (name.toLowerCase().startsWith('estatuto_')) return 'estatuto'
-  if (name.toLowerCase().startsWith('jurisprudencia_')) return 'jurisprudencia'
-  if (name.toLowerCase().startsWith('reglamento_')) return 'reglamento'
+  const lower = name.toLowerCase()
+  if (lower.startsWith('estatuto_')) return 'estatuto'
+  if (lower.startsWith('jurisprudencia_') || lower.includes('sentencia_')) return 'jurisprudencia'
+  if (lower.startsWith('reglamento_')) return 'reglamento'
+  if (lower.startsWith('codigo_')) return 'estatuto' // Códigos son estatutos
+  if (lower.startsWith('ley_')) return 'estatuto' // Leyes son estatutos
+  if (lower.startsWith('constitucion_')) return 'estatuto' // Constitución es estatuto
+  if (lower.startsWith('decreto_')) return 'estatuto' // Decretos son estatutos
   return 'estatuto'
+}
+
+function detectLegalAreaFromContent(title, content) {
+  const text = (title + ' ' + content.substring(0, 2000)).toLowerCase()
+  
+  // Laboral
+  if (text.match(/\b(trabajo|empleado|empleador|contrato laboral|prestaciones|cesant[ií]as|vacaciones|despido|horas extras|jornada|salario|código sustantivo del trabajo)\b/)) {
+    return 'laboral'
+  }
+  
+  // Comercial
+  if (text.match(/\b(comercio|sociedad|empresa|contrato comercial|compraventa|arrendamiento comercial|código de comercio)\b/)) {
+    return 'comercial'
+  }
+  
+  // Civil
+  if (text.match(/\b(contrato civil|propiedad|sucesi[oó]n|divorcio|patrimonio|obligaciones|código civil)\b/)) {
+    return 'civil'
+  }
+  
+  // Penal
+  if (text.match(/\b(delito|pena|c[oó]digo penal|crimen|homicidio|robo|fraude)\b/)) {
+    return 'penal'
+  }
+  
+  // Administrativo
+  if (text.match(/\b(acto administrativo|recurso|tutela|cumplimiento|entidad p[uú]blica|licencia|derecho de petición|código procedimiento administrativo)\b/)) {
+    return 'administrativo'
+  }
+  
+  // Tributario
+  if (text.match(/\b(impuesto|renta|iva|dian|declaraci[oó]n tributaria|retenci[oó]n|estatuto tributario)\b/)) {
+    return 'tributario'
+  }
+  
+  // Constitucional
+  if (text.match(/\b(constituci[oó]n|derechos fundamentales|acci[oó]n de tutela|corte constitucional)\b/)) {
+    return 'constitucional'
+  }
+  
+  return 'general'
+}
+
+function detectEntityFromFilename(name) {
+  const lower = name.toLowerCase()
+  
+  // Detectar entidad emisora desde el nombre del archivo
+  if (lower.includes('constitucion') || lower.includes('corte_constitucional')) {
+    return 'Corte Constitucional'
+  }
+  if (lower.includes('codigo')) {
+    return 'Congreso de la República'
+  }
+  if (lower.includes('ley_')) {
+    return 'Congreso de la República'
+  }
+  if (lower.includes('decreto')) {
+    return 'Presidencia de la República'
+  }
+  if (lower.includes('resolucion')) {
+    return 'Entidad administrativa'
+  }
+  
+  return 'Congreso de la República' // Default
+}
+
+function extractVigenciaFromFilename(name) {
+  // Intentar extraer año del nombre del archivo (ej: ley_100_1993, codigo_599_2000)
+  const yearMatch = name.match(/_(\d{4})/)
+  if (yearMatch) {
+    return yearMatch[1] + '-01-01' // Aproximación: año-01-01
+  }
+  return undefined
 }
 
 function extractTitle(content, fallback) {
@@ -107,6 +203,56 @@ function splitByArticles(content) {
   }
   pushBuffer()
   
+  // Función para dividir chunks muy grandes con overlap
+  function splitLargeChunk(chunk, maxSize = 3000, overlap = 200) {
+    if (chunk.text.length <= maxSize) {
+      return [chunk]
+    }
+    
+    const splits = []
+    const lines = chunk.text.split('\n')
+    let currentSplit = { ...chunk, text: '' }
+    let currentLength = 0
+    let overlapBuffer = []
+    
+    for (const line of lines) {
+      const lineLength = line.length + 1 // +1 for newline
+      
+      if (currentLength + lineLength > maxSize && currentSplit.text.length > 0) {
+        // Guardar el split actual con overlap
+        if (overlapBuffer.length > 0) {
+          currentSplit.text += '\n' + overlapBuffer.join('\n')
+        }
+        splits.push(currentSplit)
+        
+        // Crear nuevo split con overlap del anterior
+        const overlapText = overlapBuffer.join('\n')
+        currentSplit = {
+          ...chunk,
+          text: overlapText + (overlapText ? '\n' : '') + line
+        }
+        currentLength = currentSplit.text.length
+        overlapBuffer = []
+      } else {
+        currentSplit.text += (currentSplit.text ? '\n' : '') + line
+        currentLength += lineLength
+        
+        // Mantener últimas líneas para overlap
+        overlapBuffer.push(line)
+        if (overlapBuffer.length > 10) { // Mantener ~10 líneas para overlap
+          overlapBuffer.shift()
+        }
+      }
+    }
+    
+    // Agregar el último split
+    if (currentSplit.text.length > 0) {
+      splits.push(currentSplit)
+    }
+    
+    return splits.length > 0 ? splits : [chunk]
+  }
+  
   // Mejorar la fusión de partes pequeñas
   const merged = []
   let acc = null
@@ -129,13 +275,26 @@ function splitByArticles(content) {
       acc.text += '\n\n' + p.text
       acc.article = acc.article ? `${acc.article} y ${p.article}` : p.article
     } else {
-      // Guardar el acumulador y empezar uno nuevo
-      merged.push(acc)
+      // Dividir chunk grande antes de guardarlo
+      if (acc.text.length > 3000) {
+        const splits = splitLargeChunk(acc, 3000, 200)
+        merged.push(...splits)
+      } else {
+        merged.push(acc)
+      }
       acc = { ...p }
     }
   }
   
-  if (acc) merged.push(acc)
+  // Procesar el último acumulador
+  if (acc) {
+    if (acc.text.length > 3000) {
+      const splits = splitLargeChunk(acc, 3000, 200)
+      merged.push(...splits)
+    } else {
+      merged.push(acc)
+    }
+  }
   
   return merged
 }
@@ -266,6 +425,11 @@ async function main() {
       if (part.section) articleHierarchy.push(part.section)
       if (part.article) articleHierarchy.push(part.article)
       
+      // Detectar área legal y entidad emisora
+      const areaLegal = detectLegalAreaFromContent(title, part.text)
+      const entidadEmisora = detectEntityFromFilename(file)
+      const fechaVigencia = extractVigenciaFromFilename(file)
+      
       const metadata = {
         id: `doc-${path.parse(file).name}`,
         title,
@@ -274,6 +438,9 @@ async function main() {
         articleHierarchy: articleHierarchy.length > 0 ? articleHierarchy.join(' > ') : undefined,
         chapter: part.chapter,
         section: part.section,
+        areaLegal, // Nuevo: área legal detectada
+        entidadEmisora, // Nuevo: entidad que emitió la norma
+        fechaVigencia, // Nuevo: fecha aproximada de vigencia
         url: undefined,
         sourcePath: `data/documents/${file}`
       }
@@ -282,15 +449,18 @@ async function main() {
   }
 
   console.log(`Chunking listo: ${chunks.length} fragmentos`)
+  console.log(`Generando embeddings en lotes de 16...`)
 
   const batchSize = 16
+  const totalBatches = Math.ceil(chunks.length / batchSize)
   for (let i = 0; i < chunks.length; i += batchSize) {
     const batch = chunks.slice(i, i + batchSize)
+    const batchNum = Math.floor(i / batchSize) + 1
+    process.stdout.write(`\r[${batchNum}/${totalBatches}] Generando embeddings...`)
     const vectors = await embedBatch(batch.map(b => b.content))
     vectors.forEach((v, j) => { batch[j].embedding = v })
-    process.stdout.write('.')
   }
-  process.stdout.write('\n')
+  process.stdout.write('\n✅ Embeddings generados\n')
 
   if (process.env.PINECONE_API_KEY && process.env.PINECONE_INDEX) {
     await upsertPinecone(chunks)

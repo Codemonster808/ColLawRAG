@@ -1,0 +1,78 @@
+{
+  "normaId": "ley-57-1887",
+  "nombre": "Ley 57 de 1887 (Código Civil Colombiano)",
+  "tipo": "codigo",
+  "vigenteDesde": "1887-04-15",
+  "vigenteHasta": null,
+  "estado": "parcialmente_derogada",
+  "derogacionesParciales": [
+    {
+      "articulo": "Arts. 140-152",
+      "derogadoPor": "ley-25-1992",
+      "derogadaDesde": "1992-12-17",
+      "razon": "Creación del régimen de nulidad matrimonial"
+    },
+    {
+      "articulo": "Arts. 154-156",
+      "derogadoPor": "ley-1306-2009",
+      "derogadaDesde": "2009-06-05",
+      "razon": "Protección de personas con discapacidad mental"
+    },
+    {
+      "articulo": "Art. 177",
+      "derogadoPor": "ley-29-1982",
+      "derogadaDesde": "1982-03-09",
+      "razon": "Equiparación de derechos entre hijos legítimos e ilegítimos"
+    }
+  ],
+  "modificaciones": [
+    {
+      "norma": "ley-84-1873",
+      "fecha": "1873-05-26",
+      "tipo": "adicion",
+      "descripcion": "Adopción del Código Civil de la Unión"
+    },
+    {
+      "norma": "ley-153-1887",
+      "fecha": "1887-08-15",
+      "tipo": "adicion",
+      "descripcion": "Adición y reforma a los códigos nacionales"
+    },
+    {
+      "norma": "ley-45-1936",
+      "fecha": "1936-03-05",
+      "tipo": "modificacion",
+      "descripcion": "Reforma sobre la familia, régimen patrimonial"
+    },
+    {
+      "norma": "decreto-ley-2820-1974",
+      "fecha": "1974-12-28",
+      "tipo": "modificacion",
+      "descripcion": "Igualdad de derechos entre hombres y mujeres"
+    },
+    {
+      "norma": "ley-1-1976",
+      "fecha": "1976-01-26",
+      "tipo": "modificacion",
+      "descripcion": "Reforma sobre el divorcio"
+    },
+    {
+      "norma": "ley-29-1982",
+      "fecha": "1982-03-09",
+      "tipo": "modificacion",
+      "descripcion": "Equiparación de hijos legítimos e ilegítimos"
+    },
+    {
+      "norma": "ley-1564-2012",
+      "fecha": "2012-07-12",
+      "tipo": "modificacion",
+      "descripcion": "Código General del Proceso - aspectos procesales civiles"
+    }
+  ],
+  "notas": [
+    "Código fundamental del derecho privado colombiano",
+    "Basado en el Código Civil de Andrés Bello (Chile, 1855)",
+    "A pesar de su antigüedad, sigue siendo la base del derecho civil",
+    "Ha sido modificado en múltiples aspectos relacionados con familia, género y derechos"
+  ]
+}

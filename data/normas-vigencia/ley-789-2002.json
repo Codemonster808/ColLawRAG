@@ -1,0 +1,35 @@
+{
+  "normaId": "ley-789-2002",
+  "nombre": "Ley 789 de 2002 (Reforma Laboral)",
+  "tipo": "ley",
+  "vigenteDesde": "2002-12-27",
+  "vigenteHasta": null,
+  "estado": "vigente",
+  "modificaciones": [
+    {
+      "norma": "ley-1429-2010",
+      "fecha": "2010-12-29",
+      "tipo": "modificacion",
+      "descripcion": "Formalización y generación de empleo"
+    },
+    {
+      "norma": "ley-1780-2016",
+      "fecha": "2016-05-02",
+      "tipo": "modificacion",
+      "descripcion": "Empleo juvenil"
+    }
+  ],
+  "notas": [
+    "Reforma laboral que flexibilizó el régimen de contratación en Colombia",
+    "Derogó la Ley 50 de 1990 en varios aspectos",
+    "Modificó el régimen de jornada laboral (eliminó recargo del 100% para dominicales trabajados)",
+    "Redujo los recargos nocturnos y dominicales: nocturno 35% (antes 50%), dominical 75% (antes 100%)",
+    "Eliminó la retroactividad de las cesantías definitivamente",
+    "Modificó el régimen de indemnizaciones por despido injusto",
+    "Creó el Sistema Nacional de Formación para el Trabajo",
+    "Estableció el subsidio al desempleo para trabajadores cesantes",
+    "Fortaleció las modalidades de contratación flexible (contratos temporales, por obra o labor)",
+    "Fue controversial por reducir costos laborales pero también derechos de trabajadores",
+    "La Corte Constitucional declaró exequibles la mayoría de sus disposiciones"
+  ]
+}

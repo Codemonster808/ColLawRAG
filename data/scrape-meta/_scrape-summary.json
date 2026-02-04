@@ -1,0 +1,279 @@
+{
+  "scrapedAt": "2026-02-01T22:01:40.291Z",
+  "totalDocuments": 30,
+  "totalErrors": 0,
+  "totalSizeBytes": 11098503,
+  "results": [
+    {
+      "slug": "constitucion_politica_1991",
+      "filename": "constitucion_constitucion_politica_1991.txt",
+      "size": 565572,
+      "sizeKB": 552.3,
+      "tipo": "constitucion",
+      "area": "constitucional",
+      "scrapedAt": "2026-02-01T22:01:40.291Z"
+    },
+    {
+      "slug": "codigo_civil",
+      "filename": "codigo_codigo_civil.txt",
+      "size": 1233898,
+      "sizeKB": 1205,
+      "tipo": "codigo",
+      "area": "civil",
+      "scrapedAt": "2026-02-01T22:01:40.291Z"
+    },
+    {
+      "slug": "codigo_comercio",
+      "filename": "codigo_codigo_comercio.txt",
+      "size": 1250291,
+      "sizeKB": 1221,
+      "tipo": "codigo",
+      "area": "comercial",
+      "scrapedAt": "2026-02-01T22:01:40.291Z"
+    },
+    {
+      "slug": "codigo_sustantivo_trabajo",
+      "filename": "codigo_codigo_sustantivo_trabajo.txt",
+      "size": 422089,
+      "sizeKB": 412.2,
+      "tipo": "codigo",
+      "area": "laboral",
+      "scrapedAt": "2026-02-01T22:01:40.291Z"
+    },
+    {
+      "slug": "codigo_penal_ley599",
+      "filename": "codigo_codigo_penal_ley599.txt",
+      "size": 551856,
+      "sizeKB": 538.9,
+      "tipo": "codigo",
+      "area": "penal",
+      "scrapedAt": "2026-02-01T22:01:40.291Z"
+    },
+    {
+      "slug": "codigo_procedimiento_penal_ley906",
+      "filename": "codigo_codigo_procedimiento_penal_ley906.txt",
+      "size": 528401,
+      "sizeKB": 516,
+      "tipo": "codigo",
+      "area": "penal",
+      "scrapedAt": "2026-02-01T22:01:40.291Z"
+    },
+    {
+      "slug": "codigo_general_proceso_ley1564",
+      "filename": "codigo_codigo_general_proceso_ley1564.txt",
+      "size": 926359,
+      "sizeKB": 904.6,
+      "tipo": "codigo",
+      "area": "civil",
+      "scrapedAt": "2026-02-01T22:01:40.291Z"
+    },
+    {
+      "slug": "cpaca_ley1437",
+      "filename": "codigo_cpaca_ley1437.txt",
+      "size": 405704,
+      "sizeKB": 396.2,
+      "tipo": "codigo",
+      "area": "administrativo",
+      "scrapedAt": "2026-02-01T22:01:40.291Z"
+    },
+    {
+      "slug": "codigo_infancia_adolescencia_ley1098",
+      "filename": "codigo_codigo_infancia_adolescencia_ley1098.txt",
+      "size": 236595,
+      "sizeKB": 231,
+      "tipo": "codigo",
+      "area": "familia",
+      "scrapedAt": "2026-02-01T22:01:40.291Z"
+    },
+    {
+      "slug": "estatuto_tributario",
+      "filename": "codigo_estatuto_tributario.txt",
+      "size": 1927032,
+      "sizeKB": 1881.9,
+      "tipo": "codigo",
+      "area": "tributario",
+      "scrapedAt": "2026-02-01T22:01:40.291Z"
+    },
+    {
+      "slug": "ley_789_2002_empleo",
+      "filename": "ley_ley_789_2002_empleo.txt",
+      "size": 121337,
+      "sizeKB": 118.5,
+      "tipo": "ley",
+      "area": "laboral",
+      "scrapedAt": "2026-02-01T22:01:40.291Z"
+    },
+    {
+      "slug": "ley_1010_2006_acoso_laboral",
+      "filename": "ley_ley_1010_2006_acoso_laboral.txt",
+      "size": 25138,
+      "sizeKB": 24.5,
+      "tipo": "ley",
+      "area": "laboral",
+      "scrapedAt": "2026-02-01T22:01:40.291Z"
+    },
+    {
+      "slug": "ley_1221_2008_teletrabajo",
+      "filename": "ley_ley_1221_2008_teletrabajo.txt",
+      "size": 15003,
+      "sizeKB": 14.7,
+      "tipo": "ley",
+      "area": "laboral",
+      "scrapedAt": "2026-02-01T22:01:40.291Z"
+    },
+    {
+      "slug": "ley_2101_2021_reduccion_jornada",
+      "filename": "ley_ley_2101_2021_reduccion_jornada.txt",
+      "size": 7635,
+      "sizeKB": 7.5,
+      "tipo": "ley",
+      "area": "laboral",
+      "scrapedAt": "2026-02-01T22:01:40.291Z"
+    },
+    {
+      "slug": "ley_2121_2021_trabajo_remoto",
+      "filename": "ley_ley_2121_2021_trabajo_remoto.txt",
+      "size": 27904,
+      "sizeKB": 27.3,
+      "tipo": "ley",
+      "area": "laboral",
+      "scrapedAt": "2026-02-01T22:01:40.291Z"
+    },
+    {
+      "slug": "ley_2466_2025_reforma_laboral",
+      "filename": "ley_ley_2466_2025_reforma_laboral.txt",
+      "size": 112543,
+      "sizeKB": 109.9,
+      "tipo": "ley",
+      "area": "laboral",
+      "scrapedAt": "2026-02-01T22:01:40.291Z"
+    },
+    {
+      "slug": "ley_100_1993_seguridad_social",
+      "filename": "ley_ley_100_1993_seguridad_social.txt",
+      "size": 388255,
+      "sizeKB": 379.2,
+      "tipo": "ley",
+      "area": "seguridad_social",
+      "scrapedAt": "2026-02-01T22:01:40.291Z"
+    },
+    {
+      "slug": "ley_776_2002_riesgos_laborales",
+      "filename": "ley_ley_776_2002_riesgos_laborales.txt",
+      "size": 22481,
+      "sizeKB": 22,
+      "tipo": "ley",
+      "area": "seguridad_social",
+      "scrapedAt": "2026-02-01T22:01:40.291Z"
+    },
+    {
+      "slug": "ley_1562_2012_riesgos_laborales",
+      "filename": "ley_ley_1562_2012_riesgos_laborales.txt",
+      "size": 62313,
+      "sizeKB": 60.9,
+      "tipo": "ley",
+      "area": "seguridad_social",
+      "scrapedAt": "2026-02-01T22:01:40.291Z"
+    },
+    {
+      "slug": "ley_1996_2019_capacidad_legal",
+      "filename": "ley_ley_1996_2019_capacidad_legal.txt",
+      "size": 47110,
+      "sizeKB": 46,
+      "tipo": "ley",
+      "area": "civil",
+      "scrapedAt": "2026-02-01T22:01:40.291Z"
+    },
+    {
+      "slug": "ley_1774_2016_maltrato_animal",
+      "filename": "ley_ley_1774_2016_maltrato_animal.txt",
+      "size": 10361,
+      "sizeKB": 10.1,
+      "tipo": "ley",
+      "area": "penal",
+      "scrapedAt": "2026-02-01T22:01:40.291Z"
+    },
+    {
+      "slug": "ley_1581_2012_habeas_data",
+      "filename": "ley_ley_1581_2012_habeas_data.txt",
+      "size": 819799,
+      "sizeKB": 800.6,
+      "tipo": "ley",
+      "area": "constitucional",
+      "scrapedAt": "2026-02-01T22:01:40.291Z"
+    },
+    {
+      "slug": "ley_1712_2014_transparencia",
+      "filename": "ley_ley_1712_2014_transparencia.txt",
+      "size": 719878,
+      "sizeKB": 703,
+      "tipo": "ley",
+      "area": "administrativo",
+      "scrapedAt": "2026-02-01T22:01:40.291Z"
+    },
+    {
+      "slug": "ley_1755_2015_derecho_peticion",
+      "filename": "ley_ley_1755_2015_derecho_peticion.txt",
+      "size": 22472,
+      "sizeKB": 21.9,
+      "tipo": "ley",
+      "area": "constitucional",
+      "scrapedAt": "2026-02-01T22:01:40.291Z"
+    },
+    {
+      "slug": "ley_472_1998_acciones_populares",
+      "filename": "ley_ley_472_1998_acciones_populares.txt",
+      "size": 33225,
+      "sizeKB": 32.4,
+      "tipo": "ley",
+      "area": "constitucional",
+      "scrapedAt": "2026-02-01T22:01:40.291Z"
+    },
+    {
+      "slug": "ley_393_1997_accion_cumplimiento",
+      "filename": "ley_ley_393_1997_accion_cumplimiento.txt",
+      "size": 20396,
+      "sizeKB": 19.9,
+      "tipo": "ley",
+      "area": "constitucional",
+      "scrapedAt": "2026-02-01T22:01:40.291Z"
+    },
+    {
+      "slug": "ley_600_2000_proc_penal_anterior",
+      "filename": "ley_ley_600_2000_proc_penal_anterior.txt",
+      "size": 449445,
+      "sizeKB": 438.9,
+      "tipo": "ley",
+      "area": "penal",
+      "scrapedAt": "2026-02-01T22:01:40.291Z"
+    },
+    {
+      "slug": "ley_1826_2017_procedimiento_penal_abreviado",
+      "filename": "ley_ley_1826_2017_procedimiento_penal_abreviado.txt",
+      "size": 41347,
+      "sizeKB": 40.4,
+      "tipo": "ley",
+      "area": "penal",
+      "scrapedAt": "2026-02-01T22:01:40.291Z"
+    },
+    {
+      "slug": "ley_1480_2011_consumidor",
+      "filename": "ley_ley_1480_2011_consumidor.txt",
+      "size": 40294,
+      "sizeKB": 39.3,
+      "tipo": "ley",
+      "area": "comercial",
+      "scrapedAt": "2026-02-01T22:01:40.291Z"
+    },
+    {
+      "slug": "ley_1116_2006_insolvencia",
+      "filename": "ley_ley_1116_2006_insolvencia.txt",
+      "size": 63770,
+      "sizeKB": 62.3,
+      "tipo": "ley",
+      "area": "comercial",
+      "scrapedAt": "2026-02-01T22:01:40.291Z"
+    }
+  ],
+  "errors": []
+}

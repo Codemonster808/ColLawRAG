@@ -1,0 +1,274 @@
+{
+  "id": "laboral_verbal",
+  "nombre": "Proceso Laboral Verbal",
+  "descripcion": "Procedimiento laboral sumario para reclamaciones de menor cuantía (hasta 20 SMLMV)",
+  "normas_ref": [
+    "Código Procesal del Trabajo y de la Seguridad Social (Decreto 2158 de 1948)",
+    "Ley 712 de 2001",
+    "Código Sustantivo del Trabajo"
+  ],
+  "etapas": [
+    {
+      "nombre": "Presentación de la demanda",
+      "orden": 1,
+      "plazos": {
+        "dias": 0,
+        "descripcion": "Sin plazo específico, sujeto a prescripción (3 años desde el despido)",
+        "hitos": [
+          "Radicación de la demanda verbal ante el Juzgado Laboral"
+        ]
+      },
+      "documentos": [
+        "Demanda escrita u oral (se puede presentar verbalmente)",
+        "Identificación del demandante y demandado",
+        "Relación sucinta de los hechos",
+        "Pretensiones claras",
+        "Pruebas disponibles"
+      ],
+      "entidades": [
+        {
+          "rol": "demandante",
+          "descripcion": "Trabajador que presenta la reclamación"
+        },
+        {
+          "rol": "demandado",
+          "descripcion": "Empleador demandado"
+        },
+        {
+          "rol": "juzgado",
+          "descripcion": "Juzgado Laboral Municipal o del Circuito"
+        }
+      ]
+    },
+    {
+      "nombre": "Admisión y citación inmediata",
+      "orden": 2,
+      "plazos": {
+        "dias": 3,
+        "descripcion": "Dentro de los 3 días siguientes se admite y cita a audiencia",
+        "hitos": [
+          "Auto admisorio",
+          "Citación a audiencia de conciliación, decisión de excepciones y práctica de pruebas",
+          "Notificación al demandado"
+        ]
+      },
+      "documentos": [
+        "Auto admisorio",
+        "Auto de citación a audiencia",
+        "Oficio de notificación al demandado"
+      ],
+      "entidades": [
+        {
+          "rol": "juez",
+          "descripcion": "Juez laboral del conocimiento"
+        },
+        {
+          "rol": "secretaria",
+          "descripcion": "Secretaría del juzgado"
+        }
+      ]
+    },
+    {
+      "nombre": "Notificación al demandado",
+      "orden": 3,
+      "plazos": {
+        "dias": 5,
+        "descripcion": "Máximo 5 días para lograr la notificación",
+        "hitos": [
+          "Notificación personal al demandado",
+          "Entrega de copia de la demanda y citación a audiencia"
+        ]
+      },
+      "documentos": [
+        "Constancia de notificación",
+        "Copia de la demanda entregada",
+        "Citación a la audiencia"
+      ],
+      "entidades": [
+        {
+          "rol": "notificador",
+          "descripcion": "Notificador del juzgado"
+        },
+        {
+          "rol": "demandado",
+          "descripcion": "Empleador notificado"
+        }
+      ]
+    },
+    {
+      "nombre": "Audiencia única de trámite",
+      "orden": 4,
+      "plazos": {
+        "dias": 10,
+        "descripcion": "Máximo 10 días después de la admisión se celebra la audiencia",
+        "hitos": [
+          "Conciliación (intento obligatorio)",
+          "Contestación oral de la demanda",
+          "Proposición de excepciones",
+          "Decreto de pruebas",
+          "Práctica inmediata de pruebas",
+          "Alegatos orales",
+          "Fallo en audiencia o anuncio de sentencia"
+        ]
+      },
+      "documentos": [
+        "Acta de audiencia única",
+        "Registro de la contestación de la demanda",
+        "Excepciones propuestas",
+        "Testimonios rendidos",
+        "Documentos aportados",
+        "Alegatos orales (constan en acta)",
+        "Fallo o anuncio del sentido del fallo"
+      ],
+      "entidades": [
+        {
+          "rol": "juez",
+          "descripcion": "Juez que dirige toda la audiencia"
+        },
+        {
+          "rol": "demandante",
+          "descripcion": "Trabajador o su apoderado"
+        },
+        {
+          "rol": "demandado",
+          "descripcion": "Empleador o su apoderado"
+        },
+        {
+          "rol": "testigos",
+          "descripcion": "Testigos que declaran en la audiencia"
+        },
+        {
+          "rol": "secretaria",
+          "descripcion": "Secretaria que levanta el acta"
+        }
+      ]
+    },
+    {
+      "nombre": "Sentencia",
+      "orden": 5,
+      "plazos": {
+        "dias": 10,
+        "descripcion": "Si no se falló en audiencia, máximo 10 días para proferir sentencia",
+        "hitos": [
+          "Elaboración de la sentencia",
+          "Firma y notificación de la sentencia"
+        ]
+      },
+      "documentos": [
+        "Sentencia de primera instancia",
+        "Notificación por estado"
+      ],
+      "entidades": [
+        {
+          "rol": "juez",
+          "descripcion": "Juez que profiere la sentencia"
+        },
+        {
+          "rol": "secretaria",
+          "descripcion": "Secretaría que notifica"
+        }
+      ]
+    },
+    {
+      "nombre": "Recurso de apelación",
+      "orden": 6,
+      "plazos": {
+        "dias": 5,
+        "descripcion": "5 días hábiles desde la notificación para apelar",
+        "hitos": [
+          "Interposición del recurso de apelación",
+          "Sustentación breve del recurso",
+          "Concesión del recurso",
+          "Remisión al superior"
+        ]
+      },
+      "documentos": [
+        "Escrito de apelación",
+        "Sustentación (puede ser oral o escrita)",
+        "Auto que concede la apelación"
+      ],
+      "entidades": [
+        {
+          "rol": "apelante",
+          "descripcion": "Parte que apela"
+        },
+        {
+          "rol": "juez",
+          "descripcion": "Juez que concede el recurso"
+        }
+      ]
+    },
+    {
+      "nombre": "Segunda instancia",
+      "orden": 7,
+      "plazos": {
+        "dias": 20,
+        "descripcion": "20 días máximo para proferir sentencia de segunda instancia",
+        "hitos": [
+          "Reparto en el juzgado o tribunal superior",
+          "Alegatos breves (si se solicitan)",
+          "Sentencia de segunda instancia"
+        ]
+      },
+      "documentos": [
+        "Auto de reparto",
+        "Alegatos de segunda instancia (opcionales)",
+        "Sentencia de segunda instancia"
+      ],
+      "entidades": [
+        {
+          "rol": "juez_superior",
+          "descripcion": "Juez del Circuito (si primera instancia fue Municipal) o Tribunal (si fue Circuito)"
+        }
+      ]
+    },
+    {
+      "nombre": "Ejecución de la sentencia",
+      "orden": 8,
+      "plazos": {
+        "dias": 5,
+        "descripcion": "5 días para que el demandado cumpla voluntariamente",
+        "hitos": [
+          "Notificación de la sentencia ejecutoriada",
+          "Requerimiento de pago",
+          "Inicio de ejecución forzada (si no hay cumplimiento voluntario)",
+          "Embargo de bienes o salarios"
+        ]
+      },
+      "documentos": [
+        "Constancia de ejecutoria",
+        "Requerimiento de pago",
+        "Auto de embargo",
+        "Acta de embargo",
+        "Oficio de retención de salarios (si aplica)"
+      ],
+      "entidades": [
+        {
+          "rol": "juez",
+          "descripcion": "Juez de conocimiento que ejecuta la sentencia"
+        },
+        {
+          "rol": "demandado",
+          "descripcion": "Empleador condenado al pago"
+        },
+        {
+          "rol": "demandante",
+          "descripcion": "Trabajador beneficiario"
+        },
+        {
+          "rol": "secuestre",
+          "descripcion": "Secuestre de bienes (si se requiere)"
+        }
+      ]
+    }
+  ],
+  "notas": [
+    "El proceso verbal laboral es mucho más rápido que el ordinario (puede resolverse en menos de 2 meses)",
+    "Se aplica obligatoriamente cuando la cuantía de la reclamación es hasta 20 SMLMV",
+    "La audiencia única concentra todas las etapas procesales: conciliación, contestación, pruebas, alegatos y fallo",
+    "El juez puede fallar en la misma audiencia si el asunto es claro",
+    "No procede recurso de casación en procesos verbales laborales por la baja cuantía",
+    "La oralidad es la característica principal: la demanda puede presentarse verbalmente",
+    "La carga de la prueba favorece al trabajador (principio de favorabilidad)"
+  ]
+}

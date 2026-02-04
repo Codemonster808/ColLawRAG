@@ -1,0 +1,408 @@
+{
+  "id": "laboral_ordinario",
+  "nombre": "Proceso Laboral Ordinario",
+  "descripcion": "Procedimiento para reclamaciones laborales de mayor cuantía o complejidad",
+  "normas_ref": [
+    "Código Procesal del Trabajo y de la Seguridad Social (Decreto 2158 de 1948, modificado por Ley 712 de 2001)",
+    "Código Sustantivo del Trabajo",
+    "Ley 1564 de 2012 (Código General del Proceso) - aplicación supletoria"
+  ],
+  "etapas": [
+    {
+      "nombre": "Presentación de la demanda",
+      "orden": 1,
+      "plazos": {
+        "dias": 0,
+        "descripcion": "Sin plazo específico, sujeto a prescripción (3 años desde el despido o terminación)",
+        "hitos": [
+          "Radicación de la demanda ante el juzgado laboral"
+        ]
+      },
+      "documentos": [
+        "Demanda laboral",
+        "Identificación del demandante y demandado",
+        "Hechos y pretensiones",
+        "Relación de pruebas",
+        "Liquidación de la deuda (si aplica)",
+        "Contrato de trabajo o pruebas de la relación laboral"
+      ],
+      "entidades": [
+        {
+          "rol": "demandante",
+          "descripcion": "Trabajador que reclama sus derechos"
+        },
+        {
+          "rol": "demandado",
+          "descripcion": "Empleador o empresa demandada"
+        },
+        {
+          "rol": "juzgado",
+          "descripcion": "Juzgado Laboral del Circuito"
+        }
+      ]
+    },
+    {
+      "nombre": "Admisión de la demanda",
+      "orden": 2,
+      "plazos": {
+        "dias": 5,
+        "descripcion": "Dentro de los 5 días siguientes a la radicación",
+        "hitos": [
+          "Revisión de requisitos formales",
+          "Auto admisorio o de inadmisión",
+          "Orden de notificación al demandado"
+        ]
+      },
+      "documentos": [
+        "Auto admisorio",
+        "Requerimientos de corrección (si aplica)"
+      ],
+      "entidades": [
+        {
+          "rol": "juez",
+          "descripcion": "Juez laboral del conocimiento"
+        },
+        {
+          "rol": "secretaria",
+          "descripcion": "Secretaría del juzgado"
+        }
+      ]
+    },
+    {
+      "nombre": "Notificación al demandado",
+      "orden": 3,
+      "plazos": {
+        "dias": 10,
+        "descripcion": "10 días para notificar personalmente al demandado",
+        "hitos": [
+          "Notificación personal al demandado",
+          "Si no es posible, notificación por aviso",
+          "Entrega de copia de la demanda y auto admisorio"
+        ]
+      },
+      "documentos": [
+        "Oficio de notificación",
+        "Constancia de notificación personal",
+        "Aviso (si no fue posible la notificación personal)"
+      ],
+      "entidades": [
+        {
+          "rol": "secretaria",
+          "descripcion": "Secretaría que gestiona la notificación"
+        },
+        {
+          "rol": "demandado",
+          "descripcion": "Empresa o empleador notificado"
+        },
+        {
+          "rol": "notificador",
+          "descripcion": "Oficial o notificador del juzgado"
+        }
+      ]
+    },
+    {
+      "nombre": "Contestación de la demanda",
+      "orden": 4,
+      "plazos": {
+        "dias": 10,
+        "descripcion": "10 días hábiles desde la notificación para contestar",
+        "hitos": [
+          "Presentación de la contestación",
+          "Proposición de excepciones",
+          "Aporte de pruebas"
+        ]
+      },
+      "documentos": [
+        "Escrito de contestación",
+        "Excepciones de mérito o previas",
+        "Pruebas documentales",
+        "Relación de testigos"
+      ],
+      "entidades": [
+        {
+          "rol": "demandado",
+          "descripcion": "Empleador que contesta"
+        },
+        {
+          "rol": "apoderado",
+          "descripcion": "Abogado del demandado"
+        }
+      ]
+    },
+    {
+      "nombre": "Audiencia de conciliación, decisión de excepciones previas y saneamiento",
+      "orden": 5,
+      "plazos": {
+        "dias": 30,
+        "descripcion": "Dentro de los 30 días siguientes al vencimiento del término de traslado",
+        "hitos": [
+          "Citación a la audiencia",
+          "Intento de conciliación",
+          "Decisión de excepciones previas",
+          "Saneamiento del proceso",
+          "Fijación del litigio"
+        ]
+      },
+      "documentos": [
+        "Auto de citación a audiencia",
+        "Acta de audiencia",
+        "Acuerdo conciliatorio (si se logra)",
+        "Auto que resuelve excepciones previas",
+        "Auto de fijación del litigio"
+      ],
+      "entidades": [
+        {
+          "rol": "juez",
+          "descripcion": "Juez que dirige la audiencia"
+        },
+        {
+          "rol": "demandante",
+          "descripcion": "Trabajador o su apoderado"
+        },
+        {
+          "rol": "demandado",
+          "descripcion": "Empleador o su apoderado"
+        },
+        {
+          "rol": "secretaria",
+          "descripcion": "Secretaria que levanta el acta"
+        }
+      ]
+    },
+    {
+      "nombre": "Decreto y práctica de pruebas",
+      "orden": 6,
+      "plazos": {
+        "dias": 30,
+        "descripcion": "Término máximo de 30 días para practicar las pruebas",
+        "hitos": [
+          "Auto de decreto de pruebas",
+          "Práctica de testimonios",
+          "Práctica de inspecciones judiciales",
+          "Práctica de dictámenes periciales",
+          "Recepción de documentos"
+        ]
+      },
+      "documentos": [
+        "Auto de pruebas",
+        "Actas de testimonios",
+        "Informes periciales",
+        "Actas de inspección judicial",
+        "Oficios de solicitud de información"
+      ],
+      "entidades": [
+        {
+          "rol": "juez",
+          "descripcion": "Juez que decreta y practica las pruebas"
+        },
+        {
+          "rol": "secretaria",
+          "descripcion": "Secretaría que coordina las diligencias"
+        },
+        {
+          "rol": "testigos",
+          "descripcion": "Testigos citados"
+        },
+        {
+          "rol": "peritos",
+          "descripcion": "Peritos designados (si aplica)"
+        }
+      ]
+    },
+    {
+      "nombre": "Alegatos de conclusión",
+      "orden": 7,
+      "plazos": {
+        "dias": 8,
+        "descripcion": "8 días comunes para presentar alegatos escritos",
+        "hitos": [
+          "Vencimiento del término probatorio",
+          "Presentación de alegatos del demandante",
+          "Presentación de alegatos del demandado"
+        ]
+      },
+      "documentos": [
+        "Alegatos de conclusión del demandante",
+        "Alegatos de conclusión del demandado"
+      ],
+      "entidades": [
+        {
+          "rol": "demandante",
+          "descripcion": "Trabajador o su apoderado"
+        },
+        {
+          "rol": "demandado",
+          "descripcion": "Empleador o su apoderado"
+        }
+      ]
+    },
+    {
+      "nombre": "Sentencia de primera instancia",
+      "orden": 8,
+      "plazos": {
+        "dias": 20,
+        "descripcion": "20 días para proferir sentencia después del vencimiento del término de alegatos",
+        "hitos": [
+          "Estudio del expediente",
+          "Valoración de pruebas",
+          "Elaboración y firma de la sentencia",
+          "Notificación de la sentencia"
+        ]
+      },
+      "documentos": [
+        "Sentencia de primera instancia",
+        "Notificación por estado"
+      ],
+      "entidades": [
+        {
+          "rol": "juez",
+          "descripcion": "Juez laboral que profiere la sentencia"
+        },
+        {
+          "rol": "secretaria",
+          "descripcion": "Secretaría que notifica"
+        }
+      ]
+    },
+    {
+      "nombre": "Recursos de apelación",
+      "orden": 9,
+      "plazos": {
+        "dias": 10,
+        "descripcion": "10 días hábiles desde la notificación para apelar",
+        "hitos": [
+          "Interposición del recurso de apelación",
+          "Sustentación del recurso",
+          "Concesión del recurso",
+          "Remisión al Tribunal Superior"
+        ]
+      },
+      "documentos": [
+        "Escrito de apelación",
+        "Sustentación del recurso",
+        "Auto que concede la apelación",
+        "Oficio de remisión"
+      ],
+      "entidades": [
+        {
+          "rol": "apelante",
+          "descripcion": "Parte que apela (demandante o demandado)"
+        },
+        {
+          "rol": "juez",
+          "descripcion": "Juez de primera instancia que concede la apelación"
+        },
+        {
+          "rol": "tribunal",
+          "descripcion": "Tribunal Superior del Distrito Judicial"
+        }
+      ]
+    },
+    {
+      "nombre": "Segunda instancia",
+      "orden": 10,
+      "plazos": {
+        "dias": 40,
+        "descripcion": "40 días máximo para proferir sentencia de segunda instancia",
+        "hitos": [
+          "Reparto en el Tribunal",
+          "Traslado a las partes",
+          "Alegatos de segunda instancia (5 días)",
+          "Sentencia de segunda instancia"
+        ]
+      },
+      "documentos": [
+        "Auto de reparto",
+        "Alegatos de segunda instancia",
+        "Sentencia de segunda instancia"
+      ],
+      "entidades": [
+        {
+          "rol": "sala_laboral",
+          "descripcion": "Sala Laboral del Tribunal Superior"
+        },
+        {
+          "rol": "magistrado_ponente",
+          "descripcion": "Magistrado ponente del caso"
+        }
+      ]
+    },
+    {
+      "nombre": "Recurso de casación (opcional)",
+      "orden": 11,
+      "plazos": {
+        "dias": 30,
+        "descripcion": "30 días para interponer recurso de casación si la cuantía supera los 220 SMLMV",
+        "hitos": [
+          "Interposición del recurso de casación",
+          "Sustentación del recurso",
+          "Admisión del recurso",
+          "Remisión a la Corte Suprema de Justicia"
+        ]
+      },
+      "documentos": [
+        "Escrito de interposición de casación",
+        "Sustentación del recurso",
+        "Auto que admite o inadmite",
+        "Sentencia de casación"
+      ],
+      "entidades": [
+        {
+          "rol": "recurrente",
+          "descripcion": "Parte que recurre en casación"
+        },
+        {
+          "rol": "corte_suprema",
+          "descripcion": "Sala Laboral de la Corte Suprema de Justicia"
+        }
+      ]
+    },
+    {
+      "nombre": "Ejecución de la sentencia",
+      "orden": 12,
+      "plazos": {
+        "dias": 10,
+        "descripcion": "10 días para que el demandado cumpla voluntariamente",
+        "hitos": [
+          "Notificación de la sentencia ejecutoriada",
+          "Cumplimiento voluntario o inicio de ejecución forzada",
+          "Embargo y secuestro de bienes (si aplica)",
+          "Remate de bienes (si aplica)"
+        ]
+      },
+      "documentos": [
+        "Constancia de ejecutoria",
+        "Requerimiento de pago",
+        "Medidas cautelares",
+        "Acta de embargo",
+        "Avalúo de bienes",
+        "Auto aprobatorio de remate"
+      ],
+      "entidades": [
+        {
+          "rol": "juez",
+          "descripcion": "Juez de conocimiento que ejecuta"
+        },
+        {
+          "rol": "demandado",
+          "descripcion": "Empleador condenado"
+        },
+        {
+          "rol": "demandante",
+          "descripcion": "Trabajador beneficiario"
+        },
+        {
+          "rol": "secuestre",
+          "descripcion": "Secuestre de bienes (si aplica)"
+        }
+      ]
+    }
+  ],
+  "notas": [
+    "El proceso ordinario laboral se aplica cuando la cuantía de la reclamación supera los 20 SMLMV",
+    "Si la cuantía es menor, se tramita por proceso verbal laboral (más ágil)",
+    "La carga de la prueba en el proceso laboral favorece al trabajador (principio de favorabilidad)",
+    "Las sentencias laborales tienen prelación sobre otros créditos en caso de liquidación de la empresa",
+    "El recurso de casación solo procede si la cuantía de la pretensión supera los 220 SMLMV"
+  ]
+}

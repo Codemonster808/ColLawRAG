@@ -1,0 +1,80 @@
+{
+  "normaId": "codigo-comercio",
+  "nombre": "Código de Comercio (Decreto 410 de 1971)",
+  "tipo": "codigo",
+  "vigenteDesde": "1971-06-29",
+  "vigenteHasta": null,
+  "estado": "parcialmente_derogada",
+  "derogacionesParciales": [
+    {
+      "articulo": "Arts. 822-869 (Sociedades colectivas y en comandita)",
+      "derogadoPor": "ley-222-1995",
+      "derogadaDesde": "1995-12-20",
+      "razon": "Reforma al régimen de sociedades comerciales"
+    },
+    {
+      "articulo": "Arts. 387-389 (Régimen de quiebras)",
+      "derogadoPor": "ley-1116-2006",
+      "derogadaDesde": "2006-12-27",
+      "razon": "Nuevo régimen de insolvencia empresarial"
+    },
+    {
+      "articulo": "Arts. 615-617 (Transporte aéreo)",
+      "derogadoPor": "ley-105-1993",
+      "derogadaDesde": "1993-12-30",
+      "razon": "Nuevo régimen de transporte"
+    },
+    {
+      "articulo": "Arts. 822-898 (Libro II - Sociedades)",
+      "derogadoPor": "ley-222-1995",
+      "derogadaDesde": "1995-12-20",
+      "razon": "Modernización del régimen societario"
+    }
+  ],
+  "modificaciones": [
+    {
+      "norma": "ley-27-1990",
+      "fecha": "1990-03-08",
+      "tipo": "modificacion",
+      "descripcion": "Modificaciones sobre registro mercantil"
+    },
+    {
+      "norma": "ley-222-1995",
+      "fecha": "1995-12-20",
+      "tipo": "modificacion",
+      "descripcion": "Reforma al régimen de sociedades comerciales (deroga Libro II)"
+    },
+    {
+      "norma": "ley-510-1999",
+      "fecha": "1999-08-03",
+      "tipo": "modificacion",
+      "descripcion": "Modificaciones sobre registro mercantil y cámaras de comercio"
+    },
+    {
+      "norma": "ley-1116-2006",
+      "fecha": "2006-12-27",
+      "tipo": "modificacion",
+      "descripcion": "Nuevo régimen de insolvencia (deroga disposiciones sobre quiebras)"
+    },
+    {
+      "norma": "ley-1480-2011",
+      "fecha": "2011-10-12",
+      "tipo": "modificacion",
+      "descripcion": "Estatuto del Consumidor (modifica disposiciones sobre ventas)"
+    },
+    {
+      "norma": "ley-1564-2012",
+      "fecha": "2012-07-12",
+      "tipo": "modificacion",
+      "descripcion": "Código General del Proceso (aspectos procesales mercantiles)"
+    }
+  ],
+  "notas": [
+    "Código fundamental del derecho comercial colombiano",
+    "Regula actos de comercio, comerciantes, contratos mercantiles, títulos valores",
+    "El Libro II (Sociedades) fue derogado casi completamente por la Ley 222 de 1995",
+    "El régimen de quiebras fue reemplazado por la Ley 1116 de 2006 (insolvencia empresarial)",
+    "Continúa vigente para títulos valores, contratos mercantiles, registro mercantil",
+    "Se aplica supletoriamente a temas no regulados en leyes especiales"
+  ]
+}

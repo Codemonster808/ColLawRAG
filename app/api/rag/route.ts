@@ -5,29 +5,49 @@ import { getUserTier, checkUsageLimit, trackUsage, adjustQueryForTier } from '@/
 import { authenticateUser } from '@/lib/auth'
 import { logger } from '@/lib/logger'
 
-// Simple in-memory cache with TTL to avoid dependency issues
-const CACHE_TTL_MS = 60 * 1000
+// Cache persistente usando SQLite (puede fallback a memoria si falla)
 export const runtime = 'nodejs'
 
 // Timeout configuration
 const PIPELINE_TIMEOUT_MS = parseInt(process.env.PIPELINE_TIMEOUT_MS || '60000', 10) // 60 seconds default
 const MAX_REQUEST_SIZE = parseInt(process.env.MAX_REQUEST_SIZE || '1048576', 10) // 1MB default
 
+// Cache persistente usando SQLite (puede fallback a memoria si falla)
+// Nota: En Next.js, las importaciones dinámicas en top-level pueden causar problemas
+// Usamos importación estática con try-catch en la función
+let cacheGet: (key: string) => any | undefined
+let cacheSet: (key: string, value: any) => void
+
+// Inicializar cache (fallback a memoria si SQLite falla)
+const CACHE_TTL_MS = 60 * 1000
 const cache = new Map<string, { value: any; expiresAt: number }>()
 
-function cacheGet(key: string) {
-  const entry = cache.get(key)
-  if (!entry) return undefined
-  if (Date.now() > entry.expiresAt) {
-    cache.delete(key)
-    return undefined
+function initCache() {
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const persistentCache = require('@/lib/cache-persistent')
+    cacheGet = persistentCache.cacheGet
+    cacheSet = persistentCache.cacheSet
+  } catch (error) {
+    console.warn('[api/rag] Cache persistente no disponible, usando memoria:', error)
+    // Fallback a cache en memoria
+    cacheGet = (key: string) => {
+      const entry = cache.get(key)
+      if (!entry) return undefined
+      if (Date.now() > entry.expiresAt) {
+        cache.delete(key)
+        return undefined
+      }
+      return entry.value
+    }
+    cacheSet = (key: string, value: any) => {
+      cache.set(key, { value, expiresAt: Date.now() + CACHE_TTL_MS })
+    }
   }
-  return entry.value
 }
 
-function cacheSet(key: string, value: any) {
-  cache.set(key, { value, expiresAt: Date.now() + CACHE_TTL_MS })
-}
+// Inicializar al cargar el módulo
+initCache()
 
 function withTimeout<T>(promise: Promise<T>, timeoutMs: number): Promise<T> {
   return Promise.race([
@@ -43,6 +63,7 @@ export async function POST(req: NextRequest) {
   let requestId: string | undefined
   let userId: string | undefined
   let userTier: 'free' | 'premium' = 'free'
+  let queryText = ''
   
   try {
     // Check Content-Length header to prevent large payloads
@@ -125,25 +146,22 @@ export async function POST(req: NextRequest) {
       if (user) {
         userId = user.id
         userTier = getUserTier(userId)
-        
-        // Verificar límites de uso
-        const usageCheck = checkUsageLimit(userTier, userId)
-        if (!usageCheck.allowed) {
-          logger.warn('Usage limit exceeded', { userId, userTier })
-          return NextResponse.json(
-            { 
-              error: 'Límite de uso excedido', 
-              message: usageCheck.reason 
-            },
-            { status: 429 }
-          )
-        }
       }
     }
     
-    // 3. Trackear uso (si hay userId)
+    // 3. Verificar límites de uso ANTES de ejecutar el pipeline (solo si hay userId)
     if (userId) {
-      trackUsage(userId, userTier)
+      const usageCheck = checkUsageLimit(userTier, userId)
+      if (!usageCheck.allowed) {
+        logger.warn('Usage limit exceeded', { userId, userTier })
+        return NextResponse.json(
+          { 
+            error: 'Límite de uso excedido', 
+            message: usageCheck.reason 
+          },
+          { status: 429 }
+        )
+      }
     }
 
     // Parse and validate request body
@@ -200,6 +218,12 @@ export async function POST(req: NextRequest) {
     if (cached) {
       logger.info('Cache hit', { requestId })
       const responseTime = Date.now() - startTime
+      
+      // Trackear uso incluso para cache hits (para métricas de uso)
+      if (userId) {
+        trackUsage(userId, userTier, queryText, responseTime, true)
+      }
+      
       logger.logResponse('POST', '/api/rag', 200, responseTime, { requestId, cached: true })
       return NextResponse.json(
         { ...cached, cached: true },
@@ -233,6 +257,12 @@ export async function POST(req: NextRequest) {
     
     requestId = result.requestId
     const responseTime = Date.now() - startTime
+    
+    // Trackear uso después de consulta exitosa
+    if (userId) {
+      trackUsage(userId, userTier, queryText, responseTime, true)
+    }
+    
     logger.logMetric('rag_response_time', responseTime, 'ms', { requestId, userTier })
     logger.logResponse('POST', '/api/rag', 200, responseTime, { 
       requestId, 
@@ -256,6 +286,13 @@ export async function POST(req: NextRequest) {
     const responseTime = Date.now() - startTime
     const errorMessage = e?.message || 'Error interno'
     const isTimeout = errorMessage.includes('timeout')
+    
+    // Trackear uso incluso en caso de error (para métricas)
+    if (userId) {
+      const json = await req.clone().json().catch(() => ({}))
+      const queryText = json?.query || 'error'
+      trackUsage(userId, userTier, queryText, responseTime, false)
+    }
     
     logger.error('Pipeline error', e, { 
       requestId, 

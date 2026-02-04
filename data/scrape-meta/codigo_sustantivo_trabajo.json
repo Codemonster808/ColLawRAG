@@ -1,0 +1,14 @@
+{
+  "slug": "codigo_sustantivo_trabajo",
+  "nombre": "Código Sustantivo del Trabajo",
+  "tipo": "codigo",
+  "area": "laboral",
+  "fuente": "senado",
+  "url": "http://www.secretariasenado.gov.co/senado/basedoc/codigo_sustantivo_trabajo.html",
+  "paginated": true,
+  "enabled": true,
+  "filename": "codigo_codigo_sustantivo_trabajo.txt",
+  "size": 422089,
+  "scrapedAt": "2026-02-01T22:01:40.291Z",
+  "textLength": 421814
+}

@@ -1,0 +1,521 @@
+{
+  "id": "reparacion-directa",
+  "nombre": "Acción de Reparación Directa",
+  "descripcion": "Mecanismo procesal para obtener indemnización de daños causados por entidades públicas o sus agentes, derivados de fallas en el servicio o conductas dolosas o culposas",
+  "normas_ref": [
+    "Constitución Política - Art. 90",
+    "Código de Procedimiento Administrativo y de lo Contencioso Administrativo (Ley 1437 de 2011) - Arts. 140-144",
+    "Código Civil - Arts. 2341-2357 (responsabilidad civil aplicable)"
+  ],
+  "etapas": [
+    {
+      "nombre": "Verificación de requisitos de procedibilidad",
+      "orden": 1,
+      "plazos": {
+        "dias": 0,
+        "descripcion": "Antes de presentar la demanda, verificar que se cumplan los requisitos",
+        "hitos": [
+          "Verificar que el daño haya sido causado por una entidad pública o sus agentes",
+          "Verificar que hayan transcurrido menos de 2 años desde el daño (o 1 año desde el conocimiento del daño)",
+          "Identificar el nexo causal entre la acción/omisión de la entidad y el daño",
+          "Cuantificar el daño (moral, material, lucro cesante, daño emergente)"
+        ]
+      },
+      "documentos": [
+        "Descripción detallada de los hechos que causaron el daño",
+        "Identificación de la entidad pública responsable",
+        "Pruebas del daño (médicas, testimonios, fotografías, peritajes)",
+        "Pruebas del nexo causal (informes, oficios, documentos)",
+        "Liquidación preliminar de perjuicios"
+      ],
+      "entidades": [
+        {
+          "rol": "victima_damnificado",
+          "descripcion": "Persona que sufrió el daño (natural o jurídica)"
+        },
+        {
+          "rol": "entidad_responsable",
+          "descripcion": "Entidad pública que causó el daño (Nación, departamento, municipio, establecimiento público, etc.)"
+        }
+      ]
+    },
+    {
+      "nombre": "Conciliación prejudicial (opcional pero recomendado)",
+      "orden": 2,
+      "plazos": {
+        "dias": 90,
+        "descripcion": "Aunque no es requisito de procedibilidad, se recomienda intentar conciliación antes de demandar",
+        "hitos": [
+          "Solicitud de conciliación ante la Procuraduría o centro de conciliación",
+          "Audiencia de conciliación",
+          "Acuerdo conciliatorio o constancia de no acuerdo"
+        ]
+      },
+      "documentos": [
+        "Solicitud de conciliación",
+        "Constancia de asistencia a la audiencia",
+        "Acta de conciliación (si hay acuerdo)",
+        "Constancia de no acuerdo (si no hay acuerdo)"
+      ],
+      "entidades": [
+        {
+          "rol": "victima",
+          "descripcion": "Solicitante de la conciliación"
+        },
+        {
+          "rol": "entidad_publica",
+          "descripcion": "Entidad convocada a conciliar"
+        },
+        {
+          "rol": "conciliador",
+          "descripcion": "Procurador delegado o conciliador de centro de conciliación"
+        }
+      ]
+    },
+    {
+      "nombre": "Presentación de la demanda",
+      "orden": 3,
+      "plazos": {
+        "dias": 730,
+        "descripcion": "Máximo 2 años desde el daño, o 1 año desde que la víctima tuvo conocimiento del daño (el que sea mayor)",
+        "hitos": [
+          "Radicación de la demanda ante el Tribunal Administrativo o Juzgado Administrativo",
+          "Pago de la tarifa judicial (si aplica según cuantía)"
+        ]
+      },
+      "documentos": [
+        "Demanda de reparación directa",
+        "Identificación del demandante (víctima o causahabiente)",
+        "Identificación de la entidad pública demandada",
+        "Relato detallado de los hechos",
+        "Prueba del daño (informes médicos, peritajes, testimonios, fotografías, videos)",
+        "Prueba del nexo causal (informes técnicos, oficios, documentos administrativos)",
+        "Liquidación de perjuicios (discriminando por tipo: moral, material, lucro cesante, daño emergente)",
+        "Pretensiones (monto de la indemnización)",
+        "Relación de pruebas",
+        "Poder del apoderado (si actúa por medio de abogado)"
+      ],
+      "entidades": [
+        {
+          "rol": "demandante",
+          "descripcion": "Víctima del daño o sus causahabientes (herederos)"
+        },
+        {
+          "rol": "demandado",
+          "descripcion": "Entidad pública responsable del daño"
+        },
+        {
+          "rol": "tribunal_o_juzgado",
+          "descripcion": "Tribunal Administrativo (si cuantía supera 500 SMLMV) o Juzgado Administrativo (si es menor)"
+        }
+      ]
+    },
+    {
+      "nombre": "Admisión de la demanda",
+      "orden": 4,
+      "plazos": {
+        "dias": 10,
+        "descripcion": "10 días hábiles desde la radicación para admitir o inadmitir",
+        "hitos": [
+          "Verificación de requisitos formales",
+          "Verificación de competencia del juzgado/tribunal",
+          "Auto admisorio o de inadmisión",
+          "Reparto del proceso (si es Tribunal)"
+        ]
+      },
+      "documentos": [
+        "Auto admisorio de la demanda",
+        "Auto de corrección (si la demanda tiene defectos subsanables)",
+        "Auto de rechazo (si no cumple requisitos insubsanables)",
+        "Auto de reparto (si es Tribunal)"
+      ],
+      "entidades": [
+        {
+          "rol": "juez_o_magistrado",
+          "descripcion": "Juez Administrativo o Magistrado ponente que revisa la demanda"
+        },
+        {
+          "rol": "secretaria",
+          "descripcion": "Secretaría del despacho judicial"
+        }
+      ]
+    },
+    {
+      "nombre": "Notificación de la demanda",
+      "orden": 5,
+      "plazos": {
+        "dias": 20,
+        "descripcion": "Dentro de los 20 días siguientes a la admisión",
+        "hitos": [
+          "Notificación personal o por aviso a la entidad demandada",
+          "Entrega de copia de la demanda y auto admisorio",
+          "Vinculación del Ministerio Público (Procuraduría) al proceso"
+        ]
+      },
+      "documentos": [
+        "Oficio de notificación a la entidad demandada",
+        "Constancia de notificación",
+        "Oficio al Ministerio Público"
+      ],
+      "entidades": [
+        {
+          "rol": "entidad_demandada",
+          "descripcion": "Entidad pública notificada"
+        },
+        {
+          "rol": "ministerio_publico",
+          "descripcion": "Procuraduría Delegada que vigilará el proceso"
+        }
+      ]
+    },
+    {
+      "nombre": "Contestación de la demanda",
+      "orden": 6,
+      "plazos": {
+        "dias": 30,
+        "descripcion": "30 días hábiles desde la notificación para contestar",
+        "hitos": [
+          "Presentación de la contestación por la entidad demandada",
+          "Proposición de excepciones",
+          "Aporte de pruebas",
+          "Llamamiento en garantía (si aplica)"
+        ]
+      },
+      "documentos": [
+        "Escrito de contestación",
+        "Excepciones previas o de fondo",
+        "Pruebas documentales",
+        "Relación de testigos",
+        "Solicitud de llamamiento en garantía (si aplica)"
+      ],
+      "entidades": [
+        {
+          "rol": "entidad_demandada",
+          "descripcion": "Entidad pública que contesta la demanda"
+        },
+        {
+          "rol": "apoderado_entidad",
+          "descripcion": "Abogado de la entidad pública"
+        }
+      ]
+    },
+    {
+      "nombre": "Audiencia inicial",
+      "orden": 7,
+      "plazos": {
+        "dias": 40,
+        "descripcion": "Dentro de los 40 días siguientes al vencimiento del término de contestación",
+        "hitos": [
+          "Citación a audiencia inicial",
+          "Saneamiento del proceso",
+          "Fijación del litigio",
+          "Decreto de pruebas"
+        ]
+      },
+      "documentos": [
+        "Auto de citación a audiencia inicial",
+        "Acta de audiencia inicial",
+        "Auto de saneamiento",
+        "Auto de fijación del litigio",
+        "Auto de decreto de pruebas"
+      ],
+      "entidades": [
+        {
+          "rol": "juez_o_magistrado",
+          "descripcion": "Juez o Magistrado que dirige la audiencia"
+        },
+        {
+          "rol": "demandante",
+          "descripcion": "Víctima o su apoderado"
+        },
+        {
+          "rol": "demandado",
+          "descripcion": "Entidad pública o su apoderado"
+        },
+        {
+          "rol": "ministerio_publico",
+          "descripcion": "Procurador delegado"
+        }
+      ]
+    },
+    {
+      "nombre": "Práctica de pruebas",
+      "orden": 8,
+      "plazos": {
+        "dias": 60,
+        "descripcion": "Hasta 60 días para practicar las pruebas decretadas",
+        "hitos": [
+          "Práctica de testimonios",
+          "Práctica de dictámenes periciales (valoración del daño)",
+          "Inspecciones judiciales (si aplica)",
+          "Recepción de documentos adicionales",
+          "Oficios a entidades para solicitar información"
+        ]
+      },
+      "documentos": [
+        "Actas de testimonios",
+        "Dictámenes periciales (médicos, contables, técnicos)",
+        "Actas de inspección judicial",
+        "Oficios y respuestas de entidades",
+        "Documentos adicionales aportados"
+      ],
+      "entidades": [
+        {
+          "rol": "juez_o_magistrado",
+          "descripcion": "Juez que practica las pruebas"
+        },
+        {
+          "rol": "peritos",
+          "descripcion": "Peritos designados para cuantificar el daño"
+        },
+        {
+          "rol": "testigos",
+          "descripcion": "Testigos citados"
+        }
+      ]
+    },
+    {
+      "nombre": "Alegatos de conclusión",
+      "orden": 9,
+      "plazos": {
+        "dias": 10,
+        "descripcion": "10 días comunes para presentar alegatos escritos",
+        "hitos": [
+          "Vencimiento del término probatorio",
+          "Presentación de alegatos del demandante",
+          "Presentación de alegatos del demandado",
+          "Alegatos del Ministerio Público (Procuraduría)"
+        ]
+      },
+      "documentos": [
+        "Alegatos de conclusión del demandante",
+        "Alegatos de conclusión del demandado",
+        "Concepto del Ministerio Público"
+      ],
+      "entidades": [
+        {
+          "rol": "demandante",
+          "descripcion": "Víctima o su apoderado"
+        },
+        {
+          "rol": "demandado",
+          "descripcion": "Entidad pública o su apoderado"
+        },
+        {
+          "rol": "ministerio_publico",
+          "descripcion": "Procurador delegado que emite concepto"
+        }
+      ]
+    },
+    {
+      "nombre": "Sentencia de primera instancia",
+      "orden": 10,
+      "plazos": {
+        "dias": 60,
+        "descripcion": "60 días después del vencimiento del término de alegatos para proferir sentencia",
+        "hitos": [
+          "Estudio del expediente y valoración de pruebas",
+          "Elaboración del proyecto de sentencia",
+          "Aprobación de la sentencia en Sala (si es Tribunal)",
+          "Notificación de la sentencia"
+        ]
+      },
+      "documentos": [
+        "Proyecto de sentencia",
+        "Sentencia definitiva",
+        "Notificación por estado o personal"
+      ],
+      "entidades": [
+        {
+          "rol": "juez_o_magistrado",
+          "descripcion": "Juez Administrativo o Magistrado ponente que profiere la sentencia"
+        },
+        {
+          "rol": "sala",
+          "descripcion": "Sala del Tribunal que aprueba la sentencia (si es Tribunal)"
+        }
+      ]
+    },
+    {
+      "nombre": "Recursos de apelación",
+      "orden": 11,
+      "plazos": {
+        "dias": 10,
+        "descripcion": "10 días hábiles desde la notificación para interponer recurso de apelación",
+        "hitos": [
+          "Interposición del recurso de apelación",
+          "Sustentación del recurso",
+          "Concesión del recurso",
+          "Remisión al Consejo de Estado o Tribunal Superior"
+        ]
+      },
+      "documentos": [
+        "Escrito de apelación",
+        "Sustentación del recurso",
+        "Auto que concede o niega el recurso",
+        "Oficio de remisión"
+      ],
+      "entidades": [
+        {
+          "rol": "apelante",
+          "descripcion": "Parte que apela (demandante, demandado o Ministerio Público)"
+        },
+        {
+          "rol": "tribunal_o_consejo",
+          "descripcion": "Tribunal Superior (si apela desde Juzgado) o Consejo de Estado (si apela desde Tribunal)"
+        }
+      ]
+    },
+    {
+      "nombre": "Segunda instancia",
+      "orden": 12,
+      "plazos": {
+        "dias": 90,
+        "descripcion": "90 días máximo para proferir sentencia de segunda instancia",
+        "hitos": [
+          "Reparto en el Tribunal o Consejo de Estado",
+          "Traslado a las partes",
+          "Alegatos de segunda instancia",
+          "Concepto del Ministerio Público (si es Consejo de Estado)",
+          "Sentencia de segunda instancia"
+        ]
+      },
+      "documentos": [
+        "Auto de reparto",
+        "Alegatos de segunda instancia",
+        "Concepto del Ministerio Público",
+        "Sentencia de segunda instancia"
+      ],
+      "entidades": [
+        {
+          "rol": "tribunal_o_consejo",
+          "descripcion": "Tribunal Superior del Distrito o Consejo de Estado"
+        },
+        {
+          "rol": "magistrado_ponente",
+          "descripcion": "Magistrado ponente del caso en segunda instancia"
+        }
+      ]
+    },
+    {
+      "nombre": "Ejecución de la sentencia",
+      "orden": 13,
+      "plazos": {
+        "dias": 30,
+        "descripcion": "30 días para que la entidad condenada cumpla con el pago",
+        "hitos": [
+          "Notificación de la sentencia ejecutoriada",
+          "Requerimiento de pago a la entidad condenada",
+          "Pago voluntario o inicio de incidente de desacato",
+          "Consignación del dinero a favor del demandante"
+        ]
+      },
+      "documentos": [
+        "Constancia de ejecutoria de la sentencia",
+        "Requerimiento de pago",
+        "Comprobante de pago o consignación",
+        "Incidente de desacato (si no hay pago voluntario)",
+        "Paz y salvo"
+      ],
+      "entidades": [
+        {
+          "rol": "entidad_condenada",
+          "descripcion": "Entidad pública obligada al pago de la indemnización"
+        },
+        {
+          "rol": "demandante",
+          "descripcion": "Víctima beneficiaria de la indemnización"
+        },
+        {
+          "rol": "juez",
+          "descripcion": "Juez que verifica el cumplimiento de la sentencia"
+        }
+      ]
+    }
+  ],
+  "tipos_de_daño_indemnizable": [
+    {
+      "tipo": "Daño material",
+      "descripcion": "Perjuicio económico sufrido, incluye daño emergente (pérdida sufrida) y lucro cesante (ganancia dejada de percibir)",
+      "ejemplos": [
+        "Gastos médicos",
+        "Pérdida de ingresos",
+        "Daños a la propiedad",
+        "Costos de rehabilitación"
+      ]
+    },
+    {
+      "tipo": "Daño moral",
+      "descripcion": "Sufrimiento, dolor, aflicción psicológica causada por el daño",
+      "ejemplos": [
+        "Dolor por pérdida de un ser querido",
+        "Sufrimiento psicológico por lesión",
+        "Angustia por secuelas permanentes"
+      ]
+    },
+    {
+      "tipo": "Daño a la salud (daño fisiológico)",
+      "descripcion": "Alteración a la integridad psicofísica de la persona, independiente del impacto económico",
+      "ejemplos": [
+        "Pérdida de funcionalidad de un órgano",
+        "Discapacidad permanente",
+        "Secuelas físicas o psicológicas"
+      ]
+    },
+    {
+      "tipo": "Daño a la vida de relación",
+      "descripcion": "Imposibilidad o dificultad para realizar actividades placenteras o sociales",
+      "ejemplos": [
+        "Imposibilidad de practicar deportes",
+        "Limitación para socializar",
+        "Pérdida de placeres de la vida"
+      ]
+    }
+  ],
+  "regimenes_de_responsabilidad": [
+    {
+      "regimen": "Falla del servicio",
+      "descripcion": "La víctima debe probar que hubo una falla en la prestación del servicio público",
+      "carga_probatoria": "Demandante debe probar la falla, el daño y el nexo causal",
+      "ejemplo": "Muerte por falta de atención médica en hospital público"
+    },
+    {
+      "regimen": "Daño especial",
+      "descripcion": "La víctima sufre un daño como consecuencia de una actividad lícita del Estado",
+      "carga_probatoria": "Demandante debe probar el daño anormal y especial",
+      "ejemplo": "Perjuicio por obra pública legítima"
+    },
+    {
+      "regimen": "Riesgo excepcional",
+      "descripcion": "La víctima sufre un daño por actividades peligrosas del Estado (armas, explosivos, etc.)",
+      "carga_probatoria": "Demandante solo debe probar el daño y el nexo causal; la entidad tiene responsabilidad objetiva",
+      "ejemplo": "Lesión por bala perdida en operativo policial"
+    },
+    {
+      "regimen": "Daño por privación injusta de la libertad",
+      "descripcion": "La víctima fue privada de su libertad de forma injusta",
+      "carga_probatoria": "Demandante debe probar la privación injusta de la libertad y el daño",
+      "ejemplo": "Detención arbitraria sin fundamento legal"
+    }
+  ],
+  "notas": [
+    "La reparación directa es el mecanismo principal para exigir indemnización al Estado por daños causados",
+    "El plazo de prescripción es de 2 años desde el daño, o 1 año desde el conocimiento del daño (el que sea mayor)",
+    "La cuantía determina la competencia: Juzgado Administrativo (hasta 500 SMLMV), Tribunal Administrativo (más de 500 SMLMV)",
+    "El Ministerio Público (Procuraduría) interviene como defensor del interés público",
+    "La conciliación prejudicial no es requisito de procedibilidad, pero es recomendable",
+    "La carga de la prueba varía según el régimen de responsabilidad (falla del servicio, daño especial, riesgo excepcional)",
+    "La entidad puede llamar en garantía a terceros (aseguradoras, funcionarios responsables)",
+    "La sentencia puede condenar a pagar indemnización y a adoptar medidas de no repetición",
+    "El incumplimiento de la sentencia puede llevar a incidente de desacato contra los representantes de la entidad",
+    "Los herederos pueden demandar por daños sufridos por la víctima fallecida (daños propios y heredados)",
+    "La indemnización se indexa desde el daño hasta el pago efectivo"
+  ],
+  "costos_estimados": {
+    "tarifa_judicial": "Variable según cuantía del proceso (desde 2 hasta 50+ SMLMV)",
+    "honorarios_apoderado": "Usualmente entre 20% y 40% de la indemnización obtenida, según acuerdo",
+    "peritos": "Honorarios de peritos médicos, contables o técnicos (variable)",
+    "gastos_probatorios": "Costos de testimonios, inspecciones, certificados, etc.",
+    "nota": "Si se gana el proceso, la entidad condenada debe pagar las costas del proceso (incluye honorarios de abogado y gastos)"
+  }
+}

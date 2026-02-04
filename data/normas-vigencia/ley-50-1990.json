@@ -1,0 +1,23 @@
+{
+  "normaId": "ley-50-1990",
+  "nombre": "Ley 50 de 1990",
+  "tipo": "ley",
+  "vigenteDesde": "1990-12-28",
+  "vigenteHasta": "2002-12-27",
+  "derogadaPor": "ley-789-2002",
+  "derogadaDesde": "2002-12-27",
+  "estado": "derogada",
+  "modificaciones": [
+    {
+      "norma": "ley-278-1996",
+      "fecha": "1996-03-15",
+      "tipo": "modificacion",
+      "descripcion": "Modificación de disposiciones sobre contrato de trabajo"
+    }
+  ],
+  "notas": [
+    "Introducía reformas al Código Sustantivo del Trabajo",
+    "Regulaba contratación laboral, jornada de trabajo, salarios",
+    "Derogada en su mayoría por la Ley 789 de 2002"
+  ]
+}

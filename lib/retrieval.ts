@@ -2,11 +2,28 @@ import { Pinecone } from '@pinecone-database/pinecone'
 import { embedText } from './embeddings'
 import { type DocumentChunk, type RetrieveFilters } from './types'
 import { applyReranking } from './reranking'
+import { calculateBM25, hybridScore, deserializeBM25Index, type BM25Index } from './bm25'
 import fs from 'node:fs'
 import path from 'node:path'
 
 const USE_PINECONE = process.env.PINECONE_API_KEY && process.env.PINECONE_INDEX
 const USE_RERANKING = process.env.USE_RERANKING !== 'false' // Enabled by default
+const USE_BM25 = process.env.USE_BM25 !== 'false' // Enabled by default
+
+let cachedBM25Index: BM25Index | null = null
+
+function loadBM25Index(): BM25Index | null {
+  if (cachedBM25Index) return cachedBM25Index
+  const bm25Path = path.join(process.cwd(), 'data', 'bm25-index.json')
+  if (!fs.existsSync(bm25Path)) return null
+  try {
+    const raw = fs.readFileSync(bm25Path, 'utf-8')
+    cachedBM25Index = deserializeBM25Index(raw)
+    return cachedBM25Index
+  } catch {
+    return null
+  }
+}
 
 function cosineSimilarity(a: number[], b: number[]) {
   let dot = 0
@@ -65,6 +82,20 @@ export async function retrieveRelevantChunks(query: string, filters?: RetrieveFi
       .map(c => ({ chunk: c, score: cosineSimilarity(queryEmbedding, c.embedding || []) }))
       .sort((a, b) => b.score - a.score)
       .slice(0, initialTopK)
+  }
+
+  // Apply BM25 hybrid scoring if enabled and index exists
+  const bm25Index = USE_BM25 ? loadBM25Index() : null
+  if (bm25Index && retrieved.length > 0) {
+    const allBM25Scores = retrieved.map(r =>
+      calculateBM25(query, r.chunk.id, bm25Index)
+    )
+    retrieved = retrieved
+      .map((r, i) => ({
+        ...r,
+        score: hybridScore(r.score, allBM25Scores[i], allBM25Scores, 0.7)
+      }))
+      .sort((a, b) => b.score - a.score)
   }
 
   // Apply re-ranking if enabled

@@ -1,0 +1,39 @@
+{
+  "normaId": "ley-1480-2011",
+  "nombre": "Ley 1480 de 2011 (Estatuto del Consumidor)",
+  "tipo": "ley",
+  "vigenteDesde": "2011-10-12",
+  "vigenteHasta": null,
+  "estado": "vigente",
+  "modificaciones": [
+    {
+      "norma": "decreto-735-2013",
+      "fecha": "2013-04-18",
+      "tipo": "modificacion",
+      "descripcion": "Reglamentación de la garantía legal"
+    },
+    {
+      "norma": "decreto-1499-2014",
+      "fecha": "2014-08-12",
+      "tipo": "modificacion",
+      "descripcion": "Reglamentación de términos de garantía"
+    },
+    {
+      "norma": "ley-1955-2019",
+      "fecha": "2019-05-25",
+      "tipo": "modificacion",
+      "descripcion": "Plan Nacional de Desarrollo - modificaciones sobre protección al consumidor"
+    }
+  ],
+  "notas": [
+    "Estatuto del Consumidor que regula la protección al consumidor en Colombia",
+    "Derogó el Decreto 3466 de 1982 (anterior estatuto del consumidor)",
+    "Establece derechos del consumidor: información, garantía, retracto, seguridad, protección contractual",
+    "Regula la garantía legal (mínimo 1 año para bienes inmuebles, 6 meses para muebles, 3 meses para perecederos)",
+    "Establece el derecho de retracto (5 días hábiles para ventas a distancia)",
+    "Regula publicidad engañosa y prácticas comerciales restrictivas",
+    "La Superintendencia de Industria y Comercio (SIC) es la autoridad de protección al consumidor",
+    "Incluye sanciones para productores y proveedores por incumplimiento",
+    "Se aplica a todas las relaciones de consumo en Colombia (productos y servicios)"
+  ]
+}

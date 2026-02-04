@@ -2,15 +2,18 @@ import { v4 as uuidv4 } from 'uuid'
 import { retrieveRelevantChunks } from './retrieval'
 import { generateAnswerSpanish } from './generation'
 import { filterSensitivePII } from './pii'
-import { type RagQuery, type RagResponse } from './types'
+import { type RagQuery, type RagResponse, type DocumentChunk } from './types'
 import { detectLegalArea } from './prompt-templates'
 import { logger } from './logger'
+import { isProcedureRelatedQuery, getProcedureChunksForQuery } from './procedures'
+import { consultarVigencia, inferNormaIdFromTitle } from './norm-vigencia'
 
 // Lazy load heavy modules to optimize cold starts
 // These are only imported when actually needed
 type FactualValidator = typeof import('./factual-validator')
 type ResponseStructure = typeof import('./response-structure')
 type LegalCalculator = typeof import('./legal-calculator')
+type CitationValidator = typeof import('./citation-validator')
 
 // Import type for calculations
 import type { CalculationResult } from './legal-calculator'
@@ -205,6 +208,7 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
     enableFactualValidation = process.env.ENABLE_FACTUAL_VALIDATION === 'true',
     enableStructuredResponse = process.env.ENABLE_STRUCTURED_RESPONSE === 'true',
     enableCalculations = process.env.ENABLE_CALCULATIONS === 'true',
+    enableCitationValidation = process.env.ENABLE_CITATION_VALIDATION === 'true',
     legalArea: providedLegalArea,
     userId
   } = params
@@ -235,11 +239,25 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
     }
   }
 
+  // 2.5 Inyectar procedimientos (data/procedures/) si la consulta es procedural
+  let chunksForGeneration = retrieved
+  let procedureChunks: Array<{ chunk: DocumentChunk; score: number }> = []
+  if (isProcedureRelatedQuery(query)) {
+    procedureChunks = getProcedureChunksForQuery(query, detectedLegalArea)
+    if (procedureChunks.length > 0) {
+      // Prepend procedure chunks (máx. 2) para que el modelo vea plazos y etapas
+      const maxProcedureChunks = 2
+      const toPrepend = procedureChunks.slice(0, maxProcedureChunks)
+      chunksForGeneration = [...toPrepend, ...retrieved].slice(0, 10) // mantener límite razonable
+      logger.logPipelineStep('Procedure context injected', requestId, { count: toPrepend.length })
+    }
+  }
+
   // 3. Generación con prompts mejorados (ya integrado en generateAnswerSpanish)
   logger.logPipelineStep('Generating answer', requestId)
   const answer = await generateAnswerSpanish({
     query,
-    chunks: retrieved,
+    chunks: chunksForGeneration,
     legalArea: detectedLegalArea,
     includeWarnings: true,
     requestId
@@ -266,6 +284,27 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
       logger.warn('Factual validation errors detected', {
         requestId,
         errors: factualValidation.errors
+      })
+    }
+  }
+
+  // 5.5 Validación de citas (opcional) - Lazy loaded
+  let citationValidation
+  if (enableCitationValidation) {
+    logger.logPipelineStep('Running citation validation', requestId)
+    const { validateCitations } = await import('./citation-validator') as CitationValidator
+    citationValidation = validateCitations(safeAnswer, retrieved)
+    logger.logPipelineStep('Citation validation completed', requestId, {
+      totalCitations: citationValidation.totalCitations,
+      validCitations: citationValidation.validCitations,
+      precision: citationValidation.precision
+    })
+    
+    // Advertir si hay citas inválidas
+    if (citationValidation.invalidCitations.length > 0) {
+      logger.warn('Invalid citations detected', {
+        requestId,
+        invalidCitations: citationValidation.invalidCitations.map(c => c.citationRef)
       })
     }
   }
@@ -309,49 +348,18 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
     }
   }
 
-  // 8. Detectar necesidad de procedimientos y agregarlos
-  let procedures: any[] | undefined
-  if (enableCalculations) { // Reutilizar flag de cálculos para procedimientos también
-    const procedureKeywords = {
-      laboral: /\b(procedimiento|pasos|trámite|reclamar|demandar|accionar|tutela|cumplimiento)\b/i,
-      general: /\b(cómo|qué hacer|pasos a seguir|proceso|trámite)\b/i
-    }
-    
-    const lowerQuery = query.toLowerCase()
-    const needsProcedure = procedureKeywords.laboral.test(lowerQuery) || 
-                          procedureKeywords.general.test(lowerQuery)
-    
-    if (needsProcedure && detectedLegalArea === 'laboral') {
-      try {
-        const fs = await import('fs')
-        const path = await import('path')
-        const proceduresPath = path.join(process.cwd(), 'data', 'procedures', 'laboral.json')
-        
-        if (fs.existsSync(proceduresPath)) {
-          const proceduresData = JSON.parse(fs.readFileSync(proceduresPath, 'utf-8'))
-          const proceduresList = proceduresData.procedures || []
-          
-          // Buscar procedimientos relevantes basados en la query
-          const relevantProcedures = proceduresList.filter((proc: any) => {
-            if (!proc || typeof proc !== 'object') return false
-            const procText = JSON.stringify(proc).toLowerCase()
-            const queryTerms = query.toLowerCase().split(/\s+/)
-            return queryTerms.some(term => term.length > 3 && procText.includes(term))
-          })
-          
-          if (relevantProcedures.length > 0) {
-            procedures = relevantProcedures.slice(0, 3) // Máximo 3 procedimientos
-            logger.logPipelineStep('Procedures found', requestId, { count: procedures?.length || 0 })
-          }
-        }
-      } catch (error) {
-        logger.error('Error loading procedures', error, { requestId })
-      }
-    }
-  }
+  // 8. Procedimientos inyectados (ya cargados en 2.5 si la consulta era procedural)
+  const procedures = procedureChunks.length > 0
+    ? procedureChunks.map(p => ({
+        id: p.chunk.id,
+        nombre: p.chunk.metadata.title,
+        tipo: p.chunk.metadata.type,
+        resumen: p.chunk.content.slice(0, 500) + (p.chunk.content.length > 500 ? '...' : '')
+      }))
+    : undefined
 
-  // 9. Preparar citas
-  const citations = retrieved.map((r) => ({
+  // 9. Preparar citas (desde chunksForGeneration para incluir procedimientos si se inyectaron)
+  const citations = chunksForGeneration.map((r) => ({
     id: r.chunk.metadata.id || r.chunk.id,
     title: r.chunk.metadata.title,
     type: r.chunk.metadata.type,
@@ -360,6 +368,33 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
     score: r.score,
   }))
 
+  // 9.5 Validación de vigencia (normas derogadas o parcialmente derogadas)
+  const vigenciaWarnings: string[] = []
+  const vigenciaByNorma: Array<{ normaId: string; title: string; estado: string; derogadaPor?: string; derogadaDesde?: string }> = []
+  for (const c of citations) {
+    if (c.type === 'procedimiento') continue
+    const normaId = inferNormaIdFromTitle(c.title)
+    if (!normaId) continue
+    const vigencia = consultarVigencia(normaId)
+    if (!vigencia || vigencia.vigente && vigencia.estado === 'vigente') continue
+    if (vigencia.estado === 'derogada') {
+      vigenciaWarnings.push(`La norma "${c.title}" está derogada${'derogadaPor' in vigencia && vigencia.derogadaPor ? ` por ${vigencia.derogadaPor}` : ''}${'derogadaDesde' in vigencia && vigencia.derogadaDesde ? ` desde ${vigencia.derogadaDesde}` : ''}.`)
+      vigenciaByNorma.push({
+        normaId,
+        title: c.title,
+        estado: 'derogada',
+        derogadaPor: 'derogadaPor' in vigencia ? vigencia.derogadaPor : undefined,
+        derogadaDesde: 'derogadaDesde' in vigencia ? vigencia.derogadaDesde : undefined
+      })
+    } else if (vigencia.estado === 'parcialmente_derogada') {
+      vigenciaWarnings.push(`La norma "${c.title}" tiene artículos derogados o modificados; verifique vigencia específica.`)
+      vigenciaByNorma.push({ normaId, title: c.title, estado: 'parcialmente_derogada' })
+    }
+  }
+  if (vigenciaWarnings.length > 0) {
+    logger.logPipelineStep('Vigencia warnings', requestId, { count: vigenciaWarnings.length })
+  }
+
   // 10. Calcular tiempo de respuesta
   const responseTime = Date.now() - startTime
 
@@ -367,7 +402,7 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
   const response: RagResponse = {
     answer: safeAnswer,
     citations,
-    retrieved: retrieved.length,
+    retrieved: chunksForGeneration.length,
     requestId,
     detectedLegalArea,
     metadata: {
@@ -403,6 +438,18 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
     }
   }
 
+  if (citationValidation) {
+    response.citationValidation = {
+      totalCitations: citationValidation.totalCitations,
+      validCitations: citationValidation.validCitations,
+      precision: citationValidation.precision,
+      invalidCitations: citationValidation.invalidCitations.map(c => ({
+        ref: c.citationRef,
+        error: c.errorMessage
+      }))
+    }
+  }
+
   if (calculations && calculations.length > 0) {
     response.calculations = calculations.map(calc => ({
       type: calc.type,
@@ -410,6 +457,15 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
       formula: calc.formula,
       breakdown: calc.breakdown
     }))
+  }
+
+  if (vigenciaWarnings.length > 0) {
+    response.vigenciaValidation = {
+      warnings: vigenciaWarnings,
+      byNorma: vigenciaByNorma
+    }
+    // Añadir advertencia al final de la respuesta para que sea visible al usuario
+    response.answer = response.answer.trimEnd() + '\n\n⚠️ **Vigencia:** ' + vigenciaWarnings.join(' ')
   }
 
   logger.logPipelineStep('Pipeline complete', requestId, {

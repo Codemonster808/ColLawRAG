@@ -1,0 +1,115 @@
+{
+  "version": "1.0",
+  "created": "2026-02-03",
+  "description": "Base de datos de procedimientos legales colombianos para ColLawRAG",
+  "procedures": [
+    {
+      "id": "tutela",
+      "nombre": "Acción de Tutela",
+      "tipo": "constitucional",
+      "ambito": "Protección de derechos fundamentales",
+      "duracion_estimada": "10-30 días",
+      "cuantia": "No aplica",
+      "file": "tutela.json",
+      "normas_principales": [
+        "Constitución Política - Art. 86",
+        "Decreto 2591 de 1991"
+      ]
+    },
+    {
+      "id": "cumplimiento",
+      "nombre": "Acción de Cumplimiento",
+      "tipo": "constitucional",
+      "ambito": "Exigir cumplimiento de leyes y actos administrativos",
+      "duracion_estimada": "60-90 días",
+      "cuantia": "No aplica",
+      "file": "cumplimiento.json",
+      "normas_principales": [
+        "Constitución Política - Art. 87",
+        "Ley 393 de 1997"
+      ]
+    },
+    {
+      "id": "laboral_ordinario",
+      "nombre": "Proceso Laboral Ordinario",
+      "tipo": "laboral",
+      "ambito": "Reclamaciones laborales de mayor cuantía",
+      "duracion_estimada": "6-12 meses",
+      "cuantia": "Superior a 20 SMLMV",
+      "file": "laboral_ordinario.json",
+      "normas_principales": [
+        "Código Procesal del Trabajo",
+        "Ley 712 de 2001"
+      ]
+    },
+    {
+      "id": "laboral_verbal",
+      "nombre": "Proceso Laboral Verbal",
+      "tipo": "laboral",
+      "ambito": "Reclamaciones laborales de menor cuantía",
+      "duracion_estimada": "1-3 meses",
+      "cuantia": "Hasta 20 SMLMV",
+      "file": "laboral_verbal.json",
+      "normas_principales": [
+        "Código Procesal del Trabajo",
+        "Ley 712 de 2001"
+      ]
+    },
+    {
+      "id": "accion-grupo",
+      "nombre": "Acción de Grupo",
+      "tipo": "constitucional",
+      "ambito": "Protección de derechos e intereses colectivos por daño común",
+      "duracion_estimada": "12-24 meses",
+      "cuantia": "Variable según cuantía total del grupo (5-50+ SMLMV tarifa judicial)",
+      "file": "accion-grupo.json",
+      "normas_principales": [
+        "Constitución Política - Art. 88",
+        "Ley 472 de 1998",
+        "Ley 1437 de 2011 - Arts. 145-162"
+      ]
+    },
+    {
+      "id": "ejecutivo",
+      "nombre": "Proceso Ejecutivo",
+      "tipo": "civil",
+      "ambito": "Cobro de obligaciones con título ejecutivo",
+      "duracion_estimada": "4-8 meses",
+      "cuantia": "Variable (desde 2 hasta 30+ SMLMV tarifa judicial según monto)",
+      "file": "ejecutivo.json",
+      "normas_principales": [
+        "Código General del Proceso - Arts. 422-450",
+        "Código de Comercio (títulos valores)"
+      ]
+    },
+    {
+      "id": "reparacion-directa",
+      "nombre": "Acción de Reparación Directa",
+      "tipo": "administrativo",
+      "ambito": "Indemnización de daños causados por entidades públicas",
+      "duracion_estimada": "12-36 meses",
+      "cuantia": "Variable (desde 2 hasta 50+ SMLMV tarifa judicial según monto)",
+      "file": "reparacion-directa.json",
+      "normas_principales": [
+        "Constitución Política - Art. 90",
+        "Ley 1437 de 2011 - Arts. 140-144"
+      ]
+    }
+  ],
+  "estadisticas": {
+    "total_procedimientos": 7,
+    "tipos": {
+      "constitucional": 3,
+      "laboral": 2,
+      "civil": 1,
+      "administrativo": 1
+    },
+    "duracion_promedio": "Varía según el tipo (10 días a 36 meses)"
+  },
+  "notas": [
+    "Esta base de datos incluye los procedimientos más comunes en Colombia",
+    "Cada procedimiento está estructurado con etapas, plazos, documentos y entidades involucradas",
+    "Los plazos son aproximados y pueden variar según las circunstancias del caso",
+    "Para procedimientos adicionales (civil, administrativo, penal), consultar la normativa específica"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "slug": "ley_1480_2011_consumidor",
+  "nombre": "Ley 1480 de 2011 — Estatuto del Consumidor",
+  "tipo": "ley",
+  "area": "comercial",
+  "fuente": "senado",
+  "url": "http://www.secretariasenado.gov.co/senado/basedoc/ley_1480_2011.html",
+  "paginated": false,
+  "enabled": true,
+  "filename": "ley_ley_1480_2011_consumidor.txt",
+  "size": 40294,
+  "scrapedAt": "2026-02-01T22:01:40.291Z",
+  "textLength": 40021
+}

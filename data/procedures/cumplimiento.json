@@ -1,0 +1,318 @@
+{
+  "id": "cumplimiento",
+  "nombre": "Acción de Cumplimiento",
+  "descripcion": "Mecanismo para exigir el cumplimiento de una ley o acto administrativo",
+  "normas_ref": [
+    "Constitución Política - Art. 87",
+    "Ley 393 de 1997",
+    "Código de Procedimiento Administrativo y de lo Contencioso Administrativo (Ley 1437 de 2011)"
+  ],
+  "etapas": [
+    {
+      "nombre": "Requisito de procedibilidad",
+      "orden": 1,
+      "plazos": {
+        "dias": 30,
+        "descripcion": "Máximo 30 días desde la renuencia manifiesta o la solicitud previa",
+        "hitos": [
+          "Solicitud previa ante la autoridad renuente",
+          "Espera de 10 días para la respuesta",
+          "Verificación de la renuencia"
+        ]
+      },
+      "documentos": [
+        "Solicitud previa de cumplimiento dirigida a la autoridad",
+        "Prueba de la renuencia (silencio o negativa expresa)",
+        "Copia de la norma incumplida"
+      ],
+      "entidades": [
+        {
+          "rol": "solicitante",
+          "descripcion": "Persona que solicita el cumplimiento previo"
+        },
+        {
+          "rol": "autoridad_renuente",
+          "descripcion": "Autoridad que incumple la norma"
+        }
+      ]
+    },
+    {
+      "nombre": "Presentación de la acción",
+      "orden": 2,
+      "plazos": {
+        "dias": 0,
+        "descripcion": "Después de verificar la renuencia manifiesta",
+        "hitos": [
+          "Radicación de la demanda ante el Tribunal Administrativo"
+        ]
+      },
+      "documentos": [
+        "Demanda de cumplimiento",
+        "Identificación del accionante",
+        "Señalamiento de la norma incumplida",
+        "Descripción de la renuencia",
+        "Prueba de la solicitud previa",
+        "Pruebas de la renuencia"
+      ],
+      "entidades": [
+        {
+          "rol": "accionante",
+          "descripcion": "Persona que presenta la acción"
+        },
+        {
+          "rol": "accionado",
+          "descripcion": "Autoridad o particular renuente"
+        },
+        {
+          "rol": "tribunal",
+          "descripcion": "Tribunal Administrativo competente"
+        }
+      ]
+    },
+    {
+      "nombre": "Admisión de la acción",
+      "orden": 3,
+      "plazos": {
+        "dias": 3,
+        "descripcion": "Dentro de los 3 días siguientes a la radicación",
+        "hitos": [
+          "Verificación de requisitos",
+          "Auto admisorio o de rechazo",
+          "Reparto del proceso"
+        ]
+      },
+      "documentos": [
+        "Auto de admisión",
+        "Auto de reparto"
+      ],
+      "entidades": [
+        {
+          "rol": "magistrado_ponente",
+          "descripcion": "Magistrado al que se reparte el proceso"
+        },
+        {
+          "rol": "secretaria",
+          "descripcion": "Secretaría del Tribunal"
+        }
+      ]
+    },
+    {
+      "nombre": "Notificación y traslado",
+      "orden": 4,
+      "plazos": {
+        "dias": 5,
+        "descripcion": "Notificación inmediata y traslado de 5 días",
+        "hitos": [
+          "Notificación al accionado",
+          "Traslado para que se pronuncie"
+        ]
+      },
+      "documentos": [
+        "Auto de traslado",
+        "Oficio de notificación al accionado"
+      ],
+      "entidades": [
+        {
+          "rol": "tribunal",
+          "descripcion": "Tribunal que ordena la notificación"
+        },
+        {
+          "rol": "accionado",
+          "descripcion": "Entidad notificada"
+        },
+        {
+          "rol": "secretaria",
+          "descripcion": "Secretaría que gestiona las notificaciones"
+        }
+      ]
+    },
+    {
+      "nombre": "Respuesta del accionado",
+      "orden": 5,
+      "plazos": {
+        "dias": 5,
+        "descripcion": "5 días hábiles para contestar la demanda",
+        "hitos": [
+          "Presentación de la contestación",
+          "Aporte de pruebas",
+          "Proposición de excepciones"
+        ]
+      },
+      "documentos": [
+        "Escrito de contestación",
+        "Pruebas documentales",
+        "Excepciones de mérito o previas"
+      ],
+      "entidades": [
+        {
+          "rol": "accionado",
+          "descripcion": "Autoridad que contesta"
+        },
+        {
+          "rol": "apoderado",
+          "descripcion": "Representante legal del accionado"
+        }
+      ]
+    },
+    {
+      "nombre": "Decreto y práctica de pruebas",
+      "orden": 6,
+      "plazos": {
+        "dias": 10,
+        "descripcion": "Hasta 10 días para decretar y practicar pruebas",
+        "hitos": [
+          "Auto de pruebas",
+          "Práctica de testimonios, inspecciones, etc.",
+          "Cierre del período probatorio"
+        ]
+      },
+      "documentos": [
+        "Auto de decreto de pruebas",
+        "Actas de testimonios",
+        "Documentos aportados",
+        "Dictámenes periciales (si aplica)"
+      ],
+      "entidades": [
+        {
+          "rol": "magistrado_ponente",
+          "descripcion": "Magistrado que decreta las pruebas"
+        },
+        {
+          "rol": "secretaria",
+          "descripcion": "Secretaría que coordina las diligencias"
+        },
+        {
+          "rol": "testigos",
+          "descripcion": "Testigos citados (si aplica)"
+        }
+      ]
+    },
+    {
+      "nombre": "Alegatos de conclusión",
+      "orden": 7,
+      "plazos": {
+        "dias": 5,
+        "descripcion": "5 días comunes para presentar alegatos",
+        "hitos": [
+          "Presentación de alegatos por el accionante",
+          "Presentación de alegatos por el accionado"
+        ]
+      },
+      "documentos": [
+        "Alegatos de conclusión del accionante",
+        "Alegatos de conclusión del accionado"
+      ],
+      "entidades": [
+        {
+          "rol": "accionante",
+          "descripcion": "Parte que presenta alegatos"
+        },
+        {
+          "rol": "accionado",
+          "descripcion": "Parte que presenta alegatos"
+        }
+      ]
+    },
+    {
+      "nombre": "Sentencia",
+      "orden": 8,
+      "plazos": {
+        "dias": 30,
+        "descripcion": "Máximo 30 días después del vencimiento del término de alegatos",
+        "hitos": [
+          "Elaboración del proyecto de sentencia",
+          "Deliberación en Sala",
+          "Notificación de la sentencia"
+        ]
+      },
+      "documentos": [
+        "Proyecto de sentencia",
+        "Sentencia definitiva",
+        "Notificación personal o por estado"
+      ],
+      "entidades": [
+        {
+          "rol": "magistrado_ponente",
+          "descripcion": "Magistrado que elabora el proyecto"
+        },
+        {
+          "rol": "sala",
+          "descripcion": "Sala que aprueba la sentencia"
+        },
+        {
+          "rol": "secretaria",
+          "descripcion": "Secretaría que notifica"
+        }
+      ]
+    },
+    {
+      "nombre": "Recursos",
+      "orden": 9,
+      "plazos": {
+        "dias": 10,
+        "descripcion": "10 días para interponer recursos (súplica o apelación según el caso)",
+        "hitos": [
+          "Interposición del recurso",
+          "Sustentación del recurso",
+          "Admisión del recurso"
+        ]
+      },
+      "documentos": [
+        "Escrito de interposición del recurso",
+        "Sustentación",
+        "Auto que resuelve el recurso"
+      ],
+      "entidades": [
+        {
+          "rol": "recurrente",
+          "descripcion": "Parte que interpone el recurso"
+        },
+        {
+          "rol": "tribunal",
+          "descripcion": "Tribunal que resuelve (súplica) o Consejo de Estado (apelación)"
+        }
+      ]
+    },
+    {
+      "nombre": "Cumplimiento de la sentencia",
+      "orden": 10,
+      "plazos": {
+        "dias": 0,
+        "descripcion": "Inmediato, según lo ordenado en la sentencia",
+        "hitos": [
+          "Notificación de la sentencia al obligado",
+          "Inicio del cumplimiento",
+          "Verificación del cumplimiento",
+          "Incidente de desacato si hay incumplimiento"
+        ]
+      },
+      "documentos": [
+        "Oficio de cumplimiento",
+        "Informes de ejecución",
+        "Certificación de cumplimiento",
+        "Incidente de desacato (si aplica)"
+      ],
+      "entidades": [
+        {
+          "rol": "accionado",
+          "descripcion": "Entidad obligada a cumplir"
+        },
+        {
+          "rol": "tribunal",
+          "descripcion": "Tribunal que verifica el cumplimiento"
+        },
+        {
+          "rol": "accionante",
+          "descripcion": "Beneficiario de la sentencia"
+        }
+      ]
+    }
+  ],
+  "notas": [
+    "La acción de cumplimiento requiere solicitud previa ante la autoridad renuente",
+    "No procede cuando existen otros medios judiciales, salvo que se use como mecanismo transitorio para evitar un perjuicio irremediable",
+    "La sentencia es de única instancia si es proferida por el Tribunal Administrativo, salvo que sea susceptible de súplica",
+    "Si es proferida por Juzgado Administrativo, procede apelación ante el Tribunal",
+    "El incumplimiento puede generar multas y sanciones por desacato"
+  ]
+}

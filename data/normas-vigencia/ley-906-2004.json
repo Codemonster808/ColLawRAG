@@ -1,0 +1,90 @@
+{
+  "normaId": "ley-906-2004",
+  "nombre": "Ley 906 de 2004 (Código de Procedimiento Penal)",
+  "tipo": "codigo",
+  "vigenteDesde": "2005-01-01",
+  "vigenteHasta": null,
+  "estado": "parcialmente_derogada",
+  "derogacionesParciales": [
+    {
+      "articulo": "Arts. 63-68 (Medidas de aseguramiento)",
+      "derogadoPor": "acto-legislativo-02-2015",
+      "derogadaDesde": "2015-07-01",
+      "razon": "Reforma al sistema de detención preventiva"
+    },
+    {
+      "articulo": "Arts. 324-326 (Allanamiento a cargos)",
+      "derogadoPor": "ley-1826-2017",
+      "derogadaDesde": "2017-01-12",
+      "razon": "Modificación del procedimiento de allanamiento"
+    },
+    {
+      "articulo": "Arts. 527-531 (Principio de oportunidad)",
+      "derogadoPor": "ley-1908-2018",
+      "derogadaDesde": "2018-07-09",
+      "razon": "Ampliación de causales del principio de oportunidad"
+    }
+  ],
+  "modificaciones": [
+    {
+      "norma": "ley-1142-2007",
+      "fecha": "2007-07-28",
+      "tipo": "modificacion",
+      "descripcion": "Modificaciones al sistema procesal penal (terrorismo, seguridad)"
+    },
+    {
+      "norma": "acto-legislativo-03-2002",
+      "fecha": "2002-12-19",
+      "tipo": "modificacion",
+      "descripcion": "Estableció el sistema penal acusatorio en Colombia (base constitucional)"
+    },
+    {
+      "norma": "ley-1453-2011",
+      "fecha": "2011-06-24",
+      "tipo": "modificacion",
+      "descripcion": "Reforma a la seguridad ciudadana (modificaciones procesales)"
+    },
+    {
+      "norma": "acto-legislativo-01-2015",
+      "fecha": "2015-07-07",
+      "tipo": "modificacion",
+      "descripcion": "Equilibrio de competencias entre ramas del poder (medidas de aseguramiento)"
+    },
+    {
+      "norma": "ley-1826-2017",
+      "fecha": "2017-01-12",
+      "tipo": "modificacion",
+      "descripcion": "Modificaciones sobre allanamiento a cargos y negociación"
+    },
+    {
+      "norma": "ley-1908-2018",
+      "fecha": "2018-07-09",
+      "tipo": "modificacion",
+      "descripcion": "Fortalecimiento de la JEP y del sistema penal (principio de oportunidad)"
+    },
+    {
+      "norma": "ley-1957-2019",
+      "fecha": "2019-06-06",
+      "tipo": "modificacion",
+      "descripcion": "Reforma al sistema de justicia penal (audiencias virtuales, notificaciones)"
+    },
+    {
+      "norma": "ley-2098-2021",
+      "fecha": "2021-07-15",
+      "tipo": "modificacion",
+      "descripcion": "Ley de inseguridad, violencia y delito (modificaciones procesales)"
+    }
+  ],
+  "notas": [
+    "Código de Procedimiento Penal que implementó el sistema penal acusatorio en Colombia",
+    "Entró en vigencia gradualmente desde 2005 hasta 2008 en todo el país",
+    "Reemplazó el Decreto 2700 de 1991 (sistema inquisitivo mixto)",
+    "Establece las fases del proceso penal: indagación, investigación, juicio",
+    "Consagra garantías procesales: presunción de inocencia, derecho a la defensa, debido proceso",
+    "Regula las medidas de aseguramiento (detención preventiva), allanamiento, principio de oportunidad",
+    "El sistema acusatorio separó las funciones de investigación (Fiscalía) y juzgamiento (Jueces)",
+    "La Corte Constitucional ha declarado inexequibles varias disposiciones por violar garantías",
+    "El Acto Legislativo 02 de 2015 modificó el régimen de detención preventiva",
+    "Durante la pandemia COVID-19 se permitieron audiencias virtuales (Ley 1957 de 2019)"
+  ]
+}

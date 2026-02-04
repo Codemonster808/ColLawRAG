@@ -3,6 +3,11 @@
  * Configuración global para todos los tests
  */
 
+// Usar BD en memoria para no tocar data/users.db
+if (!process.env.COLLAWRAG_TEST_DB) {
+  process.env.COLLAWRAG_TEST_DB = ':memory:'
+}
+
 // Configurar variables de entorno de prueba si no están configuradas
 if (!process.env.HUGGINGFACE_API_KEY) {
   process.env.HUGGINGFACE_API_KEY = 'hf_test_key_for_testing'

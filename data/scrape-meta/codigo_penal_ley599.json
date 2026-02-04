@@ -1,0 +1,15 @@
+{
+  "slug": "codigo_penal_ley599",
+  "nombre": "Código Penal (Ley 599 de 2000)",
+  "tipo": "codigo",
+  "area": "penal",
+  "fuente": "senado",
+  "url": "http://www.secretariasenado.gov.co/senado/basedoc/ley_0599_2000.html",
+  "fpId": 6388,
+  "paginated": true,
+  "enabled": true,
+  "filename": "codigo_codigo_penal_ley599.txt",
+  "size": 551856,
+  "scrapedAt": "2026-02-01T22:01:40.291Z",
+  "textLength": 551600
+}

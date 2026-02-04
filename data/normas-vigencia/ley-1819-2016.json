@@ -1,0 +1,53 @@
+{
+  "normaId": "ley-1819-2016",
+  "nombre": "Ley 1819 de 2016 (Reforma Tributaria Estructural)",
+  "tipo": "ley",
+  "vigenteDesde": "2016-12-29",
+  "vigenteHasta": null,
+  "estado": "parcialmente_derogada",
+  "derogacionesParciales": [
+    {
+      "articulo": "Arts. 165-170 (Impuesto sobre la renta para personas naturales)",
+      "derogadoPor": "ley-1943-2018",
+      "derogadaDesde": "2019-01-01",
+      "razon": "Ajustes al régimen de renta de personas naturales"
+    },
+    {
+      "articulo": "Arts. 240-245 (Tarifa de impuesto de renta)",
+      "derogadoPor": "ley-2010-2019",
+      "derogadaDesde": "2020-01-01",
+      "razon": "Nuevas tarifas de renta tras inexequibilidad de Ley 1943"
+    }
+  ],
+  "modificaciones": [
+    {
+      "norma": "ley-1943-2018",
+      "fecha": "2018-12-28",
+      "tipo": "modificacion",
+      "descripcion": "Ley de financiamiento (modificó varios artículos de la 1819)"
+    },
+    {
+      "norma": "ley-2010-2019",
+      "fecha": "2019-12-27",
+      "tipo": "modificacion",
+      "descripcion": "Ley de crecimiento económico (ajustó disposiciones tras Ley 1943)"
+    },
+    {
+      "norma": "ley-2155-2021",
+      "fecha": "2021-09-14",
+      "tipo": "modificacion",
+      "descripcion": "Ley de inversión social (reforma tributaria COVID-19)"
+    }
+  ],
+  "notas": [
+    "Reforma tributaria estructural más importante de la década",
+    "Unificó el régimen de renta para personas naturales (eliminó clasificación por categorías)",
+    "Aumentó la tarifa general del IVA de 16% a 19%",
+    "Creó el impuesto sobre la renta de dividendos para personas naturales",
+    "Eliminó el CREE (impuesto sobre la renta para la equidad) y lo integró al impuesto de renta",
+    "Estableció el monotributo para pequeños comerciantes y prestadores de servicios",
+    "Modernizó el procedimiento tributario (factura electrónica, régimen sancionatorio)",
+    "Implementó medidas contra la evasión y elusión fiscal",
+    "Creó normas sobre precios de transferencia y paraísos fiscales"
+  ]
+}

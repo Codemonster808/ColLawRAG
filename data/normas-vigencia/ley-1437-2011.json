@@ -1,0 +1,28 @@
+{
+  "normaId": "ley-1437-2011",
+  "nombre": "Ley 1437 de 2011 (Código de Procedimiento Administrativo y de lo Contencioso Administrativo)",
+  "tipo": "codigo",
+  "vigenteDesde": "2012-01-02",
+  "vigenteHasta": null,
+  "estado": "vigente",
+  "modificaciones": [
+    {
+      "norma": "ley-1755-2015",
+      "fecha": "2015-06-30",
+      "tipo": "modificacion",
+      "descripcion": "Regula el derecho fundamental de petición"
+    },
+    {
+      "norma": "ley-2080-2021",
+      "fecha": "2021-01-25",
+      "tipo": "modificacion",
+      "descripcion": "Reforma a la justicia y mejora del acceso a esta"
+    }
+  ],
+  "notas": [
+    "Sustituye el Código Contencioso Administrativo (Decreto 01 de 1984)",
+    "Regula el procedimiento de las actuaciones administrativas",
+    "Establece el procedimiento ante la jurisdicción contencioso administrativa",
+    "Incluye mecanismos de oralidad en los procesos"
+  ]
+}

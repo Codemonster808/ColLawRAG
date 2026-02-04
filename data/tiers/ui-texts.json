@@ -1,0 +1,308 @@
+{
+  "version": "1.0",
+  "tiers": {
+    "free": {
+      "name": "Gratis",
+      "displayName": "Plan Gratuito",
+      "icon": "🆓",
+      "limits": {
+        "queries_per_day": 10,
+        "queries_per_month": 100,
+        "max_tokens_per_query": 500,
+        "max_chunks_per_query": 5,
+        "access_to_procedures": true,
+        "access_to_vigencia": false,
+        "access_to_jurisprudence": false,
+        "priority_support": false,
+        "export_to_pdf": false
+      }
+    },
+    "premium": {
+      "name": "Premium",
+      "displayName": "Plan Premium",
+      "icon": "⭐",
+      "limits": {
+        "queries_per_day": 100,
+        "queries_per_month": 2000,
+        "max_tokens_per_query": 2000,
+        "max_chunks_per_query": 15,
+        "access_to_procedures": true,
+        "access_to_vigencia": true,
+        "access_to_jurisprudence": true,
+        "priority_support": true,
+        "export_to_pdf": true
+      }
+    }
+  },
+  "messages": {
+    "upgrade": {
+      "title": "✨ Desbloquea todo el potencial de ColLawRAG",
+      "subtitle": "Accede a consultas ilimitadas, jurisprudencia y más funcionalidades avanzadas",
+      "cta_primary": "Actualizar a Premium",
+      "cta_secondary": "Ver comparación de planes",
+      "benefits_header": "Con Premium obtienes:",
+      "benefits": [
+        "🚀 Hasta 100 consultas diarias (vs. 10 en plan gratuito)",
+        "📚 Acceso completo a jurisprudencia de la Corte Constitucional",
+        "✅ Sistema de validación de vigencia de normas",
+        "📄 Exportación de respuestas a PDF",
+        "⚡ Respuestas más completas (hasta 2000 tokens vs. 500)",
+        "🎯 Más contexto por consulta (15 chunks vs. 5)",
+        "💬 Soporte prioritario",
+        "🔄 Actualizaciones automáticas de normativa"
+      ],
+      "price_info": "Desde $29.000 COP/mes",
+      "guarantee": "✅ Garantía de satisfacción de 7 días"
+    },
+    "limit_reached": {
+      "daily": {
+        "title": "⏰ Límite diario alcanzado",
+        "message": "Has alcanzado el límite de {limit} consultas diarias del plan gratuito.",
+        "suggestion": "Actualiza a Premium para obtener hasta 100 consultas diarias y muchas más funcionalidades.",
+        "cta": "Ver planes Premium",
+        "wait_message": "Podrás volver a consultar mañana a las {reset_time}."
+      },
+      "monthly": {
+        "title": "📊 Límite mensual alcanzado",
+        "message": "Has alcanzado el límite de {limit} consultas mensuales del plan gratuito.",
+        "suggestion": "Actualiza a Premium para obtener hasta 2000 consultas mensuales sin límites diarios estrictos.",
+        "cta": "Actualizar ahora",
+        "wait_message": "Tu límite se reiniciará el {reset_date}."
+      },
+      "feature_locked": {
+        "title": "🔒 Función Premium",
+        "message": "Esta función está disponible solo para usuarios Premium.",
+        "features": {
+          "vigencia": "El sistema de validación de vigencia de normas requiere una suscripción Premium.",
+          "jurisprudence": "El acceso a jurisprudencia de la Corte Constitucional requiere una suscripción Premium.",
+          "export_pdf": "La exportación a PDF requiere una suscripción Premium.",
+          "advanced_search": "La búsqueda avanzada requiere una suscripción Premium."
+        },
+        "cta": "Desbloquear con Premium"
+      }
+    },
+    "comparison": {
+      "title": "Comparación de Planes",
+      "subtitle": "Elige el plan que mejor se adapte a tus necesidades",
+      "features": [
+        {
+          "category": "Consultas",
+          "items": [
+            {
+              "feature": "Consultas diarias",
+              "free": "10",
+              "premium": "100",
+              "highlight": true
+            },
+            {
+              "feature": "Consultas mensuales",
+              "free": "100",
+              "premium": "2,000"
+            },
+            {
+              "feature": "Tokens por consulta",
+              "free": "500",
+              "premium": "2,000",
+              "highlight": true
+            },
+            {
+              "feature": "Chunks de contexto",
+              "free": "5",
+              "premium": "15"
+            }
+          ]
+        },
+        {
+          "category": "Contenido Legal",
+          "items": [
+            {
+              "feature": "Acceso a Códigos y Leyes",
+              "free": "✅",
+              "premium": "✅"
+            },
+            {
+              "feature": "Procedimientos legales",
+              "free": "✅",
+              "premium": "✅"
+            },
+            {
+              "feature": "Jurisprudencia Corte Constitucional",
+              "free": "❌",
+              "premium": "✅",
+              "highlight": true
+            },
+            {
+              "feature": "Validación de vigencia de normas",
+              "free": "❌",
+              "premium": "✅",
+              "highlight": true
+            }
+          ]
+        },
+        {
+          "category": "Funcionalidades",
+          "items": [
+            {
+              "feature": "Exportación a PDF",
+              "free": "❌",
+              "premium": "✅"
+            },
+            {
+              "feature": "Búsqueda avanzada",
+              "free": "Básica",
+              "premium": "Completa"
+            },
+            {
+              "feature": "Historial de consultas",
+              "free": "7 días",
+              "premium": "Ilimitado"
+            },
+            {
+              "feature": "Soporte",
+              "free": "Email (48h)",
+              "premium": "Email prioritario (4h)",
+              "highlight": true
+            }
+          ]
+        },
+        {
+          "category": "Actualizaciones",
+          "items": [
+            {
+              "feature": "Actualizaciones de normativa",
+              "free": "Mensual",
+              "premium": "Semanal"
+            },
+            {
+              "feature": "Alertas de cambios normativos",
+              "free": "❌",
+              "premium": "✅"
+            },
+            {
+              "feature": "Nuevas funcionalidades",
+              "free": "Acceso tardío",
+              "premium": "Acceso anticipado"
+            }
+          ]
+        }
+      ],
+      "pricing": {
+        "free": {
+          "price": "$0",
+          "period": "siempre",
+          "cta": "Plan actual"
+        },
+        "premium": {
+          "price": "$29.000",
+          "period": "mensual",
+          "annual_discount": "Ahorra 20% con plan anual ($278.400/año)",
+          "cta": "Comenzar ahora"
+        }
+      }
+    },
+    "badge": {
+      "free": {
+        "text": "Gratis",
+        "color": "gray",
+        "description": "Plan gratuito con funcionalidades básicas"
+      },
+      "premium": {
+        "text": "Premium",
+        "color": "gold",
+        "description": "Acceso completo a todas las funcionalidades"
+      }
+    },
+    "notifications": {
+      "upgrade_success": {
+        "title": "🎉 ¡Bienvenido a Premium!",
+        "message": "Tu cuenta ha sido actualizada exitosamente. Ya puedes disfrutar de todas las funcionalidades Premium.",
+        "cta": "Explorar funcionalidades"
+      },
+      "downgrade_warning": {
+        "title": "⚠️ Confirmación de cancelación",
+        "message": "Si cancelas tu suscripción Premium, perderás acceso a:\n\n• Jurisprudencia completa\n• Validación de vigencia\n• Exportación a PDF\n• Soporte prioritario\n\nTu plan seguirá activo hasta el {end_date}.",
+        "cta_cancel": "Cancelar suscripción",
+        "cta_keep": "Mantener Premium"
+      },
+      "trial": {
+        "title": "✨ Prueba Premium gratis por 7 días",
+        "message": "Experimenta todas las funcionalidades Premium sin costo durante 7 días. Cancela en cualquier momento.",
+        "cta": "Comenzar prueba gratuita",
+        "no_card_required": "No se requiere tarjeta de crédito"
+      }
+    },
+    "tooltips": {
+      "locked_feature": "Esta función requiere una suscripción Premium. Haz clic para ver más detalles.",
+      "usage_indicator": "Has usado {used} de {limit} consultas {period}.",
+      "premium_badge": "Usuario Premium - Acceso completo a todas las funcionalidades"
+    }
+  },
+  "use_cases": {
+    "free": {
+      "title": "Ideal para:",
+      "cases": [
+        "📚 Estudiantes de derecho",
+        "🔍 Consultas esporádicas",
+        "💡 Conocer el sistema antes de comprometerse",
+        "📖 Investigación básica de normativa"
+      ]
+    },
+    "premium": {
+      "title": "Perfecto para:",
+      "cases": [
+        "👨‍⚖️ Abogados en ejercicio",
+        "🏢 Firmas de abogados y estudios jurídicos",
+        "🏛️ Funcionarios públicos",
+        "📊 Consultores legales",
+        "🎓 Investigadores y académicos",
+        "⚖️ Procuradores y judicantes"
+      ]
+    }
+  },
+  "faq": [
+    {
+      "question": "¿Puedo cambiar de plan en cualquier momento?",
+      "answer": "Sí, puedes actualizar a Premium en cualquier momento. Si cancelas Premium, tu plan seguirá activo hasta el final del período pagado."
+    },
+    {
+      "question": "¿Los límites se reinician diariamente?",
+      "answer": "Las consultas diarias se reinician a las 00:00 hora de Colombia. Los límites mensuales se reinician el mismo día de cada mes en que te suscribiste."
+    },
+    {
+      "question": "¿Qué pasa si alcanzo mi límite?",
+      "answer": "Si alcanzas tu límite diario o mensual, podrás actualizar a Premium para continuar consultando, o esperar al reinicio del período."
+    },
+    {
+      "question": "¿Hay descuento para estudiantes?",
+      "answer": "Sí, ofrecemos un 30% de descuento para estudiantes con credencial válida. Contáctanos en support@collawrag.com para más información."
+    },
+    {
+      "question": "¿Puedo usar ColLawRAG para asesoría profesional?",
+      "answer": "ColLawRAG es una herramienta de investigación y consulta legal. No sustituye la asesoría jurídica profesional personalizada. Recomendamos siempre consultar con un abogado para casos específicos."
+    },
+    {
+      "question": "¿La información está actualizada?",
+      "answer": "Sí, actualizamos nuestra base de datos regularmente. Los usuarios Premium reciben actualizaciones semanales, mientras que los usuarios gratuitos reciben actualizaciones mensuales."
+    }
+  ],
+  "testimonials": [
+    {
+      "author": "María González",
+      "role": "Abogada Laboralista",
+      "text": "ColLawRAG Premium me ahorra horas de investigación cada semana. El acceso a jurisprudencia es invaluable.",
+      "rating": 5
+    },
+    {
+      "author": "Carlos Ramírez",
+      "role": "Estudiante de Derecho",
+      "text": "Comencé con el plan gratuito y me encantó. Ahora uso Premium para mis investigaciones de tesis.",
+      "rating": 5
+    },
+    {
+      "author": "Ana Martínez",
+      "role": "Consultora Legal",
+      "text": "La validación de vigencia de normas es una funcionalidad que ninguna otra herramienta ofrece. Vale cada peso.",
+      "rating": 5
+    }
+  ]
+}

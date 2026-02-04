@@ -1,0 +1,25 @@
+{
+  "normaId": "ley-2101-2021",
+  "nombre": "Ley 2101 de 2021 (Reducción de Jornada Laboral)",
+  "tipo": "ley",
+  "vigenteDesde": "2021-07-15",
+  "vigenteHasta": null,
+  "estado": "vigente",
+  "modificaciones": [],
+  "notas": [
+    "Reduce gradualmente la jornada laboral máxima semanal en Colombia",
+    "REDUCCIÓN GRADUAL: de 48 horas semanales a 42 horas semanales",
+    "Calendario de implementación:",
+    "  - 2023 (15 julio): máximo 47 horas semanales",
+    "  - 2024 (15 julio): máximo 46 horas semanales",
+    "  - 2025 (15 julio): máximo 44 horas semanales",
+    "  - 2026 (15 julio): máximo 42 horas semanales (jornada definitiva)",
+    "La reducción NO implica reducción de salario: los trabajadores mantienen su remuneración",
+    "Se mantiene el límite de 8 horas diarias de trabajo ordinario",
+    "Aplica a todos los trabajadores del sector privado y público",
+    "Excepciones: actividades que por su naturaleza requieren jornadas especiales (salud, seguridad, etc.)",
+    "Las horas adicionales a la jornada máxima se consideran extras y generan recargo del 25% (diurnas) o 75% (nocturnas)",
+    "Modifica el artículo 161 del Código Sustantivo del Trabajo",
+    "Primera reducción de jornada laboral en Colombia desde 1963 (cuando pasó de 56 a 48 horas)"
+  ]
+}

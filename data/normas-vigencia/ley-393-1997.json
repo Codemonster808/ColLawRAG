@@ -1,0 +1,29 @@
+{
+  "normaId": "ley-393-1997",
+  "nombre": "Ley 393 de 1997 (Acción de Cumplimiento)",
+  "tipo": "ley",
+  "vigenteDesde": "1997-07-31",
+  "vigenteHasta": null,
+  "estado": "vigente",
+  "modificaciones": [
+    {
+      "norma": "ley-1437-2011",
+      "fecha": "2011-01-18",
+      "tipo": "modificacion",
+      "descripcion": "Código de Procedimiento Administrativo (aspectos procesales de la acción de cumplimiento)"
+    }
+  ],
+  "notas": [
+    "Reglamenta la acción de cumplimiento consagrada en el artículo 87 de la Constitución Política",
+    "Permite exigir el cumplimiento de una ley o acto administrativo que no está siendo cumplido",
+    "REQUISITO DE PROCEDIBILIDAD: debe presentarse solicitud previa ante la autoridad renuente",
+    "Si la autoridad no responde en 10 días o responde negativamente, se configura la renuencia",
+    "No procede contra normas que no determinen una conducta clara del obligado",
+    "No procede cuando existen otros medios judiciales (salvo como mecanismo transitorio para evitar perjuicio irremediable)",
+    "Competencia: Tribunales Administrativos (si es contra entidad pública), Juzgados Administrativos (menor cuantía)",
+    "Término: máximo 4 meses desde que se configura la renuencia para presentar la acción",
+    "La sentencia es de única instancia si es proferida por Tribunal (salvo súplica)",
+    "Puede proceder contra autoridades públicas o particulares que ejerzan funciones públicas",
+    "Es un mecanismo subsidiario: solo procede si no hay otra vía judicial efectiva"
+  ]
+}

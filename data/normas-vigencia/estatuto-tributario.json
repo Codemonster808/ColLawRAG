@@ -1,0 +1,118 @@
+{
+  "normaId": "estatuto-tributario",
+  "nombre": "Estatuto Tributario (Decreto 624 de 1989)",
+  "tipo": "codigo",
+  "vigenteDesde": "1989-03-30",
+  "vigenteHasta": null,
+  "estado": "parcialmente_derogada",
+  "derogacionesParciales": [
+    {
+      "articulo": "Arts. 240-265 (Régimen de renta presuntiva)",
+      "derogadoPor": "ley-1819-2016",
+      "derogadaDesde": "2017-01-01",
+      "razon": "Eliminación gradual de renta presuntiva"
+    },
+    {
+      "articulo": "Arts. 26-27 (Compensación de pérdidas fiscales)",
+      "derogadoPor": "ley-1819-2016",
+      "derogadaDesde": "2017-01-01",
+      "razon": "Nuevo régimen de compensación de pérdidas"
+    },
+    {
+      "articulo": "Arts. 425-428 (Retención en la fuente)",
+      "derogadoPor": "ley-1943-2018",
+      "derogadaDesde": "2019-01-01",
+      "razon": "Modificación del régimen de retención en la fuente"
+    },
+    {
+      "articulo": "Arts. 591-593 (Impuesto de industria y comercio)",
+      "derogadoPor": "ley-14-1983",
+      "derogadaDesde": "1983-07-06",
+      "razon": "Reforma al régimen de impuestos territoriales"
+    }
+  ],
+  "modificaciones": [
+    {
+      "norma": "ley-6-1992",
+      "fecha": "1992-06-30",
+      "tipo": "modificacion",
+      "descripcion": "Reforma tributaria (IVA, renta)"
+    },
+    {
+      "norma": "ley-223-1995",
+      "fecha": "1995-12-20",
+      "tipo": "modificacion",
+      "descripcion": "Reforma tributaria (normas de procedimiento)"
+    },
+    {
+      "norma": "ley-488-1998",
+      "fecha": "1998-12-24",
+      "tipo": "modificacion",
+      "descripcion": "Reforma tributaria (IVA, renta, procedimiento)"
+    },
+    {
+      "norma": "ley-788-2002",
+      "fecha": "2002-12-27",
+      "tipo": "modificacion",
+      "descripcion": "Reforma tributaria (IVA, renta, procedimiento)"
+    },
+    {
+      "norma": "ley-1111-2006",
+      "fecha": "2006-12-27",
+      "tipo": "modificacion",
+      "descripcion": "Reforma tributaria (renta, patrimonio)"
+    },
+    {
+      "norma": "ley-1430-2010",
+      "fecha": "2010-12-29",
+      "tipo": "modificacion",
+      "descripcion": "Reforma tributaria (control fiscal)"
+    },
+    {
+      "norma": "ley-1607-2012",
+      "fecha": "2012-12-26",
+      "tipo": "modificacion",
+      "descripcion": "Reforma tributaria (renta, CREE, procedimiento)"
+    },
+    {
+      "norma": "ley-1739-2014",
+      "fecha": "2014-12-23",
+      "tipo": "modificacion",
+      "descripcion": "Reforma tributaria (impuesto a la riqueza)"
+    },
+    {
+      "norma": "ley-1819-2016",
+      "fecha": "2016-12-29",
+      "tipo": "modificacion",
+      "descripcion": "Reforma tributaria estructural (IVA, renta, procedimiento)"
+    },
+    {
+      "norma": "ley-1943-2018",
+      "fecha": "2018-12-28",
+      "tipo": "modificacion",
+      "descripcion": "Ley de financiamiento (declarada inexequible parcialmente)"
+    },
+    {
+      "norma": "ley-2010-2019",
+      "fecha": "2019-12-27",
+      "tipo": "modificacion",
+      "descripcion": "Ley de crecimiento económico (sustituyó disposiciones de Ley 1943)"
+    },
+    {
+      "norma": "ley-2155-2021",
+      "fecha": "2021-09-14",
+      "tipo": "modificacion",
+      "descripcion": "Ley de inversión social (reforma tributaria COVID-19)"
+    }
+  ],
+  "notas": [
+    "Estatuto Tributario es el código fundamental del sistema tributario colombiano",
+    "Regula impuestos nacionales: renta, IVA, retención en la fuente, timbre, etc.",
+    "Es uno de los códigos más modificados de Colombia (reformas tributarias casi anuales)",
+    "La Ley 1819 de 2016 fue una de las reformas estructurales más importantes",
+    "La Ley 1943 de 2018 fue declarada inexequible por vicios de procedimiento (Sentencia C-481 de 2019)",
+    "La Ley 2010 de 2019 reemplazó las disposiciones de la Ley 1943 tras su inexequibilidad",
+    "DIAN es la entidad encargada de la administración de impuestos nacionales",
+    "Los términos de prescripción, firmeza y corrección varían según el tipo de declaración"
+  ]
+}

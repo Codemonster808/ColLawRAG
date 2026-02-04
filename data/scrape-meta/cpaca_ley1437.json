@@ -1,0 +1,15 @@
+{
+  "slug": "cpaca_ley1437",
+  "nombre": "Código de Procedimiento Administrativo y de lo Contencioso Administrativo (Ley 1437 de 2011)",
+  "tipo": "codigo",
+  "area": "administrativo",
+  "fuente": "senado",
+  "url": "http://www.secretariasenado.gov.co/senado/basedoc/ley_1437_2011.html",
+  "fpId": 41249,
+  "paginated": true,
+  "enabled": true,
+  "filename": "codigo_cpaca_ley1437.txt",
+  "size": 405704,
+  "scrapedAt": "2026-02-01T22:01:40.291Z",
+  "textLength": 405383
+}
