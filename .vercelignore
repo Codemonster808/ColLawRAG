@@ -1,0 +1,35 @@
+# Índices RAG - Se descargan desde GitHub Releases en el build
+data/index.json
+data/bm25-index.json
+data/*.gz
+
+# NO ignorar indices-urls.json (necesario para el build)
+!data/indices-urls.json
+
+# Archivos de desarrollo y testing
+**/test-*.mjs
+hf-gen-test.mjs
+**/debug/
+
+# Logs
+*.log
+logs/
+log_errores/
+
+# Cache y archivos temporales
+.next/cache
+*.tmp
+*.temp
+*.swp
+*~
+
+# Archivos de metadatos de scraping (opcionales - ya están en git si es necesario)
+data/scrape-meta/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Documentación de desarrollo (opcional - mantener solo si es necesaria en producción)
+# DEPLOY_VERCEL_INDICES.md
+# CONFIGURAR_VERCEL_MEJORAS.md
