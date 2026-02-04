@@ -60,6 +60,8 @@ hf-gen-test.mjs
 # Índices grandes generados localmente (se regeneran con npm run ingest)
 data/index.json
 data/bm25-index.json
+# Índices comprimidos (se suben a GitHub Releases; no al repo)
+data/*.json.gz
 .vercel
 .vercel/
 

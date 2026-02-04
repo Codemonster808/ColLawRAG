@@ -398,7 +398,12 @@ async function main() {
     process.exit(1)
   }
   const entries = await fsp.readdir(DOCS_DIR)
-  const files = entries.filter(e => e.toLowerCase().endsWith('.txt'))
+  let files = entries.filter(e => e.toLowerCase().endsWith('.txt')).sort()
+  const maxDocs = process.env.INGEST_MAX_DOCS ? parseInt(process.env.INGEST_MAX_DOCS, 10) : null
+  if (maxDocs != null && maxDocs > 0 && files.length > maxDocs) {
+    files = files.slice(0, maxDocs)
+    console.log(`⚠️  INGEST_MAX_DOCS=${process.env.INGEST_MAX_DOCS}: solo se procesarán ${files.length} documento(s) (build rápido en Vercel)`)
+  }
   if (files.length === 0) {
     console.error('No se encontraron documentos en', DOCS_DIR)
     process.exit(1)

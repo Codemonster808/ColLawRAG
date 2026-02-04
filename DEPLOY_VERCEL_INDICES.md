@@ -24,9 +24,10 @@ En **Vercel → Project Settings → Environment Variables**, configurar:
 | Variable | Valor | Descripción |
 |----------|-------|-------------|
 | `HUGGINGFACE_API_KEY` | `hf_xxxxxxxxxxxxx` | **OBLIGATORIO** - API key de HuggingFace para generar embeddings |
+| `INGEST_MAX_DOCS` | `8` o `10` | **Recomendado en Vercel** - Limita cuántos documentos se indexan en el build. Con 30+ docs el build puede pasar de 10–15 min y hacer timeout. Usar 8–10 para que el build termine en ~5–8 min. Los primeros documentos (orden alfabético) suelen ser constitucion, códigos, etc. |
 | `NODE_OPTIONS` | `--max-old-space-size=4096` | **Opcional** - Aumenta memoria disponible si el build falla por OOM |
 
-**Importante**: Sin `HUGGINGFACE_API_KEY` el build fallará porque no podrá generar embeddings.
+**Importante**: Sin `HUGGINGFACE_API_KEY` el build fallará porque no podrá generar embeddings. Si el build tarda más de 10–15 min, añade **INGEST_MAX_DOCS=8** (o 10) para un índice “MVP” que permite probar el RAG sin timeout.
 
 ### 2. Build Command
 
@@ -49,19 +50,25 @@ El proceso de ingest puede tardar **5-15 minutos** dependiendo de:
 - Velocidad de la API de HuggingFace
 - Recursos asignados en Vercel
 
-**Si el build hace timeout:**
+**Si el build hace timeout (p. ej. >10–15 min):**
 
-#### Opción 1: Aumentar timeout en Vercel (si tu plan lo permite)
+#### Opción 1 (recomendada): Limitar documentos con INGEST_MAX_DOCS
+1. En **Vercel → Project Settings → Environment Variables** añade:
+   - **Name:** `INGEST_MAX_DOCS`
+   - **Value:** `8` (o `10`)
+2. Redeploy. El script de ingest solo procesará los primeros 8 (o 10) documentos en orden alfabético; el build suele terminar en ~5–8 min y el RAG sigue funcionando con un subconjunto útil (constitución, códigos, etc.).
+
+#### Opción 2: Aumentar timeout en Vercel (si tu plan lo permite)
 1. Ir a **Vercel → Project Settings → General → Build & Development Settings**
 2. Buscar **Build Timeout**
-3. Aumentar a 15-20 minutos (disponible en planes Pro+)
+3. Aumentar a 15–20 minutos (disponible en planes Pro+)
 
-#### Opción 2: Reducir documentos temporalmente
+#### Opción 3: Reducir documentos manualmente
 1. Comentar temporalmente algunos documentos en `scripts/ingest.mjs`
 2. Hacer deploy con menos documentos
 3. Ir agregando documentos gradualmente
 
-#### Opción 3: Usar pre-build local y subir índices
+#### Opción 4: Usar pre-build local y subir índices
 Si el build en Vercel sigue fallando, puedes:
 1. Generar los índices localmente: `npm run ingest`
 2. Subir `data/index.json` y `data/bm25-index.json` a Vercel Storage o similar
