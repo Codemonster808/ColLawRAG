@@ -3,7 +3,7 @@ import { retrieveRelevantChunks } from './retrieval'
 import { generateAnswerSpanish } from './generation'
 import { filterSensitivePII } from './pii'
 import { type RagQuery, type RagResponse, type DocumentChunk } from './types'
-import { detectLegalArea } from './prompt-templates'
+import { detectLegalArea, detectComplexity } from './prompt-templates'
 import { logger } from './logger'
 import { isProcedureRelatedQuery, getProcedureChunksForQuery } from './procedures'
 import { consultarVigencia, inferNormaIdFromTitle } from './norm-vigencia'
@@ -221,12 +221,27 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
   const detectedLegalArea = providedLegalArea || detectLegalArea(query)
   logger.logPipelineStep('Legal area detected', requestId, { legalArea: detectedLegalArea })
 
-  // 2. Retrieval con re-ranking (ya integrado en retrieveRelevantChunks)
+  // 1.5 Detectar complejidad de la consulta para ajustar parámetros
+  // Detectar complejidad basada en la consulta (sin necesidad de retrieval previo)
+  // Hacemos un retrieval pequeño inicial solo para estimar disponibilidad de fuentes
+  const quickRetrieval = await retrieveRelevantChunks(query, filters, 5)
+  const detectedComplexity = detectComplexity(query, quickRetrieval.length)
+  
+  // Top-K adaptativo según complejidad
+  const adaptiveTopK = detectedComplexity === 'alta' ? 16 : detectedComplexity === 'media' ? 12 : 8
+  logger.logPipelineStep('Complexity detected', requestId, { 
+    complexity: detectedComplexity, 
+    adaptiveTopK,
+    quickRetrievalCount: quickRetrieval.length
+  })
+
+  // 2. Retrieval completo con re-ranking usando top-K adaptativo
   logger.logPipelineStep('Retrieving chunks', requestId)
-  const retrieved = await retrieveRelevantChunks(query, filters, 8)
+  const retrieved = await retrieveRelevantChunks(query, filters, adaptiveTopK)
   logger.logPipelineStep('Chunks retrieved', requestId, { 
     count: retrieved.length, 
-    scores: retrieved.map(r => r.score.toFixed(3)) 
+    scores: retrieved.map(r => r.score.toFixed(3)),
+    complexity: detectedComplexity
   })
 
   if (retrieved.length === 0) {
@@ -260,7 +275,8 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
     chunks: chunksForGeneration,
     legalArea: detectedLegalArea,
     includeWarnings: true,
-    requestId
+    requestId,
+    complexity: detectedComplexity
   })
   logger.logPipelineStep('Answer generated', requestId, { answerLength: answer.length })
 

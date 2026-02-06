@@ -207,8 +207,12 @@ export async function POST(req: NextRequest) {
     })
     
     // Mapear a flags del pipeline
-    // Nota: includeFactualValidation no está en tiers, usar variable de entorno
-    const enableFactualValidation = process.env.ENABLE_FACTUAL_VALIDATION === 'true'
+    // Validaciones: habilitadas por defecto para premium, deshabilitadas para free (para reducir costo)
+    // Se pueden forzar con variables de entorno
+    const forceFactualValidation = process.env.ENABLE_FACTUAL_VALIDATION === 'true'
+    const forceCitationValidation = process.env.ENABLE_CITATION_VALIDATION === 'true'
+    const enableFactualValidation = forceFactualValidation || (userTier === 'premium' && process.env.ENABLE_FACTUAL_VALIDATION !== 'false')
+    const enableCitationValidation = forceCitationValidation || (userTier === 'premium' && process.env.ENABLE_CITATION_VALIDATION !== 'false')
     const enableStructuredResponse = tierAdjustedParams.includeStructuredResponse
     const enableCalculations = tierAdjustedParams.includeCalculations
 
@@ -249,6 +253,7 @@ export async function POST(req: NextRequest) {
         locale,
         userId,
         enableFactualValidation,
+        enableCitationValidation,
         enableStructuredResponse,
         enableCalculations
       }),

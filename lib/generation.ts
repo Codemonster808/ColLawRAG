@@ -35,10 +35,12 @@ function isRetryableError(error: any): boolean {
   return false
 }
 
-// Maximum number of citations to include in context
-const MAX_CITATIONS = 8
-// Limit context to avoid API errors (max ~4000 chars to stay within token limits)
-const MAX_CONTEXT_CHARS = 4000
+// Maximum number of citations to include in context (base, can be increased for complex queries)
+const MAX_CITATIONS_BASE = 8
+const MAX_CITATIONS_COMPLEX = 16
+// Limit context to avoid API errors (base ~4000 chars, can be increased for complex queries)
+const MAX_CONTEXT_CHARS_BASE = 4000
+const MAX_CONTEXT_CHARS_COMPLEX = 8000
 
 /**
  * Generate answer using a specific model with retry logic
@@ -199,22 +201,35 @@ export async function generateAnswerSpanish(params: {
   legalArea?: string
   includeWarnings?: boolean
   requestId?: string
+  complexity?: 'baja' | 'media' | 'alta'
 }): Promise<string> {
-  const { query, chunks, legalArea, includeWarnings = true, requestId } = params
+  const { query, chunks, legalArea, includeWarnings = true, requestId, complexity = 'media' } = params
 
-  // Limit chunks to MAX_CITATIONS and MAX_CONTEXT_CHARS
+  // Ajustar límites según complejidad
+  const maxCitations = complexity === 'alta' ? MAX_CITATIONS_COMPLEX : complexity === 'media' ? 12 : MAX_CITATIONS_BASE
+  const maxContextChars = complexity === 'alta' ? MAX_CONTEXT_CHARS_COMPLEX : complexity === 'media' ? 6000 : MAX_CONTEXT_CHARS_BASE
+  
+  logger.debug('Generation parameters', {
+    requestId,
+    complexity,
+    maxCitations,
+    maxContextChars,
+    chunksAvailable: chunks.length
+  })
+
+  // Limit chunks to MAX_CITATIONS and MAX_CONTEXT_CHARS (adaptativos)
   const limitedChunks: Array<{ chunk: DocumentChunk; score: number }> = []
   let totalChars = 0
   
-  for (let i = 0; i < Math.min(chunks.length, MAX_CITATIONS); i++) {
+  for (let i = 0; i < Math.min(chunks.length, maxCitations); i++) {
     const r = chunks[i]
     const block = `Fuente [${i + 1}] (${r.chunk.metadata.title}${r.chunk.metadata.article ? ` — ${r.chunk.metadata.article}` : ''}):\n${r.chunk.content}`
     const blockSize = block.length + (i > 0 ? 2 : 0) // +2 for \n\n
     
     // Si es el primer chunk y es muy grande, truncarlo en lugar de omitirlo
-    if (i === 0 && blockSize > MAX_CONTEXT_CHARS) {
+    if (i === 0 && blockSize > maxContextChars) {
       // Truncar el contenido del primer chunk si es necesario
-      const maxFirstChunkSize = MAX_CONTEXT_CHARS - 200 // Dejar espacio para metadata
+      const maxFirstChunkSize = maxContextChars - 200 // Dejar espacio para metadata
       const truncatedContent = r.chunk.content.substring(0, maxFirstChunkSize) + '...'
       const truncatedBlock = `Fuente [${i + 1}] (${r.chunk.metadata.title}${r.chunk.metadata.article ? ` — ${r.chunk.metadata.article}` : ''}):\n${truncatedContent}`
       limitedChunks.push(r)
@@ -222,7 +237,7 @@ export async function generateAnswerSpanish(params: {
       break
     }
     
-    if (totalChars + blockSize > MAX_CONTEXT_CHARS) break
+    if (totalChars + blockSize > maxContextChars) break
     limitedChunks.push(r)
     totalChars += blockSize
   }
@@ -239,7 +254,7 @@ export async function generateAnswerSpanish(params: {
     legalArea: legalArea as any,
     maxCitations: limitedChunks.length,
     includeWarnings,
-    complexity: 'media' // Will be auto-detected
+    complexity // Usar complejidad detectada
   }
   
   const { systemPrompt, userPrompt } = generatePrompts(promptContext)
@@ -280,14 +295,21 @@ export async function generateAnswerSpanish(params: {
     // Default: Hugging Face Inference API via router.huggingface.co
     const primaryModel = process.env.HF_GENERATION_MODEL || HF_MODEL_GENERATION_DEFAULT
     const fallbackModel = process.env.HF_GENERATION_MODEL_FALLBACK || HF_MODEL_FALLBACK_DEFAULT
-    const maxTokens = parseInt(process.env.HF_MAX_TOKENS || '2000', 10)
+    
+    // Max tokens adaptativo según complejidad
+    const baseMaxTokens = parseInt(process.env.HF_MAX_TOKENS || '2000', 10)
+    const adaptiveMaxTokens = complexity === 'alta' ? Math.max(baseMaxTokens * 1.5, 3000) : 
+                              complexity === 'media' ? Math.max(baseMaxTokens * 1.2, 2400) : 
+                              baseMaxTokens
     const timeoutMs = parseInt(process.env.HF_API_TIMEOUT_MS || '60000', 10) // Increased to 60s default
     
     logger.info('Starting generation with Hugging Face', {
       requestId,
       primaryModel,
       fallbackModel,
-      maxTokens,
+      maxTokens: adaptiveMaxTokens,
+      baseMaxTokens,
+      complexity,
       timeoutMs,
       chunksUsed: limitedChunks.length,
       totalChunks: chunks.length,
@@ -301,7 +323,7 @@ export async function generateAnswerSpanish(params: {
         primaryModel,
         systemPrompt,
         userPrompt,
-        maxTokens,
+        adaptiveMaxTokens,
         timeoutMs,
         requestId
       )
@@ -331,7 +353,7 @@ export async function generateAnswerSpanish(params: {
             fallbackModel,
             systemPrompt,
             userPrompt,
-            maxTokens,
+            adaptiveMaxTokens,
             timeoutMs,
             requestId
           )

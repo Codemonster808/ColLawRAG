@@ -163,7 +163,7 @@ export function generateLegalWarnings(complexity: 'baja' | 'media' | 'alta', leg
 /**
  * Genera el prompt del sistema especializado por área legal
  */
-export function generateSystemPrompt(legalArea: LegalArea, maxCitations: number): string {
+export function generateSystemPrompt(legalArea: LegalArea, maxCitations: number, complexity: 'baja' | 'media' | 'alta' = 'media'): string {
   const areaPrompts: Record<LegalArea, string> = {
     laboral: `Eres un abogado laboralista especializado en derecho del trabajo colombiano. Tu expertise incluye:
 - Código Sustantivo del Trabajo y sus decretos reglamentarios
@@ -225,6 +225,17 @@ Responde siempre estructurando: HECHOS RELEVANTES, NORMAS APLICABLES, ANÁLISIS 
   
   const basePrompt = areaPrompts[legalArea]
   
+  // Instrucciones adicionales para consultas complejas
+  const complexQueryInstructions = complexity === 'alta' ? `
+6. CONSULTAS COMPLEJAS - INSTRUCCIONES ESPECIALES:
+   - Si la consulta tiene múltiples partes, responde cada parte de forma estructurada
+   - Si es una consulta comparativa, organiza la respuesta en secciones claras para cada elemento comparado
+   - Si es una consulta procedimental, detalla TODOS los pasos en orden cronológico
+   - Si hay contradicciones entre fuentes, explícalas claramente y prioriza según jerarquía legal (Constitución > Ley > Decreto)
+   - Si la consulta requiere información de múltiples áreas legales, integra la información de forma coherente
+   - Para consultas que requieren jurisprudencia, cita los criterios específicos de las sentencias relevantes
+   - Si la información disponible no cubre todos los aspectos de la consulta, indícalo explícitamente en cada sección afectada` : ''
+  
   return `${basePrompt}
 
 INSTRUCCIONES CRÍTICAS:
@@ -252,7 +263,7 @@ INSTRUCCIONES CRÍTICAS:
 5. LIMITACIONES:
    - Si la información disponible es insuficiente, indícalo claramente
    - No inventes información que no esté en las fuentes proporcionadas
-   - Si el caso requiere análisis específico, recomienda asesoría profesional`
+   - Si el caso requiere análisis específico, recomienda asesoría profesional${complexQueryInstructions}`
 }
 
 /**
@@ -285,6 +296,17 @@ export function generateUserPrompt(context: PromptContext): string {
     ? generateLegalWarnings(complexity, legalArea)
     : ''
   
+  // Instrucciones adicionales para consultas complejas
+  const complexInstructions = complexity === 'alta' ? `
+
+INSTRUCCIONES ESPECIALES PARA CONSULTA COMPLEJA:
+- Si la consulta tiene múltiples partes o preguntas, responde cada una de forma estructurada
+- Si es una consulta comparativa, organiza la respuesta comparando punto por punto
+- Si es una consulta procedimental, detalla TODOS los pasos, plazos y requisitos en orden
+- Si hay información contradictoria entre fuentes, explícala y prioriza según jerarquía legal
+- Si la consulta requiere información de múltiples áreas, integra la información de forma coherente
+- Asegúrate de cubrir TODOS los aspectos mencionados en la consulta` : ''
+  
   return `CONSULTA LEGAL:
 ${query}
 
@@ -292,42 +314,106 @@ CONTEXTO LEGAL DISPONIBLE (${chunks.length} fuentes, usando primeras ${Math.min(
 ${contextBlocks}${citationWarning}
 
 INSTRUCCIONES:
-Responde como un abogado profesional especializado en ${legalArea || 'derecho colombiano'}, estructurando tu respuesta según el formato indicado.${warnings}
+Responde como un abogado profesional especializado en ${legalArea || 'derecho colombiano'}, estructurando tu respuesta según el formato indicado.${warnings}${complexInstructions}
 
 IMPORTANTE: Solo puedes citar fuentes del 1 al ${Math.min(chunks.length, maxCitations)}. Si necesitas más información, indica que la consulta requiere análisis adicional con más fuentes legales.`
 }
 
 /**
- * Detecta la complejidad de una consulta
+ * Detecta la complejidad de una consulta con análisis más sofisticado
  */
 export function detectComplexity(query: string, chunksCount: number): 'baja' | 'media' | 'alta' {
   const lowerQuery = query.toLowerCase()
   
-  // Indicadores de alta complejidad
+  // Contador de indicadores de complejidad
+  let complexityScore = 0
+  
+  // Indicadores de alta complejidad (peso 2)
   const highComplexityIndicators = [
-    /\b(múltiples|varios|diferentes|complejo|conflicto|contradicci[oó]n)\b/,
-    /\b(procedimiento|proceso|demanda|recurso|apelaci[oó]n)\b/,
-    /\b(plazo|término|prescripci[oó]n|caducidad)\b/,
-    /\?.*\?/ // Múltiples preguntas
+    /\b(múltiples|varios|diferentes|complejo|conflicto|contradicci[oó]n|comparar|comparaci[oó]n)\b/,
+    /\b(procedimiento\s+completo|proceso\s+completo|demanda|recurso|apelaci[oó]n|impugnaci[oó]n)\b/,
+    /\b(plazo|término|prescripci[oó]n|caducidad|vencimiento)\b/,
+    /\?.*\?/, // Múltiples preguntas
+    /\b(incluyendo|además|también|así como|y\s+(requisitos|plazos|efectos|recursos))\b/, // Consultas multi-parte
+    /\b(versus|vs\.|contra|frente a|diferencia entre)\b/, // Consultas comparativas
+    /\b(todos los|todas las|completo|integral|exhaustivo)\b/, // Consultas que requieren información completa
+    /\b(jurisprudencia|sentencia|fallo|criterio|doctrina)\b/, // Requiere análisis jurisprudencial
   ]
   
-  // Indicadores de media complejidad
+  // Indicadores de media complejidad (peso 1)
   const mediumComplexityIndicators = [
-    /\b(cómo|qué hacer|proceder|pasos)\b/,
-    /\b(derecho|obligaci[oó]n|requisito)\b/
+    /\b(cómo|qué hacer|proceder|pasos|requisitos)\b/,
+    /\b(derecho|obligaci[oó]n|requisito|documento)\b/,
+    /\b(cuándo|dónde|quién|cuál es el)\b/,
   ]
   
-  const hasHighComplexity = highComplexityIndicators.some(pattern => pattern.test(lowerQuery))
-  const hasMediumComplexity = mediumComplexityIndicators.some(pattern => pattern.test(lowerQuery))
+  // Contar indicadores de alta complejidad
+  highComplexityIndicators.forEach(pattern => {
+    if (pattern.test(lowerQuery)) {
+      complexityScore += 2
+    }
+  })
   
-  // Si hay pocas fuentes, aumenta la complejidad percibida
-  const sourceComplexity = chunksCount < 5 ? 1 : chunksCount < 8 ? 0.5 : 0
+  // Contar indicadores de media complejidad
+  mediumComplexityIndicators.forEach(pattern => {
+    if (pattern.test(lowerQuery)) {
+      complexityScore += 1
+    }
+  })
   
-  if (hasHighComplexity || sourceComplexity > 0.5) {
+  // Detectar consultas comparativas (muy complejas)
+  if (/\b(comparar|comparaci[oó]n|versus|vs\.|diferencia|diferencias|similitud|similitudes)\b/.test(lowerQuery)) {
+    complexityScore += 3
+  }
+  
+  // Detectar consultas procedimentales completas
+  if (/\b(procedimiento\s+completo|proceso\s+completo|pasos\s+completos|etapas)\b/.test(lowerQuery)) {
+    complexityScore += 2
+  }
+  
+  // Detectar múltiples preguntas en una sola consulta
+  const questionCount = (lowerQuery.match(/\?/g) || []).length
+  if (questionCount > 1) {
+    complexityScore += 2
+  }
+  
+  // Detectar consultas que requieren múltiples áreas legales
+  const legalAreas = ['laboral', 'comercial', 'civil', 'penal', 'administrativo', 'tributario', 'constitucional']
+  const areasMentioned = legalAreas.filter(area => {
+    const patterns: Record<string, RegExp[]> = {
+      laboral: [/\b(trabajo|empleado|contrato laboral|prestaciones)\b/],
+      comercial: [/\b(comercio|sociedad|empresa|contrato comercial)\b/],
+      civil: [/\b(contrato civil|propiedad|sucesi[oó]n|divorcio)\b/],
+      penal: [/\b(delito|pena|c[oó]digo penal|crimen)\b/],
+      administrativo: [/\b(acto administrativo|recurso|tutela|entidad p[uú]blica)\b/],
+      tributario: [/\b(impuesto|renta|iva|dian)\b/],
+      constitucional: [/\b(constituci[oó]n|derechos fundamentales|acci[oó]n de tutela)\b/],
+    }
+    return patterns[area]?.some(pattern => pattern.test(lowerQuery)) || false
+  })
+  
+  if (areasMentioned.length > 1) {
+    complexityScore += 2 // Consultas multi-área son más complejas
+  }
+  
+  // Si hay pocas fuentes disponibles, aumenta la complejidad percibida
+  const sourceComplexity = chunksCount < 5 ? 2 : chunksCount < 8 ? 1 : 0
+  complexityScore += sourceComplexity
+  
+  // Longitud de la consulta (consultas largas suelen ser más complejas)
+  if (query.length > 200) {
+    complexityScore += 1
+  }
+  if (query.length > 400) {
+    complexityScore += 1
+  }
+  
+  // Clasificar según score
+  if (complexityScore >= 5) {
     return 'alta'
   }
   
-  if (hasMediumComplexity || sourceComplexity > 0) {
+  if (complexityScore >= 2) {
     return 'media'
   }
   
@@ -351,7 +437,7 @@ export function generatePrompts(context: PromptContext): {
   }
   
   return {
-    systemPrompt: generateSystemPrompt(legalArea, context.maxCitations),
+    systemPrompt: generateSystemPrompt(legalArea, context.maxCitations, complexity),
     userPrompt: generateUserPrompt(updatedContext)
   }
 }
