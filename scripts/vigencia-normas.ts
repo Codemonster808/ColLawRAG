@@ -229,14 +229,15 @@ try {
     case 'listar': {
       const [, estado, fecha] = args
 
-      if (estado && !['vigente', 'derogada', 'parcialmente_derogada'].includes(estado)) {
+      const estadosValidos = ['vigente', 'derogada', 'parcialmente_derogada'] as const
+      if (estado && !estadosValidos.includes(estado as any)) {
         console.error('❌ Error: Estado inválido. Debe ser: vigente, derogada o parcialmente_derogada')
         process.exit(1)
       }
 
       let normas: string[]
       if (estado) {
-        normas = filtrarPorEstado(estado, fecha)
+        normas = filtrarPorEstado(estado as 'vigente' | 'derogada' | 'parcialmente_derogada', fecha)
       } else {
         normas = listNormas()
       }
