@@ -3,7 +3,7 @@
  * Conectado con lib/auth.ts para persistencia en SQLite
  */
 
-import { getUser, getUserStats, logQuery } from './auth'
+import { getUser, getUserStats, logQuery, createUser } from './auth'
 
 export type UserTier = 'free' | 'premium'
 
@@ -128,7 +128,6 @@ export function trackUsage(userId: string, tier: UserTier, query?: string, respo
     const user = getUser(userId)
     if (!user) {
       // Crear usuario si no existe
-      const { createUser } = require('./auth')
       createUser({ id: userId, tier })
     }
     

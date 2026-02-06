@@ -63,7 +63,6 @@ export async function POST(req: NextRequest) {
   let requestId: string | undefined
   let userId: string | undefined
   let userTier: 'free' | 'premium' = 'free'
-  let queryText = ''
   
   try {
     // Check Content-Length header to prevent large payloads
@@ -190,6 +189,7 @@ export async function POST(req: NextRequest) {
     }
 
     const { query, filters, locale = 'es' } = parsed.data
+    const queryText = query || '' // Para tracking
     logger.info('Request body parsed', { 
       queryLength: query?.length || 0, 
       filters, 
