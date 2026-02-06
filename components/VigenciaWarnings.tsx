@@ -18,7 +18,7 @@ export default function VigenciaWarnings({
   const hasWarnings = (warnings?.length ?? 0) > 0 || (byNorma?.length ?? 0) > 0
   if (!hasWarnings) return null
 
-  const items = byNorma?.length
+  const items: VigenciaNorma[] = byNorma?.length
     ? byNorma
     : (warnings ?? []).map((w, i) => ({ normaId: String(i), title: w, estado: 'derogada' as const }))
 
@@ -42,11 +42,11 @@ export default function VigenciaWarnings({
             key={n.normaId}
             className={`rounded-md border px-3 py-2 text-sm ${estadoStyle(n.estado)}`}
           >
-            <span className="font-medium">{'title' in n ? n.title : n.normaId}</span>
-            {n.estado === 'derogada' && (n as VigenciaNorma).derogadaPor && (
+            <span className="font-medium">{n.title || n.normaId}</span>
+            {n.estado === 'derogada' && n.derogadaPor && (
               <span className="block mt-1 opacity-90">
-                Derogada por {(n as VigenciaNorma).derogadaPor}
-                {(n as VigenciaNorma).derogadaDesde && ` desde ${(n as VigenciaNorma).derogadaDesde}`}
+                Derogada por {n.derogadaPor}
+                {n.derogadaDesde && ` desde ${n.derogadaDesde}`}
               </span>
             )}
             {n.estado === 'parcialmente_derogada' && (
