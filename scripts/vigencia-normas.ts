@@ -200,8 +200,8 @@ try {
         process.exit(1)
       }
 
-      const tiposValidos = ['modificacion', 'adicion', 'subrogacion', 'aclaracion']
-      if (!tiposValidos.includes(tipo)) {
+      const tiposValidos = ['modificacion', 'adicion', 'subrogacion', 'aclaracion'] as const
+      if (!tiposValidos.includes(tipo as any)) {
         console.error(`❌ Error: Tipo inválido. Debe ser uno de: ${tiposValidos.join(', ')}`)
         process.exit(1)
       }
@@ -211,7 +211,7 @@ try {
       registrarModificacion(normaId, {
         norma: modificadaPor,
         fecha,
-        tipo,
+        tipo: tipo as 'modificacion' | 'adicion' | 'subrogacion' | 'aclaracion',
         descripcion
       })
 
