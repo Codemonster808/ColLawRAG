@@ -132,8 +132,8 @@ try {
         process.exit(1)
       }
 
-      const tiposValidos = ['ley', 'decreto', 'acto_legislativo', 'codigo', 'resolucion', 'acuerdo']
-      if (!tiposValidos.includes(tipo)) {
+      const tiposValidos = ['ley', 'decreto', 'acto_legislativo', 'codigo', 'resolucion', 'acuerdo'] as const
+      if (!tiposValidos.includes(tipo as any)) {
         console.error(`❌ Error: Tipo inválido. Debe ser uno de: ${tiposValidos.join(', ')}`)
         process.exit(1)
       }
@@ -141,7 +141,7 @@ try {
       crearNorma({
         normaId,
         nombre,
-        tipo,
+        tipo: tipo as 'ley' | 'decreto' | 'acto_legislativo' | 'codigo' | 'resolucion' | 'acuerdo',
         vigenteDesde,
         vigenteHasta: null,
         estado: 'vigente'
