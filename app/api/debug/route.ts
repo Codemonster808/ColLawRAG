@@ -4,6 +4,7 @@ import path from 'node:path'
 import { gunzipSync } from 'node:zlib'
 
 export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
 
 function cosineSim(a: number[], b: number[]) {
   if (!a || !b || a.length === 0 || b.length === 0) return NaN
