@@ -107,8 +107,14 @@ async function decompressFile(gzPath, outputPath, label) {
   
   console.log(`   ✅ Descomprimido en ${duration}s (${gzSize.toFixed(2)} MB → ${outputSize.toFixed(2)} MB)`)
   
-  // Eliminar archivo comprimido
-  fs.unlinkSync(gzPath)
+  // En Vercel, NO eliminar el .gz (se usa en runtime)
+  // Localmente, eliminar para ahorrar espacio
+  if (!process.env.VERCEL) {
+    fs.unlinkSync(gzPath)
+    console.log(`   🗑️ Archivo .gz eliminado (local)`)
+  } else {
+    console.log(`   📦 Archivo .gz conservado para runtime (Vercel)`)
+  }
 }
 
 async function loadConfig() {
@@ -129,7 +135,23 @@ async function loadConfig() {
   return config
 }
 
+const IS_VERCEL = !!process.env.VERCEL
+
 async function checkIndicesExist() {
+  // En Vercel: verificar si los .gz existen (NO descomprimimos)
+  if (IS_VERCEL) {
+    const gzIndexExists = fs.existsSync(INDEX_PATH + '.gz')
+    const gzBm25Exists = fs.existsSync(BM25_PATH + '.gz')
+    if (gzIndexExists && gzBm25Exists) {
+      console.log('✅ Los índices comprimidos ya existen. Saltando descarga.')
+      console.log(`   index.json.gz: ${(fs.statSync(INDEX_PATH + '.gz').size / (1024 * 1024)).toFixed(2)} MB`)
+      console.log(`   bm25-index.json.gz: ${(fs.statSync(BM25_PATH + '.gz').size / (1024 * 1024)).toFixed(2)} MB`)
+      return true
+    }
+    return false
+  }
+  
+  // Local: verificar si los .json existen
   const indexExists = fs.existsSync(INDEX_PATH)
   const bm25Exists = fs.existsSync(BM25_PATH)
   
@@ -164,13 +186,22 @@ async function main() {
     await downloadFile(config.indexUrl, indexGzPath, 'index.json.gz')
     await downloadFile(config.bm25Url, bm25GzPath, 'bm25-index.json.gz')
     
-    // 4. Descomprimir índices
-    await decompressFile(indexGzPath, INDEX_PATH, 'index.json')
-    await decompressFile(bm25GzPath, BM25_PATH, 'bm25-index.json')
-    
-    console.log(`\n✅ ¡Índices descargados y descomprimidos exitosamente!`)
-    console.log(`   index.json: ${(fs.statSync(INDEX_PATH).size / (1024 * 1024)).toFixed(2)} MB`)
-    console.log(`   bm25-index.json: ${(fs.statSync(BM25_PATH).size / (1024 * 1024)).toFixed(2)} MB`)
+    if (IS_VERCEL) {
+      // En Vercel: NO descomprimir. Se hará en runtime desde .gz
+      // Esto reduce el tamaño de las funciones serverless de ~335 MB a ~108 MB
+      console.log(`\n✅ ¡Índices descargados exitosamente! (modo Vercel - solo .gz)`)
+      console.log(`   index.json.gz: ${(fs.statSync(indexGzPath).size / (1024 * 1024)).toFixed(2)} MB`)
+      console.log(`   bm25-index.json.gz: ${(fs.statSync(bm25GzPath).size / (1024 * 1024)).toFixed(2)} MB`)
+      console.log(`   💡 Los índices se descomprimirán en memoria al recibir la primera consulta.`)
+    } else {
+      // Local: descomprimir normalmente
+      await decompressFile(indexGzPath, INDEX_PATH, 'index.json')
+      await decompressFile(bm25GzPath, BM25_PATH, 'bm25-index.json')
+      
+      console.log(`\n✅ ¡Índices descargados y descomprimidos exitosamente!`)
+      console.log(`   index.json: ${(fs.statSync(INDEX_PATH).size / (1024 * 1024)).toFixed(2)} MB`)
+      console.log(`   bm25-index.json: ${(fs.statSync(BM25_PATH).size / (1024 * 1024)).toFixed(2)} MB`)
+    }
     
   } catch (error) {
     console.error(`\n❌ Error: ${error.message}`)

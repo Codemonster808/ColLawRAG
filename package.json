@@ -32,7 +32,7 @@
     "pre-deploy-check": "node scripts/pre-deploy-check.mjs",
     "deploy-check": "node scripts/deploy-check.mjs",
     "test-production": "node scripts/test-production.mjs",
-    "postbuild": "test -f data/index.json || echo '⚠️  data/index.json no encontrado. Ejecuta npm run ingest antes del build.'"
+    "postbuild": "test -f data/index.json || test -f data/index.json.gz || echo '⚠️  data/index.json(.gz) no encontrado. Ejecuta npm run ingest o npm run download-indices.'"
   },
   "dependencies": {
     "@huggingface/inference": "^4.13.10",

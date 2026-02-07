@@ -5,24 +5,85 @@ import { applyReranking } from './reranking'
 import { calculateBM25, hybridScore, deserializeBM25Index, type BM25Index } from './bm25'
 import fs from 'node:fs'
 import path from 'node:path'
+import { gunzipSync } from 'node:zlib'
 
 const USE_PINECONE = process.env.PINECONE_API_KEY && process.env.PINECONE_INDEX
 const USE_RERANKING = process.env.USE_RERANKING !== 'false' // Enabled by default
 const USE_BM25 = process.env.USE_BM25 !== 'false' // Enabled by default
 
+// --- Carga de índices con soporte para .gz (Vercel serverless) ---
+
+let cachedLocalIndex: DocumentChunk[] | null = null
+
+/**
+ * Carga el índice principal. Intenta primero el JSON descomprimido (local dev),
+ * luego el .gz comprimido (Vercel serverless) descomprimiéndolo en memoria.
+ */
+function loadLocalIndex(): DocumentChunk[] {
+  if (cachedLocalIndex) return cachedLocalIndex
+
+  const indexPath = path.join(process.cwd(), 'data', 'index.json')
+  const gzPath = indexPath + '.gz'
+
+  // 1. Intentar archivo descomprimido (dev local)
+  if (fs.existsSync(indexPath)) {
+    console.log('[retrieval] Cargando index.json descomprimido...')
+    const start = Date.now()
+    cachedLocalIndex = JSON.parse(fs.readFileSync(indexPath, 'utf-8')) as DocumentChunk[]
+    console.log(`[retrieval] index.json cargado: ${cachedLocalIndex.length} chunks en ${Date.now() - start}ms`)
+    return cachedLocalIndex
+  }
+
+  // 2. Intentar archivo .gz (Vercel serverless)
+  if (fs.existsSync(gzPath)) {
+    console.log('[retrieval] Descomprimiendo index.json.gz en memoria...')
+    const start = Date.now()
+    const compressed = fs.readFileSync(gzPath)
+    const decompressed = gunzipSync(compressed)
+    cachedLocalIndex = JSON.parse(decompressed.toString('utf-8')) as DocumentChunk[]
+    console.log(`[retrieval] index.json.gz descomprimido: ${cachedLocalIndex.length} chunks en ${Date.now() - start}ms`)
+    return cachedLocalIndex
+  }
+
+  console.warn('[retrieval] No se encontró index.json ni index.json.gz')
+  return []
+}
+
 let cachedBM25Index: BM25Index | null = null
 
 function loadBM25Index(): BM25Index | null {
   if (cachedBM25Index) return cachedBM25Index
+
   const bm25Path = path.join(process.cwd(), 'data', 'bm25-index.json')
-  if (!fs.existsSync(bm25Path)) return null
-  try {
-    const raw = fs.readFileSync(bm25Path, 'utf-8')
-    cachedBM25Index = deserializeBM25Index(raw)
-    return cachedBM25Index
-  } catch {
-    return null
+  const gzPath = bm25Path + '.gz'
+
+  // 1. Intentar archivo descomprimido
+  if (fs.existsSync(bm25Path)) {
+    try {
+      const raw = fs.readFileSync(bm25Path, 'utf-8')
+      cachedBM25Index = deserializeBM25Index(raw)
+      return cachedBM25Index
+    } catch {
+      return null
+    }
   }
+
+  // 2. Intentar archivo .gz (Vercel serverless)
+  if (fs.existsSync(gzPath)) {
+    try {
+      console.log('[retrieval] Descomprimiendo bm25-index.json.gz en memoria...')
+      const start = Date.now()
+      const compressed = fs.readFileSync(gzPath)
+      const decompressed = gunzipSync(compressed)
+      cachedBM25Index = deserializeBM25Index(decompressed.toString('utf-8'))
+      console.log(`[retrieval] bm25-index.json.gz descomprimido en ${Date.now() - start}ms`)
+      return cachedBM25Index
+    } catch {
+      return null
+    }
+  }
+
+  return null
 }
 
 function cosineSimilarity(a: number[], b: number[]) {
@@ -74,9 +135,8 @@ export async function retrieveRelevantChunks(query: string, filters?: RetrieveFi
       score: m.score || 0
     }))
   } else {
-    // Local fallback: load data/index.json built by ingest
-    const indexPath = path.join(process.cwd(), 'data', 'index.json')
-    const raw = fs.existsSync(indexPath) ? JSON.parse(fs.readFileSync(indexPath, 'utf-8')) as DocumentChunk[] : []
+    // Local/Vercel fallback: load index from .json or .json.gz
+    const raw = loadLocalIndex()
     retrieved = raw
       .filter(c => (filters?.type ? c.metadata.type === filters.type : true))
       .map(c => ({ chunk: c, score: cosineSimilarity(queryEmbedding, c.embedding || []) }))

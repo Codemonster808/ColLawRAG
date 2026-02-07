@@ -55,30 +55,40 @@ async function checkHuggingFace(): Promise<{ status: 'ok' | 'error'; message?: s
 function checkIndexFile(): { status: 'ok' | 'error'; message?: string } {
   try {
     const indexPath = path.join(process.cwd(), 'data', 'index.json')
+    const gzPath = indexPath + '.gz'
     
-    if (!fs.existsSync(indexPath)) {
+    // Verificar si existe el archivo descomprimido O el comprimido (.gz)
+    const jsonExists = fs.existsSync(indexPath)
+    const gzExists = fs.existsSync(gzPath)
+    
+    if (!jsonExists && !gzExists) {
       return {
         status: 'error',
-        message: 'data/index.json not found'
+        message: 'data/index.json and data/index.json.gz not found'
       }
     }
     
-    const stats = fs.statSync(indexPath)
-    if (stats.size === 0) {
-      return {
-        status: 'error',
-        message: 'data/index.json is empty'
+    if (jsonExists) {
+      const stats = fs.statSync(indexPath)
+      if (stats.size === 0) {
+        return {
+          status: 'error',
+          message: 'data/index.json is empty'
+        }
       }
     }
     
-    // Try to parse the JSON to ensure it's valid
-    try {
-      const content = fs.readFileSync(indexPath, 'utf-8')
-      JSON.parse(content)
-    } catch (parseError) {
+    if (!jsonExists && gzExists) {
+      const stats = fs.statSync(gzPath)
+      if (stats.size === 0) {
+        return {
+          status: 'error',
+          message: 'data/index.json.gz is empty'
+        }
+      }
       return {
-        status: 'error',
-        message: 'data/index.json is not valid JSON'
+        status: 'ok',
+        message: `index.json.gz present (${(stats.size / (1024 * 1024)).toFixed(1)} MB, will decompress at runtime)`
       }
     }
     

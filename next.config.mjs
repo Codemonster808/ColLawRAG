@@ -4,6 +4,21 @@ const nextConfig = {
   experimental: {
     typedRoutes: true,
     serverComponentsExternalPackages: ['@xenova/transformers'],
+    // Excluir archivos grandes del bundle de funciones serverless
+    outputFileTracingExcludes: {
+      '*': [
+        './data/index.json',
+        './data/bm25-index.json',
+        './data/old-documents-backup/**',
+        './node_modules/onnxruntime-node/**',
+        './node_modules/sharp/vendor/**',
+      ],
+    },
+    // Incluir explícitamente los archivos comprimidos para la ruta RAG
+    outputFileTracingIncludes: {
+      '/api/rag': ['./data/index.json.gz', './data/bm25-index.json.gz'],
+      '/api/health': ['./data/index.json.gz'],
+    },
   },
   async headers() {
     return [
