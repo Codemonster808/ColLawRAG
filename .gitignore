@@ -52,6 +52,7 @@ credentials.json
 # Excepción: script de testing de producción (necesario para CI/CD)
 !scripts/test-production.mjs
 **/debug/
+!app/api/debug/
 hf-gen-test.mjs
 
 # ============================================

@@ -18,6 +18,7 @@ const nextConfig = {
     outputFileTracingIncludes: {
       '/api/rag': ['./data/index.json.gz', './data/bm25-index.json.gz'],
       '/api/health': ['./data/index.json.gz'],
+      '/api/debug': ['./data/index.json.gz', './data/bm25-index.json.gz'],
     },
   },
   async headers() {
