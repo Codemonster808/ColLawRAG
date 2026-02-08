@@ -2,6 +2,9 @@
 data/index.json
 data/bm25-index.json
 data/*.gz
+# Excepciones: los índices comprimidos SON necesarios en producción (se descomprimen en runtime)
+!data/index.json.gz
+!data/bm25-index.json.gz
 
 # NO ignorar indices-urls.json (necesario para el build)
 !data/indices-urls.json
