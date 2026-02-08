@@ -10,6 +10,8 @@ data/*.gz
 **/test-*.mjs
 hf-gen-test.mjs
 **/debug/
+# Excepción: endpoint de diagnóstico necesario para troubleshooting en producción
+!app/api/debug/
 
 # Logs
 *.log
