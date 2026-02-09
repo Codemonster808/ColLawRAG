@@ -4,6 +4,7 @@ import { RagBodySchema } from './schema'
 import { getUserTier, checkUsageLimit, trackUsage, adjustQueryForTier } from '@/lib/tiers'
 import { authenticateUser } from '@/lib/auth'
 import { logger } from '@/lib/logger'
+import { checkRateLimit } from '@/lib/rate-limit-persistent'
 
 // Cache persistente usando SQLite (puede fallback a memoria si falla)
 export const runtime = 'nodejs'
@@ -83,6 +84,38 @@ export async function POST(req: NextRequest) {
       OLLAMA_MODEL: process.env.OLLAMA_MODEL,
       EMB_PROVIDER: process.env.EMB_PROVIDER
     })
+    
+    // Rate limiting por IP (público)
+    const clientIp = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 
+                     req.headers.get('x-real-ip') || 
+                     'unknown'
+    const rateLimitPerHour = parseInt(process.env.RATE_LIMIT_PER_HOUR || '50', 10) // 50 queries/hora por defecto
+    
+    try {
+      const rateLimitResult = checkRateLimit(clientIp, rateLimitPerHour, 3600000) // 1 hora
+      if (!rateLimitResult.allowed) {
+        logger.warn('Rate limit exceeded', { clientIp, limit: rateLimitPerHour })
+        return NextResponse.json(
+          {
+            error: 'Límite de consultas excedido',
+            message: `Has excedido el límite de ${rateLimitPerHour} consultas por hora. Por favor, intenta nuevamente más tarde.`,
+            retryAfter: rateLimitResult.retryAfter
+          },
+          {
+            status: 429,
+            headers: {
+              'Retry-After': rateLimitResult.retryAfter?.toString() || '3600',
+              'X-RateLimit-Limit': rateLimitPerHour.toString(),
+              'X-RateLimit-Remaining': rateLimitResult.remaining.toString(),
+              'X-RateLimit-Reset': new Date(rateLimitResult.resetAt).toISOString()
+            }
+          }
+        )
+      }
+    } catch (rateLimitError) {
+      // Si falla el rate limiting, loguear pero continuar (no bloquear servicio)
+      logger.warn('Rate limiting error, continuing', { error: rateLimitError })
+    }
     
     // Autenticación y autorización
     

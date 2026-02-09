@@ -48,8 +48,21 @@ export default function Page() {
         body: JSON.stringify({ query, filters: { type: typeFilter === 'todos' ? undefined : typeFilter }, locale: 'es' })
       })
       if (!res.ok) {
+        if (res.status === 429) {
+          const data = await res.json().catch(() => ({}))
+          const retryAfter = res.headers.get('retry-after') || '1 hora'
+          throw new Error(
+            data.message || 
+            `Has excedido el límite de consultas. Por favor, intenta nuevamente en ${retryAfter}.`
+          )
+        }
         const msg = await res.text()
-        throw new Error(msg || 'Error en la consulta')
+        try {
+          const jsonMsg = JSON.parse(msg)
+          throw new Error(jsonMsg.message || jsonMsg.error || 'Error en la consulta')
+        } catch {
+          throw new Error(msg || 'Error en la consulta')
+        }
       }
       const data = await res.json()
       setAnswer(data.answer)
@@ -109,8 +122,33 @@ export default function Page() {
         />
       )}
 
+        <div className="mt-8 rounded-lg bg-amber-50 border border-amber-200 p-4 mb-6">
+          <div className="flex">
+            <div className="flex-shrink-0">
+              <svg className="h-5 w-5 text-amber-400" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <div className="ml-3">
+              <h3 className="text-sm font-medium text-amber-800">Aviso Legal</h3>
+              <div className="mt-2 text-sm text-amber-700">
+                <p>
+                  Este servicio proporciona <strong>información orientativa</strong> basada en documentos legales colombianos. 
+                  <strong> No constituye asesoría legal profesional</strong> y no reemplaza la consulta con un abogado. 
+                  La información puede no estar actualizada. Use bajo su propia responsabilidad.
+                </p>
+                <p className="mt-2">
+                  <a href="/terminos" className="font-medium underline hover:text-amber-900">
+                    Ver términos de servicio
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <footer className="mt-12 pt-6 border-t border-gray-200 text-sm text-gray-500">
-          <p>Ejemplo educativo. No constituye asesoría legal.</p>
+          <p>© 2026 ColLawRAG. Servicio de consulta de normativa colombiana.</p>
         </footer>
       </div>
     </main>

@@ -81,6 +81,8 @@ Respuesta (campos principales):
 - Variables de entorno para claves.
 - Filtro básico de PII (correos, teléfonos, cédula, NIT) en las respuestas.
 - (Opcional) `RAG_API_KEY` para proteger el endpoint con header `x-api-key`.
+- **Rate limiting**: 50 consultas/hora por IP por defecto (configurable con `RATE_LIMIT_PER_HOUR`).
+- **Avisos legales**: Disclaimer visible en la interfaz y página de términos de servicio.
 
 **🔒 Seguridad:**
 - Ver [SECURITY.md](./SECURITY.md) para buenas prácticas de seguridad
