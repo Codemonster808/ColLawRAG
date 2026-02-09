@@ -4,6 +4,7 @@ import { type DocumentChunk, type RetrieveFilters } from './types'
 import { applyReranking } from './reranking'
 import { calculateBM25, hybridScore, deserializeBM25Index, type BM25Index } from './bm25'
 import fs from 'node:fs'
+import fsp from 'node:fs/promises'
 import path from 'node:path'
 import { gunzipSync } from 'node:zlib'
 
@@ -14,6 +15,86 @@ const USE_BM25 = process.env.USE_BM25 !== 'false' // Enabled by default
 // --- Carga de índices con soporte para .gz (Vercel serverless) ---
 
 let cachedLocalIndex: DocumentChunk[] | null = null
+let indicesDownloadPromise: Promise<void> | null = null
+
+type IndicesUrls = { indexUrl: string; bm25Url: string; version?: string; updatedAt?: string }
+
+function getIndicesUrlsPath() {
+  return path.join(process.cwd(), 'data', 'indices-urls.json')
+}
+
+function getTmpIndicesDir() {
+  // Serverless friendly. On Vercel this is writable.
+  return path.join('/tmp', 'col-law-rag-indices')
+}
+
+async function downloadToFile(url: string, outputPath: string) {
+  const res = await fetch(url, {
+    redirect: 'follow',
+    headers: { 'User-Agent': 'ColLawRAG-Runtime' },
+  })
+  if (!res.ok) {
+    const text = await res.text().catch(() => '')
+    throw new Error(`Failed to download ${url} (${res.status}): ${text.slice(0, 200)}`)
+  }
+  const buf = Buffer.from(await res.arrayBuffer())
+  await fsp.mkdir(path.dirname(outputPath), { recursive: true })
+  await fsp.writeFile(outputPath, buf)
+}
+
+async function ensureIndicesAvailableAtRuntime() {
+  // Avoid duplicate parallel downloads.
+  if (indicesDownloadPromise) return indicesDownloadPromise
+
+  indicesDownloadPromise = (async () => {
+    const dataDir = path.join(process.cwd(), 'data')
+    const indexGz = path.join(dataDir, 'index.json.gz')
+    const bm25Gz = path.join(dataDir, 'bm25-index.json.gz')
+
+    // If either exists in the deployment FS, do nothing.
+    if (fs.existsSync(indexGz) && fs.existsSync(bm25Gz)) return
+
+    // If running in serverless and tracing missed the files, fallback to runtime download into /tmp
+    const urlsPath = getIndicesUrlsPath()
+    if (!fs.existsSync(urlsPath)) {
+      console.warn('[retrieval] indices-urls.json not found; cannot download indices at runtime')
+      return
+    }
+
+    let cfg: IndicesUrls
+    try {
+      cfg = JSON.parse(await fsp.readFile(urlsPath, 'utf-8')) as IndicesUrls
+    } catch (e) {
+      console.warn('[retrieval] Failed to parse indices-urls.json:', (e as Error).message)
+      return
+    }
+
+    if (!cfg?.indexUrl || !cfg?.bm25Url) {
+      console.warn('[retrieval] indices-urls.json missing indexUrl/bm25Url; cannot download indices at runtime')
+      return
+    }
+
+    const tmpDir = getTmpIndicesDir()
+    const tmpIndexGz = path.join(tmpDir, 'index.json.gz')
+    const tmpBm25Gz = path.join(tmpDir, 'bm25-index.json.gz')
+
+    const hasTmp = fs.existsSync(tmpIndexGz) && fs.existsSync(tmpBm25Gz)
+    if (hasTmp) return
+
+    console.log('[retrieval] Indices not present in deployment FS. Downloading to /tmp ...')
+    const start = Date.now()
+    await Promise.all([
+      downloadToFile(cfg.indexUrl, tmpIndexGz),
+      downloadToFile(cfg.bm25Url, tmpBm25Gz),
+    ])
+    console.log(`[retrieval] Indices downloaded to /tmp in ${Date.now() - start}ms`)
+  })().finally(() => {
+    // allow retries if it failed
+    indicesDownloadPromise = null
+  })
+
+  return indicesDownloadPromise
+}
 
 /**
  * Carga el índice principal. Intenta primero el JSON descomprimido (local dev),
@@ -24,6 +105,7 @@ function loadLocalIndex(): DocumentChunk[] {
 
   const indexPath = path.join(process.cwd(), 'data', 'index.json')
   const gzPath = indexPath + '.gz'
+  const tmpGzPath = path.join(getTmpIndicesDir(), 'index.json.gz')
 
   // 1. Intentar archivo descomprimido (dev local)
   if (fs.existsSync(indexPath)) {
@@ -45,6 +127,17 @@ function loadLocalIndex(): DocumentChunk[] {
     return cachedLocalIndex
   }
 
+  // 3. Intentar .gz en /tmp (runtime download fallback)
+  if (fs.existsSync(tmpGzPath)) {
+    console.log('[retrieval] Descomprimiendo /tmp/index.json.gz en memoria...')
+    const start = Date.now()
+    const compressed = fs.readFileSync(tmpGzPath)
+    const decompressed = gunzipSync(compressed)
+    cachedLocalIndex = JSON.parse(decompressed.toString('utf-8')) as DocumentChunk[]
+    console.log(`[retrieval] /tmp/index.json.gz descomprimido: ${cachedLocalIndex.length} chunks en ${Date.now() - start}ms`)
+    return cachedLocalIndex
+  }
+
   console.warn('[retrieval] No se encontró index.json ni index.json.gz')
   return []
 }
@@ -56,6 +149,7 @@ function loadBM25Index(): BM25Index | null {
 
   const bm25Path = path.join(process.cwd(), 'data', 'bm25-index.json')
   const gzPath = bm25Path + '.gz'
+  const tmpGzPath = path.join(getTmpIndicesDir(), 'bm25-index.json.gz')
 
   // 1. Intentar archivo descomprimido
   if (fs.existsSync(bm25Path)) {
@@ -77,6 +171,21 @@ function loadBM25Index(): BM25Index | null {
       const decompressed = gunzipSync(compressed)
       cachedBM25Index = deserializeBM25Index(decompressed.toString('utf-8'))
       console.log(`[retrieval] bm25-index.json.gz descomprimido en ${Date.now() - start}ms`)
+      return cachedBM25Index
+    } catch {
+      return null
+    }
+  }
+
+  // 3. Intentar /tmp (runtime download fallback)
+  if (fs.existsSync(tmpGzPath)) {
+    try {
+      console.log('[retrieval] Descomprimiendo /tmp/bm25-index.json.gz en memoria...')
+      const start = Date.now()
+      const compressed = fs.readFileSync(tmpGzPath)
+      const decompressed = gunzipSync(compressed)
+      cachedBM25Index = deserializeBM25Index(decompressed.toString('utf-8'))
+      console.log(`[retrieval] /tmp/bm25-index.json.gz descomprimido en ${Date.now() - start}ms`)
       return cachedBM25Index
     } catch {
       return null
@@ -136,6 +245,7 @@ export async function retrieveRelevantChunks(query: string, filters?: RetrieveFi
     }))
   } else {
     // Local/Vercel fallback: load index from .json or .json.gz
+    await ensureIndicesAvailableAtRuntime()
     const raw = loadLocalIndex()
     retrieved = raw
       .filter(c => (filters?.type ? c.metadata.type === filters.type : true))
