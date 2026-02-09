@@ -80,7 +80,7 @@ export default function TerminosPage() {
             <section className="mb-8">
               <h2 className="text-2xl font-semibold text-gray-900 mb-4">7. Exención de Responsabilidad</h2>
               <p className="text-gray-700 mb-4">
-                EL SERVICIO SE PROPORCIONA "TAL CUAL" Y "SEGÚN DISPONIBILIDAD". NO OFRECEMOS GARANTÍAS DE 
+                EL SERVICIO SE PROPORCIONA &quot;TAL CUAL&quot; Y &quot;SEGÚN DISPONIBILIDAD&quot;. NO OFRECEMOS GARANTÍAS DE 
                 NINGÚN TIPO, EXPRESAS O IMPLÍCITAS, INCLUYENDO PERO NO LIMITADO A GARANTÍAS DE PRECISIÓN, 
                 COMPLETITUD O ACTUALIDAD DE LA INFORMACIÓN.
               </p>

@@ -14,6 +14,7 @@ Este documento registra todos los bugs encontrados y resueltos durante el desarr
 6. [Errores de TypeScript en Vercel build](#6-errores-de-typescript-en-vercel-build)
 7. [Límite de tamaño de funciones serverless (250 MB)](#7-límite-de-tamaño-de-funciones-serverless-250-mb)
 8. [Índices RAG no disponibles en runtime de Vercel](#8-índices-rag-no-disponibles-en-runtime-de-vercel)
+9. [Comillas sin escapar en JSX causan error de build](#9-comillas-sin-escapar-en-jsx-causan-error-de-build)
 
 ---
 
@@ -463,6 +464,47 @@ function loadLocalIndex(): DocumentChunk[] {
 
 ---
 
+## 9. Comillas sin escapar en JSX causan error de build
+
+### ❌ Error
+```
+./app/terminos/page.tsx
+83:44  Error: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+83:53  Error: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+83:57  Error: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+83:78  Error: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+```
+
+**Contexto**: Error durante el build en Vercel, commit `26a5001` (2026-02-09)
+
+### 🔍 Causa
+En JSX, las comillas dobles (`"`) dentro de texto deben ser escapadas como entidades HTML (`&quot;`) para evitar conflictos con la sintaxis JSX. El linter de React (`react/no-unescaped-entities`) detecta esto y falla el build en modo estricto.
+
+### ✅ Solución
+Reemplazar las comillas dobles literales con la entidad HTML `&quot;`:
+
+**Antes:**
+```tsx
+<p>
+  EL SERVICIO SE PROPORCIONA "TAL CUAL" Y "SEGÚN DISPONIBILIDAD".
+</p>
+```
+
+**Después:**
+```tsx
+<p>
+  EL SERVICIO SE PROPORCIONA &quot;TAL CUAL&quot; Y &quot;SEGÚN DISPONIBILIDAD&quot;.
+</p>
+```
+
+### 📝 Notas
+- Este error solo aparece en builds de producción (Vercel), no en desarrollo local
+- Next.js 14.2.35 ejecuta el linter en modo estricto durante el build
+- Alternativas: usar comillas simples en el texto, o usar `{'"'}` para comillas dinámicas
+- El error bloquea completamente el deploy, no es solo una advertencia
+
+---
+
 ## 📊 Resumen de Lecciones Aprendidas
 
 ### ✅ Mejores Prácticas
@@ -472,6 +514,7 @@ function loadLocalIndex(): DocumentChunk[] {
 3. **Type assertions para runtime values**: Usar `as Type` cuando los valores vienen de runtime (CLI, user input)
 4. **Archivos grandes en serverless**: Usar compresión y descompresión en memoria
 5. **Fallbacks para archivos críticos**: Implementar descarga en runtime si los archivos no están disponibles del build
+6. **Escapar caracteres especiales en JSX**: Usar entidades HTML (`&quot;`, `&apos;`) para comillas en texto JSX
 
 ### ⚠️ Errores Comunes a Evitar
 
@@ -479,6 +522,7 @@ function loadLocalIndex(): DocumentChunk[] {
 2. **Ignorar límites de tamaño**: Siempre verificar límites de la plataforma (250 MB para Vercel)
 3. **No probar en producción**: Muchos errores solo aparecen en Vercel, no localmente
 4. **No documentar fixes**: Este documento ayuda a evitar repetir errores
+5. **Comillas literales en JSX**: El linter de React es estricto con caracteres especiales en producción
 
 ---
 
@@ -494,4 +538,4 @@ function loadLocalIndex(): DocumentChunk[] {
 ---
 
 **Última actualización**: 2026-02-09  
-**Total de bugs resueltos**: 8
+**Total de bugs resueltos**: 9
