@@ -1,0 +1,40 @@
+SUPERINTENDENCIA DE INDUSTRIA Y COMERCIO
+
+RESOLUCION No. 10000 DE 2020
+
+Fecha: 2020-03-10
+Tema: Protección al Consumidor
+
+CONSIDERANDO:
+
+Que en ejercicio de las facultades legales conferidas por la Ley...
+
+Que es necesario establecer las normas...
+
+RESUELVE:
+
+Artículo 1. Objeto. La presente resolucion tiene por objeto...
+
+Artículo 2. Ámbito de aplicación. Las disposiciones de la presente resolucion...
+
+Artículo 3. Definiciones. Para efectos de la presente resolucion...
+
+Artículo 4. Obligaciones. Las entidades vigiladas deberán...
+
+Artículo 5. Vigencia. La presente resolucion rige a partir de su publicación.
+
+PUBLÍQUESE Y CÚMPLASE
+
+Dado en Bogotá D.C., a los 2020-03-10
+
+__________________________________
+Superintendente
+Superintendencia de Industria y Comercio
+
+---
+
+NOTA: Este es un documento de ejemplo generado para propósitos de entrenamiento del sistema RAG.
+El contenido no refleja una resolución real y debe ser reemplazado con el texto scrapeado del sitio oficial.
+
+Fuente: https://www.sic.gov.co
+Scrapeado: 2026-02-10

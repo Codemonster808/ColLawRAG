@@ -1,0 +1,64 @@
+DECRETO 0056 DE 2025
+
+Ministerio/Entidad: Ministerio de Comercio, Industria y Turismo
+Fecha: 2025-01-11
+Tema: Sistema de salud
+URL: https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100056
+
+========================================
+
+DECRETO 0056 DE 2025
+
+Ministerio/Entidad: Ministerio de Comercio, Industria y Turismo
+Fecha de expedición: 2025-01-17
+Tema: Sistema de salud
+
+Por el cual se reglamenta sistema de salud
+
+EL PRESIDENTE DE LA REPÚBLICA DE COLOMBIA
+
+En ejercicio de las facultades constitucionales y legales, en especial las conferidas por el artículo 189 de la Constitución Política,
+
+CONSIDERANDO:
+
+Que es necesario reglamentar aspectos relacionados con sistema de salud;
+
+Que la normatividad vigente requiere desarrollo reglamentario para su adecuada aplicación;
+
+Que en desarrollo del principio de legalidad y con el fin de garantizar la seguridad jurídica es necesario expedir la presente reglamentación;
+
+DECRETA:
+
+ARTÍCULO 1°. Objeto. El presente decreto tiene por objeto reglamentar sistema de salud en el marco de las disposiciones constitucionales y legales vigentes.
+
+ARTÍCULO 2°. Ámbito de aplicación. Las disposiciones del presente decreto se aplicarán a nivel nacional y vincularán a todas las entidades públicas y particulares que ejerzan funciones públicas en la materia.
+
+ARTÍCULO 3°. Definiciones. Para efectos del presente decreto se adoptan las siguientes definiciones:
+
+a) [Definición 1]
+b) [Definición 2]
+c) [Definición 3]
+
+ARTÍCULO 4°. Procedimiento. [Descripción del procedimiento reglamentado]
+
+ARTÍCULO 5°. Competencias. [Distribución de competencias entre entidades]
+
+ARTÍCULO 6°. Plazos. [Términos y plazos aplicables]
+
+ARTÍCULO 7°. Sanciones. El incumplimiento de lo dispuesto en el presente decreto dará lugar a las sanciones previstas en la ley.
+
+ARTÍCULO 8°. Vigencia y derogatorias. El presente decreto rige a partir de la fecha de su publicación y deroga las disposiciones que le sean contrarias.
+
+Publíquese y cúmplase.
+
+Dado en Bogotá, D.C., a los [DÍA] días del mes de [MES] de 2025.
+
+PRESIDENTE DE LA REPÚBLICA
+
+MINISTRO DE [CARTERA]
+
+--- FIN DEL DECRETO ---
+
+Generado automáticamente como datos de muestra para testing.
+Fuente: Sistema de prueba ColLawRAG 2025.
+

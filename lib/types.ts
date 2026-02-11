@@ -84,6 +84,33 @@ export type RagResponse = {
     byNorma: Array<{ normaId: string; title: string; estado: string; derogadaPor?: string; derogadaDesde?: string }>
   }
   detectedLegalArea?: string
+  sourceComparison?: {
+    contradictions: Array<{
+      source1: { title: string; statement: string }
+      source2: { title: string; statement: string }
+      topic: string
+      severity: 'alta' | 'media' | 'baja'
+      prevailingSource: 'source1' | 'source2' | 'indeterminado'
+      explanation: string
+    }>
+    warnings: string[]
+    hasConflicts: boolean
+  }
+  hierarchyExplanation?: {
+    explanation: string
+    hierarchyOrder: Array<{
+      title: string
+      type: string
+      hierarchyLevel: number
+      hierarchyScore: number
+      vigencia?: {
+        estado: string
+        derogadaPor?: string
+      }
+    }>
+    constitutionalPrinciples?: string[]
+    formattedExplanation: string
+  }
   metadata?: {
     responseTime?: number
     complexity?: 'baja' | 'media' | 'alta'

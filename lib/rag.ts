@@ -10,6 +10,8 @@ import { consultarVigencia, inferNormaIdFromTitle } from './norm-vigencia'
 import { shouldUseRecursiveRag, runRecursiveRag, type RecursiveRagConfig } from './rag-recursive'
 import { extractApplicableNorms } from './norm-extractor'
 import { validateLogicCoherence, generateCoherenceFeedback } from './logic-validator'
+import { compareSources } from './source-comparator'
+import { explainLegalHierarchy } from './hierarchy-explainer'
 
 // Lazy load heavy modules to optimize cold starts
 // These are only imported when actually needed
@@ -471,6 +473,36 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
     logger.logPipelineStep('Vigencia warnings', requestId, { count: vigenciaWarnings.length })
   }
 
+  // 9.5. Comparar fuentes para detectar contradicciones
+  let sourceComparison
+  try {
+    sourceComparison = await compareSources(chunksForGeneration, safeAnswer)
+    if (sourceComparison.hasConflicts) {
+      logger.logPipelineStep('Source contradictions detected', requestId, {
+        count: sourceComparison.contradictions.length,
+        warnings: sourceComparison.warnings.length
+      })
+    }
+  } catch (error) {
+    logger.warn('Error comparing sources', { error, requestId })
+    // No fallar el pipeline si hay error en comparación
+  }
+
+  // 9.6. Explicar jerarquía legal cuando hay múltiples fuentes
+  let hierarchyExplanation
+  try {
+    hierarchyExplanation = await explainLegalHierarchy(chunksForGeneration)
+    if (hierarchyExplanation) {
+      logger.logPipelineStep('Hierarchy explanation generated', requestId, {
+        sources: hierarchyExplanation.hierarchyOrder.length,
+        principles: hierarchyExplanation.constitutionalPrinciples?.length || 0
+      })
+    }
+  } catch (error) {
+    logger.warn('Error explaining hierarchy', { error, requestId })
+    // No fallar el pipeline si hay error en explicación
+  }
+
   // 10. Calcular tiempo de respuesta
   const responseTime = Date.now() - startTime
 
@@ -533,6 +565,36 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
       formula: calc.formula,
       breakdown: calc.breakdown
     }))
+  }
+
+  if (sourceComparison) {
+    response.sourceComparison = {
+      contradictions: sourceComparison.contradictions.map(c => ({
+        source1: {
+          title: c.source1.chunk.metadata.title,
+          statement: c.source1.statement
+        },
+        source2: {
+          title: c.source2.chunk.metadata.title,
+          statement: c.source2.statement
+        },
+        topic: c.topic,
+        severity: c.severity,
+        prevailingSource: c.prevailingSource,
+        explanation: c.explanation
+      })),
+      warnings: sourceComparison.warnings,
+      hasConflicts: sourceComparison.hasConflicts
+    }
+  }
+
+  if (hierarchyExplanation) {
+    response.hierarchyExplanation = {
+      explanation: hierarchyExplanation.explanation,
+      hierarchyOrder: hierarchyExplanation.hierarchyOrder,
+      constitutionalPrinciples: hierarchyExplanation.constitutionalPrinciples,
+      formattedExplanation: hierarchyExplanation.formattedExplanation
+    }
   }
 
   if (vigenciaWarnings.length > 0) {
