@@ -41,7 +41,7 @@ export async function explainLegalHierarchy(
         chunk,
         score,
         hierarchyScore,
-        vigencia,
+        vigencia: vigencia as any, // Tipo dinámico de consultarVigencia
         type: getHierarchyType(chunk.metadata.title),
         hierarchyLevel: getHierarchyLevel(chunk.metadata.title)
       }
@@ -82,8 +82,8 @@ export async function explainLegalHierarchy(
       hierarchyScore,
       vigencia: vigencia
         ? {
-            estado: vigencia.estado || (vigencia.vigente ? 'vigente' : 'no vigente'),
-            derogadaPor: 'derogadaPor' in vigencia ? vigencia.derogadaPor : undefined
+            estado: (vigencia as any).estado || ((vigencia as any).vigente ? 'vigente' : 'no vigente'),
+            derogadaPor: 'derogadaPor' in vigencia ? (vigencia as any).derogadaPor : undefined
           }
         : undefined
     })),

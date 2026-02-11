@@ -4,6 +4,7 @@ import { useState } from 'react'
 import SearchBar from '@/components/SearchBar'
 import Filters from '@/components/Filters'
 import ResultsDisplay from '@/components/ResultsDisplay'
+import LoadingSpinner from '@/components/LoadingSpinner'
 
 type Citation = {
   id: string
@@ -102,7 +103,9 @@ export default function Page() {
         </div>
 
         {loading && (
-          <div className="animate-pulse rounded-xl bg-gray-100 h-28 mb-6" />
+          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8 mb-6">
+            <LoadingSpinner message="Analizando consulta legal..." />
+          </div>
         )}
 
         {error && (

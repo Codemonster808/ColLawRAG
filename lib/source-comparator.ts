@@ -268,8 +268,10 @@ async function compareStatements(
   const hierarchy2 = getLegalHierarchyScore(chunk2)
 
   // Verificar vigencia
-  const vigencia1 = await consultarVigencia(inferNormaIdFromTitle(chunk1.metadata.title))
-  const vigencia2 = await consultarVigencia(inferNormaIdFromTitle(chunk2.metadata.title))
+  const normaId1 = inferNormaIdFromTitle(chunk1.metadata.title)
+  const normaId2 = inferNormaIdFromTitle(chunk2.metadata.title)
+  const vigencia1 = normaId1 ? consultarVigencia(normaId1) : null
+  const vigencia2 = normaId2 ? consultarVigencia(normaId2) : null
 
   // Determinar severidad
   const severity = determineSeverity(contradiction, hierarchy1, hierarchy2, vigencia1, vigencia2)
