@@ -11,6 +11,8 @@ import {
   getRelevantProcedureIds,
   getProcedureChunksForQuery,
   formatProcedureForContext,
+  buildProcedureTimeline,
+  formatProcedureWithTimeline,
   type ProcedureDetail
 } from '../lib/procedures'
 
@@ -102,5 +104,48 @@ describe('Procedures - Formato para contexto', () => {
     expect(text).toContain('Procedimiento Test')
     expect(text).toContain('Etapa 1')
     expect(text).toContain('10')
+  })
+
+  it('buildProcedureTimeline devuelve timeline y documentosPorEtapa', () => {
+    const proc: ProcedureDetail = {
+      id: 'test',
+      nombre: 'Test',
+      etapas: [
+        { nombre: 'Inicio', orden: 1, plazos: { dias: 0 }, documentos: ['Doc A'] },
+        { nombre: 'Etapa 2', orden: 2, plazos: { dias: 5 }, documentos: ['Doc B', 'Doc C'] }
+      ]
+    }
+    const { timeline, documentosPorEtapa } = buildProcedureTimeline(proc)
+    expect(timeline).toContain('Timeline')
+    expect(timeline).toContain('Inicio')
+    expect(timeline).toContain('Etapa 2')
+    expect(documentosPorEtapa).toHaveLength(2)
+    expect(documentosPorEtapa[0].diasAcumulados).toBe(0)
+    expect(documentosPorEtapa[1].diasAcumulados).toBe(5)
+    expect(documentosPorEtapa[0].documentos).toEqual(['Doc A'])
+    expect(documentosPorEtapa[1].documentos).toEqual(['Doc B', 'Doc C'])
+  })
+
+  it('formatProcedureWithTimeline incluye Timeline y Documentos requeridos por etapa', () => {
+    const proc: ProcedureDetail = {
+      id: 'test',
+      nombre: 'Test',
+      etapas: [
+        { nombre: 'Etapa 1', orden: 1, plazos: { dias: 10 }, documentos: ['Solicitud'] }
+      ]
+    }
+    const text = formatProcedureWithTimeline(proc)
+    expect(text).toContain('Timeline')
+    expect(text).toContain('Documentos requeridos por etapa')
+    expect(text).toContain('Etapa 1')
+    expect(text).toContain('Solicitud')
+  })
+
+  it('getProcedureChunksForQuery incluye timeline y documentos en contenido para tutela', () => {
+    const chunks = getProcedureChunksForQuery('plazos de la acción de tutela')
+    if (chunks.length === 0) return
+    const content = chunks[0].chunk.content
+    expect(content).toMatch(/Timeline|timeline/i)
+    expect(content).toMatch(/Documentos requeridos por etapa|documentos/i)
   })
 })

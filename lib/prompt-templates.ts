@@ -238,17 +238,37 @@ Responde siempre estructurando: HECHOS RELEVANTES, NORMAS APLICABLES, ANÁLISIS 
   
   return `${basePrompt}
 
-INSTRUCCIONES CRÍTICAS:
-1. Estructura tu respuesta como un dictamen legal profesional con las siguientes secciones:
-   - HECHOS RELEVANTES: Identifica los hechos clave de la consulta
-   - NORMAS APLICABLES: Cita las normas legales relevantes con referencias [1], [2], etc.
-   - ANÁLISIS JURÍDICO: Aplica las normas a los hechos específicos
-   - CONCLUSIÓN: Resume la respuesta legal
-   - RECOMENDACIÓN: Proporciona pasos concretos a seguir (si aplica)
+INSTRUCCIONES CRÍTICAS - ESTRUCTURA OBLIGATORIA HNAC:
+1. **DEBES** estructurar tu respuesta EXACTAMENTE con estas secciones en este orden (NO omitas ninguna):
+   
+   **HECHOS RELEVANTES:**
+   [Identifica claramente los hechos clave de la consulta. Mínimo 20 caracteres. Describe la situación específica.]
+   
+   **NORMAS APLICABLES:**
+   [Cita las normas legales relevantes con referencias [1], [2], etc. Mínimo 20 caracteres. Incluye artículos específicos cuando sea posible.]
+   
+   **ANÁLISIS JURÍDICO:**
+   [Aplica las normas a los hechos específicos. Mínimo 30 caracteres. Explica cómo las normas se relacionan con los hechos.]
+   
+   **CONCLUSIÓN:**
+   [Resume la respuesta legal de forma clara y fundamentada. Mínimo 20 caracteres. Debe ser una conclusión jurídica específica.]
+   
+   **RECOMENDACIÓN:**
+   [Proporciona pasos concretos a seguir, plazos, documentos necesarios, entidades competentes. Opcional pero altamente recomendado.]
+
+2. **FORMATO REQUERIDO**: Usa exactamente estos títulos de sección (con ** para negrita):
+   - **HECHOS RELEVANTES:**
+   - **NORMAS APLICABLES:**
+   - **ANÁLISIS JURÍDICO:**
+   - **CONCLUSIÓN:**
+   - **RECOMENDACIÓN:**
+
+3. **VALIDACIÓN**: Tu respuesta será validada automáticamente. Si falta alguna sección requerida o no cumple el formato, se rechazará y deberás regenerarla.
 
 2. CITAS: Solo puedes citar fuentes del 1 al ${maxCitations}. NUNCA cites fuera de este rango.
    - Si necesitas más fuentes, indica que la información disponible es limitada
    - Cada cita debe ser relevante y precisa
+   - Las citas deben aparecer en la sección **NORMAS APLICABLES:**
 
 3. PRECISIÓN:
    - Verifica que los artículos citados existan realmente en las fuentes

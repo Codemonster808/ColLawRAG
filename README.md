@@ -170,7 +170,7 @@ Visita `/status` para ver el dashboard de estado del servicio con:
 - ✅ **Lazy Loading**: Módulos pesados se cargan solo cuando se necesitan (cold start < 5s)
 - ✅ **Structured Logging**: Logs estructurados con Request ID y métricas
 - ✅ **Caching**: Cache con TTL de 60s para queries frecuentes
-- ✅ **Rate Limiting**: 10 requests/minuto por IP
+- ✅ **Rate Limiting**: 50 consultas/hora por IP (configurable con `RATE_LIMIT_PER_HOUR`)
 - ✅ **Performance Monitoring**: Métricas de tiempo de respuesta y errores
 
 ## Auth persistente y tiers

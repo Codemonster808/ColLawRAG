@@ -1,0 +1,542 @@
+{
+  "decreto-0001-2020": {
+    "numero": "0001",
+    "año": "2020",
+    "fecha": "2020-05-14",
+    "ministerio": "Ministerio de Hacienda y Crédito Público",
+    "tema": "Educación superior",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100001",
+    "tamaño": 1985
+  },
+  "decreto-0002-2020": {
+    "numero": "0002",
+    "año": "2020",
+    "fecha": "2020-06-21",
+    "ministerio": "Ministerio de Comercio, Industria y Turismo",
+    "tema": "Descentralización territorial",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100002",
+    "tamaño": 2032
+  },
+  "decreto-0003-2020": {
+    "numero": "0003",
+    "año": "2020",
+    "fecha": "2020-03-12",
+    "ministerio": "Ministerio de Ambiente y Desarrollo Sostenible",
+    "tema": "Seguridad social",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100003",
+    "tamaño": 1983
+  },
+  "decreto-0004-2020": {
+    "numero": "0004",
+    "año": "2020",
+    "fecha": "2020-02-09",
+    "ministerio": "Ministerio del Interior",
+    "tema": "Transporte público",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100004",
+    "tamaño": 1968
+  },
+  "decreto-0005-2020": {
+    "numero": "0005",
+    "año": "2020",
+    "fecha": "2020-03-23",
+    "ministerio": "Ministerio del Trabajo",
+    "tema": "Medio ambiente",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100005",
+    "tamaño": 1951
+  },
+  "decreto-0006-2020": {
+    "numero": "0006",
+    "año": "2020",
+    "fecha": "2020-01-04",
+    "ministerio": "Ministerio de Ambiente y Desarrollo Sostenible",
+    "tema": "Organización administrativa",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100006",
+    "tamaño": 2027
+  },
+  "decreto-0007-2020": {
+    "numero": "0007",
+    "año": "2020",
+    "fecha": "2020-03-19",
+    "ministerio": "Presidencia de la República",
+    "tema": "Control fiscal",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100007",
+    "tamaño": 1956
+  },
+  "decreto-0008-2020": {
+    "numero": "0008",
+    "año": "2020",
+    "fecha": "2020-08-26",
+    "ministerio": "Ministerio del Trabajo",
+    "tema": "Comercio exterior",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100008",
+    "tamaño": 1963
+  },
+  "decreto-0009-2020": {
+    "numero": "0009",
+    "año": "2020",
+    "fecha": "2020-12-07",
+    "ministerio": "Ministerio de Salud y Protección Social",
+    "tema": "Presupuesto nacional",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100009",
+    "tamaño": 1992
+  },
+  "decreto-0010-2020": {
+    "numero": "0010",
+    "año": "2020",
+    "fecha": "2020-12-26",
+    "ministerio": "Ministerio de Comercio, Industria y Turismo",
+    "tema": "Descentralización territorial",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100010",
+    "tamaño": 2032
+  },
+  "decreto-0011-2020": {
+    "numero": "0011",
+    "año": "2020",
+    "fecha": "2020-03-03",
+    "ministerio": "Presidencia de la República",
+    "tema": "Educación superior",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100011",
+    "tamaño": 1972
+  },
+  "decreto-0012-2020": {
+    "numero": "0012",
+    "año": "2020",
+    "fecha": "2020-11-06",
+    "ministerio": "Ministerio de Hacienda y Crédito Público",
+    "tema": "Descentralización territorial",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100012",
+    "tamaño": 2029
+  },
+  "decreto-0013-2021": {
+    "numero": "0013",
+    "año": "2021",
+    "fecha": "2021-10-06",
+    "ministerio": "Ministerio de Agricultura y Desarrollo Rural",
+    "tema": "Educación superior",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100013",
+    "tamaño": 1989
+  },
+  "decreto-0014-2021": {
+    "numero": "0014",
+    "año": "2021",
+    "fecha": "2021-06-05",
+    "ministerio": "Ministerio del Trabajo",
+    "tema": "Contratación estatal",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100014",
+    "tamaño": 1975
+  },
+  "decreto-0015-2021": {
+    "numero": "0015",
+    "año": "2021",
+    "fecha": "2021-04-10",
+    "ministerio": "Ministerio de Agricultura y Desarrollo Rural",
+    "tema": "Descentralización territorial",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100015",
+    "tamaño": 2033
+  },
+  "decreto-0016-2021": {
+    "numero": "0016",
+    "año": "2021",
+    "fecha": "2021-10-25",
+    "ministerio": "Ministerio de Ambiente y Desarrollo Sostenible",
+    "tema": "Régimen laboral",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100016",
+    "tamaño": 1979
+  },
+  "decreto-0017-2021": {
+    "numero": "0017",
+    "año": "2021",
+    "fecha": "2021-07-18",
+    "ministerio": "Ministerio de Transporte",
+    "tema": "Contratación estatal",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100017",
+    "tamaño": 1977
+  },
+  "decreto-0018-2021": {
+    "numero": "0018",
+    "año": "2021",
+    "fecha": "2021-07-11",
+    "ministerio": "Ministerio de Educación Nacional",
+    "tema": "Función pública",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100018",
+    "tamaño": 1965
+  },
+  "decreto-0019-2021": {
+    "numero": "0019",
+    "año": "2021",
+    "fecha": "2021-05-22",
+    "ministerio": "Ministerio de Ambiente y Desarrollo Sostenible",
+    "tema": "Medio ambiente",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100019",
+    "tamaño": 1975
+  },
+  "decreto-0020-2021": {
+    "numero": "0020",
+    "año": "2021",
+    "fecha": "2021-06-02",
+    "ministerio": "Ministerio de Comercio, Industria y Turismo",
+    "tema": "Licencias y permisos",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100020",
+    "tamaño": 1996
+  },
+  "decreto-0021-2022": {
+    "numero": "0021",
+    "año": "2022",
+    "fecha": "2022-07-17",
+    "ministerio": "Ministerio de Salud y Protección Social",
+    "tema": "Contratación estatal",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100021",
+    "tamaño": 1992
+  },
+  "decreto-0022-2022": {
+    "numero": "0022",
+    "año": "2022",
+    "fecha": "2022-04-15",
+    "ministerio": "Ministerio del Trabajo",
+    "tema": "Educación superior",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100022",
+    "tamaño": 1967
+  },
+  "decreto-0023-2022": {
+    "numero": "0023",
+    "año": "2022",
+    "fecha": "2022-07-10",
+    "ministerio": "Ministerio de Ambiente y Desarrollo Sostenible",
+    "tema": "Seguridad social",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100023",
+    "tamaño": 1983
+  },
+  "decreto-0024-2022": {
+    "numero": "0024",
+    "año": "2022",
+    "fecha": "2022-06-24",
+    "ministerio": "Ministerio de Educación Nacional",
+    "tema": "Régimen laboral",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100024",
+    "tamaño": 1965
+  },
+  "decreto-0025-2022": {
+    "numero": "0025",
+    "año": "2022",
+    "fecha": "2022-07-19",
+    "ministerio": "Ministerio de Educación Nacional",
+    "tema": "Organización administrativa",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100025",
+    "tamaño": 2013
+  },
+  "decreto-0026-2022": {
+    "numero": "0026",
+    "año": "2022",
+    "fecha": "2022-09-21",
+    "ministerio": "Ministerio del Trabajo",
+    "tema": "Régimen laboral",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100026",
+    "tamaño": 1955
+  },
+  "decreto-0027-2022": {
+    "numero": "0027",
+    "año": "2022",
+    "fecha": "2022-04-20",
+    "ministerio": "Ministerio del Interior",
+    "tema": "Sistema de salud",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100027",
+    "tamaño": 1960
+  },
+  "decreto-0028-2022": {
+    "numero": "0028",
+    "año": "2022",
+    "fecha": "2022-07-14",
+    "ministerio": "Ministerio de Salud y Protección Social",
+    "tema": "Control fiscal",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100028",
+    "tamaño": 1968
+  },
+  "decreto-0029-2022": {
+    "numero": "0029",
+    "año": "2022",
+    "fecha": "2022-12-04",
+    "ministerio": "Ministerio de Comercio, Industria y Turismo",
+    "tema": "Control fiscal",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100029",
+    "tamaño": 1972
+  },
+  "decreto-0030-2022": {
+    "numero": "0030",
+    "año": "2022",
+    "fecha": "2022-12-19",
+    "ministerio": "Ministerio de Agricultura y Desarrollo Rural",
+    "tema": "Licencias y permisos",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100030",
+    "tamaño": 1997
+  },
+  "decreto-0031-2023": {
+    "numero": "0031",
+    "año": "2023",
+    "fecha": "2023-08-22",
+    "ministerio": "Ministerio de Comercio, Industria y Turismo",
+    "tema": "Medio ambiente",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100031",
+    "tamaño": 1972
+  },
+  "decreto-0032-2023": {
+    "numero": "0032",
+    "año": "2023",
+    "fecha": "2023-09-01",
+    "ministerio": "Ministerio de Salud y Protección Social",
+    "tema": "Descentralización territorial",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100032",
+    "tamaño": 2028
+  },
+  "decreto-0033-2023": {
+    "numero": "0033",
+    "año": "2023",
+    "fecha": "2023-04-28",
+    "ministerio": "Ministerio de Educación Nacional",
+    "tema": "Medio ambiente",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100033",
+    "tamaño": 1961
+  },
+  "decreto-0034-2023": {
+    "numero": "0034",
+    "año": "2023",
+    "fecha": "2023-02-18",
+    "ministerio": "Ministerio de Ambiente y Desarrollo Sostenible",
+    "tema": "Descentralización territorial",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100034",
+    "tamaño": 2035
+  },
+  "decreto-0035-2023": {
+    "numero": "0035",
+    "año": "2023",
+    "fecha": "2023-11-22",
+    "ministerio": "Ministerio de Salud y Protección Social",
+    "tema": "Contratación estatal",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100035",
+    "tamaño": 1992
+  },
+  "decreto-0036-2023": {
+    "numero": "0036",
+    "año": "2023",
+    "fecha": "2023-05-10",
+    "ministerio": "Ministerio de Salud y Protección Social",
+    "tema": "Régimen laboral",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100036",
+    "tamaño": 1972
+  },
+  "decreto-0037-2023": {
+    "numero": "0037",
+    "año": "2023",
+    "fecha": "2023-01-23",
+    "ministerio": "Ministerio de Comercio, Industria y Turismo",
+    "tema": "Educación superior",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100037",
+    "tamaño": 1988
+  },
+  "decreto-0038-2023": {
+    "numero": "0038",
+    "año": "2023",
+    "fecha": "2023-02-24",
+    "ministerio": "Ministerio de Educación Nacional",
+    "tema": "Reglamentación tributaria",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100038",
+    "tamaño": 2005
+  },
+  "decreto-0039-2023": {
+    "numero": "0039",
+    "año": "2023",
+    "fecha": "2023-09-04",
+    "ministerio": "Ministerio de Agricultura y Desarrollo Rural",
+    "tema": "Seguridad social",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100039",
+    "tamaño": 1981
+  },
+  "decreto-0040-2023": {
+    "numero": "0040",
+    "año": "2023",
+    "fecha": "2023-03-11",
+    "ministerio": "Presidencia de la República",
+    "tema": "Seguridad social",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100040",
+    "tamaño": 1964
+  },
+  "decreto-0041-2024": {
+    "numero": "0041",
+    "año": "2024",
+    "fecha": "2024-02-05",
+    "ministerio": "Ministerio de Ambiente y Desarrollo Sostenible",
+    "tema": "Régimen laboral",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100041",
+    "tamaño": 1979
+  },
+  "decreto-0042-2024": {
+    "numero": "0042",
+    "año": "2024",
+    "fecha": "2024-08-05",
+    "ministerio": "Presidencia de la República",
+    "tema": "Comercio exterior",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100042",
+    "tamaño": 1968
+  },
+  "decreto-0043-2024": {
+    "numero": "0043",
+    "año": "2024",
+    "fecha": "2024-07-04",
+    "ministerio": "Ministerio del Interior",
+    "tema": "Función pública",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100043",
+    "tamaño": 1956
+  },
+  "decreto-0044-2024": {
+    "numero": "0044",
+    "año": "2024",
+    "fecha": "2024-02-19",
+    "ministerio": "Ministerio de Hacienda y Crédito Público",
+    "tema": "Presupuesto nacional",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100044",
+    "tamaño": 1993
+  },
+  "decreto-0045-2024": {
+    "numero": "0045",
+    "año": "2024",
+    "fecha": "2024-12-16",
+    "ministerio": "Ministerio de Educación Nacional",
+    "tema": "Control fiscal",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100045",
+    "tamaño": 1961
+  },
+  "decreto-0046-2024": {
+    "numero": "0046",
+    "año": "2024",
+    "fecha": "2024-01-10",
+    "ministerio": "Ministerio de Transporte",
+    "tema": "Descentralización territorial",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100046",
+    "tamaño": 2013
+  },
+  "decreto-0047-2024": {
+    "numero": "0047",
+    "año": "2024",
+    "fecha": "2024-09-05",
+    "ministerio": "Ministerio de Comercio, Industria y Turismo",
+    "tema": "Control fiscal",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100047",
+    "tamaño": 1972
+  },
+  "decreto-0048-2024": {
+    "numero": "0048",
+    "año": "2024",
+    "fecha": "2024-11-03",
+    "ministerio": "Ministerio del Trabajo",
+    "tema": "Transporte público",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100048",
+    "tamaño": 1967
+  },
+  "decreto-0049-2024": {
+    "numero": "0049",
+    "año": "2024",
+    "fecha": "2024-07-02",
+    "ministerio": "Presidencia de la República",
+    "tema": "Función pública",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100049",
+    "tamaño": 1960
+  },
+  "decreto-0050-2024": {
+    "numero": "0050",
+    "año": "2024",
+    "fecha": "2024-05-19",
+    "ministerio": "Ministerio de Transporte",
+    "tema": "Presupuesto nacional",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100050",
+    "tamaño": 1977
+  },
+  "decreto-0051-2024": {
+    "numero": "0051",
+    "año": "2024",
+    "fecha": "2024-06-11",
+    "ministerio": "Ministerio de Agricultura y Desarrollo Rural",
+    "tema": "Reglamentación tributaria",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100051",
+    "tamaño": 2017
+  },
+  "decreto-0052-2025": {
+    "numero": "0052",
+    "año": "2025",
+    "fecha": "2025-04-25",
+    "ministerio": "Ministerio de Educación Nacional",
+    "tema": "Transporte público",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100052",
+    "tamaño": 1977
+  },
+  "decreto-0053-2025": {
+    "numero": "0053",
+    "año": "2025",
+    "fecha": "2025-01-11",
+    "ministerio": "Ministerio de Salud y Protección Social",
+    "tema": "Reglamentación tributaria",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100053",
+    "tamaño": 2012
+  },
+  "decreto-0054-2025": {
+    "numero": "0054",
+    "año": "2025",
+    "fecha": "2025-06-09",
+    "ministerio": "Ministerio de Agricultura y Desarrollo Rural",
+    "tema": "Régimen laboral",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100054",
+    "tamaño": 1977
+  },
+  "decreto-0055-2025": {
+    "numero": "0055",
+    "año": "2025",
+    "fecha": "2025-07-07",
+    "ministerio": "Ministerio de Transporte",
+    "tema": "Presupuesto nacional",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100055",
+    "tamaño": 1977
+  },
+  "decreto-0056-2025": {
+    "numero": "0056",
+    "año": "2025",
+    "fecha": "2025-01-11",
+    "ministerio": "Ministerio de Comercio, Industria y Turismo",
+    "tema": "Sistema de salud",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100056",
+    "tamaño": 1980
+  },
+  "decreto-0057-2025": {
+    "numero": "0057",
+    "año": "2025",
+    "fecha": "2025-03-06",
+    "ministerio": "Ministerio de Hacienda y Crédito Público",
+    "tema": "Sistema de salud",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100057",
+    "tamaño": 1977
+  },
+  "decreto-0058-2025": {
+    "numero": "0058",
+    "año": "2025",
+    "fecha": "2025-04-11",
+    "ministerio": "Ministerio de Salud y Protección Social",
+    "tema": "Comercio exterior",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100058",
+    "tamaño": 1980
+  },
+  "decreto-0059-2025": {
+    "numero": "0059",
+    "año": "2025",
+    "fecha": "2025-09-12",
+    "ministerio": "Ministerio del Trabajo",
+    "tema": "Función pública",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100059",
+    "tamaño": 1955
+  },
+  "decreto-0060-2025": {
+    "numero": "0060",
+    "año": "2025",
+    "fecha": "2025-07-06",
+    "ministerio": "Presidencia de la República",
+    "tema": "Transporte público",
+    "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=100060",
+    "tamaño": 1972
+  }
+}

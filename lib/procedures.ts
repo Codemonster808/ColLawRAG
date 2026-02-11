@@ -75,26 +75,76 @@ export function loadProcedureDetail(idOrFile: string): ProcedureDetail | null {
 }
 
 /**
- * Convierte un procedimiento detallado a texto para contexto RAG
+ * Genera timeline con fechas límite acumuladas (D+0, D+10, etc.) y documentos por etapa
+ */
+export function buildProcedureTimeline(
+  proc: ProcedureDetail,
+  startDate?: Date
+): { timeline: string; documentosPorEtapa: Array<{ etapa: string; diasAcumulados: number; fechaLimite: string; documentos: string[] }> } {
+  const base = startDate || new Date()
+  const documentosPorEtapa: Array<{ etapa: string; diasAcumulados: number; fechaLimite: string; documentos: string[] }> = []
+  let diasAcum = 0
+  const timelineLines: string[] = ['Timeline (desde presentación):']
+
+  if (!proc.etapas?.length) {
+    return { timeline: timelineLines.join('\n'), documentosPorEtapa }
+  }
+
+  for (const e of proc.etapas) {
+    const dias = e.plazos?.dias ?? 0
+    diasAcum += dias
+    const limite = new Date(base)
+    limite.setDate(limite.getDate() + diasAcum)
+    const fechaLimite = limite.toISOString().split('T')[0]
+    const docList = e.documentos ?? []
+    documentosPorEtapa.push({
+      etapa: e.nombre,
+      diasAcumulados: diasAcum,
+      fechaLimite,
+      documentos: docList
+    })
+    const plazoDesc = e.plazos?.descripcion || (dias > 0 ? `D+${diasAcum}` : 'inmediato')
+    timelineLines.push(`- ${e.nombre}: ${plazoDesc} (fecha límite aprox. ${fechaLimite})`)
+    if (docList.length > 0) {
+      timelineLines.push('  Documentos: ' + docList.slice(0, 6).join('; ') + (docList.length > 6 ? '...' : ''))
+    }
+  }
+
+  return {
+    timeline: timelineLines.join('\n'),
+    documentosPorEtapa
+  }
+}
+
+/**
+ * Convierte un procedimiento detallado a texto para contexto RAG (sin timeline)
  */
 export function formatProcedureForContext(proc: ProcedureDetail): string {
+  return formatProcedureWithTimeline(proc, undefined)
+}
+
+/**
+ * Convierte un procedimiento detallado a texto para contexto RAG, con timeline y documentos por etapa
+ */
+export function formatProcedureWithTimeline(proc: ProcedureDetail, startDate?: Date): string {
   const lines: string[] = []
   lines.push(`Procedimiento: ${proc.nombre}`)
   if (proc.descripcion) lines.push(proc.descripcion)
   if (proc.normas_ref?.length) {
     lines.push('Normas: ' + proc.normas_ref.join('; '))
   }
-  if (proc.etapas?.length) {
-    lines.push('Etapas y plazos:')
-    for (const e of proc.etapas) {
-      const plazo = e.plazos?.descripcion || (e.plazos?.dias != null ? `${e.plazos.dias} días` : '')
-      lines.push(`- ${e.nombre}${plazo ? ` (${plazo})` : ''}`)
-      if (e.documentos?.length) {
-        lines.push('  Documentos: ' + e.documentos.slice(0, 5).join(', ') + (e.documentos.length > 5 ? '...' : ''))
-      }
+  const { timeline, documentosPorEtapa } = buildProcedureTimeline(proc, startDate)
+  lines.push('')
+  lines.push(timeline)
+  lines.push('')
+  lines.push('Documentos requeridos por etapa:')
+  for (const row of documentosPorEtapa) {
+    if (row.documentos.length > 0) {
+      lines.push(`- ${row.etapa} (hasta D+${row.diasAcumulados}): ${row.documentos.join(', ')}`)
     }
   }
   if (proc.notas?.length) {
+    lines.push('')
     lines.push('Notas: ' + proc.notas.join(' '))
   }
   return lines.join('\n')
@@ -165,7 +215,7 @@ export function getProcedureChunksForQuery(
   for (const id of ids) {
     const proc = loadProcedureDetail(id)
     if (!proc) continue
-    const content = formatProcedureForContext(proc)
+    const content = formatProcedureWithTimeline(proc)
     const chunkId = `procedimiento-${proc.id}`
     const chunk: DocumentChunk = {
       id: chunkId,

@@ -1,6 +1,7 @@
 import { type DocumentChunk } from './types'
 import { generatePrompts, type PromptContext } from './prompt-templates'
 import { logger } from './logger'
+import { validateHNACStructure, generateHNACErrorFeedback, type HNACValidationResult } from './hnac-validator'
 
 // Default model for text generation using router.huggingface.co/novita endpoint
 // Cambiado a Mistral 7B para mejor rendimiento y velocidad
@@ -202,8 +203,9 @@ export async function generateAnswerSpanish(params: {
   includeWarnings?: boolean
   requestId?: string
   complexity?: 'baja' | 'media' | 'alta'
+  enforceHNAC?: boolean // Nueva opción para forzar estructura HNAC
 }): Promise<string> {
-  const { query, chunks, legalArea, includeWarnings = true, requestId, complexity = 'media' } = params
+  const { query, chunks, legalArea, includeWarnings = true, requestId, complexity = 'media', enforceHNAC = true } = params
 
   // Ajustar límites según complejidad
   const maxCitations = complexity === 'alta' ? MAX_CITATIONS_COMPLEX : complexity === 'media' ? 12 : MAX_CITATIONS_BASE
@@ -335,6 +337,102 @@ export async function generateAnswerSpanish(params: {
         usedFallback: false
       })
       
+      // Validar estructura HNAC si está habilitado
+      if (enforceHNAC) {
+        const validation = validateHNACStructure(result)
+        if (!validation.isValid) {
+          logger.warn('Generated response does not meet HNAC structure requirements', {
+            requestId,
+            missingSections: validation.missingSections,
+            quality: validation.quality,
+            score: validation.score
+          })
+          
+          // Re-generar con feedback mejorado (máximo 2 intentos)
+          const maxRegenerationAttempts = 2
+          let regeneratedResult = result
+          let lastValidation = validation
+          
+          for (let attempt = 1; attempt <= maxRegenerationAttempts; attempt++) {
+            const feedback = generateHNACErrorFeedback(lastValidation)
+            const enhancedUserPrompt = `${userPrompt}\n\n⚠️ CORRECCIÓN REQUERIDA (Intento ${attempt}/${maxRegenerationAttempts}):\n${feedback}\n\nPor favor, regenera tu respuesta siguiendo EXACTAMENTE el formato requerido.`
+            
+            logger.info('Regenerating response with HNAC structure enforcement', {
+              requestId,
+              attempt,
+              maxAttempts: maxRegenerationAttempts,
+              missingSections: lastValidation.missingSections
+            })
+            
+            try {
+              const regenStartTime = Date.now()
+              regeneratedResult = await generateWithRetry(
+                primaryModel,
+                systemPrompt,
+                enhancedUserPrompt,
+                adaptiveMaxTokens,
+                timeoutMs,
+                requestId
+              )
+              const regenResponseTime = Date.now() - regenStartTime
+              
+              lastValidation = validateHNACStructure(regeneratedResult)
+              
+              logger.logMetric('hnac_regeneration_time', regenResponseTime, 'ms', {
+                requestId,
+                attempt,
+                isValid: lastValidation.isValid,
+                score: lastValidation.score
+              })
+              
+              if (lastValidation.isValid) {
+                logger.info('HNAC structure validation passed after regeneration', {
+                  requestId,
+                  attempt,
+                  score: lastValidation.score,
+                  quality: lastValidation.quality
+                })
+                return regeneratedResult
+              }
+              
+              if (attempt < maxRegenerationAttempts) {
+                logger.warn('Regeneration attempt did not meet HNAC requirements, retrying', {
+                  requestId,
+                  attempt,
+                  missingSections: lastValidation.missingSections,
+                  score: lastValidation.score
+                })
+              }
+            } catch (regenError: any) {
+              logger.error('Error during HNAC regeneration', regenError, {
+                requestId,
+                attempt
+              })
+              // Si falla la regeneración, continuar con el resultado original
+              break
+            }
+          }
+          
+          // Si después de todos los intentos no es válido, loguear pero retornar el resultado
+          if (!lastValidation.isValid) {
+            logger.warn('Could not generate valid HNAC structure after all attempts, returning best available result', {
+              requestId,
+              finalScore: lastValidation.score,
+              missingSections: lastValidation.missingSections,
+              quality: lastValidation.quality
+            })
+          }
+          
+          return regeneratedResult
+        } else {
+          logger.debug('HNAC structure validation passed', {
+            requestId,
+            score: validation.score,
+            quality: validation.quality
+          })
+        }
+      }
+      
       return result
     } catch (primaryError: any) {
       // If primary model fails and we have a fallback, try it
@@ -371,6 +469,81 @@ export async function generateAnswerSpanish(params: {
             fallbackModel,
             responseTime
           })
+          
+          // Validar estructura HNAC si está habilitado (mismo proceso que con modelo primario)
+          if (enforceHNAC) {
+            const validation = validateHNACStructure(result)
+            if (!validation.isValid) {
+              logger.warn('Fallback model response does not meet HNAC structure requirements', {
+                requestId,
+                missingSections: validation.missingSections,
+                quality: validation.quality,
+                score: validation.score
+              })
+              
+              // Re-generar con feedback mejorado (máximo 2 intentos)
+              const maxRegenerationAttempts = 2
+              let regeneratedResult = result
+              let lastValidation = validation
+              
+              for (let attempt = 1; attempt <= maxRegenerationAttempts; attempt++) {
+                const feedback = generateHNACErrorFeedback(lastValidation)
+                const enhancedUserPrompt = `${userPrompt}\n\n⚠️ CORRECCIÓN REQUERIDA (Intento ${attempt}/${maxRegenerationAttempts}):\n${feedback}\n\nPor favor, regenera tu respuesta siguiendo EXACTAMENTE el formato requerido.`
+                
+                try {
+                  const regenStartTime = Date.now()
+                  regeneratedResult = await generateWithRetry(
+                    fallbackModel,
+                    systemPrompt,
+                    enhancedUserPrompt,
+                    adaptiveMaxTokens,
+                    timeoutMs,
+                    requestId
+                  )
+                  const regenResponseTime = Date.now() - regenStartTime
+                  
+                  lastValidation = validateHNACStructure(regeneratedResult)
+                  
+                  if (lastValidation.isValid) {
+                    logger.info('HNAC structure validation passed after regeneration (fallback model)', {
+                      requestId,
+                      attempt,
+                      score: lastValidation.score
+                    })
+                    return regeneratedResult
+                  }
+                  
+                  if (attempt < maxRegenerationAttempts) {
+                    logger.warn('Regeneration attempt did not meet HNAC requirements (fallback), retrying', {
+                      requestId,
+                      attempt,
+                      missingSections: lastValidation.missingSections
+                    })
+                  }
+                } catch (regenError: any) {
+                  logger.error('Error during HNAC regeneration (fallback)', regenError, {
+                    requestId,
+                    attempt
+                  })
+                  break
+                }
+              }
+              
+              if (!lastValidation.isValid) {
+                logger.warn('Could not generate valid HNAC structure after all attempts (fallback), returning best available result', {
+                  requestId,
+                  finalScore: lastValidation.score
+                })
+              }
+              
+              return regeneratedResult
+            } else {
+              logger.debug('HNAC structure validation passed (fallback model)', {
+                requestId,
+                score: validation.score
+              })
+            }
+          }
           
           return result
         } catch (fallbackError: any) {

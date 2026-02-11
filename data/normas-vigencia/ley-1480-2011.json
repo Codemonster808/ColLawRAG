@@ -1,39 +1,218 @@
 {
   "normaId": "ley-1480-2011",
-  "nombre": "Ley 1480 de 2011 (Estatuto del Consumidor)",
-  "tipo": "ley",
-  "vigenteDesde": "2011-10-12",
+  "nombre": "Ley 1480 de 2011 - Estatuto del Consumidor",
+  "tipo": "Ley",
+  "numero": "1480",
+  "fecha": "2011-10-12",
+  "vigenteDesde": "2012-04-12",
   "vigenteHasta": null,
   "estado": "vigente",
+  "ambito": "Nacional",
+  "materia": "Protección al Consumidor",
+  "descripcion": "Estatuto del Consumidor. Establece normas generales de protección a los consumidores en Colombia, regula las relaciones de consumo, garantías, publicidad, cláusulas abusivas, protección contractual, y los mecanismos de reclamación y sanción.",
+  "derogacionesParciales": [
+    {
+      "articulos": "Decreto 3466 de 1982 (Estatuto del Consumidor anterior)",
+      "normaDerogante": "Ley 1480 de 2011",
+      "fechaDerogacion": "2012-04-12",
+      "observaciones": "La Ley 1480 de 2011 derogó completamente el Decreto 3466 de 1982, modernizando el régimen de protección al consumidor."
+    }
+  ],
   "modificaciones": [
     {
-      "norma": "decreto-735-2013",
-      "fecha": "2013-04-18",
-      "tipo": "modificacion",
-      "descripcion": "Reglamentación de la garantía legal"
+      "fecha": "2018-08-17",
+      "norma": "Ley 1943 de 2018",
+      "descripcion": "Modificó el artículo 60 de la Ley 1480, aumentando las multas por infracciones a las normas de protección al consumidor (hasta 2,000 SMMLV)."
     },
     {
-      "norma": "decreto-1499-2014",
-      "fecha": "2014-08-12",
-      "tipo": "modificacion",
-      "descripcion": "Reglamentación de términos de garantía"
+      "fecha": "2020-07-07",
+      "norma": "Decreto 662 de 2020",
+      "descripcion": "Durante la pandemia COVID-19, estableció medidas especiales de protección al consumidor en servicios públicos (prohibición de cortes, facilidades de pago)."
+    }
+  ],
+  "definiciones_clave": [
+    {
+      "termino": "Consumidor o usuario",
+      "definicion": "Toda persona natural o jurídica que, como destinatario final, adquiera, disfrute o utilice un determinado producto o servicio. El consumidor no recompra para comercializar."
     },
     {
-      "norma": "ley-1955-2019",
-      "fecha": "2019-05-25",
-      "tipo": "modificacion",
-      "descripcion": "Plan Nacional de Desarrollo - modificaciones sobre protección al consumidor"
+      "termino": "Productor",
+      "definicion": "Quien de manera habitual, directa o indirectamente, diseña, produce, fabrica, ensambla o importa productos para su venta o distribución."
+    },
+    {
+      "termino": "Proveedor",
+      "definicion": "Quien de manera habitual, directa o indirectamente, ofrece, suministra, distribuye o vende un producto o servicio a los consumidores."
+    },
+    {
+      "termino": "Producto",
+      "definicion": "Todo bien mueble o inmueble que se ofrece en el mercado para ser adquirido, usado o consumido."
+    },
+    {
+      "termino": "Servicio",
+      "definicion": "Toda actividad de prestación de servicios que se ofrece en el mercado a cambio de dinero."
+    },
+    {
+      "termino": "Garantía",
+      "definicion": "Obligación del productor o proveedor de responder por la calidad, idoneidad, seguridad y buen funcionamiento del producto o servicio durante el término de vigencia de la garantía."
+    }
+  ],
+  "derechos_consumidor": [
+    "Derecho a recibir productos e información adecuada y veraz.",
+    "Derecho a la libre elección del producto o servicio.",
+    "Derecho a condiciones de trato digno y equitativo en todas las operaciones de consumo.",
+    "Derecho a la protección contra publicidad engañosa.",
+    "Derecho a la protección contractual (cláusulas abusivas son ineficaces).",
+    "Derecho a la información: el productor y proveedor deben suministrar información clara, veraz, suficiente, oportuna, verificable, comprensible, precisa e idónea.",
+    "Derecho a reclamar y ser indemnizado por daños derivados del uso del producto o servicio.",
+    "Derecho a retracto (desistir del contrato dentro de 5 días hábiles sin justificación ni penalidad)."
+  ],
+  "obligaciones_productor_proveedor": [
+    "Suministrar información veraz, clara, suficiente y oportuna sobre el producto o servicio.",
+    "Indicar el precio total del producto o servicio (incluyendo IVA y otros tributos).",
+    "Respetar los términos, condiciones y modalidades ofrecidas en la publicidad.",
+    "Garantizar la calidad, idoneidad, seguridad y buen funcionamiento del producto o servicio.",
+    "Abstenerse de cláusulas abusivas en contratos de adhesión.",
+    "Entregar factura o documento equivalente en toda operación de consumo.",
+    "Atender reclamos y quejas del consumidor dentro de los 15 días hábiles.",
+    "Respetar el derecho de retracto del consumidor (5 días hábiles)."
+  ],
+  "garantia_legal": [
+    {
+      "tipo": "Garantía mínima presunta",
+      "duracion": "Productos: 1 año. Servicios: 3 meses desde la prestación.",
+      "alcance": "Cubre vicios ocultos que afecten el funcionamiento, utilidad o valor del producto. El consumidor puede exigir reparación, cambio o devolución del dinero."
+    },
+    {
+      "tipo": "Garantía extendida (opcional)",
+      "duracion": "Variable según pacto entre productor/proveedor y consumidor (puede ser superior a 1 año).",
+      "alcance": "Cubre lo pactado en el documento de garantía. Si el producto no puede repararse en 30 días, se debe cambiar o devolver el dinero."
+    },
+    {
+      "tipo": "Garantía de saneamiento",
+      "duracion": "Variable según tipo de bien (inmuebles: 1 año; bienes muebles: 6 meses).",
+      "alcance": "Cubre vicios ocultos que existían al momento de la compra pero que solo se manifiestan después. El consumidor puede exigir rebaja del precio o devolución."
+    }
+  ],
+  "derecho_retracto": [
+    "El consumidor tiene derecho a desistir del contrato dentro de 5 días hábiles contados desde la entrega del producto o la celebración del contrato (en servicios).",
+    "Aplica para contratos celebrados fuera del establecimiento comercial (venta directa, telemarketing, internet).",
+    "No aplica para: productos perecederos, personalizados, medicamentos, software descargado, servicios ejecutados totalmente.",
+    "El consumidor debe devolver el producto en las mismas condiciones en que lo recibió (puede haberlo usado razonablemente para verificar funcionamiento).",
+    "El proveedor debe devolver el dinero dentro de los 30 días siguientes, descontando el costo de transporte de devolución (si lo asume el consumidor)."
+  ],
+  "publicidad_engañosa": [
+    "Se prohíbe la publicidad engañosa: información falsa, inexacta, parcial, que induzca a error sobre características, calidad, precio, origen del producto.",
+    "Ejemplos: Publicitar producto como 'orgánico' sin serlo, ofrecer descuento sin indicar restricciones, publicar precio sin IVA.",
+    "Sanción: Multas hasta 2,000 SMMLV, orden de cesar la publicidad, obligación de rectificar públicamente.",
+    "Responsabilidad solidaria: Productor, proveedor, agencia publicitaria y medio de comunicación responden solidariamente si difundieron publicidad engañosa con conocimiento o negligencia."
+  ],
+  "clausulas_abusivas": [
+    "Son ineficaces de pleno derecho (nulas) las cláusulas que:",
+    "- Limiten la responsabilidad del productor/proveedor por daños causados por el producto.",
+    "- Inviertan la carga de la prueba en perjuicio del consumidor.",
+    "- Permitan al productor/proveedor modificar unilateralmente el contrato sin razón válida.",
+    "- Impongan al consumidor cargas desproporcionadas o inequitativas.",
+    "- Impongan renuncia a derechos del consumidor reconocidos por ley.",
+    "- Establezcan términos de prescripción inferiores a los legales.",
+    "Si una cláusula es declarada abusiva, el resto del contrato sigue vigente."
+  ],
+  "procedimiento_reclamacion": [
+    {
+      "etapa": "1. Reclamación directa ante el proveedor/productor",
+      "plazo": "El productor/proveedor tiene 15 días hábiles para responder la queja o reclamación.",
+      "requisitos": "Presentar queja por escrito (carta, correo electrónico, formulario web) indicando: identificación del consumidor, descripción del problema, pretensión (reparación, cambio, devolución), adjuntar copia de factura y garantía si hay."
+    },
+    {
+      "etapa": "2. Queja ante la Superintendencia de Industria y Comercio (SIC)",
+      "plazo": "Si el proveedor no responde en 15 días o la respuesta no es satisfactoria, el consumidor puede presentar queja ante la SIC.",
+      "requisitos": "Formulario de queja (disponible en web SIC), copia de la reclamación previa ante el proveedor, copia de la respuesta del proveedor (si la hay), copia de factura y garantía."
+    },
+    {
+      "etapa": "3. Investigación y sanción (SIC)",
+      "plazo": "La SIC puede iniciar investigación de oficio o por queja del consumidor. El proceso puede tardar 6-18 meses.",
+      "sanciones": "Multas hasta 2,000 SMMLV, orden de cesar la conducta infractora, cierre temporal del establecimiento, indemnización al consumidor (en proceso de protección al consumidor)."
+    },
+    {
+      "etapa": "4. Proceso judicial (si aplica)",
+      "plazo": "Si no se logra solución administrativa, el consumidor puede demandar ante juez civil. Proceso puede tardar 2-4 años.",
+      "pretensiones": "Indemnización por daños y perjuicios, cumplimiento del contrato, resolución del contrato y devolución del dinero."
+    }
+  ],
+  "competencia_superintendencia": [
+    "La Superintendencia de Industria y Comercio (SIC) es la autoridad nacional de protección al consumidor.",
+    "Funciones: Vigilar cumplimiento del Estatuto del Consumidor, sancionar infracciones, proteger consumidores mediante procesos administrativos, ordenar medidas cautelares (suspensión de publicidad, retiro de productos).",
+    "La SIC puede actuar de oficio (sin queja del consumidor) si detecta infracciones masivas.",
+    "También puede ordenar la reparación directa al consumidor afectado (indemnización) dentro del proceso administrativo sancionatorio."
+  ],
+  "sanciones": [
+    {
+      "tipo": "Multas",
+      "monto": "Hasta 2,000 SMMLV (aprox. $2,600 millones COP en 2026) según gravedad de la infracción y capacidad económica del infractor.",
+      "aplicacion": "Aumentan si hay reincidencia o afectación masiva de consumidores."
+    },
+    {
+      "tipo": "Cierre temporal",
+      "duracion": "Hasta 180 días calendario.",
+      "aplicacion": "Cuando el establecimiento pone en riesgo la salud, seguridad o economía de los consumidores."
+    },
+    {
+      "tipo": "Retiro de producto del mercado",
+      "alcance": "Orden de retirar y destruir productos peligrosos o que no cumplan estándares de calidad.",
+      "aplicacion": "Productos que pongan en riesgo la salud o seguridad de consumidores."
+    },
+    {
+      "tipo": "Publicación de la sanción",
+      "alcance": "Publicación del fallo sancionatorio en medios de comunicación y web de la SIC.",
+      "aplicacion": "Para informar a otros consumidores y generar disuasión."
+    }
+  ],
+  "productos_reglamentacion_tecnica": [
+    "Ciertos productos requieren certificación de cumplimiento de normas técnicas antes de ser comercializados:",
+    "- Productos eléctricos y electrónicos",
+    "- Juguetes",
+    "- Productos de construcción (cemento, acero)",
+    "- Llantas y neumáticos",
+    "- Textiles",
+    "- Productos de higiene y aseo",
+    "El incumplimiento de reglamentos técnicos genera multas y retiro del producto del mercado."
+  ],
+  "casos_especiales": [
+    {
+      "tipo": "Productos defectuosos (responsabilidad por producto defectuoso)",
+      "descripcion": "Si un producto causa daño al consumidor por defecto de diseño, fabricación o información, el productor responde objetivamente (sin necesidad de probar culpa). El consumidor puede demandar indemnización por daños personales o patrimoniales.",
+      "plazo": "3 años desde que se manifestó el daño."
+    },
+    {
+      "tipo": "Servicios públicos domiciliarios",
+      "descripcion": "La Ley 1480 se aplica a servicios públicos (agua, luz, gas, telecomunicaciones) en lo no regulado por leyes especiales (Ley 142 de 1994, Ley 1341 de 2009). Los consumidores pueden reclamar ante SIC por facturación incorrecta, suspensión indebida, cobros no autorizados.",
+      "autoridades": "SIC (protección al consumidor) y Superintendencias sectoriales (Servicios Públicos, Telecomunicaciones, Financiera)."
+    },
+    {
+      "tipo": "Servicios financieros",
+      "descripcion": "La Ley 1480 se aplica parcialmente. La Superintendencia Financiera tiene competencia preferente sobre protección al consumidor financiero (Ley 1328 de 2009).",
+      "ejemplos": "Reclamaciones por cobros indebidos, cláusulas abusivas en contratos bancarios, comisiones no informadas."
     }
   ],
   "notas": [
-    "Estatuto del Consumidor que regula la protección al consumidor en Colombia",
-    "Derogó el Decreto 3466 de 1982 (anterior estatuto del consumidor)",
-    "Establece derechos del consumidor: información, garantía, retracto, seguridad, protección contractual",
-    "Regula la garantía legal (mínimo 1 año para bienes inmuebles, 6 meses para muebles, 3 meses para perecederos)",
-    "Establece el derecho de retracto (5 días hábiles para ventas a distancia)",
-    "Regula publicidad engañosa y prácticas comerciales restrictivas",
-    "La Superintendencia de Industria y Comercio (SIC) es la autoridad de protección al consumidor",
-    "Incluye sanciones para productores y proveedores por incumplimiento",
-    "Se aplica a todas las relaciones de consumo en Colombia (productos y servicios)"
-  ]
+    "El Estatuto del Consumidor es de orden público: sus normas son imperativas y no pueden ser renunciadas por el consumidor.",
+    "En caso de duda sobre la interpretación del contrato o la información, se prefiere la interpretación más favorable al consumidor (principio in dubio pro consumidor).",
+    "Los contratos de adhesión (sin negociación de cláusulas) están sujetos a control más estricto: cláusulas ambiguas se interpretan contra quien las redactó.",
+    "El consumidor puede acumular acciones: reclamar ante SIC (sanción administrativa) y demandar judicialmente (indemnización).",
+    "La acción de protección al consumidor ante la SIC es gratuita y puede ejercerse sin abogado."
+  ],
+  "relacion_otras_normas": [
+    "Código de Comercio (Decreto 410 de 1971): Normas supletorias sobre compraventa mercantil",
+    "Código Civil: Normas sobre contratos, responsabilidad civil, garantías",
+    "Ley 1328 de 2009: Protección al consumidor financiero",
+    "Ley 142 de 1994: Régimen de servicios públicos domiciliarios",
+    "Ley 1341 de 2009: Régimen de telecomunicaciones",
+    "Ley 1581 de 2012: Protección de datos personales (habeas data)"
+  ],
+  "fuentes": [
+    "Ley 1480 de 2011 (Estatuto del Consumidor)",
+    "Decreto 735 de 2013 (Reglamentario de la Ley 1480)",
+    "Superintendencia de Industria y Comercio (SIC) - Resoluciones, circulares y conceptos",
+    "Jurisprudencia de la Corte Constitucional y Corte Suprema de Justicia"
+  ],
+  "ultima_actualizacion": "2026-02-10"
 }

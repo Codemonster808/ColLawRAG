@@ -7,6 +7,9 @@ import { detectLegalArea, detectComplexity } from './prompt-templates'
 import { logger } from './logger'
 import { isProcedureRelatedQuery, getProcedureChunksForQuery } from './procedures'
 import { consultarVigencia, inferNormaIdFromTitle } from './norm-vigencia'
+import { shouldUseRecursiveRag, runRecursiveRag, type RecursiveRagConfig } from './rag-recursive'
+import { extractApplicableNorms } from './norm-extractor'
+import { validateLogicCoherence, generateCoherenceFeedback } from './logic-validator'
 
 // Lazy load heavy modules to optimize cold starts
 // These are only imported when actually needed
@@ -205,7 +208,7 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
     query,
     filters,
     locale = 'es',
-    enableFactualValidation = process.env.ENABLE_FACTUAL_VALIDATION === 'true',
+    enableFactualValidation = process.env.ENABLE_FACTUAL_VALIDATION !== 'false',
     enableStructuredResponse = process.env.ENABLE_STRUCTURED_RESPONSE === 'true',
     enableCalculations = process.env.ENABLE_CALCULATIONS === 'true',
     enableCitationValidation = process.env.ENABLE_CITATION_VALIDATION === 'true',
@@ -216,6 +219,45 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
   const requestId = uuidv4()
   
   logger.logPipelineStep('Pipeline start', requestId, { queryLength: query.length, userId })
+
+  // 0. Detectar si debe usarse RAG recursivo para consultas multi-parte
+  const enableRecursiveRag = process.env.ENABLE_RECURSIVE_RAG !== 'false'
+  if (enableRecursiveRag) {
+    const recursiveConfig: RecursiveRagConfig = {
+      enabled: true,
+      minConfidence: parseFloat(process.env.RECURSIVE_RAG_MIN_CONFIDENCE || '0.6'),
+      maxSubQueries: parseInt(process.env.RECURSIVE_RAG_MAX_SUBQUERIES || '5', 10),
+      preserveContext: process.env.RECURSIVE_RAG_PRESERVE_CONTEXT !== 'false'
+    }
+
+    if (shouldUseRecursiveRag(query, recursiveConfig)) {
+      logger.logPipelineStep('Using recursive RAG for multi-part query', requestId, {
+        minConfidence: recursiveConfig.minConfidence,
+        maxSubQueries: recursiveConfig.maxSubQueries
+      })
+
+      try {
+        const recursiveResult = await runRecursiveRag(params, recursiveConfig)
+        
+        // Si el procesamiento recursivo fue exitoso, retornar la respuesta sintetizada
+        if (recursiveResult.isRecursive && recursiveResult.finalResponse) {
+          logger.logPipelineStep('Recursive RAG completed successfully', requestId, {
+            subQueriesProcessed: recursiveResult.metadata.subQueriesCount,
+            processingTime: recursiveResult.metadata.processingTime
+          })
+          return recursiveResult.finalResponse
+        }
+        
+        // Si no se procesó recursivamente, continuar con pipeline normal
+        logger.logPipelineStep('Recursive RAG not used, falling back to normal pipeline', requestId)
+      } catch (error) {
+        logger.error('Error in recursive RAG, falling back to normal pipeline', error as Error, {
+          requestId
+        })
+        // Continuar con pipeline normal si hay error
+      }
+    }
+  }
 
   // 1. Detectar área legal si no se proporciona
   const detectedLegalArea = providedLegalArea || detectLegalArea(query)
@@ -254,7 +296,22 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
     }
   }
 
-  // 2.5 Inyectar procedimientos (data/procedures/) si la consulta es procedural
+  // 2.5 Extraer normas aplicables de la consulta y chunks
+  const enableNormExtraction = process.env.ENABLE_NORM_EXTRACTION !== 'false'
+  let applicableNorms: any = null
+  if (enableNormExtraction) {
+    logger.logPipelineStep('Extracting applicable norms', requestId)
+    const normExtraction = extractApplicableNorms(query, retrieved)
+    applicableNorms = normExtraction
+    logger.logPipelineStep('Norms extracted', requestId, {
+      total: normExtraction.total,
+      vigentes: normExtraction.vigentes,
+      noVigentes: normExtraction.noVigentes,
+      articles: normExtraction.articles.length
+    })
+  }
+
+  // 2.6 Inyectar procedimientos (data/procedures/) si la consulta es procedural
   let chunksForGeneration = retrieved
   let procedureChunks: Array<{ chunk: DocumentChunk; score: number }> = []
   if (isProcedureRelatedQuery(query)) {
@@ -270,13 +327,16 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
 
   // 3. Generación con prompts mejorados (ya integrado en generateAnswerSpanish)
   logger.logPipelineStep('Generating answer', requestId)
+  // Habilitar validación HNAC por defecto (puede desactivarse con ENFORCE_HNAC=false)
+  const enforceHNAC = process.env.ENFORCE_HNAC !== 'false'
   const answer = await generateAnswerSpanish({
     query,
     chunks: chunksForGeneration,
     legalArea: detectedLegalArea,
     includeWarnings: true,
     requestId,
-    complexity: detectedComplexity
+    complexity: detectedComplexity,
+    enforceHNAC // Forzar estructura HNAC (Hechos, Normas, Análisis, Conclusión)
   })
   logger.logPipelineStep('Answer generated', requestId, { answerLength: answer.length })
 
@@ -484,13 +544,35 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
     response.answer = response.answer.trimEnd() + '\n\n⚠️ **Vigencia:** ' + vigenciaWarnings.join(' ')
   }
 
+  // Agregar normas aplicables si están disponibles
+  if (applicableNorms && applicableNorms.total > 0) {
+    (response as any).applicableNorms = {
+      normas: applicableNorms.normas.map((n: any) => ({
+        normaId: n.normaId,
+        title: n.title,
+        type: n.type,
+        articles: n.articles.map((a: any) => ({
+          numero: a.numero,
+          normaId: a.normaId,
+          normaTitle: a.normaTitle
+        })),
+        hierarchyScore: n.hierarchyScore,
+        vigencia: n.vigencia
+      })),
+      total: applicableNorms.total,
+      vigentes: applicableNorms.vigentes,
+      noVigentes: applicableNorms.noVigentes
+    }
+  }
+
   logger.logPipelineStep('Pipeline complete', requestId, {
     responseTime: `${responseTime}ms`,
     answerLength: safeAnswer.length,
     citationsCount: citations.length,
     hasStructuredResponse: !!structuredResponse,
     hasFactualValidation: !!factualValidation,
-    hasCalculations: !!(calculations && calculations.length > 0)
+    hasCalculations: !!(calculations && calculations.length > 0),
+    applicableNormsCount: applicableNorms?.total || 0
   })
   
   logger.logMetric('pipeline_response_time', responseTime, 'ms', { requestId })

@@ -1,0 +1,66 @@
+SENTENCIA SU-004-2022
+
+Tipo: unificacion
+Número: 004
+Año: 2022
+Fecha: 2022-02-06
+Magistrado Ponente: Alejandro Linares Cantillo
+Corte: Corte Constitucional de Colombia
+URL: https://www.corteconstitucional.gov.co/relatoria/2022/SU-004-2022.htm
+
+========================================
+
+SENTENCIA DE UNIFICACIÓN
+
+TEMA: Pensión de vejez
+
+ANTECEDENTES
+
+El accionante interpuso acción de unificacion contra [ENTIDAD] por considerar vulnerados sus derechos fundamentales.
+
+Los hechos que dieron lugar a la presente acción fueron los siguientes:
+
+1. El día [FECHA] el accionante solicitó [SOLICITUD]
+2. La entidad accionada respondió mediante [RESPUESTA]  
+3. El accionante considera que dicha respuesta vulnera sus derechos
+
+CONSIDERACIONES DE LA CORTE
+
+La Corte Constitucional, en Sala [SALA], procede a resolver el asunto de la referencia.
+
+PROBLEMA JURÍDICO
+
+¿Se vulneran los derechos fundamentales del accionante cuando [SITUACIÓN]?
+
+ANÁLISIS
+
+De conformidad con la jurisprudencia constitucional, en casos como el presente se debe analizar:
+
+1. La procedencia de la acción
+2. El derecho fundamental presuntamente vulnerado
+3. La conducta de la autoridad accionada
+
+En cuanto al primer punto, esta Corporación ha señalado que la acción de unificacion procede cuando se cumplen los siguientes requisitos [...]
+
+Respecto al segundo punto, el derecho fundamental alegado es [DERECHO], el cual ha sido ampliamente desarrollado por la jurisprudencia constitucional [...]
+
+DECISIÓN
+
+En mérito de lo expuesto, la Sala [SALA] de la Corte Constitucional, administrando justicia en nombre del pueblo y por mandato de la Constitución,
+
+RESUELVE
+
+PRIMERO: [DECISIÓN PRINCIPAL]
+
+SEGUNDO: Por Secretaría General, líbrese la comunicación de que trata el artículo 36 del Decreto 2591 de 1991.
+
+Notifíquese, comuníquese, publíquese y cúmplase.
+
+[MAGISTRADO PONENTE]
+Magistrado Ponente
+
+--- FIN DE SENTENCIA ---
+
+Generado automáticamente como datos de muestra para testing.
+Fuente: Sistema de prueba ColLawRAG 2022.
+

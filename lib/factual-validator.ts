@@ -1,4 +1,5 @@
 import { type DocumentChunk } from './types'
+import { consultarVigencia, inferNormaIdFromTitle } from './norm-vigencia'
 
 export interface FactualValidation {
   isValid: boolean
@@ -219,6 +220,23 @@ export function validateFactual(
       verified: verification.verified,
       source: verification.sources.join(', ') || 'No encontrado'
     })
+  }
+
+  // Verificación de vigencia de normas citadas (títulos de chunks)
+  const titlesChecked = new Set<string>()
+  for (const chunkWithScore of chunks) {
+    const chunk = 'chunk' in chunkWithScore ? chunkWithScore.chunk : chunkWithScore
+    const title = chunk.metadata?.title
+    if (!title || chunk.metadata?.type === 'procedimiento' || titlesChecked.has(title)) continue
+    titlesChecked.add(title)
+    const normaId = inferNormaIdFromTitle(title)
+    if (!normaId) continue
+    const vigencia = consultarVigencia(normaId)
+    if (vigencia?.estado === 'derogada') {
+      warnings.push(`La norma citada "${title}" está derogada${'derogadaPor' in vigencia && vigencia.derogadaPor ? ` por ${vigencia.derogadaPor}` : ''}.`)
+    } else if (vigencia?.estado === 'parcialmente_derogada') {
+      warnings.push(`La norma citada "${title}" tiene artículos derogados o modificados; verificar vigencia.`)
+    }
   }
   
   // Determinar si es válido (sin errores críticos)

@@ -1,521 +1,468 @@
 {
   "id": "reparacion-directa",
   "nombre": "Acción de Reparación Directa",
-  "descripcion": "Mecanismo procesal para obtener indemnización de daños causados por entidades públicas o sus agentes, derivados de fallas en el servicio o conductas dolosas o culposas",
+  "descripcion": "Medio de control judicial mediante el cual cualquier persona puede demandar al Estado (Nación, departamentos, municipios, establecimientos públicos, empresas industriales y comerciales del Estado, sociedades de economía mixta) para obtener indemnización por daños causados por la acción u omisión de las autoridades públicas. Es el mecanismo principal para exigir responsabilidad patrimonial del Estado.",
   "normas_ref": [
-    "Constitución Política - Art. 90",
-    "Código de Procedimiento Administrativo y de lo Contencioso Administrativo (Ley 1437 de 2011) - Arts. 140-144",
-    "Código Civil - Arts. 2341-2357 (responsabilidad civil aplicable)"
+    "Código de Procedimiento Administrativo y de lo Contencioso Administrativo (CPACA) - Ley 1437 de 2011, Artículos 140-141",
+    "Constitución Política de Colombia - Artículo 90 (responsabilidad patrimonial del Estado)",
+    "Ley 1437 de 2011 - Artículos 164-170 (trámite procesal)"
+  ],
+  "fundamento_constitucional": "Artículo 90 CP: 'El Estado responderá patrimonialmente por los daños antijurídicos que le sean imputables, causados por la acción u omisión de las autoridades públicas'",
+  "ambito": "Contencioso Administrativo (daños causados por entidades públicas)",
+  "competencia": "Tribunales Administrativos o Consejo de Estado (según cuantía)",
+  "cuantia_minima": {
+    "juzgados_administrativos": "Hasta 500 SMLMV",
+    "tribunales_administrativos": "Más de 500 SMLMV y hasta 2,000 SMLMV",
+    "consejo_de_estado": "Más de 2,000 SMLMV (en única instancia) o apelaciones de tribunales"
+  },
+  "legitimacion": {
+    "activa": "Cualquier persona (natural o jurídica) que haya sufrido un daño causado por una entidad pública. También herederos o familiares de víctimas (daño reflejo).",
+    "pasiva": "Entidades públicas: Nación, departamentos, municipios, establecimientos públicos, empresas industriales y comerciales del Estado, sociedades de economía mixta con participación estatal superior al 50%"
+  },
+  "requisitos_procedencia": [
+    "Existencia de un daño antijurídico: Daño que la víctima no tiene el deber jurídico de soportar",
+    "Imputabilidad del daño al Estado: El daño debe ser causado por acción u omisión de una autoridad pública",
+    "Nexo causal: Relación de causa-efecto entre la acción/omisión estatal y el daño",
+    "No existencia de causales de exoneración: Fuerza mayor, culpa exclusiva de la víctima, hecho de un tercero"
+  ],
+  "tipos_daño_indemnizable": [
+    "Daño emergente: Pérdida o disminución patrimonial directa (ej. gastos médicos, reparación de bienes)",
+    "Lucro cesante: Lo que se deja de percibir por el daño (ej. salarios no devengados, lucro cesante futuro)",
+    "Daño moral: Sufrimiento, aflicción, dolor psíquico de la víctima o sus familiares",
+    "Daño a la vida de relación: Afectación a la capacidad de la víctima para realizar actividades cotidianas (ej. deportes, vida social)",
+    "Daño por alteración grave a condiciones de existencia: Cambio drástico en las condiciones de vida (ej. pérdida de autonomía, dependencia de terceros)",
+    "Perjuicio fisiológico o biológico: Afectación a la integridad corporal (lesiones permanentes)"
+  ],
+  "regimenes_responsabilidad": [
+    {
+      "tipo": "Responsabilidad objetiva (daño especial)",
+      "descripcion": "El Estado responde sin que sea necesario probar culpa o falla del servicio. Se aplica cuando el daño proviene de actividades lícitas del Estado que generan cargas desproporcionadas a ciertos individuos.",
+      "ejemplos": [
+        "Obras públicas que afectan propiedades vecinas",
+        "Declaratoria de emergencia sanitaria que restringe derechos de particulares",
+        "Expropiación sin justa indemnización"
+      ]
+    },
+    {
+      "tipo": "Responsabilidad por falla del servicio",
+      "descripcion": "El demandante debe probar que la entidad pública no prestó el servicio debido, lo prestó tardíamente o lo prestó defectuosamente.",
+      "ejemplos": [
+        "Falta de atención médica oportuna en hospital público (muerte o lesiones)",
+        "Omisión policial en proteger a víctima de amenazas conocidas",
+        "Falta de mantenimiento de vías públicas que causa accidentes",
+        "Errores en trámites administrativos que causan perjuicio económico"
+      ]
+    },
+    {
+      "tipo": "Responsabilidad por riesgo excepcional",
+      "descripcion": "Actividades peligrosas del Estado que generan riesgo excepcional para los particulares. No se requiere probar culpa.",
+      "ejemplos": [
+        "Uso de armas de fuego por la fuerza pública (disparos que hieren a civiles)",
+        "Almacenamiento de explosivos o sustancias peligrosas",
+        "Operaciones militares en zonas pobladas"
+      ]
+    },
+    {
+      "tipo": "Responsabilidad por privación injusta de la libertad",
+      "descripcion": "Si una persona es privada de la libertad sin justa causa o más allá del tiempo legal, el Estado responde objetivamente.",
+      "ejemplos": [
+        "Detención arbitraria sin orden judicial",
+        "Prisión prolongada sin condena definitiva (más allá del tiempo legal)",
+        "Error judicial que lleva a condena de inocente"
+      ]
+    }
   ],
   "etapas": [
     {
-      "nombre": "Verificación de requisitos de procedibilidad",
       "orden": 1,
-      "plazos": {
-        "dias": 0,
-        "descripcion": "Antes de presentar la demanda, verificar que se cumplan los requisitos",
-        "hitos": [
-          "Verificar que el daño haya sido causado por una entidad pública o sus agentes",
-          "Verificar que hayan transcurrido menos de 2 años desde el daño (o 1 año desde el conocimiento del daño)",
-          "Identificar el nexo causal entre la acción/omisión de la entidad y el daño",
-          "Cuantificar el daño (moral, material, lucro cesante, daño emergente)"
-        ]
-      },
-      "documentos": [
-        "Descripción detallada de los hechos que causaron el daño",
-        "Identificación de la entidad pública responsable",
-        "Pruebas del daño (médicas, testimonios, fotografías, peritajes)",
-        "Pruebas del nexo causal (informes, oficios, documentos)",
-        "Liquidación preliminar de perjuicios"
-      ],
-      "entidades": [
-        {
-          "rol": "victima_damnificado",
-          "descripcion": "Persona que sufrió el daño (natural o jurídica)"
-        },
-        {
-          "rol": "entidad_responsable",
-          "descripcion": "Entidad pública que causó el daño (Nación, departamento, municipio, establecimiento público, etc.)"
-        }
+      "nombre": "Ocurrencia del Daño",
+      "descripcion": "Evento que causa el daño imputable al Estado. A partir de este momento comienza a contar el plazo de caducidad para demandar.",
+      "plazos": "El plazo de caducidad para presentar la demanda es de 2 años contados desde el día siguiente al de la ocurrencia del daño, o desde cuando el demandante tuvo o debió tener conocimiento del mismo.",
+      "documentos": [],
+      "entidades": [],
+      "notas": [
+        "Si el daño es continuo (ej. contaminación permanente), el plazo de caducidad corre desde que cesa el daño",
+        "Si el daño es de tracto sucesivo (ej. pensión no pagada), cada cuota no pagada tiene su propio plazo de caducidad",
+        "En casos de desaparición forzada, el plazo de caducidad es de 10 años (ley especial)"
       ]
     },
     {
-      "nombre": "Conciliación prejudicial (opcional pero recomendado)",
       "orden": 2,
-      "plazos": {
-        "dias": 90,
-        "descripcion": "Aunque no es requisito de procedibilidad, se recomienda intentar conciliación antes de demandar",
-        "hitos": [
-          "Solicitud de conciliación ante la Procuraduría o centro de conciliación",
-          "Audiencia de conciliación",
-          "Acuerdo conciliatorio o constancia de no acuerdo"
-        ]
-      },
+      "nombre": "Conciliación Prejudicial (Obligatoria)",
+      "descripcion": "Antes de presentar la demanda, es obligatorio agotar el requisito de conciliación prejudicial. Se acude a la Procuraduría, Agencia Nacional de Defensa Jurídica del Estado o centro de conciliación autorizado para intentar llegar a un acuerdo con la entidad demandada.",
+      "plazos": "La conciliación debe intentarse dentro de los 2 años de caducidad. Si no hay acuerdo, el acta de no conciliación tiene validez de 3 meses para presentar la demanda.",
       "documentos": [
-        "Solicitud de conciliación",
-        "Constancia de asistencia a la audiencia",
-        "Acta de conciliación (si hay acuerdo)",
-        "Constancia de no acuerdo (si no hay acuerdo)"
+        "Solicitud de conciliación (escrito)",
+        "Pruebas del daño (certificados médicos, fotos, testimonios, etc.)",
+        "Identificación del demandante",
+        "Identificación de la entidad demandada",
+        "Liquidación del daño (estimación de perjuicios)"
       ],
       "entidades": [
-        {
-          "rol": "victima",
-          "descripcion": "Solicitante de la conciliación"
-        },
-        {
-          "rol": "entidad_publica",
-          "descripcion": "Entidad convocada a conciliar"
-        },
-        {
-          "rol": "conciliador",
-          "descripcion": "Procurador delegado o conciliador de centro de conciliación"
-        }
+        "Procuraduría General de la Nación (Procuradurías Delegadas)",
+        "Agencia Nacional de Defensa Jurídica del Estado (ANDJE)",
+        "Centros de conciliación autorizados"
+      ],
+      "costos_estimados": "Gratuito si se hace en Procuraduría. Si es en centro de conciliación privado: $100,000 - $300,000 COP",
+      "notas": [
+        "Si la entidad no asiste a la audiencia de conciliación, se entiende agotado el requisito",
+        "Si hay acuerdo en conciliación, este tiene efectos de sentencia judicial (título ejecutivo)",
+        "Si no se agota la conciliación prejudicial, la demanda será rechazada por el juez"
       ]
     },
     {
-      "nombre": "Presentación de la demanda",
       "orden": 3,
-      "plazos": {
-        "dias": 730,
-        "descripcion": "Máximo 2 años desde el daño, o 1 año desde que la víctima tuvo conocimiento del daño (el que sea mayor)",
-        "hitos": [
-          "Radicación de la demanda ante el Tribunal Administrativo o Juzgado Administrativo",
-          "Pago de la tarifa judicial (si aplica según cuantía)"
-        ]
-      },
+      "nombre": "Elaboración y Presentación de la Demanda",
+      "descripcion": "El demandante (mediante apoderado judicial) elabora y presenta la demanda de reparación directa ante el Tribunal Administrativo o Juzgado competente, adjuntando todas las pruebas del daño, causalidad e imputación al Estado.",
+      "plazos": "Dentro de los 2 años contados desde la ocurrencia del daño o conocimiento del mismo. Si hay conciliación previa, dentro de los 3 meses siguientes al acta de no conciliación.",
       "documentos": [
-        "Demanda de reparación directa",
-        "Identificación del demandante (víctima o causahabiente)",
-        "Identificación de la entidad pública demandada",
-        "Relato detallado de los hechos",
-        "Prueba del daño (informes médicos, peritajes, testimonios, fotografías, videos)",
-        "Prueba del nexo causal (informes técnicos, oficios, documentos administrativos)",
-        "Liquidación de perjuicios (discriminando por tipo: moral, material, lucro cesante, daño emergente)",
-        "Pretensiones (monto de la indemnización)",
-        "Relación de pruebas",
-        "Poder del apoderado (si actúa por medio de abogado)"
+        "Demanda (escrito detallado)",
+        "Poder especial autenticado (si actúa mediante apoderado)",
+        "Acta de conciliación prejudicial (fracasada)",
+        "Pruebas del daño: certificados médicos, incapacidades, fotos, videos, testimonios, peritajes",
+        "Prueba de la relación causal: informes técnicos, periciales, documentos oficiales",
+        "Liquidación detallada de perjuicios (daño emergente, lucro cesante, daño moral, etc.)",
+        "Certificado de existencia de la entidad demandada",
+        "Prueba de parentesco (si se demanda por daño reflejo, ej. muerte de familiar)"
       ],
       "entidades": [
-        {
-          "rol": "demandante",
-          "descripcion": "Víctima del daño o sus causahabientes (herederos)"
-        },
-        {
-          "rol": "demandado",
-          "descripcion": "Entidad pública responsable del daño"
-        },
-        {
-          "rol": "tribunal_o_juzgado",
-          "descripcion": "Tribunal Administrativo (si cuantía supera 500 SMLMV) o Juzgado Administrativo (si es menor)"
-        }
+        "Juzgado Administrativo (si cuantía es hasta 500 SMLMV)",
+        "Tribunal Administrativo (si cuantía es mayor a 500 SMLMV)"
+      ],
+      "costos_estimados": "Honorarios de abogado: 15-30% del valor recuperado (cuota litis) o tarifa fija. No hay tarifa judicial en lo contencioso administrativo.",
+      "notas": [
+        "La demanda debe contener: identificación de partes, hechos, pretensiones (monto de la indemnización), fundamentos de derecho, pruebas",
+        "Es fundamental liquidar correctamente los perjuicios (daño emergente, lucro cesante, daño moral) con base en jurisprudencia del Consejo de Estado",
+        "Si no se cumplen requisitos formales, el juez puede rechazar la demanda (apelable)"
       ]
     },
     {
-      "nombre": "Admisión de la demanda",
       "orden": 4,
-      "plazos": {
-        "dias": 10,
-        "descripcion": "10 días hábiles desde la radicación para admitir o inadmitir",
-        "hitos": [
-          "Verificación de requisitos formales",
-          "Verificación de competencia del juzgado/tribunal",
-          "Auto admisorio o de inadmisión",
-          "Reparto del proceso (si es Tribunal)"
-        ]
-      },
-      "documentos": [
-        "Auto admisorio de la demanda",
-        "Auto de corrección (si la demanda tiene defectos subsanables)",
-        "Auto de rechazo (si no cumple requisitos insubsanables)",
-        "Auto de reparto (si es Tribunal)"
-      ],
-      "entidades": [
-        {
-          "rol": "juez_o_magistrado",
-          "descripcion": "Juez Administrativo o Magistrado ponente que revisa la demanda"
-        },
-        {
-          "rol": "secretaria",
-          "descripcion": "Secretaría del despacho judicial"
-        }
+      "nombre": "Admisión de la Demanda",
+      "descripcion": "El juez verifica que la demanda cumpla todos los requisitos legales (conciliación prejudicial, caducidad, competencia, pruebas) y admite la demanda mediante auto que ordena notificar a la entidad demandada.",
+      "plazos": "10-20 días hábiles después de presentada la demanda (depende de la carga del despacho)",
+      "documentos": ["Auto de admisión de la demanda"],
+      "entidades": ["Juez o Magistrado competente"],
+      "notas": [
+        "Si falta algún requisito, el juez puede rechazar la demanda o dar plazo para corregir",
+        "Una vez admitida, se ordena notificar a la entidad demandada para que conteste"
       ]
     },
     {
-      "nombre": "Notificación de la demanda",
       "orden": 5,
-      "plazos": {
-        "dias": 20,
-        "descripcion": "Dentro de los 20 días siguientes a la admisión",
-        "hitos": [
-          "Notificación personal o por aviso a la entidad demandada",
-          "Entrega de copia de la demanda y auto admisorio",
-          "Vinculación del Ministerio Público (Procuraduría) al proceso"
-        ]
-      },
-      "documentos": [
-        "Oficio de notificación a la entidad demandada",
-        "Constancia de notificación",
-        "Oficio al Ministerio Público"
-      ],
-      "entidades": [
-        {
-          "rol": "entidad_demandada",
-          "descripcion": "Entidad pública notificada"
-        },
-        {
-          "rol": "ministerio_publico",
-          "descripcion": "Procuraduría Delegada que vigilará el proceso"
-        }
+      "nombre": "Notificación a la Entidad Demandada",
+      "descripcion": "Se notifica personalmente al representante legal de la entidad pública demandada. Si no es posible notificación personal, se procede mediante edicto (aviso público).",
+      "plazos": "Debe intentarse la notificación personal mínimo 2 veces en días diferentes. Si no se logra en 20 días, se procede por edicto (5 días fijado en lugar público + página web).",
+      "documentos": ["Auto admisorio de la demanda", "Notificación personal o edicto"],
+      "entidades": ["Secretaría del juzgado o tribunal", "Representante legal de la entidad demandada"],
+      "notas": [
+        "La notificación personal es preferible, pero si no es posible, el edicto es válido",
+        "Desde la notificación corre el término para que la entidad conteste la demanda"
       ]
     },
     {
-      "nombre": "Contestación de la demanda",
       "orden": 6,
-      "plazos": {
-        "dias": 30,
-        "descripcion": "30 días hábiles desde la notificación para contestar",
-        "hitos": [
-          "Presentación de la contestación por la entidad demandada",
-          "Proposición de excepciones",
-          "Aporte de pruebas",
-          "Llamamiento en garantía (si aplica)"
-        ]
-      },
+      "nombre": "Contestación de la Demanda",
+      "descripcion": "La entidad demandada (mediante abogado de la oficina jurídica o apoderado externo) contesta la demanda dentro del plazo legal, aceptando o rechazando las pretensiones, proponiendo excepciones y aportando pruebas en su defensa.",
+      "plazos": "30 días hábiles contados desde la notificación del auto admisorio para contestar la demanda",
       "documentos": [
-        "Escrito de contestación",
-        "Excepciones previas o de fondo",
-        "Pruebas documentales",
-        "Relación de testigos",
-        "Solicitud de llamamiento en garantía (si aplica)"
+        "Contestación de la demanda (escrito)",
+        "Excepciones propuestas (defensas legales)",
+        "Pruebas de descargo (documentos, testimonios, peritajes)",
+        "Poder del apoderado (si no actúa directamente el abogado de planta)"
       ],
-      "entidades": [
-        {
-          "rol": "entidad_demandada",
-          "descripcion": "Entidad pública que contesta la demanda"
-        },
-        {
-          "rol": "apoderado_entidad",
-          "descripcion": "Abogado de la entidad pública"
-        }
+      "entidades": ["Entidad pública demandada (oficina jurídica o apoderado externo)"],
+      "excepciones_comunes": [
+        "Caducidad de la acción (demanda presentada fuera del plazo de 2 años)",
+        "Falta de legitimación (el demandante no es la víctima directa)",
+        "Ausencia de nexo causal (el daño no fue causado por la entidad)",
+        "Culpa exclusiva de la víctima (el daño fue causado por acción del propio demandante)",
+        "Hecho de un tercero (el daño fue causado por otra persona, no por la entidad)",
+        "Fuerza mayor o caso fortuito (evento imprevisible e irresistible)",
+        "Inexistencia del daño o perjuicio (no se probó el daño alegado)",
+        "Indemnización ya recibida (la víctima ya fue compensada por otra vía)"
+      ],
+      "notas": [
+        "La entidad puede aceptar parcialmente la demanda (reconocer el daño pero objetar el monto)",
+        "Si la entidad no contesta, el proceso sigue adelante con las pruebas aportadas por el demandante",
+        "Es común que la entidad solicite pruebas adicionales (peritajes técnicos, testimonios de funcionarios)"
       ]
     },
     {
-      "nombre": "Audiencia inicial",
       "orden": 7,
-      "plazos": {
-        "dias": 40,
-        "descripcion": "Dentro de los 40 días siguientes al vencimiento del término de contestación",
-        "hitos": [
-          "Citación a audiencia inicial",
-          "Saneamiento del proceso",
-          "Fijación del litigio",
-          "Decreto de pruebas"
-        ]
-      },
+      "nombre": "Etapa Probatoria",
+      "descripcion": "El juez decreta las pruebas solicitadas por ambas partes (peritajes, testimonios, inspecciones judiciales) y fija audiencias para practicarlas. Esta es la etapa más larga del proceso.",
+      "plazos": "60-120 días hábiles para la práctica de pruebas (puede extenderse si hay peritajes complejos o testimonios numerosos)",
       "documentos": [
-        "Auto de citación a audiencia inicial",
-        "Acta de audiencia inicial",
-        "Auto de saneamiento",
-        "Auto de fijación del litigio",
-        "Auto de decreto de pruebas"
+        "Auto que decreta pruebas",
+        "Peritajes (médicos, técnicos, contables, actuariales)",
+        "Actas de testimonios (declaraciones bajo juramento)",
+        "Informes de inspecciones judiciales",
+        "Documentos adicionales aportados por las partes"
       ],
       "entidades": [
-        {
-          "rol": "juez_o_magistrado",
-          "descripcion": "Juez o Magistrado que dirige la audiencia"
-        },
-        {
-          "rol": "demandante",
-          "descripcion": "Víctima o su apoderado"
-        },
-        {
-          "rol": "demandado",
-          "descripcion": "Entidad pública o su apoderado"
-        },
-        {
-          "rol": "ministerio_publico",
-          "descripcion": "Procurador delegado"
-        }
+        "Juzgado o Tribunal",
+        "Peritos designados (médicos forenses, ingenieros, contadores, actuarios)",
+        "Testigos citados",
+        "Instituto Nacional de Medicina Legal (si se requiere peritaje médico-legal)"
+      ],
+      "costos_estimados": "Peritajes: $1,000,000 - $10,000,000 COP según complejidad (pagados inicialmente por quien los solicita)",
+      "pruebas_comunes": [
+        "Peritaje médico-legal: Para determinar el grado de incapacidad o secuelas de lesiones",
+        "Peritaje actuarial: Para calcular el lucro cesante (ingresos futuros perdidos)",
+        "Peritaje técnico: Para determinar causas de accidentes (ej. falla en obra pública)",
+        "Testimonios: De víctimas, familiares, funcionarios, testigos presenciales",
+        "Inspección judicial: Para verificar in situ las condiciones del lugar del daño"
+      ],
+      "notas": [
+        "Los peritajes son fundamentales para valorar el daño económico (daño emergente, lucro cesante)",
+        "El peritaje médico-legal determina el porcentaje de incapacidad, base para calcular indemnizaciones",
+        "Si alguna prueba no se practica en el término, el juez decide con las disponibles"
       ]
     },
     {
-      "nombre": "Práctica de pruebas",
       "orden": 8,
-      "plazos": {
-        "dias": 60,
-        "descripcion": "Hasta 60 días para practicar las pruebas decretadas",
-        "hitos": [
-          "Práctica de testimonios",
-          "Práctica de dictámenes periciales (valoración del daño)",
-          "Inspecciones judiciales (si aplica)",
-          "Recepción de documentos adicionales",
-          "Oficios a entidades para solicitar información"
-        ]
-      },
-      "documentos": [
-        "Actas de testimonios",
-        "Dictámenes periciales (médicos, contables, técnicos)",
-        "Actas de inspección judicial",
-        "Oficios y respuestas de entidades",
-        "Documentos adicionales aportados"
-      ],
-      "entidades": [
-        {
-          "rol": "juez_o_magistrado",
-          "descripcion": "Juez que practica las pruebas"
-        },
-        {
-          "rol": "peritos",
-          "descripcion": "Peritos designados para cuantificar el daño"
-        },
-        {
-          "rol": "testigos",
-          "descripcion": "Testigos citados"
-        }
+      "nombre": "Alegatos de Conclusión",
+      "descripcion": "Una vez practicadas todas las pruebas, las partes presentan alegatos escritos resumiendo sus argumentos finales antes de que el juez dicte sentencia.",
+      "plazos": "10 días hábiles para presentar alegatos de conclusión después de concluida la etapa probatoria",
+      "documentos": ["Alegatos de conclusión (escritos de demandante y demandado)"],
+      "entidades": ["Demandante y demandado (mediante apoderados)"],
+      "notas": [
+        "Los alegatos son opcionales, pero altamente recomendados para reforzar la posición de cada parte",
+        "El demandante debe argumentar por qué se debe condenar al Estado y por qué el monto solicitado es justo",
+        "La entidad demandada argumenta por qué las excepciones deben prosperar o por qué el monto es exagerado"
       ]
     },
     {
-      "nombre": "Alegatos de conclusión",
       "orden": 9,
-      "plazos": {
-        "dias": 10,
-        "descripcion": "10 días comunes para presentar alegatos escritos",
-        "hitos": [
-          "Vencimiento del término probatorio",
-          "Presentación de alegatos del demandante",
-          "Presentación de alegatos del demandado",
-          "Alegatos del Ministerio Público (Procuraduría)"
-        ]
-      },
-      "documentos": [
-        "Alegatos de conclusión del demandante",
-        "Alegatos de conclusión del demandado",
-        "Concepto del Ministerio Público"
+      "nombre": "Sentencia de Primera Instancia",
+      "descripcion": "El juez o magistrado ponente dicta sentencia decidiendo si condena o absuelve a la entidad demandada, y en caso de condena, fija el monto de la indemnización por cada tipo de perjuicio.",
+      "plazos": "60-120 días hábiles después de los alegatos de conclusión (puede extenderse si el caso es complejo)",
+      "documentos": ["Sentencia de primera instancia"],
+      "entidades": ["Juez o Magistrado ponente del Tribunal"],
+      "posibles_resultados": [
+        "Condena total: Se reconoce el daño y se condena al Estado a pagar la totalidad de los perjuicios solicitados",
+        "Condena parcial: Se reconoce el daño pero se reduce el monto de la indemnización (ej. se acepta daño moral pero en menor cuantía)",
+        "Absolución: Se rechaza la demanda por prosperar alguna excepción o por no acreditarse el daño o el nexo causal",
+        "Condena con solidaridad: Se condena tanto al Estado como a un funcionario específico (si hubo dolo o culpa grave)"
       ],
-      "entidades": [
-        {
-          "rol": "demandante",
-          "descripcion": "Víctima o su apoderado"
-        },
-        {
-          "rol": "demandado",
-          "descripcion": "Entidad pública o su apoderado"
-        },
-        {
-          "rol": "ministerio_publico",
-          "descripcion": "Procurador delegado que emite concepto"
-        }
+      "conceptos_indemnizacion": [
+        "Daño emergente: Gastos reales probados (médicos, funerarios, reparaciones)",
+        "Lucro cesante: Ingresos dejados de percibir (calculados con peritaje actuarial)",
+        "Daño moral: Aflicción, dolor, sufrimiento (liquidado en salarios mínimos según jurisprudencia)",
+        "Daño a la vida de relación: Afectación a actividades cotidianas (liquidado en salarios mínimos)",
+        "Perjuicio fisiológico: Afectación a la integridad corporal (calculado según grado de incapacidad)"
+      ],
+      "notas": [
+        "El Consejo de Estado tiene tablas jurisprudenciales para liquidar daño moral (ej. muerte de hijo: 100 SMLMV para padres)",
+        "El lucro cesante se calcula con base en los ingresos probados de la víctima y expectativa de vida",
+        "Si la sentencia es condenatoria, puede incluir indexación (actualización monetaria) e intereses moratorios",
+        "La sentencia debe estar motivada (explicar por qué se decidió condenar o absolver)"
       ]
     },
     {
-      "nombre": "Sentencia de primera instancia",
       "orden": 10,
-      "plazos": {
-        "dias": 60,
-        "descripcion": "60 días después del vencimiento del término de alegatos para proferir sentencia",
-        "hitos": [
-          "Estudio del expediente y valoración de pruebas",
-          "Elaboración del proyecto de sentencia",
-          "Aprobación de la sentencia en Sala (si es Tribunal)",
-          "Notificación de la sentencia"
-        ]
-      },
-      "documentos": [
-        "Proyecto de sentencia",
-        "Sentencia definitiva",
-        "Notificación por estado o personal"
-      ],
+      "nombre": "Recurso de Apelación (si aplica)",
+      "descripcion": "La parte inconforme (demandante o demandado) puede apelar la sentencia ante la segunda instancia (Consejo de Estado si fue Tribunal, o Tribunal si fue Juzgado) dentro de los 10 días hábiles siguientes a su notificación.",
+      "plazos": "10 días hábiles desde la notificación de la sentencia para interponer el recurso de apelación",
+      "documentos": ["Recurso de apelación (escrito)", "Sustentación del recurso (argumentos)"],
       "entidades": [
-        {
-          "rol": "juez_o_magistrado",
-          "descripcion": "Juez Administrativo o Magistrado ponente que profiere la sentencia"
-        },
-        {
-          "rol": "sala",
-          "descripcion": "Sala del Tribunal que aprueba la sentencia (si es Tribunal)"
-        }
+        "Consejo de Estado - Sección Tercera (si apelación de sentencia de Tribunal)",
+        "Tribunal Administrativo (si apelación de sentencia de Juzgado)"
+      ],
+      "notas": [
+        "Si ninguna parte apela, la sentencia queda ejecutoriada (firme)",
+        "El superior jerárquico puede confirmar, modificar o revocar la sentencia de primera instancia",
+        "La segunda instancia tarda 1-2 años adicionales en resolver"
       ]
     },
     {
-      "nombre": "Recursos de apelación",
       "orden": 11,
-      "plazos": {
-        "dias": 10,
-        "descripcion": "10 días hábiles desde la notificación para interponer recurso de apelación",
-        "hitos": [
-          "Interposición del recurso de apelación",
-          "Sustentación del recurso",
-          "Concesión del recurso",
-          "Remisión al Consejo de Estado o Tribunal Superior"
-        ]
-      },
-      "documentos": [
-        "Escrito de apelación",
-        "Sustentación del recurso",
-        "Auto que concede o niega el recurso",
-        "Oficio de remisión"
+      "nombre": "Sentencia de Segunda Instancia (si aplica)",
+      "descripcion": "El Consejo de Estado o Tribunal revisa la apelación y dicta sentencia definitiva confirmando, modificando o revocando la sentencia de primera instancia.",
+      "plazos": "12-24 meses después de interpuesta la apelación (depende de la carga del Consejo de Estado o Tribunal)",
+      "documentos": ["Sentencia de segunda instancia"],
+      "entidades": ["Consejo de Estado - Sección Tercera o Tribunal Administrativo"],
+      "posibles_resultados": [
+        "Confirma la sentencia: Se mantiene la decisión de primera instancia",
+        "Modifica la sentencia: Se cambia el monto de la indemnización (aumenta o disminuye)",
+        "Revoca la sentencia: Se anula completamente la decisión de primera instancia y se dicta nueva sentencia"
       ],
-      "entidades": [
-        {
-          "rol": "apelante",
-          "descripcion": "Parte que apela (demandante, demandado o Ministerio Público)"
-        },
-        {
-          "rol": "tribunal_o_consejo",
-          "descripcion": "Tribunal Superior (si apela desde Juzgado) o Consejo de Estado (si apela desde Tribunal)"
-        }
+      "notas": [
+        "La sentencia de segunda instancia es definitiva (solo puede atacarse mediante recursos extraordinarios muy excepcionales)",
+        "Si la sentencia es condenatoria, la entidad debe pagar dentro de los 10 días siguientes a su ejecutoria"
       ]
     },
     {
-      "nombre": "Segunda instancia",
       "orden": 12,
-      "plazos": {
-        "dias": 90,
-        "descripcion": "90 días máximo para proferir sentencia de segunda instancia",
-        "hitos": [
-          "Reparto en el Tribunal o Consejo de Estado",
-          "Traslado a las partes",
-          "Alegatos de segunda instancia",
-          "Concepto del Ministerio Público (si es Consejo de Estado)",
-          "Sentencia de segunda instancia"
-        ]
-      },
-      "documentos": [
-        "Auto de reparto",
-        "Alegatos de segunda instancia",
-        "Concepto del Ministerio Público",
-        "Sentencia de segunda instancia"
+      "nombre": "Recurso Extraordinario (Excepcional)",
+      "descripcion": "En casos muy excepcionales, si la sentencia viola normas constitucionales o legales evidentes, se puede interponer recurso extraordinario de revisión ante el Consejo de Estado.",
+      "plazos": "3 meses desde la ejecutoria de la sentencia para interponer recurso de revisión",
+      "documentos": ["Demanda de revisión (escrito)", "Pruebas de la causal invocada"],
+      "entidades": ["Consejo de Estado - Sala Plena"],
+      "causales_revision": [
+        "Documentos falsos que sirvieron de base a la sentencia",
+        "Sentencias contradictorias sobre los mismos hechos",
+        "Violación directa de normas constitucionales",
+        "Prevaricato del juez (sentencia manifiestamente ilegal)"
       ],
-      "entidades": [
-        {
-          "rol": "tribunal_o_consejo",
-          "descripcion": "Tribunal Superior del Distrito o Consejo de Estado"
-        },
-        {
-          "rol": "magistrado_ponente",
-          "descripcion": "Magistrado ponente del caso en segunda instancia"
-        }
+      "notas": [
+        "El recurso de revisión es rarísimo y casi nunca prospera",
+        "Solo procede por causales tasadas en la ley",
+        "No suspende la ejecución de la sentencia (se debe pagar mientras se resuelve)"
       ]
     },
     {
-      "nombre": "Ejecución de la sentencia",
       "orden": 13,
-      "plazos": {
-        "dias": 30,
-        "descripcion": "30 días para que la entidad condenada cumpla con el pago",
-        "hitos": [
-          "Notificación de la sentencia ejecutoriada",
-          "Requerimiento de pago a la entidad condenada",
-          "Pago voluntario o inicio de incidente de desacato",
-          "Consignación del dinero a favor del demandante"
-        ]
-      },
+      "nombre": "Cumplimiento Voluntario de la Sentencia",
+      "descripcion": "Una vez ejecutoriada la sentencia condenatoria (firme), la entidad pública tiene 10 días para pagar voluntariamente el monto de la indemnización reconocido en la sentencia.",
+      "plazos": "10 días hábiles desde la ejecutoria de la sentencia para pagar voluntariamente",
       "documentos": [
-        "Constancia de ejecutoria de la sentencia",
-        "Requerimiento de pago",
-        "Comprobante de pago o consignación",
-        "Incidente de desacato (si no hay pago voluntario)",
-        "Paz y salvo"
+        "Sentencia ejecutoriada (copia auténtica)",
+        "Certificación de ejecutoria expedida por el juzgado o tribunal"
+      ],
+      "entidades": ["Entidad condenada (oficina de pagos o tesorería)"],
+      "notas": [
+        "Si la entidad paga voluntariamente, el proceso termina",
+        "El pago puede hacerse mediante cheque, transferencia bancaria o consignación judicial",
+        "Si la entidad no paga voluntariamente, se procede con el proceso de cobro coactivo"
+      ]
+    },
+    {
+      "orden": 14,
+      "nombre": "Proceso de Cobro Coactivo (si no hay pago voluntario)",
+      "descripcion": "Si la entidad condenada no paga voluntariamente dentro de los 10 días, el demandante puede iniciar proceso de cobro coactivo para forzar el pago mediante embargo de cuentas bancarias de la entidad.",
+      "plazos": "El proceso de cobro coactivo puede tardar 6-12 meses adicionales",
+      "documentos": [
+        "Demanda de cobro coactivo",
+        "Sentencia ejecutoriada (título ejecutivo)",
+        "Liquidación del crédito (capital + intereses moratorios + indexación)"
       ],
       "entidades": [
-        {
-          "rol": "entidad_condenada",
-          "descripcion": "Entidad pública obligada al pago de la indemnización"
-        },
-        {
-          "rol": "demandante",
-          "descripcion": "Víctima beneficiaria de la indemnización"
-        },
-        {
-          "rol": "juez",
-          "descripcion": "Juez que verifica el cumplimiento de la sentencia"
-        }
+        "Jurisdicción Coactiva del mismo juzgado o tribunal que dictó la sentencia",
+        "Entidades bancarias (para embargo de cuentas)"
+      ],
+      "costos_estimados": "Honorarios de abogado adicionales: 5-10% del valor a cobrar",
+      "notas": [
+        "El cobro coactivo permite embargar cuentas bancarias de la entidad pública",
+        "Si la entidad no tiene recursos, el pago puede quedar en lista de espera (cola de pagos del presupuesto público)",
+        "En la práctica, muchas entidades públicas pagan solo cuando hay embargo de cuentas"
+      ]
+    },
+    {
+      "orden": 15,
+      "nombre": "Pago Efectivo de la Indemnización",
+      "descripcion": "Una vez embargadas las cuentas o asegurado el pago, la entidad condenada transfiere el monto de la indemnización al demandante, terminando definitivamente el proceso.",
+      "plazos": "Variable según disponibilidad presupuestal de la entidad (inmediato si hay embargo, hasta 1-2 años si debe esperarse apropiación presupuestal)",
+      "documentos": [
+        "Comprobante de pago (transferencia o cheque)",
+        "Carta de paz y salvo (firmada por el demandante)",
+        "Auto de terminación del proceso"
+      ],
+      "entidades": ["Entidad condenada (tesorería)", "Demandante (beneficiario)"],
+      "notas": [
+        "El pago incluye: capital reconocido + indexación + intereses moratorios desde la sentencia hasta el pago efectivo",
+        "Una vez pagado, el demandante firma carta de paz y salvo y el proceso se archiva",
+        "Si la entidad no tiene presupuesto, el pago puede tardar años (caso de municipios pequeños en crisis fiscal)"
       ]
     }
   ],
-  "tipos_de_daño_indemnizable": [
+  "duracion_estimada": "3-7 años (según complejidad del caso, etapa probatoria, apelaciones y cobro coactivo)",
+  "costos_totales_estimados": {
+    "honorarios_abogado": "15-30% del valor recuperado (cuota litis) o tarifa fija ($5,000,000 - $20,000,000 COP)",
+    "conciliacion_prejudicial": "Gratuito (si es en Procuraduría) o $100,000 - $300,000 COP (centro privado)",
+    "peritajes": "$1,000,000 - $10,000,000 COP (médicos, actuariales, técnicos)",
+    "fotocopias_notificaciones": "$500,000 - $2,000,000 COP (depende de la extensión del expediente)",
+    "total_aproximado": "20-35% del valor recuperado (si es por cuota litis)"
+  },
+  "recomendaciones": [
+    "Agotar obligatoriamente la conciliación prejudicial antes de demandar (requisito de procedibilidad)",
+    "Reunir todas las pruebas del daño desde el inicio (certificados médicos, fotos, videos, testimonios)",
+    "Liquidar correctamente los perjuicios con base en jurisprudencia del Consejo de Estado (evitar liquidaciones exageradas que generan rechazo)",
+    "Contratar perito actuario para calcular el lucro cesante de forma técnica",
+    "Verificar el plazo de caducidad (2 años desde el daño o conocimiento) para no perder la acción",
+    "Considerar acuerdo conciliatorio antes de sentencia (más rápido y seguro que esperar cobro coactivo)",
+    "Si la entidad ofrece pagar, exigir compromiso escrito y plazo concreto"
+  ],
+  "terminos_clave": [
+    "Daño antijurídico: Daño que la víctima no tiene el deber jurídico de soportar",
+    "Imputabilidad: Atribución del daño a una acción u omisión de la administración pública",
+    "Nexo causal: Relación de causa-efecto entre la acción/omisión estatal y el daño",
+    "Falla del servicio: No prestación, prestación tardía o defectuosa del servicio público",
+    "Riesgo excepcional: Actividad peligrosa del Estado que genera responsabilidad objetiva",
+    "Daño emergente: Pérdida o disminución patrimonial directa",
+    "Lucro cesante: Ganancia que se deja de percibir por el daño",
+    "Daño moral: Sufrimiento psíquico o aflicción",
+    "Caducidad: Plazo de 2 años para presentar la demanda"
+  ],
+  "errores_comunes": [
+    "No agotar la conciliación prejudicial (la demanda es rechazada)",
+    "Demandar después del plazo de caducidad de 2 años (se pierde la acción)",
+    "Liquidar exageradamente los perjuicios (genera desconfianza del juez)",
+    "No aportar pruebas suficientes del nexo causal (la demanda es rechazada)",
+    "No contratar perito actuario para el lucro cesante (se pierde dinero)",
+    "Conformarse con la primera oferta de conciliación sin evaluarla técnicamente"
+  ],
+  "preguntas_frecuentes": [
     {
-      "tipo": "Daño material",
-      "descripcion": "Perjuicio económico sufrido, incluye daño emergente (pérdida sufrida) y lucro cesante (ganancia dejada de percibir)",
-      "ejemplos": [
-        "Gastos médicos",
-        "Pérdida de ingresos",
-        "Daños a la propiedad",
-        "Costos de rehabilitación"
-      ]
+      "pregunta": "¿Puedo demandar si pasaron más de 2 años desde el accidente?",
+      "respuesta": "No, si pasaron más de 2 años desde la ocurrencia del daño o desde que tuviste conocimiento del mismo, la acción caducó y no puedes demandar. Excepción: desaparición forzada (10 años)."
     },
     {
-      "tipo": "Daño moral",
-      "descripcion": "Sufrimiento, dolor, aflicción psicológica causada por el daño",
-      "ejemplos": [
-        "Dolor por pérdida de un ser querido",
-        "Sufrimiento psicológico por lesión",
-        "Angustia por secuelas permanentes"
-      ]
+      "pregunta": "¿Cuánto puedo pedir por daño moral?",
+      "respuesta": "El Consejo de Estado tiene tablas jurisprudenciales. Por muerte de hijo: hasta 100 SMLMV para cada padre. Por lesiones graves: 50-100 SMLMV según gravedad. Consultar con abogado especializado."
     },
     {
-      "tipo": "Daño a la salud (daño fisiológico)",
-      "descripcion": "Alteración a la integridad psicofísica de la persona, independiente del impacto económico",
-      "ejemplos": [
-        "Pérdida de funcionalidad de un órgano",
-        "Discapacidad permanente",
-        "Secuelas físicas o psicológicas"
-      ]
+      "pregunta": "¿Qué pasa si la entidad no tiene plata para pagar?",
+      "respuesta": "El pago queda en lista de espera (cola de pagos del presupuesto). Puede tardar años, especialmente en municipios pequeños. Se puede embargar cuentas bancarias de la entidad para forzar el pago."
     },
     {
-      "tipo": "Daño a la vida de relación",
-      "descripcion": "Imposibilidad o dificultad para realizar actividades placenteras o sociales",
-      "ejemplos": [
-        "Imposibilidad de practicar deportes",
-        "Limitación para socializar",
-        "Pérdida de placeres de la vida"
-      ]
+      "pregunta": "¿Puedo demandar a un hospital privado con esta acción?",
+      "respuesta": "No, la reparación directa solo aplica para entidades públicas. Para hospitales privados debes usar proceso ordinario civil por responsabilidad médica."
+    },
+    {
+      "pregunta": "¿Puedo demandar al policía o médico que causó el daño?",
+      "respuesta": "No directamente. Demandas al Estado (entidad), y si hay dolo o culpa grave del funcionario, el Estado puede repetir contra él después (acción de repetición)."
     }
   ],
-  "regimenes_de_responsabilidad": [
+  "casos_especiales": [
     {
-      "regimen": "Falla del servicio",
-      "descripcion": "La víctima debe probar que hubo una falla en la prestación del servicio público",
-      "carga_probatoria": "Demandante debe probar la falla, el daño y el nexo causal",
-      "ejemplo": "Muerte por falta de atención médica en hospital público"
+      "tipo": "Privación injusta de la libertad",
+      "descripcion": "Si fuiste detenido sin justa causa o más allá del tiempo legal, el Estado responde objetivamente (no necesitas probar falla del servicio). La indemnización incluye daño moral por privación de libertad.",
+      "normas": "CPACA Art. 140 num. 2"
     },
     {
-      "regimen": "Daño especial",
-      "descripcion": "La víctima sufre un daño como consecuencia de una actividad lícita del Estado",
-      "carga_probatoria": "Demandante debe probar el daño anormal y especial",
-      "ejemplo": "Perjuicio por obra pública legítima"
+      "tipo": "Daño causado por uso de armas de fuego",
+      "descripcion": "Si fuiste herido por disparo de fuerza pública (policía, ejército), aplica responsabilidad por riesgo excepcional. No necesitas probar culpa, solo que el disparo causó el daño.",
+      "normas": "Jurisprudencia del Consejo de Estado"
     },
     {
-      "regimen": "Riesgo excepcional",
-      "descripcion": "La víctima sufre un daño por actividades peligrosas del Estado (armas, explosivos, etc.)",
-      "carga_probatoria": "Demandante solo debe probar el daño y el nexo causal; la entidad tiene responsabilidad objetiva",
-      "ejemplo": "Lesión por bala perdida en operativo policial"
+      "tipo": "Falta de protección policial (amenazas)",
+      "descripcion": "Si denunciaste amenazas a la policía y no te protegieron, y luego fuiste víctima de atentado, puedes demandar por falla del servicio. Debes probar que las autoridades conocían el riesgo y no actuaron.",
+      "normas": "Jurisprudencia del Consejo de Estado - Falla en protección"
     },
     {
-      "regimen": "Daño por privación injusta de la libertad",
-      "descripcion": "La víctima fue privada de su libertad de forma injusta",
-      "carga_probatoria": "Demandante debe probar la privación injusta de la libertad y el daño",
-      "ejemplo": "Detención arbitraria sin fundamento legal"
+      "tipo": "Daño causado por obra pública",
+      "descripcion": "Si tu propiedad fue afectada por una obra pública (grietas, inundaciones, ruido excesivo), puedes demandar por daño especial (responsabilidad objetiva). No necesitas probar culpa.",
+      "normas": "CPACA Art. 140 num. 3"
     }
   ],
-  "notas": [
-    "La reparación directa es el mecanismo principal para exigir indemnización al Estado por daños causados",
-    "El plazo de prescripción es de 2 años desde el daño, o 1 año desde el conocimiento del daño (el que sea mayor)",
-    "La cuantía determina la competencia: Juzgado Administrativo (hasta 500 SMLMV), Tribunal Administrativo (más de 500 SMLMV)",
-    "El Ministerio Público (Procuraduría) interviene como defensor del interés público",
-    "La conciliación prejudicial no es requisito de procedibilidad, pero es recomendable",
-    "La carga de la prueba varía según el régimen de responsabilidad (falla del servicio, daño especial, riesgo excepcional)",
-    "La entidad puede llamar en garantía a terceros (aseguradoras, funcionarios responsables)",
-    "La sentencia puede condenar a pagar indemnización y a adoptar medidas de no repetición",
-    "El incumplimiento de la sentencia puede llevar a incidente de desacato contra los representantes de la entidad",
-    "Los herederos pueden demandar por daños sufridos por la víctima fallecida (daños propios y heredados)",
-    "La indemnización se indexa desde el daño hasta el pago efectivo"
+  "alternativas_extrajudiciales": [
+    "Conciliación prejudicial con acuerdo: Si la entidad acepta conciliar y pagar, el proceso termina rápidamente (3-6 meses)",
+    "Acuerdo antes de sentencia: Negociar con la entidad después de practicadas las pruebas puede acelerar el pago",
+    "Tutela (si hay perjuicio irremediable): Si el daño genera riesgo inminente a la vida o salud, puedes pedir protección inmediata vía tutela mientras tramitas la reparación directa"
   ],
-  "costos_estimados": {
-    "tarifa_judicial": "Variable según cuantía del proceso (desde 2 hasta 50+ SMLMV)",
-    "honorarios_apoderado": "Usualmente entre 20% y 40% de la indemnización obtenida, según acuerdo",
-    "peritos": "Honorarios de peritos médicos, contables o técnicos (variable)",
-    "gastos_probatorios": "Costos de testimonios, inspecciones, certificados, etc.",
-    "nota": "Si se gana el proceso, la entidad condenada debe pagar las costas del proceso (incluye honorarios de abogado y gastos)"
-  }
+  "jurisprudencia_relevante": [
+    "Consejo de Estado, Sección Tercera, Sentencia del 28 de agosto de 2014 (Exp. 31170): Tablas de liquidación de daño moral",
+    "Consejo de Estado, Sección Tercera, Sentencia del 23 de agosto de 2012 (Exp. 21515): Daño a la vida de relación",
+    "Consejo de Estado, Sección Tercera, Sentencia del 14 de septiembre de 2011 (Exp. 19031): Responsabilidad por uso de armas de fuego",
+    "Consejo de Estado, Sección Tercera, Sentencia del 15 de agosto de 2007 (Exp. 16530): Falla del servicio médico"
+  ],
+  "fuentes": [
+    "Ley 1437 de 2011 (Código de Procedimiento Administrativo y de lo Contencioso Administrativo)",
+    "Constitución Política de Colombia - Artículo 90",
+    "Jurisprudencia del Consejo de Estado - Sección Tercera",
+    "Agencia Nacional de Defensa Jurídica del Estado - Guías de defensa"
+  ],
+  "ultima_actualizacion": "2026-02-10"
 }

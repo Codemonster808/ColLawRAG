@@ -3,6 +3,7 @@ import { embedText } from './embeddings'
 import { type DocumentChunk, type RetrieveFilters } from './types'
 import { applyReranking } from './reranking'
 import { calculateBM25, hybridScore, deserializeBM25Index, type BM25Index } from './bm25'
+import { consultarVigencia, inferNormaIdFromTitle } from './norm-vigencia'
 import fs from 'node:fs'
 import fsp from 'node:fs/promises'
 import path from 'node:path'
@@ -280,5 +281,38 @@ export async function retrieveRelevantChunks(query: string, filters?: RetrieveFi
     retrieved = retrieved.slice(0, topK)
   }
 
+  // Filtrar chunks de normas totalmente derogadas (data/normas-vigencia). Desactivar con USE_VIGENCIA_FILTER=false
+  const USE_VIGENCIA_FILTER = process.env.USE_VIGENCIA_FILTER !== 'false'
+  if (USE_VIGENCIA_FILTER && retrieved.length > 0) {
+    retrieved = filterChunksByVigencia(retrieved)
+  }
+
   return retrieved
+}
+
+/**
+ * Filtra chunks cuya norma (inferida por título) está totalmente derogada.
+ * Exportado para tests de integración.
+ */
+export function filterChunksByVigencia<T extends { chunk: DocumentChunk; score: number }>(
+  retrieved: T[]
+): T[] {
+  const filtered: T[] = []
+  for (const r of retrieved) {
+    const title = r.chunk.metadata?.title
+    if (!title || r.chunk.metadata?.type === 'procedimiento') {
+      filtered.push(r)
+      continue
+    }
+    const normaId = inferNormaIdFromTitle(title)
+    if (!normaId) {
+      filtered.push(r)
+      continue
+    }
+    const vigencia = consultarVigencia(normaId)
+    if (!vigencia || vigencia.estado !== 'derogada') {
+      filtered.push(r)
+    }
+  }
+  return filtered
 } 

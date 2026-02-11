@@ -1,80 +1,155 @@
 {
   "normaId": "codigo-comercio",
-  "nombre": "Código de Comercio (Decreto 410 de 1971)",
-  "tipo": "codigo",
-  "vigenteDesde": "1971-06-29",
+  "nombre": "Código de Comercio",
+  "tipo": "Decreto Ley",
+  "numero": "410",
+  "fecha": "1971-03-27",
+  "vigenteDesde": "1971-07-01",
   "vigenteHasta": null,
-  "estado": "parcialmente_derogada",
+  "estado": "vigente",
+  "ambito": "Nacional",
+  "materia": "Derecho Comercial",
+  "descripcion": "Regula las obligaciones de los comerciantes, los actos de comercio, los contratos mercantiles, las sociedades comerciales, los títulos valores, los procedimientos mercantiles y la navegación marítima y fluvial.",
   "derogacionesParciales": [
     {
-      "articulo": "Arts. 822-869 (Sociedades colectivas y en comandita)",
-      "derogadoPor": "ley-222-1995",
-      "derogadaDesde": "1995-12-20",
-      "razon": "Reforma al régimen de sociedades comerciales"
+      "articulos": "Libro II - Sociedades Comerciales (Arts. 98-242)",
+      "normaDerogante": "Ley 222 de 1995",
+      "fechaDerogacion": "1995-12-20",
+      "observaciones": "La Ley 222 de 1995 reformó completamente el régimen de sociedades comerciales, derogando el Libro II del Código de Comercio. Actualmente rige la Ley 222 de 1995 y sus modificaciones posteriores para sociedades."
     },
     {
-      "articulo": "Arts. 387-389 (Régimen de quiebras)",
-      "derogadoPor": "ley-1116-2006",
-      "derogadaDesde": "2006-12-27",
-      "razon": "Nuevo régimen de insolvencia empresarial"
-    },
-    {
-      "articulo": "Arts. 615-617 (Transporte aéreo)",
-      "derogadoPor": "ley-105-1993",
-      "derogadaDesde": "1993-12-30",
-      "razon": "Nuevo régimen de transporte"
-    },
-    {
-      "articulo": "Arts. 822-898 (Libro II - Sociedades)",
-      "derogadoPor": "ley-222-1995",
-      "derogadaDesde": "1995-12-20",
-      "razon": "Modernización del régimen societario"
+      "articulos": "Arts. 515-516 (quiebra)",
+      "normaDerogante": "Ley 1116 de 2006 (Régimen de Insolvencia)",
+      "fechaDerogacion": "2006-12-27",
+      "observaciones": "El régimen de quiebra fue reemplazado por el régimen de insolvencia empresarial de la Ley 1116 de 2006."
     }
   ],
   "modificaciones": [
     {
-      "norma": "ley-27-1990",
-      "fecha": "1990-03-08",
-      "tipo": "modificacion",
-      "descripcion": "Modificaciones sobre registro mercantil"
-    },
-    {
-      "norma": "ley-222-1995",
       "fecha": "1995-12-20",
-      "tipo": "modificacion",
-      "descripcion": "Reforma al régimen de sociedades comerciales (deroga Libro II)"
+      "norma": "Ley 222 de 1995",
+      "descripcion": "Reformó el régimen de sociedades comerciales (Libro II del Código de Comercio). Introdujo nuevos tipos societarios (SAS en 2008 mediante Ley 1258) y modificó normas sobre reorganización empresarial."
     },
     {
-      "norma": "ley-510-1999",
-      "fecha": "1999-08-03",
-      "tipo": "modificacion",
-      "descripcion": "Modificaciones sobre registro mercantil y cámaras de comercio"
-    },
-    {
-      "norma": "ley-1116-2006",
       "fecha": "2006-12-27",
-      "tipo": "modificacion",
-      "descripcion": "Nuevo régimen de insolvencia (deroga disposiciones sobre quiebras)"
+      "norma": "Ley 1116 de 2006",
+      "descripcion": "Creó el Régimen de Insolvencia Empresarial, reemplazando el régimen de quiebra del Código de Comercio."
     },
     {
-      "norma": "ley-1480-2011",
+      "fecha": "2008-12-05",
+      "norma": "Ley 1258 de 2008",
+      "descripcion": "Creó la Sociedad por Acciones Simplificada (SAS), modificando indirectamente el régimen societario."
+    },
+    {
       "fecha": "2011-10-12",
-      "tipo": "modificacion",
-      "descripcion": "Estatuto del Consumidor (modifica disposiciones sobre ventas)"
+      "norma": "Ley 1480 de 2011",
+      "descripcion": "Estatuto del Consumidor. Modificó artículos relacionados con contratos de compraventa mercantil en protección al consumidor."
     },
     {
-      "norma": "ley-1564-2012",
-      "fecha": "2012-07-12",
-      "tipo": "modificacion",
-      "descripcion": "Código General del Proceso (aspectos procesales mercantiles)"
+      "fecha": "2020-07-02",
+      "norma": "Decreto Legislativo 772 de 2020",
+      "descripcion": "Durante la pandemia COVID-19, autorizó reuniones virtuales de juntas directivas y asambleas de accionistas (modificación temporal)."
     }
   ],
+  "libros_vigentes": [
+    {
+      "libro": "I - Comerciantes y actos de comercio",
+      "articulos": "1-97",
+      "estado": "vigente",
+      "temas": "Definición de comerciante, actos de comercio, obligaciones de los comerciantes (contabilidad, registro mercantil), matrícula mercantil, establecimiento de comercio."
+    },
+    {
+      "libro": "II - Sociedades comerciales",
+      "articulos": "98-242",
+      "estado": "derogado",
+      "temas": "Derogado por Ley 222 de 1995. Rige actualmente Ley 222 de 1995 y Ley 1258 de 2008 (SAS)."
+    },
+    {
+      "libro": "III - Contratos y obligaciones mercantiles",
+      "articulos": "822-1042",
+      "estado": "vigente",
+      "temas": "Compraventa mercantil, mandato comercial, suministro, transporte, depósito, contratos bancarios, seguros, fiducia mercantil."
+    },
+    {
+      "libro": "IV - Títulos valores",
+      "articulos": "619-821",
+      "estado": "vigente",
+      "temas": "Letra de cambio, pagaré, cheque, bonos, cédulas hipotecarias, títulos de participación, factura cambiaria. Base del derecho cambiario colombiano."
+    },
+    {
+      "libro": "V - Procedimientos",
+      "articulos": "1349-1528",
+      "estado": "parcialmente vigente",
+      "temas": "Jurisdicción mercantil, procesos ejecutivos mercantiles, intervención de la Superintendencia de Sociedades. Muchos artículos fueron derogados por el Código General del Proceso (Ley 1564 de 2012)."
+    }
+  ],
+  "articulos_clave_vigentes": [
+    {
+      "articulo": "10",
+      "tema": "Definición de comerciante",
+      "resumen": "Son comerciantes las personas que profesionalmente se ocupan en alguna de las actividades que la ley considera mercantiles."
+    },
+    {
+      "articulo": "19-21",
+      "tema": "Obligaciones de los comerciantes",
+      "resumen": "Todo comerciante debe: (1) matricularse en el registro mercantil, (2) llevar contabilidad regular, (3) conservar correspondencia comercial, (4) inscribir actos mercantiles en el registro."
+    },
+    {
+      "articulo": "48",
+      "tema": "Contabilidad mercantil",
+      "resumen": "Todo comerciante debe llevar libros de contabilidad: libro diario, libro mayor, libro de inventarios y balances."
+    },
+    {
+      "articulo": "515",
+      "tema": "Establecimiento de comercio",
+      "resumen": "Conjunto de bienes organizados por el empresario para realizar los fines de la empresa. Puede ser objeto de negocios jurídicos (compraventa, arrendamiento, hipoteca)."
+    },
+    {
+      "articulo": "619-821",
+      "tema": "Títulos valores",
+      "resumen": "Regula letra de cambio, pagaré, cheque y demás títulos valores. Base del cobro ejecutivo de obligaciones mercantiles."
+    },
+    {
+      "articulo": "822-916",
+      "tema": "Compraventa mercantil",
+      "resumen": "Regula la compraventa de mercancías entre comerciantes o para reventa. Incluye obligaciones del comprador y vendedor, riesgos, tradición, etc."
+    },
+    {
+      "articulo": "1037-1164",
+      "tema": "Seguros",
+      "resumen": "Regula el contrato de seguro: elementos, obligaciones de las partes, tipos de seguros (vida, daños, responsabilidad civil, etc.)."
+    }
+  ],
+  "principios_fundamentales": [
+    "Buena fe mercantil: Los comerciantes deben actuar con lealtad y transparencia en todas sus operaciones.",
+    "Onerosidad: Los actos mercantiles se presumen onerosos (a título oneroso, no gratuitos).",
+    "Solidaridad: En las obligaciones mercantiles, los deudores son solidarios salvo pacto en contrario.",
+    "Profesionalidad: Solo es comerciante quien ejerce actos de comercio de manera profesional (habitual).",
+    "Libertad contractual: Los comerciantes pueden pactar libremente sus contratos dentro de los límites legales."
+  ],
   "notas": [
-    "Código fundamental del derecho comercial colombiano",
-    "Regula actos de comercio, comerciantes, contratos mercantiles, títulos valores",
-    "El Libro II (Sociedades) fue derogado casi completamente por la Ley 222 de 1995",
-    "El régimen de quiebras fue reemplazado por la Ley 1116 de 2006 (insolvencia empresarial)",
-    "Continúa vigente para títulos valores, contratos mercantiles, registro mercantil",
-    "Se aplica supletoriamente a temas no regulados en leyes especiales"
-  ]
+    "El Código de Comercio sigue siendo la base del derecho mercantil colombiano, aunque muchas de sus normas han sido modificadas por leyes especiales.",
+    "El Libro II (Sociedades) fue completamente reemplazado por la Ley 222 de 1995 y posteriores reformas (Ley 1258 de 2008 - SAS).",
+    "Los títulos valores (Libro IV) siguen plenamente vigentes y son la base del proceso ejecutivo mercantil.",
+    "El régimen de contratos mercantiles (Libro III) está vigente pero debe leerse junto con el Estatuto del Consumidor (Ley 1480 de 2011) cuando el comprador es consumidor final.",
+    "El Código General del Proceso (Ley 1564 de 2012) derogó muchas normas procesales del Código de Comercio."
+  ],
+  "relacion_otras_normas": [
+    "Ley 222 de 1995: Régimen de sociedades comerciales (reemplazó Libro II)",
+    "Ley 1258 de 2008: Sociedad por Acciones Simplificada (SAS)",
+    "Ley 1116 de 2006: Régimen de insolvencia empresarial (reemplazó quiebra)",
+    "Ley 1480 de 2011: Estatuto del Consumidor (modifica compraventa mercantil)",
+    "Ley 1564 de 2012: Código General del Proceso (derogó procedimientos mercantiles)",
+    "Decreto 410 de 1971: Código de Comercio original (aún vigente en gran parte)"
+  ],
+  "fuentes": [
+    "Decreto 410 de 1971 (Código de Comercio)",
+    "Ley 222 de 1995 (Sociedades comerciales)",
+    "Ley 1116 de 2006 (Insolvencia)",
+    "Ley 1258 de 2008 (SAS)",
+    "Ley 1480 de 2011 (Estatuto del Consumidor)",
+    "Ley 1564 de 2012 (Código General del Proceso)",
+    "Superintendencia de Sociedades - Doctrina y conceptos"
+  ],
+  "ultima_actualizacion": "2026-02-10"
 }
