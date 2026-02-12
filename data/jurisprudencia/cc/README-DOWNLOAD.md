@@ -1,8 +1,8 @@
 # Instrucciones de Descarga Manual - Jurisprudencia CC
 
 **Generado**: 2026-02-11  
-**Total de sentencias**: 515  
-**Pendientes de descarga**: 515  
+**Total de sentencias**: 644  
+**Pendientes de descarga**: 644  
 **Ya existentes**: 0
 
 ## 📋 Lista de Descarga

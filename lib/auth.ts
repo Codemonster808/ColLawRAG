@@ -57,11 +57,67 @@ function getDb(): Database.Database {
         timestamp INTEGER NOT NULL,
         response_time INTEGER NOT NULL,
         success INTEGER NOT NULL DEFAULT 1,
+        legal_area TEXT,
+        complexity TEXT,
         FOREIGN KEY (user_id) REFERENCES users(id)
       );
       
       CREATE INDEX IF NOT EXISTS idx_user_id ON query_logs(user_id);
       CREATE INDEX IF NOT EXISTS idx_timestamp ON query_logs(timestamp);
+      CREATE INDEX IF NOT EXISTS idx_legal_area ON query_logs(legal_area);
+    `)
+    
+    // Crear tabla de métricas de calidad si no existe
+    db.exec(`
+      CREATE TABLE IF NOT EXISTS quality_metrics (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        query_log_id INTEGER NOT NULL,
+        citation_precision REAL,
+        total_citations INTEGER,
+        valid_citations INTEGER,
+        response_length INTEGER,
+        chunks_retrieved INTEGER,
+        timestamp INTEGER NOT NULL,
+        FOREIGN KEY (query_log_id) REFERENCES query_logs(id)
+      );
+      
+      CREATE INDEX IF NOT EXISTS idx_query_log_id ON quality_metrics(query_log_id);
+      CREATE INDEX IF NOT EXISTS idx_timestamp_qm ON quality_metrics(timestamp);
+    `)
+    
+    // Crear tabla de feedback de usuarios si no existe
+    db.exec(`
+      CREATE TABLE IF NOT EXISTS user_feedback (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        query_log_id INTEGER,
+        user_id TEXT,
+        rating INTEGER NOT NULL CHECK (rating >= 1 AND rating <= 5),
+        comment TEXT,
+        timestamp INTEGER NOT NULL,
+        FOREIGN KEY (query_log_id) REFERENCES query_logs(id),
+        FOREIGN KEY (user_id) REFERENCES users(id)
+      );
+      
+      CREATE INDEX IF NOT EXISTS idx_query_log_feedback ON user_feedback(query_log_id);
+      CREATE INDEX IF NOT EXISTS idx_user_feedback ON user_feedback(user_id);
+      CREATE INDEX IF NOT EXISTS idx_timestamp_feedback ON user_feedback(timestamp);
+    `)
+    
+    // Crear tabla de A/B testing si no existe
+    db.exec(`
+      CREATE TABLE IF NOT EXISTS ab_tests (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        test_name TEXT NOT NULL,
+        variant TEXT NOT NULL,
+        user_id TEXT,
+        query_log_id INTEGER,
+        timestamp INTEGER NOT NULL,
+        FOREIGN KEY (user_id) REFERENCES users(id),
+        FOREIGN KEY (query_log_id) REFERENCES query_logs(id)
+      );
+      
+      CREATE INDEX IF NOT EXISTS idx_test_name ON ab_tests(test_name);
+      CREATE INDEX IF NOT EXISTS idx_user_ab ON ab_tests(user_id);
     `)
   }
   return db
@@ -198,7 +254,9 @@ export function logQuery(params: {
   query: string
   responseTime: number
   success: boolean
-}): void {
+  legalArea?: string
+  complexity?: 'simple' | 'medium' | 'complex'
+}): number {
   try {
     const database = getDb()
     const now = Date.now()
@@ -240,18 +298,23 @@ export function logQuery(params: {
     `).run(queriesThisMonth, totalQueries, now, params.userId)
     
     // Registrar en log
-    database.prepare(`
-      INSERT INTO query_logs (user_id, query, timestamp, response_time, success)
-      VALUES (?, ?, ?, ?, ?)
+    const result = database.prepare(`
+      INSERT INTO query_logs (user_id, query, timestamp, response_time, success, legal_area, complexity)
+      VALUES (?, ?, ?, ?, ?, ?, ?)
     `).run(
       params.userId,
       params.query.substring(0, 1000), // Limitar longitud de query
       now,
       params.responseTime,
-      params.success ? 1 : 0
+      params.success ? 1 : 0,
+      params.legalArea || null,
+      params.complexity || null
     )
+    
+    return result.lastInsertRowid as number
   } catch (error) {
     console.error('[auth] Error logging query:', error)
+    return 0
   }
 }
 
@@ -443,4 +506,337 @@ export function authenticateByApiKey(apiKey: string): User | null {
   // En producción, esto debería verificar contra una base de datos
   // Por ahora, asumimos que el API key es el userId
   return getUser(apiKey) || null
+}
+
+/**
+ * Registra métricas de calidad para una consulta
+ */
+export function logQualityMetrics(params: {
+  queryLogId: number
+  citationPrecision?: number
+  totalCitations?: number
+  validCitations?: number
+  responseLength?: number
+  chunksRetrieved?: number
+}): void {
+  try {
+    const database = getDb()
+    const now = Date.now()
+    
+    database.prepare(`
+      INSERT INTO quality_metrics (
+        query_log_id, citation_precision, total_citations, valid_citations,
+        response_length, chunks_retrieved, timestamp
+      )
+      VALUES (?, ?, ?, ?, ?, ?, ?)
+    `).run(
+      params.queryLogId,
+      params.citationPrecision ?? null,
+      params.totalCitations ?? null,
+      params.validCitations ?? null,
+      params.responseLength ?? null,
+      params.chunksRetrieved ?? null,
+      now
+    )
+  } catch (error) {
+    console.error('[auth] Error logging quality metrics:', error)
+  }
+}
+
+/**
+ * Registra feedback de un usuario
+ */
+export function logUserFeedback(params: {
+  queryLogId?: number
+  userId?: string
+  rating: number
+  comment?: string
+}): void {
+  try {
+    const database = getDb()
+    const now = Date.now()
+    
+    database.prepare(`
+      INSERT INTO user_feedback (query_log_id, user_id, rating, comment, timestamp)
+      VALUES (?, ?, ?, ?, ?)
+    `).run(
+      params.queryLogId ?? null,
+      params.userId ?? null,
+      params.rating,
+      params.comment ?? null,
+      now
+    )
+  } catch (error) {
+    console.error('[auth] Error logging user feedback:', error)
+  }
+}
+
+/**
+ * Obtiene métricas de calidad agregadas
+ */
+export function getQualityMetrics(params?: {
+  startDate?: Date
+  endDate?: Date
+  legalArea?: string
+}): {
+  averageCitationPrecision: number
+  totalQueriesWithMetrics: number
+  averageCitationsPerQuery: number
+  averageValidCitations: number
+  averageResponseLength: number
+  averageChunksRetrieved: number
+  precisionByArea: Record<string, { precision: number; count: number }>
+  precisionByComplexity: Record<string, { precision: number; count: number }>
+} {
+  try {
+    const database = getDb()
+    
+    let whereClause = '1=1'
+    const paramsArray: any[] = []
+    
+    if (params?.startDate) {
+      whereClause += ' AND qm.timestamp >= ?'
+      paramsArray.push(params.startDate.getTime())
+    }
+    
+    if (params?.endDate) {
+      whereClause += ' AND qm.timestamp <= ?'
+      paramsArray.push(params.endDate.getTime())
+    }
+    
+    if (params?.legalArea) {
+      whereClause += ' AND ql.legal_area = ?'
+      paramsArray.push(params.legalArea)
+    }
+    
+    // Métricas generales
+    const metricsRow = database.prepare(`
+      SELECT 
+        AVG(qm.citation_precision) as avg_precision,
+        COUNT(*) as total_queries,
+        AVG(qm.total_citations) as avg_total_citations,
+        AVG(qm.valid_citations) as avg_valid_citations,
+        AVG(qm.response_length) as avg_response_length,
+        AVG(qm.chunks_retrieved) as avg_chunks_retrieved
+      FROM quality_metrics qm
+      JOIN query_logs ql ON qm.query_log_id = ql.id
+      WHERE ${whereClause}
+    `).get(...paramsArray) as any
+    
+    // Precisión por área legal
+    const areaRows = database.prepare(`
+      SELECT 
+        ql.legal_area,
+        AVG(qm.citation_precision) as precision,
+        COUNT(*) as count
+      FROM quality_metrics qm
+      JOIN query_logs ql ON qm.query_log_id = ql.id
+      WHERE ${whereClause} AND ql.legal_area IS NOT NULL
+      GROUP BY ql.legal_area
+    `).all(...paramsArray) as any[]
+    
+    const precisionByArea: Record<string, { precision: number; count: number }> = {}
+    for (const row of areaRows) {
+      precisionByArea[row.legal_area] = {
+        precision: row.precision || 0,
+        count: row.count || 0
+      }
+    }
+    
+    // Precisión por complejidad
+    const complexityRows = database.prepare(`
+      SELECT 
+        ql.complexity,
+        AVG(qm.citation_precision) as precision,
+        COUNT(*) as count
+      FROM quality_metrics qm
+      JOIN query_logs ql ON qm.query_log_id = ql.id
+      WHERE ${whereClause} AND ql.complexity IS NOT NULL
+      GROUP BY ql.complexity
+    `).all(...paramsArray) as any[]
+    
+    const precisionByComplexity: Record<string, { precision: number; count: number }> = {}
+    for (const row of complexityRows) {
+      precisionByComplexity[row.complexity] = {
+        precision: row.precision || 0,
+        count: row.count || 0
+      }
+    }
+    
+    return {
+      averageCitationPrecision: metricsRow?.avg_precision || 0,
+      totalQueriesWithMetrics: metricsRow?.total_queries || 0,
+      averageCitationsPerQuery: metricsRow?.avg_total_citations || 0,
+      averageValidCitations: metricsRow?.avg_valid_citations || 0,
+      averageResponseLength: metricsRow?.avg_response_length || 0,
+      averageChunksRetrieved: metricsRow?.avg_chunks_retrieved || 0,
+      precisionByArea,
+      precisionByComplexity
+    }
+  } catch (error) {
+    console.error('[auth] Error getting quality metrics:', error)
+    return {
+      averageCitationPrecision: 0,
+      totalQueriesWithMetrics: 0,
+      averageCitationsPerQuery: 0,
+      averageValidCitations: 0,
+      averageResponseLength: 0,
+      averageChunksRetrieved: 0,
+      precisionByArea: {},
+      precisionByComplexity: {}
+    }
+  }
+}
+
+/**
+ * Obtiene métricas de satisfacción (feedback)
+ */
+export function getSatisfactionMetrics(params?: {
+  startDate?: Date
+  endDate?: Date
+}): {
+  averageRating: number
+  totalFeedback: number
+  ratingDistribution: Record<number, number>
+  feedbackWithComments: number
+} {
+  try {
+    const database = getDb()
+    
+    let whereClause = '1=1'
+    const paramsArray: any[] = []
+    
+    if (params?.startDate) {
+      whereClause += ' AND timestamp >= ?'
+      paramsArray.push(params.startDate.getTime())
+    }
+    
+    if (params?.endDate) {
+      whereClause += ' AND timestamp <= ?'
+      paramsArray.push(params.endDate.getTime())
+    }
+    
+    const metricsRow = database.prepare(`
+      SELECT 
+        AVG(rating) as avg_rating,
+        COUNT(*) as total_feedback,
+        SUM(CASE WHEN comment IS NOT NULL AND comment != '' THEN 1 ELSE 0 END) as with_comments
+      FROM user_feedback
+      WHERE ${whereClause}
+    `).get(...paramsArray) as any
+    
+    const distributionRows = database.prepare(`
+      SELECT rating, COUNT(*) as count
+      FROM user_feedback
+      WHERE ${whereClause}
+      GROUP BY rating
+    `).all(...paramsArray) as any[]
+    
+    const ratingDistribution: Record<number, number> = {}
+    for (const row of distributionRows) {
+      ratingDistribution[row.rating] = row.count || 0
+    }
+    
+    return {
+      averageRating: metricsRow?.avg_rating || 0,
+      totalFeedback: metricsRow?.total_feedback || 0,
+      ratingDistribution,
+      feedbackWithComments: metricsRow?.with_comments || 0
+    }
+  } catch (error) {
+    console.error('[auth] Error getting satisfaction metrics:', error)
+    return {
+      averageRating: 0,
+      totalFeedback: 0,
+      ratingDistribution: {},
+      feedbackWithComments: 0
+    }
+  }
+}
+
+/**
+ * Sistema básico de A/B testing
+ */
+export function assignABTestVariant(testName: string, userId: string): 'A' | 'B' {
+  try {
+    // Usar hash del userId para asignación consistente
+    const hash = userId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
+    return hash % 2 === 0 ? 'A' : 'B'
+  } catch (error) {
+    console.error('[auth] Error assigning AB test variant:', error)
+    return 'A'
+  }
+}
+
+export function logABTest(params: {
+  testName: string
+  variant: 'A' | 'B'
+  userId?: string
+  queryLogId?: number
+}): void {
+  try {
+    const database = getDb()
+    const now = Date.now()
+    
+    database.prepare(`
+      INSERT INTO ab_tests (test_name, variant, user_id, query_log_id, timestamp)
+      VALUES (?, ?, ?, ?, ?)
+    `).run(
+      params.testName,
+      params.variant,
+      params.userId ?? null,
+      params.queryLogId ?? null,
+      now
+    )
+  } catch (error) {
+    console.error('[auth] Error logging AB test:', error)
+  }
+}
+
+export function getABTestResults(testName: string): {
+  variantA: { count: number; avgResponseTime: number; avgSuccess: number }
+  variantB: { count: number; avgResponseTime: number; avgSuccess: number }
+} {
+  try {
+    const database = getDb()
+    
+    const variantARow = database.prepare(`
+      SELECT 
+        COUNT(*) as count,
+        AVG(ql.response_time) as avg_response_time,
+        AVG(ql.success) as avg_success
+      FROM ab_tests ab
+      JOIN query_logs ql ON ab.query_log_id = ql.id
+      WHERE ab.test_name = ? AND ab.variant = 'A'
+    `).get(testName) as any
+    
+    const variantBRow = database.prepare(`
+      SELECT 
+        COUNT(*) as count,
+        AVG(ql.response_time) as avg_response_time,
+        AVG(ql.success) as avg_success
+      FROM ab_tests ab
+      JOIN query_logs ql ON ab.query_log_id = ql.id
+      WHERE ab.test_name = ? AND ab.variant = 'B'
+    `).get(testName) as any
+    
+    return {
+      variantA: {
+        count: variantARow?.count || 0,
+        avgResponseTime: variantARow?.avg_response_time || 0,
+        avgSuccess: variantARow?.avg_success || 0
+      },
+      variantB: {
+        count: variantBRow?.count || 0,
+        avgResponseTime: variantBRow?.avg_response_time || 0,
+        avgSuccess: variantBRow?.avg_success || 0
+      }
+    }
+  } catch (error) {
+    console.error('[auth] Error getting AB test results:', error)
+    return {
+      variantA: { count: 0, avgResponseTime: 0, avgSuccess: 0 },
+      variantB: { count: 0, avgResponseTime: 0, avgSuccess: 0 }
+    }
+  }
 }

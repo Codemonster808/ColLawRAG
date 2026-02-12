@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { getSystemMetrics, getQueriesPerDay } from '@/lib/auth'
+import { getSystemMetrics, getQueriesPerDay, getQualityMetrics, getSatisfactionMetrics, getABTestResults } from '@/lib/auth'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -21,10 +21,16 @@ export async function GET(request: Request) {
   try {
     const metrics = getSystemMetrics()
     const queriesPerDay = getQueriesPerDay(14)
+    const qualityMetrics = getQualityMetrics()
+    const satisfactionMetrics = getSatisfactionMetrics()
+    const abTestResults = getABTestResults('topk_variants')
 
     return NextResponse.json({
       ...metrics,
-      queriesPerDay
+      queriesPerDay,
+      qualityMetrics,
+      satisfactionMetrics,
+      abTestResults
     })
   } catch (e) {
     console.error('[analytics]', e)

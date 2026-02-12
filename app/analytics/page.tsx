@@ -1,4 +1,4 @@
-import { getSystemMetrics, getQueriesPerDay } from '@/lib/auth'
+import { getSystemMetrics, getQueriesPerDay, getQualityMetrics, getSatisfactionMetrics, getABTestResults } from '@/lib/auth'
 import AnalyticsDashboard from './AnalyticsDashboard'
 
 type Props = { searchParams: Promise<{ key?: string }> }
@@ -25,12 +25,18 @@ export default async function AnalyticsPage({ searchParams }: Props) {
 
   const metrics = getSystemMetrics()
   const queriesPerDay = getQueriesPerDay(14)
+  const qualityMetrics = getQualityMetrics()
+  const satisfactionMetrics = getSatisfactionMetrics()
+  const abTestResults = getABTestResults('topk_variants')
 
   return (
     <AnalyticsDashboard
       metrics={{
         ...metrics,
-        queriesPerDay
+        queriesPerDay,
+        qualityMetrics,
+        satisfactionMetrics,
+        abTestResults
       }}
     />
   )

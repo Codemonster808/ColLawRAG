@@ -1,0 +1,143 @@
+{
+  "totalProcesadas": 29210,
+  "totalFiltradas": 3084,
+  "porAño": {
+    "2020": 523,
+    "2021": 443,
+    "2022": 474,
+    "2023": 585,
+    "2024": 530,
+    "2025": 520,
+    "2026": 9
+  },
+  "porTipo": {
+    "tutela": 2222,
+    "d": 640,
+    "lat": 47,
+    "re": 155,
+    "og": 7,
+    "pe": 12,
+    "rpz": 1
+  },
+  "porMagistrado": {
+    "Cristina Pardo Schlesinger": 297,
+    "Diana Constanza Fajardo Rivera": 294,
+    "José Fernando Reyes Cuartas": 285,
+    "Conjuez": 1,
+    "Alberto Rojas Ríos": 93,
+    "Gloria Stella Ortiz Delgado": 128,
+    "Luis Guillermo Guerrero Pérez": 84,
+    "Alejandro Linares Cantillo": 252,
+    "Antonio José Lizarazo Ocampo": 292,
+    "Carlos Libardo Bernal Pulido": 28,
+    "Carlos Libardo Bernal Pulido; Cristina Pardo Schlesinger": 1,
+    "Cristina Pardo Schlesinger; Luis Guillermo Guerrero Pérez": 1,
+    "Cristina Pardo Schlesinger; Gloria Stella Ortiz Delgado": 1,
+    "Richard Steve Ramírez Grisales": 14,
+    "Luis Javier Moreno Ortiz": 3,
+    "Alejandro Linares Cantillo; José Fernando Reyes Cuartas": 1,
+    "Jorge Enrique Ibáñez Najar": 330,
+    "Diana Constanza Fajardo Rivera; José Fernando Reyes Cuartas; Sala Plena": 1,
+    "Alberto Rojas Ríos; José Fernando Reyes Cuartas": 1,
+    "Paola Andrea Meneses Mosquera": 278,
+    "Mauricio Piñeros Perdomo (Conjuez)": 1,
+    "Antonio José Lizarazo Ocampo; José Fernando Reyes Cuartas": 1,
+    "Alejandro Martínez Caballero": 1,
+    "Jorge Enrique Ibáñez Najar; Diana Constanza Fajardo Rivera": 1,
+    "José Fernando Reyes Cuartas; Sala Plena": 1,
+    "Eduardo Cifuentes Muñoz": 1,
+    "Gloria Stella Ortiz Delgado; Paola Andrea Meneses Mosquera": 2,
+    "Antonio José Lizarazo Ocampo; Jorge Enrique Ibáñez Najar": 1,
+    "Antonio José Lizarazo Ocampo; Alberto Rojas Ríos": 1,
+    "Karena Elisama Caselles Hernández": 9,
+    "Diana Constanza Fajardo Rivera; Cristina Pardo Schlesinger; José Fernando Reyes Cuartas": 1,
+    "Natalia Ángel Cabo": 229,
+    "Hernán Correa Cardozo": 21,
+    "Jorge Enrique Ibáñez Najar; Cristina Pardo Schlesinger": 2,
+    "Juan Carlos Cortés González": 177,
+    "Juan Carlos Cortés González; José Fernando Reyes Cuartas": 1,
+    "Luis Fernando López Roca (Conjuez)": 1,
+    "Diana Constanza Fajardo Rivera; Alejandro Linares Cantillo": 2,
+    "José Fernando Reyes Cuartas; Diana Constanza Fajardo Rivera": 1,
+    "Alejandro Linares Cantillo; Antonio José Lizarazo Ocampo": 1,
+    "Cristina Pardo Schlesinger; Jorge Enrique Ibáñez Najar": 1,
+    "Natalia Ángel Cabo; Antonio José Lizarazo Ocampo": 2,
+    "Miguel Efrain Polo Rosero": 55,
+    "Cristina Pardo Schlesinger; Paola Andrea Meneses Mosquera": 1,
+    "Cristina Pardo Schlesinger; Antonio José Lizarazo Ocampo; José Fernando Reyes Cuartas": 1,
+    "Vladimir Fernández Andrade": 104,
+    "Mauricio Piñeros Perdomo (Conjuez); Natalia Ángel Cabo": 1,
+    "Cristina Pardo Schlesinger; Antonio José Lizarazo Ocampo": 1,
+    "Jorge Enrique Ibáñez Najar; José Fernando Reyes Cuartas": 1,
+    "Jorge Enrique Ibáñez Najar; Vladimir Fernández Andrade": 1,
+    "Cristina Pardo Schlesinger; Natalia Ángel Cabo": 1,
+    "Carolina Ramírez Pérez": 9,
+    "Paola Andrea Meneses Mosquera; Carolina Ramírez Pérez": 1,
+    "Jorge Enrique Ibáñez Najar; Natalia Ángel Cabo": 1,
+    "Diana Constanza Fajardo Rivera; Juan Carlos Cortés González": 1,
+    "César Humberto Carvajal Santoyo": 2,
+    "Héctor Alfonso Carvajal Londoño": 23,
+    "Lina Marcela Escobar Martínez": 24,
+    "Lina Marcela Escobar Martínez; Vladimir Fernández Andrade": 1,
+    "Juan Jacobo Calderón Villegas": 7,
+    "Carlos Camargo Assis": 6
+  },
+  "porSala": {
+    "Salas de Revisión": 1979,
+    "Sala Plena": 1105
+  },
+  "conVotos": 3020,
+  "sinVotos": 64,
+  "topMagistrados": [
+    {
+      "nombre": "Jorge Enrique Ibáñez Najar",
+      "count": 330
+    },
+    {
+      "nombre": "Cristina Pardo Schlesinger",
+      "count": 297
+    },
+    {
+      "nombre": "Diana Constanza Fajardo Rivera",
+      "count": 294
+    },
+    {
+      "nombre": "Antonio José Lizarazo Ocampo",
+      "count": 292
+    },
+    {
+      "nombre": "José Fernando Reyes Cuartas",
+      "count": 285
+    },
+    {
+      "nombre": "Paola Andrea Meneses Mosquera",
+      "count": 278
+    },
+    {
+      "nombre": "Alejandro Linares Cantillo",
+      "count": 252
+    },
+    {
+      "nombre": "Natalia Ángel Cabo",
+      "count": 229
+    },
+    {
+      "nombre": "Juan Carlos Cortés González",
+      "count": 177
+    },
+    {
+      "nombre": "Gloria Stella Ortiz Delgado",
+      "count": 128
+    }
+  ],
+  "topSalas": [
+    {
+      "nombre": "Salas de Revisión",
+      "count": 1979
+    },
+    {
+      "nombre": "Sala Plena",
+      "count": 1105
+    }
+  ]
+}

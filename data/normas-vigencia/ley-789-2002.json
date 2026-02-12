@@ -1,35 +1,248 @@
 {
   "normaId": "ley-789-2002",
-  "nombre": "Ley 789 de 2002 (Reforma Laboral)",
+  "nombre": "Ley 789 de 2002 - Por la cual se dictan normas para apoyar el empleo y ampliar la protección social",
   "tipo": "ley",
   "vigenteDesde": "2002-12-27",
   "vigenteHasta": null,
   "estado": "vigente",
-  "modificaciones": [
+  "ambito": "nacional",
+  "materia": "Derecho Laboral - Empleo y Protección Social",
+  "emisor": "Congreso de la República",
+  "publicacion": "Diario Oficial 45.046 de 27 de diciembre de 2002",
+  "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=6778",
+  
+  "descripcion": "Reforma laboral que modificó aspectos del Código Sustantivo del Trabajo relacionados con jornada de trabajo, dominicales, horas extras, contratos de aprendizaje, y creó el Sistema de Protección Social.",
+  
+  "objetoPrincipal": "Estimular la generación de empleo, flexibilizar el mercado laboral, y ampliar la protección social a través de subsidios al desempleo, salud y pensión para población vulnerable.",
+  
+  "modificacionesPrincipales": [
+    {
+      "tema": "Jornada nocturna",
+      "articuloCST": "Art. 160 CST",
+      "cambio": "Redujo recargo nocturno de 35% a 35% (mantuvo). Definió jornada nocturna: 10PM a 6AM",
+      "impacto": "Clarificó definición de trabajo nocturno"
+    },
+    {
+      "tema": "Trabajo dominical y festivo",
+      "articuloCST": "Art. 179 CST",
+      "cambio": "Redujo recargo dominical de 100% a 75%. Eliminó descanso compensatorio obligatorio si se paga recargo",
+      "impacto": "Abarató costo de trabajo dominical para empleadores"
+    },
+    {
+      "tema": "Horas extras",
+      "articuloCST": "Art. 168 CST",
+      "cambio": "Mantuvo recargos: 25% diurna, 75% nocturna, 100% dominical diurna, 150% dominical nocturna",
+      "impacto": "No cambió recargos, solo aclaró procedimiento"
+    },
+    {
+      "tema": "Indemnización por despido",
+      "articuloCST": "Art. 64 CST",
+      "cambio": "Para salarios inferiores a 10 SMMLV: 30 días por primer año, 20 días por años siguientes (máximo 20 años)",
+      "impacto": "Estableció tope a indemnizaciones"
+    },
+    {
+      "tema": "Contrato de aprendizaje",
+      "articuloCST": "Nuevo régimen",
+      "cambio": "Creó contrato de aprendizaje como relación especial (no laboral). Quota de aprendices obligatoria",
+      "impacto": "Generó empleo juvenil pero precarizó condiciones (no es contrato laboral)"
+    }
+  ],
+  
+  "sistemaProteccionSocial": {
+    "subsidioDesempleo": {
+      "beneficiarios": "Trabajadores cesantes que cotizaron al menos 12 meses",
+      "duracion": "Hasta 6 meses",
+      "monto": "1.5 SMMLV mensual",
+      "financiacion": "Cajas de compensación familiar"
+    },
+    "subsidioSalud": {
+      "beneficiarios": "Población vulnerable sin capacidad de pago",
+      "cobertura": "Régimen subsidiado de salud",
+      "financiacion": "Estado (FOSYGA)"
+    },
+    "subsidioPension": {
+      "beneficiarios": "Personas de bajos ingresos mayores de 55 años",
+      "monto": "Variable según ingresos",
+      "financiacion": "Fondo de Solidaridad Pensional"
+    }
+  },
+  
+  "contratoAprendizaje": {
+    "definicion": "Relación especial (no laboral) entre empresa y aprendiz para formación teórico-práctica",
+    "duracion": "Hasta 2 años (máximo)",
+    "etapas": [
+      {
+        "etapa": "Lectiva",
+        "duracion": "Mínimo 50% del tiempo total",
+        "apoyo": "Apoyo de sostenimiento: 50% de 1 SMMLV",
+        "afiliacion": "Solo salud (EPS)"
+      },
+      {
+        "etapa": "Práctica",
+        "duracion": "Máximo 50% del tiempo total",
+        "apoyo": "Apoyo de sostenimiento: 75% de 1 SMMLV si cumple horario completo, 50% si no",
+        "afiliacion": "Salud (EPS) y riesgos laborales (ARL)"
+      }
+    ],
+    "quotaObligatoria": {
+      "empresas": "Empresas con más de 15 trabajadores",
+      "porcentaje": "1 aprendiz por cada 20 trabajadores (aprox)",
+      "alternativas": "Pago monetario al SENA si no vincula aprendices"
+    },
+    "caracteristicas": [
+      "No es contrato laboral",
+      "No genera prestaciones sociales",
+      "No hay salario sino apoyo de sostenimiento",
+      "No hay estabilidad laboral",
+      "Aprendiz recibe formación en el SENA u otra institución"
+    ]
+  },
+  
+  "articulosRelevantes": [
+    {
+      "articulo": "Art. 25",
+      "tema": "Modificación recargo trabajo nocturno",
+      "resumen": "Mantuvo 35% recargo nocturno (10PM-6AM)"
+    },
+    {
+      "articulo": "Art. 26",
+      "tema": "Trabajo dominical",
+      "resumen": "Redujo recargo dominical de 100% a 75%"
+    },
+    {
+      "articulo": "Art. 28",
+      "tema": "Indemnización por despido",
+      "resumen": "Estableció topes a indemnización: 30 días primer año, 20 días siguientes (max 20 años)"
+    },
+    {
+      "articulo": "Art. 30",
+      "tema": "Contrato de aprendizaje",
+      "resumen": "Definió contrato de aprendizaje como relación especial, no laboral"
+    },
+    {
+      "articulo": "Art. 32",
+      "tema": "Quota de aprendices",
+      "resumen": "Empresas deben vincular aprendices según tamaño (1 por cada 20 trabajadores)"
+    },
+    {
+      "articulo": "Art. 42",
+      "tema": "Subsidio al desempleo",
+      "resumen": "Creó subsidio al desempleo para trabajadores cesantes"
+    },
+    {
+      "articulo": "Art. 65",
+      "tema": "Subsidio de salud",
+      "resumen": "Amplió cobertura régimen subsidiado de salud"
+    }
+  ],
+  
+  "impactoEconomico": {
+    "objetivo": "Reducir costos laborales para estimular contratación",
+    "resultados": [
+      "Redujo costos de trabajo dominical (de 200% a 175%)",
+      "Estableció topes a indemnizaciones por despido",
+      "Creó figura de aprendizaje (más barato que trabajador)",
+      "Generó controversia: ¿flexibilización o precarización?"
+    ],
+    "efectosEnEmpleo": [
+      "Aumento de contratación formal (discutible)",
+      "Reducción de costos para empresas",
+      "Precarización de condiciones (aprendices sin prestaciones)",
+      "Generación de empleo juvenil (aprendices SENA)"
+    ]
+  },
+  
+  "jurisprudenciaRelevante": [
+    {
+      "sentencia": "C-038/2004",
+      "magistrado": "Eduardo Montealegre Lynett",
+      "fecha": "2004-01-27",
+      "tema": "Exequibilidad Ley 789",
+      "ratio": "Declaró exequible la reducción de recargos dominicales. Competencia del legislador regular relaciones laborales"
+    },
+    {
+      "sentencia": "C-614/2009",
+      "magistrado": "Jorge Iván Palacio Palacio",
+      "fecha": "2009-09-02",
+      "tema": "Contrato de aprendizaje",
+      "ratio": "El contrato de aprendizaje no es laboral, es especial. Objetivos de formación y empleo juvenil"
+    },
+    {
+      "sentencia": "T-1083/2012",
+      "magistrado": "Jorge Ignacio Pretelt Chaljub",
+      "fecha": "2012-12-13",
+      "tema": "Protección aprendices",
+      "ratio": "Aunque no sea laboral, aprendices tienen derechos fundamentales (dignidad, formación adecuada)"
+    }
+  ],
+  
+  "criticasYControversias": [
+    "Redujo protección laboral (recargos dominicales)",
+    "Topes a indemnizaciones perjudican trabajadores antiguos",
+    "Contrato de aprendizaje precariza empleo juvenil (no prestaciones)",
+    "Empresas abusan de aprendices como mano de obra barata",
+    "Quota de aprendices no siempre se cumple",
+    "Subsidio al desempleo es insuficiente (solo 1.5 SMMLV por 6 meses)",
+    "Flexibilización laboral vs protección de derechos",
+    "Impacto real en generación de empleo es discutible"
+  ],
+  
+  "modificacionesPosteriores": [
+    {
+      "norma": "decreto-933-2003",
+      "fecha": "2003-04-11",
+      "tipo": "reglamentacion",
+      "descripcion": "Reglamentó contrato de aprendizaje"
+    },
+    {
+      "norma": "decreto-2177-2004",
+      "fecha": "2004-07-09",
+      "tipo": "reglamentacion",
+      "descripcion": "Modificó decreto 933/2003 sobre aprendices"
+    },
     {
       "norma": "ley-1429-2010",
       "fecha": "2010-12-29",
-      "tipo": "modificacion",
-      "descripcion": "Formalización y generación de empleo"
-    },
-    {
-      "norma": "ley-1780-2016",
-      "fecha": "2016-05-02",
-      "tipo": "modificacion",
-      "descripcion": "Empleo juvenil"
+      "tipo": "adicion",
+      "descripcion": "Formalización y generación de empleo (beneficios tributarios)"
     }
   ],
+  
+  "relacionConOtrasNormas": [
+    {
+      "norma": "codigo-sustantivo-trabajo",
+      "relacion": "Modificó varios artículos del CST (recargos, indemnizaciones)"
+    },
+    {
+      "norma": "ley-100-1993",
+      "relacion": "Complementó sistema de protección social (salud, pensión)"
+    },
+    {
+      "norma": "ley-50-1990",
+      "relacion": "Continuó proceso de flexibilización laboral iniciado en 1990"
+    }
+  ],
+  
+  "estadisticas": {
+    "vigenciaAños": 22,
+    "modificaciones": 5,
+    "aprendicesSENA": "Aproximadamente 300,000 aprendices anuales (2023)",
+    "impactoEmpleo": "Discutido por economistas (no consenso sobre efectividad)",
+    "areaImpacto": "Derecho Laboral, Empleo, Protección Social"
+  },
+  
   "notas": [
-    "Reforma laboral que flexibilizó el régimen de contratación en Colombia",
-    "Derogó la Ley 50 de 1990 en varios aspectos",
-    "Modificó el régimen de jornada laboral (eliminó recargo del 100% para dominicales trabajados)",
-    "Redujo los recargos nocturnos y dominicales: nocturno 35% (antes 50%), dominical 75% (antes 100%)",
-    "Eliminó la retroactividad de las cesantías definitivamente",
-    "Modificó el régimen de indemnizaciones por despido injusto",
-    "Creó el Sistema Nacional de Formación para el Trabajo",
-    "Estableció el subsidio al desempleo para trabajadores cesantes",
-    "Fortaleció las modalidades de contratación flexible (contratos temporales, por obra o labor)",
-    "Fue controversial por reducir costos laborales pero también derechos de trabajadores",
-    "La Corte Constitucional declaró exequibles la mayoría de sus disposiciones"
+    "Reforma laboral controversial de 2002",
+    "Objetivo: flexibilizar mercado laboral para generar empleo",
+    "Redujo costos laborales (recargos, indemnizaciones)",
+    "Creó contrato de aprendizaje como alternativa al laboral",
+    "Amplió protección social (subsidio desempleo, salud, pensión)",
+    "Generó debate: ¿flexibilización necesaria o precarización?",
+    "Impacto en generación de empleo es discutible",
+    "Contrato de aprendizaje es criticado por precarizar empleo juvenil",
+    "Quota de aprendices obligatoria pero no siempre cumplida",
+    "Gobierno la promovió como necesaria para competitividad",
+    "Sindicatos y trabajadores la criticaron como regresiva",
+    "Continúa vigente y es referencia en reformas laborales posteriores"
   ]
 }

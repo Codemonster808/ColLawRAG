@@ -1,34 +1,290 @@
 {
   "normaId": "ley-1010-2006",
-  "nombre": "Ley 1010 de 2006 (Acoso Laboral)",
+  "nombre": "Ley 1010 de 2006 - Por medio de la cual se adoptan medidas para prevenir, corregir y sancionar el acoso laboral",
   "tipo": "ley",
   "vigenteDesde": "2006-01-23",
   "vigenteHasta": null,
   "estado": "vigente",
-  "modificaciones": [
+  "ambito": "nacional",
+  "materia": "Derecho Laboral - Protección de derechos fundamentales",
+  "emisor": "Congreso de la República",
+  "publicacion": "Diario Oficial 46.160 de 23 de enero de 2006",
+  "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=18843",
+  
+  "descripcion": "Primera ley en Colombia que define, previene y sanciona el acoso laboral. Protege a trabajadores de conductas hostiles, humillantes y degradantes en el entorno de trabajo, garantizando la dignidad humana y el ambiente laboral sano.",
+  
+  "objetoPrincipal": "Definir, prevenir, corregir y sancionar las diversas formas de agresión, maltrato, vejámenes, trato desconsiderado y ofensivo y en general todo ultraje a la dignidad humana que se ejercen sobre quienes realizan actividades económicas en el contexto de una relación laboral.",
+  
+  "definicionAcosoLaboral": {
+    "concepto": "Toda conducta persistente y demostrable, ejercida sobre un empleado o trabajador por parte de un empleador, un jefe o superior jerárquico inmediato o mediato, un compañero de trabajo o un subalterno, encaminada a infundir miedo, intimidación, terror y angustia, a causar perjuicio laboral, generar desmotivación en el trabajo, o inducir la renuncia del mismo.",
+    "elementosEsenciales": [
+      "Persistencia: Conducta repetitiva, no un hecho aislado",
+      "Demostrable: Debe probarse con evidencia",
+      "Intencionalidad: Busca causar daño psicológico o laboral",
+      "Afectación: Perjudica dignidad, salud o condiciones de trabajo"
+    ],
+    "caracteristicas": [
+      "Reiterativa o sistemática",
+      "Puede ser vertical (jefe-subordinado) u horizontal (entre compañeros)",
+      "Incluye acoso ascendente (subordinado a jefe)",
+      "Afecta dignidad humana y ambiente laboral"
+    ]
+  },
+  
+  "modalidadesAcosoLaboral": [
     {
-      "norma": "resolucion-2646-2008",
-      "fecha": "2008-07-17",
-      "tipo": "modificacion",
-      "descripcion": "Reglamentación sobre factores de riesgo psicosocial en el trabajo"
+      "modalidad": "Maltrato laboral",
+      "descripcion": "Acto de violencia contra integridad física o moral, libertad física o sexual, y los bienes del trabajador"
     },
     {
-      "norma": "resolucion-652-2012",
-      "fecha": "2012-04-30",
-      "tipo": "modificacion",
-      "descripcion": "Conformación de comités de convivencia laboral en empresas"
+      "modalidad": "Persecución laboral",
+      "descripcion": "Conductas cuya finalidad es inducir renuncia mediante descalificación, carga excesiva, cambios de horario sin justificación"
+    },
+    {
+      "modalidad": "Discriminación laboral",
+      "descripcion": "Trato diferenciado por razones de raza, género, origen familiar, religión, preferencia política, situación social, orientación sexual"
+    },
+    {
+      "modalidad": "Entorpecimiento laboral",
+      "descripcion": "Obstaculizar cumplimiento de labor o retener información, instrumentos de trabajo, retardar procesos"
+    },
+    {
+      "modalidad": "Inequidad laboral",
+      "descripcion": "Asignación de funciones degradantes, exceso de cargas sin compensación, trato desigual injustificado"
+    },
+    {
+      "modalidad": "Desprotección laboral",
+      "descripcion": "No proteger ante situaciones de riesgo, ordenar tareas sin medios o capacitación, exponer a riesgos innecesarios"
     }
   ],
+  
+  "conductasAcosoLaboral": [
+    "Agresiones físicas o verbales",
+    "Expresiones injuriosas, ultrajantes, ofensivas",
+    "Órdenes, amenazas, gritos, exigencias desproporcionadas",
+    "Descalificación pública del trabajo",
+    "Burlas sobre apariencia física, forma de vestir, hablar, gesticular",
+    "Alusiones ofensivas a raza, género, orientación sexual, religión, discapacidad",
+    "Imposición de deberes ostensiblemente extraños",
+    "Envío a sitios peligrosos sin protección",
+    "Traslados de oficio sin justificación",
+    "Obstaculización de permisos, licencias, vacaciones",
+    "Negativa de suministro de materiales o información",
+    "Descalificación frente a compañeros",
+    "Cambios de horario sin justificación",
+    "Trato hostil y despreciativo"
+  ],
+  
+  "conductasQueNOSonAcoso": [
+    "Exigencias y órdenes necesarias para cumplir metas",
+    "Llamados de atención por incumplimiento laboral justificado",
+    "Solicitud de cumplimiento de deberes laborales",
+    "Asignación de trabajo acorde al contrato",
+    "Evaluación de desempeño objetiva",
+    "Traslados justificados por necesidad del servicio",
+    "Cualquier otro acto derivado del ejercicio de facultades legales del empleador"
+  ],
+  
+  "mecanismosPrevencion": {
+    "comiteConvivencia": {
+      "obligacion": "Empresas con más de 20 trabajadores",
+      "composicion": "Representantes del empleador y trabajadores (en partes iguales)",
+      "funciones": [
+        "Recibir quejas de acoso laboral",
+        "Examinar conductas denunciadas",
+        "Escuchar a las partes",
+        "Formular recomendaciones",
+        "Hacer seguimiento"
+      ],
+      "nota": "No tiene facultad sancionatoria, solo preventiva"
+    },
+    "reglamentoInterno": {
+      "inclusion": "Debe incluir medidas preventivas y correctivas del acoso laboral",
+      "publicidad": "Debe ser conocido por todos los trabajadores",
+      "actualizacion": "Debe actualizarse periódicamente"
+    },
+    "capacitacion": {
+      "objetivo": "Sensibilizar sobre el acoso laboral",
+      "frecuencia": "Periódica",
+      "contenido": "Definición, modalidades, consecuencias, procedimientos"
+    }
+  },
+  
+  "procedimientoQueja": {
+    "viaInterna": {
+      "ante": "Comité de Convivencia Laboral",
+      "forma": "Queja escrita detallando hechos",
+      "termino": "Comité tiene 6 meses para tramitar",
+      "resultado": "Recomendaciones al empleador"
+    },
+    "viaAdministrativa": {
+      "ante": "Inspector de Trabajo",
+      "requisito": "Agotar vía interna primero (si existe comité)",
+      "procedimiento": "Queja formal ante inspección",
+      "sancion": "Inspector puede sancionar a empleador"
+    },
+    "viaJudicial": {
+      "ante": "Juez laboral",
+      "accion": "Demanda laboral ordinaria",
+      "pretensiones": "Indemnización por daños, terminación con justa causa por trabajador",
+      "pruebas": "Testimonios, emails, mensajes, certificados médicos, grabaciones"
+    },
+    "viaPenal": {
+      "ante": "Fiscalía General",
+      "cuando": "Si configura delito (lesiones, injuria, calumnia, etc.)",
+      "pena": "Según el Código Penal"
+    }
+  },
+  
+  "sanciones": {
+    "paraEmpleador": {
+      "administrativas": "Multas hasta 10 SMMLV por Inspector de Trabajo",
+      "laborales": "Indemnización por daños y perjuicios",
+      "penales": "Si configura delito"
+    },
+    "paraTrabajador": {
+      "laborales": "Terminación con justa causa si acosa a compañeros o superiores",
+      "penales": "Si configura delito"
+    },
+    "paraComiteConvivencia": {
+      "responsabilidad": "Si no actúa diligentemente ante queja"
+    }
+  },
+  
+  "articulosRelevantes": [
+    {
+      "articulo": "Art. 2",
+      "tema": "Definición de acoso laboral",
+      "resumen": "Conducta persistente y demostrable que causa miedo, intimidación, daño laboral o renuncia"
+    },
+    {
+      "articulo": "Art. 3",
+      "tema": "Modalidades de acoso laboral",
+      "resumen": "Maltrato, persecución, discriminación, entorpecimiento, inequidad, desprotección"
+    },
+    {
+      "articulo": "Art. 7",
+      "tema": "Conductas que constituyen acoso",
+      "resumen": "Agresiones, insultos, burlas, descalificación, trato hostil, etc."
+    },
+    {
+      "articulo": "Art. 8",
+      "tema": "Conductas que NO constituyen acoso",
+      "resumen": "Exigencias razonables, evaluación objetiva, facultades legales del empleador"
+    },
+    {
+      "articulo": "Art. 9",
+      "tema": "Medidas preventivas y correctivas",
+      "resumen": "Política interna, comité de convivencia, capacitación"
+    },
+    {
+      "articulo": "Art. 10",
+      "tema": "Conducto regular",
+      "resumen": "Vía interna (comité), administrativa (inspector), judicial (juez laboral)"
+    },
+    {
+      "articulo": "Art. 12",
+      "tema": "Sanciones para empleador",
+      "resumen": "Multas hasta 10 SMMLV, indemnizaciones"
+    },
+    {
+      "articulo": "Art. 13",
+      "tema": "Terminación del contrato con justa causa",
+      "resumen": "Trabajador puede terminar contrato si empleador ejerce acoso (Art. 62 CST literal a)"
+    }
+  ],
+  
+  "jurisprudenciaRelevante": [
+    {
+      "sentencia": "T-882/2006",
+      "magistrado": "Humberto Antonio Sierra Porto",
+      "fecha": "2006-10-25",
+      "tema": "Protección constitucional contra acoso laboral",
+      "ratio": "El acoso laboral viola dignidad humana, derecho al trabajo digno y ambiente laboral sano"
+    },
+    {
+      "sentencia": "T-461/2013",
+      "magistrado": "Mauricio González Cuervo",
+      "fecha": "2013-07-18",
+      "tema": "Carga de la prueba",
+      "ratio": "Trabajador debe probar conductas de acoso. Persistencia y afectación son elementos esenciales"
+    },
+    {
+      "sentencia": "T-239/2018",
+      "magistrado": "José Fernando Reyes Cuartas",
+      "fecha": "2018-06-22",
+      "tema": "Acoso laboral vertical descendente",
+      "ratio": "Jefes no pueden ejercer violencia psicológica bajo pretexto de autoridad. Poder jerárquico tiene límites"
+    },
+    {
+      "sentencia": "T-043/2020",
+      "magistrado": "Diana Fajardo Rivera",
+      "fecha": "2020-02-06",
+      "tema": "Acoso laboral horizontal",
+      "ratio": "Acoso entre compañeros también está prohibido. Empleador debe adoptar medidas"
+    }
+  ],
+  
+  "relacionConOtrasNormas": [
+    {
+      "norma": "constitucion-articulo-25",
+      "relacion": "Derecho al trabajo en condiciones dignas y justas"
+    },
+    {
+      "norma": "codigo-sustantivo-trabajo-articulo-62",
+      "relacion": "Terminación unilateral del contrato por trabajador con justa causa"
+    },
+    {
+      "norma": "ley-1562-2012",
+      "relacion": "Sistema de Riesgos Laborales - acoso es riesgo psicosocial"
+    },
+    {
+      "norma": "resolucion-2646-2008",
+      "relacion": "Factores de riesgo psicosocial en el trabajo"
+    }
+  ],
+  
+  "estadisticas": {
+    "vigenciaAños": 18,
+    "denunciasAnuales": "Aproximadamente 5,000-7,000 quejas ante inspecciones de trabajo",
+    "tipoAcosoMasFrecuente": "Persecución laboral y maltrato verbal",
+    "sectoresMasAfectados": "Salud, educación, servicios públicos",
+    "generoMasAfectado": "Mujeres (60-70% de casos)",
+    "areaImpacto": "Derecho Laboral, Derecho Constitucional, Salud Mental"
+  },
+  
+  "dificultadesAplicacion": [
+    "Difícil probación (conductas sutiles, psicológicas)",
+    "Miedo a represalias al denunciar",
+    "Comités de convivencia inoperantes en muchas empresas",
+    "Sanciones administrativas insuficientes (multas bajas)",
+    "Procesos judiciales largos y costosos",
+    "Cultura de tolerancia al maltrato laboral",
+    "Falta de protección efectiva a denunciantes"
+  ],
+  
+  "recomendacionesVictimas": [
+    "Documentar todas las conductas (fechas, testigos, evidencias)",
+    "Acudir al Comité de Convivencia",
+    "Reportar a Inspector de Trabajo",
+    "Buscar asesoría jurídica",
+    "Acudir a EPS por afectación psicológica (certificado médico)",
+    "Conservar comunicaciones (emails, mensajes)",
+    "No renunciar sin asesoría legal"
+  ],
+  
   "notas": [
-    "Define y regula el acoso laboral (mobbing) en Colombia",
-    "ACOSO LABORAL: conducta persistente y demostrable, ejercida sobre un empleado, con el fin de infundir miedo, intimidación, terror, angustia o causar perjuicio laboral",
-    "Modalidades de acoso: maltrato laboral, persecución laboral, discriminación laboral, entorpecimiento laboral, inequidad laboral, desprotección laboral",
-    "Sanciones: multas (de 2 a 10 SMLMV), obligación de pagar tratamiento psicológico, terminación del contrato sin justa causa del acosador",
-    "Puede ser acoso vertical (jefe a subalterno), horizontal (entre compañeros) o ascendente (subalterno a jefe)",
-    "Procedimiento: queja ante Inspector de Trabajo o demanda laboral directa",
-    "Término de prescripción: 6 meses desde el último acto de acoso",
-    "Las empresas deben tener Comité de Convivencia Laboral (obligatorio si tienen más de 10 trabajadores - Resolución 652 de 2012)",
-    "La víctima puede pedir traslado de área o de empleado acosador",
-    "El acoso laboral también puede configurar delito penal (tortura psicológica) en casos graves"
+    "Primera ley en Colombia sobre acoso laboral",
+    "Reconoce que violencia psicológica en trabajo es problema jurídico",
+    "Protege dignidad humana en contexto laboral",
+    "Comité de Convivencia es obligatorio (empresas >20 trabajadores)",
+    "Acoso puede ser vertical (jefe-subordinado) u horizontal (entre pares)",
+    "Incluye acoso ascendente (subordinado a jefe) - poco común pero posible",
+    "No todos los conflictos laborales son acoso (debe ser persistente e intencional)",
+    "Sanciones administrativas son bajas (hasta 10 SMMLV)",
+    "Indemnizaciones judiciales pueden ser altas si se prueba daño",
+    "Carga de prueba recae en víctima (difícil en casos psicológicos)",
+    "Género es factor relevante: mujeres son mayoría de víctimas",
+    "Afecta salud mental: estrés, ansiedad, depresión, burnout"
   ]
 }

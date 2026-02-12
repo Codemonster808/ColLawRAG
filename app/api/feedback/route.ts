@@ -1,28 +1,42 @@
 import { NextRequest, NextResponse } from 'next/server'
-import fs from 'node:fs'
-import path from 'node:path'
+import { logUserFeedback } from '@/lib/auth'
+import { logger } from '@/lib/logger'
 
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+
+/**
+ * POST /api/feedback — Recibe feedback de usuarios sobre respuestas
+ */
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { requestId, query, vote, notes } = body || {}
-    if (!requestId || !vote || (vote !== 'up' && vote !== 'down')) {
-      return NextResponse.json({ error: 'Parámetros inválidos' }, { status: 400 })
+    const { queryLogId, userId, rating, comment } = body
+    
+    // Validar rating
+    if (!rating || rating < 1 || rating > 5) {
+      return NextResponse.json(
+        { error: 'Rating debe ser un número entre 1 y 5' },
+        { status: 400 }
+      )
     }
-    const entry = {
-      ts: new Date().toISOString(),
-      requestId,
-      query: query || null,
-      vote,
-      notes: notes || null,
-      ip: req.headers.get('x-forwarded-for') || 'local'
-    }
-    const dir = path.join(process.cwd(), 'data')
-    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
-    const file = path.join(dir, 'feedback.log')
-    fs.appendFileSync(file, JSON.stringify(entry) + '\n', 'utf-8')
-    return NextResponse.json({ ok: true })
-  } catch (e: any) {
-    return NextResponse.json({ error: e?.message || 'Error interno' }, { status: 500 })
+    
+    // Registrar feedback
+    logUserFeedback({
+      queryLogId: queryLogId ? parseInt(queryLogId, 10) : undefined,
+      userId,
+      rating: parseInt(rating, 10),
+      comment: comment || undefined
+    })
+    
+    logger.info('User feedback received', { queryLogId, userId, rating })
+    
+    return NextResponse.json({ success: true })
+  } catch (error) {
+    logger.error('Error processing feedback', error)
+    return NextResponse.json(
+      { error: 'Error procesando feedback' },
+      { status: 500 }
+    )
   }
-} 
+}

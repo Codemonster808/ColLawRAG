@@ -392,7 +392,7 @@ async function generateSampleData(years, tipos, limitPerType = 50) {
           año: year.toString(),
           fecha: `${year}-${String(Math.floor(Math.random() * 12) + 1).padStart(2, '0')}-${String(Math.floor(Math.random() * 28) + 1).padStart(2, '0')}`,
           magistrado: magistrados[Math.floor(Math.random() * magistrados.length)],
-          url: `https://www.corteconstitucional.gov.co/relatoria/${year}/${tipoCode}-${numero}-${year}.htm`,
+          url: `https://www.corteconstitucional.gov.co/relatoria/${year}/${tipoCode}-${numero}-${year.toString().slice(-2)}.htm`,
           contenido: generateSampleContenido(tipo, temasComunes[Math.floor(Math.random() * temasComunes.length)], year),
           tamaño: 0
         };

@@ -2,9 +2,10 @@ import { NextRequest, NextResponse } from 'next/server'
 import { runRagPipeline } from '@/lib/rag'
 import { RagBodySchema } from './schema'
 import { getUserTier, checkUsageLimit, trackUsage, adjustQueryForTier } from '@/lib/tiers'
-import { authenticateUser } from '@/lib/auth'
+import { authenticateUser, logQuery, logQualityMetrics, assignABTestVariant, logABTest } from '@/lib/auth'
 import { logger } from '@/lib/logger'
 import { checkRateLimit } from '@/lib/rate-limit-persistent'
+import { detectLegalArea, detectComplexity, calculateCitationPrecision } from '@/lib/query-analyzer'
 
 // Cache persistente usando SQLite (puede fallback a memoria si falla)
 export const runtime = 'nodejs'
@@ -256,8 +257,35 @@ export async function POST(req: NextRequest) {
       logger.info('Cache hit', { requestId })
       const responseTime = Date.now() - startTime
       
-      // Trackear uso incluso para cache hits (para métricas de uso)
+      // Detectar área legal y complejidad
+      const legalArea = detectLegalArea(queryText)
+      const complexity = detectComplexity(queryText)
+      
+      // Registrar consulta con metadata (incluso para cache hits)
       if (userId) {
+        const queryLogId = logQuery({
+          userId,
+          query: queryText,
+          responseTime,
+          success: true,
+          legalArea,
+          complexity
+        })
+        
+        // Registrar métricas de calidad si están disponibles
+        if (queryLogId > 0 && cached.answer && cached.citations) {
+          const citationMetrics = calculateCitationPrecision(cached.answer, cached.citations)
+          logQualityMetrics({
+            queryLogId,
+            citationPrecision: citationMetrics.precision,
+            totalCitations: citationMetrics.totalCitations,
+            validCitations: citationMetrics.validCitations,
+            responseLength: cached.answer.length,
+            chunksRetrieved: cached.retrieved || 0
+          })
+        }
+        
+        // Trackear uso (mantener compatibilidad)
         trackUsage(userId, userTier, queryText, responseTime, true)
       }
       
@@ -329,6 +357,20 @@ export async function POST(req: NextRequest) {
     if (userId) {
       const json = await req.clone().json().catch(() => ({}))
       const queryText = json?.query || 'error'
+      // Registrar consulta fallida
+      if (userId) {
+        const legalArea = detectLegalArea(queryText)
+        const complexity = detectComplexity(queryText)
+        logQuery({
+          userId,
+          query: queryText,
+          responseTime,
+          success: false,
+          legalArea,
+          complexity
+        })
+      }
+      
       trackUsage(userId, userTier, queryText, responseTime, false)
     }
     
