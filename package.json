@@ -12,6 +12,9 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "test:integration": "jest tests/api.test.ts",
+    "toon": "node scripts/generate-toon-payloads.mjs",
+    "toon:demo": "node scripts/generate-toon-payloads.mjs --demo",
+    "toon:bench": "node scripts/generate-toon-payloads.mjs --bench",
     "ingest": "node scripts/ingest.mjs && npm run build-bm25",
     "build-bm25": "npx tsx scripts/build-bm25.ts",
     "convert-jurisprudencia": "node scripts/convert-jurisprudencia-to-docs.mjs",
@@ -54,6 +57,7 @@
     "zod": "^3.25.76"
   },
   "devDependencies": {
+    "@toon-format/toon": "^2.1.0",
     "@types/better-sqlite3": "^7.6.13",
     "@types/jest": "^29.5.14",
     "@types/node": "^20.19.30",
