@@ -1,0 +1,188 @@
+{
+  "version": "1.0",
+  "descripcion": "Dataset de benchmark para evaluar accuracy de ColLawRAG vs respuestas de abogados expertos",
+  "creado": "2026-02-13",
+  "total": 20,
+  "casos": [
+    {
+      "id": "LAB-001",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuántos días de vacaciones tiene derecho un trabajador con un año de trabajo?",
+      "respuesta_referencia": "Según el artículo 186 del Código Sustantivo del Trabajo (CST), el trabajador tiene derecho a 15 días hábiles consecutivos de vacaciones remuneradas por cada año de servicio. Este derecho es irrenunciable según el artículo 189 del CST.",
+      "normas_clave": ["Art. 186 CST", "Art. 189 CST"],
+      "criterio_evaluacion": "Debe mencionar 15 días hábiles, artículo 186 CST, y que es por año de servicio"
+    },
+    {
+      "id": "LAB-002",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es el salario mínimo legal mensual vigente en Colombia para 2024?",
+      "respuesta_referencia": "Para el año 2024, el salario mínimo legal mensual vigente (SMLMV) en Colombia fue fijado en $1.300.000 mediante el Decreto 2613 de 2023, representando un incremento del 12% respecto al año anterior. Adicionalmente, el auxilio de transporte quedó en $162.000 mensuales.",
+      "normas_clave": ["Decreto 2613 de 2023", "Art. 145 CST"],
+      "criterio_evaluacion": "Debe mencionar $1.300.000, Decreto 2613/2023, y el auxilio de transporte"
+    },
+    {
+      "id": "LAB-003",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuándo procede el despido sin justa causa y cuál es la indemnización?",
+      "respuesta_referencia": "Según el artículo 64 del CST, el empleador puede terminar el contrato sin justa causa pagando indemnización. Para contratos a término indefinido con trabajadores que ganen menos de 10 SMLMV: 30 días por el primer año y 20 días adicionales por cada año posterior. Para trabajadores con más de 10 SMLMV: 20 días por el primer año y 15 adicionales por cada año. El artículo 26 del Decreto 2351/65 modificó esta figura.",
+      "normas_clave": ["Art. 64 CST", "Art. 65 CST", "Decreto 2351/65"],
+      "criterio_evaluacion": "Debe mencionar el Art. 64 CST, la fórmula de indemnización y la diferencia por nivel salarial"
+    },
+    {
+      "id": "LAB-004",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el fuero de maternidad y qué protección ofrece?",
+      "respuesta_referencia": "El fuero de maternidad, consagrado en el artículo 239 del CST y desarrollado por la Sentencia C-005 de 2017 de la Corte Constitucional, prohíbe el despido de la trabajadora embarazada o en período de lactancia sin la autorización previa del Inspector de Trabajo. Si se despide sin autorización, el despido es ineficaz y la trabajadora tiene derecho a ser reintegrada y al pago de salarios y prestaciones dejados de percibir. La protección aplica incluso en contratos a término fijo y de obra.",
+      "normas_clave": ["Art. 239 CST", "Sentencia C-005/2017", "Art. 240 CST"],
+      "criterio_evaluacion": "Debe mencionar Art. 239 CST, necesidad de autorización del Inspector, ineficacia del despido y Sentencia C-005/2017"
+    },
+    {
+      "id": "LAB-005",
+      "area": "laboral",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cómo se calcula la liquidación de un trabajador que lleva 3 años y gana $2.000.000?",
+      "respuesta_referencia": "Para un trabajador con 3 años de antigüedad y salario de $2.000.000: (1) Cesantías: $2.000.000 × 3 años = $6.000.000; (2) Intereses sobre cesantías: $6.000.000 × 12% = $720.000; (3) Prima de servicios: $2.000.000 × 3 meses/12 = $500.000 (proporcional al último semestre); (4) Vacaciones: 15 días × $66.667/día = $1.000.000 (proporcional); (5) Si el auxilio de transporte aplica ($162.000/mes). El total aproximado antes de descuentos sería $8.220.000 más el auxilio de transporte proporcional.",
+      "normas_clave": ["Art. 249 CST", "Art. 306 CST", "Art. 186 CST", "Ley 52/1975"],
+      "criterio_evaluacion": "Debe calcular correctamente cesantías, intereses, prima y vacaciones con las fórmulas del CST"
+    },
+    {
+      "id": "LAB-006",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es el período de prueba máximo permitido en Colombia?",
+      "respuesta_referencia": "Según el artículo 78 del CST, el período de prueba no puede exceder dos (2) meses. Para contratos a término fijo inferior a un año, el período de prueba no podrá ser superior a la quinta parte del término inicialmente pactado. Este período debe constar por escrito.",
+      "normas_clave": ["Art. 78 CST", "Art. 77 CST"],
+      "criterio_evaluacion": "Debe mencionar máximo 2 meses, Art. 78 CST, y la regla proporcional para contratos cortos"
+    },
+    {
+      "id": "CIV-001",
+      "area": "civil",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es el plazo de prescripción de la acción ejecutiva en Colombia?",
+      "respuesta_referencia": "Según el artículo 2536 del Código Civil colombiano, la acción ejecutiva prescribe en cinco (5) años. La acción ordinaria prescribe en diez (10) años. La prescripción puede ser interrumpida por reconocimiento de deuda o por demanda judicial.",
+      "normas_clave": ["Art. 2536 Código Civil", "Art. 2535 Código Civil"],
+      "criterio_evaluacion": "Debe mencionar 5 años para ejecutiva, 10 para ordinaria, y el Art. 2536 CC"
+    },
+    {
+      "id": "CIV-002",
+      "area": "civil",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuáles son los requisitos para que un contrato de compraventa de inmueble sea válido?",
+      "respuesta_referencia": "Para la validez de la compraventa de inmueble en Colombia se requiere: (1) Capacidad de las partes (Art. 1502 CC); (2) Consentimiento libre de vicios (Arts. 1508-1516 CC); (3) Objeto lícito y determinado (Arts. 1517-1521 CC); (4) Causa lícita (Arts. 1524-1527 CC); (5) Solemnidad: escritura pública ante notario (Art. 1857 CC y Art. 12 Decreto 960/70); (6) Registro en la Oficina de Instrumentos Públicos para la tradición (Art. 756 CC).",
+      "normas_clave": ["Art. 1857 CC", "Art. 1502 CC", "Art. 756 CC", "Decreto 960/70"],
+      "criterio_evaluacion": "Debe mencionar escritura pública, registro, capacidad, consentimiento, objeto y causa lícita"
+    },
+    {
+      "id": "CIV-003",
+      "area": "civil",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es la acción de tutela y en qué plazo debe ser resuelta?",
+      "respuesta_referencia": "La acción de tutela, consagrada en el artículo 86 de la Constitución Política y reglamentada por el Decreto 2591 de 1991, es un mecanismo de protección inmediata de derechos fundamentales cuando no exista otro medio de defensa judicial eficaz. El juez debe resolver en un plazo de diez (10) días calendario. La sentencia puede ser impugnada dentro de los tres (3) días siguientes.",
+      "normas_clave": ["Art. 86 CP", "Decreto 2591/1991", "Art. 29 Decreto 2591"],
+      "criterio_evaluacion": "Debe mencionar Art. 86 CP, 10 días para resolver, Decreto 2591/91"
+    },
+    {
+      "id": "CIV-004",
+      "area": "civil",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cuándo procede la acción popular y quién puede interponerla?",
+      "respuesta_referencia": "La acción popular está consagrada en el artículo 88 de la Constitución y regulada por la Ley 472 de 1998. Procede para proteger derechos e intereses colectivos como el medio ambiente, la moralidad administrativa, el espacio público, la salubridad pública, entre otros. Puede ser interpuesta por cualquier persona natural o jurídica, organizaciones no gubernamentales, entidades públicas y el Defensor del Pueblo. No requiere acreditar perjuicio personal.",
+      "normas_clave": ["Art. 88 CP", "Ley 472/1998"],
+      "criterio_evaluacion": "Debe mencionar Art. 88 CP, Ley 472/98, derechos colectivos, legitimación amplia"
+    },
+    {
+      "id": "PEN-001",
+      "area": "penal",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es la pena por el delito de hurto simple en Colombia?",
+      "respuesta_referencia": "Según el artículo 239 del Código Penal (Ley 599 de 2000), el hurto simple está sancionado con prisión de dos (2) a seis (6) años. Si el valor de lo hurtado no supera diez (10) salarios mínimos legales mensuales vigentes y el imputado no tiene antecedentes, puede acceder a mecanismos sustitutivos de prisión como la suspensión condicional de la ejecución de la pena.",
+      "normas_clave": ["Art. 239 Ley 599/2000", "Art. 63 Ley 599/2000"],
+      "criterio_evaluacion": "Debe mencionar Art. 239 Ley 599/2000, 2 a 6 años, posibilidad de sustitutivos"
+    },
+    {
+      "id": "PEN-002",
+      "area": "penal",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el preacuerdo en materia penal y qué beneficios ofrece?",
+      "respuesta_referencia": "El preacuerdo está regulado en los artículos 348 a 354 del Código de Procedimiento Penal (Ley 906 de 2004). Es un mecanismo de terminación anticipada del proceso mediante el cual el fiscal y el imputado o acusado acuerdan la imputación y los cargos, a cambio de una rebaja de hasta la mitad de la pena (50%). El juez debe verificar que no se desconozcan garantías fundamentales. Difiere de la aceptación de cargos en que implica negociación sobre los hechos imputados.",
+      "normas_clave": ["Arts. 348-354 Ley 906/2004"],
+      "criterio_evaluacion": "Debe mencionar Arts. 348-354 Ley 906/2004, rebaja hasta 50%, verificación judicial"
+    },
+    {
+      "id": "CON-001",
+      "area": "constitucional",
+      "dificultad": "basico",
+      "pregunta": "¿Cuáles son los derechos fundamentales reconocidos en la Constitución de 1991?",
+      "respuesta_referencia": "La Constitución Política de 1991 reconoce en el Título II, Capítulo I (Arts. 11-44) los derechos fundamentales, entre ellos: derecho a la vida (Art. 11), prohibición de tortura (Art. 12), derecho a la igualdad (Art. 13), libertad de conciencia (Art. 18), libre desarrollo de la personalidad (Art. 16), derecho al debido proceso (Art. 29), libertad personal (Art. 28), habeas corpus (Art. 30), derecho de petición (Art. 23), entre otros. La Corte Constitucional ha ampliado este catálogo vía jurisprudencia.",
+      "normas_clave": ["Arts. 11-44 CP", "Arts. 85-86 CP"],
+      "criterio_evaluacion": "Debe mencionar el Título II CP, varios artículos específicos y el rol de la Corte Constitucional"
+    },
+    {
+      "id": "CON-002",
+      "area": "constitucional",
+      "dificultad": "intermedio",
+      "pregunta": "¿En qué consiste el estado de emergencia económica y cuánto puede durar?",
+      "respuesta_referencia": "El estado de emergencia económica, social y ecológica está consagrado en el artículo 215 de la Constitución Política. El Presidente puede declararlo cuando sobrevengan hechos distintos a los del Estado de Guerra o Conmoción Interior que perturben el orden económico, social o ecológico. Puede declararse por períodos de hasta treinta (30) días cada uno, sin que sumados excedan noventa (90) días en el año calendario. Durante su vigencia el Gobierno puede expedir decretos legislativos.",
+      "normas_clave": ["Art. 215 CP"],
+      "criterio_evaluacion": "Debe mencionar Art. 215 CP, 30 días por período, máximo 90 días al año, decretos legislativos"
+    },
+    {
+      "id": "CON-003",
+      "area": "constitucional",
+      "dificultad": "avanzado",
+      "pregunta": "¿Qué es la excepción de inconstitucionalidad y cómo se aplica?",
+      "respuesta_referencia": "La excepción de inconstitucionalidad, consagrada en el artículo 4 de la Constitución Política, permite a cualquier operador jurídico inaplicar una norma que sea contraria a la Constitución en un caso concreto, sin que esto implique su derogatoria general. Difiere de la acción de inconstitucionalidad en que sus efectos son inter partes y no erga omnes. La Corte Constitucional ha señalado que es un deber del juez cuando la norma aplicable viola claramente preceptos constitucionales.",
+      "normas_clave": ["Art. 4 CP", "Art. 241 CP"],
+      "criterio_evaluacion": "Debe mencionar Art. 4 CP, efectos inter partes, diferencia con acción de inconstitucionalidad"
+    },
+    {
+      "id": "ADM-001",
+      "area": "administrativo",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es el plazo para interponer acción de nulidad y restablecimiento del derecho?",
+      "respuesta_referencia": "Según el artículo 164 del Código de Procedimiento Administrativo y de lo Contencioso Administrativo (CPACA - Ley 1437 de 2011), la demanda de nulidad y restablecimiento del derecho debe presentarse dentro de los cuatro (4) meses siguientes a la comunicación, notificación o publicación del acto administrativo. Para actos que no requieren publicación, el término corre desde el día siguiente al de la notificación.",
+      "normas_clave": ["Art. 164 Ley 1437/2011 CPACA"],
+      "criterio_evaluacion": "Debe mencionar 4 meses, Art. 164 CPACA Ley 1437/2011"
+    },
+    {
+      "id": "ADM-002",
+      "area": "administrativo",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el derecho de petición y cuál es el plazo para responderlo?",
+      "respuesta_referencia": "El derecho de petición está consagrado en el artículo 23 de la Constitución Política y regulado por la Ley 1755 de 2015 (que modificó el CPACA). Las entidades públicas deben resolver las peticiones en un plazo de quince (15) días hábiles para peticiones de carácter general. Las consultas tienen 30 días hábiles. Las quejas y reclamos: 15 días hábiles. El incumplimiento genera responsabilidad disciplinaria y puede dar lugar a tutela.",
+      "normas_clave": ["Art. 23 CP", "Ley 1755/2015", "Arts. 13-33 CPACA"],
+      "criterio_evaluacion": "Debe mencionar Art. 23 CP, Ley 1755/2015, 15 días hábiles, posibilidad de tutela"
+    },
+    {
+      "id": "ADM-003",
+      "area": "administrativo",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cuándo procede la acción de repetición contra un servidor público?",
+      "respuesta_referencia": "La acción de repetición, regulada por la Ley 678 de 2001 y el artículo 90 de la Constitución, procede cuando el Estado ha sido condenado a reparar un daño antijurídico y este fue causado por la conducta dolosa o gravemente culposa de un servidor público. Es obligatoria cuando la condena supera 500 SMLMV. Prescribe en dos (2) años contados desde el pago total o desde la última cuota pagada. El servidor público puede ser declarado responsable patrimonialmente.",
+      "normas_clave": ["Art. 90 CP", "Ley 678/2001"],
+      "criterio_evaluacion": "Debe mencionar Art. 90 CP, Ley 678/2001, dolo o culpa grave, prescripción 2 años, obligatoria +500 SMLMV"
+    },
+    {
+      "id": "TRI-001",
+      "area": "tributario",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es la tarifa general del impuesto de renta para personas jurídicas en Colombia?",
+      "respuesta_referencia": "Según el artículo 240 del Estatuto Tributario (ET), modificado por la Ley 2277 de 2022 (Reforma Tributaria), la tarifa general del impuesto sobre la renta para personas jurídicas es del 35% a partir del año gravable 2022. Existen tarifas especiales para ciertos sectores como el financiero (38%) y para zonas francas (20%). Las entidades del régimen tributario especial tienen tarifa del 20%.",
+      "normas_clave": ["Art. 240 ET", "Ley 2277/2022"],
+      "criterio_evaluacion": "Debe mencionar 35%, Art. 240 ET, Ley 2277/2022, tarifas especiales"
+    },
+    {
+      "id": "TRI-002",
+      "area": "tributario",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuándo se genera el IVA y cuál es la tarifa general en Colombia?",
+      "respuesta_referencia": "El Impuesto sobre las Ventas (IVA) está regulado en el Libro Tercero del Estatuto Tributario (Arts. 420-513 ET). Se genera en la venta de bienes corporales muebles no excluidos, prestación de servicios en el territorio nacional, importación de bienes corporales muebles y juegos de suerte y azar. La tarifa general es del 19% según el artículo 468 ET, modificado por la Ley 1819 de 2016. Existen tarifas diferenciales del 5% y bienes exentos (0%).",
+      "normas_clave": ["Art. 420 ET", "Art. 468 ET", "Ley 1819/2016"],
+      "criterio_evaluacion": "Debe mencionar 19%, Art. 468 ET, Ley 1819/2016, hechos generadores, tarifas del 5% y exentos"
+    }
+  ]
+}
