@@ -1,0 +1,180 @@
+# Ley 1943 de 2018 - Ley de Financiamiento
+
+tipo: Ley
+area: Nacional
+fuente: Congreso de la República
+estado: inexequible
+vigente_desde: 2019-01-01
+vigente_hasta: 2020-01-01
+
+---
+
+DESCRIPCIÓN GENERAL
+
+Ley de Financiamiento que modificó el Estatuto Tributario buscando incrementar el recaudo fiscal. Fue DECLARADA INEXEQUIBLE por la Corte Constitucional mediante Sentencia C-481 de 2019 por vicios de trámite legislativo. Tuvo vigencia transitoria hasta enero de 2020.
+
+NUMERO
+
+1943
+
+FECHA
+
+2018-12-28
+
+DEROGACIONES PARCIALES
+
+
+
+MODIFICACIONES
+
+- fecha: 2019-10-16
+  norma: Corte Constitucional Sentencia C-481 de 2019
+  descripcion: La Corte Constitucional declaró INEXEQUIBLE la totalidad de la Ley 1943 de 2018 por vicios en el trámite legislativo. Concedió efectos diferidos hasta el 1 de enero de 2020 para evitar vacío normativo.
+- fecha: 2019-12-27
+  norma: Ley 2010 de 2019 (Ley de Crecimiento Económico)
+  descripcion: Reemplazó la Ley 1943 de 2018 tras su inexequibilidad. Retomó algunas disposiciones de la Ley 1943 pero con ajustes.
+
+SENTENCIA_INEXEQUIBILIDAD
+
+sentencia: C-481 de 2019
+fecha: 2019-10-16
+ponente: Alejandro Linares Cantillo
+magistrados_ponentes_salvamento:
+  - Diana Fajardo Rivera
+  - Luis Guillermo Guerrero Pérez
+fundamentos:
+  - Violación del principio democrático y del debido proceso legislativo
+  - Incumplimiento del requisito de publicidad en el trámite de proposiciones modificatorias en la Comisión Tercera de la Cámara de Representantes
+  - Las proposiciones modificatorias fueron presentadas y votadas sin el cumplimiento de los términos de publicidad exigidos por el Reglamento del Congreso
+  - Se afectó el derecho de los congresistas a conocer y deliberar sobre las modificaciones propuestas
+efectos: Inexequibilidad con efectos diferidos hasta el 1 de enero de 2020 (se concedió un año de vigencia transitoria para evitar vacío normativo y permitir al Congreso expedir nueva ley)
+impacto: Primera vez en la historia constitucional colombiana que se declara inexequible una reforma tributaria completa por vicios de trámite
+
+PRINCIPALES_DISPOSICIONES
+
+- disposicion: Reducción de tarifa de renta corporativa
+  descripcion: Establecía tarifa única del 32% para 2019, 31% para 2020, y 30% desde 2021. (Aceleraba la reducción gradual establecida en Ley 1819/2016)
+  vigencia: 2019 (solo aplicó el 32% antes de inexequibilidad)
+- disposicion: Modificación de IVA
+  descripcion: Ampliaba la base gravable del IVA, eliminaba exenciones en varios productos (antes excluidos o exentos), mantenía tarifa general en 19%.
+  impacto: Incremento en el costo de la canasta familiar, generó protestas sociales
+- disposicion: Renta presuntiva
+  descripcion: Reducía gradualmente la renta presuntiva del 3.5% al 0%: 3.5% (2018), 1.5% (2019), 0% (2020 en adelante).
+  justificacion: Eliminar distorsión que desincentivaba la inversión en activos productivos
+- disposicion: Normalización tributaria
+  descripcion: Creaba régimen de normalización de activos omitidos (amnistía tributaria). Tarifa del 13% sobre valor de activos no declarados.
+  objetivo: Incentivar la declaración de activos ocultos, incrementar recaudo
+- disposicion: Modificación de dividendos
+  descripcion: Modificaba tributación de dividendos: tarifa del 15% sobre distribuciones que excedieran 300 UVT (vs 10% en Ley 1819).
+  impacto: Mayor tributación sobre rentas de capital, afectaba inversionistas
+- disposicion: Monotributo
+  descripcion: Creaba el Monotributo para micro y pequeños comerciantes (sustituto del impuesto de renta e IVA). Cuota fija mensual según ingresos.
+  beneficiarios: Pequeños comerciantes con ingresos < 3,500 UVT (~$164 millones COP en 2024)
+  vigencia: No llegó a implementarse por inexequibilidad, fue retomado parcialmente en Ley 2010/2019
+- disposicion: Gravaba con IVA del 19% los servicios digitales prestados desde el exterior (Netflix, Spotify, etc.). Responsables: plataformas extranjeras.
+  vigencia: Aplicó durante 2019, mantenido en Ley 2010/2019
+- disposicion: Devolución bimestral de IVA
+  descripcion: Establecía devolución automática y prioritaria de saldos a favor de IVA en plazos bimestrales (antes era más lento).
+  objetivo: Mejorar flujo de caja de empresas exportadoras y del régimen común
+
+VIGENCIA_TRANSITORIA
+
+periodo: 1 de enero de 2019 - 31 de diciembre de 2019
+justificacion: La Corte Constitucional concedió efectos diferidos de la inexequibilidad para evitar vacío normativo que afectara el presupuesto nacional y la estabilidad fiscal
+consecuencias:
+  - Las declaraciones de renta y complementarios del año gravable 2019 se rigieron por las normas de la Ley 1943
+  - Los pagos de IVA durante 2019 se realizaron conforme a las tarifas de la Ley 1943
+  - El Gobierno presentó urgentemente un nuevo proyecto de ley que se convirtió en la Ley 2010 de 2019
+
+TRAMITE_LEGISLATIVO_VICIADO
+
+descripcion: El proyecto de ley fue tramitado en sesiones extraordinarias del Congreso (octubre-diciembre 2018)
+vicios_identificados:
+  - En la Comisión Tercera de la Cámara de Representantes se presentaron proposiciones modificatorias sin cumplir el término de publicidad de 1 día previo a la votación (exigido por el Reglamento del Congreso)
+  - Las proposiciones fueron conocidas y votadas en la misma sesión, sin dar tiempo a los congresistas para su análisis
+  - Se violó el principio de publicidad que garantiza la transparencia y el debate informado en el proceso legislativo
+  - La Corte consideró que este vicio afectó la esencia del procedimiento democrático
+demanda: Presentada por ciudadanos que cuestionaron el procedimiento legislativo, no el contenido material de la ley
+
+IMPACTO_ECONOMICO
+
+- Recaudo adicional estimado (nunca logrado completamente): $8.2 billones de pesos anuales
+- Incertidumbre jurídica: La inexequibilidad generó incertidumbre entre contribuyentes sobre qué normas aplicarían desde 2020
+- Devoluciones de IVA: Algunas empresas solicitaron devoluciones de IVA pagado bajo la Ley 1943 (rechazadas por vigencia transitoria)
+- Presión fiscal: Obligó al Gobierno a presentar rápidamente una nueva ley para no afectar las finanzas públicas en 2020
+
+COMPARACION_LEY_2010_2019
+
+- tema: Tarifa de renta corporativa
+  ley_1943: 32% (2019), 31% (2020), 30% (2021+)
+  ley_2010: 30% desde 2020 (aceleró la reducción)
+- tema: IVA en productos
+  ley_1943: Ampliaba base gravable, eliminaba exenciones
+  ley_2010: Retrocedió en algunas exclusiones, mantuvo tarifa 19%
+- tema: Renta presuntiva
+  ley_1943: Reducción gradual a 0%
+  ley_2010: Mantuvo reducción: 1.5% (2019-2020), 0.5% (2021), 0% (2022+)
+- tema: Normalización tributaria
+  ley_1943: 13% sobre activos omitidos
+  ley_2010: No incluyó normalización (tema polémico)
+- tema: Monotributo
+  ley_1943: Creado con cuotas fijas
+  ley_2010: No lo retomó (tema requería mayor análisis)
+- tema: IVA servicios digitales
+  ley_1943: Gravó con 19%
+  ley_2010: Mantuvo gravamen
+
+CRITICAS_Y_CONTROVERSIAS
+
+- Protestas sociales: Generó protestas masivas (noviembre-diciembre 2018) por incremento de IVA en canasta familiar y afectación a clase media
+- Regresividad: Críticas por ampliar IVA (impuesto regresivo) en lugar de fortalecer impuestos progresivos (renta, patrimonio)
+- Amnistía tributaria: La normalización fue criticada como 'premio' a evasores mientras contribuyentes cumplidos pagaban normalmente
+- Trámite acelerado: El procedimiento en sesiones extraordinarias fue criticado por falta de debate suficiente
+- Vicios de trámite: La Corte Constitucional confirmó que el proceso legislativo no cumplió estándares mínimos de publicidad y deliberación
+
+LECCION_INSTITUCIONAL
+
+descripcion: La inexequibilidad de la Ley 1943 de 2018 dejó lecciones importantes sobre el proceso legislativo en Colombia
+lecciones:
+  - El Congreso debe respetar estrictamente el Reglamento Interno y los principios constitucionales del proceso legislativo
+  - La publicidad y transparencia son requisitos esenciales de la democracia deliberativa
+  - Las reformas tributarias complejas requieren tiempo suficiente para el debate y análisis técnico
+  - Los vicios de procedimiento pueden invalidar leyes independientemente de su contenido material
+  - La Corte Constitucional ejerce control estricto sobre el debido proceso legislativo
+impacto_futuro: Desde entonces, el Congreso ha sido más cuidadoso en el cumplimiento de términos de publicidad en trámites legislativos
+
+RELACION_OTRAS_NORMAS
+
+- Estatuto Tributario (Decreto 624 de 1989): Norma que la Ley 1943 pretendió modificar
+- Ley 1819 de 2016: Reforma anterior que la Ley 1943 modificó parcialmente
+- Ley 2010 de 2019: Ley que reemplazó la Ley 1943 tras su inexequibilidad
+- Sentencia C-481 de 2019: Declaró inexequible la Ley 1943
+- Decreto 1625 de 2016: Decreto Único Reglamentario en materia tributaria
+
+JURISPRUDENCIA
+
+- Corte Constitucional Sentencia C-481 de 2019 (Magistrado Ponente: Alejandro Linares Cantillo): Declaró inexequible la totalidad de la Ley 1943 de 2018 por vicios en el trámite legislativo. Efectos diferidos hasta enero 1 de 2020.
+- Consejo de Estado - Sección Cuarta: Múltiples sentencias sobre aplicación transitoria de la Ley 1943 durante 2019
+
+FUENTES
+
+- Ley 1943 de 2018 (Diario Oficial 50820 del 28 de diciembre de 2018)
+- Corte Constitucional Sentencia C-481 de 2019
+- Exposición de motivos del Proyecto de Ley 028/2018 (Cámara) - 002/2018 (Senado)
+- DIAN - Dirección de Impuestos y Aduanas Nacionales (conceptos sobre vigencia transitoria)
+- Ministerio de Hacienda y Crédito Público (comunicados oficiales)
+- Análisis académicos y de prensa sobre la inexequibilidad
+
+ULTIMA_ACTUALIZACION
+
+2026-02-10
+
+NOTAS Y ACLARACIONES
+
+- La Ley 1943 de 2018 es la primera y única reforma tributaria en la historia de Colombia declarada completamente inexequible.
+- La inexequibilidad fue por vicios de forma (procedimiento), no de fondo (contenido material).
+- La vigencia transitoria de 1 año fue una medida excepcional de la Corte para evitar caos fiscal.
+- Algunas disposiciones de la Ley 1943 fueron retomadas en la Ley 2010 de 2019, pero con ajustes.
+- El caso generó debate sobre el equilibrio entre rigurosidad del control constitucional y necesidad de estabilidad fiscal.
+- Las declaraciones de renta del año 2019 se rigieron por la Ley 1943 (tarifa 32%) y las de 2020 por la Ley 2010 (tarifa 30%).
+- El Gobierno de Iván Duque enfrentó crisis política por las protestas contra la reforma y posteriormente por su inexequibilidad.

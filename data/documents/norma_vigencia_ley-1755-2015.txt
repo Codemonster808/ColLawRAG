@@ -1,0 +1,224 @@
+# Ley 1755 de 2015 - Por medio de la cual se regula el Derecho Fundamental de Petición
+
+tipo: ley
+area: nacional
+fuente: Congreso de la República
+url: https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=62178
+estado: vigente
+vigente_desde: 2015-06-30
+
+---
+
+DESCRIPCIÓN GENERAL
+
+Regula el derecho fundamental de petición establecido en el artículo 23 de la Constitución Política, unificando y actualizando la normatividad dispersa sobre el tema. Garantiza la efectividad del derecho en todas sus modalidades ante organizaciones públicas y privadas.
+
+OBJETO PRINCIPAL
+
+Regular el derecho fundamental de petición en interés general, particular o colectivo, ante organizaciones públicas o privadas, con o sin personería jurídica, mediante el cual toda persona puede presentar solicitudes respetuosas a las autoridades por motivos de interés general o particular y obtener pronta resolución completa y de fondo sobre lo solicitado.
+
+ARTÍCULOS RELEVANTES
+
+{"articulo":"Art. 1","tema":"Objeto","resumen":"Regular el derecho fundamental de petición consagrado en el artículo 23 de la Constitución Política"}
+
+{"articulo":"Art. 2","tema":"Ámbito de aplicación","resumen":"Aplicable a toda actuación administrativa, ante organizaciones privadas, congresistas, servidores públicos"}
+
+{"articulo":"Art. 4","tema":"Modalidades del derecho de petición","resumen":"Información, consulta, quejas, reclamos, manifestaciones, solicitudes de documentos, peticiones de interés general o particular"}
+
+{"articulo":"Art. 5","tema":"Reglas generales","resumen":"No requiere formalidades especiales, puede presentarse verbal o escrito, personalmente o por terceros"}
+
+{"articulo":"Art. 6","tema":"Requisitos mínimos","resumen":"Identificación del peticionario, objeto de la petición, dirección de notificación, si es verbal debe dejarse constancia"}
+
+{"articulo":"Art. 13","tema":"Términos para resolver","resumen":"Peticiones en general: 15 días. Consultas: 30 días. Peticiones de documentos: 10 días. Quejas: 15 días"}
+
+{"articulo":"Art. 14","tema":"Término para resolver peticiones ante autoridades de salud","resumen":"Máximo 10 días hábiles cuando se trate de servicios de salud autorizados en el Plan de Beneficios"}
+
+{"articulo":"Art. 16","tema":"Derecho de petición en interés general o particular","resumen":"Toda persona puede presentar peticiones respetuosas por motivos de interés general o particular"}
+
+{"articulo":"Art. 17","tema":"Derecho de petición de información","resumen":"Acceso a documentos públicos salvo reserva legal. No se requiere justificar el interés"}
+
+{"articulo":"Art. 18","tema":"Derecho de petición de consulta","resumen":"Consulta sobre interpretación y aplicación de normas. Término: 30 días"}
+
+{"articulo":"Art. 19","tema":"Quejas","resumen":"Presentar irregularidades en funcionamiento de entidades, incumplimiento de deberes por servidores públicos"}
+
+{"articulo":"Art. 20","tema":"Derecho de petición ante organizaciones privadas","resumen":"Solicitar información, consultas o documentos ante organizaciones privadas que presten servicios públicos"}
+
+{"articulo":"Art. 21","tema":"Derecho de petición ante el Congreso","resumen":"Presentar proyectos de ley o acto legislativo ante congresistas"}
+
+{"articulo":"Art. 23","tema":"Notificaciones","resumen":"Se notifica al peticionario en la dirección indicada, puede ser electrónica si lo autoriza"}
+
+{"articulo":"Art. 28","tema":"Silencio administrativo positivo","resumen":"Opera cuando vencido el término legal la autoridad no ha dado respuesta"}
+
+{"articulo":"Art. 29","tema":"Silencio administrativo negativo","resumen":"Aplica en licencias, permisos, autorizaciones que puedan afectar derechos de terceros"}
+
+MODIFICACIONES
+
+- norma: decreto-1166-2016
+  fecha: 2016-07-21
+  tipo: reglamentacion
+  descripcion: Reglamentó parcialmente la Ley 1755 de 2015 en materia de recepción de peticiones
+- norma: ley-1952-2019
+  fecha: 2019-01-28
+  tipo: modificacion
+  descripcion: Código General Disciplinario - incluyó faltas por violación al derecho de petición
+
+DEROGACIONES PARCIALES
+
+
+
+PRINCIPIOS APLICABLES
+
+- Celeridad en la respuesta
+- Eficacia administrativa
+- Buena fe
+- Publicidad
+- Gratuidad (salvo costos de reproducción)
+- Informalidad (no requiere formalidades especiales)
+- Oralidad (puede presentarse verbalmente)
+- Derecho a obtener respuesta de fondo
+
+TERMINOS Y DEFINICIONES
+
+derechoDePeticion: Facultad que tiene toda persona de presentar solicitudes respetuosas ante autoridades u organizaciones privadas y obtener pronta resolución
+respuestaDeФонdo: Respuesta clara, precisa, congruente que resuelve lo solicitado de manera completa
+silencioAdministrativoPositivo: Ficción legal por la cual se entiende que la solicitud ha sido aceptada cuando vence el término sin respuesta
+silencioAdministrativoNegativo: Ficción legal por la cual se entiende negada la solicitud cuando vence el término sin respuesta
+peticionario: Persona que presenta la solicitud o petición
+peticionado: Autoridad u organización ante quien se presenta la petición
+
+PROCEDIMIENTO
+
+presentacion:
+{
+  "formas": [
+    "Escrito",
+    "Verbal",
+    "Electrónico"
+  ],
+  "requisitosMinimos": [
+    "Identificación del peticionario",
+    "Objeto de la petición",
+    "Dirección de notificación",
+    "Si es verbal, debe dejarse constancia escrita"
+  ],
+  "formalidades": "No requiere formalidades especiales, puede presentarse sin abogado"
+}
+tramite:
+{
+  "radicacion": "La entidad debe radicar y dar número de seguimiento",
+  "reparto": "Se asigna al funcionario competente",
+  "analisis": "Estudio de la petición y documentos",
+  "decision": "Resolución de fondo dentro del término legal"
+}
+respuesta:
+{
+  "requisitos": [
+    "Clara y precisa",
+    "Congruente con lo solicitado",
+    "De fondo (no evasiva)",
+    "Motivada cuando sea negativa",
+    "Dentro del término legal"
+  ],
+  "notificacion": [
+    "En la dirección indicada por el peticionario",
+    "Puede ser electrónica si fue autorizada",
+    "Debe contener texto íntegro de la respuesta"
+  ]
+}
+
+TERMINOS
+
+general:
+{
+  "dias": 15,
+  "tipo": "días hábiles",
+  "aplica": "Peticiones en general"
+}
+consulta:
+{
+  "dias": 30,
+  "tipo": "días hábiles",
+  "aplica": "Consultas sobre interpretación de normas"
+}
+documentos:
+{
+  "dias": 10,
+  "tipo": "días hábiles",
+  "aplica": "Solicitud de copias de documentos"
+}
+salud:
+{
+  "dias": 10,
+  "tipo": "días hábiles",
+  "aplica": "Peticiones relacionadas con servicios de salud autorizados"
+}
+quejas:
+{
+  "dias": 15,
+  "tipo": "días hábiles",
+  "aplica": "Quejas sobre funcionamiento o servidores públicos"
+}
+
+SANCIONES
+
+disciplinarias: Falta gravísima para servidor público que no atienda derecho de petición (Ley 1952 de 2019)
+penales: Puede configurar abuso de autoridad o prevaricato por omisión
+tutelaContraProvidencia: Procede tutela cuando se viola el derecho de petición
+
+CASOS ESPECIALES
+
+- caso: Peticiones en salud
+  termino: 10 días hábiles
+  especialidad: Aplicable a servicios autorizados en Plan de Beneficios en Salud
+- caso: Peticiones ante el Congreso
+  termino: No tiene término específico
+  especialidad: Se tramitan como proyecto de ley de iniciativa popular
+- caso: Peticiones ante organizaciones privadas
+  termino: 15 días hábiles
+  especialidad: Solo cuando presten servicios públicos o ejerzan funciones públicas
+- caso: Habeas Data
+  termino: 10 días hábiles
+  especialidad: Cuando se solicita información personal en bases de datos
+
+JURISPRUDENCIA RELEVANTE
+
+T-274/2018 - M.P. Gloria Stella Ortiz Delgado (2018-07-11)
+Tema: Alcance del derecho de petición
+
+T-013/2019 - M.P. Diana Fajardo Rivera (2019-01-21)
+Tema: Silencio administrativo
+
+SU-626/2015 - M.P. Jorge Ignacio Pretelt Chaljub (2015-10-02)
+Tema: Derecho de petición en salud
+
+T-260/2016 - M.P. Luis Ernesto Vargas Silva (2016-05-17)
+Tema: Respuesta de fondo
+
+RELACIÓN CON OTRAS NORMAS
+
+- norma: constitucion-articulo-23
+  relacion: Fundamento constitucional del derecho de petición
+- norma: ley-1437-2011
+  relacion: Código de Procedimiento Administrativo - regula actuaciones administrativas
+- norma: ley-1712-2014
+  relacion: Ley de Transparencia - regula acceso a información pública
+- norma: ley-1952-2019
+  relacion: Código General Disciplinario - sanciona violación al derecho de petición
+
+ESTADÍSTICAS Y DATOS
+
+sentenciasCorte: Más de 5000 tutelas anuales por violación al derecho de petición
+areaImpacto: Derecho Administrativo, Derecho Constitucional, Derecho de la Salud
+
+NOTAS Y ACLARACIONES
+
+- Unificó normatividad dispersa sobre derecho de petición que estaba en múltiples decretos y leyes
+- Elevó a rango legal normas que estaban en decretos (ejemplo: Decreto 01 de 1984)
+- Amplió el ámbito a organizaciones privadas que antes no estaban reguladas
+- Estableció términos diferenciados según tipo de petición
+- Consagró el silencio administrativo positivo como regla general
+- Es aplicable a todos los niveles del Estado: nacional, departamental, municipal
+- Protege también el derecho de petición ante particulares que presten servicios públicos
+- La Corte Constitucional ha sido garante del cumplimiento de esta ley
+- El incumplimiento puede derivar en sanciones disciplinarias, penales y acciones de tutela
+- Es una de las normas más invocadas en acciones de tutela en Colombia

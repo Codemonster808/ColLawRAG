@@ -1,0 +1,26 @@
+# Decreto 2591 de 1991
+
+tipo: decreto
+area: constitucional
+fuente: Congreso de la República
+estado: vigente
+vigente_desde: 1991-11-19
+
+---
+
+MODIFICACIONES
+
+- norma: decreto-306-1992
+  fecha: 1992-02-19
+  tipo: modificacion
+  descripcion: Ajustes al procedimiento de tutela
+- norma: decreto-1382-2000
+  fecha: 2000-08-01
+  tipo: modificacion
+  descripcion: Reforma al trámite de la acción de tutela
+
+NOTAS Y ACLARACIONES
+
+- Reglamenta la acción de tutela consagrada en el artículo 86 de la Constitución Política
+- Norma fundamental para la protección de derechos fundamentales
+- Aplicación inmediata y preferente

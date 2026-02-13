@@ -1,0 +1,50 @@
+# Ley 599 de 2000 (Código Penal)
+
+tipo: codigo
+area: penal
+fuente: Congreso de la República
+estado: parcialmente_derogada
+vigente_desde: 2000-07-24
+
+---
+
+DEROGACIONES PARCIALES
+
+- articulo: Art. 14
+  derogadoPor: ley-890-2004
+  derogadaDesde: 2004-07-07
+  razon: Modificación de penas y aumento de prisión
+- articulo: Arts. 324-325
+  derogadoPor: ley-1719-2014
+  derogadaDesde: 2014-06-18
+  razon: Reforma sobre delitos de violencia sexual en conflicto armado
+
+MODIFICACIONES
+
+- norma: ley-890-2004
+  fecha: 2004-07-07
+  tipo: modificacion
+  descripcion: Aumento de penas para diversos delitos
+- norma: ley-1142-2007
+  fecha: 2007-07-28
+  tipo: modificacion
+  descripcion: Medidas contra el terrorismo y delitos contra la seguridad pública
+- norma: ley-1426-2010
+  fecha: 2010-12-29
+  tipo: adicion
+  descripcion: Creación de delitos relacionados con la violencia intrafamiliar
+- norma: ley-1719-2014
+  fecha: 2014-06-18
+  tipo: modificacion
+  descripcion: Medidas para garantizar acceso a la justicia de víctimas de violencia sexual
+- norma: ley-1801-2016
+  fecha: 2016-07-29
+  tipo: modificacion
+  descripcion: Código Nacional de Seguridad y Convivencia Ciudadana
+
+NOTAS Y ACLARACIONES
+
+- Derogó el anterior Código Penal (Decreto Ley 100 de 1980)
+- Establece los tipos penales y las sanciones en Colombia
+- Ha sido ampliamente modificado para endurecer penas y crear nuevos delitos
+- Obra en conjunto con el Código de Procedimiento Penal (Ley 906 de 2004)

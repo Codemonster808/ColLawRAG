@@ -1,0 +1,169 @@
+# Estatuto Tributario Nacional
+
+tipo: Decreto
+area: Nacional
+fuente: Congreso de la República
+estado: vigente
+vigente_desde: 1989-04-01
+
+---
+
+DESCRIPCIÓN GENERAL
+
+Estatuto Tributario de los impuestos administrados por la Dirección General de Impuestos Nacionales (DIAN). Regula el impuesto sobre la renta, IVA, impuesto al consumo, retención en la fuente, procedimiento tributario, y sanciones tributarias.
+
+NUMERO
+
+624
+
+FECHA
+
+1989-03-30
+
+DEROGACIONES PARCIALES
+
+- articulos: Artículos varios sobre tarifas de renta y deducciones
+  normaDerogante: Ley 1819 de 2016 (Reforma Tributaria Estructural)
+  fechaDerogacion: 2016-12-29
+  observaciones: La Ley 1819 de 2016 modificó sustancialmente las tarifas del impuesto de renta para personas naturales y jurídicas, eliminó el CREE, y creó nuevos regímenes tributarios especiales.
+- articulos: Artículos sobre tarifas de IVA y exclusiones
+  normaDerogante: Ley 1943 de 2018 (Ley de Financiamiento)
+  fechaDerogacion: 2018-12-28
+  observaciones: La Ley 1943 de 2018 modificó tarifas de IVA, amplió la base gravable, y modificó el impuesto de renta. Posteriormente fue declarada inexequible por la Corte Constitucional en octubre de 2019.
+- articulos: Ley 1943 de 2018 declarada INEXEQUIBLE
+  normaDerogante: Corte Constitucional Sentencia C-481 de 2019
+  fechaDerogacion: 2019-10-16
+  observaciones: La Corte Constitucional declaró inexequible la Ley 1943 de 2018 por vicios de trámite legislativo. Se concedió un año de vigencia transitoria (hasta enero 2020) para que el Congreso expidiera nueva ley.
+- articulos: Artículos sobre renta y IVA
+  normaDerogante: Ley 2010 de 2019 (Ley de Crecimiento Económico)
+  fechaDerogacion: 2019-12-27
+  observaciones: Reemplazó la Ley 1943 de 2018 tras su inexequibilidad. Redujo tarifas de renta corporativa (del 33% al 30%), modificó IVA, y creó incentivos tributarios para la inversión.
+- articulos: Artículos sobre tarifas y solidaridad
+  normaDerogante: Ley 2155 de 2021 (Reforma Tributaria de Inversión Social)
+  fechaDerogacion: 2021-09-14
+  observaciones: Creó el impuesto temporal de normalización tributaria, eliminó algunos beneficios del régimen simple, y modificó tarifas de IVA en algunos sectores.
+
+MODIFICACIONES
+
+- fecha: 2012-12-26
+  norma: Ley 1607 de 2012
+  descripcion: Reforma Tributaria que creó el CREE (Impuesto sobre la Renta para la Equidad), IMAN e IMAS para personas naturales, y modificó tarifas de renta.
+- fecha: 2014-12-26
+  norma: Ley 1739 de 2014
+  descripcion: Reforma tributaria que creó el impuesto a la riqueza, CREE transitorio, sobretasa al CREE, y modificó normas de IVA.
+- fecha: 2016-12-29
+  norma: Ley 1819 de 2016
+  descripcion: Reforma Tributaria Estructural. Eliminó el CREE, simplificó el impuesto de renta, modificó tarifas (personas jurídicas: 34% 2017, 33% 2018, 32% 2019, 31% 2020-2021, 30% desde 2022), creó régimen simple de tributación, modificó IVA.
+- fecha: 2018-12-28
+  norma: Ley 1943 de 2018 (Ley de Financiamiento)
+  descripcion: Reforma tributaria que modificó renta (tarifa única 32% 2019, 31% 2020, 30% 2021), amplió base de IVA, eliminó exenciones. DECLARADA INEXEQUIBLE por Sentencia C-481/2019.
+- fecha: 2019-12-27
+  norma: Ley 2010 de 2019 (Ley de Crecimiento Económico)
+  descripcion: Reemplazó Ley 1943/2018. Redujo tarifa corporativa (30%), mantuvo IVA en 19%, creó régimen simple permanente, incentivos para inversión (megainversiones con tarifa 27%), deducciones por I+D+i.
+- fecha: 2021-09-14
+  norma: Ley 2155 de 2021 (Reforma Tributaria de Inversión Social)
+  descripcion: Creó impuesto de normalización tributaria (tarifa 17%), eliminó beneficio de auditoría en régimen simple, modificó tarifas de IVA en restaurantes y bares, prorrogó descuentos tributarios.
+
+LIBROS_VIGENTES
+
+- libro: I - Impuesto sobre la Renta y Complementarios
+  articulos: 1-364
+  estado: vigente_modificado
+  temas: Hecho generador, sujetos pasivos, base gravable, tarifas, exenciones, deducciones, rentas exentas, ganancias ocasionales, régimen especial.
+- libro: II - Retención en la Fuente
+  articulos: 365-419
+  estado: vigente_modificado
+  temas: Retención en la fuente a título de renta, IVA, timbre. Agentes de retención, tarifas, bases, procedimiento.
+- libro: III - Impuesto sobre las Ventas (IVA)
+  articulos: 420-512
+  estado: vigente_modificado
+  temas: Hecho generador, sujetos pasivos, base gravable, tarifas (0%, 5%, 19%), exclusiones, exenciones, responsables, régimen simplificado.
+- libro: IV - Impuesto Nacional al Consumo
+  articulos: 512-1 a 512-22
+  estado: vigente
+  temas: Impuesto al consumo de restaurantes, bares, telefonía móvil, vehículos, bienes inmuebles. Tarifas del 4%, 8%, 16% según bien.
+- libro: V - Procedimiento Tributario
+  articulos: 555-869
+  estado: vigente_modificado
+  temas: Declaraciones, liquidación, corrección, inspecciones, verificaciones, investigaciones, determinación oficial, recursos, cobro coactivo.
+- libro: VI - Régimen Sancionatorio
+  articulos: 634-684
+  estado: vigente
+  temas: Sanciones por extemporaneidad, corrección, inexactitud, no declarar, evasión. Multas, intereses de mora, clausura.
+
+IMPUESTOS_PRINCIPALES
+
+- impuesto: Impuesto sobre la Renta y Complementarios
+  tipo: Directo
+  hecho_generador: Obtención de ingresos susceptibles de producir incremento en el patrimonio
+  sujetos_pasivos: Personas naturales, jurídicas, asimiladas, contribuyentes del régimen especial
+- impuesto: Impuesto sobre las Ventas (IVA)
+  tipo: Indirecto
+  hecho_generador: Venta de bienes, prestación de servicios, importación de bienes
+  sujetos_pasivos: Responsables del IVA (comerciantes, importadores, prestadores de servicios gravados)
+- impuesto: Impuesto Nacional al Consumo
+  tipo: Indirecto
+  hecho_generador: Prestación de servicios de restaurantes, bares, telefonía móvil, venta de vehículos y bienes inmuebles nuevos
+  sujetos_pasivos: Prestadores de servicios gravados, vendedores de vehículos y bienes inmuebles
+- impuesto: Retención en la Fuente
+  tipo: Mecanismo de recaudo anticipado
+  hecho_generador: Pago o abono en cuenta de rentas sujetas a retención
+  sujetos_pasivos: Agentes de retención (empleadores, compradores de bienes y servicios, etc.)
+  tarifas_actuales: Variables según concepto: salarios (tabla progresiva), honorarios (10%), servicios (4%), arrendamientos (3.5%), etc.
+
+REGIMENES_ESPECIALES
+
+- regimen: Régimen Simple de Tributación (SIMPLE)
+  descripcion: Régimen voluntario para pequeñas empresas (ingresos brutos inferiores a 100,000 UVT = ~$4,500 millones COP en 2024). Integra impuesto de renta, IVA e ICA en un solo pago.
+  tarifas: Progresivas del 1.6% al 16.5% según actividad económica e ingresos
+  beneficios: Simplicidad administrativa, pago único, menor carga tributaria para micro y pequeñas empresas
+  norma: Creado por Ley 1819 de 2016, modificado por Ley 2010 de 2019
+- regimen: Régimen Especial del Impuesto sobre la Renta
+  descripcion: Para entidades sin ánimo de lucro que cumplen funciones de interés general (educación, salud, cultura, investigación, etc.). Tarifa del 20% sobre rentas no exentas.
+  beneficios: Exención sobre rentas provenientes de actividades meritorias, donaciones deducibles para donantes
+  requisitos: Calificación por parte de la DIAN, destinar excedentes al objeto social, prohibición de distribuir utilidades
+  norma: Artículos 19, 356-364 del Estatuto Tributario
+- regimen: Megainversiones
+  descripcion: Régimen especial para proyectos de inversión superiores a $1 billón de pesos con impacto económico significativo. Tarifa de renta del 27% (vs 35% general).
+  beneficios: Tarifa reducida, estabilidad tributaria por 20 años, deducciones especiales
+  requisitos: Inversión mínima $1 billón, aprobación del CONPES, generación de empleo
+  norma: Creado por Ley 2010 de 2019
+- regimen: Zonas Francas
+  descripcion: Áreas geográficas con beneficios tributarios especiales para promover inversión, exportaciones e industrialización. Tarifa de renta del 20% (vs 35% general).
+  beneficios: Tarifa reducida de renta, exención de IVA en importaciones, exención de aranceles
+  requisitos: Constitución como usuario de zona franca, inversión mínima, exportaciones o industrialización
+  norma: Artículos 240-i del Estatuto Tributario, Ley 1004 de 2005
+
+RELACION_OTRAS_NORMAS
+
+- Ley 1819 de 2016: Reforma Tributaria Estructural (eliminó CREE, simplificó renta, modificó IVA)
+- Ley 2010 de 2019: Ley de Crecimiento Económico (tarifa 30% renta corporativa, régimen SIMPLE permanente)
+- Ley 2155 de 2021: Reforma Tributaria de Inversión Social (normalización tributaria, modificó IVA)
+- Ley 2277 de 2022: Reforma Tributaria (incrementó tarifa renta corporativa 35%, creó impuesto multinivel patrimonio)
+- Decreto 1625 de 2016: Decreto Único Reglamentario en materia tributaria (consolida decretos reglamentarios)
+- Resoluciones DIAN: Reglamentan aspectos técnicos (formatos de declaración, plazos, procedimientos)
+
+FUENTES
+
+- Decreto 624 de 1989 (Estatuto Tributario original)
+- Ley 1819 de 2016 (Reforma Tributaria Estructural)
+- Ley 2010 de 2019 (Ley de Crecimiento Económico)
+- Ley 2155 de 2021 (Reforma Tributaria de Inversión Social)
+- Ley 2277 de 2022 (Reforma Tributaria)
+- DIAN - Dirección de Impuestos y Aduanas Nacionales (doctrina y conceptos)
+- Consejo de Estado - Jurisprudencia tributaria
+- Corte Constitucional - Sentencias sobre constitucionalidad de reformas tributarias
+
+ULTIMA_ACTUALIZACION
+
+2026-02-10
+
+NOTAS Y ACLARACIONES
+
+- El Estatuto Tributario es la norma más modificada del ordenamiento jurídico colombiano (reformas casi anuales).
+- La Ley 2277 de 2022 (última reforma tributaria) incrementó la tarifa de renta corporativa del 31% al 35% desde 2023.
+- El IVA ha tenido múltiples tarifas históricas: 10% (1983), 12% (1990), 14% (1992), 15% (1995), 16% (2000), 19% (2012).
+- La UVT (Unidad de Valor Tributario) se actualiza anualmente con inflación. Para 2024: 1 UVT = $47,065 COP.
+- Las personas naturales declaran renta si ingresos > 1,400 UVT, patrimonio > 4,500 UVT, consumos con tarjetas > 1,400 UVT, o compras/consignaciones > 1,400 UVT.
+- Plazos de declaración: Renta (abril-mayo), IVA (bimestral o cuatrimestral según último dígito NIT), Retención (mensual).
+- Sanciones comunes: Extemporaneidad (5% por mes hasta 100%), Inexactitud (200% del mayor valor a pagar o menor saldo a favor), No declarar (20% de ingresos brutos del año o 10% del patrimonio).

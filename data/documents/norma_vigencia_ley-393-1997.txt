@@ -1,0 +1,244 @@
+# Ley 393 de 1997 - Por la cual se desarrolla el artículo 87 de la Constitución Política (Acción de Cumplimiento)
+
+tipo: ley
+area: nacional
+fuente: Congreso de la República
+url: https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=344
+estado: vigente
+vigente_desde: 1997-07-19
+
+---
+
+DESCRIPCIÓN GENERAL
+
+Regula la acción de cumplimiento consagrada en el artículo 87 de la Constitución Política, mediante la cual toda persona puede acudir ante la autoridad judicial competente para hacer efectivo el cumplimiento de una ley o acto administrativo por parte de la autoridad renuente.
+
+OBJETO PRINCIPAL
+
+Desarrollar el artículo 87 de la Constitución Política que consagra la acción de cumplimiento como mecanismo de protección de derechos e intereses colectivos, permitiendo a cualquier persona exigir el cumplimiento de una ley o acto administrativo.
+
+ARTÍCULOS RELEVANTES
+
+{"articulo":"Art. 1","tema":"Objeto y finalidad","resumen":"Regular la acción de cumplimiento prevista en el artículo 87 de la Constitución"}
+
+{"articulo":"Art. 2","tema":"Titular de la acción","resumen":"Toda persona natural o jurídica, o ciudadano en ejercicio de sus derechos"}
+
+{"articulo":"Art. 3","tema":"Legitimación pasiva","resumen":"Autoridad administrativa o particular que incumpla ley o acto administrativo"}
+
+{"articulo":"Art. 4","tema":"Procedencia de la acción","resumen":"Procede contra autoridades que incumplen ley o acto administrativo de manera reiterada o sin justa causa"}
+
+{"articulo":"Art. 5","tema":"Improcedencia","resumen":"No procede cuando: (i) sea para proteger derechos que puedan ser garantizados por otras acciones, (ii) haya otro medio judicial, (iii) norma cuestionada sea general, abstracta"}
+
+{"articulo":"Art. 6","tema":"Requisito de procedibilidad","resumen":"El accionante debe haber reclamado previamente ante la autoridad el cumplimiento del deber legal"}
+
+{"articulo":"Art. 7","tema":"Competencia","resumen":"Jueces administrativos en primera instancia. Tribunales administrativos en segunda instancia"}
+
+{"articulo":"Art. 8","tema":"Contenido de la demanda","resumen":"Identificación de partes, ley o acto incumplido, prueba del reclamo previo, pretensiones"}
+
+{"articulo":"Art. 9","tema":"Término para resolver","resumen":"20 días para dictar sentencia de primera instancia"}
+
+{"articulo":"Art. 10","tema":"Sentencia","resumen":"Ordenará el cumplimiento del deber omitido. Fijará término para el cumplimiento"}
+
+{"articulo":"Art. 11","tema":"Apelación","resumen":"Apelable ante el Tribunal Administrativo respectivo"}
+
+{"articulo":"Art. 12","tema":"Cumplimiento de la sentencia","resumen":"La autoridad debe cumplir en el término fijado. Si no cumple, se remite al superior jerárquico"}
+
+{"articulo":"Art. 13","tema":"Desacato","resumen":"El incumplimiento de la sentencia genera sanciones por desacato"}
+
+FUNDAMENTO CONSTITUCIONAL
+
+articulo: Artículo 87 Constitución Política
+texto: Toda persona podrá acudir ante la autoridad judicial definida en esta ley para hacer efectivo el cumplimiento de una ley o un acto administrativo. En caso de prosperar la acción, la sentencia ordenará a la autoridad renuente el cumplimiento del deber omitido.
+
+MODIFICACIONES
+
+- norma: ley-1437-2011
+  fecha: 2011-01-18
+  tipo: modificacion
+  descripcion: Código de Procedimiento Administrativo - modificó aspectos procedimentales de la acción
+- norma: ley-1755-2015
+  fecha: 2015-06-30
+  tipo: complemento
+  descripcion: Reguló el derecho de petición como requisito previo a la acción de cumplimiento
+
+DEROGACIONES PARCIALES
+
+
+
+REQUISITOS
+
+procedibilidad:
+  - {"requisito":"Reclamo previo","descripcion":"Haber reclamado ante la autoridad renuente el cumplimiento del deber legal","plazo":"No especifica plazo, pero debe ser razonable antes de acudir al juez"}
+  - {"requisito":"Existencia de ley o acto administrativo","descripcion":"Debe existir una norma o acto vigente que establezca el deber de la autoridad","caracteristicas":"Debe ser claro, expreso y exigible"}
+  - {"requisito":"Renuencia de la autoridad","descripcion":"La autoridad se abstiene de cumplir sin justa causa o de manera reiterada","tipos":"Incumplimiento total o parcial"}
+  - {"requisito":"Inexistencia de otro medio judicial","descripcion":"No debe existir otro mecanismo judicial idóneo para exigir el cumplimiento","excepciones":"Puede acumularse con acción popular si se afectan derechos colectivos"}
+improcedencia:
+  - Cuando la norma sea general y abstracta (no contenga obligación concreta)
+  - Cuando exista otro medio de defensa judicial (contencioso administrativo, tutela, etc.)
+  - Cuando se trate de normas que requieren reglamentación previa
+  - Cuando se trate de normas que dependen de disponibilidad presupuestal
+  - Cuando el incumplimiento sea justificado (caso fortuito, fuerza mayor)
+  - Contra decisiones de tutela (tienen mecanismo propio de cumplimiento)
+  - Para proteger derechos que pueden garantizarse por tutela
+
+PROCEDIMIENTO
+
+presentacion:
+{
+  "forma": "Demanda escrita ante juez administrativo",
+  "contenido": [
+    "Identificación de las partes",
+    "Ley o acto administrativo incumplido",
+    "Prueba del reclamo previo",
+    "Hechos que sustentan la renuencia",
+    "Pretensiones"
+  ],
+  "documentos": [
+    "Copia de la norma o acto incumplido",
+    "Prueba del reclamo previo (derecho de petición)",
+    "Pruebas del incumplimiento"
+  ]
+}
+tramite:
+{
+  "admision": "Juez verifica requisitos de procedibilidad",
+  "traslado": "Traslado a la entidad demandada por 10 días",
+  "pruebas": "Término probatorio si se requiere",
+  "audiencia": "Audiencia de pruebas y alegatos si procede",
+  "sentencia": "20 días hábiles para dictar sentencia"
+}
+sentencia:
+{
+  "contenido": [
+    "Declarar probada o no la renuencia",
+    "Ordenar el cumplimiento del deber omitido",
+    "Fijar término para el cumplimiento (no mayor a 6 meses)",
+    "Indicar consecuencias del desacato"
+  ],
+  "efectos": [
+    "Obliga a la autoridad renuente",
+    "Es de única instancia (apelable)",
+    "Hace tránsito a cosa juzgada"
+  ]
+}
+cumplimiento:
+{
+  "termino": "Fijado por el juez (máximo 6 meses)",
+  "seguimiento": "Juez verifica cumplimiento",
+  "desacato": "Si no cumple, sanciones por desacato (multas, arresto)",
+  "superiорHierarchico": "Si persiste incumplimiento, se informa al superior jerárquico"
+}
+
+COMPETENCIA
+
+primeraInstancia: Jueces Administrativos
+segundaInstancia: Tribunales Administrativos
+factorTerritorial: Lugar donde debe cumplirse la ley o acto administrativo
+factorFuncional: Según jerarquía de la autoridad renuente
+
+DIFERENCIAS CON OTRAS ACCIONES
+
+accionDeTutela:
+{
+  "objeto": "Tutela protege derechos fundamentales. Cumplimiento exige cumplimiento de ley o acto",
+  "procedimiento": "Tutela es más informal. Cumplimiento requiere demanda formal",
+  "termino": "Tutela: 10 días. Cumplimiento: 20 días",
+  "improcedencia": "No se sustituyen mutuamente"
+}
+accionPopular:
+{
+  "objeto": "Popular protege derechos colectivos. Cumplimiento exige cumplimiento de norma",
+  "titular": "Cualquier persona en ambas",
+  "acumulacion": "Pueden acumularse si el incumplimiento afecta derechos colectivos"
+}
+accionDeNulidad:
+{
+  "objeto": "Nulidad ataca validez del acto. Cumplimiento exige su ejecución",
+  "procedimiento": "Nulidad es proceso ordinario. Cumplimiento es preferente",
+  "efecto": "Nulidad anula el acto. Cumplimiento ordena su ejecución"
+}
+
+CASOS EJEMPLO
+
+- caso: Cumplimiento de sentencia judicial
+  normaIncumplida: Sentencia judicial que ordena hacer o no hacer
+  procedencia: SÍ procede contra autoridad que no cumple sentencia
+  nota: Especialmente sentencias contencioso administrativas
+- caso: Pago de salarios o prestaciones
+  normaIncumplida: Leyes laborales o acto administrativo de nombramiento
+  procedencia: NO procede si hay vía laboral o contenciosa
+  nota: Existe otro medio judicial idóneo
+- caso: Expedición de reglamento
+  normaIncumplida: Ley que ordena expedir reglamento
+  procedencia: SÍ procede si el término legal venció
+  nota: Común para exigir reglamentación de leyes
+- caso: Ejecución de obras públicas
+  normaIncumplida: Plan de desarrollo o acto que ordena la obra
+  procedencia: DEPENDE de disponibilidad presupuestal
+  nota: No procede si depende de recursos no disponibles
+
+PRINCIPIOS APLICABLES
+
+- Legalidad (exigir cumplimiento de la ley)
+- Eficacia administrativa
+- Buena fe de las autoridades
+- Prevalencia del derecho sustancial
+- Celeridad procesal
+- Economía procesal
+
+TERMINOS Y DEFINICIONES
+
+renuencia: Resistencia o negativa de la autoridad a cumplir un deber legal sin justa causa
+reclamoPrevio: Solicitud formal (derecho de petición) presentada a la autoridad antes de acudir al juez
+desacato: Incumplimiento injustificado de orden judicial que genera sanciones
+normaExigible: Norma que establece un deber claro, concreto y actual para la autoridad
+actoadministrativo: Decisión unilateral de la administración que crea, modifica o extingue situaciones jurídicas
+
+JURISPRUDENCIA RELEVANTE
+
+C-157/1998 - M.P. Antonio Barrera Carbonell (1998-04-29)
+Tema: Exequibilidad de la Ley 393 de 1997
+
+C-157/1998 - M.P. Antonio Barrera Carbonell (1998-04-29)
+Tema: Requisito de reclamo previo
+
+AC-0172/2001 - M.P. María Elena Giraldo Gómez (2001-03-01)
+Tema: Acción de cumplimiento vs tutela
+
+AC-2397/2013 - M.P. Ramiro Pazos Guerrero (2013-10-31)
+Tema: Improcedencia cuando hay otra vía
+
+AC-3952/2014 - M.P. Gerardo Arenas Monsalve (2014-11-13)
+Tema: Cumplimiento de normas presupuestales
+
+RELACIÓN CON OTRAS NORMAS
+
+- norma: constitucion-articulo-87
+  relacion: Fundamento constitucional de la acción de cumplimiento
+- norma: ley-1437-2011
+  relacion: Código de Procedimiento Administrativo - regula aspectos procedimentales
+- norma: ley-1755-2015
+  relacion: Regula el derecho de petición (requisito previo)
+- norma: ley-472-1998
+  relacion: Acciones populares y de grupo - pueden acumularse
+
+ESTADÍSTICAS Y DATOS
+
+usoAnual: Aproximadamente 3000 acciones de cumplimiento al año
+exitoPromedioProximado: 40-50% de sentencias favorables
+areaImpacto: Derecho Administrativo, Derecho Constitucional
+
+NOTAS Y ACLARACIONES
+
+- Primera ley que reguló la acción de cumplimiento después de la Constitución de 1991
+- Es una acción de rango constitucional (artículo 87 CP)
+- Busca hacer efectivo el principio de legalidad de la administración pública
+- No sustituye a la tutela ni a otras acciones judiciales
+- El requisito de reclamo previo busca evitar congestión judicial
+- Tiene un procedimiento preferente y sumario (20 días para sentencia)
+- La sentencia es de única instancia pero apelable
+- El incumplimiento de la sentencia genera sanciones por desacato
+- Es menos utilizada que la tutela pero igualmente importante
+- Útil especialmente para exigir reglamentación de leyes o cumplimiento de sentencias
+- La jurisprudencia ha precisado sus límites frente a otras acciones
+- No procede cuando depende de disponibilidad presupuestal (limitación práctica importante)

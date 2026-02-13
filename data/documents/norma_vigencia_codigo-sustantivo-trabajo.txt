@@ -1,0 +1,366 @@
+# Decreto Ley 2663 de 1950 y Decreto Ley 3743 de 1950 - Código Sustantivo del Trabajo
+
+tipo: codigo
+area: nacional
+fuente: Gobierno Nacional (Decretos con fuerza de ley)
+url: https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=33104
+estado: vigente
+vigente_desde: 1951-09-01
+
+---
+
+DESCRIPCIÓN GENERAL
+
+Código que regula las relaciones individuales y colectivas de trabajo en Colombia. Establece los derechos y obligaciones de trabajadores y empleadores, las condiciones mínimas de trabajo, y los procedimientos para resolver conflictos laborales.
+
+OBJETO PRINCIPAL
+
+Lograr la justicia en las relaciones que surgen entre empleadores y trabajadores, dentro de un espíritu de coordinación económica y equilibrio social.
+
+ARTÍCULOS RELEVANTES
+
+{"articulo":"Art. 1","tema":"Objeto del Código","resumen":"Lograr la justicia en las relaciones entre empleadores y trabajadores"}
+
+{"articulo":"Art. 22","tema":"Definición de contrato de trabajo","resumen":"Aquel por el cual una persona se obliga a prestar un servicio personal a otra bajo continuada dependencia, mediante remuneración"}
+
+{"articulo":"Art. 23","tema":"Elementos del contrato","resumen":"Prestación personal del servicio, Continuada subordinación o dependencia, Salario como retribución"}
+
+{"articulo":"Art. 37","tema":"Contrato a término fijo","resumen":"Duración máxima 3 años, renovable indefinidamente, preaviso 30 días"}
+
+{"articulo":"Art. 45","tema":"Contrato a término indefinido","resumen":"No tiene fecha de terminación determinada"}
+
+{"articulo":"Art. 61","tema":"Terminación unilateral sin justa causa","resumen":"Empleador puede terminar pero debe pagar indemnización"}
+
+{"articulo":"Art. 62","tema":"Justas causas de terminación","resumen":"Causales que permiten terminar sin indemnización: incumplimientos graves, faltas del trabajador"}
+
+{"articulo":"Art. 64","tema":"Indemnización por despido injusto","resumen":"Término indefinido: 30 días por primer año, 20 días por años siguientes. Término fijo: valor salarios faltantes"}
+
+{"articulo":"Art. 127","tema":"Definición de salario","resumen":"Toda retribución ordinaria, fija o variable, que recibe el trabajador como contraprestación directa del servicio"}
+
+{"articulo":"Art. 128","tema":"Pagos que NO constituyen salario","resumen":"Primas, bonificaciones, auxilios, viáticos, etc., si así se pacta"}
+
+{"articulo":"Art. 132","tema":"Salario mínimo","resumen":"Todo trabajador tiene derecho a un salario mínimo legal"}
+
+{"articulo":"Art. 142","tema":"Período de pago","resumen":"Salarios se pagan por períodos iguales y vencidos (mensual, quincenal, semanal)"}
+
+{"articulo":"Art. 149","tema":"Pago de salarios en especie","resumen":"Máximo 50% del salario puede pagarse en especie (30% si es salario mínimo)"}
+
+{"articulo":"Art. 161","tema":"Jornada ordinaria de trabajo","resumen":"Máximo 8 horas diarias y 48 horas semanales"}
+
+{"articulo":"Art. 162","tema":"Excepciones a la jornada máxima","resumen":"Trabajos discontinuos, de simple vigilancia, de dirección, confianza o manejo"}
+
+{"articulo":"Art. 168","tema":"Trabajo suplementario o de horas extras","resumen":"Trabajo que excede la jornada ordinaria. Debe remunerarse con recargo"}
+
+{"articulo":"Art. 179","tema":"Descanso dominical remunerado","resumen":"Todo trabajador tiene derecho a descanso remunerado el domingo"}
+
+{"articulo":"Art. 186","tema":"Vacaciones anuales","resumen":"15 días hábiles consecutivos de vacaciones remuneradas por cada año de servicio"}
+
+{"articulo":"Art. 192","tema":"Compensación en dinero","resumen":"Vacaciones pueden compensarse en dinero solo al terminar el contrato"}
+
+{"articulo":"Art. 236","tema":"Prima de servicios","resumen":"Un mes de salario pagadero por semestre (15 días en junio, 15 días en diciembre)"}
+
+{"articulo":"Art. 249","tema":"Auxilio de cesantías","resumen":"Un mes de salario por cada año de servicios"}
+
+{"articulo":"Art. 253","tema":"Intereses sobre cesantías","resumen":"12% anual sobre saldos de cesantías"}
+
+{"articulo":"Art. 306","tema":"Protección a la maternidad","resumen":"Prohibición de despedir por embarazo. Licencia de maternidad"}
+
+ESTRUCTURA
+
+partesPrincipales:
+  - Parte Primera: Derecho Individual del Trabajo
+  - Parte Segunda: Derecho Colectivo del Trabajo
+  - Parte Tercera: Jurisdicción Laboral y Procedimiento
+totalArticulos: Aproximadamente 488 artículos (con modificaciones)
+titulos: Múltiples títulos por cada libro
+
+MODIFICACIONES IMPORTANTES
+
+- norma: ley-50-1990
+  fecha: 1990-12-28
+  tipo: reforma
+  descripcion: Gran reforma laboral: creó cesantías retroactivas, modificó estabilidad laboral, contratos
+- norma: ley-100-1993
+  fecha: 1993-12-23
+  tipo: modificacion
+  descripcion: Sistema de Seguridad Social: salud, pensiones, riesgos profesionales
+- norma: ley-789-2002
+  fecha: 2002-12-27
+  tipo: reforma
+  descripcion: Reforma laboral: jornada nocturna, dominicales, horas extras, contratos de aprendizaje
+- norma: ley-1010-2006
+  fecha: 2006-01-23
+  tipo: adicion
+  descripcion: Medidas para prevenir y corregir el acoso laboral
+- norma: ley-1221-2008
+  fecha: 2008-07-16
+  tipo: adicion
+  descripcion: Teletrabajo en Colombia
+- norma: ley-1468-2011
+  fecha: 2011-06-30
+  tipo: modificacion
+  descripcion: Ampliación licencia de maternidad a 14 semanas, licencia de paternidad a 8 días
+- norma: ley-1496-2011
+  fecha: 2011-12-29
+  tipo: adicion
+  descripcion: Igualdad salarial entre mujeres y hombres
+- norma: ley-1610-2013
+  fecha: 2013-01-02
+  tipo: modificacion
+  descripcion: Regulación del trabajo doméstico: salario mínimo igual, jornada, prestaciones
+- norma: ley-1822-2017
+  fecha: 2017-01-04
+  tipo: modificacion
+  descripcion: Ampliación licencia de paternidad: de 8 a 2 semanas
+- norma: ley-2101-2021
+  fecha: 2021-07-15
+  tipo: modificacion
+  descripcion: Reducción gradual de jornada laboral: de 48 a 42 horas semanales
+
+DERECHOS  TRABAJADOR
+
+- derecho: Salario mínimo
+  fundamento: Art. 132
+  descripcion: Derecho a salario mínimo legal vigente (fijado anualmente)
+- derecho: Jornada máxima
+  fundamento: Art. 161
+  descripcion: Máximo 8 horas diarias y 42-48 horas semanales (en transición)
+- derecho: Horas extras
+  fundamento: Art. 168
+  descripcion: Recargo del 25% nocturno, 25% dominical, 75% extra dominical nocturna
+- derecho: Descansos
+  fundamento: Art. 179
+  descripcion: Descanso dominical remunerado, festivos
+- derecho: Vacaciones
+  fundamento: Art. 186
+  descripcion: 15 días hábiles de vacaciones anuales remuneradas
+- derecho: Prima de servicios
+  fundamento: Art. 236
+  descripcion: Un mes de salario anual pagadero en dos cuotas semestrales
+- derecho: Cesantías
+  fundamento: Art. 249
+  descripcion: Un mes de salario por cada año de servicios
+- derecho: Intereses cesantías
+  fundamento: Art. 253
+  descripcion: 12% anual sobre cesantías
+- derecho: Seguridad social
+  fundamento: Ley 100/1993
+  descripcion: Salud, pensión, riesgos laborales (ARL)
+- derecho: Protección maternidad/paternidad
+  fundamento: Art. 236, Ley 1822
+  descripcion: Licencia maternidad 18 semanas, paternidad 2 semanas
+- derecho: Estabilidad laboral reforzada
+  fundamento: Jurisprudencia
+  descripcion: Protección especial: embarazo, discapacidad, fuero sindical, pre-pensionados
+- derecho: Indemnización por despido
+  fundamento: Art. 64
+  descripcion: Indemnización si despido es sin justa causa
+
+OBLIGACIONES DEL EMPLEADOR
+
+- Pagar salario en forma completa y oportuna
+- Afiliar a seguridad social (salud, pensión, ARL)
+- Pagar aportes a seguridad social
+- Pagar prestaciones sociales (prima, cesantías, intereses)
+- Otorgar vacaciones, descansos
+- Pagar recargos nocturnos, dominicales, extras
+- Garantizar condiciones de higiene y seguridad
+- Respetar derechos fundamentales del trabajador
+- Llevar registro de trabajadores
+- Pagar dotación (uniformes) cuando aplique
+- Reconocer licencias (maternidad, paternidad, luto, calamidad)
+- No discriminar por sexo, raza, religión, orientación sexual, etc.
+
+TIPOS DE CONTRATO
+
+- tipo: Término indefinido
+  articulo: Art. 45
+  caracteristicas: No tiene fecha de terminación. Más estable para el trabajador
+  terminacion: Requiere justa causa o pago de indemnización
+- tipo: Término fijo
+  articulo: Art. 46
+  caracteristicas: Duración máxima 3 años. Renovable. Requiere preaviso 30 días
+  terminacion: Al vencimiento del plazo o antes con indemnización
+- tipo: Obra o labor
+  articulo: Art. 45
+  caracteristicas: Duración determinada por la obra o labor contratada
+  terminacion: Al terminar la obra o labor
+- tipo: Ocasional o transitorio
+  articulo: Art. 6
+  caracteristicas: Máximo 30 días. Labores ajenas a actividades normales del empleador
+  terminacion: Al cumplir el objeto o los 30 días
+- tipo: Aprendizaje
+  articulo: Ley 789/2002
+  caracteristicas: Estudiante recibe formación teórico-práctica. No es propiamente laboral
+  terminacion: Al culminar la etapa de formación
+
+JORNADAS
+
+ordinariaDiurna:
+{
+  "horario": "6:00 AM a 10:00 PM",
+  "maxima": "8 horas diarias",
+  "recargo": "0% (salario ordinario)"
+}
+nocturna:
+{
+  "horario": "10:00 PM a 6:00 AM",
+  "maxima": "8 horas diarias",
+  "recargo": "35% sobre salario ordinario"
+}
+extraDiurna:
+{
+  "horario": "Fuera de jornada ordinaria, en horas diurnas",
+  "recargo": "25% sobre salario ordinario"
+}
+extraNocturna:
+{
+  "horario": "Fuera de jornada ordinaria, en horas nocturnas",
+  "recargo": "75% sobre salario ordinario"
+}
+dominicalDiurna:
+{
+  "horario": "Domingo o festivo, horas diurnas",
+  "recargo": "75% sobre salario ordinario + descanso compensatorio"
+}
+dominicalNocturna:
+{
+  "horario": "Domingo o festivo, horas nocturnas",
+  "recargo": "110% sobre salario ordinario + descanso compensatorio"
+}
+semanal:
+{
+  "actual": "48 horas (en transición)",
+  "futuro": "42 horas semanales a partir de 2026 (Ley 2101/2021)",
+  "reduccion": "Gradual: 47h en 2023, 46h en 2024, 44h en 2025, 42h en 2026"
+}
+
+PRESTACIONES SOCIALES
+
+prima:
+{
+  "monto": "Un mes de salario al año",
+  "pago": "15 días en junio (antes del 30), 15 días en diciembre (antes del 20)",
+  "base": "Salario promedio últimos 6 meses o año trabajado"
+}
+cesantias:
+{
+  "monto": "Un mes de salario por cada año de servicios",
+  "pago": "Anualmente al fondo de cesantías (antes del 15 de febrero)",
+  "retiro": "Al terminar contrato, o parcialmente para vivienda o educación"
+}
+interesesCesantias:
+{
+  "monto": "12% anual sobre saldo de cesantías",
+  "pago": "Directamente al trabajador antes del 31 de enero"
+}
+vacaciones:
+{
+  "monto": "15 días hábiles de descanso remunerado",
+  "cuando": "Por cada año de servicios",
+  "compensacion": "Solo al terminar contrato, no durante vigencia"
+}
+dotacion:
+{
+  "cuando": "Si trabajador gana hasta 2 SMMLV",
+  "frecuencia": "3 veces al año (abril, agosto, diciembre)",
+  "contenido": "Vestido y calzado apropiado para labor"
+}
+
+TERMINACIÓN DEL CONTRATO
+
+justaCausa:
+{
+  "trabajador": [
+    "Engaño del empleador",
+    "Violencia, malos tratos del empleador",
+    "Incumplimiento grave obligaciones del empleador",
+    "Cualquier acto que ponga en peligro seguridad del trabajador"
+  ],
+  "empleador": [
+    "Engaño del trabajador",
+    "Todo acto de violencia, injuria, malos tratos del trabajador",
+    "Todo daño material causado intencionalmente",
+    "Revelación de secretos",
+    "Inasistencia injustificada por más de 3 días consecutivos",
+    "Embriaguez o toxicomanía del trabajador"
+  ]
+}
+sinJustaCausa:
+{
+  "terminoIndefinido": "30 días de salario por primer año, 20 días por años siguientes (hasta 20 años max)",
+  "terminoFijo": "Valor de salarios que faltan para culminar el plazo",
+  "requisito": "Empleador debe pagar indemnización"
+}
+
+SEGURIDAD SOCIAL
+
+salud:
+{
+  "aporte": "12.5% del salario (8.5% empleador, 4% trabajador)",
+  "base": "Salario",
+  "entidad": "EPS (Entidad Promotora de Salud)"
+}
+pension:
+{
+  "aporte": "16% del salario (12% empleador, 4% trabajador)",
+  "base": "Salario",
+  "entidad": "Fondo de Pensiones o Colpensiones"
+}
+riesgosLaborales:
+{
+  "aporte": "0.522% a 6.96% según nivel de riesgo",
+  "quien": "100% empleador",
+  "entidad": "ARL (Administradora de Riesgos Laborales)"
+}
+parafiscales:
+{
+  "SENA": "2% sobre nómina (empleadores con más de un trabajador)",
+  "ICBF": "3% sobre nómina",
+  "CajaCompensacion": "4% sobre nómina"
+}
+
+DERECHO COLECTIVO
+
+sindicatos: Derecho a constituir sindicatos libremente (Art. 353)
+negociacionColectiva: Derecho a negociar condiciones de trabajo (Art. 467)
+huelga: Derecho a la huelga (con límites y procedimientos, Art. 429)
+fueroSindical: Protección especial a dirigentes sindicales (Art. 405)
+convenciones: Acuerdos entre sindicatos y empleadores (Art. 467)
+
+JURISPRUDENCIA RELEVANTE
+
+C-593/2014
+Tema: Estabilidad laboral reforzada embarazo
+
+C-614/2009
+Tema: Licencia de maternidad
+
+SU-070/2013
+Tema: Estabilidad laboral reforzada discapacidad
+
+T-597/2013
+Tema: Fuero de pre-pensionados
+
+ESTADÍSTICAS Y DATOS
+
+modificacionesMayores: Más de 50 reformas desde 1951
+trabajadoresFormales: Aproximadamente 10 millones (2023)
+informalidadLaboral: Aproximadamente 50% de población económicamente activa
+salarioMinimoActual: Variable anual (2024: $1.300.000 aprox)
+areaImpacto: Derecho Laboral, Seguridad Social, Derecho Colectivo
+
+NOTAS Y ACLARACIONES
+
+- Código vigente desde 1951, uno de los más antiguos de América Latina
+- Ha sido reformado múltiples veces (especialmente Ley 50/1990, Ley 789/2002)
+- Regula tanto derecho individual como colectivo del trabajo
+- Complementado por Ley 100/1993 (seguridad social)
+- La jornada laboral está en transición: de 48 a 42 horas semanales (Ley 2101/2021)
+- Protección especial a grupos vulnerables: mujeres embarazadas, personas con discapacidad, pre-pensionados
+- El salario mínimo se fija anualmente por decreto (no está en el código)
+- Las prestaciones sociales son irrenunciables (Art. 14)
+- La jurisprudencia constitucional ha ampliado derechos (estabilidad reforzada, igualdad, no discriminación)
+- Colombia tiene uno de los sistemas de prestaciones sociales más generosos de América Latina
+- El código convive con normas especiales (servicio doméstico, teletrabajo, trabajo en alturas, etc.)
+- Importante: la realidad sobre el papel no siempre coincide con la práctica (informalidad laboral alta)

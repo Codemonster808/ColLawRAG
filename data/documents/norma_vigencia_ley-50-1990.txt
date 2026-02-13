@@ -1,0 +1,31 @@
+# Ley 50 de 1990
+
+tipo: ley
+area: laboral
+fuente: Congreso de la República
+estado: derogada
+vigente_desde: 1990-12-28
+vigente_hasta: 2002-12-27
+
+---
+
+DEROGADA POR
+
+ley-789-2002
+
+DEROGADA DESDE
+
+2002-12-27
+
+MODIFICACIONES
+
+- norma: ley-278-1996
+  fecha: 1996-03-15
+  tipo: modificacion
+  descripcion: Modificación de disposiciones sobre contrato de trabajo
+
+NOTAS Y ACLARACIONES
+
+- Introducía reformas al Código Sustantivo del Trabajo
+- Regulaba contratación laboral, jornada de trabajo, salarios
+- Derogada en su mayoría por la Ley 789 de 2002

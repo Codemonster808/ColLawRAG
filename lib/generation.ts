@@ -6,8 +6,8 @@ import { validateHNACStructure, generateHNACErrorFeedback, type HNACValidationRe
 // Default model for text generation using router.huggingface.co/novita endpoint
 // Cambiado a Mistral 7B para mejor rendimiento y velocidad
 // Alternativas: meta-llama/Llama-3.1-8B-Instruct, Qwen/Qwen2.5-7B-Instruct
-const HF_MODEL_GENERATION_DEFAULT = 'mistralai/Mistral-7B-Instruct-v0.3'
-const HF_MODEL_FALLBACK_DEFAULT = 'mistralai/Mistral-7B-Instruct-v0.3'
+const HF_MODEL_GENERATION_DEFAULT = 'deepseek/deepseek-v3.2'
+const HF_MODEL_FALLBACK_DEFAULT = 'qwen/qwen-2.5-72b-instruct'
 
 // Helper function to sleep
 function sleep(ms: number): Promise<void> {
@@ -37,11 +37,11 @@ function isRetryableError(error: any): boolean {
 }
 
 // Maximum number of citations to include in context (base, can be increased for complex queries)
-const MAX_CITATIONS_BASE = 8
-const MAX_CITATIONS_COMPLEX = 16
+const MAX_CITATIONS_BASE = 10
+const MAX_CITATIONS_COMPLEX = 20
 // Limit context to avoid API errors (base ~4000 chars, can be increased for complex queries)
-const MAX_CONTEXT_CHARS_BASE = 4000
-const MAX_CONTEXT_CHARS_COMPLEX = 8000
+const MAX_CONTEXT_CHARS_BASE = 6000
+const MAX_CONTEXT_CHARS_COMPLEX = 12000
 
 /**
  * Generate answer using a specific model with retry logic
@@ -209,7 +209,7 @@ export async function generateAnswerSpanish(params: {
 
   // Ajustar límites según complejidad
   const maxCitations = complexity === 'alta' ? MAX_CITATIONS_COMPLEX : complexity === 'media' ? 12 : MAX_CITATIONS_BASE
-  const maxContextChars = complexity === 'alta' ? MAX_CONTEXT_CHARS_COMPLEX : complexity === 'media' ? 6000 : MAX_CONTEXT_CHARS_BASE
+  const maxContextChars = complexity === 'alta' ? MAX_CONTEXT_CHARS_COMPLEX : complexity === 'media' ? 9000 : MAX_CONTEXT_CHARS_BASE
   
   logger.debug('Generation parameters', {
     requestId,
@@ -225,7 +225,11 @@ export async function generateAnswerSpanish(params: {
   
   for (let i = 0; i < Math.min(chunks.length, maxCitations); i++) {
     const r = chunks[i]
-    const block = `Fuente [${i + 1}] (${r.chunk.metadata.title}${r.chunk.metadata.article ? ` — ${r.chunk.metadata.article}` : ''}):\n${r.chunk.content}`
+    const areaTag = r.chunk.metadata.areaLegal ? ` [${r.chunk.metadata.areaLegal}]` : ''
+    const vigenciaTag = r.chunk.metadata.fechaVigencia ? ` [vigente ${r.chunk.metadata.fechaVigencia}]` : ''
+    const articleTag = r.chunk.metadata.article ? ` — ${r.chunk.metadata.article}` : ''
+    const hierarchyTag = r.chunk.metadata.articleHierarchy ? ` (${r.chunk.metadata.articleHierarchy})` : ''
+    const block = `Fuente [${i + 1}]${areaTag}${vigenciaTag} — ${r.chunk.metadata.title}${articleTag}${hierarchyTag}:\n${r.chunk.content}`
     const blockSize = block.length + (i > 0 ? 2 : 0) // +2 for \n\n
     
     // Si es el primer chunk y es muy grande, truncarlo en lugar de omitirlo

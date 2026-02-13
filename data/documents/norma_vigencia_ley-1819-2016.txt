@@ -1,0 +1,184 @@
+# Ley 1819 de 2016 - Reforma Tributaria Estructural
+
+tipo: Ley
+area: Nacional
+fuente: Congreso de la República
+estado: vigente
+vigente_desde: 2017-01-01
+
+---
+
+DESCRIPCIÓN GENERAL
+
+Reforma Tributaria Estructural que modificó el Estatuto Tributario. Eliminó el CREE, simplificó el impuesto de renta, creó el Régimen Simple de Tributación (SIMPLE), modificó tarifas de IVA, fortaleció la lucha contra la evasión, y modernizó el sistema tributario colombiano.
+
+NUMERO
+
+1819
+
+FECHA
+
+2016-12-29
+
+DEROGACIONES PARCIALES
+
+- articulos: Artículos sobre tarifa de renta corporativa
+  normaDerogante: Ley 2010 de 2019
+  fechaDerogacion: 2019-12-27
+  observaciones: La Ley 2010 modificó la reducción gradual de la tarifa de renta corporativa. La Ley 1819 establecía: 34% (2017), 33% (2018), 32% (2019), 31% (2020-2021), 30% (2022+). La Ley 2010 aceleró la reducción a 30% desde 2020.
+- articulos: Artículos sobre tarifa de renta corporativa nuevamente
+  normaDerogante: Ley 2277 de 2022
+  fechaDerogacion: 2022-12-13
+  observaciones: La Ley 2277 de 2022 incrementó la tarifa de renta corporativa de 30% a 35% desde 2023, revirtiendo la tendencia de reducción.
+
+MODIFICACIONES
+
+- fecha: 2018-12-28
+  norma: Ley 1943 de 2018 (Ley de Financiamiento)
+  descripcion: Modificó algunas disposiciones de la Ley 1819, especialmente en tarifas de IVA y renta. Posteriormente declarada INEXEQUIBLE por la Corte Constitucional (Sentencia C-481/2019).
+- fecha: 2019-12-27
+  norma: Ley 2010 de 2019 (Ley de Crecimiento Económico)
+  descripcion: Modificó la reducción gradual de la tarifa de renta corporativa (aceleró a 30% desde 2020), hizo permanente el Régimen Simple, y ajustó beneficios tributarios.
+- fecha: 2021-09-14
+  norma: Ley 2155 de 2021
+  descripcion: Modificó algunos beneficios del Régimen Simple (eliminó beneficio de auditoría), prorrogó descuentos tributarios, y ajustó tarifas de IVA en algunos sectores.
+- fecha: 2022-12-13
+  norma: Ley 2277 de 2022
+  descripcion: Incrementó tarifa de renta corporativa de 30% a 35%, creó impuesto multinivel al patrimonio, modificó tarifas de dividendos, y eliminó algunos beneficios tributarios.
+
+OBJETIVOS_REFORMA
+
+- Simplicidad: Simplificar el sistema tributario para facilitar el cumplimiento y reducir costos administrativos
+- Equidad: Mejorar la progresividad del sistema y reducir la evasión
+- Eficiencia: Eliminar distorsiones económicas causadas por el sistema tributario
+- Recaudo: Aumentar el recaudo fiscal para financiar el posconflicto y programas sociales
+- Formalización: Incentivar la formalización empresarial mediante el Régimen Simple
+
+PRINCIPALES_CAMBIOS
+
+- cambio: Eliminación del CREE
+  descripcion: Eliminó el Impuesto sobre la Renta para la Equidad (CREE) creado en 2013. El CREE gravaba con 9% la renta de las sociedades y tenía destinación específica (ICBF, SENA, salud). Se integró al impuesto de renta general.
+  impacto: Simplificó la estructura tributaria corporativa, eliminó doble tributación de dividendos
+- cambio: Reducción gradual de tarifa de renta corporativa
+  descripcion: Estableció reducción gradual de la tarifa general de renta para personas jurídicas: 34% (2017), 33% (2018), 32% (2019), 31% (2020-2021), 30% (2022 en adelante).
+  impacto: Incentivo a la inversión empresarial y competitividad internacional. Posteriormente modificado por Ley 2277/2022 que aumentó a 35% desde 2023.
+- cambio: Simplificación del impuesto de renta para personas naturales
+  descripcion: Eliminó el IMAN e IMAS (sistemas complejos de la Ley 1607/2012). Creó dos sistemas: Ordinario (IMAN) e IMAS, simplificando a un solo sistema con cédulas de renta (trabajo, pensiones, capital, no laborales, dividendos).
+  impacto: Mayor simplicidad en cálculo del impuesto, eliminó confusión de sistemas paralelos
+- cambio: Creación del Régimen Simple de Tributación (SIMPLE)
+  descripcion: Régimen voluntario para micro, pequeñas y medianas empresas que integra impuesto de renta, IVA e ICA en un solo pago. Tarifas progresivas del 1.6% al 16.5% según actividad e ingresos. Límite: ingresos brutos < 100,000 UVT (~$4,500 millones COP).
+  impacto: Incentivo a la formalización, reducción de cargas administrativas para pymes, simplificación tributaria
+- cambio: Modificación de tarifas de IVA
+  descripcion: Amplió la base gravable del IVA, eliminó exclusiones (ej. bienes de la canasta familiar que pasaron a tarifa 5%), mantuvo tarifa general en 19%.
+  impacto: Mayor recaudo, pero incrementó carga sobre consumidores de menores ingresos (regresividad)
+- cambio: Fortalecimiento de la lucha contra la evasión
+  descripcion: Creó herramientas para combatir evasión: intercambio automático de información financiera (CRS), facturación electrónica obligatoria, endurecimiento de sanciones, normas anti-elusión (cláusula general anti-abuso).
+  impacto: Mayor control tributario, reducción de evasión y elusión fiscal
+- cambio: Dividendos y participaciones
+  descripcion: Modificó tributación de dividendos: tarifa del 5% para distribuciones hasta 300 UVT, 10% sobre el exceso. Eliminó la exención total que existía antes.
+  impacto: Mayor recaudo sobre rentas de capital, afectó inversionistas y accionistas
+- cambio: Limitación de beneficios tributarios
+  descripcion: Limitó deducciones y beneficios tributarios excesivos: rentas exentas, descuentos tributarios, deducciones especiales. Creó el concepto de 'depuración especial' para ciertas rentas.
+  impacto: Reducción de planeación fiscal agresiva, mayor base gravable efectiva
+
+REGIMEN_SIMPLE
+
+descripcion: Régimen Simple de Tributación (SIMPLE) - Sistema tributario integrado para micro, pequeñas y medianas empresas
+beneficiarios: Personas naturales y jurídicas con ingresos brutos anuales < 100,000 UVT (~$4,700 millones COP en 2024)
+impuestos_integrados:
+  - Impuesto sobre la renta
+  - Impuesto sobre las ventas (IVA)
+  - Impuesto de Industria y Comercio (ICA)
+tarifas:
+{
+  "actividades_comercio_servicios": "1.6% a 11.6% (progresivas según ingresos)",
+  "actividades_industriales": "3.4% a 13.4%",
+  "actividades_profesionales": "6.4% a 16.4%"
+}
+ventajas:
+  - Un solo pago bimestral (simplificación administrativa)
+  - Menor carga tributaria para pequeñas empresas
+  - No obligación de llevar contabilidad compleja
+  - Beneficio de auditoría (originalmente, eliminado por Ley 2155/2021)
+  - Incentivo a la formalización
+requisitos:
+  - Ingresos brutos < 100,000 UVT en el año anterior
+  - No tener contratos con entidades estatales > 3,500 UVT
+  - No ser usuario de zonas francas
+  - No haber sido condenado por delitos contra la administración pública o lavado de activos
+  - Inscripción voluntaria ante la DIAN
+permanencia: Mínimo 1 año, permanencia indefinida mientras se cumplan requisitos (hecho permanente por Ley 2010/2019)
+
+FACTURACION_ELECTRONICA
+
+descripcion: La Ley 1819 estableció la obligatoriedad de la facturación electrónica como instrumento de lucha contra la evasión
+cronograma: Implementación gradual desde 2019: grandes contribuyentes primero, luego medianos, luego todos
+beneficios:
+  - Trazabilidad de operaciones comerciales
+  - Reducción de facturación falsa
+  - Simplificación administrativa
+  - Control en tiempo real por parte de la DIAN
+estado_actual: Obligatoria para todos los contribuyentes desde 2022 (Resolución DIAN 000042 de 2020)
+
+NORMAS_ANTI_EVASION
+
+- norma: Cláusula General Anti-Abuso (GAAR)
+  descripcion: Permite a la DIAN desconocer operaciones que carecen de sustancia económica y cuyo propósito principal es obtener un beneficio tributario indebido
+  aplicacion: Cuando se demuestra que la principal razón de una transacción es evadir o eludir impuestos
+- norma: Normas de Subcapitalización
+  descripcion: Limita la deducibilidad de intereses en préstamos entre vinculados económicos cuando la deuda supera 3 veces el patrimonio líquido del deudor
+  objetivo: Evitar erosión de la base gravable mediante endeudamiento artificial con vinculados en el exterior
+- norma: Precios de Transferencia
+  descripcion: Fortalece normas de precios de transferencia para transacciones con vinculados económicos del exterior, exigiendo que se realicen a valores de mercado
+  obligacion: Documentación comprobatoria (informe local, informe maestro, reporte país por país para multinacionales)
+- norma: Intercambio Automático de Información
+  descripcion: Colombia adopta el estándar CRS (Common Reporting Standard) de la OCDE para intercambio automático de información financiera con otros países
+  alcance: Información de cuentas bancarias, inversiones, rentas de no residentes en Colombia
+
+IMPACTO_ECONOMICO
+
+- Recaudo adicional estimado: $6 billones de pesos anuales (2017)
+- Formalización: Más de 150,000 empresas se inscribieron en Régimen Simple (2017-2019)
+- Reducción de evasión: Estimada en 1-2 puntos del PIB por mayor control y facturación electrónica
+- Impacto en competitividad: Mejora en ranking Doing Business (facilidad para pagar impuestos)
+- Críticas: Incremento de IVA sobre canasta familiar generó regresividad y afectó a población de menores ingresos
+
+RELACION_OTRAS_NORMAS
+
+- Estatuto Tributario (Decreto 624 de 1989): Norma modificada por esta ley
+- Ley 1607 de 2012: Reforma anterior que creó el CREE, IMAN e IMAS (eliminados por Ley 1819)
+- Ley 1943 de 2018: Reforma posterior (inexequible), modificó algunas disposiciones de Ley 1819
+- Ley 2010 de 2019: Reemplazó Ley 1943, ajustó tarifas y beneficios de Ley 1819
+- Ley 2155 de 2021: Modificó Régimen Simple (eliminó beneficio de auditoría)
+- Ley 2277 de 2022: Incrementó tarifa de renta corporativa, revirtiendo tendencia de Ley 1819
+- Decreto 1625 de 2016: Decreto Único Reglamentario que incorpora reglamentación de Ley 1819
+- Resoluciones DIAN: Reglamentan aspectos técnicos (facturación electrónica, Régimen Simple, declaraciones)
+
+JURISPRUDENCIA_RELEVANTE
+
+- Corte Constitucional Sentencia C-120 de 2018: Declaró exequible la Ley 1819 de 2016 (constitucionalidad del trámite legislativo)
+- Corte Constitucional Sentencia C-481 de 2019: Declaró inexequible la Ley 1943 de 2018 que modificó parcialmente la Ley 1819
+- Consejo de Estado - Sección Cuarta: Múltiples sentencias sobre interpretación de normas de la Ley 1819 (facturación electrónica, Régimen Simple, precios de transferencia)
+
+FUENTES
+
+- Ley 1819 de 2016 (Diario Oficial 50101 del 29 de diciembre de 2016)
+- Exposición de motivos del Proyecto de Ley 178/2016 (Cámara) - 160/2016 (Senado)
+- DIAN - Dirección de Impuestos y Aduanas Nacionales (conceptos y doctrina)
+- Ministerio de Hacienda y Crédito Público (documentos técnicos y evaluaciones)
+- Comisión de Expertos en Beneficios Tributarios - Informe Final (2015)
+- OCDE - Estudios Económicos de Colombia (análisis del sistema tributario)
+
+ULTIMA_ACTUALIZACION
+
+2026-02-10
+
+NOTAS Y ACLARACIONES
+
+- La Ley 1819 de 2016 fue la reforma tributaria más estructural de la última década en Colombia.
+- Fue presentada por el Gobierno de Juan Manuel Santos como parte del financiamiento del posconflicto tras el acuerdo de paz con las FARC.
+- El Congreso hizo modificaciones significativas durante el trámite legislativo, especialmente en tarifas de IVA.
+- La reforma generó protestas sociales por el incremento de IVA en bienes de la canasta familiar.
+- El Régimen Simple ha sido uno de los principales logros de la reforma en términos de formalización empresarial.
+- Muchas de las disposiciones de la Ley 1819 han sido posteriormente modificadas por reformas tributarias anuales (2018, 2019, 2021, 2022).
+- La tendencia de reducción gradual de la tarifa de renta corporativa se revirtió con la Ley 2277 de 2022 (incremento a 35%).

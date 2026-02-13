@@ -1,0 +1,234 @@
+# Ley 2101 de 2021 - Por medio de la cual se modifica la Ley 50 de 1990, se reduce la jornada laboral semanal de manera gradual
+
+tipo: ley
+area: nacional
+fuente: Congreso de la República
+url: https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=166108
+estado: vigente
+vigente_desde: 2021-07-15
+
+---
+
+DESCRIPCIÓN GENERAL
+
+Ley que reduce gradualmente la jornada laboral semanal en Colombia de 48 horas a 42 horas, manteniendo la jornada diaria de 8 horas. La reducción se implementa de forma progresiva entre 2023 y 2026 para permitir adaptación de empresas y trabajadores.
+
+OBJETO PRINCIPAL
+
+Reducir la jornada laboral semanal máxima de 48 horas a 42 horas de manera gradual, sin afectar el salario de los trabajadores, para mejorar la calidad de vida, productividad y equilibrio trabajo-familia.
+
+ARTÍCULOS RELEVANTES
+
+{"articulo":"Art. 1","tema":"Objeto de la ley","resumen":"Modificar artículo 161 del CST para reducir jornada laboral"}
+
+{"articulo":"Art. 2","tema":"Reducción gradual de jornada","resumen":"Calendario: 47h (2023), 46h (2024), 44h (2025), 42h (2026)"}
+
+{"articulo":"Art. 3","tema":"Jornada diaria máxima","resumen":"Se mantiene en 8 horas diarias. Solo cambia la semanal"}
+
+{"articulo":"Art. 4","tema":"Excepciones","resumen":"No aplica a trabajos de dirección, confianza, manejo, discontinuos"}
+
+{"articulo":"Art. 5","tema":"Horas extras","resumen":"Toda hora que exceda la jornada reducida es extra (con recargos)"}
+
+REDUCCION GRADUAL
+
+antesLey:
+{
+  "jornada": "48 horas semanales",
+  "jornadaDiaria": "8 horas diarias",
+  "vigencia": "Hasta 2022"
+}
+año2023:
+{
+  "jornada": "47 horas semanales",
+  "jornadaDiaria": "8 horas diarias",
+  "reduccion": "1 hora menos por semana"
+}
+año2024:
+{
+  "jornada": "46 horas semanales",
+  "jornadaDiaria": "8 horas diarias",
+  "reduccion": "2 horas menos por semana (vs 2022)"
+}
+año2025:
+{
+  "jornada": "44 horas semanales",
+  "jornadaDiaria": "8 horas diarias",
+  "reduccion": "4 horas menos por semana (vs 2022)"
+}
+año2026:
+{
+  "jornada": "42 horas semanales",
+  "jornadaDiaria": "8 horas diarias",
+  "reduccion": "6 horas menos por semana (vs 2022)",
+  "nota": "Meta final de la ley"
+}
+
+PRINCIPIOS BASICOS
+
+- principio: Gradualidad
+  descripcion: Reducción progresiva para evitar impacto abrupto en empresas
+- principio: Mantenimiento de salario
+  descripcion: Salario no se reduce aunque jornada sea menor
+- principio: Jornada diaria constante
+  descripcion: Máximo 8 horas diarias se mantiene
+- principio: Equilibrio trabajo-vida
+  descripcion: Más tiempo para familia, educación, descanso
+- principio: Productividad
+  descripcion: Trabajadores descansados son más productivos
+
+IMPLEMENTACION
+
+empleadores:
+{
+  "obligacion": "Ajustar horarios para cumplir nueva jornada",
+  "opciones": [
+    "Reducir días laborales (de 6 a 5 días)",
+    "Reducir horas diarias (de 8 a 7 en algunos días)",
+    "Distribuir horas de forma flexible"
+  ],
+  "prohibicion": "No pueden reducir salario por reducción de jornada"
+}
+trabajadores:
+{
+  "derecho": "Trabajar menos horas manteniendo salario",
+  "beneficio": "Más tiempo libre para familia, estudios, descanso",
+  "recargos": "Horas que excedan nueva jornada son extras (con recargo)"
+}
+sectoresExcluidos:
+  - Trabajos de dirección, confianza y manejo
+  - Trabajos discontinuos o de simple vigilancia
+  - Trabajo doméstico (tiene regulación especial)
+  - Trabajadores excepto de jornada máxima por ley especial
+
+IMPACTO ECONOMICO
+
+empresas:
+{
+  "costos": "Posible aumento de costos si deben contratar más personal",
+  "productividad": "Estudios indican que trabajadores descansados rinden más",
+  "adaptacion": "Periodo de 5 años permite ajuste gradual"
+}
+trabajadores:
+{
+  "beneficios": [
+    "Más tiempo libre",
+    "Mejor salud mental y física",
+    "Mayor equilibrio trabajo-familia",
+    "Oportunidad de estudiar o capacitarse",
+    "Reducción de estrés y burnout"
+  ],
+  "riesgos": [
+    "Posible presión para ser más productivos en menos tiempo",
+    "Empresas podrían aumentar cargas de trabajo"
+  ]
+}
+economia:
+{
+  "consumo": "Más tiempo libre puede estimular consumo y recreación",
+  "empleo": "Podría generar más empleos si empresas contratan para cubrir horas",
+  "productividad": "Meta: mantener o aumentar productividad con menos horas"
+}
+
+COMPARACION INTERNACIONAL
+
+colombia2022: 48 horas/semana
+colombia2026: 42 horas/semana
+promedioOCDE: 37-40 horas/semana
+paisesReferencia:
+  - {"pais":"Francia","jornada":"35 horas/semana","nota":"Una de las más bajas del mundo"}
+  - {"pais":"España","jornada":"40 horas/semana","nota":"Estándar europeo"}
+  - {"pais":"México","jornada":"48 horas/semana","nota":"Similar a Colombia antes de ley"}
+  - {"pais":"Chile","jornada":"45 horas/semana","nota":"Reducción reciente (era 48h)"}
+  - {"pais":"Argentina","jornada":"48 horas/semana","nota":"Similar a Colombia"}
+conclusion: Colombia se acerca a estándares internacionales pero sigue por encima de Europa
+
+BENEFICIOS ESPERADOS
+
+- Mejora en salud mental y física de trabajadores
+- Reducción de estrés, ansiedad, burnout
+- Mayor productividad (trabajadores descansados rinden más)
+- Equilibrio trabajo-familia
+- Tiempo para educación, capacitación, estudios
+- Reducción de accidentes laborales (trabajadores menos fatigados)
+- Mayor satisfacción laboral
+- Impulso a economía (más tiempo para consumo, recreación)
+- Posible generación de empleo (si empresas contratan más personal)
+- Alineación con estándares internacionales
+
+DESAFIOS
+
+- Adaptación de empresas sin reducir productividad
+- Riesgo de intensificación de trabajo (hacer lo mismo en menos tiempo)
+- Posible aumento de costos laborales para empresas
+- Cumplimiento efectivo (supervisión de inspecciones)
+- Cultura laboral de largas jornadas
+- Sectores con jornadas superiores (salud, transporte, seguridad)
+- Trabajadores informales no se benefician
+- Resistencia de algunos sectores empresariales
+
+SEGUIMIENTO IMPLEMENTACION
+
+entidadResponsable: Ministerio del Trabajo
+mecanismos:
+  - Inspecciones laborales
+  - Reportes de empresas
+  - Denuncias de trabajadores
+  - Estudios de impacto periódicos
+sanciones: Multas por incumplimiento (Código Sustantivo del Trabajo)
+
+DATOS INTERESANTES
+
+- Colombia era uno de países con jornada más larga de América Latina (48h)
+- Con 42h/semana, Colombia se acerca a estándar OCDE (40h)
+- Reducción es gradual para minimizar impacto económico
+- No reduce salario: trabajadores ganan lo mismo por menos horas
+- Beneficia especialmente a trabajadores con familia y estudiantes
+- Puede reducir desempleo si empresas contratan más personal para cubrir horas
+- Trabajadores informales (50% de población) NO se benefician directamente
+- Inspirada en experiencias de Chile, Uruguay, Francia
+- Debate: ¿flexibilización o protección laboral?
+- Gobierno promovió como mejora de calidad de vida
+- Empresarios expresaron preocupación por costos
+- Sindicatos y trabajadores la apoyaron ampliamente
+
+JURISPRUDENCIA RELEVANTE
+
+C-038/2004 - M.P. Eduardo Montealegre Lynett (2004-01-27)
+Tema: Competencia legislador en jornada laboral
+
+C-372/1994 - M.P. Hernando Herrera Vergara (1994-08-25)
+Tema: Jornada laboral y dignidad humana
+
+RELACIÓN CON OTRAS NORMAS
+
+- norma: codigo-sustantivo-trabajo-articulo-161
+  relacion: Modificó el artículo sobre jornada máxima de trabajo
+- norma: ley-50-1990
+  relacion: Reforma laboral que esta ley modifica parcialmente
+- norma: ley-789-2002
+  relacion: Otra reforma laboral (recargos, indemnizaciones)
+- norma: convenio-OIT-001
+  relacion: Convenio de la OIT sobre jornada de trabajo (8 horas diarias)
+
+ESTADÍSTICAS Y DATOS
+
+trabajadoresAfectados: Aproximadamente 10 millones de trabajadores formales
+reduccionTotal: 6 horas semanales (12.5% reducción)
+impactoEnCostos: Estimado 3-5% aumento de costos laborales para empresas
+areaImpacto: Derecho Laboral, Economía, Salud Pública, Bienestar Social
+
+NOTAS Y ACLARACIONES
+
+- Reforma laboral progresista de 2021
+- Primera reducción de jornada en Colombia desde 1950s
+- Implementación gradual 2023-2026 (5 años)
+- Meta: 42 horas semanales en 2026
+- Salario se mantiene (no se reduce)
+- Jornada diaria máxima sigue siendo 8 horas
+- Horas extras se calculan sobre nueva jornada reducida
+- No aplica a todos los trabajadores (excepciones)
+- Beneficia a trabajadores formales únicamente
+- Impacto en economía es objeto de estudio
+- Se espera mejora en salud mental y productividad
+- Alinea a Colombia con estándares internacionales
+- Es política pública de bienestar social
