@@ -1,6 +1,7 @@
 import fs from 'node:fs'
 import fsp from 'node:fs/promises'
 import path from 'node:path'
+import { createWriteStream } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { randomUUID } from 'node:crypto'
 
@@ -532,7 +533,8 @@ async function main() {
     const batchNum = Math.floor(i / batchSize) + 1
     process.stdout.write(`\r[${batchNum}/${totalBatches}] Generando embeddings...`)
     const vectors = await embedBatch(batch.map(b => b.content))
-    vectors.forEach((v, j) => { batch[j].embedding = v })
+    // Convertir a array plano por si el SDK retorna TypedArray (Float32Array)
+    vectors.forEach((v, j) => { batch[j].embedding = Array.isArray(v) ? v : Array.from(v) })
   }
   process.stdout.write('\n✅ Embeddings generados\n')
 
@@ -540,7 +542,27 @@ async function main() {
     await upsertPinecone(chunks)
   } else {
     if (!fs.existsSync(path.dirname(OUT_PATH))) fs.mkdirSync(path.dirname(OUT_PATH), { recursive: true })
-    await fsp.writeFile(OUT_PATH, JSON.stringify(chunks, null, 2), 'utf-8')
+    // Escribir en streaming para evitar RangeError (Invalid string length) con índices muy grandes
+    await new Promise((resolve, reject) => {
+      const stream = createWriteStream(OUT_PATH, { encoding: 'utf-8' })
+      let i = 0
+      function writeNext() {
+        let ok = true
+        while (ok && i < chunks.length) {
+          const line = JSON.stringify(chunks[i]) + (i < chunks.length - 1 ? ',' : '') + '\n'
+          ok = stream.write(line)
+          i++
+        }
+        if (i >= chunks.length) {
+          stream.write(']\n')
+          stream.end(err => (err ? reject(err) : resolve()))
+        } else {
+          stream.once('drain', writeNext)
+        }
+      }
+      stream.write('[\n')
+      writeNext()
+    })
     console.log('Índice local guardado en', OUT_PATH)
   }
 }
