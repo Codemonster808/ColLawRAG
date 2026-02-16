@@ -54,17 +54,52 @@ async function generateWithModel(
   timeoutMs: number
 ): Promise<string> {
   const apiKey = process.env.HUGGINGFACE_API_KEY
-  if (!apiKey) {
-    throw new Error('HUGGINGFACE_API_KEY not set')
+  if (!apiKey) throw new Error('HUGGINGFACE_API_KEY not set')
+
+  const provider = (process.env.GEN_PROVIDER || 'hf').toLowerCase()
+
+  // Novita: modelos de pago (DeepSeek V3, etc.) via router.huggingface.co/novita
+  if (provider === 'novita') {
+    const apiUrl = 'https://router.huggingface.co/novita/v3/openai/chat/completions'
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), timeoutMs)
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model,
+          messages: [
+            { role: 'system', content: systemPrompt },
+            { role: 'user', content: userPrompt },
+          ],
+          max_tokens: maxTokens,
+          temperature: 0.2,
+        }),
+        signal: controller.signal,
+      })
+      clearTimeout(timeoutId)
+      if (!response.ok) {
+        const errorText = await response.text()
+        const error = new Error(`HF API error: ${response.status} - ${errorText}`)
+        ;(error as any).statusCode = response.status
+        throw error
+      }
+      const data = await response.json() as { choices?: Array<{ message?: { content?: string } }> }
+      if (data.choices?.[0]?.message?.content) return data.choices[0].message.content.trim()
+      throw new Error('No content in response')
+    } catch (err: any) {
+      clearTimeout(timeoutId)
+      if (err.name === 'AbortError') throw new Error(`Generation timeout after ${timeoutMs}ms`)
+      throw err
+    }
   }
-  
-  // Usar HF SDK chatCompletion (hf-inference serverless, gratuito en plan free)
-  // En vez del endpoint novita que requiere créditos de pago
+
+  // Default: HF serverless (gratuito, plan free) via HfInference SDK
   const { HfInference } = await import('@huggingface/inference')
   const hf = new HfInference(apiKey)
   const controller = new AbortController()
   const timeoutId = setTimeout(() => controller.abort(), timeoutMs)
-
   try {
     const result = await hf.chatCompletion({
       model,
@@ -79,9 +114,7 @@ async function generateWithModel(
     return result.choices[0]?.message?.content?.trim() || ''
   } catch (error: any) {
     clearTimeout(timeoutId)
-    if (controller.signal.aborted) {
-      throw new Error(`Generation timeout after ${timeoutMs}ms`)
-    }
+    if (controller.signal.aborted) throw new Error(`Generation timeout after ${timeoutMs}ms`)
     ;(error as any).statusCode = error.statusCode || 500
     throw error
   }
