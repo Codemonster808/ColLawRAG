@@ -12,13 +12,6 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "test:integration": "jest tests/api.test.ts",
-    "evaluate": "node scripts/evaluate-accuracy.mjs",
-    "evaluate:prod": "node scripts/evaluate-accuracy.mjs --prod",
-    "evaluate:fast": "node scripts/evaluate-accuracy.mjs --limit 3",
-    "toon": "node scripts/toon-generator.mjs",
-    "toon:generate": "node scripts/generate-toon-payloads.mjs",
-    "toon:demo": "node scripts/generate-toon-payloads.mjs --demo",
-    "toon:bench": "node scripts/generate-toon-payloads.mjs --bench",
     "ingest": "node scripts/ingest.mjs && npm run build-bm25",
     "build-bm25": "npx tsx scripts/build-bm25.ts",
     "convert-jurisprudencia": "node scripts/convert-jurisprudencia-to-docs.mjs",
@@ -39,6 +32,10 @@
     "pre-deploy-check": "node scripts/pre-deploy-check.mjs",
     "deploy-check": "node scripts/deploy-check.mjs",
     "test-production": "node scripts/test-production.mjs",
+    "toon": "node scripts/generate-toon-payloads.mjs",
+    "toon:demo": "node scripts/generate-toon-payloads.mjs --demo",
+    "toon:bench": "node scripts/generate-toon-payloads.mjs --bench",
+    "toon:from-text": "node scripts/generate-toon-payloads.mjs --from-text",
     "postbuild": "test -f data/index.json || test -f data/index.json.gz || echo '⚠️  data/index.json(.gz) no encontrado. Ejecuta npm run ingest o npm run download-indices.'"
   },
   "dependencies": {
@@ -61,7 +58,6 @@
     "zod": "^3.25.76"
   },
   "devDependencies": {
-    "@toon-format/toon": "^2.1.0",
     "@types/better-sqlite3": "^7.6.13",
     "@types/jest": "^29.5.14",
     "@types/node": "^20.19.30",

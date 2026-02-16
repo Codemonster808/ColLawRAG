@@ -3,11 +3,11 @@ import { generatePrompts, type PromptContext } from './prompt-templates'
 import { logger } from './logger'
 import { validateHNACStructure, generateHNACErrorFeedback, type HNACValidationResult } from './hnac-validator'
 
-// Default model for text generation using router.huggingface.co/novita endpoint
-// Cambiado a Mistral 7B para mejor rendimiento y velocidad
-// Alternativas: meta-llama/Llama-3.1-8B-Instruct, Qwen/Qwen2.5-7B-Instruct
-const HF_MODEL_GENERATION_DEFAULT = 'deepseek/deepseek-v3.2'
-const HF_MODEL_FALLBACK_DEFAULT = 'qwen/qwen-2.5-72b-instruct'
+// Default model para testing gratuito: Qwen2.5-7B-Instruct via HF serverless (sin créditos)
+// Para producción comercial: deepseek/deepseek-v3.2 via Novita (requiere créditos HF)
+// El SDK @huggingface/inference usa hf-inference serverless automáticamente (gratis, plan free)
+const HF_MODEL_GENERATION_DEFAULT = 'Qwen/Qwen2.5-7B-Instruct'
+const HF_MODEL_FALLBACK_DEFAULT = 'meta-llama/Llama-3.2-3B-Instruct'
 
 // Helper function to sleep
 function sleep(ms: number): Promise<void> {
@@ -37,11 +37,11 @@ function isRetryableError(error: any): boolean {
 }
 
 // Maximum number of citations to include in context (base, can be increased for complex queries)
-const MAX_CITATIONS_BASE = 10
-const MAX_CITATIONS_COMPLEX = 20
+const MAX_CITATIONS_BASE = 8
+const MAX_CITATIONS_COMPLEX = 16
 // Limit context to avoid API errors (base ~4000 chars, can be increased for complex queries)
-const MAX_CONTEXT_CHARS_BASE = 6000
-const MAX_CONTEXT_CHARS_COMPLEX = 12000
+const MAX_CONTEXT_CHARS_BASE = 4000
+const MAX_CONTEXT_CHARS_COMPLEX = 8000
 
 /**
  * Generate answer using a specific model with retry logic
@@ -58,10 +58,50 @@ async function generateWithModel(
     throw new Error('HUGGINGFACE_API_KEY not set')
   }
   
-  const apiUrl = 'https://router.huggingface.co/novita/v3/openai/chat/completions'
+  // Usar HF SDK chatCompletion (hf-inference serverless, gratuito en plan free)
+  // En vez del endpoint novita que requiere créditos de pago
+  const { HfInference } = await import('@huggingface/inference')
+  const hf = new HfInference(apiKey)
   const controller = new AbortController()
   const timeoutId = setTimeout(() => controller.abort(), timeoutMs)
-  
+
+  try {
+    const result = await hf.chatCompletion({
+      model,
+      messages: [
+        { role: 'system', content: systemPrompt },
+        { role: 'user', content: userPrompt },
+      ],
+      max_tokens: maxTokens,
+      temperature: 0.3,
+    })
+    clearTimeout(timeoutId)
+    return result.choices[0]?.message?.content?.trim() || ''
+  } catch (error: any) {
+    clearTimeout(timeoutId)
+    if (controller.signal.aborted) {
+      throw new Error(`Generation timeout after ${timeoutMs}ms`)
+    }
+    ;(error as any).statusCode = error.statusCode || 500
+    throw error
+  }
+}
+
+// Legacy fetch-based function kept for reference (Novita/paid endpoint)
+async function _generateWithModelLegacy(
+  model: string,
+  systemPrompt: string,
+  userPrompt: string,
+  maxTokens: number,
+  timeoutMs: number
+): Promise<string> {
+  const apiKey = process.env.HUGGINGFACE_API_KEY
+  if (!apiKey) throw new Error('HUGGINGFACE_API_KEY not set')
+
+  const apiUrl = 'https://router.huggingface.co/novita/v3/openai/chat/completions'
+  const controller2 = new AbortController()
+  const timeoutId2 = setTimeout(() => controller2.abort(), timeoutMs)
+
   try {
     const response = await fetch(apiUrl, {
       method: 'POST',
@@ -84,10 +124,10 @@ async function generateWithModel(
         max_tokens: maxTokens,
         temperature: 0.2,
       }),
-      signal: controller.signal
+      signal: controller2.signal
     })
     
-    clearTimeout(timeoutId)
+    clearTimeout(timeoutId2)
     
     if (!response.ok) {
       const errorText = await response.text()
@@ -97,19 +137,16 @@ async function generateWithModel(
     }
     
     const data = await response.json() as { choices?: Array<{ message?: { content?: string } }> }
-    // Extract content from OpenAI-compatible response
     if (data.choices && data.choices.length > 0 && data.choices[0].message?.content) {
       const content = data.choices[0].message.content.trim()
-      if (content.length === 0) {
-        throw new Error('Empty response from model')
-      }
+      if (content.length === 0) throw new Error('Empty response from model')
       return content
     }
     throw new Error('No content in response')
   } catch (fetchError: any) {
-    clearTimeout(timeoutId)
+    clearTimeout(timeoutId2)
     if (fetchError.name === 'AbortError') {
-      const timeoutError = new Error(`Request timeout: Hugging Face API did not respond within ${timeoutMs}ms`)
+      const timeoutError = new Error(`Request timeout: ${timeoutMs}ms`)
       ;(timeoutError as any).isTimeout = true
       throw timeoutError
     }
@@ -209,7 +246,7 @@ export async function generateAnswerSpanish(params: {
 
   // Ajustar límites según complejidad
   const maxCitations = complexity === 'alta' ? MAX_CITATIONS_COMPLEX : complexity === 'media' ? 12 : MAX_CITATIONS_BASE
-  const maxContextChars = complexity === 'alta' ? MAX_CONTEXT_CHARS_COMPLEX : complexity === 'media' ? 9000 : MAX_CONTEXT_CHARS_BASE
+  const maxContextChars = complexity === 'alta' ? MAX_CONTEXT_CHARS_COMPLEX : complexity === 'media' ? 6000 : MAX_CONTEXT_CHARS_BASE
   
   logger.debug('Generation parameters', {
     requestId,
@@ -225,11 +262,7 @@ export async function generateAnswerSpanish(params: {
   
   for (let i = 0; i < Math.min(chunks.length, maxCitations); i++) {
     const r = chunks[i]
-    const areaTag = r.chunk.metadata.areaLegal ? ` [${r.chunk.metadata.areaLegal}]` : ''
-    const vigenciaTag = r.chunk.metadata.fechaVigencia ? ` [vigente ${r.chunk.metadata.fechaVigencia}]` : ''
-    const articleTag = r.chunk.metadata.article ? ` — ${r.chunk.metadata.article}` : ''
-    const hierarchyTag = r.chunk.metadata.articleHierarchy ? ` (${r.chunk.metadata.articleHierarchy})` : ''
-    const block = `Fuente [${i + 1}]${areaTag}${vigenciaTag} — ${r.chunk.metadata.title}${articleTag}${hierarchyTag}:\n${r.chunk.content}`
+    const block = `Fuente [${i + 1}] (${r.chunk.metadata.title}${r.chunk.metadata.article ? ` — ${r.chunk.metadata.article}` : ''}):\n${r.chunk.content}`
     const blockSize = block.length + (i > 0 ? 2 : 0) // +2 for \n\n
     
     // Si es el primer chunk y es muy grande, truncarlo en lugar de omitirlo

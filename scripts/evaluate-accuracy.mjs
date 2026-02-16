@@ -89,11 +89,11 @@ const blue = (txt) => color(C.blue, txt);
 // ─── Paso 1: Llamar al RAG ────────────────────────────────────────────────────
 
 async function queryRAG(question) {
-  const url = `${API_URL}/api/query`;
+  const url = `${API_URL}/api/rag`;
   const res = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ question }),
+    body: JSON.stringify({ query: question }),
     signal: AbortSignal.timeout(60_000),
   });
   if (!res.ok) throw new Error(`RAG API error: ${res.status} ${res.statusText}`);
@@ -438,10 +438,10 @@ async function main() {
     process.stdout.write(gray(`\n  Verificando conexión con RAG (${API_URL})... `));
     try {
       const r = await fetch(`${API_URL}/api/health`, { signal: AbortSignal.timeout(5000) }).catch(() =>
-        fetch(`${API_URL}/api/query`, {
+        fetch(`${API_URL}/api/rag`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ question: 'test' }),
+          body: JSON.stringify({ query: 'test' }),
           signal: AbortSignal.timeout(10000)
         })
       );

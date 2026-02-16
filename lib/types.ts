@@ -8,7 +8,8 @@ export type DocumentMetadata = {
   articleHierarchy?: string  // "Título I > Capítulo 1 > Artículo 5"
   chapter?: string            // Capítulo
   section?: string            // Sección
-  areaLegal?: string          // Área legal detectada (laboral, comercial, civil, penal, administrativo, tributario, constitucional, general)
+  area?: string               // Área legal para filtros (frontmatter o detectada; preferir sobre areaLegal)
+  areaLegal?: string          // Área legal detectada (legacy; uso interno preferir metadata.area)
   entidadEmisora?: string     // Entidad que emitió la norma (Congreso, Presidencia, Corte Constitucional, etc.)
   fechaVigencia?: string      // Fecha aproximada de vigencia (YYYY-MM-DD)
   url?: string

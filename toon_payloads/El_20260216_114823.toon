@@ -1,0 +1,4 @@
+nombre: Beta
+tareas[2]{nombre,prioridad,completada}:
+  Diseño,alta,true
+  Pruebas,baja,false

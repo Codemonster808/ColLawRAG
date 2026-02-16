@@ -1,0 +1,6 @@
+nombre: Alfa
+equipo: Core
+tareas[3]{nombre,prioridad,completada}:
+  Diseño,alta,true
+  Desarrollo,media,false
+  Pruebas,baja,true

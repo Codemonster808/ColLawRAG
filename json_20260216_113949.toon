@@ -1,0 +1,7 @@
+context:
+  task: hikes
+  location: Boulder
+friends[3]: ana,luis,sam
+hikes[2]{id,name,distanceKm,wasSunny}:
+  1,Blue Lake,7.5,true
+  2,Ridge,9.2,false

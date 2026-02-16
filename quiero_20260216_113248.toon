@@ -1,0 +1,4 @@
+ruta_proyecto: /home/lesaint/Documentos/Cursor/ColLawRAG
+accion: generar
+elementos[6]: tech_stack,arquitectura,diagrama,explicacion,mejoras,documentacion
+tipo: documentacion_proyecto

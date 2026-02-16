@@ -1,0 +1,239 @@
+{
+  "fecha": "2026-02-16",
+  "api_url": "http://localhost:3001",
+  "modelo_juez": "deepseek/deepseek-v3.2",
+  "resumen": {
+    "total_casos": 5,
+    "evaluados": 4,
+    "errores": 1,
+    "score_promedio": "0.55",
+    "accuracy_porcentaje": "5.5%"
+  },
+  "veredictos": {
+    "INCORRECTO": 4
+  },
+  "promedio_criterios": {
+    "precision_normativa": "0.75",
+    "articulos_correctos": "0.50",
+    "interpretacion_valida": "0.00",
+    "completitud": "1.50",
+    "ausencia_alucinaciones": "0.00"
+  },
+  "por_area": {
+    "laboral": {
+      "promedio": "0.55",
+      "casos": 4,
+      "scores": [
+        0,
+        0.8,
+        0.4,
+        1
+      ]
+    }
+  },
+  "mejores_casos": [
+    {
+      "id": "LAB-005",
+      "area": "laboral",
+      "score": 1
+    },
+    {
+      "id": "LAB-003",
+      "area": "laboral",
+      "score": 0.8
+    },
+    {
+      "id": "LAB-004",
+      "area": "laboral",
+      "score": 0.4
+    }
+  ],
+  "peores_casos": [
+    {
+      "id": "LAB-001",
+      "area": "laboral",
+      "score": 0
+    },
+    {
+      "id": "LAB-004",
+      "area": "laboral",
+      "score": 0.4
+    },
+    {
+      "id": "LAB-003",
+      "area": "laboral",
+      "score": 0.8
+    }
+  ],
+  "alucinaciones_detectadas": [
+    {
+      "id": "LAB-001",
+      "alucinaciones": [
+        "Artículo 190 del Código Sustantivo del Trabajo"
+      ]
+    },
+    {
+      "id": "LAB-003",
+      "alucinaciones": [
+        "Artículo 410 del Código Sustantivo del Trabajo (CST)",
+        "Sentencia T-760/2008 de la Corte Constitucional",
+        "Código de Comercio (Decreto 410 de 1971)",
+        "Código Civil (Ley 84 de 1873)"
+      ]
+    },
+    {
+      "id": "LAB-004",
+      "alucinaciones": [
+        "Sentencia C-355/2006 - Corte Constitucional — Artículo 124",
+        "Artículo 43 Superior",
+        "Sentencia T-760/2008"
+      ]
+    },
+    {
+      "id": "LAB-005",
+      "alucinaciones": [
+        "Artículo 64 del Código Sustantivo del Trabajo (interpretación errónea para indemnización)",
+        "Cálculo de indemnización por 70 días de salario ($140.000.000) que no corresponde a la pregunta"
+      ]
+    }
+  ],
+  "resultados_detallados": [
+    {
+      "id": "LAB-001",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuántos días de vacaciones tiene derecho un trabajador con un año de trabajo?",
+      "respuesta_referencia": "Según el artículo 186 del Código Sustantivo del Trabajo (CST), el trabajador tiene derecho a 15 días hábiles consecutivos de vacaciones remuneradas por cada año de servicio. Este derecho es irrenunciable según el artículo 189 del CST.",
+      "respuesta_rag": "**HECHOS RELEVANTES:**\nUn trabajador ha laborado por un año en una empresa y solicita información sobre sus derechos a vacaciones.\n\n**NORMAS APLICABLES:**\nSegún el Código Sustantivo del Trabajo, Artículo 190, el trabajador goza anualmente, por lo menos, de seis (6) días hábiles continuos de vacaciones, los que no son acumulables [1]. Este artículo establece que en todo caso, el trabajador tiene derecho a seis días de vacaciones al año, sin posibilidad de acumular días adicionales.\n\n**ANÁLISIS JURÍDICO:**\nEl trabajador con un año de trabajo tiene derecho a seis (6) días hábiles continuos de vacaciones anuales, conforme al Artículo 190 del Código Sustantivo del Trabajo. Esta cantidad de días es mínima y no puede ser inferior, independientemente del tiempo de servicio del trabajador. No se permite la acumulación de días de vacaciones adicionales en este caso.\n\n**CONCLUSIÓN:**\nEl trabajador con un año de trabajo tiene derecho a seis (6) días hábiles continuos de vacaciones anuales.\n\n**RECOMENDACIÓN:**\nEl trabajador debe solicitar sus vacaciones de acuerdo con las políticas de la empresa y el procedimiento establecido. Si la empresa no concede las vacaciones, el trabajador puede solicitar asesoramiento legal para garantizar su derecho a las vacaciones.",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 0,
+        "score_total": 0,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 186 CST",
+          "Art. 189 CST"
+        ],
+        "alucinaciones": [
+          "Artículo 190 del Código Sustantivo del Trabajo"
+        ],
+        "comentario": "La respuesta del RAG es completamente incorrecta: cita el artículo 190 CST (que no existe) en lugar del 186, menciona 6 días en lugar de 15, y omite que es por año de servicio."
+      },
+      "error": null,
+      "timestamp": "2026-02-16T22:17:22.159Z"
+    },
+    {
+      "id": "LAB-003",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuándo procede el despido sin justa causa y cuál es la indemnización?",
+      "respuesta_referencia": "Según el artículo 64 del CST, el empleador puede terminar el contrato sin justa causa pagando indemnización. Para contratos a término indefinido con trabajadores que ganen menos de 10 SMLMV: 30 días por el primer año y 20 días adicionales por cada año posterior. Para trabajadores con más de 10 SMLMV: 20 días por el primer año y 15 adicionales por cada año. El artículo 26 del Decreto 2351/65 modificó esta figura.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Cuándo procede el despido sin justa causa**\n\n\n\n**HECHOS RELEVANTES:**\nSe consulta sobre la procedencia del despido sin justa causa en Colombia. Se busca determinar bajo qué circunstancias un empleador puede proceder a un despido sin justa causa, teniendo en cuenta el marco legal vigente.\n\n**NORMAS APLICABLES:**\nLas normas relevantes para el despido sin justa causa en Colombia se encuentran en el Código Sustantivo del Trabajo y la jurisprudencia de la Corte Constitucional. Específicamente:\n- **Artículo 410 del Código Sustantivo del Trabajo (CST):** Establece las justas causas para el despido, pero no menciona el despido sin justa causa. [2]\n- **Sentencia T-760/2008 de la Corte Constitucional:** Indica que el incumplimiento por parte del empleador de sus obligaciones laborales puede ser considerado como una justa causa para el despido. [3]\n\n**ANÁLISIS JURÍDICO:**\nEl despido sin justa causa es un concepto que no está explícitamente definido en el CST, pero puede ser inferido a partir de la jurisprudencia y el marco legal general. Según la Sentencia T-760/2008 de la Corte Constitucional, si el empleador incumple sus obligaciones laborales de manera reiterada y sin justa causa, esto puede ser considerado como una justa causa para el despido. Sin embargo, este despido debe ser realizado de manera justa y conforme a los procedimientos legales.\n\n**CONCLUSIÓN:**\nEl despido sin justa causa es posible en Colombia si el empleador incumple sus obligaciones laborales de manera reiterada y sin justa causa. Sin embargo, este despido debe ser realizado de manera justa y conforme a los procedimientos legales establecidos.\n\n**RECOMENDACIÓN:**\n1. **Consultar a un abogado laboralista:** Antes de proceder con cualquier despido, es recomendable consultar a un abogado laboralista para asegurar que el procedimiento sea legal y justificado.\n2. **Documentar las violaciones:** Mantener un registro detallado de las violaciones de obligaciones laborales por parte del empleador.\n3. **Cumplir con los procedimientos:** Seguir los procedimientos legales para el despido, incluyendo el preaviso y la notificación al trabajador.\n4. **Respetar el plazo de prescripción:** Asegurarse de que el despido se realice dentro del plazo de prescripción de los derechos laborales (3 años desde la terminación del contrato).\n\n\n\n---\n\n\n\n**2. y cuál es la indemnización?**\n\n\n\n**HECHOS RELEVANTES:**\nSe solicita determinar la indemnización en un contexto no especificado, pero se entiende que se trata de una situación donde ha ocurrido un siniestro o un daño que requiere una compensación económica.\n\n**NORMAS APLICABLES:**\n- **Código de Comercio (Decreto 410 de 1971):**\n  - Artículo 1110: La indemnización será pagadera en dinero, o mediante la reposición, reparación o reconstrucción de la cosa asegurada, a opción del asegurador.\n  - Artículo 1111: La suma asegurada se entenderá reducida, desde el momento del siniestro, en el importe de la indemnización pagada por el asegurador.\n  - Artículo 1112: Al asegurado o al beneficiario, según el caso, no le estará permitido el abandono de las cosas aseguradas, con ocasión de un siniestro, salvo acuerdo en contrario.\n- **Código Civil (Ley 84 de 1873):**\n  - Artículo 1613: La indemnización de perjuicios comprende el daño emergente y lucro cesante, ya provenga de no haberse cumplido la obligación, o de haberse cumplido imperfectamente, o de haberse retardado el cumplimiento.\n  - Artículo 1614: Se entiende por daño emergente el perjuicio o la pérdida que proviene de no haberse cumplido la obligación o de haberse cumplido imperfectamente, o de haberse retardado su cumplimiento; y por lucro cesante, la ganancia o provecho que deja de reportarse a consecuencia de no haberse cumplido la obligación, o cumplido imperfectamente, o retardado su cumplimiento.\n\n**ANÁLISIS JURÍDICO:**\nLa indemnización en Colombia se regula principalmente por el Código de Comercio y el Código Civil. Según el Código de Comercio, la indemnización puede ser pagada en dinero, o mediante la reposición, reparación o reconstrucción de la cosa asegurada, a elección del asegurador. Además, la suma asegurada se reduce en el importe de la indemnización pagada. El Código Civil define la indemnización de perjuicios como el daño emergente y el lucro cesante, que incluye tanto los daños materiales como los daños no materiales.\n\n**CONCLUSIÓN:**\nLa indemnización en Colombia se basa en la compensación de los daños emergentes y lucro cesante, y puede ser pagada en dinero o mediante la reposición de la cosa asegurada, según la opción del asegurador. La suma asegurada se reduce en el importe de la indemnización pagada.\n\n**RECOMENDACIÓN:**\n1. **Identificar los daños:** Determinar cuáles son los daños emergentes y los lucro cesante.\n2. **Calcular la indemnización:** Aplicar las reglas del Código Civil para calcular la indemnización.\n3. **Opción del asegurador:** Decidir si la indemnización se pagará en dinero o mediante la reposición de la cosa asegurada.\n4. **Reducción de la suma asegurada:** Reducir la suma asegurada en el importe de la indemnización pagada.\n5. **Documentación:** Asegurar la documentación necesaria para respaldar la indemnización.\n6. **Consultar a un abogado:** En caso de dudas o conflictos, consultar con un abogado especializado en derecho de seguros y derecho civil.",
+      "evaluacion": {
+        "precision_normativa": 1,
+        "articulos_correctos": 1,
+        "interpretacion_valida": 0,
+        "completitud": 2,
+        "ausencia_alucinaciones": 0,
+        "score_total": 0.8,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 64 CST",
+          "Art. 65 CST",
+          "Decreto 2351/65"
+        ],
+        "alucinaciones": [
+          "Artículo 410 del Código Sustantivo del Trabajo (CST)",
+          "Sentencia T-760/2008 de la Corte Constitucional",
+          "Código de Comercio (Decreto 410 de 1971)",
+          "Código Civil (Ley 84 de 1873)"
+        ],
+        "comentario": "La respuesta del RAG es completamente errónea, ya que no aborda la figura del despido sin justa causa del artículo 64 CST ni su indemnización, y en su lugar inventa normas y conceptos ajenos al derecho laboral colombiano."
+      },
+      "error": null,
+      "timestamp": "2026-02-16T22:17:45.142Z"
+    },
+    {
+      "id": "LAB-004",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el fuero de maternidad y qué protección ofrece?",
+      "respuesta_referencia": "El fuero de maternidad, consagrado en el artículo 239 del CST y desarrollado por la Sentencia C-005 de 2017 de la Corte Constitucional, prohíbe el despido de la trabajadora embarazada o en período de lactancia sin la autorización previa del Inspector de Trabajo. Si se despide sin autorización, el despido es ineficaz y la trabajadora tiene derecho a ser reintegrada y al pago de salarios y prestaciones dejados de percibir. La protección aplica incluso en contratos a término fijo y de obra.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Qué es el fuero de maternidad**\n\n\n\n**HECHOS RELEVANTES:**\nSe consulta sobre el concepto y características del fuero de maternidad, en el contexto de la protección legal que se debe brindar a las mujeres en estado de embarazo y recién paridas.\n\n**NORMAS APLICABLES:**\n1. **Sentencia C-355/2006 - Corte Constitucional — Artículo 124.** [1]\n2. **Artículo 43 Superior.** [1]\n\n**ANÁLISIS JURÍDICO:**\nEl fuero de maternidad se refiere a la protección especial que la Constitución y el ordenamiento jurídico colombiano otorgan a las mujeres en estado de embarazo y recién paridas. Esta protección se fundamenta en la necesidad de garantizar que la vida que se está gestando o recién nacida pueda desarrollarse plenamente bajo el amparo de su progenitora. El artículo 43 Superior confiere a la mujer en estado de embarazo el derecho a especial asistencia y protección del Estado, y en caso de desempleo o desamparo, a recibir un subsidio alimentario. La Corte Constitucional, en la Sentencia C-355/2006, reafirma el carácter especial y constitucional de esta protección, estableciendo que durante el embarazo y después del parto, la mujer goza de un fuero que incluye asistencia y protección del Estado.\n\n**CONCLUSIÓN:**\nEl fuero de maternidad es un conjunto de derechos y protecciones que la mujer en estado de embarazo y recién parida tiene en virtud de la Constitución y el ordenamiento jurídico colombiano. Este fuero incluye asistencia y protección especial del Estado, así como el derecho a un subsidio alimentario en caso de desempleo o desamparo.\n\n**RECOMENDACIÓN:**\n1. **Consultar al empleador:** Asegúrese de que el empleador cumpla con las obligaciones establecidas en el fuero de maternidad, como el permiso por maternidad y el mantenimiento del puesto de trabajo.\n2. **Documentación:** Mantenga un registro de todas las comunicaciones y documentos relacionados con el permiso por maternidad y cualquier solicitud de subsidio alimentario.\n3. **Asesoramiento legal:** En caso de incumplimiento por parte del empleador o necesidad de solicitar un subsidio alimentario, consulte con un abogado especializado en derecho laboral para obtener asesoramiento legal.\n\n\n\n---\n\n\n\n**2. y qué protección ofrece?**\n\n\n\n**HECHOS RELEVANTES:**\nSe solicita conocer la protección que ofrece la normativa colombiana a los niños en relación con el derecho a la salud.\n\n**NORMAS APLICABLES:**\nLa protección a los niños en cuanto al derecho a la salud se encuentra regulada en la jurisprudencia de la Corte Constitucional, en particular en la Sentencia T-760/2008 [1]. Específicamente, la Corte ha protegido el acceso a servicios de salud, incluyendo cirugías plásticas, medicamentos, vacunas, y servicios de salud para bebés recién nacidos.\n\n**ANÁLISIS JURÍDICO:**\nLa jurisprudencia de la Corte Constitucional ha establecido que el derecho a la salud de los niños es fundamental y debe ser protegido en todas sus dimensiones. Esto incluye garantizar el acceso a servicios médicos necesarios para asegurar su desarrollo armónico e integral, incluso en situaciones donde estos servicios no afecten la integridad funcional de algún órgano. La Corte ha protegido el derecho a la salud de los niños en diversos aspectos, como el acceso a medicamentos, vacunas, y servicios médicos especializados. Además, se ha protegido el derecho a que los niños no sean víctimas de abusos por parte de entidades de salud, y se ha garantizado que no se les cobren pagos moderadores que puedan constituir barreras al acceso a servicios de salud.\n\n**CONCLUSIÓN:**\nLa normativa colombiana, en particular la jurisprudencia de la Corte Constitucional, ofrece una protección integral al derecho a la salud de los niños, garantizando su acceso a servicios médicos necesarios para su desarrollo armónico e integral, incluso en situaciones de vulnerabilidad.\n\n**RECOMENDACIÓN:**\n1. **Documentación:** Mantén toda la documentación relacionada con los servicios de salud que reciban los niños.\n2. **Acceso a Servicios:** Asegúrate de que los niños tengan acceso a todos los servicios médicos necesarios, incluyendo vacunas y tratamientos especializados.\n3. **Protección Legal:** Si se presentan situaciones en las que las EPS o IPS intenten limitar el acceso a servicios de salud, consulte a un abogado especializado para proteger los derechos del niño.\n4. **Vacunación:** Mantenga un registro de las vacunas recibidas por los niños y asegúrese de que estén actualizadas.\n5. **Atención Médica:** En caso de que se presente alguna situación en la que se considere que los derechos del niño no están siendo respetados, no dude en buscar asesoramiento legal para proteger sus derechos.\n\nEsta información es orientativa y se recomienda consultar con un abogado especializado para obtener asesoramiento personalizado.",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 2,
+        "ausencia_alucinaciones": 0,
+        "score_total": 0.4,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 239 CST",
+          "Sentencia C-005/2017",
+          "Art. 240 CST"
+        ],
+        "alucinaciones": [
+          "Sentencia C-355/2006 - Corte Constitucional — Artículo 124",
+          "Artículo 43 Superior",
+          "Sentencia T-760/2008"
+        ],
+        "comentario": "La respuesta del RAG es completamente incorrecta para el área laboral, ya que no menciona ninguna de las normas esperadas (CST) y se enfoca erróneamente en temas constitucionales y de salud, inventando jurisprudencia no relevante para el fuero de maternidad laboral."
+      },
+      "error": null,
+      "timestamp": "2026-02-16T22:18:23.370Z"
+    },
+    {
+      "id": "LAB-005",
+      "area": "laboral",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cómo se calcula la liquidación de un trabajador que lleva 3 años y gana $2.000.000?",
+      "respuesta_referencia": "Para un trabajador con 3 años de antigüedad y salario de $2.000.000: (1) Cesantías: $2.000.000 × 3 años = $6.000.000; (2) Intereses sobre cesantías: $6.000.000 × 12% = $720.000; (3) Prima de servicios: $2.000.000 × 3 meses/12 = $500.000 (proporcional al último semestre); (4) Vacaciones: 15 días × $66.667/día = $1.000.000 (proporcional); (5) Si el auxilio de transporte aplica ($162.000/mes). El total aproximado antes de descuentos sería $8.220.000 más el auxilio de transporte proporcional.",
+      "respuesta_rag": "**HECHOS RELEVANTES:**\nUn trabajador con 3 años de servicio y un salario de $2.000.000 solicita la liquidación de su contrato de trabajo.\n\n**NORMAS APLICABLES:**\n- **Artículo 64 del Código Sustantivo del Trabajo [2]:** Establece la indemnización para trabajadores que devengan un salario inferior a diez (10) salarios mínimos mensuales legales.\n- **Artículo 249 del Código Sustantivo del Trabajo [5]:** Establece la regla general para el pago de auxilio de cesantía, un mes de salario por cada año de servicios.\n\n**ANÁLISIS JURÍDICO:**\nEl trabajador en cuestión tiene un salario de $2.000.000, que es inferior a diez (10) salarios mínimos legales (actualmente, el salario mínimo legal mensual es de $1.096.000). Según el **Artículo 64 del Código Sustantivo del Trabajo [2]**, para trabajadores que devengan un salario inferior a diez (10) salarios mínimos mensuales legales, la indemnización se calcula de la siguiente manera:\n- Treinta (30) días de salario cuando el trabajador tuviere un tiempo de servicio no mayor de un (1) año.\n- Si el trabajador tuviere más de un (1) año de servicio continuo, se le pagarán veinte (20) días adicionales de salario sobre los treinta (30) básicos del numeral 1, por cada uno de los años de servicio subsiguientes al primero y proporcionalmente por fracción.\n\nDado que el trabajador lleva 3 años de servicio, se le deben pagar 30 días de salario por el primer año y 20 días adicionales por cada uno de los siguientes dos años, totalizando 70 días de salario.\n\n**CONCLUSIÓN:**\nEl trabajador debe recibir 70 días de salario como indemnización por la terminación de su contrato de trabajo, calculados en base a su salario actual de $2.000.000.\n\n**RECOMENDACIÓN:**\n1. **Calcular la indemnización:** \n   - 30 días de salario por el primer año: 30 x $2.000.000 = $60.000.000.\n   - 20 días adicionales por cada uno de los siguientes dos años: 20 x 2 x $2.000.000 = $80.000.000.\n   - Total: $60.000.000 + $80.000.000 = $140.000.000.\n\n2. **Entrega de documentos:**\n   - Liquidación de trabajador.\n   - Comprobante de pago de indemnización.\n\n3. **Entidades competentes:**\n   - Inspección General de Trabajo.\n   - Superintendencia de Salud (si se requiere).\n\n4. **Plazos:**\n   - Asegurarse de que el pago se realice dentro del plazo legal, que es inmediato a la terminación del contrato.\n\n5. **Asesoramiento adicional:**\n   - Consultar con un abogado especializado en derecho laboral para asegurar que se cumplen todos los requisitos legales y que no existen otros derechos adicionales que deban ser considerados.",
+      "evaluacion": {
+        "precision_normativa": 2,
+        "articulos_correctos": 1,
+        "interpretacion_valida": 0,
+        "completitud": 2,
+        "ausencia_alucinaciones": 0,
+        "score_total": 1,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [
+          "Artículo 249 del Código Sustantivo del Trabajo"
+        ],
+        "normas_faltantes": [
+          "Art. 249 CST",
+          "Art. 306 CST",
+          "Art. 186 CST",
+          "Ley 52/1975"
+        ],
+        "alucinaciones": [
+          "Artículo 64 del Código Sustantivo del Trabajo (interpretación errónea para indemnización)",
+          "Cálculo de indemnización por 70 días de salario ($140.000.000) que no corresponde a la pregunta"
+        ],
+        "comentario": "La respuesta del RAG es completamente incorrecta, ya que confunde el cálculo de liquidación ordinaria con indemnizaciones por despido injustificado, inventa normas y no calcula ninguno de los conceptos solicitados (cesantías, intereses, prima y vacaciones)."
+      },
+      "error": null,
+      "timestamp": "2026-02-16T22:19:00.952Z"
+    }
+  ],
+  "errores": [
+    {
+      "id": "LAB-002",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es el salario mínimo legal mensual vigente en Colombia para 2024?",
+      "respuesta_referencia": "Para el año 2024, el salario mínimo legal mensual vigente (SMLMV) en Colombia fue fijado en $1.300.000 mediante el Decreto 2613 de 2023, representando un incremento del 12% respecto al año anterior. Adicionalmente, el auxilio de transporte quedó en $162.000 mensuales.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 404 Not Found",
+      "timestamp": "2026-02-16T22:17:39.714Z"
+    }
+  ]
+}

@@ -3,12 +3,6 @@
   "regions": ["iad1"],
   "buildCommand": "npm run download-indices && npm run build",
   "devCommand": "npm run dev",
-  "installCommand": "npm install",
-  "functions": {
-    "app/api/rag/route.ts": { "maxDuration": 60 },
-    "app/api/analytics/route.ts": { "maxDuration": 15 },
-    "app/api/feedback/route.ts": { "maxDuration": 15 },
-    "app/api/health/route.ts": { "maxDuration": 10 }
-  }
+  "installCommand": "npm install"
 }
 

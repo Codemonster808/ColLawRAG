@@ -1,0 +1,25 @@
+{
+  "fecha": "2026-02-16",
+  "tipo": "baseline_real",
+  "accuracy_global_pct": 30,
+  "bug_critico_bloqueante": "HuggingFace API 402 - Credit balance depleted. DeepSeek V3.2 y Mistral fallback AMBOS fallan.",
+  "accuracy_real_sin_cache": "~0%",
+  "retrieval_embeddings": "OK",
+  "generacion_llm": "FALLA - HF 402",
+  "campo_area_en_indice": "areaLegal (deberia ser area para consistencia)",
+  "metricas_indice": {
+    "total_chunks": 12468,
+    "chunks_grandes_pct": 35.8,
+    "campo_area": "areaLegal"
+  },
+  "distribucion_area": {
+    "general": 17.3,
+    "comercial": 15.7,
+    "constitucional": 15.5,
+    "civil": 14.3,
+    "administrativo": 10.7,
+    "laboral": 10.3,
+    "penal": 8.3,
+    "tributario": 7.9
+  }
+}

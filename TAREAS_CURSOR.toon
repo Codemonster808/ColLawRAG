@@ -10,9 +10,10 @@ sprints[4]{numero,nombre,objetivo_accuracy,semana}:
   3,UX y conversión,Retención y conversión de usuarios,3-4
   4,Accuracy avanzado,85% → 92%+,4-6
 
-tareas[11]{id,sprint,prioridad,estado,titulo,archivo_principal,impacto,tiempo_estimado}:
+tareas[12]{id,sprint,prioridad,estado,titulo,archivo_principal,impacto,tiempo_estimado}:
+  CU-URGENTE,0,bloqueante,pendiente,Recargar créditos HuggingFace o cambiar proveedor LLM,lib/generation.ts,"Sistema sin generación - 0% accuracy real",30min
   CU-00,1,critico,pendiente,Fix endpoint evaluate-accuracy.mjs,scripts/evaluate-accuracy.mjs,Benchmark funcional,5min
-  CU-01,1,critico,pendiente,Fix metadata + parseFrontmatter en ingest.mjs,scripts/ingest.mjs,+20-25% accuracy,4h
+  CU-01,1,critico,pendiente,Fix field areaLegal→area en ingest.mjs,scripts/ingest.mjs,Consistencia metadata,2h
   CU-02,1,critico,pendiente,Reducir chunk size 3000→1000 chars,scripts/ingest.mjs,+8-12% precision retrieval,30min
   CU-03,2,comercial,pendiente,Migrar SQLite→Neon Postgres,"lib/auth.ts,lib/tiers.ts",Persistencia real en Vercel,2d
   CU-04,2,comercial,pendiente,Implementar NextAuth.js Google+email,app/api/auth/[...nextauth]/,Auth sin UUID headers,2d

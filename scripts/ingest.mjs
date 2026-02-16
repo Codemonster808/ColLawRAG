@@ -40,6 +40,27 @@ function guessTypeFromFilename(name) {
   return 'estatuto'
 }
 
+/**
+ * Parsea frontmatter YAML entre --- del contenido raw.
+ * Devuelve { area?, ... } para usar en metadata (retrieval filtra por metadata.area).
+ */
+function parseFrontmatter(raw) {
+  const match = raw.match(/^---\s*\n([\s\S]*?)\n---/)
+  if (!match) return {}
+  const block = match[1]
+  const out = {}
+  for (const line of block.split('\n')) {
+    const m = line.match(/^(\w[\w_-]*)\s*:\s*(.*)$/)
+    if (m) {
+      const key = m[1].trim().toLowerCase().replace(/_/g, '_')
+      const val = m[2].trim().replace(/^["']|["']$/g, '')
+      if (key === 'area' || key === 'area_legal') out.area = val
+      else out[m[1].trim()] = val
+    }
+  }
+  return out
+}
+
 function detectLegalAreaFromContent(title, content) {
   const text = (title + ' ' + content.substring(0, 2000)).toLowerCase()
   
@@ -79,6 +100,37 @@ function detectLegalAreaFromContent(title, content) {
   }
   
   return 'general'
+}
+
+/**
+ * Divide un texto en segmentos de máximo maxSize caracteres, con overlap de overlap chars.
+ * Respeta líneas; usa las últimas líneas como solapamiento entre segmentos.
+ */
+function splitTextBySize(text, maxSize = 1000, overlap = 150) {
+  if (!text || text.length <= maxSize) return [text]
+  const lines = text.split('\n')
+  const segments = []
+  let current = ''
+  let currentLength = 0
+  let overlapBuffer = []
+  for (const line of lines) {
+    const lineLength = line.length + 1 // +1 newline
+    if (currentLength + lineLength > maxSize && current.length > 0) {
+      if (overlapBuffer.length > 0) current += '\n' + overlapBuffer.join('\n')
+      segments.push(current)
+      const overlapText = overlapBuffer.join('\n')
+      current = overlapText + (overlapText ? '\n' : '') + line
+      currentLength = current.length
+      overlapBuffer = []
+    } else {
+      current += (current ? '\n' : '') + line
+      currentLength += line.length + 1
+      overlapBuffer.push(line)
+      if (overlapBuffer.length > 10) overlapBuffer.shift()
+    }
+  }
+  if (current.length > 0) segments.push(current)
+  return segments
 }
 
 function detectEntityFromFilename(name) {
@@ -204,7 +256,7 @@ function splitByArticles(content) {
   pushBuffer()
   
   // Función para dividir chunks muy grandes con overlap
-  function splitLargeChunk(chunk, maxSize = 3000, overlap = 200) {
+  function splitLargeChunk(chunk, maxSize = 1000, overlap = 150) {
     if (chunk.text.length <= maxSize) {
       return [chunk]
     }
@@ -275,9 +327,9 @@ function splitByArticles(content) {
       acc.text += '\n\n' + p.text
       acc.article = acc.article ? `${acc.article} y ${p.article}` : p.article
     } else {
-      // Dividir chunk grande antes de guardarlo
-      if (acc.text.length > 3000) {
-        const splits = splitLargeChunk(acc, 3000, 200)
+      // Dividir chunk grande antes de guardarlo (max 1000 chars, overlap 150)
+      if (acc.text.length > 1000) {
+        const splits = splitLargeChunk(acc, 1000, 150)
         merged.push(...splits)
       } else {
         merged.push(acc)
@@ -288,8 +340,8 @@ function splitByArticles(content) {
   
   // Procesar el último acumulador
   if (acc) {
-    if (acc.text.length > 3000) {
-      const splits = splitLargeChunk(acc, 3000, 200)
+    if (acc.text.length > 1000) {
+      const splits = splitLargeChunk(acc, 1000, 150)
       merged.push(...splits)
     } else {
       merged.push(acc)
@@ -416,13 +468,12 @@ async function main() {
   for (const file of files) {
     const full = path.join(DOCS_DIR, file)
     const raw = await fsp.readFile(full, 'utf-8')
+    const frontmatter = parseFrontmatter(raw)
     const title = extractTitle(raw, path.parse(file).name)
     const type = guessTypeFromFilename(file)
 
     const articleChunks = splitByArticles(raw)
     for (const part of articleChunks) {
-      const id = randomUUID()
-      
       // Construir jerarquía completa para mejor citación
       const articleHierarchy = []
       if (part.title) articleHierarchy.push(part.title)
@@ -430,8 +481,9 @@ async function main() {
       if (part.section) articleHierarchy.push(part.section)
       if (part.article) articleHierarchy.push(part.article)
       
-      // Detectar área legal y entidad emisora
-      const areaLegal = detectLegalAreaFromContent(title, part.text)
+      // Área: frontmatter tiene prioridad; si no, detección por contenido (retrieval filtra por metadata.area)
+      const areaDetected = detectLegalAreaFromContent(title, part.text)
+      const area = frontmatter.area || areaDetected || 'general'
       const entidadEmisora = detectEntityFromFilename(file)
       const fechaVigencia = extractVigenciaFromFilename(file)
       
@@ -443,13 +495,17 @@ async function main() {
         articleHierarchy: articleHierarchy.length > 0 ? articleHierarchy.join(' > ') : undefined,
         chapter: part.chapter,
         section: part.section,
-        areaLegal, // Nuevo: área legal detectada
-        entidadEmisora, // Nuevo: entidad que emitió la norma
-        fechaVigencia, // Nuevo: fecha aproximada de vigencia
+        area, // Para filtros en retrieval (antes areaLegal; frontmatter + detección)
+        entidadEmisora,
+        fechaVigencia,
         url: undefined,
         sourcePath: `data/documents/${file}`
       }
-      chunks.push({ id, content: part.text, metadata })
+      // Asegurar que ningún chunk supere 1000 caracteres (split con overlap 150)
+      const contentParts = part.text.length > 1000 ? splitTextBySize(part.text, 1000, 150) : [part.text]
+      for (const content of contentParts) {
+        chunks.push({ id: randomUUID(), content, metadata })
+      }
     }
   }
 

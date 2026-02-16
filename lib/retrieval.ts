@@ -208,11 +208,11 @@ function cosineSimilarity(a: number[], b: number[]) {
   return dot / (Math.sqrt(na) * Math.sqrt(nb) + 1e-8)
 }
 
-export async function retrieveRelevantChunks(query: string, filters?: RetrieveFilters, topK = 12): Promise<Array<{ chunk: DocumentChunk; score: number }>> {
+export async function retrieveRelevantChunks(query: string, filters?: RetrieveFilters, topK = 8): Promise<Array<{ chunk: DocumentChunk; score: number }>> {
   const queryEmbedding = await embedText(query)
   
   // Retrieve more chunks initially if re-ranking is enabled (to allow re-ranking to select best)
-  const initialTopK = USE_RERANKING ? Math.min(topK * 2, 30) : topK
+  const initialTopK = USE_RERANKING ? Math.min(topK * 2, 20) : topK
 
   let retrieved: Array<{ chunk: DocumentChunk; score: number }> = []
 

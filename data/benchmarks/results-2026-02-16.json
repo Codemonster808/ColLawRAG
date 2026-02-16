@@ -1,0 +1,149 @@
+{
+  "fecha": "2026-02-16",
+  "api_url": "https://col-law-rag.vercel.app",
+  "modelo_juez": "deepseek/deepseek-v3.2",
+  "resumen": {
+    "total_casos": 3,
+    "evaluados": 2,
+    "errores": 1,
+    "score_promedio": "4.60",
+    "accuracy_porcentaje": "46.0%"
+  },
+  "veredictos": {
+    "EXCELENTE": 1,
+    "INCORRECTO": 1
+  },
+  "promedio_criterios": {
+    "precision_normativa": "4.50",
+    "articulos_correctos": "4.50",
+    "interpretacion_valida": "5.00",
+    "completitud": "5.00",
+    "ausencia_alucinaciones": "4.00"
+  },
+  "por_area": {
+    "laboral": {
+      "promedio": "4.60",
+      "casos": 2,
+      "scores": [
+        9.2,
+        0
+      ]
+    }
+  },
+  "mejores_casos": [
+    {
+      "id": "LAB-001",
+      "area": "laboral",
+      "score": 9.2
+    },
+    {
+      "id": "LAB-002",
+      "area": "laboral",
+      "score": 0
+    }
+  ],
+  "peores_casos": [
+    {
+      "id": "LAB-002",
+      "area": "laboral",
+      "score": 0
+    },
+    {
+      "id": "LAB-001",
+      "area": "laboral",
+      "score": 9.2
+    }
+  ],
+  "alucinaciones_detectadas": [
+    {
+      "id": "LAB-001",
+      "alucinaciones": [
+        "Art. 190 CST (citado correctamente pero no era necesario para la pregunta específica)"
+      ]
+    },
+    {
+      "id": "LAB-002",
+      "alucinaciones": [
+        "Decreto 2114 de 2023",
+        "Artículo 132 del Código Sustantivo del Trabajo",
+        "Artículo 492 del Código Sustantivo del Trabajo",
+        "Código Penal (Ley 599 de 2000)"
+      ]
+    }
+  ],
+  "resultados_detallados": [
+    {
+      "id": "LAB-001",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuántos días de vacaciones tiene derecho un trabajador con un año de trabajo?",
+      "respuesta_referencia": "Según el artículo 186 del Código Sustantivo del Trabajo (CST), el trabajador tiene derecho a 15 días hábiles consecutivos de vacaciones remuneradas por cada año de servicio. Este derecho es irrenunciable según el artículo 189 del CST.",
+      "respuesta_rag": "**HECHOS RELEVANTES:**\nUn trabajador ha cumplido un año de servicio y desea conocer cuántos días de vacaciones tiene derecho a disfrutar.\n\n**NORMAS APLICABLES:**\n- **Código Sustantivo del Trabajo — Artículo 186. (Capítulo IV)** [4]:\n  1. Los trabajadores que hubieren prestado sus servicios durante un año tienen derecho a quince (15) días hábiles consecutivos de vacaciones remuneradas.\n  2. Los profesionales y ayudantes que trabajan en establecimientos privados dedicados a la lucha contra la tuberculosis, y los ocupados en la aplicación de rayos X, tienen derecho a gozar de quince (15) días de vacaciones remuneradas por cada seis (6) meses de servicios prestados.\n\n- **Código Sustantivo del Trabajo — Artículo 190. (Capítulo IV)** [1]:\n  1. En todo caso, el trabajador gozará anualmente, por lo menos de seis (6) días hábiles continuos de vacaciones, los que no son acumulables.\n  2. Las partes pueden convenir en acumular los días restantes de vacaciones hasta por dos años.\n  3. La acumulación puede ser hasta por cuatro (4) años, cuando se trate de trabajadores técnicos, especializados, de confianza, de manejo o de extranjeros que presten sus servicios en lugares distintos a los de la residencia de sus familiares.\n  4. Si el trabajador goza únicamente de seis (6) días de vacaciones en un año, se presume que acumula los días restantes de vacaciones a las posteriores, en términos del presente artículo.\n\n**ANÁLISIS JURÍDICO:**\nDe acuerdo con el **Artículo 186** del Código Sustantivo del Trabajo [4], un trabajador que ha prestado sus servicios durante un año tiene derecho a quince (15) días hábiles consecutivos de vacaciones remuneradas. Este derecho es claro y no admite interpretaciones alternativas. \n\nEl **Artículo 190** [1] establece que, en todo caso, el trabajador gozará anualmente de al menos seis (6) días hábiles continuos de vacaciones, los cuales no son acumulables. Sin embargo, este artículo también permite la acumulación de los días restantes de vacaciones hasta por dos años, y hasta por cuatro años en casos especiales. \n\nEn el caso específico de un trabajador con un año de servicio, el derecho a quince (15) días de vacaciones está garantizado por el **Artículo 186**. Por lo tanto, el trabajador tiene derecho a disfrutar de quince (15) días hábiles de vacaciones remuneradas.\n\n**CONCLUSIÓN:**\nEl trabajador que ha cumplido un año de servicio tiene derecho a quince (15) días hábiles consecutivos de vacaciones remuneradas, conforme al **Artículo 186** del Código Sustantivo del Trabajo.\n\n**RECOMENDACIÓN:**\n1. **Comunicación con el Empleador:** El trabajador debe comunicarse con su empleador para solicitar la programación de sus vacaciones, de acuerdo con el **Artículo 187** del Código Sustantivo del Trabajo [2], que establece que el empleador debe notificar con quince (15) días de anticipación la fecha en que se concederán las vacaciones.\n2. **Registro de Vacaciones:** El empleador debe llevar un registro especial de vacaciones, anotando la fecha de ingreso del trabajador, la fecha en que toma sus vacaciones y la fecha en que las termina, así como la remuneración recibida por las mismas, conforme al **Artículo 187** [2].\n3. **Liquidación de Vacaciones:** El trabajador debe asegurarse de que la liquidación de sus vacaciones se haga de acuerdo con el **Artículo 192** [3], que establece que durante el período de vacaciones, el trabajador recibirá el salario ordinario que esté devengando el día en que comience a disfrutar de ellas.",
+      "evaluacion": {
+        "precision_normativa": 9,
+        "articulos_correctos": 9,
+        "interpretacion_valida": 10,
+        "completitud": 10,
+        "ausencia_alucinaciones": 8,
+        "score_total": 9.2,
+        "veredicto": "EXCELENTE",
+        "normas_correctas": [
+          "Art. 186 CST"
+        ],
+        "normas_faltantes": [
+          "Art. 189 CST"
+        ],
+        "alucinaciones": [
+          "Art. 190 CST (citado correctamente pero no era necesario para la pregunta específica)"
+        ],
+        "comentario": "La respuesta del RAG es muy completa y precisa en el análisis del Art. 186 CST, pero omite mencionar el Art. 189 CST sobre la irrenunciabilidad que sí incluye el experto, e incluye información del Art. 190 que, aunque correcta, no era estrictamente necesaria para la pregunta concreta."
+      },
+      "error": null,
+      "timestamp": "2026-02-16T21:14:03.065Z"
+    },
+    {
+      "id": "LAB-002",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es el salario mínimo legal mensual vigente en Colombia para 2024?",
+      "respuesta_referencia": "Para el año 2024, el salario mínimo legal mensual vigente (SMLMV) en Colombia fue fijado en $1.300.000 mediante el Decreto 2613 de 2023, representando un incremento del 12% respecto al año anterior. Adicionalmente, el auxilio de transporte quedó en $162.000 mensuales.",
+      "respuesta_rag": "**HECHOS RELEVANTES:**\nEl consultante solicita conocer el salario mínimo legal mensual vigente en Colombia para el año 2024. Este dato es crucial para determinar las condiciones mínimas de remuneración que deben cumplir los empleadores en sus contratos de trabajo.\n\n**NORMAS APLICABLES:**\n- **Artículo 132 del Código Sustantivo del Trabajo** [1]: \"Todo trabajador tiene derecho a un salario mínimo legal.\"\n- **Artículo 492 del Código Sustantivo del Trabajo** [4]: \"Quedan vigentes las normas que regulan el salario mínimo.\"\n\n**ANÁLISIS JURÍDICO:**\nEl salario mínimo legal mensual en Colombia es un derecho fundamental establecido en el Código Sustantivo del Trabajo, específicamente en el Artículo 132, que garantiza a todos los trabajadores el derecho a recibir un salario mínimo legal. Este salario es revisado anualmente por el Gobierno Nacional a través de decretos, los cuales fijan el monto para el año siguiente.\n\nPara el año 2024, el salario mínimo legal mensual en Colombia fue fijado por el Decreto 2114 de 2023, que entró en vigor el 1 de enero de 2024. Según este decreto, el salario mínimo legal mensual para 2024 es de $1,160,000 COP (pesos colombianos).\n\n**CONCLUSIÓN:**\nEl salario mínimo legal mensual vigente en Colombia para el año 2024 es de $1,160,000 COP. Este monto es aplicable a todos los trabajadores en el país y debe ser respetado por los empleadores en sus contratos de trabajo.\n\n**RECOMENDACIÓN:**\n- **Verificar el Decreto 2114 de 2023**: Para confirmar el monto exacto del salario mínimo legal mensual para 2024, se recomienda consultar el Decreto 2114 de 2023 en el Diario Oficial o en la página web oficial del Gobierno Nacional.\n- **Actualizar Contratos de Trabajo**: Los empleadores deben asegurarse de que los contratos de trabajo y las nóminas reflejen el salario mínimo legal vigente para 2024.\n- **Consultar con un Abogado Laboralista**: En caso de dudas o necesidad de ajustes en los contratos de trabajo, se recomienda consultar con un abogado laboralista para garantizar el cumplimiento de la normativa vigente.\n\n⚠️ **Vigencia:** La norma \"Código Penal (Ley 599 de 2000)\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Código Penal (Ley 599 de 2000)\" tiene artículos derogados o modificados; verifique vigencia específica.",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 0,
+        "score_total": 0,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Decreto 2613 de 2023",
+          "Art. 145 CST"
+        ],
+        "alucinaciones": [
+          "Decreto 2114 de 2023",
+          "Artículo 132 del Código Sustantivo del Trabajo",
+          "Artículo 492 del Código Sustantivo del Trabajo",
+          "Código Penal (Ley 599 de 2000)"
+        ],
+        "comentario": "La respuesta del RAG es completamente incorrecta: menciona un decreto y monto equivocados ($1,160,000 y Decreto 2114/2023), inventa normas no solicitadas, y omite por completo el dato correcto ($1.300.000), la norma aplicable (Decreto 2613/2023) y el auxilio de transporte."
+      },
+      "error": null,
+      "timestamp": "2026-02-16T21:15:04.093Z"
+    }
+  ],
+  "errores": [
+    {
+      "id": "LAB-003",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuándo procede el despido sin justa causa y cuál es la indemnización?",
+      "respuesta_referencia": "Según el artículo 64 del CST, el empleador puede terminar el contrato sin justa causa pagando indemnización. Para contratos a término indefinido con trabajadores que ganen menos de 10 SMLMV: 30 días por el primer año y 20 días adicionales por cada año posterior. Para trabajadores con más de 10 SMLMV: 20 días por el primer año y 15 adicionales por cada año. El artículo 26 del Decreto 2351/65 modificó esta figura.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: The operation was aborted due to timeout",
+      "timestamp": "2026-02-16T21:15:34.604Z"
+    }
+  ]
+}
