@@ -402,12 +402,25 @@ async function embedBatch(texts) {
   }
   const { HfInference } = await import('@huggingface/inference')
   const model = process.env.HF_EMBEDDING_MODEL || 'sentence-transformers/paraphrase-multilingual-mpnet-base-v2'
-  // Use the new router endpoint instead of the deprecated api-inference endpoint
   const hf = new HfInference(process.env.HUGGINGFACE_API_KEY, {
     endpoint: 'https://router.huggingface.co'
   })
-  const out = await hf.featureExtraction({ model, inputs: texts })
-  return out
+  const maxRetries = 3
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      const out = await hf.featureExtraction({ model, inputs: texts })
+      return out
+    } catch (err) {
+      const is5xx = err?.httpResponse?.status >= 500 || err?.message?.includes('500')
+      if (is5xx && attempt < maxRetries) {
+        const delay = attempt * 8000
+        console.warn(`\n⚠️  HF API error (intento ${attempt}/${maxRetries}), reintento en ${delay / 1000}s...`)
+        await new Promise(r => setTimeout(r, delay))
+      } else {
+        throw err
+      }
+    }
+  }
 }
 
 async function upsertPinecone(chunks) {

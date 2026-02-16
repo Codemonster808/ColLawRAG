@@ -1,0 +1,35 @@
+{
+  "fecha": "2026-02-16",
+  "tarea": "OC-C7",
+  "modelo": "deepseek/deepseek-v3-0324 via novita",
+  "servidor": "localhost:3001",
+  "resultados": [
+    {
+      "id": "Q1",
+      "area": "laboral",
+      "estado": "OK",
+      "tiempo_ms": 24201,
+      "citas": 12
+    },
+    {
+      "id": "Q2",
+      "area": "administrativo",
+      "estado": "OK",
+      "tiempo_ms": 19929,
+      "citas": 12
+    },
+    {
+      "id": "Q3",
+      "area": "civil",
+      "estado": "TIMEOUT",
+      "tiempo_ms": 35000,
+      "citas": 0
+    }
+  ],
+  "resumen": {
+    "exitosas": 2,
+    "fallidas": 1,
+    "tiempo_promedio_ms": 22065,
+    "observacion": "Retrieval OK. DeepSeek genera respuestas estructuradas de calidad. Q3 timeout por carga HF."
+  }
+}

@@ -3,30 +3,32 @@
   "api_url": "https://col-law-rag.vercel.app",
   "modelo_juez": "deepseek/deepseek-v3.2",
   "resumen": {
-    "total_casos": 3,
-    "evaluados": 2,
-    "errores": 1,
-    "score_promedio": "4.60",
-    "accuracy_porcentaje": "46.0%"
+    "total_casos": 5,
+    "evaluados": 3,
+    "errores": 2,
+    "score_promedio": "4.27",
+    "accuracy_porcentaje": "42.7%"
   },
   "veredictos": {
-    "EXCELENTE": 1,
-    "INCORRECTO": 1
+    "BUENO": 1,
+    "INCORRECTO": 1,
+    "DEFICIENTE": 1
   },
   "promedio_criterios": {
-    "precision_normativa": "4.50",
-    "articulos_correctos": "4.50",
-    "interpretacion_valida": "5.00",
-    "completitud": "5.00",
-    "ausencia_alucinaciones": "4.00"
+    "precision_normativa": "4.33",
+    "articulos_correctos": "4.00",
+    "interpretacion_valida": "4.33",
+    "completitud": "5.67",
+    "ausencia_alucinaciones": "3.00"
   },
   "por_area": {
     "laboral": {
-      "promedio": "4.60",
-      "casos": 2,
+      "promedio": "4.27",
+      "casos": 3,
       "scores": [
-        9.2,
-        0
+        8.6,
+        1.8,
+        2.4
       ]
     }
   },
@@ -34,39 +36,60 @@
     {
       "id": "LAB-001",
       "area": "laboral",
-      "score": 9.2
+      "score": 8.6
+    },
+    {
+      "id": "LAB-005",
+      "area": "laboral",
+      "score": 2.4
     },
     {
       "id": "LAB-002",
       "area": "laboral",
-      "score": 0
+      "score": 1.8
     }
   ],
   "peores_casos": [
     {
       "id": "LAB-002",
       "area": "laboral",
-      "score": 0
+      "score": 1.8
+    },
+    {
+      "id": "LAB-005",
+      "area": "laboral",
+      "score": 2.4
     },
     {
       "id": "LAB-001",
       "area": "laboral",
-      "score": 9.2
+      "score": 8.6
     }
   ],
   "alucinaciones_detectadas": [
     {
       "id": "LAB-001",
       "alucinaciones": [
-        "Art. 190 CST (citado correctamente pero no era necesario para la pregunta específica)"
+        "Art. 187 CST (aunque existe, no era necesario para la pregunta específica y su inclusión puede distraer)"
       ]
     },
     {
       "id": "LAB-002",
       "alucinaciones": [
-        "Decreto 2114 de 2023",
-        "Artículo 132 del Código Sustantivo del Trabajo",
-        "Artículo 492 del Código Sustantivo del Trabajo",
+        "Decreto 2614 de 2023",
+        "Artículo 132 del CST (no aplica directamente)",
+        "Artículo 142 del CST (no aplica directamente)",
+        "Artículo 492 del CST (no aplica directamente)",
+        "Código Penal (Ley 599 de 2000) (irrelevante)"
+      ]
+    },
+    {
+      "id": "LAB-005",
+      "alucinaciones": [
+        "Código Sustantivo del Trabajo — Artículo 65",
+        "Código Sustantivo del Trabajo — Artículo 213",
+        "Código Sustantivo del Trabajo — Artículo 227",
+        "Ley 100 de 1993 — Artículos 161 y 162",
         "Código Penal (Ley 599 de 2000)"
       ]
     }
@@ -78,15 +101,15 @@
       "dificultad": "basico",
       "pregunta": "¿Cuántos días de vacaciones tiene derecho un trabajador con un año de trabajo?",
       "respuesta_referencia": "Según el artículo 186 del Código Sustantivo del Trabajo (CST), el trabajador tiene derecho a 15 días hábiles consecutivos de vacaciones remuneradas por cada año de servicio. Este derecho es irrenunciable según el artículo 189 del CST.",
-      "respuesta_rag": "**HECHOS RELEVANTES:**\nUn trabajador ha cumplido un año de servicio y desea conocer cuántos días de vacaciones tiene derecho a disfrutar.\n\n**NORMAS APLICABLES:**\n- **Código Sustantivo del Trabajo — Artículo 186. (Capítulo IV)** [4]:\n  1. Los trabajadores que hubieren prestado sus servicios durante un año tienen derecho a quince (15) días hábiles consecutivos de vacaciones remuneradas.\n  2. Los profesionales y ayudantes que trabajan en establecimientos privados dedicados a la lucha contra la tuberculosis, y los ocupados en la aplicación de rayos X, tienen derecho a gozar de quince (15) días de vacaciones remuneradas por cada seis (6) meses de servicios prestados.\n\n- **Código Sustantivo del Trabajo — Artículo 190. (Capítulo IV)** [1]:\n  1. En todo caso, el trabajador gozará anualmente, por lo menos de seis (6) días hábiles continuos de vacaciones, los que no son acumulables.\n  2. Las partes pueden convenir en acumular los días restantes de vacaciones hasta por dos años.\n  3. La acumulación puede ser hasta por cuatro (4) años, cuando se trate de trabajadores técnicos, especializados, de confianza, de manejo o de extranjeros que presten sus servicios en lugares distintos a los de la residencia de sus familiares.\n  4. Si el trabajador goza únicamente de seis (6) días de vacaciones en un año, se presume que acumula los días restantes de vacaciones a las posteriores, en términos del presente artículo.\n\n**ANÁLISIS JURÍDICO:**\nDe acuerdo con el **Artículo 186** del Código Sustantivo del Trabajo [4], un trabajador que ha prestado sus servicios durante un año tiene derecho a quince (15) días hábiles consecutivos de vacaciones remuneradas. Este derecho es claro y no admite interpretaciones alternativas. \n\nEl **Artículo 190** [1] establece que, en todo caso, el trabajador gozará anualmente de al menos seis (6) días hábiles continuos de vacaciones, los cuales no son acumulables. Sin embargo, este artículo también permite la acumulación de los días restantes de vacaciones hasta por dos años, y hasta por cuatro años en casos especiales. \n\nEn el caso específico de un trabajador con un año de servicio, el derecho a quince (15) días de vacaciones está garantizado por el **Artículo 186**. Por lo tanto, el trabajador tiene derecho a disfrutar de quince (15) días hábiles de vacaciones remuneradas.\n\n**CONCLUSIÓN:**\nEl trabajador que ha cumplido un año de servicio tiene derecho a quince (15) días hábiles consecutivos de vacaciones remuneradas, conforme al **Artículo 186** del Código Sustantivo del Trabajo.\n\n**RECOMENDACIÓN:**\n1. **Comunicación con el Empleador:** El trabajador debe comunicarse con su empleador para solicitar la programación de sus vacaciones, de acuerdo con el **Artículo 187** del Código Sustantivo del Trabajo [2], que establece que el empleador debe notificar con quince (15) días de anticipación la fecha en que se concederán las vacaciones.\n2. **Registro de Vacaciones:** El empleador debe llevar un registro especial de vacaciones, anotando la fecha de ingreso del trabajador, la fecha en que toma sus vacaciones y la fecha en que las termina, así como la remuneración recibida por las mismas, conforme al **Artículo 187** [2].\n3. **Liquidación de Vacaciones:** El trabajador debe asegurarse de que la liquidación de sus vacaciones se haga de acuerdo con el **Artículo 192** [3], que establece que durante el período de vacaciones, el trabajador recibirá el salario ordinario que esté devengando el día en que comience a disfrutar de ellas.",
+      "respuesta_rag": "**HECHOS RELEVANTES:**\nUn trabajador ha cumplido un año de servicio y desea conocer cuántos días de vacaciones tiene derecho a disfrutar.\n\n**NORMAS APLICABLES:**\n- **Código Sustantivo del Trabajo — Artículo 186. (Capítulo IV)** [4]:\n  1. Los trabajadores que hubieren prestado sus servicios durante un año tienen derecho a quince (15) días hábiles consecutivos de vacaciones remuneradas.\n  2. Los profesionales y ayudantes que trabajan en establecimientos privados dedicados a la lucha contra la tuberculosis, y los ocupados en la aplicación de rayos X, tienen derecho a gozar de quince (15) días de vacaciones remuneradas por cada seis (6) meses de servicios prestados.\n\n**ANÁLISIS JURÍDICO:**\nDe acuerdo con el **Artículo 186** del Código Sustantivo del Trabajo [4], los trabajadores que han prestado sus servicios durante un año tienen derecho a quince (15) días hábiles consecutivos de vacaciones remuneradas. Este derecho es ineludible y debe ser concedido por el empleador dentro del año subsiguiente a la finalización del primer año de servicio, conforme a lo dispuesto en el **Artículo 187** del mismo código [2].\n\n**CONCLUSIÓN:**\nEl trabajador que ha cumplido un año de servicio tiene derecho a quince (15) días hábiles consecutivos de vacaciones remuneradas.\n\n**RECOMENDACIÓN:**\n- El trabajador debe solicitar formalmente sus vacaciones al empleador, preferiblemente por escrito, para dejar constancia de la solicitud.\n- El empleador debe comunicar con quince (15) días de anticipación la fecha en que se concederán las vacaciones, de acuerdo con el **Artículo 187** del Código Sustantivo del Trabajo [2].\n- Es recomendable que el trabajador revise el registro especial de vacaciones que debe llevar el empleador, según el **Artículo 187** [2], para asegurarse de que su información esté actualizada y correcta.\n- Si el empleador no concede las vacaciones de manera oportuna, el trabajador puede presentar una queja ante el Ministerio del Trabajo.",
       "evaluacion": {
-        "precision_normativa": 9,
-        "articulos_correctos": 9,
+        "precision_normativa": 8,
+        "articulos_correctos": 8,
         "interpretacion_valida": 10,
         "completitud": 10,
-        "ausencia_alucinaciones": 8,
-        "score_total": 9.2,
-        "veredicto": "EXCELENTE",
+        "ausencia_alucinaciones": 7,
+        "score_total": 8.6,
+        "veredicto": "BUENO",
         "normas_correctas": [
           "Art. 186 CST"
         ],
@@ -94,12 +117,12 @@
           "Art. 189 CST"
         ],
         "alucinaciones": [
-          "Art. 190 CST (citado correctamente pero no era necesario para la pregunta específica)"
+          "Art. 187 CST (aunque existe, no era necesario para la pregunta específica y su inclusión puede distraer)"
         ],
-        "comentario": "La respuesta del RAG es muy completa y precisa en el análisis del Art. 186 CST, pero omite mencionar el Art. 189 CST sobre la irrenunciabilidad que sí incluye el experto, e incluye información del Art. 190 que, aunque correcta, no era estrictamente necesaria para la pregunta concreta."
+        "comentario": "La respuesta del RAG es precisa en el contenido central (15 días hábiles por año según Art. 186 CST) y ofrece un análisis detallado, pero omite mencionar el Art. 189 CST sobre la irrenunciabilidad del derecho, que sí incluye la respuesta experta."
       },
       "error": null,
-      "timestamp": "2026-02-16T21:14:03.065Z"
+      "timestamp": "2026-02-16T22:50:59.531Z"
     },
     {
       "id": "LAB-002",
@@ -107,14 +130,14 @@
       "dificultad": "basico",
       "pregunta": "¿Cuál es el salario mínimo legal mensual vigente en Colombia para 2024?",
       "respuesta_referencia": "Para el año 2024, el salario mínimo legal mensual vigente (SMLMV) en Colombia fue fijado en $1.300.000 mediante el Decreto 2613 de 2023, representando un incremento del 12% respecto al año anterior. Adicionalmente, el auxilio de transporte quedó en $162.000 mensuales.",
-      "respuesta_rag": "**HECHOS RELEVANTES:**\nEl consultante solicita conocer el salario mínimo legal mensual vigente en Colombia para el año 2024. Este dato es crucial para determinar las condiciones mínimas de remuneración que deben cumplir los empleadores en sus contratos de trabajo.\n\n**NORMAS APLICABLES:**\n- **Artículo 132 del Código Sustantivo del Trabajo** [1]: \"Todo trabajador tiene derecho a un salario mínimo legal.\"\n- **Artículo 492 del Código Sustantivo del Trabajo** [4]: \"Quedan vigentes las normas que regulan el salario mínimo.\"\n\n**ANÁLISIS JURÍDICO:**\nEl salario mínimo legal mensual en Colombia es un derecho fundamental establecido en el Código Sustantivo del Trabajo, específicamente en el Artículo 132, que garantiza a todos los trabajadores el derecho a recibir un salario mínimo legal. Este salario es revisado anualmente por el Gobierno Nacional a través de decretos, los cuales fijan el monto para el año siguiente.\n\nPara el año 2024, el salario mínimo legal mensual en Colombia fue fijado por el Decreto 2114 de 2023, que entró en vigor el 1 de enero de 2024. Según este decreto, el salario mínimo legal mensual para 2024 es de $1,160,000 COP (pesos colombianos).\n\n**CONCLUSIÓN:**\nEl salario mínimo legal mensual vigente en Colombia para el año 2024 es de $1,160,000 COP. Este monto es aplicable a todos los trabajadores en el país y debe ser respetado por los empleadores en sus contratos de trabajo.\n\n**RECOMENDACIÓN:**\n- **Verificar el Decreto 2114 de 2023**: Para confirmar el monto exacto del salario mínimo legal mensual para 2024, se recomienda consultar el Decreto 2114 de 2023 en el Diario Oficial o en la página web oficial del Gobierno Nacional.\n- **Actualizar Contratos de Trabajo**: Los empleadores deben asegurarse de que los contratos de trabajo y las nóminas reflejen el salario mínimo legal vigente para 2024.\n- **Consultar con un Abogado Laboralista**: En caso de dudas o necesidad de ajustes en los contratos de trabajo, se recomienda consultar con un abogado laboralista para garantizar el cumplimiento de la normativa vigente.\n\n⚠️ **Vigencia:** La norma \"Código Penal (Ley 599 de 2000)\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Código Penal (Ley 599 de 2000)\" tiene artículos derogados o modificados; verifique vigencia específica.",
+      "respuesta_rag": "**HECHOS RELEVANTES:**\nEl consultante solicita conocer el salario mínimo legal mensual vigente en Colombia para el año 2024. Este dato es crucial para determinar si los trabajadores están recibiendo una remuneración conforme a la ley.\n\n**NORMAS APLICABLES:**\n1. **Código Sustantivo del Trabajo - Decreto Ley 2663 de 1950 y Decreto Ley 3743 de 1950** [1]:\n   - **Artículo 132:** Todo trabajador tiene derecho a un salario mínimo legal.\n   - **Artículo 142:** Salarios se pagan por períodos iguales y vencidos (mensual, quincenal, semanal).\n\n2. **Código Sustantivo del Trabajo — Artículo 492. (Capítulo II)** [4]:\n   - **Artículo 492:** Quedan vigentes las normas que regulan el salario mínimo.\n\n**ANÁLISIS JURÍDICO:**\nEl Código Sustantivo del Trabajo establece en el **Artículo 132** que todo trabajador tiene derecho a un salario mínimo legal. Este salario mínimo es un derecho fundamental que garantiza un nivel de vida adecuado para el trabajador y su familia. El **Artículo 142** del mismo código especifica que los salarios deben pagarse por períodos iguales y vencidos, lo que incluye el salario mínimo.\n\nPara el año 2024, el salario mínimo legal mensual en Colombia fue fijado por el **Decreto 2614 de 2023**, el cual estableció que el salario mínimo legal mensual para 2024 es de **1,160,000 pesos colombianos**. Este decreto es emitido anualmente por el Gobierno Nacional y debe ser consultado para obtener la cifra exacta y actualizada.\n\n**CONCLUSIÓN:**\nEl salario mínimo legal mensual vigente en Colombia para el año 2024 es de **1,160,000 pesos colombianos**. Este monto está establecido por el **Decreto 2614 de 2023** y es aplicable a todos los trabajadores en el país, garantizando un nivel de vida adecuado.\n\n**RECOMENDACIÓN:**\n1. **Consulta el Decreto 2614 de 2023**: Para confirmar la cifra exacta del salario mínimo legal mensual para 2024, es recomendable consultar el **Decreto 2614 de 2023** en el Diario Oficial o en la página web oficial del Gobierno Nacional.\n2. **Verifica la remuneración**: Asegúrate de que tu remuneración o la de tus empleados cumpla con el salario mínimo legal vigente.\n3. **Documentación**: Mantén registros actualizados de los salarios pagados para evitar sanciones legales.\n4. **Asesoría Legal**: En caso de dudas o conflictos, consulta con un abogado laboralista para garantizar el cumplimiento de la normativa laboral.\n\n⚠️ **Vigencia:** La norma \"Código Penal (Ley 599 de 2000)\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Código Penal (Ley 599 de 2000)\" tiene artículos derogados o modificados; verifique vigencia específica.",
       "evaluacion": {
-        "precision_normativa": 0,
-        "articulos_correctos": 0,
-        "interpretacion_valida": 0,
-        "completitud": 0,
-        "ausencia_alucinaciones": 0,
-        "score_total": 0,
+        "precision_normativa": 2,
+        "articulos_correctos": 2,
+        "interpretacion_valida": 1,
+        "completitud": 3,
+        "ausencia_alucinaciones": 1,
+        "score_total": 1.8,
         "veredicto": "INCORRECTO",
         "normas_correctas": [],
         "normas_faltantes": [
@@ -122,15 +145,50 @@
           "Art. 145 CST"
         ],
         "alucinaciones": [
-          "Decreto 2114 de 2023",
-          "Artículo 132 del Código Sustantivo del Trabajo",
-          "Artículo 492 del Código Sustantivo del Trabajo",
-          "Código Penal (Ley 599 de 2000)"
+          "Decreto 2614 de 2023",
+          "Artículo 132 del CST (no aplica directamente)",
+          "Artículo 142 del CST (no aplica directamente)",
+          "Artículo 492 del CST (no aplica directamente)",
+          "Código Penal (Ley 599 de 2000) (irrelevante)"
         ],
-        "comentario": "La respuesta del RAG es completamente incorrecta: menciona un decreto y monto equivocados ($1,160,000 y Decreto 2114/2023), inventa normas no solicitadas, y omite por completo el dato correcto ($1.300.000), la norma aplicable (Decreto 2613/2023) y el auxilio de transporte."
+        "comentario": "La respuesta del RAG es incorrecta en su núcleo: cita un decreto inexistente (2614/2023) y un monto erróneo ($1.160.000), omitiendo por completo la norma correcta (Decreto 2613/2023), la cifra exacta ($1.300.000) y el auxilio de transporte."
       },
       "error": null,
-      "timestamp": "2026-02-16T21:15:04.093Z"
+      "timestamp": "2026-02-16T22:51:35.002Z"
+    },
+    {
+      "id": "LAB-005",
+      "area": "laboral",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cómo se calcula la liquidación de un trabajador que lleva 3 años y gana $2.000.000?",
+      "respuesta_referencia": "Para un trabajador con 3 años de antigüedad y salario de $2.000.000: (1) Cesantías: $2.000.000 × 3 años = $6.000.000; (2) Intereses sobre cesantías: $6.000.000 × 12% = $720.000; (3) Prima de servicios: $2.000.000 × 3 meses/12 = $500.000 (proporcional al último semestre); (4) Vacaciones: 15 días × $66.667/día = $1.000.000 (proporcional); (5) Si el auxilio de transporte aplica ($162.000/mes). El total aproximado antes de descuentos sería $8.220.000 más el auxilio de transporte proporcional.",
+      "respuesta_rag": "**HECHOS RELEVANTES:**\nUn trabajador que lleva 3 años en una empresa y gana $2.000.000 mensuales ha finalizado su relación laboral. Se requiere calcular la liquidación correspondiente.\n\n**NORMAS APLICABLES:**\n1. **Código Sustantivo del Trabajo — Artículo 65. (Capítulo VI)**: Regula las indemnizaciones por retardo en el pago de salarios y prestaciones al término del contrato.\n2. **Código Sustantivo del Trabajo — Artículo 213. (Capítulo II)**: Aunque no es directamente aplicable a la liquidación de finiquito, regula las prestaciones por muerte.\n3. **Código Sustantivo del Trabajo — Artículo 227. (Capítulo III)**: Regula el auxilio por incapacidad no profesional.\n4. **Ley 100 de 1993 — Artículos 161 y 162**: Establecen las prestaciones económicas a favor del trabajador, incluyendo cesantías, intereses de cesantías, prima de servicios, y vacaciones no disfrutadas.\n\n**ANÁLISIS JURÍDICO:**\n1. **Cesantías**: Según el **Artículo 161 de la Ley 100 de 1993**, las cesantías se calculan como un mes de salario por cada año de servicio. Para 3 años de servicio, el trabajador tiene derecho a 3 meses de salario, es decir, $6.000.000.\n2. **Intereses de Cesantías**: Según el **Artículo 162 de la Ley 100 de 1993**, los intereses de cesantías se calculan sobre la base de la tasa legal vigente al momento del pago. Para simplificar, si consideramos una tasa del 12% anual, los intereses serían $720.000 (12% de $6.000.000).\n3. **Prima de Servicios**: La prima de servicios se calcula como un mes de salario por cada año de servicio, similar a las cesantías. Para 3 años, el trabajador tiene derecho a 3 meses de salario, es decir, $6.000.000.\n4. **Vacaciones No Disfrutadas**: Si el trabajador no ha disfrutado sus vacaciones, tiene derecho a una indemnización equivalente a un mes de salario por cada año de servicio. Para 3 años, el trabajador tiene derecho a 3 meses de salario, es decir, $6.000.000.\n5. **Indemnización por Retardo**: Si el empleador no paga a tiempo, según el **Artículo 65 del Código Sustantivo del Trabajo**, debe pagar una indemnización igual al último salario diario por cada día de retardo, hasta por 24 meses.\n\n**CONCLUSIÓN:**\nLa liquidación del trabajador que lleva 3 años y gana $2.000.000 mensuales incluye:\n- Cesantías: $6.000.000\n- Intereses de Cesantías: $720.000\n- Prima de Servicios: $6.000.000\n- Vacaciones No Disfrutadas: $6.000.000\n- Total: $18.720.000\n\n**RECOMENDACIÓN:**\n1. **Verificar Documentación**: El trabajador debe revisar su contrato laboral y cualquier acuerdo adicional que pueda afectar la liquidación.\n2. **Solicitar Liquidación Formal**: El trabajador debe solicitar formalmente al empleador la liquidación de sus prestaciones.\n3. **Plazo de Pago**: El empleador debe realizar el pago de la liquidación dentro de los 15 días siguientes a la terminación del contrato, de lo contrario, incurrirá en la obligación de pagar la indemnización por retardo.\n4. **Reclamación Judicial**: Si el empleador no paga dentro del plazo, el trabajador puede iniciar un proceso judicial para reclamar sus derechos.\n5. **Asesoría Legal**: Es recomendable que el trabajador consulte con un abogado laboralista para garantizar que todos sus derechos sean respetados y para manejar cualquier disputa que pueda surgir.\n\n⚠️ **Vigencia:** La norma \"Código Penal (Ley 599 de 2000)\" tiene artículos derogados o modificados; verifique vigencia específica.",
+      "evaluacion": {
+        "precision_normativa": 3,
+        "articulos_correctos": 2,
+        "interpretacion_valida": 2,
+        "completitud": 4,
+        "ausencia_alucinaciones": 1,
+        "score_total": 2.4,
+        "veredicto": "DEFICIENTE",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 249 CST",
+          "Art. 306 CST",
+          "Art. 186 CST",
+          "Ley 52/1975"
+        ],
+        "alucinaciones": [
+          "Código Sustantivo del Trabajo — Artículo 65",
+          "Código Sustantivo del Trabajo — Artículo 213",
+          "Código Sustantivo del Trabajo — Artículo 227",
+          "Ley 100 de 1993 — Artículos 161 y 162",
+          "Código Penal (Ley 599 de 2000)"
+        ],
+        "comentario": "La respuesta del RAG contiene graves errores normativos y alucinaciones, citando leyes incorrectas y aplicando fórmulas erróneas para prima y vacaciones, lo que genera un cálculo total muy superior al correcto."
+      },
+      "error": null,
+      "timestamp": "2026-02-16T22:54:10.220Z"
     }
   ],
   "errores": [
@@ -143,7 +201,18 @@
       "respuesta_rag": null,
       "evaluacion": null,
       "error": "RAG error: The operation was aborted due to timeout",
-      "timestamp": "2026-02-16T21:15:34.604Z"
+      "timestamp": "2026-02-16T22:52:06.214Z"
+    },
+    {
+      "id": "LAB-004",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el fuero de maternidad y qué protección ofrece?",
+      "respuesta_referencia": "El fuero de maternidad, consagrado en el artículo 239 del CST y desarrollado por la Sentencia C-005 de 2017 de la Corte Constitucional, prohíbe el despido de la trabajadora embarazada o en período de lactancia sin la autorización previa del Inspector de Trabajo. Si se despide sin autorización, el despido es ineficaz y la trabajadora tiene derecho a ser reintegrada y al pago de salarios y prestaciones dejados de percibir. La protección aplica incluso en contratos a término fijo y de obra.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: The operation was aborted due to timeout",
+      "timestamp": "2026-02-16T22:53:08.218Z"
     }
   ]
 }

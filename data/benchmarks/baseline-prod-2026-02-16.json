@@ -1,0 +1,160 @@
+{
+  "fecha": "2026-02-16",
+  "api_url": "https://col-law-rag.vercel.app",
+  "modelo_juez": "deepseek/deepseek-v3.2",
+  "resumen": {
+    "total_casos": 5,
+    "evaluados": 2,
+    "errores": 3,
+    "score_promedio": "5.90",
+    "accuracy_porcentaje": "59.0%"
+  },
+  "veredictos": {
+    "EXCELENTE": 1,
+    "INCORRECTO": 1
+  },
+  "promedio_criterios": {
+    "precision_normativa": "6.00",
+    "articulos_correctos": "6.00",
+    "interpretacion_valida": "5.50",
+    "completitud": "6.50",
+    "ausencia_alucinaciones": "5.50"
+  },
+  "por_area": {
+    "laboral": {
+      "promedio": "5.90",
+      "casos": 2,
+      "scores": [
+        10,
+        1.8
+      ]
+    }
+  },
+  "mejores_casos": [
+    {
+      "id": "LAB-001",
+      "area": "laboral",
+      "score": 10
+    },
+    {
+      "id": "LAB-002",
+      "area": "laboral",
+      "score": 1.8
+    }
+  ],
+  "peores_casos": [
+    {
+      "id": "LAB-002",
+      "area": "laboral",
+      "score": 1.8
+    },
+    {
+      "id": "LAB-001",
+      "area": "laboral",
+      "score": 10
+    }
+  ],
+  "alucinaciones_detectadas": [
+    {
+      "id": "LAB-002",
+      "alucinaciones": [
+        "Decreto 2154 de 2023",
+        "Código Penal (Ley 599 de 2000)"
+      ]
+    }
+  ],
+  "resultados_detallados": [
+    {
+      "id": "LAB-001",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuántos días de vacaciones tiene derecho un trabajador con un año de trabajo?",
+      "respuesta_referencia": "Según el artículo 186 del Código Sustantivo del Trabajo (CST), el trabajador tiene derecho a 15 días hábiles consecutivos de vacaciones remuneradas por cada año de servicio. Este derecho es irrenunciable según el artículo 189 del CST.",
+      "respuesta_rag": "**HECHOS RELEVANTES:**\nUn trabajador ha cumplido un año de servicio y desea conocer cuántos días de vacaciones tiene derecho a disfrutar.\n\n**NORMAS APLICABLES:**\n- **Código Sustantivo del Trabajo — Artículo 186. (Capítulo IV)** [4]:\n  1. Los trabajadores que hubieren prestado sus servicios durante un año tienen derecho a quince (15) días hábiles consecutivos de vacaciones remuneradas.\n  2. Los profesionales y ayudantes que trabajan en establecimientos privados dedicados a la lucha contra la tuberculosis, y los ocupados en la aplicación de rayos X, tienen derecho a gozar de quince (15) días de vacaciones remuneradas por cada seis (6) meses de servicios prestados.\n\n**ANÁLISIS JURÍDICO:**\nDe acuerdo con el **Artículo 186** del Código Sustantivo del Trabajo [4], los trabajadores que han prestado sus servicios durante un año tienen derecho a quince (15) días hábiles consecutivos de vacaciones remuneradas. Este derecho es ineludible y debe ser concedido por el empleador dentro del año subsiguiente a la finalización del primer año de servicio, conforme a lo dispuesto en el **Artículo 187** del mismo código [2].\n\n**CONCLUSIÓN:**\nEl trabajador que ha cumplido un año de servicio tiene derecho a quince (15) días hábiles consecutivos de vacaciones remuneradas.\n\n**RECOMENDACIÓN:**\n- El trabajador debe solicitar formalmente sus vacaciones al empleador, preferiblemente por escrito, para dejar constancia de la solicitud.\n- El empleador debe comunicar con quince (15) días de anticipación la fecha en que se concederán las vacaciones, de acuerdo con el **Artículo 187** del Código Sustantivo del Trabajo [2].\n- Es recomendable que el trabajador revise el registro especial de vacaciones que debe mantener el empleador, según lo establece el **Artículo 187** [2], para asegurarse de que su información esté actualizada y correcta.\n- Si el empleador no concede las vacaciones en el plazo legal, el trabajador puede presentar una queja ante el Ministerio del Trabajo.",
+      "evaluacion": {
+        "precision_normativa": 10,
+        "articulos_correctos": 10,
+        "interpretacion_valida": 10,
+        "completitud": 10,
+        "ausencia_alucinaciones": 10,
+        "score_total": 10,
+        "veredicto": "EXCELENTE",
+        "normas_correctas": [
+          "Art. 186 CST",
+          "Art. 187 CST"
+        ],
+        "normas_faltantes": [],
+        "alucinaciones": [],
+        "comentario": "La respuesta del RAG es completa y precisa, menciona correctamente los 15 días hábiles del artículo 186 CST por año de servicio, y además incluye información adicional relevante sobre el procedimiento sin inventar normas."
+      },
+      "error": null,
+      "timestamp": "2026-02-16T22:26:15.147Z"
+    },
+    {
+      "id": "LAB-002",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es el salario mínimo legal mensual vigente en Colombia para 2024?",
+      "respuesta_referencia": "Para el año 2024, el salario mínimo legal mensual vigente (SMLMV) en Colombia fue fijado en $1.300.000 mediante el Decreto 2613 de 2023, representando un incremento del 12% respecto al año anterior. Adicionalmente, el auxilio de transporte quedó en $162.000 mensuales.",
+      "respuesta_rag": "**HECHOS RELEVANTES:**\nEl consultante solicita conocer el salario mínimo legal mensual vigente en Colombia para el año 2024. Este dato es crucial para determinar las condiciones mínimas de remuneración que deben cumplir los empleadores en sus contratos de trabajo.\n\n**NORMAS APLICABLES:**\n- **Artículo 132 del Código Sustantivo del Trabajo** [1]: \"Todo trabajador tiene derecho a un salario mínimo legal.\"\n- **Artículo 492 del Código Sustantivo del Trabajo** [4]: \"Quedan vigentes las normas que regulan el salario mínimo.\"\n\n**ANÁLISIS JURÍDICO:**\nEl Código Sustantivo del Trabajo, en su Artículo 132, establece que todo trabajador tiene derecho a un salario mínimo legal. Este salario mínimo es revisado anualmente por el Gobierno Nacional a través de un decreto que se publica al inicio de cada año. Para el año 2024, el salario mínimo legal mensual en Colombia fue fijado por el Decreto 2154 de 2023, el cual estableció que el salario mínimo legal mensual para 2024 es de $1,160,000 COP.\n\n**CONCLUSIÓN:**\nEl salario mínimo legal mensual vigente en Colombia para el año 2024 es de $1,160,000 COP. Este monto es aplicable a todos los trabajadores en relación de dependencia y debe ser respetado por los empleadores en sus contratos de trabajo.\n\n**RECOMENDACIÓN:**\nPara asegurarse de que la información sea la más actualizada y precisa, se recomienda consultar el Decreto 2154 de 2023 o cualquier otro decreto que pueda haber sido emitido posteriormente. Además, es importante mantenerse al tanto de cualquier modificación que pueda surgir durante el año. Si tienes dudas adicionales o necesitas asesoría específica, consulta con un abogado laboralista.\n\n⚠️ **Vigencia:** La norma \"Código Penal (Ley 599 de 2000)\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Código Penal (Ley 599 de 2000)\" tiene artículos derogados o modificados; verifique vigencia específica.",
+      "evaluacion": {
+        "precision_normativa": 2,
+        "articulos_correctos": 2,
+        "interpretacion_valida": 1,
+        "completitud": 3,
+        "ausencia_alucinaciones": 1,
+        "score_total": 1.8,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [
+          "Artículo 132 del Código Sustantivo del Trabajo",
+          "Artículo 492 del Código Sustantivo del Trabajo"
+        ],
+        "normas_faltantes": [
+          "Decreto 2613 de 2023"
+        ],
+        "alucinaciones": [
+          "Decreto 2154 de 2023",
+          "Código Penal (Ley 599 de 2000)"
+        ],
+        "comentario": "La respuesta del RAG es incorrecta en su núcleo: proporciona un monto erróneo ($1,160,000) y cita un decreto inexistente (2154/2023), fallando en mencionar el valor correcto ($1,300,000), la norma correcta (Decreto 2613/2023) y el auxilio de transporte."
+      },
+      "error": null,
+      "timestamp": "2026-02-16T22:26:58.831Z"
+    }
+  ],
+  "errores": [
+    {
+      "id": "LAB-003",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuándo procede el despido sin justa causa y cuál es la indemnización?",
+      "respuesta_referencia": "Según el artículo 64 del CST, el empleador puede terminar el contrato sin justa causa pagando indemnización. Para contratos a término indefinido con trabajadores que ganen menos de 10 SMLMV: 30 días por el primer año y 20 días adicionales por cada año posterior. Para trabajadores con más de 10 SMLMV: 20 días por el primer año y 15 adicionales por cada año. El artículo 26 del Decreto 2351/65 modificó esta figura.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: The operation was aborted due to timeout",
+      "timestamp": "2026-02-16T22:27:36.897Z"
+    },
+    {
+      "id": "LAB-004",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el fuero de maternidad y qué protección ofrece?",
+      "respuesta_referencia": "El fuero de maternidad, consagrado en el artículo 239 del CST y desarrollado por la Sentencia C-005 de 2017 de la Corte Constitucional, prohíbe el despido de la trabajadora embarazada o en período de lactancia sin la autorización previa del Inspector de Trabajo. Si se despide sin autorización, el despido es ineficaz y la trabajadora tiene derecho a ser reintegrada y al pago de salarios y prestaciones dejados de percibir. La protección aplica incluso en contratos a término fijo y de obra.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: The operation was aborted due to timeout",
+      "timestamp": "2026-02-16T22:28:38.900Z"
+    },
+    {
+      "id": "LAB-005",
+      "area": "laboral",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cómo se calcula la liquidación de un trabajador que lleva 3 años y gana $2.000.000?",
+      "respuesta_referencia": "Para un trabajador con 3 años de antigüedad y salario de $2.000.000: (1) Cesantías: $2.000.000 × 3 años = $6.000.000; (2) Intereses sobre cesantías: $6.000.000 × 12% = $720.000; (3) Prima de servicios: $2.000.000 × 3 meses/12 = $500.000 (proporcional al último semestre); (4) Vacaciones: 15 días × $66.667/día = $1.000.000 (proporcional); (5) Si el auxilio de transporte aplica ($162.000/mes). El total aproximado antes de descuentos sería $8.220.000 más el auxilio de transporte proporcional.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: The operation was aborted due to timeout",
+      "timestamp": "2026-02-16T22:29:40.903Z"
+    }
+  ]
+}
