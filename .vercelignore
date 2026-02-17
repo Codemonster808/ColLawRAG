@@ -1,9 +1,10 @@
-# Índices RAG - Se descargan desde GitHub Releases en el build
+# Índices RAG - Se descargan desde GitHub Releases en el build (via download-indices)
 data/index.json
 data/bm25-index.json
-# Nota: NO ignorar data/*.gz.
-# En Vercel los índices se descargan como .gz durante el build y deben quedar disponibles
-# para que Next.js los tracee y los incluya en las funciones serverless.
+# Los .gz también se excluyen: son demasiado grandes (>100MB) para el límite de Vercel.
+# El buildCommand "npm run download-indices && npm run build" los descarga en el build de Vercel.
+data/index.json.gz
+data/bm25-index.json.gz
 
 # NO ignorar indices-urls.json (necesario para el build)
 !data/indices-urls.json
