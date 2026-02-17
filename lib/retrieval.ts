@@ -101,7 +101,7 @@ async function ensureIndicesAvailableAtRuntime() {
  * Carga el índice principal. Intenta primero el JSON descomprimido (local dev),
  * luego el .gz comprimido (Vercel serverless) descomprimiéndolo en memoria.
  */
-function loadLocalIndex(): DocumentChunk[] {
+async function loadLocalIndex(): Promise<DocumentChunk[]> {
   if (cachedLocalIndex) return cachedLocalIndex
 
   const indexPath = path.join(process.cwd(), 'data', 'index.json')
@@ -112,7 +112,26 @@ function loadLocalIndex(): DocumentChunk[] {
   if (fs.existsSync(indexPath)) {
     console.log('[retrieval] Cargando index.json descomprimido...')
     const start = Date.now()
-    cachedLocalIndex = JSON.parse(fs.readFileSync(indexPath, 'utf-8')) as DocumentChunk[]
+    // Usar Buffer para evitar ERR_STRING_TOO_LONG con índices >512MB
+    // Para índices muy grandes (>500MB) usamos lectura línea a línea
+    const fileSizeMB = fs.statSync(indexPath).size / (1024 * 1024)
+    if (fileSizeMB > 400) {
+      console.log(`[retrieval] Índice grande (${fileSizeMB.toFixed(0)}MB), leyendo línea a línea...`)
+      const readline = require('node:readline') as typeof import('readline')
+      const chunks: DocumentChunk[] = []
+      const rl = readline.createInterface({ input: fs.createReadStream(indexPath), crlfDelay: Infinity })
+      await new Promise<void>((resolve) => {
+        rl.on('line', (line: string) => {
+          const t = line.trim().replace(/,$/, '')
+          if (!t || t === '[' || t === ']') return
+          try { chunks.push(JSON.parse(t) as DocumentChunk) } catch {}
+        })
+        rl.on('close', resolve)
+      })
+      cachedLocalIndex = chunks
+    } else {
+      cachedLocalIndex = JSON.parse(fs.readFileSync(indexPath).toString()) as DocumentChunk[]
+    }
     console.log(`[retrieval] index.json cargado: ${cachedLocalIndex.length} chunks en ${Date.now() - start}ms`)
     return cachedLocalIndex
   }
@@ -247,7 +266,7 @@ export async function retrieveRelevantChunks(query: string, filters?: RetrieveFi
   } else {
     // Local/Vercel fallback: load index from .json or .json.gz
     await ensureIndicesAvailableAtRuntime()
-    const raw = loadLocalIndex()
+    const raw = await loadLocalIndex()
     retrieved = raw
       .filter(c => (filters?.type ? c.metadata.type === filters.type : true))
       .map(c => ({ chunk: c, score: cosineSimilarity(queryEmbedding, c.embedding || []) }))
