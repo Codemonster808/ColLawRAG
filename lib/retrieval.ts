@@ -1,7 +1,7 @@
 import { Pinecone } from '@pinecone-database/pinecone'
 import { embedText } from './embeddings'
 import { type DocumentChunk, type RetrieveFilters } from './types'
-import { applyReranking } from './reranking'
+import { applyReranking, rerankWithHFSimilarity } from './reranking'
 import { calculateBM25, hybridScore, deserializeBM25Index, type BM25Index } from './bm25'
 import { consultarVigencia, inferNormaIdFromTitle } from './norm-vigencia'
 import fs from 'node:fs'
@@ -12,6 +12,7 @@ import { gunzipSync } from 'node:zlib'
 const USE_PINECONE = process.env.PINECONE_API_KEY && process.env.PINECONE_INDEX
 const USE_RERANKING = process.env.USE_RERANKING !== 'false' // Enabled by default
 const USE_BM25 = process.env.USE_BM25 !== 'false' // Enabled by default
+const USE_CROSS_ENCODER = process.env.USE_CROSS_ENCODER === 'true' // CU-06: rerank con HF sentence similarity
 
 // --- Carga de índices con soporte para .gz (Vercel serverless) ---
 
@@ -147,7 +148,23 @@ async function loadLocalIndex(): Promise<DocumentChunk[]> {
     return cachedLocalIndex
   }
 
-  // 3. Intentar .gz en /tmp (runtime download fallback)
+  // 3. CU-07: Intentar Vercel Blob (BLOB_INDEX_URL) para reducir cold start
+  const blobIndexUrl = process.env.BLOB_INDEX_URL
+  if (blobIndexUrl) {
+    try {
+      const { get } = await import('@vercel/blob')
+      const blob = await get(blobIndexUrl)
+      const compressed = Buffer.from(await blob.arrayBuffer())
+      const decompressed = gunzipSync(compressed)
+      cachedLocalIndex = JSON.parse(decompressed.toString('utf-8')) as DocumentChunk[]
+      console.log(`[retrieval] Índice cargado desde Vercel Blob: ${cachedLocalIndex.length} chunks`)
+      return cachedLocalIndex
+    } catch (e) {
+      console.warn('[retrieval] Fallo al cargar índice desde Blob:', (e as Error).message)
+    }
+  }
+
+  // 4. Intentar .gz en /tmp (runtime download fallback)
   if (fs.existsSync(tmpGzPath)) {
     console.log('[retrieval] Descomprimiendo /tmp/index.json.gz en memoria...')
     const start = Date.now()
@@ -158,7 +175,7 @@ async function loadLocalIndex(): Promise<DocumentChunk[]> {
     return cachedLocalIndex
   }
 
-  console.warn('[retrieval] No se encontró index.json ni index.json.gz')
+  console.warn('[retrieval] No se encontró index.json, index.json.gz ni BLOB_INDEX_URL')
   return []
 }
 
@@ -293,10 +310,22 @@ export async function retrieveRelevantChunks(query: string, filters?: RetrieveFi
     retrieved = applyReranking(retrieved, query, {
       useAdvanced: true,
       minScore: 0.05,
-      topK: topK
+      topK: topK * 2
     })
+    // CU-06: opcional re-ranking con modelo HF (sentence similarity) para mejor relevancia top-K
+    if (USE_CROSS_ENCODER && process.env.HUGGINGFACE_API_KEY && retrieved.length > 0) {
+      const toRerank = retrieved.slice(0, 16)
+      const rest = retrieved.slice(16)
+      try {
+        const reranked = await rerankWithHFSimilarity(toRerank, query)
+        retrieved = [...reranked, ...rest].slice(0, topK)
+      } catch {
+        retrieved = retrieved.slice(0, topK)
+      }
+    } else {
+      retrieved = retrieved.slice(0, topK)
+    }
   } else {
-    // Just limit to topK if re-ranking is disabled
     retrieved = retrieved.slice(0, topK)
   }
 

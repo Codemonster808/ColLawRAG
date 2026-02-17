@@ -357,3 +357,38 @@ export function applyReranking(
   return reranked
 }
 
+/** Máximo de caracteres por chunk a enviar al modelo de similitud (límite de contexto) */
+const HF_SIMILARITY_MAX_CHARS = 512
+
+/**
+ * Re-ranking con modelo de similitud de Hugging Face (sentence similarity).
+ * CU-06: Cross-encoder real / modelo de relevancia para +5-10% en top-K.
+ * Se activa con USE_CROSS_ENCODER=true y HUGGINGFACE_API_KEY.
+ * Si falla la API, se devuelve el orden original.
+ */
+export async function rerankWithHFSimilarity(
+  chunks: Array<{ chunk: DocumentChunk; score: number }>,
+  query: string
+): Promise<Array<{ chunk: DocumentChunk; score: number }>> {
+  if (chunks.length === 0) return []
+  const key = process.env.HUGGINGFACE_API_KEY
+  if (!key) return chunks
+  const model = process.env.HF_RERANK_MODEL || 'sentence-transformers/paraphrase-multilingual-mpnet-base-v2'
+  try {
+    const { HfInference } = await import('@huggingface/inference')
+    const hf = new HfInference(key)
+    const source = query.slice(0, HF_SIMILARITY_MAX_CHARS)
+    const sentences = chunks.map(r => r.chunk.content.slice(0, HF_SIMILARITY_MAX_CHARS))
+    const scores = await hf.sentenceSimilarity({
+      model,
+      inputs: { source_sentence: source, sentences }
+    }) as number[]
+    if (!Array.isArray(scores) || scores.length !== chunks.length) return chunks
+    const withScores = chunks.map((r, i) => ({ ...r, score: scores[i] ?? r.score }))
+    withScores.sort((a, b) => b.score - a.score)
+    return withScores
+  } catch {
+    return chunks
+  }
+}
+

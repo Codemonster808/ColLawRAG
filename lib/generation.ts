@@ -74,7 +74,7 @@ async function generateWithModel(
             { role: 'user', content: userPrompt },
           ],
           max_tokens: maxTokens,
-          temperature: 0.2,
+          temperature: 0.1,
         }),
         signal: controller.signal,
       })
@@ -108,7 +108,7 @@ async function generateWithModel(
         { role: 'user', content: userPrompt },
       ],
       max_tokens: maxTokens,
-      temperature: 0.3,
+      temperature: 0.1,
     })
     clearTimeout(timeoutId)
     return result.choices[0]?.message?.content?.trim() || ''
@@ -155,7 +155,7 @@ async function _generateWithModelLegacy(
           }
         ],
         max_tokens: maxTokens,
-        temperature: 0.2,
+        temperature: 0.1,
       }),
       signal: controller2.signal
     })
@@ -353,7 +353,7 @@ export async function generateAnswerSpanish(params: {
           model: ollamaModel,
           prompt: fullPrompt,
           stream: false,
-          options: { temperature: 0.2, num_predict: 600 },
+          options: { temperature: 0.1, num_predict: 600 },
         })
       })
       if (!res.ok) {

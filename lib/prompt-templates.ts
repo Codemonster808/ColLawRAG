@@ -270,8 +270,14 @@ INSTRUCCIONES CRÍTICAS - ESTRUCTURA OBLIGATORIA HNAC:
    - Cada cita debe ser relevante y precisa
    - Las citas deben aparecer en la sección **NORMAS APLICABLES:**
 
+⚠️ REGLA ANTI-ALUCINACIÓN — OBLIGATORIA:
+   - SOLO puedes mencionar artículos, leyes, decretos y sentencias que aparezcan TEXTUALMENTE en las fuentes [1]-[${maxCitations}] del contexto.
+   - PROHIBIDO inventar o recordar artículos de tu entrenamiento. Si el Art. X no aparece en las fuentes, NO lo menciones.
+   - Si el contexto no contiene el artículo exacto, di: "Las fuentes disponibles no incluyen el artículo específico, pero según [fuente X]..."
+   - NUNCA cites artículos inexistentes como Art. 190 CST, Art. 408 CST, etc. Solo cita lo que está en las fuentes.
+
 3. PRECISIÓN:
-   - Verifica que los artículos citados existan realmente en las fuentes
+   - Los artículos que cites DEBEN aparecer en el texto de las fuentes proporcionadas arriba
    - Si mencionas números o porcentajes, deben ser exactos según las fuentes
    - Si hay contradicciones entre fuentes, menciónalas explícitamente
 
@@ -310,6 +316,15 @@ export function generateUserPrompt(context: PromptContext): string {
   const citationWarning = chunks.length > maxCitations
     ? `\n\n⚠️ NOTA: Solo se proporcionan las primeras ${maxCitations} fuentes más relevantes. Hay ${chunks.length - maxCitations} fuentes adicionales disponibles pero no están incluidas en este contexto.`
     : ''
+
+  // Lista de artículos disponibles en las fuentes (para reducir alucinaciones)
+  const availableArticles = chunks
+    .slice(0, maxCitations)
+    .map(r => r.chunk.metadata.article)
+    .filter(Boolean)
+  const articlesList = availableArticles.length > 0
+    ? `\n\n📋 ARTÍCULOS DISPONIBLES EN LAS FUENTES (solo cita estos): ${[...new Set(availableArticles)].join(', ')}`
+    : ''
   
   // Advertencias legales
   const warnings = includeWarnings && legalArea 
@@ -336,7 +351,7 @@ ${contextBlocks}${citationWarning}
 INSTRUCCIONES:
 Responde como un abogado profesional especializado en ${legalArea || 'derecho colombiano'}, estructurando tu respuesta según el formato indicado.${warnings}${complexInstructions}
 
-IMPORTANTE: Solo puedes citar fuentes del 1 al ${Math.min(chunks.length, maxCitations)}. Si necesitas más información, indica que la consulta requiere análisis adicional con más fuentes legales.`
+IMPORTANTE: Solo puedes citar fuentes del 1 al ${Math.min(chunks.length, maxCitations)}. Si necesitas más información, indica que la consulta requiere análisis adicional con más fuentes legales.${articlesList}`
 }
 
 /**
