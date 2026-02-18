@@ -177,14 +177,27 @@ async function loadLocalIndex(): Promise<DocumentChunk[]> {
     }
   }
 
-  // 4. Intentar .gz en /tmp (runtime download fallback)
+  // 4. Intentar .gz en /tmp (runtime download fallback) — stream parse igual que path 2
   if (fs.existsSync(tmpGzPath)) {
-    console.log('[retrieval] Descomprimiendo /tmp/index.json.gz en memoria...')
+    console.log('[retrieval] Leyendo /tmp/index.json.gz línea a línea (streaming)...')
     const start = Date.now()
-    const compressed = fs.readFileSync(tmpGzPath)
-    const decompressed = gunzipSync(compressed)
-    cachedLocalIndex = JSON.parse(decompressed.toString('utf-8')) as DocumentChunk[]
-    console.log(`[retrieval] /tmp/index.json.gz descomprimido: ${cachedLocalIndex.length} chunks en ${Date.now() - start}ms`)
+    const chunks: DocumentChunk[] = []
+    await new Promise<void>((resolve, reject) => {
+      const gunzip = createGunzip()
+      const input = fs.createReadStream(tmpGzPath)
+      const rl = readline.createInterface({ input: input.pipe(gunzip), crlfDelay: Infinity })
+      rl.on('line', (line: string) => {
+        const t = line.trim().replace(/,$/, '')
+        if (!t || t === '[' || t === ']') return
+        try { chunks.push(JSON.parse(t) as DocumentChunk) } catch {}
+      })
+      rl.on('close', resolve)
+      rl.on('error', reject)
+      input.on('error', reject)
+      gunzip.on('error', reject)
+    })
+    cachedLocalIndex = chunks
+    console.log(`[retrieval] /tmp/index.json.gz cargado: ${cachedLocalIndex.length} chunks en ${Date.now() - start}ms`)
     return cachedLocalIndex
   }
 
