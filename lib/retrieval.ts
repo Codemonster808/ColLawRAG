@@ -7,7 +7,7 @@ import { consultarVigencia, inferNormaIdFromTitle } from './norm-vigencia'
 import fs from 'node:fs'
 import fsp from 'node:fs/promises'
 import path from 'node:path'
-import { gunzipSync } from 'node:zlib'
+import { gunzipSync, createGunzip } from 'node:zlib'
 import readline from 'node:readline'
 
 const USE_PINECONE = process.env.PINECONE_API_KEY && process.env.PINECONE_INDEX
@@ -137,14 +137,27 @@ async function loadLocalIndex(): Promise<DocumentChunk[]> {
     return cachedLocalIndex
   }
 
-  // 2. Intentar archivo .gz (Vercel serverless)
+  // 2. Intentar archivo .gz (Vercel serverless) — stream parse para no agotar RAM
   if (fs.existsSync(gzPath)) {
-    console.log('[retrieval] Descomprimiendo index.json.gz en memoria...')
+    console.log('[retrieval] Leyendo index.json.gz línea a línea (streaming)...')
     const start = Date.now()
-    const compressed = fs.readFileSync(gzPath)
-    const decompressed = gunzipSync(compressed)
-    cachedLocalIndex = JSON.parse(decompressed.toString('utf-8')) as DocumentChunk[]
-    console.log(`[retrieval] index.json.gz descomprimido: ${cachedLocalIndex.length} chunks en ${Date.now() - start}ms`)
+    const chunks: DocumentChunk[] = []
+    await new Promise<void>((resolve, reject) => {
+      const gunzip = createGunzip()
+      const input = fs.createReadStream(gzPath)
+      const rl = readline.createInterface({ input: input.pipe(gunzip), crlfDelay: Infinity })
+      rl.on('line', (line: string) => {
+        const t = line.trim().replace(/,$/, '')
+        if (!t || t === '[' || t === ']') return
+        try { chunks.push(JSON.parse(t) as DocumentChunk) } catch {}
+      })
+      rl.on('close', resolve)
+      rl.on('error', reject)
+      input.on('error', reject)
+      gunzip.on('error', reject)
+    })
+    cachedLocalIndex = chunks
+    console.log(`[retrieval] index.json.gz cargado: ${cachedLocalIndex.length} chunks en ${Date.now() - start}ms`)
     return cachedLocalIndex
   }
 
