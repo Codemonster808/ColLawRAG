@@ -8,6 +8,7 @@ import fs from 'node:fs'
 import fsp from 'node:fs/promises'
 import path from 'node:path'
 import { gunzipSync } from 'node:zlib'
+import readline from 'node:readline'
 
 const USE_PINECONE = process.env.PINECONE_API_KEY && process.env.PINECONE_INDEX
 const USE_RERANKING = process.env.USE_RERANKING !== 'false' // Enabled by default
@@ -118,7 +119,6 @@ async function loadLocalIndex(): Promise<DocumentChunk[]> {
     const fileSizeMB = fs.statSync(indexPath).size / (1024 * 1024)
     if (fileSizeMB > 400) {
       console.log(`[retrieval] Índice grande (${fileSizeMB.toFixed(0)}MB), leyendo línea a línea...`)
-      const readline = require('node:readline') as typeof import('readline')
       const chunks: DocumentChunk[] = []
       const rl = readline.createInterface({ input: fs.createReadStream(indexPath), crlfDelay: Infinity })
       await new Promise<void>((resolve) => {
