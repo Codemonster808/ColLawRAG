@@ -1,76 +1,64 @@
 proyecto: ColLawRAG
-generado: 2026-02-16
-ejecutor: OpenClaw
-referencia: DIAGNOSTICO_COMERCIAL_2026-02-16.md
-cron_jobs_activos: 3
+actualizado: 2026-02-18
+ejecutor: OpenClaw (Santis)
+url_produccion: https://col-law-rag.vercel.app
+accuracy_actual: 35.9%
+accuracy_baseline_original: 28.7%
+modelo_generacion: deepseek/deepseek-v3-0324 via novita
 
-tareas_inmediatas[4]{id,titulo,trigger,estado,output_esperado}:
-  OC-A1,Benchmark accuracy baseline,ahora (antes de cambios Cursor),pendiente,"data/benchmarks/baseline-2026-02-16.json con % accuracy por área"
-  OC-A2,Re-ingestar tras CU-01+CU-02,Cursor confirma cambios en ingest.mjs,pendiente,"index.json con >70% chunks con area específica"
-  OC-A3,Benchmark post-fix comparativo,tras OC-A2 completado,pendiente,"diferencia accuracy antes/después + notificar a Le'saint"
-  OC-A4,Subir índices + re-deploy,tras OC-A2 y accuracy OK,pendiente,"índices en GitHub Releases + vercel --prod"
+estado_general:
+  completadas: OC-A1 OC-A2 OC-A3 OC-A4
+  pendientes: OC-A5 OC-A6 OC-A7 OC-A8
+  crons_activos: OC-B1 OC-B2 OC-B3
+  diferido_por_usuario: OC-A5 (cambio modelo generacion - hacer de último)
 
-comandos_inmediatos[4]{id,directorio,comando,nota}:
-  OC-A1,/home/lesaint/Documentos/Cursor/ColLawRAG,"node scripts/evaluate-accuracy.mjs --prod --limit 5",requiere CU-00 fix primero
-  OC-A2,/home/lesaint/Documentos/Cursor/ColLawRAG,"npm run ingest && npm run build-bm25",requiere CU-01+CU-02 primero
-  OC-A3,/home/lesaint/Documentos/Cursor/ColLawRAG,"node scripts/evaluate-accuracy.mjs --prod",comparar con baseline OC-A1
-  OC-A4,/home/lesaint/Documentos/Cursor/ColLawRAG,"npm run upload-indices && npx vercel --prod",solo si accuracy mejoró
+historial_completado[4]{id,titulo,fecha,resultado}:
+  OC-A1,Benchmark accuracy baseline,2026-02-16,"28.7% accuracy (20 casos, postfix-deepseek-2026-02-16.json)"
+  OC-A2,Re-ingestar corpus completo,2026-02-17,"36500 chunks, 609MB index.json, metadata area corregida"
+  OC-A3,Benchmark post-reingest,2026-02-18,"35.9% accuracy (47/180 casos evaluados, 133 timeouts)"
+  OC-A4,Upload indices + deploy Vercel,2026-02-17,"index.json.gz 206MB + bm25 38MB en GitHub Releases indices-v1"
 
-verificacion_post_ingest[3]{id,descripcion,comando_verificacion,umbral_exito}:
-  V1,Chunks con area específica,node -e verificar-areas.js,>70% con area != general/unknown
-  V2,Total chunks mayor que antes,wc -c data/index.json,>290MB (>12468 chunks)
-  V3,Metadata fuente presente,"node -e verificar-source.js",>60% con source != unknown
+tareas_pendientes[4]{id,prioridad,titulo,trigger,accion,output_esperado}:
+  OC-A5,diferido,Swap modelo generacion a claude-sonnet/opus,cuando usuario lo apruebe,"Cambiar HF_GENERATION_MODEL en Vercel env vars + update lib/generation.ts si hardcoded + deploy","accuracy estimada +15-25% sin re-ingest"
+  OC-A6,alta,"Upload indices a Vercel Blob (post CU-07)",Cursor confirma wiring en lib/retrieval.ts + BLOB_READ_WRITE_TOKEN lista,"node scripts/upload-indices-to-blob.mjs → actualiza data/indices-urls.json → deploy","cold start reducido 50s → <3s"
+  OC-A7,alta,Benchmark post-Blob,OC-A6 completado + deploy live,"node scripts/evaluate-accuracy.mjs --url http://localhost:3000 (180 casos sin timeout)","accuracy completa 180/180 casos evaluados"
+  OC-A8,media,Benchmark con modelo potente,OC-A5 completado,"node scripts/evaluate-accuracy.mjs --url http://localhost:3000","comparativa accuracy modelo viejo vs nuevo"
 
-cron_jobs[3]{id,nombre,schedule_cron,zona_horaria,tipo,descripcion}:
-  OC-B1,Monitoreo diario producción,"5 9 * * *",America/Bogota,isolated,"Health check + 2 queries prueba + alerta si >8s o error"
-  OC-B2,Warm-up Vercel,"0 7,13,19 * * *",America/Bogota,isolated,"curl /api/health para evitar cold starts"
-  OC-B3,Reporte semanal calidad,"0 8 * * 1",America/Bogota,isolated,"Calidad respuestas + avance roadmap + próximos pasos"
+cron_jobs[3]{id,nombre,schedule,zona_horaria,objetivo}:
+  OC-B1,Monitoreo diario produccion,"5 9 * * *",America/Bogota,"health check + 1 query prueba + alerta si >30s o HTTP!=200"
+  OC-B2,Warm-up Vercel 3x dia,"0 7,13,19 * * *",America/Bogota,"curl /api/health para mantener instancia caliente"
+  OC-B3,Reporte semanal calidad,"0 8 * * 1",America/Bogota,"calidad respuestas + avance roadmap + git log"
 
-tareas_bajo_demanda[8]{id,titulo,cuando_usar,script,reportar}:
-  OC-C1,Scraping jurisprudencia nueva,Aumentar corpus sentencias,node scripts/scrape-jurisprudencia.mjs,Número sentencias nuevas descargadas
-  OC-C2,Generar benchmark 100 casos,Evaluación robusta de accuracy,generar QA pairs manualmente,80 preguntas nuevas en qa-abogados.json
-  OC-C3,Análisis cobertura corpus,Ver normas faltantes en índice,node inline + ls data/,Lista de normas sin indexar
-  OC-C4,Verificar vigencia normas,Detectar normas desactualizadas,node scripts/vigencia-normas.mjs,Normas posiblemente derogadas
-  OC-C5,Documentos compliance LPDP,Antes del lanzamiento comercial,generar docs/legal/,3 borradores legales
-  OC-C6,Analizar queries reales producción,Con usuarios reales en DB,node inline SQLite/Postgres,Top áreas + queries fallidas
-  OC-C7,Test queries complejas,Post cualquier re-ingesta,node scripts/test-complex-queries.mjs,Resultado por tipo de query
-  OC-C8,Reporte calidad manual,Bajo demanda,node scripts/generate-quality-report.mjs,Reporte en data/quality-reports/
+tareas_bajo_demanda[5]{id,titulo,cuando_usar,script}:
+  OC-C3,Analisis cobertura corpus,detectar normas faltantes en indice,node inline + ls data/documents/
+  OC-C4,Verificar vigencia normas,detectar normas desactualizadas,node scripts/vigencia-normas.mjs
+  OC-C6,Analizar queries reales produccion,con usuarios reales en DB,node inline Postgres queries
+  OC-C7,Test queries complejas,post cualquier re-ingesta o deploy,node scripts/test-complex-queries.mjs
+  OC-C8,Reporte calidad manual,bajo demanda,node scripts/generate-quality-report.mjs
 
-distribucion_benchmark_100casos[6]{area,preguntas_actuales,preguntas_a_agregar,total_objetivo}:
-  laboral,8,17,25
-  constitucional,4,16,20
-  administrativo,2,13,15
-  civil,2,13,15
-  penal,2,8,10
-  tributario,2,13,15
+analisis_accuracy[5]{dimension,valor,descripcion}:
+  score_promedio,3.59/10,sobre 47 casos evaluados
+  area_mejor,constitucional 5.74/10,CP bien indexada y estructurada
+  area_peor,tributario 1.40/10,ET poco cubierto + modelo alucina
+  alucinaciones,87% de casos,LLM inventa numeros de articulo
+  normas_faltantes,83% de casos,retrieval trae chunks proximos pero no el articulo exacto
 
-metricas_a_rastrear[6]{metrica,como_medir,valor_actual,objetivo_sprint1,objetivo_final}:
-  accuracy_benchmark,"evaluate-accuracy.mjs --prod","~60% (est)",>85%,>92%
-  chunks_area_especifica,node inline index.json,6%,>70%,>95%
-  total_chunks,index.json array length,12468,>14000,>25000
-  cold_start_segundos,primer request real,10-15,<8,<3
-  p95_response_ms,logs monitoreo Vercel,5000-8000,<5000,<4000
-  uptime_produccion,health check diario,desconocido,>99%,>99.9%
+causa_raiz_accuracy[3]{problema,descripcion,fix}:
+  alucinacion_articulos,"RAG encuentra texto semanticamente similar pero LLM rellena numero de articulo de su memoria de entrenamiento (incorrecto)","cambiar modelo generacion a uno mas preciso (OC-A5)"
+  cobertura_CST,"CST (laboral) y ET (tributario) estan fragmentados y mal cubiertos en el indice","agregar mas documentos del CST y ET a data/documents/"
+  cold_start_50s,"retrieval.ts descarga 206MB de GitHub Releases en cada cold start","Vercel Blob (OC-A6 espera CU-07)"
 
-flujo_con_cursor[8]{paso,actor,accion,esperar_a}:
-  1,Cursor,CU-00 fix endpoint evaluate-accuracy,ninguno
-  2,OpenClaw,OC-A1 benchmark baseline,CU-00 completado
-  3,Cursor,CU-01 fix metadata + frontmatter,paralelo con OC-A1
-  4,Cursor,CU-02 reducir chunk size,junto con CU-01
-  5,OpenClaw,OC-A2 npm run ingest,CU-01 + CU-02 confirmados
-  6,OpenClaw,OC-A3 benchmark post-fix,OC-A2 completado
-  7,OpenClaw,OC-A4 upload-indices + deploy,accuracy mejoró >10%
-  8,Cursor,CU-03 Postgres en adelante,OC-A4 completado
+flujo_con_cursor[6]{paso,actor,accion,esperando}:
+  1,Cursor,CU-03 Neon Postgres + CU-07 wiring Vercel Blob,ya iniciado
+  2,Cursor,Pasa BLOB_READ_WRITE_TOKEN a OpenClaw,tras crear Vercel Blob store
+  3,OpenClaw,OC-A6 subir indices a Blob + deploy,BLOB_READ_WRITE_TOKEN recibido
+  4,Cursor,CU-04 NextAuth + CU-05 Stripe,paralelo con OC-A6
+  5,OpenClaw,OC-A7 benchmark 180 casos sin timeout,post deploy CU-07
+  6,OpenClaw,OC-A5 swap modelo + OC-A8 benchmark final,cuando usuario apruebe
 
-alertas_monitoreo[4]{condicion,accion,canal}:
-  "response_time > 8000ms",notificar a Le'saint con tiempo medido,Telegram
-  "health check status != 200",notificar con error completo,Telegram
-  "citations = 0 en respuesta RAG",notificar query fallida,Telegram
-  "accuracy post-fix < accuracy baseline",notificar urgente con comparativa,Telegram
-
-archivos_referencia[5]{archivo,descripcion,cuando_leer}:
-  DIAGNOSTICO_COMERCIAL_2026-02-16.md,Diagnóstico completo + roadmap 4 sprints,siempre
-  TAREAS_CURSOR.toon,Tareas de código para Cursor con fixes exactos,cuando Cursor termine tarea
-  data/benchmarks/qa-abogados.json,20 casos QA para medir accuracy,antes/después de re-ingesta
-  scripts/evaluate-accuracy.mjs,Script de evaluación LLM-as-judge,para OC-A1 y OC-A3
-  data/benchmarks/,Directorio con todos los resultados de benchmarks,al reportar métricas
+archivos_clave[5]{archivo,descripcion,ultima_modificacion}:
+  data/benchmarks/local-benchmark-2026-02-18.json,Benchmark actual 35.9% accuracy 47/180 casos,2026-02-18
+  data/indices-urls.json,URLs actuales de indices (GitHub Releases → cambiara a Blob),2026-02-17
+  scripts/upload-indices-to-blob.mjs,Script listo para subir a Vercel Blob tras CU-07,2026-02-18
+  ENV_VARS_PENDIENTES.md,Todas las env vars pendientes con instrucciones,2026-02-18
+  lib/retrieval.ts,Retrieval hibrido (cosine + BM25) - Cursor modifica para Blob en CU-07,2026-02-17
