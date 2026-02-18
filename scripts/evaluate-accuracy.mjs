@@ -22,7 +22,33 @@
 import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import { encode } from '@toon-format/toon';
+// Minimal TOON encoder (inline, no external deps)
+function encode(obj, indent = '') {
+  const lines = [];
+  for (const [k, v] of Object.entries(obj)) {
+    if (Array.isArray(v)) {
+      if (v.length > 0 && typeof v[0] === 'object' && v[0] !== null) {
+        const keys = Object.keys(v[0]);
+        lines.push(`${indent}${k}[${v.length}]{${keys.join(',')}}`);
+        for (const item of v) {
+          lines.push(`${indent}  ` + keys.map(ki => {
+            const val = item[ki];
+            return typeof val === 'string' ? val.replace(/,/g, '，') : String(val ?? '');
+          }).join(','));
+        }
+      } else {
+        lines.push(`${indent}${k}[${v.length}]`);
+        for (const item of v) lines.push(`${indent}  ${String(item)}`);
+      }
+    } else if (typeof v === 'object' && v !== null) {
+      lines.push(`${indent}${k}`);
+      lines.push(encode(v, indent + '  '));
+    } else {
+      lines.push(`${indent}${k}: ${String(v ?? '')}`);
+    }
+  }
+  return lines.join('\n');
+}
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -94,7 +120,7 @@ async function queryRAG(question) {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ query: question }),
-    signal: AbortSignal.timeout(60_000),
+    signal: AbortSignal.timeout(120_000),
   });
   if (!res.ok) throw new Error(`RAG API error: ${res.status} ${res.statusText}`);
   const data = await res.json();
@@ -455,17 +481,24 @@ async function main() {
 
   // Evaluar casos con pausa entre solicitudes para no sobrecargar la API
   const results = [];
+  const SAVE_EVERY = 10; // guardar checkpoint cada N casos
   for (let i = 0; i < casos.length; i++) {
     const result = await evaluateCase(casos[i], i, casos.length);
     results.push(result);
+    // Guardar checkpoint parcial
+    if ((i + 1) % SAVE_EVERY === 0 || i === casos.length - 1) {
+      const partial = generateReport(results);
+      writeFileSync(OUTPUT_PATH, JSON.stringify(partial, null, 2));
+      console.log(gray(`  💾 Checkpoint guardado (${i + 1}/${casos.length} casos)`));
+    }
     // Pausa entre casos (respetar rate limits)
     if (i < casos.length - 1) await new Promise(r => setTimeout(r, 2000));
   }
 
-  // Generar reporte
+  // Generar reporte final
   const report = generateReport(results);
 
-  // Guardar resultados
+  // Guardar resultados finales
   writeFileSync(OUTPUT_PATH, JSON.stringify(report, null, 2));
 
   // Imprimir resumen
