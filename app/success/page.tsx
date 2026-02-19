@@ -11,23 +11,20 @@ function SuccessContent() {
   const [plan, setPlan] = useState<string | null>(null)
 
   useEffect(() => {
-    // TODO: Cuando CU-05 esté completa, verificar sesión con Stripe:
-    // if (sessionId) {
-    //   fetch(`/api/stripe/session?session_id=${sessionId}`)
-    //     .then(res => res.json())
-    //     .then(data => {
-    //       setPlan(data.plan)
-    //       setLoading(false)
-    //     })
-    // } else {
-    //   setLoading(false)
-    // }
-    
-    // Por ahora, simular carga
-    setTimeout(() => {
+    if (sessionId) {
+      fetch(`/api/stripe/session?session_id=${sessionId}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setPlan(data.plan ?? null)
+          setLoading(false)
+        })
+        .catch(() => {
+          setPlan(null)
+          setLoading(false)
+        })
+    } else {
       setLoading(false)
-      setPlan('premium') // Mock
-    }, 1000)
+    }
   }, [sessionId])
 
   return (

@@ -1,546 +1,383 @@
 {
-  "timestamp": "2026-01-15T21:07:46.183Z",
+  "timestamp": "2026-02-18T21:03:32.931Z",
   "results": [
     {
       "query": "Trabajo 10 horas diarias de lunes a sábado. Mi empleador me dice que no me debe pagar horas extras porque estoy en un contrato de prestación de servicios. ¿Tengo derecho a horas extras y cómo puedo reclamarlas?",
       "category": "laboral_complejo",
-      "complexity": "alta",
-      "answer": "En Colombia, el contrato de prestación de servicios es regulado por el Código Civil y el Código de Comercio [1]. Aunque este tipo de contrato es más flexible en cuanto a la jornada laboral, el trabajador tiene derecho a un trato justo y equitativo. Sin embargo, es importante destacar que el contrato de prestación de servicios no está regulado por el Código Sustantivo del Trabajo, que es el que regula las horas extras para los trabajadores con contrato laboral [2]. Para determinar si tienes derecho a horas extras, es necesario revisar el contrato de prestación de servicios y verificar si se establece una jornada laboral específica o si se pactó un pago adicional por horas extras [3]. Si consideras que tienes derecho a horas extras, puedes reclamarlas ante el Ministerio del Trabajo o un juez laboral [4]. Es recomendable consultar con un abogado especializado en derecho laboral para evaluar tu caso específico y determinar el mejor curso de acción [5]. También puedes consultar la página web del Ministerio del Trabajo para obtener más información sobre tus derechos laborales [6]. Recuerda que es importante conservar todos los documentos relacionados con tu contrato y tu jornada laboral para poder presentar pruebas en caso de una reclamación [7]. Es importante mencionar que la ley colombiana establece que los trabajadores tienen derecho a un descanso mínimo de 11 horas entre jornadas laborales y a un día de descanso semanal [8]. Si consideras que tus derechos laborales han sido vulnerados, no dudes en buscar asesoría legal para proteger tus intereses [9].",
-      "citations": [
-        {
-          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
-          "title": "Codigo Sustantivo del Trabajo",
-          "type": "estatuto",
-          "score": 0.029304662203818
-        },
-        {
-          "id": "doc-estatuto_constitucion_politica_de_colombia",
-          "title": "Constitucion Politica de Colombia",
-          "type": "estatuto",
-          "score": 0.027183755492664816
-        },
-        {
-          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
-          "title": "Ley 100 de 1993 - Seguridad Social",
-          "type": "estatuto",
-          "score": 0.022508140935042553
-        },
-        {
-          "id": "doc-estatuto_horas_extras",
-          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
-          "type": "estatuto",
-          "article": "Artículo 168",
-          "score": 0.019613821491986136
-        },
-        {
-          "id": "doc-estatuto_codigo_de_comercio",
-          "title": "Codigo de Comercio",
-          "type": "estatuto",
-          "score": 0.016619705286631762
-        },
-        {
-          "id": "doc-jurisprudencia_tutela",
-          "title": "Corte Constitucional — Acción de Tutela (Mock)",
-          "type": "jurisprudencia",
-          "article": "Artículo 86",
-          "score": 0.0012108455482089523
-        },
-        {
-          "id": "doc-estatuto_codigo_civil",
-          "title": "Codigo Civil",
-          "type": "estatuto",
-          "score": -0.004087013396482735
-        },
-        {
-          "id": "doc-estatuto_codigo_sustantivo_del_trabajo_extractos",
-          "title": "Codigo Sustantivo del Trabajo - Extractos Principales",
-          "type": "estatuto",
-          "score": -0.0176028047127844
-        }
-      ],
-      "metrics": {
-        "answerLength": 1575,
-        "citationCount": 9,
-        "uniqueCitations": 9,
-        "sourcesAvailable": 8,
-        "hasAdvice": true,
-        "hasProcedure": true,
-        "responseTime": "0.01"
-      }
+      "error": "network timeout at: http://localhost:3000/api/rag"
     },
     {
       "query": "Me despidieron sin justa causa después de 3 años de trabajo. No me pagaron las prestaciones sociales completas. ¿Qué debo hacer para reclamar mis derechos laborales?",
       "category": "laboral_complejo",
       "complexity": "alta",
-      "answer": "Para reclamar tus derechos laborales, debes seguir el procedimiento establecido en la ley laboral colombiana. Primero, es recomendable que intentes un acuerdo directo con tu ex empleador para obtener el pago de las prestaciones sociales completas [1]. Si esto no es posible, puedes acudir a la inspección de trabajo o a un juez laboral para solicitar el pago de las prestaciones sociales adeudadas. La acción de tutela es un mecanismo excepcional que puede ser utilizado cuando se vulneran derechos fundamentales, pero en este caso, es más adecuado seguir el procedimiento laboral ordinario [1]. Debes presentar una demanda laboral ante el juez competente, aportando todas las pruebas necesarias para demostrar tu derecho a las prestaciones sociales. Es importante que consultes con un abogado laboralista para que te asesore y te represente en el proceso [1]. La Corte Constitucional ha establecido que la tutela procede de manera excepcional frente a particulares cuando hay indefensión o subordinación, pero en este caso, el procedimiento laboral es el más adecuado [1]. Recuerda que es fundamental actuar con prontitud, ya que hay un plazo límite para presentar la demanda laboral. Puedes consultar la página web del Ministerio de Trabajo o acudir a una oficina de asesoría laboral para obtener más información sobre el procedimiento a seguir.",
+      "answer": "**HECHOS RELEVANTES:**  \nEl consultante fue despedido sin justa causa después de 3 años de trabajo continuo. El empleador no pagó las prestaciones sociales completas. El caso no cumple con los requisitos temporales (10+ años) para aplicar el Artículo 267 del CST sobre pensión-sanción, pero sí configura un despido injustificado con omisión en el pago de prestaciones sociales.\n\n**NORMAS APLICABLES:**  \n1. **Artículo 267 del CST (Fuente [1] y [2]):** Establece la pensión-sanción para trabajadores no afiliados al Sistema General de Pensiones por omisión del empleador, despedidos sin justa causa después de 10 o más años de servicio. No aplica al caso por insuficiencia en el tiempo laborado (3 años).  \n2. **Prescripción de derechos laborales (Instrucciones críticas):** Plazo de 3 años desde la terminación del contrato para reclamar.  \n\n**ANÁLISIS JURÍDICO:**  \n- El despido sin justa causa genera obligaciones para el empleador, incluyendo el pago de indemnizaciones y prestaciones sociales adeudadas (prima de servicios, cesantías, intereses sobre cesantías y vacaciones).  \n- El Artículo 267 citado no es aplicable al no cumplirse el requisito de antigüedad (10+ años). Sin embargo, el despido injustificado sí activa otros derechos bajo el CST no incluidos en las fuentes disponibles, como la indemnización sustitutiva del preaviso y la de despido sin causa (Art. 64 y 65 CST, aunque no están en las fuentes proporcionadas).  \n- La omisión en el pago de prestaciones sociales es una infracción laboral independiente del motivo del despido.  \n\n**CONCLUSIÓN:**  \nEl consultante tiene derecho a reclamar:  \n1. Prestaciones sociales adeudadas (cesantías, intereses, prima y vacaciones).  \n2. Indemnización por despido sin justa causa (aunque las fuentes no incluyen los artículos específicos, este derecho está reconocido en el CST).  \n3. El reclamo debe realizarse dentro del plazo de prescripción de 3 años.  \n\n**RECOMENDACIÓN:**  \n1. **Recopilar documentos:**  \n   - Copia del contrato de trabajo.  \n   - Comunicación de despido (si existe).  \n   - Certificados de ingresos y tiempo de servicio.  \n2. **Acción legal:**  \n   - Presentar una **demanda ante el juez laboral** dentro de los 3 años siguientes al despido.  \n   - Alternativamente, iniciar un **proceso conciliatorio** ante el Ministerio del Trabajo o una entidad autorizada (menos formal, pero sin efecto vinculante si no hay acuerdo).  \n3. **Asesoría profesional:** Consultar con un abogado laboralista para cuantificar exactamente los montos adeudados (incluyendo salarios pendientes si los hubiera) y redactar la demanda.  \n\n⚠️ **Nota:** Las fuentes disponibles no contienen los artículos específicos sobre indemnizaciones por despido injustificado (ej. Art. 64 CST), por lo que se recomienda complementar el análisis con el texto completo del Código Sustantivo del Trabajo.",
       "citations": [
         {
-          "id": "doc-jurisprudencia_tutela",
-          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "id": "doc-codigo_codigo_sustantivo_trabajo",
+          "title": "Código Sustantivo del Trabajo",
+          "type": "estatuto",
+          "article": "Artículo 267.",
+          "score": 1.5130018487533032
+        },
+        {
+          "id": "doc-codigo_codigo_sustantivo_trabajo",
+          "title": "Código Sustantivo del Trabajo",
+          "type": "estatuto",
+          "article": "Artículo 267.",
+          "score": 1.50099604399144
+        },
+        {
+          "id": "doc-codigo_codigo_sustantivo_trabajo",
+          "title": "Código Sustantivo del Trabajo",
+          "type": "estatuto",
+          "article": "Artículo 267.",
+          "score": 1.5003950978354528
+        },
+        {
+          "id": "doc-codigo_codigo_sustantivo_trabajo",
+          "title": "Código Sustantivo del Trabajo",
+          "type": "estatuto",
+          "article": "Artículo 267.",
+          "score": 1.4926053648186564
+        },
+        {
+          "id": "doc-codigo_codigo_sustantivo_trabajo",
+          "title": "Código Sustantivo del Trabajo",
+          "type": "estatuto",
+          "article": "Artículo 208. y Artículo 209.",
+          "score": 1.4118317707565173
+        },
+        {
+          "id": "doc-jurisprudencia_sentencia_t_760_2008",
+          "title": "Sentencia T-760/2008 - Corte Constitucional",
           "type": "jurisprudencia",
-          "article": "Artículo 86",
-          "score": 0.02254350685693252
+          "score": 1.3794190759313527
         },
         {
-          "id": "doc-estatuto_codigo_de_comercio",
-          "title": "Codigo de Comercio",
+          "id": "doc-codigo_codigo_sustantivo_trabajo",
+          "title": "Código Sustantivo del Trabajo",
           "type": "estatuto",
-          "score": 0.021152597038796583
+          "article": "Artículo 408.",
+          "score": 1.3481022043014423
         },
         {
-          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
-          "title": "Ley 100 de 1993 - Seguridad Social",
+          "id": "doc-codigo_codigo_sustantivo_trabajo",
+          "title": "Código Sustantivo del Trabajo",
           "type": "estatuto",
-          "score": 0.011015998289704098
-        },
-        {
-          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
-          "title": "Codigo Sustantivo del Trabajo",
-          "type": "estatuto",
-          "score": -0.0030762043352332504
-        },
-        {
-          "id": "doc-estatuto_constitucion_politica_de_colombia_extractos",
-          "title": "Constitucion Politica de Colombia - Extractos Principales",
-          "type": "estatuto",
-          "score": -0.00863748576245968
-        },
-        {
-          "id": "doc-estatuto_horas_extras",
-          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
-          "type": "estatuto",
-          "article": "Artículo 168",
-          "score": -0.010515307481401151
-        },
-        {
-          "id": "doc-estatuto_constitucion_politica_de_colombia",
-          "title": "Constitucion Politica de Colombia",
-          "type": "estatuto",
-          "score": -0.013974681960456373
-        },
-        {
-          "id": "doc-estatuto_horas_extras",
-          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
-          "type": "estatuto",
-          "article": "Artículo 159 y Artículo 160",
-          "score": -0.019409721369970694
+          "article": "Artículo 450.",
+          "score": 1.3390565354465072
         }
       ],
       "metrics": {
-        "answerLength": 1347,
-        "citationCount": 4,
-        "uniqueCitations": 1,
+        "answerLength": 2846,
+        "citationCount": 2,
+        "uniqueCitations": 2,
         "sourcesAvailable": 8,
         "hasAdvice": true,
         "hasProcedure": true,
-        "responseTime": "0.01"
+        "responseTime": "20.55"
       }
     },
     {
       "query": "Mi empleador me está obligando a trabajar los domingos sin pagarme el recargo dominical. ¿Es legal esto y qué puedo hacer?",
       "category": "laboral_complejo",
       "complexity": "media",
-      "answer": "Según el Código Sustantivo del Trabajo, específicamente en el Artículo 168, se establece el recargo por trabajo nocturno, pero no se menciona explícitamente el recargo dominical [2]. Sin embargo, es importante considerar que el trabajo en domingos y festivos puede estar regulado por otras disposiciones. \n\nEn el contexto colombiano, el trabajo en domingos y festivos puede generar un recargo sobre el salario ordinario, pero esto debe ser consultado en la normativa específica que regula la jornada de trabajo y los descansos [3]. El Artículo 159 del Código Sustantivo del Trabajo establece que el trabajo suplementario o de horas extras debe ser remunerado con recargo del veinticinco por ciento (25%) sobre el salario ordinario en el diurno [3]. \n\nSi considera que sus derechos laborales están siendo vulnerados, puede buscar asesoría en una entidad laboral competente o considerar la acción de tutela para proteger sus derechos fundamentales, según lo establecido en el Artículo 86 de la Constitución Política de Colombia [1]. Es importante recordar que la tutela procede de manera excepcional frente a particulares cuando hay indefensión o subordinación. \n\nPara resolver su situación, es recomendable consultar directamente con el Ministerio del Trabajo o una entidad laboral competente para obtener orientación específica sobre su caso y los pasos a seguir. También puede ser útil revisar los contratos laborales y acuerdos colectivos que puedan aplicar en su situación laboral.",
+      "answer": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. Mi empleador me está obligando a trabajar los domingos sin pagarme el recargo dominical. ¿Es legal esto**\n\n\n\n**HECHOS RELEVANTES:**  \nEl consultante manifiesta que su empleador lo obliga a trabajar los domingos sin pagarle el recargo dominical correspondiente. No se especifica si el trabajo dominical es habitual o esporádico, ni si el consultante pertenece a un sector con excepciones legales (ej. agropecuario, técnico).  \n\n**NORMAS APLICABLES:**  \n1. **Artículo 173 CST [4]**: Establece el derecho a remuneración del descanso dominical para trabajadores que cumplen su jornada semanal completa, salvo faltas injustificadas.  \n2. **Artículo 185 CST [1]**: Exige al empleador fijar un aviso público con 12 horas de anticipación cuando el trabajo dominical es habitual, indicando el personal afectado y el descanso compensatorio.  \n3. **Artículo 182 CST [3]**: Permite trabajo dominical sin descanso compensatorio para técnicos irreemplazables, pero con remuneración según el Artículo 179 (no incluido en las fuentes).  \n4. **Artículo 183 CST [3]**: Regula las formas de descanso compensatorio (día alterno o medio día extendido).  \n\n**ANÁLISIS JURÍDICO:**  \n- **Derecho al recargo dominical**: Según el Artículo 173 [4], el trabajador tiene derecho a remuneración por el descanso dominical si cumple su jornada semanal completa. Si el empleador no paga este recargo, incumple la norma.  \n- **Excepciones**:  \n  - **Trabajo técnico irreemplazable (Artículo 182 [3])**: No aplica descanso compensatorio, pero sí remuneración según Artículo 179 (no detallado en las fuentes).  \n  - **Sector agropecuario (Artículo 185-A [1])**: Trabajo dominical es obligatorio con remuneración y descanso compensatorio.  \n- **Formalidades**: Si el trabajo dominical es habitual, el empleador debe cumplir con el aviso público y descanso compensatorio (Artículo 185 [1]).  \n\n**CONCLUSIÓN:**  \nLa obligación de trabajar domingos sin pago del recargo dominical es **ilegal**, salvo que el consultante pertenezca a un sector con excepciones (ej. agropecuario o técnico irreemplazable). El empleador debe pagar la remuneración correspondiente y garantizar el descanso compensatorio según lo establecido en los Artículos 173 y 185 del CST.  \n\n**RECOMENDACIÓN:**  \n1. **Documentar**: Registrar los domingos trabajados y la falta de pago (nóminas, comunicaciones).  \n2. **Exigir cumplimiento**: Solicitar por escrito el pago del recargo dominical y el descanso compensatorio, citando los Artículos 173 y 185 CST.  \n3. **Acción legal**: Si persiste el incumplimiento, presentar una queja ante el Ministerio del Trabajo o demandar ante la jurisdicción laboral (plazo de prescripción: 3 años desde la terminación del contrato).  \n4. **Asesoría**: Consultar un abogado laboralista para evaluar si aplican excepciones legales en su caso concreto.  \n\n⚠️ **Nota**: Las fuentes no incluyen el Artículo 179 CST (remuneración para trabajo dominical), por lo que se recomienda verificar su contenido para un análisis completo.\n\n\n\n---\n\n\n\n**2. y qué puedo hacer?**\n\n\n\n**HECHOS RELEVANTES:**  \nLa consulta se refiere a una persona asalariada con diagnóstico de gigantomastia y déficit funcional dorso lumbar, que sufre dolor constante y limitaciones para realizar sus labores cotidianas y laborales. La persona no cuenta con recursos económicos suficientes para costear una cirugía de reducción mamaria y solicita orientación sobre las acciones legales disponibles para acceder al tratamiento médico necesario.  \n\n**NORMAS APLICABLES:**  \n1. **Sentencia T-760/2008 (Corte Constitucional)**:  \n   - Reconoce el derecho a la salud como fundamental y ordena a las EPS garantizar tratamientos médicos necesarios, incluso si no están incluidos en el POS (Plan Obligatorio de Salud) [1], [4].  \n   - Establece que, en casos de precariedad económica, la EPS debe asumir los costos y realizar recobros ante el Fosyga [4].  \n   - Ordena valoraciones interdisciplinarias en plazos perentorios (48 horas para valoración y 2 meses como máximo para tratamiento) [4].  \n\n2. **Artículo 142 (citado en Sentencia C-355/2006)**:  \n   - Aunque no es directamente aplicable al caso, refuerza la idea de plazos perentorios en contextos de salud [3].  \n\n**ANÁLISIS JURÍDICO:**  \n1. **Derecho a la salud**: La situación descrita encaja en los supuestos de la Sentencia T-760/2008, donde se protege el acceso a tratamientos médicos necesarios para condiciones que afectan la calidad de vida y capacidad laboral. La gigantomastia con déficit funcional es una condición médica grave que justifica la intervención quirúrgica.  \n2. **Obligaciones de la EPS**: La EPS está obligada a:  \n   - Realizar una valoración interdisciplinaria urgente (máximo 48 horas).  \n   - Ordenar el tratamiento (cirugía) si es médicamente necesario, sin excusarse en exclusiones del POS.  \n   - Asumir los costos si la paciente demuestra incapacidad económica, con posibilidad de recobro ante Fosyga.  \n3. **Acción legal**: La vía idónea es una *acción de tutela* por vulneración del derecho a la salud (Art. 86 Constitución Política), basada en la jurisprudencia constitucional citada.  \n\n**CONCLUSIÓN:**  \nLa paciente tiene derecho a que su EPS garantice la cirugía de reducción mamaria por ser un tratamiento necesario para su condición médica, independientemente de su inclusión en el POS. La vía legal más efectiva es interponer una acción de tutela para exigir la valoración y tratamiento inmediatos.  \n\n**RECOMENDACIÓN:**  \n1. **Documentación**:  \n   - Reunir: diagnóstico médico, historial clínico, pruebas de ingresos (ej. nómina, declaración de renta) para acreditar incapacidad económica.  \n2. **Acción inmediata**:  \n   - Solicitar por escrito a la EPS la valoración interdisciplinaria (especialistas en ortopedia/ginecología) y la autorización de la cirugía.  \n   - Si la EPS no responde en 48 horas, interponer tutela ante un juez municipal/promiscuo.  \n3. **Plazos**:  \n   - La tutela debe resolverse en 10 días. Incluir en la demanda copia de la solicitud a la EPS y todos los soportes médicos.  \n4. **Asesoría**:  \n   - Acudir a una clínica jurídica o defensoría del pueblo para redacción de la tutela.  \n\n⚠️ **Nota**: Si la EPS es Famisanar, la Sentencia T-760/2008 es directamente aplicable (caso análogo). En otros casos, se invoca el mismo precedente.",
       "citations": [
         {
-          "id": "doc-jurisprudencia_tutela",
-          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "id": "doc-codigo_codigo_sustantivo_trabajo",
+          "title": "Código Sustantivo del Trabajo",
+          "type": "estatuto",
+          "article": "Artículo 185.",
+          "score": 1.5159527858595183
+        },
+        {
+          "id": "doc-codigo_codigo_sustantivo_trabajo",
+          "title": "Código Sustantivo del Trabajo",
+          "type": "estatuto",
+          "article": "Artículo 161.",
+          "score": 1.4495526210783876
+        },
+        {
+          "id": "doc-codigo_codigo_sustantivo_trabajo",
+          "title": "Código Sustantivo del Trabajo",
+          "type": "estatuto",
+          "article": "Artículo 182. y Artículo 183.",
+          "score": 1.3923620129255108
+        },
+        {
+          "id": "doc-codigo_codigo_sustantivo_trabajo",
+          "title": "Código Sustantivo del Trabajo",
+          "type": "estatuto",
+          "article": "Artículo 173.",
+          "score": 1.3558550322819487
+        },
+        {
+          "id": "doc-ley_ley_2101_2021_reduccion_jornada",
+          "title": "Ley 2101 de 2021 — Reducción de Jornada Laboral",
+          "type": "estatuto",
+          "article": "Artículo 161.",
+          "score": 1.3370647808618572
+        },
+        {
+          "id": "doc-codigo_codigo_sustantivo_trabajo",
+          "title": "Código Sustantivo del Trabajo",
+          "type": "estatuto",
+          "article": "Artículo 179.",
+          "score": 1.3287203027600831
+        },
+        {
+          "id": "doc-ley_ley_2466_2025_reforma_laboral",
+          "title": "Ley 2466 de 2025 — Reforma Laboral",
+          "type": "estatuto",
+          "article": "Artículo 14.",
+          "score": 1.3131776200882093
+        },
+        {
+          "id": "doc-jurisprudencia_sentencia_t_760_2008",
+          "title": "Sentencia T-760/2008 - Corte Constitucional",
           "type": "jurisprudencia",
-          "article": "Artículo 86",
-          "score": 0.03652875388404459
+          "score": 1.2115342989604723
         },
         {
-          "id": "doc-estatuto_horas_extras",
-          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
-          "type": "estatuto",
-          "article": "Artículo 168",
-          "score": 0.031420723082483164
+          "id": "doc-jurisprudencia_sentencia_c_355_2006",
+          "title": "Sentencia C-355/2006 - Corte Constitucional",
+          "type": "jurisprudencia",
+          "article": "Artículo 142",
+          "score": 1.2057028625346673
         },
         {
-          "id": "doc-estatuto_codigo_sustantivo_del_trabajo_extractos",
-          "title": "Codigo Sustantivo del Trabajo - Extractos Principales",
-          "type": "estatuto",
-          "score": 0.019637815269092473
-        },
-        {
-          "id": "doc-estatuto_codigo_civil",
-          "title": "Codigo Civil",
-          "type": "estatuto",
-          "score": 0.014444410243445591
-        },
-        {
-          "id": "doc-estatuto_constitucion_politica_de_colombia",
-          "title": "Constitucion Politica de Colombia",
-          "type": "estatuto",
-          "score": 0.012290964395554322
-        },
-        {
-          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
-          "title": "Codigo Sustantivo del Trabajo",
-          "type": "estatuto",
-          "score": 0.012052932195909733
-        },
-        {
-          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
-          "title": "Ley 100 de 1993 - Seguridad Social",
-          "type": "estatuto",
-          "score": 0.0050519046641573665
-        },
-        {
-          "id": "doc-estatuto_codigo_de_comercio",
-          "title": "Codigo de Comercio",
-          "type": "estatuto",
-          "score": -0.01653878698917399
+          "id": "doc-jurisprudencia_sentencia_c_355_2006",
+          "title": "Sentencia C-355/2006 - Corte Constitucional",
+          "type": "jurisprudencia",
+          "article": "Artículo 53.",
+          "score": 1.1959471301221718
         }
       ],
       "metrics": {
-        "answerLength": 1484,
-        "citationCount": 4,
+        "answerLength": 6375,
+        "citationCount": 13,
         "uniqueCitations": 3,
-        "sourcesAvailable": 8,
+        "sourcesAvailable": 10,
         "hasAdvice": true,
         "hasProcedure": true,
-        "responseTime": "0.02"
+        "responseTime": "44.90"
       }
     },
     {
       "query": "Necesito saber si puedo presentar una acción de tutela para que me reconozcan mi pensión. Tengo 62 años y he cotizado 20 años, pero la administradora me dice que no cumplo los requisitos.",
       "category": "constitucional_seguridad_social",
       "complexity": "alta",
-      "answer": "La acción de tutela es un mecanismo constitucional para proteger los derechos fundamentales [1]. En este caso, si consideras que tu derecho a la pensión está siendo vulnerado, podrías presentar una acción de tutela. Sin embargo, es importante verificar si cumples con los requisitos establecidos en la ley para acceder a la pensión, como lo establece el artículo 33 de la Ley 100 de 1993 [2]. La edad y el tiempo de cotización son factores clave para determinar la elegibilidad para una pensión. Si has cotizado 20 años y tienes 62 años, es posible que cumples con los requisitos para una pensión de vejez, según lo establecido en el artículo 12 de la Ley 100 de 1993 [3]. Te recomiendo consultar el reglamento específico de la administradora de pensiones y la legislación vigente para entender mejor tus derechos y obligaciones. También podrías considerar consultar a un abogado especializado en derecho laboral o a la Superintendencia de la Protección Social [4] para obtener orientación personalizada. La acción de tutela debe ser presentada ante el juez competente, quien evaluará si hay una vulneración de tus derechos fundamentales [5]. Es crucial tener en cuenta que la acción de tutela no es un mecanismo para resolver disputas contractuales o laborales comunes, sino para proteger derechos fundamentales [6].",
+      "answer": "**HECHOS RELEVANTES:**  \nEl consultante tiene 62 años y ha cotizado 20 años para pensión, pero la administradora le niega el reconocimiento alegando incumplimiento de requisitos. Busca saber si procede una acción de tutela para proteger su derecho a la pensión.  \n\n**NORMAS APLICABLES:**  \n1. **Constitución Política - Art. 86** [1]: Establece la acción de tutela para proteger derechos fundamentales.  \n2. **Decreto 2591 de 1991 y 1382 de 2000** [1]: Regulan el procedimiento de tutela, plazos y requisitos.  \n3. **Código Sustantivo del Trabajo - Art. 278** [2]: Indica que con 55+ años y 15+ años de servicios, la pensión de invalidez se convierte en jubilación. No menciona requisitos para pensión ordinaria.  \n4. **Código Sustantivo del Trabajo - Art. 265** [3]: Regula la prueba de supervivencia para el pago de pensiones, pero no aplica directamente al caso.  \n\n**ANÁLISIS JURÍDICO:**  \n- La tutela procede solo si se vulnera un derecho fundamental (ej: vida digna, igualdad) y no hay otro mecanismo efectivo. El derecho a la pensión es un derecho prestacional, no fundamental *per se*, pero podría invocarse si la negativa afecta derechos conexos como la vida digna (Art. 86 CP [1]).  \n- El Art. 278 CST [2] no establece requisitos para pensión de vejez ordinaria, solo para conversión de invalidez a jubilación. Se requeriría analizar la normativa específica del sistema de pensiones (no incluida en las fuentes).  \n- La administradora debe motivar su negativa. Si incumple deberes formales (ej: no responder peticiones), podría configurarse una vulneración indirecta a derechos fundamentales.  \n\n**CONCLUSIÓN:**  \nLa tutela sería viable **solo si** la negativa de la pensión afecta derechos fundamentales (ej: subsistencia mínima) y se agotaron otras vías (recurso de reposición, acción contencioso-administrativa). Las fuentes disponibles no permiten confirmar si cumple los requisitos legales para la pensión, pues falta normativa específica.  \n\n**RECOMENDACIÓN:**  \n1. **Agotar vías ordinarias**: Presentar recurso de reposición ante la administradora (plazo: 10 días hábiles desde la notificación de la negativa) [Instrucciones].  \n2. **Recopilar pruebas**: Certificados de cotización, comunicación de negativa y documentos que acrediten afectación a derechos fundamentales (ej: condición económica crítica).  \n3. **Evaluar tutela**: Si persiste la negativa injustificada y hay afectación grave, presentar tutela con:  \n   - Escrito que detalle la vulneración a derechos fundamentales.  \n   - Pruebas de la negativa y su impacto.  \n   - Copia del recurso de reposición agotado (o justificación de no exigibilidad).  \n4. **Plazo**: La tutela debe interponerse dentro de un término razonable desde la negativa definitiva (Fuente [1]).  \n\n⚠️ **Nota**: Se recomienda asesoría profesional para analizar la normativa específica del sistema de pensiones (Ley 100/1993 o régimen aplicable), no incluida en las fuentes proporcionadas.\n\n⚠️ **Vigencia:** La norma \"Ley 100 de 1993 — Sistema General de Seguridad Social\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Ley 100 de 1993 — Sistema General de Seguridad Social\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Ley 100 de 1993 — Sistema General de Seguridad Social\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Ley 100 de 1993 — Sistema General de Seguridad Social\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Ley 100 de 1993 — Sistema General de Seguridad Social\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Ley 100 de 1993 — Sistema General de Seguridad Social\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Ley 100 de 1993 — Sistema General de Seguridad Social\" tiene artículos derogados o modificados; verifique vigencia específica.",
       "citations": [
         {
-          "id": "doc-estatuto_codigo_civil",
-          "title": "Codigo Civil",
+          "id": "procedimiento-tutela",
+          "title": "Acción de Tutela",
+          "type": "procedimiento",
+          "score": 0.95
+        },
+        {
+          "id": "doc-codigo_codigo_sustantivo_trabajo",
+          "title": "Código Sustantivo del Trabajo",
           "type": "estatuto",
-          "score": 0.019479569993535877
+          "article": "Artículo 278.",
+          "score": 1.4165998309687315
         },
         {
-          "id": "doc-estatuto_constitucion_politica_de_colombia_extractos",
-          "title": "Constitucion Politica de Colombia - Extractos Principales",
+          "id": "doc-codigo_codigo_sustantivo_trabajo",
+          "title": "Código Sustantivo del Trabajo",
           "type": "estatuto",
-          "score": 0.013974818333551856
+          "article": "Artículo 265.",
+          "score": 1.34689474509206
         },
         {
-          "id": "doc-reglamento_accion_cumplimiento",
-          "title": "Ley 393 de 1997 — Acción de Cumplimiento (Mock)",
-          "type": "reglamento",
-          "article": "Artículo 1 y Artículo 5",
-          "score": 0.0018079171559382612
-        },
-        {
-          "id": "doc-jurisprudencia_tutela",
-          "title": "Corte Constitucional — Acción de Tutela (Mock)",
-          "type": "jurisprudencia",
-          "article": "Artículo 86",
-          "score": 0.00030145075761176215
-        },
-        {
-          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
-          "title": "Codigo Sustantivo del Trabajo",
+          "id": "doc-ley_ley_100_1993_seguridad_social",
+          "title": "Ley 100 de 1993 — Sistema General de Seguridad Social",
           "type": "estatuto",
-          "score": -0.018146557229989153
+          "article": "Artículo 33.",
+          "score": 1.3420504309259678
         },
         {
-          "id": "doc-estatuto_horas_extras",
-          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "id": "doc-ley_ley_100_1993_seguridad_social",
+          "title": "Ley 100 de 1993 — Sistema General de Seguridad Social",
           "type": "estatuto",
-          "article": "Artículo 168",
-          "score": -0.021447663722084304
+          "article": "Artículo 33.",
+          "score": 1.340764936558121
         },
         {
-          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
-          "title": "Ley 100 de 1993 - Seguridad Social",
+          "id": "doc-ley_ley_100_1993_seguridad_social",
+          "title": "Ley 100 de 1993 — Sistema General de Seguridad Social",
           "type": "estatuto",
-          "score": -0.026768566029955282
+          "article": "Artículo 33.",
+          "score": 1.333079390730378
         },
         {
-          "id": "doc-estatuto_codigo_de_comercio",
-          "title": "Codigo de Comercio",
+          "id": "doc-ley_ley_100_1993_seguridad_social",
+          "title": "Ley 100 de 1993 — Sistema General de Seguridad Social",
           "type": "estatuto",
-          "score": -0.03010217232959272
+          "article": "Artículo 29.",
+          "score": 1.327197489278094
+        },
+        {
+          "id": "doc-ley_ley_100_1993_seguridad_social",
+          "title": "Ley 100 de 1993 — Sistema General de Seguridad Social",
+          "type": "estatuto",
+          "article": "Artículo 33.",
+          "score": 1.3156419616742876
+        },
+        {
+          "id": "doc-ley_ley_100_1993_seguridad_social",
+          "title": "Ley 100 de 1993 — Sistema General de Seguridad Social",
+          "type": "estatuto",
+          "article": "Artículo 36.",
+          "score": 1.2827532568304814
+        },
+        {
+          "id": "doc-ley_ley_100_1993_seguridad_social",
+          "title": "Ley 100 de 1993 — Sistema General de Seguridad Social",
+          "type": "estatuto",
+          "article": "Artículo 33.",
+          "score": 1.238339200798955
         }
       ],
       "metrics": {
-        "answerLength": 1317,
-        "citationCount": 6,
-        "uniqueCitations": 6,
-        "sourcesAvailable": 8,
+        "answerLength": 3915,
+        "citationCount": 7,
+        "uniqueCitations": 3,
+        "sourcesAvailable": 10,
         "hasAdvice": true,
         "hasProcedure": true,
-        "responseTime": "0.01"
+        "responseTime": "21.45"
       }
     },
     {
       "query": "Mi empresa me está descontando de mi salario el valor de la seguridad social, pero no está haciendo los aportes. ¿Qué derechos tengo y cómo puedo protegerlos?",
       "category": "laboral_seguridad_social",
       "complexity": "alta",
-      "answer": "Si tu empresa te está descontando el valor de la seguridad social de tu salario pero no está haciendo los aportes correspondientes, tienes derecho a reclamar el cumplimiento de esta obligación. Según la Constitución Política de Colombia, específicamente el Artículo 86 [1], puedes interponer una acción de tutela para proteger tus derechos fundamentales, aunque generalmente se aplica contra autoridades públicas, puede proceder contra particulares en casos de indefensión o subordinación. La Corte Constitucional ha establecido que los derechos laborales, incluidos los relacionados con la seguridad social, son fundamentales y deben ser protegidos [1]. Es importante que recopiles toda la documentación que respalde tus descuentos y la falta de aportes por parte de tu empleador. Puedes comenzar por hablar con el departamento de recursos humanos de tu empresa para resolver el asunto de manera amistosa. Si no se resuelve, considera acudir a la autoridad laboral competente o a un abogado especializado en derecho laboral para obtener asesoría específica y proceder con la acción de tutela si es necesario. La acción de tutela es un mecanismo preferente y sumario [1], diseñado para la protección inmediata de los derechos fundamentales. Recuerda que, para que proceda la tutela contra un particular, debe haber una relación de subordinación o indefensión, lo cual puede darse en el contexto laboral. Es crucial actuar con prontitud para evitar que se agrave la situación. Para más información, te sugiero consultar directamente con un profesional del derecho o con las autoridades laborales competentes en Colombia.",
+      "answer": "**Entidades mencionadas:** empresa\n\n\n\nEsta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. Mi empresa me está descontando de mi salario el valor de la seguridad social, pero no está haciendo los aportes. ¿Qué derechos tengo**\n\n\n\n**HECHOS RELEVANTES:**  \nEl consultante reporta que su empleador le está descontando del salario el valor correspondiente a los aportes de seguridad social, pero no está realizando dichos pagos a las entidades correspondientes. Esto implica una retención indebida y un incumplimiento de las obligaciones legales del empleador en materia de seguridad social.\n\n**NORMAS APLICABLES:**  \n1. **Fuente [1] (Sentencia T-760/2008 - Corte Constitucional):**  \n   - Establece que el incumplimiento del empleador en el pago de las cotizaciones a la seguridad social lo obliga a asumir las responsabilidades económicas derivadas de dicho incumplimiento, exonerando a la entidad de seguridad social (en este caso, no se especifica cuál).  \n2. **Fuente [3] (Código General del Proceso - Artículo 549):**  \n   - Indica que los aportes a la seguridad social de los empleados son considerados gastos de administración, incluso si se causaron antes de la aceptación de una solicitud (aunque este artículo no aborda directamente el incumplimiento, refuerza la obligatoriedad de los aportes).  \n\n**ANÁLISIS JURÍDICO:**  \nSegún la **Fuente [1]**, el empleador es directamente responsable del pago oportuno de las cotizaciones a la seguridad social. Si retiene los descuentos del salario pero no los gira a las entidades correspondientes, incurre en una conducta ilegal que vulnera los derechos del trabajador. El trabajador no debe asumir las consecuencias de este incumplimiento, y el empleador está obligado a regularizar los pagos y asumir las prestaciones económicas que deriven de su omisión (como incapacidades no cubiertas, según el caso analizado en la sentencia).  \n\nAunque las fuentes disponibles no detallan el procedimiento sancionatorio contra el empleador, el **Artículo 549 (Fuente [3])** refuerza que estos aportes son obligatorios y forman parte de los gastos administrativos de la empresa.  \n\n**CONCLUSIÓN:**  \nEl empleador está incumpliendo sus obligaciones legales al retener los aportes de seguridad social sin realizarlos. El trabajador tiene derecho a exigir el pago inmediato de dichas cotizaciones y a que se le indemnicen los perjuicios causados por este incumplimiento (como la falta de cobertura en salud o pensiones).  \n\n**RECOMENDACIÓN:**  \n1. **Recopilar pruebas:**  \n   - Copia de recibos de pago de nómina donde se evidencie el descuento.  \n   - Certificación de afiliación y estado de aportes ante la EPS y AFP (solicitarla directamente a estas entidades).  \n2. **Acciones legales:**  \n   - Presentar una queja formal ante el **Ministerio del Trabajo** por incumplimiento en los aportes (plazo: dentro de los 3 años desde la ocurrencia, según prescripción laboral).  \n   - Si el empleador no regulariza la situación, iniciar un **proceso laboral** para exigir el pago de las cotizaciones adeudadas y posibles perjuicios.  \n3. **Asesoría:**  \n   - Consultar con un abogado laboralista para evaluar la viabilidad de una demanda por incumplimiento contractual y vulneración de derechos.  \n\n⚠️ **Nota:** Las fuentes disponibles no incluyen artículos específicos sobre sanciones al empleador, por lo que se recomienda complementar con la Ley 100 de 1993 (Seguridad Social) y el Código Sustantivo del Trabajo en su integridad para un análisis completo.\n\n\n\n---\n\n\n\n**2. y cómo puedo protegerlos?**\n\n\n\n**HECHOS RELEVANTES:**  \nLa consulta se refiere a cómo una empresa puede proteger derechos, aunque no se especifica si son derechos de menores, trabajadores o socios. Las fuentes disponibles solo contienen normas sobre protección de niños, niñas y adolescentes (Ley 1098 de 2006) y un fragmento sobre acceso a información en salud (Sentencia T-760/2008). No hay datos concretos sobre la entidad, su actividad o los derechos a proteger.  \n\n**NORMAS APLICABLES:**  \n1. **Artículo 41 de la Ley 1098 de 2006** [2], [3]: Establece obligaciones para proteger menores contra explotación económica, desplazamientos arbitrarios, reclutamiento ilegal y garantizar derechos alimentarios y educativos.  \n2. **Artículo 20 de la Ley 1098 de 2006** [4]: Enumera derechos de protección de menores contra abandono, explotación, consumo de sustancias y abusos sexuales.  \n3. **Sentencia T-760/2008** [1]: Solo aplicable a protección de derechos en salud, ordena medidas para garantizar acceso a información en el sistema de salud.  \n\n**ANÁLISIS JURÍDICO:**  \n- Si la empresa busca proteger derechos de menores (ej. empleados, beneficiarios):  \n  - Debe cumplir con el **Artículo 41** (evitar explotación laboral, garantizar educación) y **Artículo 20** (protección contra abusos).  \n  - Las fuentes no mencionan normas comerciales específicas para empresas, solo deberes generales hacia menores.  \n- Si la protección es sobre socios o datos comerciales: Las fuentes no contienen información relevante.  \n- La Sentencia T-760/2008 [1] es inaplicable, ya que se refiere exclusivamente al sector salud.  \n\n**CONCLUSIÓN:**  \nLas fuentes disponibles solo permiten analizar la protección de derechos de niños, niñas y adolescentes. Si la empresa busca salvaguardar otros aspectos (ej. propiedad intelectual, societarios, contractuales), se requiere consultar normas comerciales específicas no incluidas en el contexto.  \n\n**RECOMENDACIÓN:**  \n1. **Si la protección es sobre menores**:  \n   - Implementar protocolos contra explotación laboral (Art. 41 [2], [3]).  \n   - Capacitar al personal en derechos del menor (Art. 20 [4]).  \n   - Reportar vulneraciones al ICBF o autoridades competentes.  \n2. **Para otros derechos comerciales**:  \n   - Consultar el Código de Comercio, Ley 222 de 1995 (régimen societario) o Ley 256 de 1996 (propiedad industrial).  \n   - Evaluar contratos con cláusulas de confidencialidad y garantías legales.  \n3. **Plazos clave**:  \n   - Registro de medidas ante Cámara de Comercio (30 días desde su implementación).  \n   - En caso de conflictos, verificar términos de prescripción según la acción legal.  \n\n⚠️ **Nota**: La consulta requiere mayor detalle sobre el tipo de protección buscada y análisis de normas comerciales no disponibles en las fuentes proporcionadas.\n\n⚠️ **Vigencia:** La norma \"Código de Procedimiento Penal (Ley 906 de 2004)\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Código de Procedimiento Penal (Ley 906 de 2004)\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Código de Procedimiento Penal (Ley 906 de 2004)\" tiene artículos derogados o modificados; verifique vigencia específica.",
       "citations": [
         {
-          "id": "doc-jurisprudencia_tutela",
-          "title": "Corte Constitucional — Acción de Tutela (Mock)",
+          "id": "doc-jurisprudencia_sentencia_t_760_2008",
+          "title": "Sentencia T-760/2008 - Corte Constitucional",
           "type": "jurisprudencia",
-          "article": "Artículo 86",
-          "score": 0.02632009528667053
+          "score": 1.4413491306895145
         },
         {
-          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
-          "title": "Ley 100 de 1993 - Seguridad Social",
+          "id": "doc-codigo_codigo_sustantivo_trabajo",
+          "title": "Código Sustantivo del Trabajo",
           "type": "estatuto",
-          "score": 0.019877149392959002
+          "article": "Artículo 307. y Artículo 308.",
+          "score": 1.432510964641975
         },
         {
-          "id": "doc-estatuto_codigo_de_comercio",
-          "title": "Codigo de Comercio",
+          "id": "doc-codigo_codigo_general_proceso_ley1564",
+          "title": "Código General del Proceso (Ley 1564 de 2012)",
           "type": "estatuto",
-          "score": 0.013496994827302329
+          "article": "Artículo 549.",
+          "score": 1.4258083920725417
         },
         {
-          "id": "doc-estatuto_constitucion_politica_de_colombia_extractos",
-          "title": "Constitucion Politica de Colombia - Extractos Principales",
+          "id": "doc-codigo_codigo_sustantivo_trabajo",
+          "title": "Código Sustantivo del Trabajo",
           "type": "estatuto",
-          "score": 0.0075117590310947585
+          "article": "Artículo 296.",
+          "score": 1.3361618585429003
         },
         {
-          "id": "doc-estatuto_horas_extras",
-          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
+          "id": "doc-codigo_codigo_sustantivo_trabajo",
+          "title": "Código Sustantivo del Trabajo",
           "type": "estatuto",
-          "article": "Artículo 168",
-          "score": -0.011125039426878584
+          "article": "Artículo 131.",
+          "score": 1.3153076351515471
         },
         {
-          "id": "doc-estatuto_constitucion_politica_de_colombia",
-          "title": "Constitucion Politica de Colombia",
+          "id": "doc-codigo_estatuto_tributario",
+          "title": "Estatuto Tributario (Decreto 624 de 1989)",
           "type": "estatuto",
-          "score": -0.015333296221561604
+          "article": "Artículo 126-1.",
+          "score": 1.0700013177105596
         },
         {
-          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
-          "title": "Codigo Sustantivo del Trabajo",
+          "id": "doc-codigo_estatuto_tributario",
+          "title": "Estatuto Tributario (Decreto 624 de 1989)",
           "type": "estatuto",
-          "score": -0.026634414578761367
+          "article": "Artículo 356-1.",
+          "score": 1.049365713125472
         },
         {
-          "id": "doc-reglamento_accion_cumplimiento",
-          "title": "Ley 393 de 1997 — Acción de Cumplimiento (Mock)",
-          "type": "reglamento",
-          "article": "Artículo 1 y Artículo 5",
-          "score": -0.034855340962376996
+          "id": "doc-codigo_codigo_infancia_adolescencia_ley1098",
+          "title": "Código de la Infancia y la Adolescencia (Ley 1098 de 2006)",
+          "type": "estatuto",
+          "article": "Artículo 41.",
+          "score": 1.3585585478070539
+        },
+        {
+          "id": "doc-codigo_codigo_infancia_adolescencia_ley1098",
+          "title": "Código de la Infancia y la Adolescencia (Ley 1098 de 2006)",
+          "type": "estatuto",
+          "article": "Artículo 20.",
+          "score": 1.2151078148716494
+        },
+        {
+          "id": "doc-codigo_codigo_procedimiento_penal_ley906",
+          "title": "Código de Procedimiento Penal (Ley 906 de 2004)",
+          "type": "estatuto",
+          "article": "Artículo 311.",
+          "score": 1.2096410371055513
+        },
+        {
+          "id": "doc-codigo_codigo_procedimiento_penal_ley906",
+          "title": "Código de Procedimiento Penal (Ley 906 de 2004)",
+          "type": "estatuto",
+          "article": "Artículo 307.",
+          "score": 1.2044265596178483
+        },
+        {
+          "id": "doc-codigo_codigo_infancia_adolescencia_ley1098",
+          "title": "Código de la Infancia y la Adolescencia (Ley 1098 de 2006)",
+          "type": "estatuto",
+          "article": "Artículo 18.",
+          "score": 1.2020800231090574
+        },
+        {
+          "id": "doc-codigo_codigo_procedimiento_penal_ley906",
+          "title": "Código de Procedimiento Penal (Ley 906 de 2004)",
+          "type": "estatuto",
+          "article": "Artículo 134.",
+          "score": 1.1986333739417305
+        },
+        {
+          "id": "doc-ley_ley_1581_2012_habeas_data",
+          "title": "Ley 1581 de 2012 — Protección de Datos Personales",
+          "type": "estatuto",
+          "article": "Artículo 7",
+          "score": 1.09533024303472
         }
       ],
       "metrics": {
-        "answerLength": 1619,
-        "citationCount": 3,
-        "uniqueCitations": 1,
-        "sourcesAvailable": 8,
+        "answerLength": 6755,
+        "citationCount": 12,
+        "uniqueCitations": 4,
+        "sourcesAvailable": 14,
         "hasAdvice": true,
         "hasProcedure": true,
-        "responseTime": "14.51"
+        "responseTime": "38.78"
       }
     },
     {
       "query": "Trabajo como independiente pero mi cliente me trata como empleado: me exige horarios fijos, me paga quincenal y me da órdenes directas. ¿Puedo reclamar relación laboral?",
       "category": "laboral_complejo",
-      "complexity": "alta",
-      "answer": "En Colombia, la relación laboral se caracteriza por la subordinación del trabajador al empleador, lo que incluye el cumplimiento de horarios fijos, la recepción de órdenes directas y el pago periódico [1]. Si como trabajador independiente estás siendo tratado de esta manera por tu cliente, es posible que puedas reclamar una relación laboral. La Corte Constitucional ha establecido que la acción de tutela puede proceder contra particulares cuando hay una relación de subordinación o indefensión [1]. En tu caso, el hecho de que te exijan horarios fijos, te paguen quincenalmente y te den órdenes directas podría indicar una relación de subordinación. Sin embargo, para determinar si realmente existe una relación laboral, sería necesario analizar todos los elementos de la relación laboral, como la dependencia económica y la falta de autonomía [2]. Te recomiendo consultar a un abogado laboralista para evaluar tu situación específica y determinar las mejores opciones legales. La acción de tutela podría ser una vía para reclamar tus derechos, pero es importante seguir el procedimiento establecido en el artículo 86 de la Constitución Política de Colombia [1]. Recuerda que la tutela es un mecanismo excepcional, por lo que es crucial demostrar la vulneración de tus derechos fundamentales.",
-      "citations": [
-        {
-          "id": "doc-jurisprudencia_tutela",
-          "title": "Corte Constitucional — Acción de Tutela (Mock)",
-          "type": "jurisprudencia",
-          "article": "Artículo 86",
-          "score": 0.05888883562037293
-        },
-        {
-          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
-          "title": "Codigo Sustantivo del Trabajo",
-          "type": "estatuto",
-          "score": 0.03763000192809664
-        },
-        {
-          "id": "doc-estatuto_constitucion_politica_de_colombia",
-          "title": "Constitucion Politica de Colombia",
-          "type": "estatuto",
-          "score": 0.029015313227231644
-        },
-        {
-          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
-          "title": "Ley 100 de 1993 - Seguridad Social",
-          "type": "estatuto",
-          "score": 0.02629701845044753
-        },
-        {
-          "id": "doc-estatuto_codigo_civil",
-          "title": "Codigo Civil",
-          "type": "estatuto",
-          "score": 0.01461718392065988
-        },
-        {
-          "id": "doc-estatuto_codigo_de_comercio",
-          "title": "Codigo de Comercio",
-          "type": "estatuto",
-          "score": 0.014434944951928123
-        },
-        {
-          "id": "doc-estatuto_horas_extras",
-          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
-          "type": "estatuto",
-          "article": "Artículo 168",
-          "score": 0.009738193590096852
-        },
-        {
-          "id": "doc-estatuto_constitucion_politica_de_colombia_extractos",
-          "title": "Constitucion Politica de Colombia - Extractos Principales",
-          "type": "estatuto",
-          "score": 0.0034342715270815186
-        }
-      ],
-      "metrics": {
-        "answerLength": 1295,
-        "citationCount": 4,
-        "uniqueCitations": 2,
-        "sourcesAvailable": 8,
-        "hasAdvice": true,
-        "hasProcedure": true,
-        "responseTime": "13.36"
-      }
+      "error": "API returned 404: <!DOCTYPE html><html lang=\"es\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"stylesheet\" href=\"/_next/static/css/app/layout.css?v=1771448604110\" data-precedence=\"next_static/css/app/layout.css\"/><link rel=\"preload\" as=\"script\" fetchPriority=\"low\" href=\"/_next/static/chunks/webpack.js?v=1771448604110\"/><script src=\"/_next/static/chunks/main-app.js?v=1771448604110\" async=\"\"></script><script src=\"/_next/static/chunks/app-pages-internals.js\" async=\"\"></script><script src=\"/_next/static/chunks/app/layout.js\" async=\"\"></script><meta name=\"robots\" content=\"noindex\"/><title>404: This page could not be found.</title><title>RAG Derecho Colombiano</title><meta name=\"description\" content=\"Consulta leyes colombianas con RAG en español, con citas.\"/><script src=\"/_next/static/chunks/polyfills.js\" noModule=\"\"></script></head><body class=\"min-h-screen bg-gray-50 text-gray-900 antialiased\"><div style=\"font-family:system-ui,&quot;Segoe UI&quot;,Roboto,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;;height:100vh;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center\"><div><style>body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}</style><h1 class=\"next-error-h1\" style=\"display:inline-block;margin:0 20px 0 0;padding:0 23px 0 0;font-size:24px;font-weight:500;vertical-align:top;line-height:49px\">404</h1><div style=\"display:inline-block\"><h2 style=\"font-size:14px;font-weight:400;line-height:49px;margin:0\">This page could not be found.</h2></div></div></div><script src=\"/_next/static/chunks/webpack.js?v=1771448604110\" async=\"\"></script><script>(self.__next_f=self.__next_f||[]).push([0]);self.__next_f.push([2,null])</script><script>self.__next_f.push([1,\"1:HL[\\\"/_next/static/css/app/layout.css?v=1771448604110\\\",\\\"style\\\"]\\n0:D{\\\"name\\\":\\\"r5\\\",\\\"env\\\":\\\"Server\\\"}\\n\"])</script><script>self.__next_f.push([1,\"2:I[\\\"(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js\\\",[\\\"app-pages-internals\\\",\\\"static/chunks/app-pages-internals.js\\\"],\\\"\\\"]\\n5:I[\\\"(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js\\\",[\\\"app-pages-internals\\\",\\\"static/chunks/app-pages-internals.js\\\"],\\\"\\\"]\\n6:I[\\\"(app-pages-browser)/./node_modules/next/dist/client/components/render-from-template-context.js\\\",[\\\"app-pages-internals\\\",\\\"static/chunks/app-pages-internals.js\\\"],\\\"\\\"]\\n8:I[\\\"(app-pages-browser)/./components/SessionProvider.tsx\\\",[\\\"app/layout\\\",\\\"static/chunks/app/layout.js\\\"],\\\"default\\\"]\\n10:I[\\\"(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js\\\",[\\\"app-pages-internals\\\",\\\"static/chunks/app-pages-internals.js\\\"],\\\"\\\"]\\n3:D{\\\"name\\\":\\\"\\\",\\\"env\\\":\\\"Server\\\"}\\n4:D{\\\"name\\\":\\\"NotFound\\\",\\\"env\\\":\\\"Server\\\"}\\n4:[[\\\"$\\\",\\\"title\\\",null,{\\\"children\\\":\\\"404: This page could not be found.\\\"}],[\\\"$\\\",\\\"div\\\",null,{\\\"style\\\":{\\\"fontFamily\\\":\\\"system-ui,\\\\\\\"Segoe UI\\\\\\\",Roboto,Helvetica,Arial,sans-serif,\\\\\\\"Apple Color Emoji\\\\\\\",\\\\\\\"Segoe UI Emoji\\\\\\\"\\\",\\\"height\\\":\\\"100vh\\\",\\\"textAlign\\\":\\\"center\\\",\\\"display\\\":\\\"flex\\\",\\\"flexDirection\\\":\\\"column\\\",\\\"alignItems\\\":\\\"center\\\",\\\"justifyContent\\\":\\\"center\\\"},\\\"children\\\":[\\\"$\\\",\\\"div\\\",null,{\\\"children\\\":[[\\\"$\\\",\\\"style\\\",null,{\\\"dangerouslySetInnerHTML\\\":{\\\"__html\\\":\\\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\\\"}}],[\\\"$\\\",\\\"h1\\\",null,{\\\"className\\\":\\\"next-error-h1\\\",\\\"style\\\":{\\\"display\\\":\\\"inline-block\\\",\\\"margin\\\":\\\"0 20px 0 0\\\",\\\"padding\\\":\\\"0 23px 0 0\\\",\\\"fontSize\\\":24,\\\"fontWeight\\\":500,\\\"verticalAlign\\\":\\\"top\\\",\\\"lineHeight\\\":\\\"49px\\\"},\\\"children\\\":\\\"404\\\"}],[\\\"$\\\",\\\"div\\\",null,{\\\"style\\\":{\\\"display\\\":\\\"inline-block\\\"},\\\"children\\\":[\\\"$\\\",\\\"h2\\\",null,{\\\"style\\\":{\\\"fontSize\\\":14,\\\"fontWeight\\\":400,\\\"lineHeight\\\":\\\"49px\\\",\\\"margin\\\":0},\\\"children\\\":\\\"This page could not be found.\\\"}]}]]}]}]]\\n7:D{\\\"name\\\":\\\"RootLayout\\\",\\\"env\\\":\\\"Server\\\"}\\n9:D{\\\"name\\\":\\\"NotFound\\\",\\\"env\\\":\\\"Server\\\"}\\na:{\\\"fontFamily\\\":\\\"system-ui,\\\\\\\"Segoe UI\\\\\\\",Roboto,Helvetica,Arial,sans-serif,\\\\\\\"App\"])</script><script>self.__next_f.push([1,\"le Color Emoji\\\\\\\",\\\\\\\"Segoe UI Emoji\\\\\\\"\\\",\\\"height\\\":\\\"100vh\\\",\\\"textAlign\\\":\\\"center\\\",\\\"display\\\":\\\"flex\\\",\\\"flexDirection\\\":\\\"column\\\",\\\"alignItems\\\":\\\"center\\\",\\\"justifyContent\\\":\\\"center\\\"}\\nb:{\\\"display\\\":\\\"inline-block\\\",\\\"margin\\\":\\\"0 20px 0 0\\\",\\\"padding\\\":\\\"0 23px 0 0\\\",\\\"fontSize\\\":24,\\\"fontWeight\\\":500,\\\"verticalAlign\\\":\\\"top\\\",\\\"lineHeight\\\":\\\"49px\\\"}\\nc:{\\\"display\\\":\\\"inline-block\\\"}\\nd:{\\\"fontSize\\\":14,\\\"fontWeight\\\":400,\\\"lineHeight\\\":\\\"49px\\\",\\\"margin\\\":0}\\n9:[[\\\"$\\\",\\\"title\\\",null,{\\\"children\\\":\\\"404: This page could not be found.\\\"}],[\\\"$\\\",\\\"div\\\",null,{\\\"style\\\":\\\"$a\\\",\\\"children\\\":[\\\"$\\\",\\\"div\\\",null,{\\\"children\\\":[[\\\"$\\\",\\\"style\\\",null,{\\\"dangerouslySetInnerHTML\\\":{\\\"__html\\\":\\\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\\\"}}],[\\\"$\\\",\\\"h1\\\",null,{\\\"className\\\":\\\"next-error-h1\\\",\\\"style\\\":\\\"$b\\\",\\\"children\\\":\\\"404\\\"}],[\\\"$\\\",\\\"div\\\",null,{\\\"style\\\":\\\"$c\\\",\\\"children\\\":[\\\"$\\\",\\\"h2\\\",null,{\\\"style\\\":\\\"$d\\\",\\\"children\\\":\\\"This page could not be found.\\\"}]}]]}]}]]\\n7:[\\\"$\\\",\\\"html\\\",null,{\\\"lang\\\":\\\"es\\\",\\\"children\\\":[\\\"$\\\",\\\"body\\\",null,{\\\"className\\\":\\\"min-h-screen bg-gray-50 text-gray-900 antialiased\\\",\\\"children\\\":[\\\"$\\\",\\\"$L8\\\",null,{\\\"children\\\":[\\\"$\\\",\\\"$L5\\\",null,{\\\"parallelRouterKey\\\":\\\"children\\\",\\\"segmentPath\\\":[\\\"children\\\"],\\\"error\\\":\\\"$undefined\\\",\\\"errorStyles\\\":\\\"$undefined\\\",\\\"errorScripts\\\":\\\"$undefined\\\",\\\"template\\\":[\\\"$\\\",\\\"$L6\\\",null,{}],\\\"templateStyles\\\":\\\"$undefined\\\",\\\"templateScripts\\\":\\\"$undefined\\\",\\\"notFound\\\":\\\"$9\\\",\\\"notFoundStyles\\\":[]}]}]}]}]\\ne:D{\\\"name\\\":\\\"r6\\\",\\\"env\\\":\\\"Server\\\"}\\ne:[\\\"$\\\",\\\"meta\\\",null,{\\\"name\\\":\\\"robots\\\",\\\"content\\\":\\\"noindex\\\"}]\\nf:D{\\\"name\\\":\\\"\\\",\\\"env\\\":\\\"Server\\\"}\\n11:[]\\n0:[\\\"$\\\",\\\"$L2\\\",null,{\\\"buildId\\\":\\\"development\\\",\\\"assetPrefix\\\":\\\"\\\",\\\"urlParts\\\":[\\\"\\\",\\\"api\\\",\\\"rag\\\"],\\\"initialTree\\\":[\\\"\\\",{\\\"children\\\":[\\\"/_not-found\\\",{\\\"children\\\":[\\\"__PAGE__\\\",{}]}]},\\\"$undefined\\\",\\\"$undefined\\\",true],\\\"initialSeedData\\\":[\\\"\\\",{\\\"children\\\":[\\\"/_not-found\\\",{\\\"children\\\":[\\\"__PAGE__\\\",{},[[\\\"$L3\\\",\\\"$4\\\",null],null],null]},[null,[\\\"$\\\",\\\"$L5\\\",null,{\\\"parallelRouterKey\\\":\\\"children\\\",\\\"segmentPath\\\":[\\\"children\\\",\\\"/_not-found\\\",\\\"children\\\"],\\\"error\\\":\\\"$undefined\\\",\\\"errorSty\"])</script><script>self.__next_f.push([1,\"les\\\":\\\"$undefined\\\",\\\"errorScripts\\\":\\\"$undefined\\\",\\\"template\\\":[\\\"$\\\",\\\"$L6\\\",null,{}],\\\"templateStyles\\\":\\\"$undefined\\\",\\\"templateScripts\\\":\\\"$undefined\\\",\\\"notFound\\\":\\\"$undefined\\\",\\\"notFoundStyles\\\":\\\"$undefined\\\"}]],null]},[[[[\\\"$\\\",\\\"link\\\",\\\"0\\\",{\\\"rel\\\":\\\"stylesheet\\\",\\\"href\\\":\\\"/_next/static/css/app/layout.css?v=1771448604110\\\",\\\"precedence\\\":\\\"next_static/css/app/layout.css\\\",\\\"crossOrigin\\\":\\\"$undefined\\\"}]],\\\"$7\\\"],null],null],\\\"couldBeIntercepted\\\":false,\\\"initialHead\\\":[\\\"$e\\\",\\\"$Lf\\\"],\\\"globalErrorComponent\\\":\\\"$10\\\",\\\"missingSlots\\\":\\\"$W11\\\"}]\\n\"])</script><script>self.__next_f.push([1,\"f:[[\\\"$\\\",\\\"meta\\\",\\\"0\\\",{\\\"name\\\":\\\"viewport\\\",\\\"content\\\":\\\"width=device-width, initial-scale=1\\\"}],[\\\"$\\\",\\\"meta\\\",\\\"1\\\",{\\\"charSet\\\":\\\"utf-8\\\"}],[\\\"$\\\",\\\"title\\\",\\\"2\\\",{\\\"children\\\":\\\"RAG Derecho Colombiano\\\"}],[\\\"$\\\",\\\"meta\\\",\\\"3\\\",{\\\"name\\\":\\\"description\\\",\\\"content\\\":\\\"Consulta leyes colombianas con RAG en español, con citas.\\\"}]]\\n3:null\\n\"])</script></body></html>"
     },
     {
       "query": "Mi empleador me está negando el pago de las cesantías argumentando que no he cumplido un año completo. Llevo 11 meses trabajando. ¿Tengo derecho a cesantías?",
       "category": "laboral_complejo",
-      "complexity": "media",
-      "answer": "Según la legislación laboral colombiana, las cesantías son un derecho laboral que se genera con el paso del tiempo de servicio [2]. Aunque no he encontrado una fuente específica en el contexto proporcionado, en la legislación laboral colombiana, como se establece en el Código Sustantivo del Trabajo [3], los trabajadores tienen derecho a cesantías después de un año de servicio. Sin embargo, es importante mencionar que, aunque no has cumplido un año completo, es posible que tengas derecho a una proporción de cesantías según el tiempo trabajado, siempre y cuando se cumplan los requisitos establecidos por la ley [4]. Te recomiendo consultar el Código Sustantivo del Trabajo o acudir a un profesional del derecho para obtener asesoramiento específico sobre tu caso. La acción de tutela mencionada en la fuente [1] se refiere a la protección de derechos fundamentales y no directamente a disputas laborales como la tuya. Para resolver tu situación, deberías considerar las leyes laborales específicas y no solo la acción de tutela [5]. Es importante recordar que la información proporcionada en el contexto no aborda directamente el tema de las cesantías, por lo que te sugiero buscar fuentes oficiales como el Ministerio del Trabajo de Colombia para obtener información precisa [6].",
-      "citations": [
-        {
-          "id": "doc-jurisprudencia_tutela",
-          "title": "Corte Constitucional — Acción de Tutela (Mock)",
-          "type": "jurisprudencia",
-          "article": "Artículo 86",
-          "score": 0.05328353824452399
-        },
-        {
-          "id": "doc-estatuto_codigo_civil",
-          "title": "Codigo Civil",
-          "type": "estatuto",
-          "score": 0.012090558828149257
-        },
-        {
-          "id": "doc-estatuto_constitucion_politica_de_colombia",
-          "title": "Constitucion Politica de Colombia",
-          "type": "estatuto",
-          "score": -0.0007094951002153969
-        },
-        {
-          "id": "doc-estatuto_horas_extras",
-          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
-          "type": "estatuto",
-          "article": "Artículo 168",
-          "score": -0.0032165188209580978
-        },
-        {
-          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
-          "title": "Codigo Sustantivo del Trabajo",
-          "type": "estatuto",
-          "score": -0.00873857408327779
-        },
-        {
-          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
-          "title": "Ley 100 de 1993 - Seguridad Social",
-          "type": "estatuto",
-          "score": -0.011462570955665495
-        },
-        {
-          "id": "doc-estatuto_codigo_de_comercio",
-          "title": "Codigo de Comercio",
-          "type": "estatuto",
-          "score": -0.011983004334345347
-        },
-        {
-          "id": "doc-reglamento_accion_cumplimiento",
-          "title": "Ley 393 de 1997 — Acción de Cumplimiento (Mock)",
-          "type": "reglamento",
-          "article": "Artículo 1 y Artículo 5",
-          "score": -0.018868193066889673
-        }
-      ],
-      "metrics": {
-        "answerLength": 1285,
-        "citationCount": 6,
-        "uniqueCitations": 6,
-        "sourcesAvailable": 8,
-        "hasAdvice": true,
-        "hasProcedure": true,
-        "responseTime": "11.28"
-      }
+      "error": "API returned 500: <!DOCTYPE html><html><head><style data-next-hide-fouc=\"true\">body{display:none}</style><noscript data-next-hide-fouc=\"true\"><style>body{display:block}</style></noscript><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width\"/><meta name=\"next-head-count\" content=\"2\"/><noscript data-n-css=\"\"></noscript><script defer=\"\" nomodule=\"\" src=\"/_next/static/chunks/polyfills.js\"></script><script src=\"/_next/static/chunks/webpack.js\" defer=\"\"></script><script src=\"/_next/static/chunks/main.js\" defer=\"\"></script><script src=\"/_next/static/chunks/pages/_app.js\" defer=\"\"></script><script src=\"/_next/static/chunks/pages/_error.js\" defer=\"\"></script><script src=\"/_next/static/development/_buildManifest.js\" defer=\"\"></script><script src=\"/_next/static/development/_ssgManifest.js\" defer=\"\"></script><noscript id=\"__next_css__DO_NOT_USE__\"></noscript></head><body><div id=\"__next\"></div><script src=\"/_next/static/chunks/react-refresh.js\"></script><script id=\"__NEXT_DATA__\" type=\"application/json\">{\"props\":{\"pageProps\":{\"statusCode\":500}},\"page\":\"/_error\",\"query\":{},\"buildId\":\"development\",\"isFallback\":false,\"err\":{\"name\":\"Error\",\"source\":\"server\",\"message\":\"Cannot find module './276.js'\\nRequire stack:\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/.next/server/webpack-runtime.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/.next/server/app/_not-found/page.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/require.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/load-components.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/build/utils.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/dev/hot-middleware.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/dev/hot-reloader-webpack.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/lib/router-server.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/lib/start-server.js\",\"stack\":\"Error: Cannot find module './276.js'\\nRequire stack:\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/.next/server/webpack-runtime.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/.next/server/app/_not-found/page.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/require.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/load-components.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/build/utils.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/dev/hot-middleware.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/dev/hot-reloader-webpack.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/lib/router-server.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/lib/start-server.js\\n    at Function.\\u003canonymous\\u003e (node:internal/modules/cjs/loader:1383:15)\\n    at /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/require-hook.js:55:36\\n    at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)\\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)\\n    at Function._load (node:internal/modules/cjs/loader:1192:37)\\n    at TracingChannel.traceSync (node:diagnostics_channel:328:14)\\n    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)\\n    at Module.\\u003canonymous\\u003e (node:internal/modules/cjs/loader:1463:12)\\n    at mod.require (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/require-hook.js:65:28)\\n    at require (node:internal/modules/helpers:147:16)\\n    at __webpack_require__.f.require (/home/lesaint/Documentos/Cursor/ColLawRAG/.next/server/webpack-runtime.js:203:28)\\n    at /home/lesaint/Documentos/Cursor/ColLawRAG/.next/server/webpack-runtime.js:116:40\\n    at Array.reduce (\\u003canonymous\\u003e)\\n    at __webpack_require__.e (/home/lesaint/Documentos/Cursor/ColLawRAG/.next/server/webpack-runtime.js:115:67)\\n    at Array.map (\\u003canonymous\\u003e)\\n    at __webpack_require__.X (/home/lesaint/Documentos/Cursor/ColLawRAG/.next/server/webpack-runtime.js:167:22)\\n    at /home/lesaint/Documentos/Cursor/ColLawRAG/.next/server/app/api/rag/route.js:169:349734\\n    at Object.\\u003canonymous\\u003e (/home/lesaint/Documentos/Cursor/ColLawRAG/.next/server/app/api/rag/route.js:169:349788)\\n    at Module._compile (node:internal/modules/cjs/loader:1706:14)\\n    at Object..js (node:internal/modules/cjs/loader:1839:10)\\n    at Module.load (node:internal/modules/cjs/loader:1441:32)\\n    at Function._load (node:internal/modules/cjs/loader:1263:12)\\n    at TracingChannel.traceSync (node:diagnostics_channel:328:14)\\n    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)\\n    at Module.\\u003canonymous\\u003e (node:internal/modules/cjs/loader:1463:12)\\n    at mod.require (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/require-hook.js:65:28)\\n    at require (node:internal/modules/helpers:147:16)\\n    at requirePage (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/require.js:109:84)\\n    at /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/load-components.js:103:84\\n    at async loadComponentsImpl (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/load-components.js:103:26)\\n    at async DevServer.findPageComponentsImpl (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/next-server.js:714:36)\\n    at async DevServer.findPageComponents (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/dev/next-dev-server.js:577:20)\\n    at async DevServer.renderPageComponent (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/base-server.js:1910:24)\\n    at async DevServer.renderToResponseImpl (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/base-server.js:1962:32)\\n    at async DevServer.pipeImpl (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/base-server.js:922:25)\\n    at async NextNodeServer.handleCatchallRenderRequest (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/next-server.js:272:17)\\n    at async DevServer.handleRequestImpl (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/base-server.js:818:17)\\n    at async /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/dev/next-dev-server.js:339:20\\n    at async Span.traceAsyncFn (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/trace/trace.js:154:20)\\n    at async DevServer.handleRequest (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/dev/next-dev-server.js:336:24)\\n    at async invokeRender (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/lib/router-server.js:179:21)\\n    at async handleRequest (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/lib/router-server.js:359:24)\\n    at async requestHandlerImpl (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/lib/router-server.js:383:13)\\n    at async Server.requestListener (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/lib/start-server.js:141:13)\"},\"gip\":true,\"scriptLoader\":[]}</script></body></html>"
     },
     {
       "query": "Necesito saber si puedo demandar a mi empleador por no pagarme el salario mínimo. Trabajo 48 horas semanales pero me pagan menos del mínimo legal.",
       "category": "laboral_complejo",
-      "complexity": "media",
-      "answer": "En Colombia, el salario mínimo es establecido por el gobierno y es obligatorio para todos los empleadores [1]. Si usted trabaja 48 horas semanales y recibe un pago inferior al mínimo legal, puede tener derecho a reclamar el pago de las diferencias salariales. Debe verificar su contrato laboral y los recibos de pago para determinar el monto exacto que se le adeuda [2]. Es recomendable que consulte con un abogado laboralista para evaluar su caso y determinar las mejores opciones legales. También puede acercarse a la Dirección de Trabajo o a la Inspección de Trabajo de su localidad para presentar una denuncia y solicitar asesoramiento [3]. La Ley 1562 de 2012 establece que los empleadores deben pagar el salario mínimo y puede ser sancionado si no cumple con esta obligación [4]. Es importante que actúe con prontitud, ya que el plazo para presentar una demanda laboral es de tres años contados a partir de la fecha en que se produjo el incumplimiento [5]. Puede consultar la página web del Ministerio de Trabajo para obtener más información sobre los derechos laborales y los trámites para reclamar el pago de salarios [6]. Recuerde que, como trabajador, tiene derecho a un salario justo y a condiciones laborales dignas.",
-      "citations": [
-        {
-          "id": "doc-estatuto_codigo_de_comercio",
-          "title": "Codigo de Comercio",
-          "type": "estatuto",
-          "score": 0.037967742817412595
-        },
-        {
-          "id": "doc-jurisprudencia_tutela",
-          "title": "Corte Constitucional — Acción de Tutela (Mock)",
-          "type": "jurisprudencia",
-          "article": "Artículo 86",
-          "score": 0.03367206654871749
-        },
-        {
-          "id": "doc-estatuto_horas_extras",
-          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
-          "type": "estatuto",
-          "article": "Artículo 159 y Artículo 160",
-          "score": 0.028021357258251074
-        },
-        {
-          "id": "doc-estatuto_codigo_sustantivo_del_trabajo",
-          "title": "Codigo Sustantivo del Trabajo",
-          "type": "estatuto",
-          "score": 0.027988573338871666
-        },
-        {
-          "id": "doc-estatuto_codigo_civil",
-          "title": "Codigo Civil",
-          "type": "estatuto",
-          "score": 0.008509073966102457
-        },
-        {
-          "id": "doc-estatuto_ley_100_de_1993_seguridad_social",
-          "title": "Ley 100 de 1993 - Seguridad Social",
-          "type": "estatuto",
-          "score": 0.008417095644251846
-        },
-        {
-          "id": "doc-estatuto_constitucion_politica_de_colombia",
-          "title": "Constitucion Politica de Colombia",
-          "type": "estatuto",
-          "score": -0.0002388968216741915
-        },
-        {
-          "id": "doc-estatuto_horas_extras",
-          "title": "Código Sustantivo del Trabajo — Horas Extras (Mock)",
-          "type": "estatuto",
-          "article": "Artículo 168",
-          "score": -0.011467754083303036
-        }
-      ],
-      "metrics": {
-        "answerLength": 1228,
-        "citationCount": 6,
-        "uniqueCitations": 6,
-        "sourcesAvailable": 8,
-        "hasAdvice": true,
-        "hasProcedure": true,
-        "responseTime": "12.77"
-      }
+      "error": "API returned 500: <!DOCTYPE html><html><head><style data-next-hide-fouc=\"true\">body{display:none}</style><noscript data-next-hide-fouc=\"true\"><style>body{display:block}</style></noscript><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width\"/><meta name=\"next-head-count\" content=\"2\"/><noscript data-n-css=\"\"></noscript><script defer=\"\" nomodule=\"\" src=\"/_next/static/chunks/polyfills.js\"></script><script src=\"/_next/static/chunks/webpack.js\" defer=\"\"></script><script src=\"/_next/static/chunks/main.js\" defer=\"\"></script><script src=\"/_next/static/chunks/pages/_app.js\" defer=\"\"></script><script src=\"/_next/static/chunks/pages/_error.js\" defer=\"\"></script><script src=\"/_next/static/development/_buildManifest.js\" defer=\"\"></script><script src=\"/_next/static/development/_ssgManifest.js\" defer=\"\"></script><noscript id=\"__next_css__DO_NOT_USE__\"></noscript></head><body><div id=\"__next\"></div><script src=\"/_next/static/chunks/react-refresh.js\"></script><script id=\"__NEXT_DATA__\" type=\"application/json\">{\"props\":{\"pageProps\":{\"statusCode\":500}},\"page\":\"/_error\",\"query\":{},\"buildId\":\"development\",\"isFallback\":false,\"err\":{\"name\":\"Error\",\"source\":\"server\",\"message\":\"Cannot find module './276.js'\\nRequire stack:\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/.next/server/webpack-runtime.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/.next/server/pages/_document.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/require.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/load-components.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/build/utils.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/dev/hot-middleware.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/dev/hot-reloader-webpack.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/lib/router-server.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/lib/start-server.js\",\"stack\":\"Error: Cannot find module './276.js'\\nRequire stack:\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/.next/server/webpack-runtime.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/.next/server/pages/_document.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/require.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/load-components.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/build/utils.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/dev/hot-middleware.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/dev/hot-reloader-webpack.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/lib/router-server.js\\n- /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/lib/start-server.js\\n    at Function.\\u003canonymous\\u003e (node:internal/modules/cjs/loader:1383:15)\\n    at /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/require-hook.js:55:36\\n    at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)\\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)\\n    at Function._load (node:internal/modules/cjs/loader:1192:37)\\n    at TracingChannel.traceSync (node:diagnostics_channel:328:14)\\n    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)\\n    at Module.\\u003canonymous\\u003e (node:internal/modules/cjs/loader:1463:12)\\n    at mod.require (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/require-hook.js:65:28)\\n    at require (node:internal/modules/helpers:147:16)\\n    at __webpack_require__.f.require (/home/lesaint/Documentos/Cursor/ColLawRAG/.next/server/webpack-runtime.js:203:28)\\n    at /home/lesaint/Documentos/Cursor/ColLawRAG/.next/server/webpack-runtime.js:116:40\\n    at Array.reduce (\\u003canonymous\\u003e)\\n    at __webpack_require__.e (/home/lesaint/Documentos/Cursor/ColLawRAG/.next/server/webpack-runtime.js:115:67)\\n    at Array.map (\\u003canonymous\\u003e)\\n    at __webpack_require__.X (/home/lesaint/Documentos/Cursor/ColLawRAG/.next/server/webpack-runtime.js:167:22)\\n    at /home/lesaint/Documentos/Cursor/ColLawRAG/.next/server/app/api/rag/route.js:169:349734\\n    at Object.\\u003canonymous\\u003e (/home/lesaint/Documentos/Cursor/ColLawRAG/.next/server/app/api/rag/route.js:169:349788)\\n    at Module._compile (node:internal/modules/cjs/loader:1706:14)\\n    at Object..js (node:internal/modules/cjs/loader:1839:10)\\n    at Module.load (node:internal/modules/cjs/loader:1441:32)\\n    at Function._load (node:internal/modules/cjs/loader:1263:12)\\n    at TracingChannel.traceSync (node:diagnostics_channel:328:14)\\n    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)\\n    at Module.\\u003canonymous\\u003e (node:internal/modules/cjs/loader:1463:12)\\n    at mod.require (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/require-hook.js:65:28)\\n    at require (node:internal/modules/helpers:147:16)\\n    at requirePage (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/require.js:109:84)\\n    at /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/load-components.js:103:84\\n    at async loadComponentsImpl (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/load-components.js:103:26)\\n    at async DevServer.findPageComponentsImpl (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/next-server.js:714:36)\\n    at async DevServer.findPageComponents (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/dev/next-dev-server.js:577:20)\\n    at async DevServer.renderPageComponent (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/base-server.js:1910:24)\\n    at async DevServer.renderToResponseImpl (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/base-server.js:1962:32)\\n    at async DevServer.pipeImpl (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/base-server.js:922:25)\\n    at async NextNodeServer.handleCatchallRenderRequest (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/next-server.js:272:17)\\n    at async DevServer.handleRequestImpl (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/base-server.js:818:17)\\n    at async /home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/dev/next-dev-server.js:339:20\\n    at async Span.traceAsyncFn (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/trace/trace.js:154:20)\\n    at async DevServer.handleRequest (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/dev/next-dev-server.js:336:24)\\n    at async invokeRender (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/lib/router-server.js:179:21)\\n    at async handleRequest (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/lib/router-server.js:359:24)\\n    at async requestHandlerImpl (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/lib/router-server.js:383:13)\\n    at async Server.requestListener (/home/lesaint/Documentos/Cursor/ColLawRAG/node_modules/next/dist/server/lib/start-server.js:141:13)\"},\"gip\":true,\"scriptLoader\":[]}</script></body></html>"
     }
   ]
 }

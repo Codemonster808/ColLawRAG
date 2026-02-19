@@ -1,79 +1,100 @@
 proyecto: ColLawRAG
-actualizado: 2026-02-18
+generado: 2026-02-16
 ejecutor: Cursor
-referencia: TAREAS_CURSOR.md
+referencia: DIAGNOSTICO_COMERCIAL_2026-02-16.md
+diagnostico_documentos: DIAGNOSTICO_DOCUMENTOS_2026-02-18.md
 url_produccion: https://col-law-rag.vercel.app
-accuracy_actual: 35.9%
-accuracy_objetivo_lanzamiento: >60%
 
-estado_general:
-  completadas: CU-00 CU-01 CU-02
-  pendientes: CU-03 CU-04 CU-05 CU-06 CU-07 CU-08 CU-09 CU-10
-  bloqueantes_lanzamiento: CU-03 CU-04 CU-05 CU-07
+sprints[4]{numero,nombre,objetivo_accuracy,semana}:
+  1,Accuracy mínimo comercial,60-70% → 85%+,1-2
+  2,Infraestructura comercial,Base técnica para cobrar,2-3
+  3,UX y conversión,Retención y conversión de usuarios,3-4
+  4,Accuracy avanzado,85% → 92%+,4-6
 
-tareas[10]{id,prioridad,estado,titulo,archivo_principal,impacto,tiempo_estimado,depende_de}:
-  CU-00,critico,completada,Fix endpoint evaluate-accuracy.mjs,scripts/evaluate-accuracy.mjs,Benchmark funcional,5min,ninguna
-  CU-01,critico,completada,Fix field areaLegal→area en ingest.mjs,scripts/ingest.mjs,Metadata correcta,2h,ninguna
-  CU-02,critico,completada,Reducir chunk size 3000→1000 chars,scripts/ingest.mjs,+8-12% precision,30min,CU-01
-  CU-03,comercial,pendiente,Migrar SQLite→Neon Postgres,"lib/auth.ts,lib/tiers.ts",Persistencia real en Vercel,4h,ninguna
-  CU-04,comercial,pendiente,Implementar NextAuth.js Google+Credentials,"app/api/auth/[...nextauth]/route.ts,lib/auth-config.ts,app/login/page.tsx",Auth real sin UUID,3h,CU-03
-  CU-05,comercial,pendiente,Integrar Stripe Checkout+Webhooks,"lib/stripe.ts,app/api/stripe/checkout/route.ts,app/api/stripe/webhook/route.ts,app/pricing/page.tsx",Sistema de pagos,4h,CU-04
-  CU-07,performance,pendiente,Wiring Vercel Blob en lib/retrieval.ts,lib/retrieval.ts,"cold start 50s → <3s (OpenClaw sube los archivos después)",2h,ninguna
-  CU-08,conversion,pendiente,Landing page con pricing y demo embebido,"app/page.tsx,app/app/page.tsx",Conversión visitantes,5h,CU-04 CU-05
-  CU-06,accuracy,pendiente,Cross-encoder reranking HuggingFace,lib/reranking.ts,+5-10% relevancia top-K,2h,ninguna
-  CU-09,retencion,pendiente,Historial de consultas por usuario,"app/historial/page.tsx,app/api/historial/route.ts",Retención,2h,CU-03 CU-04
+tareas[12]{id,sprint,prioridad,estado,titulo,archivo_principal,impacto,tiempo_estimado}:
+  CU-URGENTE,0,bloqueante,completada,Recargar créditos HuggingFace o cambiar proveedor LLM,lib/generation.ts,"Sistema sin generación - 0% accuracy real",30min
+  CU-00,1,critico,completada,Fix endpoint evaluate-accuracy.mjs,scripts/evaluate-accuracy.mjs,Benchmark funcional,5min
+  CU-01,1,critico,completada,Fix field areaLegal→area en ingest.mjs,scripts/ingest.mjs,Consistencia metadata,2h
+  CU-02,1,critico,completada,Reducir chunk size 3000→1000 chars,scripts/ingest.mjs,+8-12% precision retrieval,30min
+  CU-03,2,comercial,completada,Migrar SQLite→Neon Postgres,"lib/auth.ts,lib/tiers.ts,lib/db-postgres.ts",Persistencia real en Vercel,2d
+  CU-04,2,comercial,completada,Implementar NextAuth.js Google+email,app/api/auth/[...nextauth]/,Auth sin UUID headers,2d
+  CU-05,2,comercial,completada,Integrar Stripe Checkout+Webhooks,app/api/stripe/,Sistema de pagos funcional,2d
+  CU-06,4,accuracy,completada,Cross-encoder real en reranking,lib/reranking.ts,+5-10% relevancia top-K,1d
+  CU-07,2,performance,completada,Índices en Vercel Blob (eliminar cold start),lib/retrieval.ts,15s → <3s cold start,1d
+  CU-08,3,conversion,completada,Landing page con pricing y demo,app/page.tsx,Conversión visitantes,3d
+  CU-09,3,retencion,completada,Historial de consultas por usuario,app/historial/page.tsx,Retención de usuarios,1d
+  CU-10,3,valor,completada,Exportar respuesta a PDF,components/ResultsDisplay.tsx,Valor percibido premium,2d
 
-contexto_critico[5]{issue,descripcion}:
-  DB_actual,"better-sqlite3 no soportado en Vercel serverless → auth y tiers SIEMPRE fallan en producción"
-  paquetes_ya_instalados,"@neondatabase/serverless ^1.0.2 + @vercel/blob ^0.26.0 → solo wiring, no instalar de nuevo"
-  next_auth_no_instalado,next-auth NOT INSTALLED → npm install next-auth
-  stripe_no_instalado,stripe NOT INSTALLED → npm install stripe @stripe/stripe-js
-  blob_script_listo,"OpenClaw ya preparó scripts/upload-indices-to-blob.mjs → solo hace falta el wiring en lib/retrieval.ts"
+fixes_codigo[3]{id,archivo,linea_aprox,antes,despues}:
+  CU-00,scripts/evaluate-accuracy.mjs,93,"/api/query + body:{question}","/api/rag + body:{query}"
+  CU-01,scripts/ingest.mjs,430,"metadata:{areaLegal}","metadata:{area} + parseFrontmatter(raw)"
+  CU-02,scripts/ingest.mjs,280,"splitLargeChunk(acc,3000,200)","splitLargeChunk(acc,1000,150)"
 
-env_vars_pendientes[9]{tarea_id,variable,descripcion}:
-  CU-03,DATABASE_URL,"postgresql://user:pass@ep-xxx.neon.tech/collawrag?sslmode=require"
-  CU-04,NEXTAUTH_SECRET,openssl rand -base64 32
-  CU-04,NEXTAUTH_URL,https://col-law-rag.vercel.app
-  CU-04,GOOGLE_CLIENT_ID,xxx.apps.googleusercontent.com
-  CU-04,GOOGLE_CLIENT_SECRET,GOCSPX-xxx
-  CU-05,STRIPE_SECRET_KEY,sk_live_xxx
-  CU-05,STRIPE_WEBHOOK_SECRET,whsec_xxx
-  CU-05,NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,pk_live_xxx
-  CU-07,BLOB_READ_WRITE_TOKEN,"vercel_blob_rw_xxx (OpenClaw necesita esto para subir índices)"
+bugs_raiz[3]{id,descripcion,causa,impacto_accuracy}:
+  CU-00,"evaluate-accuracy llama /api/query en vez de /api/rag","endpoint incorrecto en script",benchmark no funciona
+  CU-01,"94% chunks con area=unknown en retrieval","field areaLegal vs area + frontmatter ignorado",filtros no funcionan
+  CU-02,"35.6% chunks >2000 chars","splitLargeChunk max=3000","cosine similarity imprecisa"
 
-archivos_nuevos[7]{tarea_id,ruta,descripcion}:
+schema_postgres[4]{tabla,campos_principales,proposito}:
+  users,"id,tier,query_count,last_reset,created_at",Usuarios y tiers freemium
+  queries,"id,user_id,query,legal_area,response_time,success,created_at",Log de consultas
+  quality_metrics,"query_id,citation_precision,chunks_retrieved,response_length",Métricas de calidad
+  subscriptions,"user_id,stripe_customer_id,stripe_subscription_id,status,plan,current_period_end",Pagos Stripe
+
+planes_precios[3]{plan,precio_cop,precio_usd,limite,descripcion}:
+  free,0,0,"10 consultas/mes",Acceso básico sin auth
+  premium,29000,7,"ilimitado",Validación factual + cálculos + historial
+  pro,149000,36,"ilimitado + API","Firmas de abogados: API key + analytics + PDF"
+
+variables_entorno_nuevas[9]{tarea_id,variable,ejemplo,servicio}:
+  CU-03,DATABASE_URL,"postgresql://user:pass@host.neon.tech/db",Neon Postgres
+  CU-04,NEXTAUTH_SECRET,random-32-chars,NextAuth.js
+  CU-04,NEXTAUTH_URL,https://col-law-rag.vercel.app,NextAuth.js
+  CU-04,GOOGLE_CLIENT_ID,xxx.apps.googleusercontent.com,Google OAuth
+  CU-04,GOOGLE_CLIENT_SECRET,GOCSPX-xxx,Google OAuth
+  CU-05,STRIPE_SECRET_KEY,sk_live_xxx,Stripe
+  CU-05,STRIPE_WEBHOOK_SECRET,whsec_xxx,Stripe
+  CU-05,NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,pk_live_xxx,Stripe
+  CU-07,BLOB_READ_WRITE_TOKEN,vercel_blob_rw_xxx,Vercel Blob
+
+dependencias_npm[6]{tarea_id,paquete,instalar}:
+  CU-03,@neondatabase/serverless,true
+  CU-04,next-auth,true
+  CU-05,stripe,true
+  CU-05,@stripe/stripe-js,true
+  CU-06,@huggingface/inference,ya instalado
+  CU-07,@vercel/blob,true
+
+archivos_nuevos[12]{tarea_id,ruta,descripcion}:
   CU-04,app/api/auth/[...nextauth]/route.ts,Handler NextAuth
   CU-04,lib/auth-config.ts,Providers Google+Credentials
   CU-04,app/login/page.tsx,Página de login/registro
+  CU-04,components/SessionProvider.tsx,Provider NextAuth para layout
+  CU-04,types/next-auth.d.ts,Tipos sesión user.id
+  CU-05,lib/stripe.ts,Cliente Stripe + createCheckoutSession + handleWebhookEvent
   CU-05,app/api/stripe/checkout/route.ts,Crear sesión checkout
   CU-05,app/api/stripe/webhook/route.ts,Actualizar tier tras pago
+  CU-05,app/api/stripe/session/route.ts,GET sesión para página success
   CU-05,app/pricing/page.tsx,Página de precios
   CU-08,app/app/page.tsx,Buscador (mover desde /)
+  CU-09,app/historial/page.tsx,Historial de consultas
 
-schema_postgres[4]{tabla,campos_principales,proposito}:
-  users,"id TEXT PK,tier TEXT DEFAULT free,query_count INT DEFAULT 0,last_reset TIMESTAMPTZ,created_at TIMESTAMPTZ",Usuarios y tiers freemium
-  queries,"id SERIAL PK,user_id TEXT REF users,query TEXT,legal_area TEXT,response_time INT,success BOOL,created_at TIMESTAMPTZ",Log de consultas
-  quality_metrics,"id SERIAL PK,query_id INT REF queries,citation_precision FLOAT,chunks_retrieved INT,response_length INT",Métricas calidad
-  subscriptions,"id SERIAL PK,user_id TEXT REF users,stripe_customer_id TEXT,stripe_subscription_id TEXT,status TEXT,plan TEXT,current_period_end TIMESTAMPTZ",Pagos Stripe
+orden_ejecucion[11]{paso,tarea_id,depende_de,sincronizar_con_openclaw}:
+  1,CU-00,ninguna,avisar para OC-A1
+  2,CU-01,CU-00,avisar para OC-A2 al terminar
+  3,CU-02,CU-01,junto con CU-01
+  4,CU-03,accuracy OK post OC-A3,no
+  5,CU-04,CU-03,no
+  6,CU-05,CU-04,no
+  7,CU-06,CU-01 CU-02,avisar para re-ingesta
+  8,CU-07,CU-01 CU-02,no
+  9,CU-08,CU-04 CU-05,no
+  10,CU-09,CU-03 CU-04,no
+  11,CU-10,CU-08,no
 
-planes_precios[3]{plan,precio_cop,precio_usd,limite}:
-  free,0,0,10 consultas/mes
-  premium,29000,7,ilimitado
-  pro,149000,36,"ilimitado + API key + analytics"
-
-orden_ejecucion[8]{semana,paso,tarea_id,sincronizar_con_openclaw}:
-  1,1,CU-03,no
-  1,2,CU-07,"sí: avisar a OpenClaw cuando BLOB_READ_WRITE_TOKEN esté lista"
-  1,3,CU-04,no
-  2,4,CU-05,no
-  2,5,CU-08,no
-  2,6,CU-06,no
-  3,7,CU-09,no
-  3,8,CU-10,no
-
-metricas_exito[5]{metrica,valor_actual,objetivo_lanzamiento,objetivo_final}:
-  accuracy_benchmark,35.9%,>60%,>85%
-  cold_start_segundos,~50s,<5s (tras CU-07 + OpenClaw blob upload),<3s
-  auth_funcional,false,true (CU-04),true
-  pagos_funcionales,false,true (CU-05),true
-  uptime_produccion,>99%,>99%,>99.9%
+metricas_exito[5]{metrica,valor_actual,objetivo_sprint1,objetivo_sprint4}:
+  accuracy_benchmark,~60-70%,>85%,>92%
+  chunks_area_especifica,6%,>70%,>95%
+  cold_start_segundos,10-15,10-15,<3
+  p95_response_time_ms,5000-8000,<5000,<4000
+  uptime_produccion,%99,>99%,>99.9%

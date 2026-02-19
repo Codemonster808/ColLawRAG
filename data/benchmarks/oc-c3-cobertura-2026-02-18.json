@@ -1,0 +1,33 @@
+{
+  "fecha": "2026-02-18",
+  "tarea": "OC-C3 Análisis cobertura corpus",
+  "total_chunks": 36500,
+  "total_documentos": 746,
+  "chunks_por_area": {
+    "constitucional": 8467,
+    "general": 7325,
+    "administrativo": 3946,
+    "comercial": 3718,
+    "tributario": 3622,
+    "laboral": 3420,
+    "civil": 3366,
+    "penal": 2636
+  },
+  "top_documentos": [
+    {"doc": "codigo_estatuto_tributario.txt", "chunks": 5163},
+    {"doc": "jurisprudencia_sentencia_c_355_2006.txt", "chunks": 4060},
+    {"doc": "codigo_codigo_general_proceso_ley1564.txt", "chunks": 2592},
+    {"doc": "jurisprudencia_sentencia_t_760_2008.txt", "chunks": 2261},
+    {"doc": "ley_ley_1581_2012_habeas_data.txt", "chunks": 1930},
+    {"doc": "codigo_codigo_comercio.txt", "chunks": 1900},
+    {"doc": "constitucion_constitucion_politica_1991.txt", "chunks": 1647},
+    {"doc": "codigo_codigo_penal_ley599.txt", "chunks": 1432},
+    {"doc": "codigo_codigo_civil.txt", "chunks": 1410},
+    {"doc": "codigo_cpaca_ley1437.txt", "chunks": 1246},
+    {"doc": "codigo_codigo_sustantivo_trabajo.txt", "chunks": 1074}
+  ],
+  "hallazgo_critico": "El ET tiene 5163 chunks y el CST 1074 pero la accuracy de tributario es 1.40/10 y laboral 2.63/10. El retrieval funciona — el problema es el modelo de generación (DeepSeek V3) que alucina números de artículo",
+  "conclusion": "No es problema de cobertura del índice. Es problema del modelo LLM de generación. Cambiar modelo (OC-A5) debería subir accuracy +15-25%",
+  "chunks_sin_area": 7325,
+  "porcentaje_sin_area": "20.1%"
+}

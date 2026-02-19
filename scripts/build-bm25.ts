@@ -1,12 +1,13 @@
 /**
  * Builds BM25 index from data/index.json and writes data/bm25-index.json.
  * Lee línea a línea para evitar ERR_STRING_TOO_LONG con índices >512MB.
+ * Escribe el índice por streaming para evitar RangeError al serializar 36k+ docs.
  * Usage: npx tsx scripts/build-bm25.ts
  */
 import fs from 'node:fs'
 import path from 'node:path'
 import readline from 'node:readline'
-import { buildBM25Index, serializeBM25Index } from '../lib/bm25'
+import { buildBM25Index, streamSerializeBM25Index } from '../lib/bm25'
 
 const INDEX_PATH = path.join(process.cwd(), 'data', 'index.json')
 const BM25_PATH = path.join(process.cwd(), 'data', 'bm25-index.json')
@@ -28,11 +29,9 @@ async function main() {
   for await (const line of rl) {
     const trimmed = line.trim()
     if (!trimmed || trimmed === '[' || trimmed === ']') continue
-    // Cada línea es un objeto JSON seguido de una coma opcional
     const jsonStr = trimmed.endsWith(',') ? trimmed.slice(0, -1) : trimmed
     try {
       const obj = JSON.parse(jsonStr) as { id: string; content: string; embedding?: number[] }
-      // Solo guardamos id y content para BM25 (no embedding)
       docs.push({ id: obj.id, content: obj.content })
     } catch {
       // ignorar líneas malformadas
@@ -42,11 +41,22 @@ async function main() {
   console.log(`✅ ${docs.length} chunks leídos. Construyendo índice BM25...`)
 
   const index = buildBM25Index(docs)
-  const json = serializeBM25Index(index)
 
   const dir = path.dirname(BM25_PATH)
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
-  fs.writeFileSync(BM25_PATH, json, 'utf-8')
+
+  await new Promise<void>((resolve, reject) => {
+    const stream = fs.createWriteStream(BM25_PATH, { encoding: 'utf-8' })
+    stream.on('error', reject)
+    stream.on('finish', () => resolve())
+    try {
+      streamSerializeBM25Index(index, stream)
+      stream.end()
+    } catch (err) {
+      stream.destroy(err as Error)
+      reject(err)
+    }
+  })
 
   console.log(`✅ Índice BM25 guardado en ${BM25_PATH} (${index.totalDocs} documentos)`)
 }

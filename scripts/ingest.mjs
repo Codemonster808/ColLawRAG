@@ -43,7 +43,7 @@ function guessTypeFromFilename(name) {
 
 /**
  * Parsea frontmatter YAML entre --- del contenido raw.
- * Devuelve { area?, ... } para usar en metadata (retrieval filtra por metadata.area).
+ * Devuelve { area?, tipo?, ... } para usar en metadata (retrieval filtra por metadata.area).
  */
 function parseFrontmatter(raw) {
   const match = raw.match(/^---\s*\n([\s\S]*?)\n---/)
@@ -56,10 +56,55 @@ function parseFrontmatter(raw) {
       const key = m[1].trim().toLowerCase().replace(/_/g, '_')
       const val = m[2].trim().replace(/^["']|["']$/g, '')
       if (key === 'area' || key === 'area_legal') out.area = val
+      else if (key === 'tipo') out.tipo = val
       else out[m[1].trim()] = val
     }
   }
   return out
+}
+
+/**
+ * Parsea cabecera alternativa: líneas "Clave: valor" antes de ======== o ---.
+ * Usado por decretos (Tema:, Ministerio/Entidad:) y jurisprudencia (Tipo:, TEMA:).
+ * Devuelve { area?, type? } para metadata.
+ */
+function parseHeaderMetadata(raw) {
+  const sepEquals = raw.indexOf('========================================')
+  const sepDash = raw.search(/\n---\s*\n/)
+  const end = sepEquals >= 0
+    ? sepEquals
+    : (sepDash >= 0 ? sepDash : Math.min(2000, raw.length))
+  const block = raw.slice(0, end)
+  const out = {}
+  for (const line of block.split(/\r?\n/)) {
+    const m = line.match(/^([^:]+):\s*(.*)$/)
+    if (!m) continue
+    const key = m[1].trim().toLowerCase().replace(/\s+/g, '_')
+    const val = m[2].trim()
+    if (key === 'tema') {
+      out.tema = val
+    } else if (key === 'tipo') {
+      out.tipo = val
+    }
+  }
+  if (out.tema) {
+    const t = (out.tema || '').toLowerCase()
+    if (/\b(tutela|derechos fundamentales|constitucional|libertad)\b/.test(t)) out.area = 'constitucional'
+    else if (/\b(laboral|trabajo|empleo|prestaciones|cesantías)\b/.test(t)) out.area = 'laboral'
+    else if (/\b(tributario|impuesto|iva|renta)\b/.test(t)) out.area = 'tributario'
+    else if (/\b(penal|delito)\b/.test(t)) out.area = 'penal'
+    else if (/\b(civil|contrato|familia|sucesión)\b/.test(t)) out.area = 'civil'
+    else if (/\b(comercial|sociedad|empresa)\b/.test(t)) out.area = 'comercial'
+    else if (/\b(administrativo|licencias|permisos|petición)\b/.test(t)) out.area = 'administrativo'
+    else out.area = detectLegalAreaFromContent(out.tema, '')
+  }
+  if (out.tipo) {
+    const tip = (out.tipo || '').toLowerCase()
+    if (/\b(tutela|constitucionalidad|unificaci[oó]n)\b/.test(tip)) out.type = 'jurisprudencia'
+    else if (/\b(decreto)\b/.test(tip)) out.type = 'estatuto'
+    else if (/\b(ley|código)\b/.test(tip)) out.type = 'estatuto'
+  }
+  return { area: out.area, type: out.type }
 }
 
 function detectLegalAreaFromContent(title, content) {
@@ -175,6 +220,36 @@ function extractTitle(content, fallback) {
     if (m2) return m2[1].trim()
   }
   return fallback.replace(/[_-]/g, ' ')
+}
+
+/**
+ * Elimina el header de metadata y el TOC de navegación HTML del contenido raw.
+ * Soporta dos formatos:
+ *   - YAML entre --- o cabecera con "Clave: valor" y separador ========
+ *   - Tras el separador, opcional TOC; el cuerpo real empieza con TÍTULO/ARTÍCULO/DECRETO/etc.
+ */
+function stripHeaderAndNav(raw) {
+  let content = raw
+  const sepDash = raw.search(/\n---\s*\n/)
+  const sepEquals = raw.indexOf('========================================')
+
+  if (sepEquals >= 0) {
+    // Separador ======== (decretos, jurisprudencia): quitar todo hasta después de esa línea
+    const afterEquals = raw.indexOf('\n', sepEquals) + 1
+    content = afterEquals > 0 ? raw.slice(afterEquals) : raw.slice(sepEquals + 40)
+  } else if (sepDash >= 0) {
+    content = raw.slice(sepDash + 5)
+  }
+
+  // Eliminar TOC de navegación HTML si existe (Inicio + números de artículos)
+  const realContentMatch = content.search(
+    /\n(T[ÍI]TULO|TITULO|CAP[ÍI]TULO|CAPITULO|ARTICULO\s+\d|ART[ÍI]CULO\s+\d|LEY\s+\d|DECRETO|C[OÓ]DIGO|CONSTITUCI[OÓ]N|NORMA|RESOLUCI[OÓ]N|SENTENCIA)/i
+  )
+  if (realContentMatch > 0) {
+    content = content.slice(realContentMatch + 1)
+  }
+
+  return content
 }
 
 function splitByArticles(content) {
@@ -385,11 +460,17 @@ async function embedBatch(texts) {
   if (provider === 'xenova') {
     try {
       const { pipeline } = await import('@xenova/transformers')
-      const model = process.env.EMB_MODEL || 'Xenova/all-MiniLM-L6-v2'
+      const model = process.env.EMB_MODEL || 'Xenova/paraphrase-multilingual-MiniLM-L12-v2'
       const extractor = await pipeline('feature-extraction', model)
       const outputs = await extractor(texts, { pooling: 'mean', normalize: true })
-      const toArray = (x) => Array.from(x.data || x)
-      return Array.isArray(outputs) ? outputs.map(toArray) : [toArray(outputs)]
+      // Tensor batch: shape [n, dim] — split correctly
+      if (outputs?.dims?.length === 2) {
+        const [n, dim] = outputs.dims
+        const flat = Array.from(outputs.data)
+        return Array.from({ length: n }, (_, i) => flat.slice(i * dim, (i + 1) * dim))
+      }
+      // Single text fallback
+      return [Array.from(outputs.data || outputs)]
     } catch (e) {
       console.error('⚠️  Error con Xenova, usando embeddings locales:', e.message)
       return texts.map(t => fakeEmbed(t))
@@ -483,10 +564,14 @@ async function main() {
     const full = path.join(DOCS_DIR, file)
     const raw = await fsp.readFile(full, 'utf-8')
     const frontmatter = parseFrontmatter(raw)
+    const headerMeta = parseHeaderMetadata(raw)
     const title = extractTitle(raw, path.parse(file).name)
-    const type = guessTypeFromFilename(file)
+    const typeFromFilename = guessTypeFromFilename(file)
+    const type = frontmatter.tipo || headerMeta.type || typeFromFilename
 
-    const articleChunks = splitByArticles(raw)
+    // Limpiar contenido antes de chunking (--- o ======== + TOC)
+    const cleanContent = stripHeaderAndNav(raw)
+    const articleChunks = splitByArticles(cleanContent)
     for (const part of articleChunks) {
       // Construir jerarquía completa para mejor citación
       const articleHierarchy = []
@@ -495,9 +580,9 @@ async function main() {
       if (part.section) articleHierarchy.push(part.section)
       if (part.article) articleHierarchy.push(part.article)
       
-      // Área: frontmatter tiene prioridad; si no, detección por contenido (retrieval filtra por metadata.area)
+      // Área: frontmatter > cabecera alternativa (Tema:/Tipo:) > detección por contenido
       const areaDetected = detectLegalAreaFromContent(title, part.text)
-      const area = frontmatter.area || areaDetected || 'general'
+      const area = frontmatter.area || headerMeta.area || areaDetected || 'general'
       const entidadEmisora = detectEntityFromFilename(file)
       const fechaVigencia = extractVigenciaFromFilename(file)
       
@@ -528,41 +613,58 @@ async function main() {
 
   const batchSize = 16
   const totalBatches = Math.ceil(chunks.length / batchSize)
-  for (let i = 0; i < chunks.length; i += batchSize) {
-    const batch = chunks.slice(i, i + batchSize)
-    const batchNum = Math.floor(i / batchSize) + 1
-    process.stdout.write(`\r[${batchNum}/${totalBatches}] Generando embeddings...`)
-    const vectors = await embedBatch(batch.map(b => b.content))
-    // Convertir a array plano por si el SDK retorna TypedArray (Float32Array)
-    vectors.forEach((v, j) => { batch[j].embedding = Array.isArray(v) ? v : Array.from(v) })
-  }
-  process.stdout.write('\n✅ Embeddings generados\n')
 
   if (process.env.PINECONE_API_KEY && process.env.PINECONE_INDEX) {
+    // Modo Pinecone: acumular en memoria y hacer upsert al final
+    for (let i = 0; i < chunks.length; i += batchSize) {
+      const batch = chunks.slice(i, i + batchSize)
+      const batchNum = Math.floor(i / batchSize) + 1
+      process.stdout.write(`\r[${batchNum}/${totalBatches}] Generando embeddings...`)
+      const vectors = await embedBatch(batch.map(b => b.content))
+      vectors.forEach((v, j) => { batch[j].embedding = Array.isArray(v) ? v : Array.from(v) })
+    }
+    process.stdout.write('\n✅ Embeddings generados\n')
     await upsertPinecone(chunks)
   } else {
+    // Modo local: escribir al disco batch a batch para no acumular en RAM
+    // Usamos archivo temporal + rename atómico al final
+    const TMP_PATH = OUT_PATH + '.tmp'
     if (!fs.existsSync(path.dirname(OUT_PATH))) fs.mkdirSync(path.dirname(OUT_PATH), { recursive: true })
-    // Escribir en streaming para evitar RangeError (Invalid string length) con índices muy grandes
-    await new Promise((resolve, reject) => {
-      const stream = createWriteStream(OUT_PATH, { encoding: 'utf-8' })
-      let i = 0
-      function writeNext() {
-        let ok = true
-        while (ok && i < chunks.length) {
-          const line = JSON.stringify(chunks[i]) + (i < chunks.length - 1 ? ',' : '') + '\n'
-          ok = stream.write(line)
-          i++
-        }
-        if (i >= chunks.length) {
-          stream.write(']\n')
-          stream.end(err => (err ? reject(err) : resolve()))
-        } else {
-          stream.once('drain', writeNext)
-        }
-      }
-      stream.write('[\n')
-      writeNext()
+
+    const stream = createWriteStream(TMP_PATH, { encoding: 'utf-8' })
+    const writeToStream = (data) => new Promise((resolve, reject) => {
+      const ok = stream.write(data)
+      if (ok) return resolve()
+      stream.once('drain', resolve)
+      stream.once('error', reject)
     })
+
+    await writeToStream('[\n')
+
+    for (let i = 0; i < chunks.length; i += batchSize) {
+      const batch = chunks.slice(i, i + batchSize)
+      const batchNum = Math.floor(i / batchSize) + 1
+      process.stdout.write(`\r[${batchNum}/${totalBatches}] Generando embeddings...`)
+      const vectors = await embedBatch(batch.map(b => b.content))
+      // Convertir a array plano por si el SDK retorna TypedArray (Float32Array)
+      vectors.forEach((v, j) => { batch[j].embedding = Array.isArray(v) ? v : Array.from(v) })
+
+      // Escribir batch al disco inmediatamente (libera memoria)
+      for (let j = 0; j < batch.length; j++) {
+        const globalIdx = i + j
+        const isLast = globalIdx === chunks.length - 1
+        await writeToStream(JSON.stringify(batch[j]) + (isLast ? '\n' : ',\n'))
+        // Liberar embedding de memoria tras escribir
+        batch[j].embedding = null
+      }
+    }
+
+    await writeToStream(']\n')
+    await new Promise((resolve, reject) => stream.end(err => err ? reject(err) : resolve()))
+
+    // Rename atómico: el index.json real nunca queda corrupto
+    await fsp.rename(TMP_PATH, OUT_PATH)
+    process.stdout.write('\n✅ Embeddings generados\n')
     console.log('Índice local guardado en', OUT_PATH)
   }
 }

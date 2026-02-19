@@ -77,11 +77,11 @@ export function hasFeature(tier: UserTier, feature: keyof TierLimits): boolean {
 }
 
 /**
- * Obtiene el tier de un usuario desde la base de datos
+ * Obtiene el tier de un usuario desde la base de datos. Async cuando DATABASE_URL (Postgres).
  */
-export function getUserTier(userId: string): UserTier {
+export async function getUserTier(userId: string): Promise<UserTier> {
   try {
-    const user = getUser(userId)
+    const user = await getUser(userId)
     return user?.tier || 'free'
   } catch (error) {
     console.error('[tiers] Error getting user tier:', error)
@@ -90,86 +90,40 @@ export function getUserTier(userId: string): UserTier {
 }
 
 /**
- * Verifica límites de uso para un usuario (consulta DB)
+ * Verifica límites de uso para un usuario (consulta DB). Async cuando DATABASE_URL (Postgres).
  */
-export function checkUsageLimit(tier: UserTier, userId: string): { allowed: boolean; reason?: string } {
+export async function checkUsageLimit(tier: UserTier, userId: string): Promise<{ allowed: boolean; reason?: string }> {
   try {
     const limits = TIER_LIMITS[tier]
-    
-    if (limits.maxQueriesPerMonth === -1) {
-      return { allowed: true }
-    }
-    
-    // Consultar queriesThisMonth desde base de datos
-    const stats = getUserStats(userId)
+    if (limits.maxQueriesPerMonth === -1) return { allowed: true }
+    const stats = await getUserStats(userId)
     const queriesThisMonth = stats?.queriesThisMonth || 0
-    
     if (queriesThisMonth >= limits.maxQueriesPerMonth) {
       return {
         allowed: false,
         reason: `Has alcanzado el límite de ${limits.maxQueriesPerMonth} consultas mensuales. Actualiza a Premium para consultas ilimitadas.`
       }
     }
-    
     return { allowed: true }
   } catch (error) {
     console.error('[tiers] Error checking usage limit:', error)
-    // En caso de error, permitir la request
     return { allowed: true }
   }
 }
 
 /**
- * Trackea el uso de un usuario (actualiza DB)
+ * Trackea el uso de un usuario (actualiza DB). Async cuando DATABASE_URL (Postgres).
  */
-export function trackUsage(userId: string, tier: UserTier, query?: string, responseTime?: number, success?: boolean): void {
+export async function trackUsage(userId: string, tier: UserTier, query?: string, responseTime?: number, success?: boolean): Promise<void> {
   try {
-    // Asegurar que el usuario existe
-    const user = getUser(userId)
-    if (!user) {
-      // Crear usuario si no existe
-      createUser({ id: userId, tier })
-    }
-    
-    // Si se proporcionan detalles de la consulta, usar logQuery
-    if (query !== undefined && responseTime !== undefined && success !== undefined) {
-      logQuery({
-        userId,
-        query,
-        responseTime,
-        success
-      })
-    } else {
-      // Solo actualizar contador mensual (más ligero)
-      // logQuery ya maneja el incremento de contadores, pero podemos hacerlo explícito aquí
-      const stats = getUserStats(userId)
-      const now = new Date()
-      const lastQueryAt = stats?.lastQueryAt
-      
-      // Resetear contador si es nuevo mes
-      let queriesThisMonth = stats?.queriesThisMonth || 0
-      if (lastQueryAt) {
-        const lastMonth = lastQueryAt.getMonth()
-        const lastYear = lastQueryAt.getFullYear()
-        const currentMonth = now.getMonth()
-        const currentYear = now.getFullYear()
-        
-        if (lastMonth !== currentMonth || lastYear !== currentYear) {
-          queriesThisMonth = 0
-        }
-      }
-      
-      // Incrementar contador (logQuery lo hará cuando se llame con detalles)
-      queriesThisMonth++
-      
-      // Actualizar en DB (usar logQuery con valores mínimos si no tenemos detalles)
-      logQuery({
-        userId,
-        query: query || 'tracked',
-        responseTime: responseTime || 0,
-        success: success !== undefined ? success : true
-      })
-    }
+    const user = await getUser(userId)
+    if (!user) await createUser({ id: userId, tier })
+    await logQuery({
+      userId,
+      query: query ?? 'tracked',
+      responseTime: responseTime ?? 0,
+      success: success !== undefined ? success : true
+    })
   } catch (error) {
     console.error('[tiers] Error tracking usage:', error)
   }

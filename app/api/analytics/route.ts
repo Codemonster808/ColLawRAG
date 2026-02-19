@@ -19,11 +19,13 @@ export async function GET(request: Request) {
   }
 
   try {
-    const metrics = getSystemMetrics()
-    const queriesPerDay = getQueriesPerDay(14)
-    const qualityMetrics = getQualityMetrics()
-    const satisfactionMetrics = getSatisfactionMetrics()
-    const abTestResults = getABTestResults('topk_variants')
+    const [metrics, queriesPerDay, qualityMetrics, satisfactionMetrics, abTestResults] = await Promise.all([
+      getSystemMetrics(),
+      getQueriesPerDay(14),
+      getQualityMetrics(),
+      getSatisfactionMetrics(),
+      getABTestResults('topk_variants')
+    ])
 
     return NextResponse.json({
       ...metrics,

@@ -1,159 +1,349 @@
 'use client'
 
-import { useState } from 'react'
-import SearchBar from '@/components/SearchBar'
-import Filters from '@/components/Filters'
-import ResultsDisplay from '@/components/ResultsDisplay'
-import LoadingSpinner from '@/components/LoadingSpinner'
+import Link from 'next/link'
 
-type Citation = {
-  id: string
-  title: string
-  type: string
-  url?: string
-  article?: string
-  score?: number
-}
-
-type CalculationItem = { type: string; amount: number; formula: string; breakdown: Record<string, number | string> }
-type VigenciaNorma = { normaId: string; title: string; estado: string; derogadaPor?: string; derogadaDesde?: string }
-type ProcedureItem = { id: string; nombre: string; tipo?: string; resumen?: string }
-
-export default function Page() {
-  const [query, setQuery] = useState('')
-  const [typeFilter, setTypeFilter] = useState<string>('todos')
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [answer, setAnswer] = useState('')
-  const [citations, setCitations] = useState<Citation[]>([])
-  const [requestId, setRequestId] = useState<string | undefined>(undefined)
-  const [calculations, setCalculations] = useState<CalculationItem[]>([])
-  const [vigenciaValidation, setVigenciaValidation] = useState<{ warnings: string[]; byNorma: VigenciaNorma[] } | null>(null)
-  const [procedures, setProcedures] = useState<ProcedureItem[]>([])
-
-  const onSearch = async () => {
-    setLoading(true)
-    setError(null)
-    setAnswer('')
-    setCitations([])
-    setRequestId(undefined)
-    setCalculations([])
-    setVigenciaValidation(null)
-    setProcedures([])
-    try {
-      const res = await fetch('/api/rag', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ query, filters: { type: typeFilter === 'todos' ? undefined : typeFilter }, locale: 'es' })
-      })
-      if (!res.ok) {
-        if (res.status === 429) {
-          const data = await res.json().catch(() => ({}))
-          const retryAfter = res.headers.get('retry-after') || '1 hora'
-          throw new Error(
-            data.message || 
-            `Has excedido el límite de consultas. Por favor, intenta nuevamente en ${retryAfter}.`
-          )
-        }
-        const msg = await res.text()
-        try {
-          const jsonMsg = JSON.parse(msg)
-          throw new Error(jsonMsg.message || jsonMsg.error || 'Error en la consulta')
-        } catch {
-          throw new Error(msg || 'Error en la consulta')
-        }
-      }
-      const data = await res.json()
-      setAnswer(data.answer)
-      setCitations(data.citations || [])
-      setRequestId(data.requestId)
-      setCalculations(data.calculations ?? [])
-      setVigenciaValidation(data.vigenciaValidation ?? null)
-      setProcedures(data.procedures ?? [])
-    } catch (e: any) {
-      setError(e.message || 'Error inesperado')
-    } finally {
-      setLoading(false)
-    }
-  }
-
+export default function LandingPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-10">
-        <header className="mb-8">
-          <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl tracking-tight">
-            RAG: Derecho Colombiano
-          </h1>
-          <p className="mt-2 text-gray-600 sm:text-base">
-            Consulte la normativa colombiana en lenguaje natural. Respuestas con contexto, citas, cálculos y procedimientos cuando apliquen.
-          </p>
-          <p className="mt-1 text-sm text-gray-500">Idioma: Español (ES).</p>
-        </header>
-
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 sm:p-5 mb-6">
-          <SearchBar
-            value={query}
-            onChange={setQuery}
-            onSubmit={onSearch}
-            loading={loading}
-          />
-          <Filters value={typeFilter} onChange={setTypeFilter} />
+    <main className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-gray-50">
+      {/* Navigation */}
+      <nav className="border-b border-gray-200 bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center">
+              <h1 className="text-xl font-bold text-blue-600">ColLawRAG</h1>
+            </div>
+            <div className="flex items-center gap-4">
+              <Link href="/app" className="text-gray-600 hover:text-gray-900 font-medium">
+                Buscador
+              </Link>
+              <Link href="/historial" className="text-gray-600 hover:text-gray-900 font-medium">
+                Historial
+              </Link>
+              <Link href="/pricing" className="text-gray-600 hover:text-gray-900 font-medium">
+                Precios
+              </Link>
+              <Link href="/login" className="text-gray-600 hover:text-gray-900 font-medium">
+                Iniciar sesión
+              </Link>
+              <Link 
+                href="/app" 
+                className="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+              >
+                Empieza gratis
+              </Link>
+            </div>
+          </div>
         </div>
+      </nav>
 
-        {loading && (
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8 mb-6">
-            <LoadingSpinner message="Analizando consulta legal..." />
+      {/* Hero Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
+        <div className="text-center">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+            Consulta el derecho colombiano
+            <span className="text-blue-600"> con inteligencia artificial</span>
+          </h1>
+          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+            Respuestas precisas con citas, cálculos automáticos y validación de vigencia. 
+            Todo el conocimiento legal colombiano al alcance de tu mano.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link 
+              href="/app" 
+              className="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg"
+            >
+              Probar ahora gratis
+            </Link>
+            <Link 
+              href="/pricing" 
+              className="bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold border-2 border-blue-600 hover:bg-blue-50 transition-colors"
+            >
+              Ver planes y precios
+            </Link>
           </div>
-        )}
+        </div>
+      </section>
 
-        {error && (
-          <div className="rounded-lg bg-red-50 border border-red-100 text-red-700 px-4 py-3 mb-6" role="alert">
-            {error}
+      {/* Demo Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-8">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+            Prueba el buscador ahora
+          </h2>
+          <div className="max-w-2xl mx-auto">
+            <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+              <p className="text-sm text-gray-500 mb-2">Ejemplo de consulta:</p>
+              <p className="text-gray-800 font-medium mb-4">
+                "¿Cuáles son los requisitos para interponer una acción de tutela?"
+              </p>
+              <Link 
+                href="/app" 
+                className="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+              >
+                Probar esta consulta →
+              </Link>
+            </div>
           </div>
-        )}
+        </div>
+      </section>
 
-      {!loading && (answer || citations.length > 0) && (
-        <ResultsDisplay
-          answer={answer}
-          citations={citations}
-          requestId={requestId}
-          calculations={calculations}
-          vigenciaValidation={vigenciaValidation}
-          procedures={procedures}
-        />
-      )}
-
-        <div className="mt-8 rounded-lg bg-amber-50 border border-amber-200 p-4 mb-6">
-          <div className="flex">
-            <div className="flex-shrink-0">
-              <svg className="h-5 w-5 text-amber-400" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+      {/* Features Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
+          Funcionalidades principales
+        </h2>
+        <div className="grid md:grid-cols-3 gap-8">
+          <div className="bg-white rounded-xl p-6 shadow-md border border-gray-100">
+            <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+              <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
             </div>
-            <div className="ml-3">
-              <h3 className="text-sm font-medium text-amber-800">Aviso Legal</h3>
-              <div className="mt-2 text-sm text-amber-700">
-                <p>
-                  Este servicio proporciona <strong>información orientativa</strong> basada en documentos legales colombianos. 
-                  <strong> No constituye asesoría legal profesional</strong> y no reemplaza la consulta con un abogado. 
-                  La información puede no estar actualizada. Use bajo su propia responsabilidad.
-                </p>
-                <p className="mt-2">
-                  <a href="/terminos" className="font-medium underline hover:text-amber-900">
-                    Ver términos de servicio
-                  </a>
-                </p>
-              </div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">RAG con citas precisas</h3>
+            <p className="text-gray-600">
+              Respuestas basadas en documentos legales reales con referencias exactas a artículos, leyes y jurisprudencia.
+            </p>
+          </div>
+          <div className="bg-white rounded-xl p-6 shadow-md border border-gray-100">
+            <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+              <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
             </div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">Validación de vigencia</h3>
+            <p className="text-gray-600">
+              Detecta automáticamente si las normas citadas están vigentes o han sido derogadas, con advertencias claras.
+            </p>
+          </div>
+          <div className="bg-white rounded-xl p-6 shadow-md border border-gray-100">
+            <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+              <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">Cálculos automáticos</h3>
+            <p className="text-gray-600">
+              Calcula automáticamente indemnizaciones, prestaciones y otros valores legales con fórmulas precisas.
+            </p>
           </div>
         </div>
+      </section>
 
-        <footer className="mt-12 pt-6 border-t border-gray-200 text-sm text-gray-500">
-          <p>© 2026 ColLawRAG. Servicio de consulta de normativa colombiana.</p>
-        </footer>
-      </div>
+      {/* Pricing Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">
+          Planes y precios
+        </h2>
+        <p className="text-center text-gray-600 mb-12">
+          Elige el plan que mejor se adapte a tus necesidades
+        </p>
+        <div className="grid md:grid-cols-3 gap-8">
+          {/* Free Plan */}
+          <div className="bg-white rounded-xl p-8 shadow-md border border-gray-200">
+            <h3 className="text-2xl font-bold text-gray-900 mb-2">Free</h3>
+            <div className="mb-4">
+              <span className="text-4xl font-bold text-gray-900">$0</span>
+              <span className="text-gray-600">/mes</span>
+            </div>
+            <ul className="space-y-3 mb-6">
+              <li className="flex items-start">
+                <svg className="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span className="text-gray-700">10 consultas/mes</span>
+              </li>
+              <li className="flex items-start">
+                <svg className="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span className="text-gray-700">Acceso básico sin auth</span>
+              </li>
+            </ul>
+            <Link 
+              href="/app" 
+              className="block w-full text-center bg-gray-100 text-gray-900 px-6 py-3 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+            >
+              Empezar gratis
+            </Link>
+          </div>
+
+          {/* Premium Plan */}
+          <div className="bg-blue-600 rounded-xl p-8 shadow-xl border-2 border-blue-700 transform scale-105">
+            <div className="flex items-center justify-between mb-2">
+              <h3 className="text-2xl font-bold text-white">Premium</h3>
+              <span className="bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded">Popular</span>
+            </div>
+            <div className="mb-4">
+              <span className="text-4xl font-bold text-white">$29.000</span>
+              <span className="text-blue-100"> COP/mes</span>
+            </div>
+            <ul className="space-y-3 mb-6">
+              <li className="flex items-start">
+                <svg className="w-5 h-5 text-yellow-300 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span className="text-white">Consultas ilimitadas</span>
+              </li>
+              <li className="flex items-start">
+                <svg className="w-5 h-5 text-yellow-300 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span className="text-white">Validación factual</span>
+              </li>
+              <li className="flex items-start">
+                <svg className="w-5 h-5 text-yellow-300 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span className="text-white">Cálculos automáticos</span>
+              </li>
+              <li className="flex items-start">
+                <svg className="w-5 h-5 text-yellow-300 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span className="text-white">Historial de consultas</span>
+              </li>
+            </ul>
+            <Link 
+              href="/pricing" 
+              className="block w-full text-center bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
+            >
+              Suscribirse
+            </Link>
+          </div>
+
+          {/* Pro Plan */}
+          <div className="bg-white rounded-xl p-8 shadow-md border border-gray-200">
+            <h3 className="text-2xl font-bold text-gray-900 mb-2">Pro</h3>
+            <div className="mb-4">
+              <span className="text-4xl font-bold text-gray-900">$149.000</span>
+              <span className="text-gray-600"> COP/mes</span>
+            </div>
+            <ul className="space-y-3 mb-6">
+              <li className="flex items-start">
+                <svg className="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span className="text-gray-700">Todo de Premium</span>
+              </li>
+              <li className="flex items-start">
+                <svg className="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span className="text-gray-700">API key incluida</span>
+              </li>
+              <li className="flex items-start">
+                <svg className="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span className="text-gray-700">Analytics avanzados</span>
+              </li>
+              <li className="flex items-start">
+                <svg className="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span className="text-gray-700">Exportar a PDF</span>
+              </li>
+            </ul>
+            <Link 
+              href="/pricing" 
+              className="block w-full text-center bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+            >
+              Suscribirse
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
+          Preguntas frecuentes
+        </h2>
+        <div className="space-y-6">
+          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              ¿Es esto asesoría legal profesional?
+            </h3>
+            <p className="text-gray-600">
+              No. ColLawRAG proporciona información orientativa basada en documentos legales colombianos. 
+              No constituye asesoría legal profesional y no reemplaza la consulta con un abogado calificado.
+            </p>
+          </div>
+          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              ¿Cómo funciona el sistema de precios?
+            </h3>
+            <p className="text-gray-600">
+              El plan Free incluye 10 consultas por mes sin necesidad de registro. 
+              Los planes Premium y Pro ofrecen consultas ilimitadas con funcionalidades adicionales.
+            </p>
+          </div>
+          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              ¿Qué información legal está disponible?
+            </h3>
+            <p className="text-gray-600">
+              El sistema incluye constitución, códigos, leyes, decretos, resoluciones y jurisprudencia 
+              de la Corte Constitucional colombiana, con validación automática de vigencia.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="bg-blue-600 rounded-2xl p-12 text-center">
+          <h2 className="text-3xl font-bold text-white mb-4">
+            ¿Listo para empezar?
+          </h2>
+          <p className="text-xl text-blue-100 mb-8">
+            Prueba ColLawRAG gratis y descubre cómo la IA puede ayudarte con consultas legales.
+          </p>
+          <Link 
+            href="/app" 
+            className="inline-block bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-50 transition-colors shadow-lg"
+          >
+            Probar ahora gratis
+          </Link>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-gray-200 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div>
+              <h3 className="text-lg font-bold text-gray-900 mb-4">ColLawRAG</h3>
+              <p className="text-gray-600 text-sm">
+                Consulta legal inteligente para Colombia
+              </p>
+            </div>
+            <div>
+              <h4 className="font-semibold text-gray-900 mb-4">Producto</h4>
+              <ul className="space-y-2 text-sm">
+                <li><Link href="/app" className="text-gray-600 hover:text-gray-900">Buscador</Link></li>
+                <li><Link href="/pricing" className="text-gray-600 hover:text-gray-900">Precios</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold text-gray-900 mb-4">Legal</h4>
+              <ul className="space-y-2 text-sm">
+                <li><a href="/terminos" className="text-gray-600 hover:text-gray-900">Términos de servicio</a></li>
+                <li><a href="/privacidad" className="text-gray-600 hover:text-gray-900">Privacidad</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold text-gray-900 mb-4">Contacto</h4>
+              <p className="text-gray-600 text-sm">
+                Soporte disponible en la aplicación
+              </p>
+            </div>
+          </div>
+          <div className="mt-8 pt-8 border-t border-gray-200 text-center text-sm text-gray-500">
+            <p>© 2026 ColLawRAG. Todos los derechos reservados.</p>
+          </div>
+        </div>
+      </footer>
     </main>
   )
-} 
+}

@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
     }
     
     // Registrar feedback
-    logUserFeedback({
+    await logUserFeedback({
       queryLogId: queryLogId ? parseInt(queryLogId, 10) : undefined,
       userId,
       rating: parseInt(rating, 10),

@@ -36,12 +36,14 @@ export async function embedTexts(texts: string[]): Promise<number[][]> {
       const { pipeline } = await import('@xenova/transformers')
       const extractor: any = await pipeline('feature-extraction', EMB_MODEL)
       const outputs: any = await extractor(texts, { pooling: 'mean', normalize: true })
-      // outputs can be a single tensor or array; normalize to number[][]
-      const toArray = (x: any): number[] => Array.from(x.data || x) as number[]
-      if (Array.isArray(outputs)) {
-        return outputs.map(toArray) as number[][]
+      // Tensor batch: shape [n, dim] — split correctly
+      if (outputs?.dims?.length === 2) {
+        const [n, dim] = outputs.dims
+        const flat = Array.from(outputs.data) as number[]
+        return Array.from({ length: n }, (_, i) => flat.slice(i * dim, (i + 1) * dim))
       }
-      return [toArray(outputs)]
+      // Single text fallback
+      return [Array.from(outputs.data || outputs) as number[]]
     } catch (e) {
       return texts.map(t => fakeEmbed(t))
     }

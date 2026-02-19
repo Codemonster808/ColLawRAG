@@ -1,0 +1,2563 @@
+{
+  "fecha": "2026-02-18",
+  "api_url": "https://col-law-rag.vercel.app",
+  "modelo_juez": "deepseek/deepseek-v3.2",
+  "resumen": {
+    "total_casos": 180,
+    "evaluados": 30,
+    "errores": 150,
+    "score_promedio": "2.00",
+    "accuracy_porcentaje": "20.0%"
+  },
+  "veredictos": {
+    "INCORRECTO": 30
+  },
+  "promedio_criterios": {
+    "precision_normativa": "0.00",
+    "articulos_correctos": "0.00",
+    "interpretacion_valida": "0.00",
+    "completitud": "0.00",
+    "ausencia_alucinaciones": "10.00"
+  },
+  "por_area": {
+    "laboral": {
+      "promedio": "2.00",
+      "casos": 12,
+      "scores": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ]
+    },
+    "constitucional": {
+      "promedio": "2.00",
+      "casos": 6,
+      "scores": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ]
+    },
+    "tributario": {
+      "promedio": "2.00",
+      "casos": 3,
+      "scores": [
+        2,
+        2,
+        2
+      ]
+    },
+    "administrativo": {
+      "promedio": "2.00",
+      "casos": 4,
+      "scores": [
+        2,
+        2,
+        2,
+        2
+      ]
+    },
+    "civil": {
+      "promedio": "2.00",
+      "casos": 4,
+      "scores": [
+        2,
+        2,
+        2,
+        2
+      ]
+    },
+    "penal": {
+      "promedio": "2.00",
+      "casos": 1,
+      "scores": [
+        2
+      ]
+    }
+  },
+  "mejores_casos": [
+    {
+      "id": "LAB-003",
+      "area": "laboral",
+      "score": 2
+    },
+    {
+      "id": "LAB-004",
+      "area": "laboral",
+      "score": 2
+    },
+    {
+      "id": "CON-003",
+      "area": "constitucional",
+      "score": 2
+    }
+  ],
+  "peores_casos": [
+    {
+      "id": "TRI-015",
+      "area": "tributario",
+      "score": 2
+    },
+    {
+      "id": "PEN-010",
+      "area": "penal",
+      "score": 2
+    },
+    {
+      "id": "CIV-014",
+      "area": "civil",
+      "score": 2
+    }
+  ],
+  "alucinaciones_detectadas": [],
+  "resultados_detallados": [
+    {
+      "id": "LAB-003",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuándo procede el despido sin justa causa y cuál es la indemnización?",
+      "respuesta_referencia": "Según el artículo 64 del CST, el empleador puede terminar el contrato sin justa causa pagando indemnización. Para contratos a término indefinido con trabajadores que ganen menos de 10 SMLMV: 30 días por el primer año y 20 días adicionales por cada año posterior. Para trabajadores con más de 10 SMLMV: 20 días por el primer año y 15 adicionales por cada año. El artículo 26 del Decreto 2351/65 modificó esta figura.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Cuándo procede el despido sin justa causa**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Cuándo procede el despido sin justa causa\n\n\n\n---\n\n\n\n**2. y cuál es la indemnización?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y cuál es la indemnización?",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 10,
+        "score_total": 2,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 64 CST",
+          "Art. 65 CST",
+          "Decreto 2351/65"
+        ],
+        "alucinaciones": [],
+        "comentario": "La respuesta del RAG es completamente nula, ya que no pudo generar información alguna sobre el despido sin justa causa ni la indemnización, fallando en todos los aspectos sustantivos de la consulta."
+      },
+      "error": null,
+      "timestamp": "2026-02-18T04:00:32.479Z"
+    },
+    {
+      "id": "LAB-004",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el fuero de maternidad y qué protección ofrece?",
+      "respuesta_referencia": "El fuero de maternidad, consagrado en el artículo 239 del CST y desarrollado por la Sentencia C-005 de 2017 de la Corte Constitucional, prohíbe el despido de la trabajadora embarazada o en período de lactancia sin la autorización previa del Inspector de Trabajo. Si se despide sin autorización, el despido es ineficaz y la trabajadora tiene derecho a ser reintegrada y al pago de salarios y prestaciones dejados de percibir. La protección aplica incluso en contratos a término fijo y de obra.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Qué es el fuero de maternidad**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Qué es el fuero de maternidad\n\n\n\n---\n\n\n\n**2. y qué protección ofrece?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y qué protección ofrece?",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 10,
+        "score_total": 2,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 239 CST",
+          "Sentencia C-005/2017",
+          "Art. 240 CST"
+        ],
+        "alucinaciones": [],
+        "comentario": "La respuesta del RAG es completamente fallida, ya que no generó contenido para ninguna parte de la pregunta, a pesar de no inventar información."
+      },
+      "error": null,
+      "timestamp": "2026-02-18T04:00:47.874Z"
+    },
+    {
+      "id": "CON-003",
+      "area": "constitucional",
+      "dificultad": "avanzado",
+      "pregunta": "¿Qué es la excepción de inconstitucionalidad y cómo se aplica?",
+      "respuesta_referencia": "La excepción de inconstitucionalidad, consagrada en el artículo 4 de la Constitución Política, permite a cualquier operador jurídico inaplicar una norma que sea contraria a la Constitución en un caso concreto, sin que esto implique su derogatoria general. Difiere de la acción de inconstitucionalidad en que sus efectos son inter partes y no erga omnes. La Corte Constitucional ha señalado que es un deber del juez cuando la norma aplicable viola claramente preceptos constitucionales.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Qué es la excepción de inconstitucionalidad**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Qué es la excepción de inconstitucionalidad\n\n\n\n---\n\n\n\n**2. y cómo se aplica?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y cómo se aplica?",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 10,
+        "score_total": 2,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 4 CP",
+          "Art. 241 CP"
+        ],
+        "alucinaciones": [],
+        "comentario": "El sistema RAG no generó ninguna respuesta sustantiva, solo indicó que no pudo responder, por lo que no cumple con ningún criterio de contenido jurídico."
+      },
+      "error": null,
+      "timestamp": "2026-02-18T04:02:17.636Z"
+    },
+    {
+      "id": "TRI-002",
+      "area": "tributario",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuándo se genera el IVA y cuál es la tarifa general en Colombia?",
+      "respuesta_referencia": "El Impuesto sobre las Ventas (IVA) está regulado en el Libro Tercero del Estatuto Tributario (Arts. 420-513 ET). Se genera en la venta de bienes corporales muebles no excluidos, prestación de servicios en el territorio nacional, importación de bienes corporales muebles y juegos de suerte y azar. La tarifa general es del 19% según el artículo 468 ET, modificado por la Ley 1819 de 2016. Existen tarifas diferenciales del 5% y bienes exentos (0%).",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Cuándo se genera el IVA**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Cuándo se genera el IVA\n\n\n\n---\n\n\n\n**2. y cuál es la tarifa general en Colombia?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y cuál es la tarifa general en Colombia?",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 10,
+        "score_total": 2,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 420 ET",
+          "Art. 468 ET",
+          "Ley 1819/2016"
+        ],
+        "alucinaciones": [],
+        "comentario": "El sistema RAG no pudo generar respuesta alguna a la consulta, por lo que no cumple con ningún criterio de contenido jurídico, aunque tampoco inventó información."
+      },
+      "error": null,
+      "timestamp": "2026-02-18T04:03:01.175Z"
+    },
+    {
+      "id": "LAB-015",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Qué es la prima de servicios y cuándo se paga?",
+      "respuesta_referencia": "La prima de servicios está en el artículo 306 del CST. Es un salario adicional que se paga en dos pagas al año: la primera antes del 30 de junio (por el primer semestre) y la segunda antes del 20 de diciembre (por el segundo semestre). Equivale a 15 días de salario por cada semestre trabajado.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Qué es la prima de servicios**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Qué es la prima de servicios\n\n\n\n---\n\n\n\n**2. y cuándo se paga?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y cuándo se paga?",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 10,
+        "score_total": 2,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 306 CST"
+        ],
+        "alucinaciones": [],
+        "comentario": "El sistema RAG no generó ninguna respuesta sustantiva, fallando completamente en explicar qué es la prima de servicios y sus fechas de pago, mientras que la respuesta experta es completa y precisa."
+      },
+      "error": null,
+      "timestamp": "2026-02-18T04:04:11.872Z"
+    },
+    {
+      "id": "LAB-018",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es la causal objetiva de despido y cuál es la indemnización?",
+      "respuesta_referencia": "Las causales objetivas están en el artículo 62 del CST: cierre de la empresa, suspensión de actividades por más de 120 días, muerte del empleador natural, etc. La indemnización es la misma que para despido sin justa causa: 30+20×(años-1) para quienes ganen menos de 10 SMMLV, o 20+15×(años-1) para quienes ganen más.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Qué es la causal objetiva de despido**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Qué es la causal objetiva de despido\n\n\n\n---\n\n\n\n**2. y cuál es la indemnización?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y cuál es la indemnización?",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 10,
+        "score_total": 2,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 62 CST",
+          "Art. 64 CST"
+        ],
+        "alucinaciones": [],
+        "comentario": "La respuesta del sistema RAG es completamente insuficiente, ya que no pudo generar ninguna información sobre las causales objetivas ni la indemnización, fallando en todos los aspectos sustantivos de la pregunta."
+      },
+      "error": null,
+      "timestamp": "2026-02-18T04:04:46.571Z"
+    },
+    {
+      "id": "LAB-021",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el pacto de no concurrencia y cuándo es válido?",
+      "respuesta_referencia": "El pacto de no concurrencia (no competir después de terminar el contrato) está en el artículo 27 del CST. Es válido solo si se limita a actividades similares, a un tiempo no mayor de dos (2) años y a un territorio determinado. Debe constar por escrito y el empleador debe pagar una contraprestación no inferior al 50% del último salario durante el período pactado.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Qué es el pacto de no concurrencia**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Qué es el pacto de no concurrencia\n\n\n\n---\n\n\n\n**2. y cuándo es válido?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y cuándo es válido?",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 10,
+        "score_total": 2,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 27 CST"
+        ],
+        "alucinaciones": [],
+        "comentario": "La respuesta del RAG es completamente nula, ya que no pudo generar contenido para ninguna parte de la consulta, mientras que la respuesta experta define correctamente el pacto y sus requisitos de validez según el artículo 27 del CST."
+      },
+      "error": null,
+      "timestamp": "2026-02-18T04:05:16.932Z"
+    },
+    {
+      "id": "CON-008",
+      "area": "constitucional",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cuál es la diferencia entre estado de excepción y estado de conmoción interior?",
+      "respuesta_referencia": "El estado de guerra exterior está en el Art. 212 CP; el de conmoción interior en el Art. 213. La conmoción interior procede cuando hay grave perturbación del orden público que atente contra la estabilidad institucional, la seguridad del Estado o la convivencia ciudadana. Cada período es de hasta 90 días, prorrogables por 90 más. El de guerra no tiene ese límite único. Ambos permiten decretos legislativos con límites constitucionales.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Cuál es la entre estado de excepción**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Cuál es la entre estado de excepción\n\n\n\n---\n\n\n\n**2. ¿Cuál es la estado de conmoción interior?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Cuál es la estado de conmoción interior?",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 10,
+        "score_total": 2,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 212 CP",
+          "Art. 213 CP"
+        ],
+        "alucinaciones": [],
+        "comentario": "La respuesta del RAG es completamente fallida: no procesó la pregunta correctamente, no generó contenido jurídico y no mencionó ninguna norma, mientras que la respuesta experta sí distinguió los estados de excepción y conmoción interior con precisión normativa."
+      },
+      "error": null,
+      "timestamp": "2026-02-18T04:06:29.737Z"
+    },
+    {
+      "id": "ADM-008",
+      "area": "administrativo",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es la vía de hecho y cómo se combate?",
+      "respuesta_referencia": "La vía de hecho ocurre cuando la administración actúa fuera del ordenamiento jurídico o vulnera el procedimiento de manera grave. Se combate con acción de tutela cuando no hay otro recurso efectivo, o con acción de cumplimiento cuando se trata de un acto administrativo que no se cumple. También puede demandarse la nulidad y restablecimiento del derecho.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Qué es la vía de hecho**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Qué es la vía de hecho\n\n\n\n---\n\n\n\n**2. y cómo se combate?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y cómo se combate?",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 10,
+        "score_total": 2,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 86 CP",
+          "Ley 393/1997"
+        ],
+        "alucinaciones": [],
+        "comentario": "La respuesta del RAG es completamente nula, ya que no pudo generar contenido para ninguna parte de la pregunta, mientras que la respuesta experta define correctamente la vía de hecho y sus mecanismos de combate."
+      },
+      "error": null,
+      "timestamp": "2026-02-18T04:08:35.992Z"
+    },
+    {
+      "id": "TRI-005",
+      "area": "tributario",
+      "dificultad": "basico",
+      "pregunta": "¿Qué es la retención en la fuente y cuándo se practica?",
+      "respuesta_referencia": "La retención en la fuente es un mecanismo por el cual un agente retenedor (empleador, pagador de honorarios, etc.) descuenta del pago un porcentaje del impuesto de renta o del IVA y lo consigna a la DIAN. Se practica sobre pagos laborales, por honorarios, por dividendos, por arrendamientos, entre otros. Está regulada en el Estatuto Tributario (Arts. 400 y ss.).",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Qué es la retención en la fuente**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Qué es la retención en la fuente\n\n\n\n---\n\n\n\n**2. y cuándo se practica?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y cuándo se practica?",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 10,
+        "score_total": 2,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Estatuto Tributario",
+          "Arts. 400 y ss. ET"
+        ],
+        "alucinaciones": [],
+        "comentario": "El sistema RAG no generó ninguna respuesta sustantiva a la pregunta, fallando completamente en explicar qué es la retención en la fuente y cuándo se practica, a diferencia de la respuesta experta que incluye definición, mecanismo y normas aplicables."
+      },
+      "error": null,
+      "timestamp": "2026-02-18T04:12:03.239Z"
+    },
+    {
+      "id": "LAB-011",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Qué es la prima de servicios y cuándo se paga en Colombia?",
+      "respuesta_referencia": "La prima de servicios equivale a 30 días de salario por año trabajado, pagadera en dos cuotas: 15 días en junio y 15 días en diciembre. Se regula en el Art. 306 del CST y aplica a todo empleado del sector privado.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Qué es la prima de servicios**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Qué es la prima de servicios\n\n\n\n---\n\n\n\n**2. y cuándo se paga en Colombia?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y cuándo se paga en Colombia?",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 10,
+        "score_total": 2,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 306 CST"
+        ],
+        "alucinaciones": [],
+        "comentario": "El sistema RAG no generó ninguna respuesta sustantiva sobre la prima de servicios, fallando completamente en abordar la pregunta. No hubo alucinaciones, pero la ausencia total de contenido lo hace incorrecto."
+      },
+      "error": null,
+      "timestamp": "2026-02-18T04:13:41.142Z"
+    },
+    {
+      "id": "LAB-014",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es la sustitución patronal y cuáles son sus efectos en los contratos de trabajo?",
+      "respuesta_referencia": "La sustitución patronal ocurre cuando un empleador es reemplazado por otro. Los contratos de trabajo no se extinguen, el nuevo empleador asume las obligaciones laborales y el trabajador mantiene sus derechos adquiridos. Art. 67 y 68 del CST regulan esta figura.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Qué es la sustitución patronal**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Qué es la sustitución patronal\n\n\n\n---\n\n\n\n**2. y cuáles son sus efectos en los contratos de trabajo?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y cuáles son sus efectos en los contratos de trabajo?",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 10,
+        "score_total": 2,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 67 CST",
+          "Art. 68 CST"
+        ],
+        "alucinaciones": [],
+        "comentario": "El sistema RAG no generó respuesta alguna sobre sustitución patronal, fallando completamente en abordar la pregunta, mientras que la respuesta experta define correctamente la figura y cita las normas aplicables."
+      },
+      "error": null,
+      "timestamp": "2026-02-18T04:14:10.633Z"
+    },
+    {
+      "id": "LAB-019",
+      "area": "laboral",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cómo se determina la pensión de invalidez en el sistema de prima media y cuál es el porcentaje de pérdida de capacidad requerido?",
+      "respuesta_referencia": "Para la pensión de invalidez en Colpensiones (prima media): se requiere pérdida de capacidad laboral del 50% o más calificada por la Junta de Calificación de Invalidez. El monto es entre 45% y 75% del ingreso base de liquidación según semanas cotizadas. Ley 100/1993 Art. 38 y siguientes.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Cómo se determina la pensión de invalidez en el sistema de prima media**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Cómo se determina la pensión de invalidez en el sistema de prima media\n\n\n\n---\n\n\n\n**2. y cuál es el porcentaje de pérdida de capacidad requerido?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y cuál es el porcentaje de pérdida de capacidad requerido?",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 10,
+        "score_total": 2,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 38 Ley 100/1993",
+          "Art. 39 Ley 100/1993",
+          "Decreto 917 de 1999"
+        ],
+        "alucinaciones": [],
+        "comentario": "El sistema RAG no generó ninguna respuesta sustantiva, indicando que no pudo responder ninguna parte de la consulta, por lo que falla completamente en todos los criterios de contenido jurídico."
+      },
+      "error": null,
+      "timestamp": "2026-02-18T04:14:53.848Z"
+    },
+    {
+      "id": "LAB-020",
+      "area": "laboral",
+      "dificultad": "avanzado",
+      "pregunta": "¿Qué es el contrato sindical y cómo difiere del contrato de trabajo individual?",
+      "respuesta_referencia": "El contrato sindical es celebrado entre uno o más sindicatos y uno o más empleadores para la prestación de servicios por parte de los afiliados sindicales. Se regula en los Art. 482 y siguientes del CST. A diferencia del contrato individual, el sindicato responde solidariamente y los trabajadores mantienen su relación con el sindicato, no directamente con el empleador.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Qué es el contrato sindical**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Qué es el contrato sindical\n\n\n\n---\n\n\n\n**2. y cómo difiere del contrato de trabajo individual?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y cómo difiere del contrato de trabajo individual?",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 10,
+        "score_total": 2,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 482 CST",
+          "Art. 483 CST",
+          "Art. 484 CST"
+        ],
+        "alucinaciones": [],
+        "comentario": "El sistema RAG no generó ninguna respuesta sustantiva sobre el contrato sindical, por lo que no cumple con ninguno de los criterios principales solicitados."
+      },
+      "error": null,
+      "timestamp": "2026-02-18T04:15:11.358Z"
+    },
+    {
+      "id": "LAB-021",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Qué son las horas extras y cómo se remuneran en Colombia?",
+      "respuesta_referencia": "Las horas extras son las trabajadas por encima de la jornada ordinaria. El recargo es del 25% sobre el valor ordinario en horas diurnas y del 75% en horas nocturnas. El Art. 168 del CST prohíbe más de 2 horas extras diarias y 12 semanales.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Qué son las horas extras**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Qué son las horas extras\n\n\n\n---\n\n\n\n**2. y cómo se remuneran en Colombia?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y cómo se remuneran en Colombia?",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 10,
+        "score_total": 2,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 168 CST",
+          "Art. 167 CST"
+        ],
+        "alucinaciones": [],
+        "comentario": "El sistema RAG no generó ninguna respuesta sustantiva sobre horas extras, mientras que la respuesta experta incluye todos los elementos requeridos: porcentajes de recargo, límites y normas aplicables."
+      },
+      "error": null,
+      "timestamp": "2026-02-18T04:15:28.252Z"
+    },
+    {
+      "id": "LAB-024",
+      "area": "laboral",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cómo funciona la solidaridad laboral en los contratos de prestación de servicios y cuándo responde el beneficiario?",
+      "respuesta_referencia": "El Art. 34 del CST establece solidaridad laboral: el dueño de la obra o el beneficiario del servicio responde solidariamente con el contratista por las obligaciones laborales cuando el contratista no es empresario independiente. La solidaridad cubre salarios, prestaciones e indemnizaciones.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Cómo funciona la solidaridad laboral en los contratos de prestación de servicios**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Cómo funciona la solidaridad laboral en los contratos de prestación de servicios\n\n\n\n---\n\n\n\n**2. y cuándo responde el beneficiario?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y cuándo responde el beneficiario?",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 10,
+        "score_total": 2,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 34 CST"
+        ],
+        "alucinaciones": [],
+        "comentario": "El sistema RAG no generó ninguna respuesta sustantiva, solo indicó que no pudo responder las preguntas, por lo que falla completamente en todos los criterios de contenido jurídico."
+      },
+      "error": null,
+      "timestamp": "2026-02-18T04:15:57.224Z"
+    },
+    {
+      "id": "LAB-025",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es la convención colectiva de trabajo y cuándo obliga a trabajadores no sindicalizados?",
+      "respuesta_referencia": "La convención colectiva es el acuerdo entre el sindicato y el empleador sobre condiciones de trabajo. Según el Art. 471 del CST, si el sindicato agrupa más del tercio de los trabajadores, la convención se extiende a todos los trabajadores de la empresa, sindicalizados o no.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Qué es la convención colectiva de trabajo**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Qué es la convención colectiva de trabajo\n\n\n\n---\n\n\n\n**2. y cuándo obliga a trabajadores no sindicalizados?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y cuándo obliga a trabajadores no sindicalizados?",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 10,
+        "score_total": 2,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 467 CST",
+          "Art. 471 CST"
+        ],
+        "alucinaciones": [],
+        "comentario": "El sistema RAG no generó ninguna respuesta sustantiva, fallando completamente en abordar la pregunta sobre la convención colectiva y su extensión a no sindicalizados."
+      },
+      "error": null,
+      "timestamp": "2026-02-18T04:16:14.040Z"
+    },
+    {
+      "id": "CON-004",
+      "area": "constitucional",
+      "dificultad": "basico",
+      "pregunta": "¿Qué es la acción de tutela y cuáles son sus requisitos de procedibilidad?",
+      "respuesta_referencia": "La tutela es un mecanismo de protección inmediata de derechos fundamentales, consagrada en el Art. 86 de la Constitución. Requisitos: (1) vulneración o amenaza de derecho fundamental, (2) inexistencia de otro medio judicial eficaz, (3) presentación ante juez competente, (4) dentro de los 10 días siguientes al hecho.",
+      "respuesta_rag": "**Contexto común:** acción de tutela\n\n\n\nEsta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Qué es la acción de tutela**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Qué es la acción de tutela\n\n\n\n---\n\n\n\n**2. y cuáles son sus requisitos de procedibilidad (en el contexto de acción de tutela)?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y cuáles son sus requisitos de procedibilidad (en el contexto de acción de tutela)?\n\n\n\n*Esta respuesta depende de la información de la pregunta 1.*",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 10,
+        "score_total": 2,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 86 Constitución Política",
+          "Decreto 2591 de 1991"
+        ],
+        "alucinaciones": [],
+        "comentario": "El sistema RAG no generó ninguna respuesta sustantiva, por lo que no cumple con ninguno de los criterios de contenido jurídico solicitados."
+      },
+      "error": null,
+      "timestamp": "2026-02-18T04:16:31.255Z"
+    },
+    {
+      "id": "CON-011",
+      "area": "constitucional",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué protección constitucional tiene el derecho a la igualdad y cuándo hay discriminación válida?",
+      "respuesta_referencia": "El Art. 13 de la Constitución establece igualdad ante la ley y prohíbe discriminación por sexo, raza, origen nacional, lengua, religión u opinión política. El Estado debe promover igualdad real. Las diferencias de trato son válidas solo cuando son razonables, proporcionales y persiguen fin legítimo (test de igualdad de la Corte Constitucional).",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Qué protección constitucional tiene el derecho a la igualdad**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Qué protección constitucional tiene el derecho a la igualdad\n\n\n\n---\n\n\n\n**2. y cuándo hay discriminación válida?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y cuándo hay discriminación válida?",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 10,
+        "score_total": 2,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 13 Constitución Política"
+        ],
+        "alucinaciones": [],
+        "comentario": "El sistema RAG no generó ninguna respuesta sustantiva, solo indicó que no pudo responder, mientras que la respuesta experta cita correctamente el Art. 13 y explica el test de igualdad."
+      },
+      "error": null,
+      "timestamp": "2026-02-18T04:17:27.548Z"
+    },
+    {
+      "id": "CON-012",
+      "area": "constitucional",
+      "dificultad": "avanzado",
+      "pregunta": "¿Qué es la cosa juzgada constitucional y cuándo puede revisarse una sentencia de la Corte Constitucional?",
+      "respuesta_referencia": "La cosa juzgada constitucional (Art. 243 CP) implica que las decisiones de la Corte Constitucional hacen tránsito a cosa juzgada y ninguna autoridad puede reproducir el contenido material de actos declarados inexequibles. Solo puede revisarse si cambia el bloque de constitucionalidad o hay un cambio significativo del contexto normativo.",
+      "respuesta_rag": "**Entidades mencionadas:** corte\n\n\n\nEsta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Qué es la cosa juzgada constitucional**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Qué es la cosa juzgada constitucional\n\n\n\n---\n\n\n\n**2. y cuándo puede revisarse una sentencia de la Corte Constitucional?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y cuándo puede revisarse una sentencia de la Corte Constitucional?",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 10,
+        "score_total": 2,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 243 Constitución Política",
+          "Art. 241 CP"
+        ],
+        "alucinaciones": [],
+        "comentario": "La respuesta del RAG es completamente insuficiente ya que no pudo generar ninguna información sobre el tema, mientras que la respuesta experta cita correctamente el Art. 243 CP y explica los conceptos fundamentales."
+      },
+      "error": null,
+      "timestamp": "2026-02-18T04:17:44.651Z"
+    },
+    {
+      "id": "CON-019",
+      "area": "constitucional",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cuáles son las diferencias entre el control abstracto y el control concreto de constitucionalidad en Colombia?",
+      "respuesta_referencia": "El control abstracto es previo (para leyes estatutarias y tratados) o posterior (demanda de inconstitucionalidad) y tiene efectos erga omnes. El control concreto ocurre en casos particulares (tutela, excepción de inconstitucionalidad) y tiene efectos inter partes. La Corte Constitucional ejerce el control abstracto; todos los jueces el control concreto mediante excepción de inconstitucionalidad.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Cuáles son las diferencias el control abstracto**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Cuáles son las diferencias el control abstracto\n\n\n\n---\n\n\n\n**2. ¿Cuáles son las diferencias el control concreto de constitucionalidad en Colombia?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Cuáles son las diferencias el control concreto de constitucionalidad en Colombia?",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 10,
+        "score_total": 2,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 241 Constitución Política",
+          "Art. 4 CP",
+          "Art. 86 CP"
+        ],
+        "alucinaciones": [],
+        "comentario": "La respuesta del RAG es completamente fallida: no responde la pregunta, no cita normas y no distingue entre control abstracto y concreto. Solo indica que no pudo generar respuesta."
+      },
+      "error": null,
+      "timestamp": "2026-02-18T04:18:40.868Z"
+    },
+    {
+      "id": "ADM-004",
+      "area": "administrativo",
+      "dificultad": "basico",
+      "pregunta": "¿Qué es un acto administrativo y cuáles son sus elementos esenciales?",
+      "respuesta_referencia": "Un acto administrativo es una manifestación unilateral de voluntad de la administración que crea, modifica o extingue situaciones jurídicas. Sus elementos son: competencia del funcionario, objeto lícito, causa o motivo, finalidad de interés general, y procedimiento adecuado. Se regula en el CPACA (Ley 1437 de 2011).",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Qué es un acto administrativo**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Qué es un acto administrativo\n\n\n\n---\n\n\n\n**2. y cuáles son sus elementos esenciales?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y cuáles son sus elementos esenciales?",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 10,
+        "score_total": 2,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 35 Ley 1437/2011 (CPACA)",
+          "Art. 42 CPACA"
+        ],
+        "alucinaciones": [],
+        "comentario": "La respuesta del RAG es completamente nula, ya que no pudo generar contenido para ninguna parte de la consulta, mientras que la respuesta experta define el acto administrativo, menciona elementos esenciales y cita la norma correcta."
+      },
+      "error": null,
+      "timestamp": "2026-02-18T04:18:58.072Z"
+    },
+    {
+      "id": "ADM-007",
+      "area": "administrativo",
+      "dificultad": "basico",
+      "pregunta": "¿Qué es un servidor público en Colombia y cómo se diferencia de un trabajador oficial?",
+      "respuesta_referencia": "Los servidores públicos son quienes ejercen funciones públicas (Art. 123 CP): empleados públicos (vinculados por relación legal y reglamentaria), trabajadores oficiales (vinculados por contrato laboral en empresas industriales y comerciales del Estado). Los empleados públicos no pueden sindicalizarse salvo excepciones; los trabajadores oficiales sí.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Qué es un servidor público en Colombia**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Qué es un servidor público en Colombia\n\n\n\n---\n\n\n\n**2. y cómo se diferencia de un trabajador oficial?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y cómo se diferencia de un trabajador oficial?\n\n\n\n*Esta respuesta depende de la información de la pregunta 1.*",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 10,
+        "score_total": 2,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 123 Constitución Política",
+          "Art. 125 CP",
+          "Decreto 1950 de 1973"
+        ],
+        "alucinaciones": [],
+        "comentario": "La respuesta del RAG es completamente nula, ya que no pudo generar información alguna sobre el tema, fallando en todos los criterios de contenido jurídico."
+      },
+      "error": null,
+      "timestamp": "2026-02-18T04:19:27.563Z"
+    },
+    {
+      "id": "ADM-014",
+      "area": "administrativo",
+      "dificultad": "avanzado",
+      "pregunta": "¿En qué consiste la responsabilidad personal del funcionario público y cuándo puede ejercerse la acción de repetición?",
+      "respuesta_referencia": "La acción de repetición (Ley 678 de 2001, Art. 90 CP) permite al Estado repetir contra el funcionario que con dolo o culpa grave causó el daño. Es obligatoria cuando el Estado es condenado judicialmente o concilia. El plazo es de 2 años desde el pago. El funcionario responde con su patrimonio personal.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿En qué consiste la responsabilidad personal del funcionario público**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿En qué consiste la responsabilidad personal del funcionario público\n\n\n\n---\n\n\n\n**2. y cuándo puede ejercerse la acción de repetición?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y cuándo puede ejercerse la acción de repetición?",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 10,
+        "score_total": 2,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 90 Constitución Política",
+          "Ley 678 de 2001"
+        ],
+        "alucinaciones": [],
+        "comentario": "La respuesta del RAG es completamente insuficiente al no poder generar contenido para ninguna parte de la consulta, a pesar de no inventar información. No aborda ninguno de los aspectos solicitados sobre responsabilidad personal del funcionario o acción de repetición."
+      },
+      "error": null,
+      "timestamp": "2026-02-18T04:20:25.625Z"
+    },
+    {
+      "id": "CIV-005",
+      "area": "civil",
+      "dificultad": "basico",
+      "pregunta": "¿Cómo funciona la sucesión intestada en Colombia y cuáles son los órdenes hereditarios?",
+      "respuesta_referencia": "La sucesión intestada (Art. 1040 CC) sigue 6 órdenes: 1º hijos y descendientes, 2º ascendientes y cónyuge, 3º hermanos y cónyuge, 4º hijos de hermanos, 5º sobrinos nietos y ascendientes de 3er grado, 6º Estado. El orden siguiente solo hereda si no hay herederos del orden anterior.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Cómo funciona la sucesión intestada en Colombia**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Cómo funciona la sucesión intestada en Colombia\n\n\n\n---\n\n\n\n**2. y cuáles son los órdenes hereditarios?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y cuáles son los órdenes hereditarios?",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 10,
+        "score_total": 2,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 1040 Código Civil",
+          "Art. 1045 CC",
+          "Art. 1054 CC"
+        ],
+        "alucinaciones": [],
+        "comentario": "La respuesta del RAG es completamente no operativa, ya que no pudo generar contenido para ninguna parte de la consulta, fallando en todos los aspectos sustantivos de la pregunta."
+      },
+      "error": null,
+      "timestamp": "2026-02-18T04:20:56.346Z"
+    },
+    {
+      "id": "CIV-006",
+      "area": "civil",
+      "dificultad": "basico",
+      "pregunta": "¿Qué es la unión marital de hecho y qué derechos genera en Colombia?",
+      "respuesta_referencia": "La unión marital de hecho (Ley 54 de 1990) genera sociedad patrimonial entre compañeros permanentes que conviven por más de 2 años. Derechos: sucesorios (igual que cónyuge), seguridad social, porción conyugal, y disolución de sociedad patrimonial. La Sentencia C-029/2009 extendió beneficios a parejas del mismo sexo.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Qué es la unión marital de hecho**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Qué es la unión marital de hecho\n\n\n\n---\n\n\n\n**2. y qué derechos genera en Colombia?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y qué derechos genera en Colombia?",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 10,
+        "score_total": 2,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Ley 54 de 1990",
+          "Sentencia C-029/2009"
+        ],
+        "alucinaciones": [],
+        "comentario": "La respuesta del RAG es completamente no operativa, ya que no pudo generar contenido para ninguna parte de la consulta, por lo que no cumple con ningún criterio sustantivo de evaluación jurídica."
+      },
+      "error": null,
+      "timestamp": "2026-02-18T04:21:13.284Z"
+    },
+    {
+      "id": "CIV-013",
+      "area": "civil",
+      "dificultad": "intermedio",
+      "pregunta": "¿En qué consiste la hipoteca y cuáles son sus elementos esenciales?",
+      "respuesta_referencia": "La hipoteca (Art. 2432 CC) es un derecho real de garantía que afecta un inmueble para asegurar el cumplimiento de una obligación, sin despojar al deudor de la posesión. Elementos: (1) debe constar en escritura pública, (2) el bien debe ser determinado, (3) requiere inscripción en registro. El acreedor hipotecario tiene derecho de persecución, preferencia y venta.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿En qué consiste la hipoteca**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿En qué consiste la hipoteca\n\n\n\n---\n\n\n\n**2. y cuáles son sus elementos esenciales?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y cuáles son sus elementos esenciales?",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 10,
+        "score_total": 2,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 2432 Código Civil",
+          "Art. 2434 CC"
+        ],
+        "alucinaciones": [],
+        "comentario": "El sistema RAG no generó ninguna respuesta sustantiva, solo indicó fallas técnicas, por lo que no cumple con ningún criterio de contenido jurídico."
+      },
+      "error": null,
+      "timestamp": "2026-02-18T04:22:09.771Z"
+    },
+    {
+      "id": "CIV-014",
+      "area": "civil",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cómo funciona la nulidad absoluta de contratos civiles y cuáles son sus causales?",
+      "respuesta_referencia": "La nulidad absoluta (Art. 1741 CC) opera por: objeto ilícito, causa ilícita, incapacidad absoluta del contratante, o falta de solemnidad sustancial. Es declarable de oficio por el juez, puede alegarla cualquier interesado, y es insubsanable. Sus efectos son retroactivos (ex tunc) y hacen ineficaz el contrato desde su celebración.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Cómo funciona la nulidad absoluta de contratos civiles**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Cómo funciona la nulidad absoluta de contratos civiles\n\n\n\n---\n\n\n\n**2. y cuáles son sus causales?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y cuáles son sus causales?",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 10,
+        "score_total": 2,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 1741 Código Civil",
+          "Art. 1519 CC",
+          "Art. 1524 CC"
+        ],
+        "alucinaciones": [],
+        "comentario": "El sistema RAG no generó ninguna respuesta sustantiva a la pregunta, por lo que no cumple con ninguno de los criterios de contenido jurídico solicitados."
+      },
+      "error": null,
+      "timestamp": "2026-02-18T04:22:26.666Z"
+    },
+    {
+      "id": "PEN-010",
+      "area": "penal",
+      "dificultad": "avanzado",
+      "pregunta": "¿Qué es la violencia intrafamiliar como delito y cuáles son sus elementos típicos?",
+      "respuesta_referencia": "La violencia intrafamiliar (Art. 229 CP) se configura cuando un miembro del núcleo familiar maltrata física o psicológicamente a otro. El núcleo familiar incluye cónyuge, compañero permanente, parientes hasta cuarto grado de consanguinidad. La pena va de 4 a 8 años de prisión, agravada cuando la víctima es menor de edad o hay embarazo.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Qué es la violencia intrafamiliar como delito**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Qué es la violencia intrafamiliar como delito\n\n\n\n---\n\n\n\n**2. y cuáles son sus elementos típicos?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y cuáles son sus elementos típicos?",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 10,
+        "score_total": 2,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 229 Ley 599 de 2000",
+          "Ley 1257 de 2008"
+        ],
+        "alucinaciones": [],
+        "comentario": "El sistema RAG no generó ninguna respuesta sustantiva, fallando completamente en abordar la pregunta sobre el delito de violencia intrafamiliar y sus elementos típicos."
+      },
+      "error": null,
+      "timestamp": "2026-02-18T04:23:50.323Z"
+    },
+    {
+      "id": "TRI-015",
+      "area": "tributario",
+      "dificultad": "avanzado",
+      "pregunta": "¿Qué es la capitalización delgada o subcapitalización y cómo se aplica en Colombia?",
+      "respuesta_referencia": "La subcapitalización (Art. 118-1 ET, Ley 1607 de 2012) limita la deducción de intereses pagados a vinculados cuando el endeudamiento total supera 3 veces el patrimonio líquido del contribuyente. Los intereses sobre el exceso no son deducibles. Aplica a préstamos de vinculados nacionales y extranjeros.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Qué es la capitalización delgada o subcapitalización**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Qué es la capitalización delgada o subcapitalización\n\n\n\n---\n\n\n\n**2. y cómo se aplica en Colombia?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y cómo se aplica en Colombia?",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 10,
+        "score_total": 2,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 118-1 Estatuto Tributario",
+          "Ley 1607 de 2012"
+        ],
+        "alucinaciones": [],
+        "comentario": "El sistema RAG no generó ninguna respuesta sustantiva, fallando completamente en abordar la pregunta sobre capitalización delgada y su aplicación en Colombia."
+      },
+      "error": null,
+      "timestamp": "2026-02-18T04:25:27.227Z"
+    }
+  ],
+  "errores": [
+    {
+      "id": "LAB-001",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuántos días de vacaciones tiene derecho un trabajador con un año de trabajo?",
+      "respuesta_referencia": "Según el artículo 186 del Código Sustantivo del Trabajo (CST), el trabajador tiene derecho a 15 días hábiles consecutivos de vacaciones remuneradas por cada año de servicio. Este derecho es irrenunciable según el artículo 189 del CST.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:00:10.171Z"
+    },
+    {
+      "id": "LAB-002",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es el salario mínimo legal mensual vigente en Colombia para 2024?",
+      "respuesta_referencia": "Para el año 2024, el salario mínimo legal mensual vigente (SMLMV) en Colombia fue fijado en $1.300.000 mediante el Decreto 2613 de 2023, representando un incremento del 12% respecto al año anterior. Adicionalmente, el auxilio de transporte quedó en $162.000 mensuales.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:00:26.641Z"
+    },
+    {
+      "id": "LAB-005",
+      "area": "laboral",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cómo se calcula la liquidación de un trabajador que lleva 3 años y gana $2.000.000?",
+      "respuesta_referencia": "Para un trabajador con 3 años de antigüedad y salario de $2.000.000: (1) Cesantías: $2.000.000 × 3 años = $6.000.000; (2) Intereses sobre cesantías: $6.000.000 × 12% = $720.000; (3) Prima de servicios: $2.000.000 × 3 meses/12 = $500.000 (proporcional al último semestre); (4) Vacaciones: 15 días × $66.667/día = $1.000.000 (proporcional); (5) Si el auxilio de transporte aplica ($162.000/mes). El total aproximado antes de descuentos sería $8.220.000 más el auxilio de transporte proporcional.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:01:09.955Z"
+    },
+    {
+      "id": "LAB-006",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es el período de prueba máximo permitido en Colombia?",
+      "respuesta_referencia": "Según el artículo 78 del CST, el período de prueba no puede exceder dos (2) meses. Para contratos a término fijo inferior a un año, el período de prueba no podrá ser superior a la quinta parte del término inicialmente pactado. Este período debe constar por escrito.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:01:16.407Z"
+    },
+    {
+      "id": "CIV-001",
+      "area": "civil",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es el plazo de prescripción de la acción ejecutiva en Colombia?",
+      "respuesta_referencia": "Según el artículo 2536 del Código Civil colombiano, la acción ejecutiva prescribe en cinco (5) años. La acción ordinaria prescribe en diez (10) años. La prescripción puede ser interrumpida por reconocimiento de deuda o por demanda judicial.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:01:23.265Z"
+    },
+    {
+      "id": "CIV-002",
+      "area": "civil",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuáles son los requisitos para que un contrato de compraventa de inmueble sea válido?",
+      "respuesta_referencia": "Para la validez de la compraventa de inmueble en Colombia se requiere: (1) Capacidad de las partes (Art. 1502 CC); (2) Consentimiento libre de vicios (Arts. 1508-1516 CC); (3) Objeto lícito y determinado (Arts. 1517-1521 CC); (4) Causa lícita (Arts. 1524-1527 CC); (5) Solemnidad: escritura pública ante notario (Art. 1857 CC y Art. 12 Decreto 960/70); (6) Registro en la Oficina de Instrumentos Públicos para la tradición (Art. 756 CC).",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:01:30.313Z"
+    },
+    {
+      "id": "CIV-003",
+      "area": "civil",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es la acción de tutela y en qué plazo debe ser resuelta?",
+      "respuesta_referencia": "La acción de tutela, consagrada en el artículo 86 de la Constitución Política y reglamentada por el Decreto 2591 de 1991, es un mecanismo de protección inmediata de derechos fundamentales cuando no exista otro medio de defensa judicial eficaz. El juez debe resolver en un plazo de diez (10) días calendario. La sentencia puede ser impugnada dentro de los tres (3) días siguientes.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:01:36.553Z"
+    },
+    {
+      "id": "CIV-004",
+      "area": "civil",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cuándo procede la acción popular y quién puede interponerla?",
+      "respuesta_referencia": "La acción popular está consagrada en el artículo 88 de la Constitución y regulada por la Ley 472 de 1998. Procede para proteger derechos e intereses colectivos como el medio ambiente, la moralidad administrativa, el espacio público, la salubridad pública, entre otros. Puede ser interpuesta por cualquier persona natural o jurídica, organizaciones no gubernamentales, entidades públicas y el Defensor del Pueblo. No requiere acreditar perjuicio personal.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:01:43.745Z"
+    },
+    {
+      "id": "PEN-001",
+      "area": "penal",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es la pena por el delito de hurto simple en Colombia?",
+      "respuesta_referencia": "Según el artículo 239 del Código Penal (Ley 599 de 2000), el hurto simple está sancionado con prisión de dos (2) a seis (6) años. Si el valor de lo hurtado no supera diez (10) salarios mínimos legales mensuales vigentes y el imputado no tiene antecedentes, puede acceder a mecanismos sustitutivos de prisión como la suspensión condicional de la ejecución de la pena.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:01:50.093Z"
+    },
+    {
+      "id": "PEN-002",
+      "area": "penal",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el preacuerdo en materia penal y qué beneficios ofrece?",
+      "respuesta_referencia": "El preacuerdo está regulado en los artículos 348 a 354 del Código de Procedimiento Penal (Ley 906 de 2004). Es un mecanismo de terminación anticipada del proceso mediante el cual el fiscal y el imputado o acusado acuerdan la imputación y los cargos, a cambio de una rebaja de hasta la mitad de la pena (50%). El juez debe verificar que no se desconozcan garantías fundamentales. Difiere de la aceptación de cargos en que implica negociación sobre los hechos imputados.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:01:57.260Z"
+    },
+    {
+      "id": "CON-001",
+      "area": "constitucional",
+      "dificultad": "basico",
+      "pregunta": "¿Cuáles son los derechos fundamentales reconocidos en la Constitución de 1991?",
+      "respuesta_referencia": "La Constitución Política de 1991 reconoce en el Título II, Capítulo I (Arts. 11-44) los derechos fundamentales, entre ellos: derecho a la vida (Art. 11), prohibición de tortura (Art. 12), derecho a la igualdad (Art. 13), libertad de conciencia (Art. 18), libre desarrollo de la personalidad (Art. 16), derecho al debido proceso (Art. 29), libertad personal (Art. 28), habeas corpus (Art. 30), derecho de petición (Art. 23), entre otros. La Corte Constitucional ha ampliado este catálogo vía jurisprudencia.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:02:03.712Z"
+    },
+    {
+      "id": "CON-002",
+      "area": "constitucional",
+      "dificultad": "intermedio",
+      "pregunta": "¿En qué consiste el estado de emergencia económica y cuánto puede durar?",
+      "respuesta_referencia": "El estado de emergencia económica, social y ecológica está consagrado en el artículo 215 de la Constitución Política. El Presidente puede declararlo cuando sobrevengan hechos distintos a los del Estado de Guerra o Conmoción Interior que perturben el orden económico, social o ecológico. Puede declararse por períodos de hasta treinta (30) días cada uno, sin que sumados excedan noventa (90) días en el año calendario. Durante su vigencia el Gobierno puede expedir decretos legislativos.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:02:11.084Z"
+    },
+    {
+      "id": "ADM-001",
+      "area": "administrativo",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es el plazo para interponer acción de nulidad y restablecimiento del derecho?",
+      "respuesta_referencia": "Según el artículo 164 del Código de Procedimiento Administrativo y de lo Contencioso Administrativo (CPACA - Ley 1437 de 2011), la demanda de nulidad y restablecimiento del derecho debe presentarse dentro de los cuatro (4) meses siguientes a la comunicación, notificación o publicación del acto administrativo. Para actos que no requieren publicación, el término corre desde el día siguiente al de la notificación.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:02:34.737Z"
+    },
+    {
+      "id": "ADM-002",
+      "area": "administrativo",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el derecho de petición y cuál es el plazo para responderlo?",
+      "respuesta_referencia": "El derecho de petición está consagrado en el artículo 23 de la Constitución Política y regulado por la Ley 1755 de 2015 (que modificó el CPACA). Las entidades públicas deben resolver las peticiones en un plazo de quince (15) días hábiles para peticiones de carácter general. Las consultas tienen 30 días hábiles. Las quejas y reclamos: 15 días hábiles. El incumplimiento genera responsabilidad disciplinaria y puede dar lugar a tutela.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:02:41.187Z"
+    },
+    {
+      "id": "ADM-003",
+      "area": "administrativo",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cuándo procede la acción de repetición contra un servidor público?",
+      "respuesta_referencia": "La acción de repetición, regulada por la Ley 678 de 2001 y el artículo 90 de la Constitución, procede cuando el Estado ha sido condenado a reparar un daño antijurídico y este fue causado por la conducta dolosa o gravemente culposa de un servidor público. Es obligatoria cuando la condena supera 500 SMLMV. Prescribe en dos (2) años contados desde el pago total o desde la última cuota pagada. El servidor público puede ser declarado responsable patrimonialmente.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:02:47.740Z"
+    },
+    {
+      "id": "TRI-001",
+      "area": "tributario",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es la tarifa general del impuesto de renta para personas jurídicas en Colombia?",
+      "respuesta_referencia": "Según el artículo 240 del Estatuto Tributario (ET), modificado por la Ley 2277 de 2022 (Reforma Tributaria), la tarifa general del impuesto sobre la renta para personas jurídicas es del 35% a partir del año gravable 2022. Existen tarifas especiales para ciertos sectores como el financiero (38%) y para zonas francas (20%). Las entidades del régimen tributario especial tienen tarifa del 20%.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:02:55.011Z"
+    },
+    {
+      "id": "LAB-007",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuántas horas máximas tiene la jornada ordinaria de trabajo en Colombia?",
+      "respuesta_referencia": "Según el artículo 161 del CST, la jornada ordinaria de trabajo es de máximo ocho (8) horas al día y cuarenta y ocho (48) horas a la semana.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:03:17.802Z"
+    },
+    {
+      "id": "LAB-008",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿A cuánto equivalen las horas extras en el día ordinario?",
+      "respuesta_referencia": "Según el artículo 168 del CST, las horas extras diurnas se pagan con un recargo del 25% sobre el valor de la hora ordinaria. Las nocturnas (entre 10pm y 6am) con 75% de recargo.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:03:24.502Z"
+    },
+    {
+      "id": "LAB-009",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es la estabilidad laboral reforzada y quiénes la tienen?",
+      "respuesta_referencia": "La estabilidad laboral reforzada está en el artículo 26 del CST. La tienen los trabajadores con más de diez (10) años de servicio continuos en la empresa. El empleador no puede despedirlos sin justa causa probada ni sin autorización del Inspector de Trabajo.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:03:30.951Z"
+    },
+    {
+      "id": "LAB-010",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuándo se pagan las cesantías al trabajador?",
+      "respuesta_referencia": "Según el artículo 249 del CST, las cesantías se pagan al terminar el contrato. Durante la vigencia del contrato a término indefinido, el empleador debe consignar las cesantías antes del 14 de febrero de cada año (o en el primer mes al cumplir el trabajador un año).",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:03:38.249Z"
+    },
+    {
+      "id": "LAB-011",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el auxilio de cesantías y quiénes tienen derecho?",
+      "respuesta_referencia": "El auxilio de cesantías está regulado en los artículos 249 a 252 del CST. Es un derecho de los trabajadores de servicio doméstico y de los que devenguen hasta dos (2) salarios mínimos. Se paga al finalizar el contrato: un mes de salario si laboró de 1 a 5 años; 20 días por año si laboró más de 5 años.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:03:44.775Z"
+    },
+    {
+      "id": "LAB-012",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿El empleador puede descontar del salario por daños en herramientas?",
+      "respuesta_referencia": "Según el artículo 150 del CST, el empleador no puede hacer descuentos por pérdida o deterioro de herramientas o elementos de trabajo, salvo que medie autorización por escrito del trabajador o fallo judicial. Los descuentos por cuotas sindicales o cooperativas sí están permitidos con autorización.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:03:51.862Z"
+    },
+    {
+      "id": "LAB-013",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuál es el plazo para reclamar prestaciones sociales ante la conciliación?",
+      "respuesta_referencia": "Según el artículo 392 del CST, las controversias sobre prestaciones sociales prescriben en tres (3) años contados desde el día siguiente a la terminación del contrato. Antes de demandar, es obligatorio acudir a la conciliación ante el Inspector de Trabajo o centro de conciliación.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:03:58.293Z"
+    },
+    {
+      "id": "LAB-014",
+      "area": "laboral",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cómo se calcula la indemnización por despido sin justa causa para un trabajador con 5 años y salario de 15 SMMLV?",
+      "respuesta_referencia": "Para trabajadores que devenguen más de 10 SMMLV (Art. 64 CST): 20 días por el primer año y 15 días por cada año siguiente. Con 5 años: 20 + (15×4) = 80 días. Con salario de 15 SMMLV ($19.500.000 en 2024): 80 × ($19.500.000/30) ≈ $52.000.000.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:04:05.642Z"
+    },
+    {
+      "id": "LAB-016",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué derechos tiene un trabajador en período de prueba al ser despedido?",
+      "respuesta_referencia": "Durante el período de prueba (máximo 2 meses, Art. 78 CST) cualquiera de las partes puede terminar el contrato sin expresión de causa y sin indemnización. El trabajador tiene derecho a que se le paguen los salarios y prestaciones proporcionales al tiempo laborado. No aplica indemnización por despido sin justa causa.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:04:32.699Z"
+    },
+    {
+      "id": "LAB-017",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuántos días de licencia de maternidad tiene una trabajadora en Colombia?",
+      "respuesta_referencia": "Según el artículo 236 del CST, la trabajadora tiene derecho a dieciocho (18) semanas de licencia de maternidad, de las cuales una (1) puede ser transferida al padre. La licencia es remunerada y se cuenta desde la fecha del parto o desde que el médico certifique el embarazo en los casos de parto prematuro.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:04:39.154Z"
+    },
+    {
+      "id": "LAB-019",
+      "area": "laboral",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cómo se liquida la pensión de jubilación en un contrato de trabajo?",
+      "respuesta_referencia": "La pensión de jubilación en el régimen de ahorro individual (Ley 100) se liquida con el saldo acumulado en la cuenta del afiliado. En el CST no hay pensión de jubilación pagada por el empleador; el trabajador cotiza a Colpensiones o fondo privado. Al retiro por edad (62 años hombres, 57 mujeres) o por el monto de semanas requeridas, se accede a la mesada pensional.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:05:03.722Z"
+    },
+    {
+      "id": "LAB-020",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Puede un empleador cambiar unilateralmente el lugar de trabajo?",
+      "respuesta_referencia": "El cambio de lugar de trabajo está regulado en el artículo 24 del CST. Si el contrato no lo prevé, el empleador puede trasladar al trabajador siempre que el nuevo lugar esté en la misma población. Si implica cambio de residencia, el trabajador puede aceptar (con auxilio de traslado) o dar por terminado el contrato con indemnización.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:05:10.378Z"
+    },
+    {
+      "id": "LAB-022",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuántos días de incapacidad paga el empleador directamente?",
+      "respuesta_referencia": "Según el artículo 199 del CST, el empleador paga directamente los dos (2) primeros días de incapacidad. A partir del tercer día, paga el Instituto de Seguros Sociales (o la EPS) hasta el día 90; después del día 90, la incapacidad la asume la entidad aseguradora según normativa de riesgos profesionales.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:05:35.364Z"
+    },
+    {
+      "id": "LAB-023",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué requisitos debe cumplir un despido por justa causa?",
+      "respuesta_referencia": "Las causales de despido con justa causa están en el artículo 62 del CST: fraude, violencia, embriaguez habitual, etc. El empleador debe dar al trabajador la oportunidad de presentar descargos (Art. 60). El despido debe notificarse por escrito con expresión de los hechos y la causal. Si no se cumple el procedimiento, el despido puede declararse ineficaz.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:05:42.123Z"
+    },
+    {
+      "id": "LAB-024",
+      "area": "laboral",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cómo se calculan los intereses sobre cesantías y quién los paga?",
+      "respuesta_referencia": "Los intereses sobre cesantías están en el artículo 99 del CST. El empleador debe pagar al trabajador un 12% anual sobre el valor de las cesantías, o proporcional al tiempo laborado. Se pagan junto con las cesantías al terminar el contrato, o anualmente si el trabajador lo solicita. La liquidación se hace sobre el saldo de cesantías a 31 de diciembre.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:05:48.575Z"
+    },
+    {
+      "id": "LAB-025",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Qué es el trabajo en dominical o festivo y cómo se paga?",
+      "respuesta_referencia": "Según el artículo 177 del CST, el trabajo en domingo y festivos se remunera con un recargo del 75% sobre el valor del trabajo en día ordinario. Si el trabajador no descansa en la semana, además tiene derecho al descanso compensado remunerado. Las festividades son las que señale la ley (Art. 177).",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:05:55.944Z"
+    },
+    {
+      "id": "CON-004",
+      "area": "constitucional",
+      "dificultad": "basico",
+      "pregunta": "¿Qué es el habeas corpus y en qué artículo está?",
+      "respuesta_referencia": "El habeas corpus está en el artículo 30 de la Constitución. Toda persona detenida tiene derecho a que se le informe de las razones de la detención y a que se le juzgue dentro de las libertades constitucionales. Puede invocarse ante cualquier autoridad judicial para que se examine la legalidad de la privación de la libertad.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:06:02.301Z"
+    },
+    {
+      "id": "CON-005",
+      "area": "constitucional",
+      "dificultad": "intermedio",
+      "pregunta": "¿Quién puede presentar una demanda de inconstitucionalidad contra una ley?",
+      "respuesta_referencia": "Según el artículo 241 de la Constitución, pueden demandar la inconstitucionalidad de leyes: (1) los ciudadanos (por el 5% del censo o 30% de los concejales/diputados); (2) el Presidente; (3) los magistrados de la Corte Suprema, del Consejo de Estado y del Consejo Superior de la Judicatura; (4) el Procurador General; (5) el Defensor del Pueblo; (6) los ministros.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:06:09.666Z"
+    },
+    {
+      "id": "CON-006",
+      "area": "constitucional",
+      "dificultad": "basico",
+      "pregunta": "¿Cuántos artículos tiene la Constitución de 1991?",
+      "respuesta_referencia": "La Constitución Política de Colombia de 1991 tiene 380 artículos en su parte dogmática y orgánica, organizados en 13 títulos. Incluye disposiciones transitorias. El preámbulo y los artículos 1 a 380 conforman el texto principal.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:06:16.220Z"
+    },
+    {
+      "id": "CON-007",
+      "area": "constitucional",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el bloque de constitucionalidad?",
+      "respuesta_referencia": "El bloque de constitucionalidad es la doctrina según la cual no solo la Constitución escrita sino también los tratados internacionales de derechos humanos ratificados por Colombia (Art. 93 CP) y parte de la jurisprudencia constitucional integran el parámetro de control. La Corte Constitucional lo ha desarrollado para que los derechos de los tratados operen como límite material.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:06:23.286Z"
+    },
+    {
+      "id": "CON-009",
+      "area": "constitucional",
+      "dificultad": "basico",
+      "pregunta": "¿Qué dice el artículo 15 de la Constitución sobre la intimidad?",
+      "respuesta_referencia": "El artículo 15 de la Constitución establece que todas las personas tienen derecho al reconocimiento de su personalidad jurídica y que tienen derecho a conocer, actualizar y rectificar las informaciones que se hayan recogido sobre ellas en bancos de datos y en archivos de entidades públicas y privadas. También consagra el habeas data y el derecho a la intimidad.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:06:47.041Z"
+    },
+    {
+      "id": "CON-010",
+      "area": "constitucional",
+      "dificultad": "intermedio",
+      "pregunta": "¿Quién elige a los magistrados de la Corte Constitucional?",
+      "respuesta_referencia": "Según el artículo 239 de la Constitución, la Corte Constitucional se compone de nueve (9) magistrados elegidos por el Senado de la República por periodos de ocho (8) años, de sendas ternas enviadas por el Presidente, la Corte Suprema de Justicia y el Consejo de Estado. No son reelegibles.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:06:53.696Z"
+    },
+    {
+      "id": "CON-011",
+      "area": "constitucional",
+      "dificultad": "basico",
+      "pregunta": "¿Qué derechos protege la acción de tutela?",
+      "respuesta_referencia": "La acción de tutela (Art. 86 CP) protege los derechos fundamentales. La Corte ha dicho que son fundamentales los expresamente reconocidos en la Constitución y los que por su conexidad o por el principio de dignidad humana lo sean. No procede cuando existan otros medios de defensa judicial efectivos, salvo que se trate de evitar un perjuicio irremediable.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:07:00.251Z"
+    },
+    {
+      "id": "CON-012",
+      "area": "constitucional",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es la sustitución de la Constitución y quién la controla?",
+      "respuesta_referencia": "La Corte Constitucional en sentencia C-551 de 2003 estableció que hay un límite al poder de reforma: no se puede sustituir la Constitución, es decir, cambiar sus elementos definitorios (Estado social de derecho, democracia, derechos fundamentales, etc.). El control de sustitución lo ejerce la Corte al revisar actos legislativos y referendos.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:07:07.533Z"
+    },
+    {
+      "id": "CON-013",
+      "area": "constitucional",
+      "dificultad": "avanzado",
+      "pregunta": "¿En qué casos la Corte Constitucional tiene competencia para revisar fallos de tutela?",
+      "respuesta_referencia": "Según el artículo 86 y la Ley 153 de 2012 (estatutaria de la administración de justicia), la Corte Constitucional selecciona para revisión las sentencias de tutela de los tribunales. No revisa todas; elige por criterios de importancia (unificación de jurisprudencia, temas novedosos, etc.). Los fallos de la Corte en revisión de tutela son de obligatorio cumplimiento.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:07:13.937Z"
+    },
+    {
+      "id": "CON-014",
+      "area": "constitucional",
+      "dificultad": "basico",
+      "pregunta": "¿Qué dice el artículo 29 sobre el debido proceso?",
+      "respuesta_referencia": "El artículo 29 de la Constitución consagra el derecho al debido proceso: toda persona se presume inocente mientras no se le haya declarado judicialmente culpable. Quien sea sindicado tiene derecho a la defensa, a un juicio público sin dilaciones injustificadas, a presentar pruebas y a impugnar la sentencia. Nadie podrá ser juzgado dos veces por el mismo hecho.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:07:21.344Z"
+    },
+    {
+      "id": "CON-015",
+      "area": "constitucional",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el estado de cosas inconstitucional?",
+      "respuesta_referencia": "El estado de cosas inconstitucional es una figura creada por la Corte Constitucional (Sentencia T-025/04 y otras) para cuando la violación de derechos fundamentales es masiva y sistemática, causada por fallas estructurales y no por actos puntuales. Implica órdenes a varias autoridades para adoptar medidas coordinadas en un plazo razonable. Ejemplo: desplazamiento forzado, sistema carcelario.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:07:27.591Z"
+    },
+    {
+      "id": "CON-016",
+      "area": "constitucional",
+      "dificultad": "basico",
+      "pregunta": "¿Cuántos son los derechos económicos, sociales y culturales en la Constitución?",
+      "respuesta_referencia": "Los DESC están principalmente en el Título II, Capítulo 2 (Arts. 42-77) y en otros artículos. Incluyen derecho a la seguridad social, trabajo, educación, salud, vivienda, recreación, medio ambiente sano, etc. La Corte ha desarrollado su exigibilidad vía tutela cuando hay conexidad con derechos fundamentales o en estado de cosas inconstitucional.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:07:34.861Z"
+    },
+    {
+      "id": "CON-017",
+      "area": "constitucional",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es la objeción de conciencia y en qué artículo se regula?",
+      "respuesta_referencia": "El artículo 18 de la Constitución consagra la libertad de conciencia. La Corte Constitucional ha reconocido la objeción de conciencia como manifestación de esa libertad: no obligar a una persona a actuar contra sus convicciones (por ejemplo, servicio militar, aborto en casos permitidos). Tiene límites: no puede afectar derechos de terceros de manera desproporcionada.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:07:41.328Z"
+    },
+    {
+      "id": "CON-018",
+      "area": "constitucional",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cómo se reforma la Constitución por vía de referendo?",
+      "respuesta_referencia": "El artículo 378 de la Constitución establece que el referendo puede ser convocado por el pueblo (5% del censo) o por el Congreso. La reforma se aprueba con la mitad más uno de los votos y con al menos la cuarta parte del censo electoral. No puede reformar artículos que reconozcan derechos fundamentales ni los que regulen participación y partidos. El artículo 377 lista las materias que no son reformables por referendo.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:07:48.686Z"
+    },
+    {
+      "id": "CON-019",
+      "area": "constitucional",
+      "dificultad": "basico",
+      "pregunta": "¿Qué dice el artículo 37 sobre la libertad de reunión?",
+      "respuesta_referencia": "El artículo 37 de la Constitución establece que se reconoce el derecho de reunión y manifestación pública. Solo la ley puede establecer de manera expresa los casos en los cuales se podrá limitar el ejercicio de este derecho, por razones de seguridad o de orden público.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:07:54.830Z"
+    },
+    {
+      "id": "CON-020",
+      "area": "constitucional",
+      "dificultad": "intermedio",
+      "pregunta": "¿Quién nombra al Procurador General de la Nación?",
+      "respuesta_referencia": "Según el artículo 275 de la Constitución, el Procurador General de la Nación es elegido por el Senado de la República para un período de cuatro (4) años, de terna enviada por el Presidente de la República, la Corte Suprema de Justicia y el Consejo de Estado. No es reelegible y debe ser abogado.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:08:02.201Z"
+    },
+    {
+      "id": "ADM-004",
+      "area": "administrativo",
+      "dificultad": "basico",
+      "pregunta": "¿Qué es un acto administrativo?",
+      "respuesta_referencia": "El acto administrativo es la manifestación de voluntad de una autoridad pública en ejercicio de la función administrativa, con efectos jurídicos (Ley 1437/2011 CPACA). Puede ser de carácter general o particular. Debe ser motivado cuando afecte derechos.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:08:08.652Z"
+    },
+    {
+      "id": "ADM-005",
+      "area": "administrativo",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuál es el plazo para interponer recurso de reposición?",
+      "respuesta_referencia": "Según el artículo 64 del CPACA (Ley 1437/2011), el recurso de reposición se interpone ante el mismo funcionario que profirió el acto, dentro de los quince (15) días siguientes a su notificación. La decisión debe adoptarse en un plazo de quince (15) días.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:08:15.820Z"
+    },
+    {
+      "id": "ADM-006",
+      "area": "administrativo",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cuándo procede la acción de nulidad por vía de excepción?",
+      "respuesta_referencia": "La nulidad por vía de excepción puede oponerse como defensa en un proceso cuando se discuta la validez de un acto administrativo que sirve de fundamento a la pretensión. No sustituye la demanda de nulidad y restablecimiento del derecho; el juez puede declarar la nulidad del acto en la sentencia si se cumplen los requisitos.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:08:22.180Z"
+    },
+    {
+      "id": "ADM-007",
+      "area": "administrativo",
+      "dificultad": "basico",
+      "pregunta": "¿Qué es el silencio administrativo positivo?",
+      "respuesta_referencia": "El silencio administrativo positivo está regulado en el CPACA (Ley 1437/2011). Cuando la ley o el acto administrativo no fijen término para resolver una petición, se entiende que la decisión es favorable (silencio positivo) una vez transcurridos dos (2) meses desde la presentación. Para peticiones de contenido patrimonial el término es de tres (3) meses.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:08:29.541Z"
+    },
+    {
+      "id": "ADM-009",
+      "area": "administrativo",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es el plazo para que una entidad responda una petición de información?",
+      "respuesta_referencia": "Según la Ley 1755 de 2015 y el CPACA, las peticiones de información deben responderse en un plazo de diez (10) días hábiles. Las consultas tienen hasta treinta (30) días hábiles. El incumplimiento puede dar lugar a tutela y a responsabilidad disciplinaria del servidor.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:08:53.359Z"
+    },
+    {
+      "id": "ADM-010",
+      "area": "administrativo",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es la acción de grupo y en qué se diferencia de la popular?",
+      "respuesta_referencia": "La acción de grupo (Ley 472/1998) la ejercen un número plural de personas que comparten un interés colectivo por un daño común causado por la misma conducta. La acción popular (Art. 88 CP) protege derechos e intereses colectivos sin necesidad de acreditar perjuicio personal. La de grupo busca indemnización; la popular puede buscar además la cesación del daño y la reparación colectiva.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:09:00.056Z"
+    },
+    {
+      "id": "ADM-011",
+      "area": "administrativo",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cuándo prescribe la acción de nulidad y restablecimiento del derecho?",
+      "respuesta_referencia": "Según el artículo 164 del CPACA (Ley 1437/2011), la demanda de nulidad y restablecimiento del derecho prescribe en cuatro (4) meses desde la notificación o publicación del acto. Si el acto no se notifica, la jurisprudencia ha establecido que el término puede correr desde cuando el interesado tuvo conocimiento del acto.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:09:06.507Z"
+    },
+    {
+      "id": "ADM-012",
+      "area": "administrativo",
+      "dificultad": "basico",
+      "pregunta": "¿Qué es la doble instancia en lo contencioso administrativo?",
+      "respuesta_referencia": "En el proceso contencioso administrativo (CPACA) existe la posibilidad de impugnar la sentencia de primera instancia ante el tribunal administrativo (Consejo de Estado o tribunales administrativos). La apelación o la consulta permiten la doble instancia. Los plazos y requisitos están en la Ley 1437/2011.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:09:13.666Z"
+    },
+    {
+      "id": "ADM-013",
+      "area": "administrativo",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el recurso de apelación en sede administrativa?",
+      "respuesta_referencia": "El recurso de apelación se interpone ante el superior jerárquico del funcionario que profirió el acto (CPACA). En algunos casos la ley exige agotar la vía gubernativa antes de demandar. El término para apelar es generalmente de diez (10) días hábiles desde la notificación. El superior tiene un plazo para decidir.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:09:20.228Z"
+    },
+    {
+      "id": "ADM-014",
+      "area": "administrativo",
+      "dificultad": "basico",
+      "pregunta": "¿Contra qué actos procede la acción de cumplimiento?",
+      "respuesta_referencia": "La acción de cumplimiento (Ley 393 de 1997) procede para exigir el cumplimiento de una ley o un acto administrativo cuando el obligado sea una autoridad pública o un particular que cumpla funciones públicas. No procede contra sentencias judiciales ni cuando existan otros medios de defensa judicial idóneos.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:09:27.602Z"
+    },
+    {
+      "id": "ADM-015",
+      "area": "administrativo",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es la responsabilidad patrimonial del Estado?",
+      "respuesta_referencia": "La responsabilidad patrimonial del Estado está en el artículo 90 de la Constitución y en la Ley 678 de 2001. El Estado es responsable por los daños antijurídicos que le sean imputables por acción u omisión de las autoridades. La indemnización se rige por el derecho común. En caso de dolo o culpa grave del servidor, el Estado puede repetir contra él (acción de repetición).",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:09:33.847Z"
+    },
+    {
+      "id": "CIV-005",
+      "area": "civil",
+      "dificultad": "basico",
+      "pregunta": "¿Qué es la capacidad jurídica en el Código Civil?",
+      "respuesta_referencia": "La capacidad jurídica es la aptitud para ser titular de derechos y obligaciones (personalidad jurídica). La capacidad de ejercicio es la aptitud para actuar por sí mismo en la vida jurídica. Los menores y los declarados en interdicción tienen capacidad jurídica pero restricciones en la de ejercicio (Arts. 1502 y ss. CC).",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:09:41.037Z"
+    },
+    {
+      "id": "CIV-006",
+      "area": "civil",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuáles son las causales de nulidad absoluta del contrato?",
+      "respuesta_referencia": "La nulidad absoluta en el Código Civil procede por objeto o causa ilícita, por incapacidad absoluta de las partes, por falta de consentimiento (vicio que anula la voluntad). No prescribe por regla general y puede ser declarada de oficio. La relativa prescribe en cuatro años y solo puede invocarla la parte afectada.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:09:47.364Z"
+    },
+    {
+      "id": "CIV-007",
+      "area": "civil",
+      "dificultad": "basico",
+      "pregunta": "¿Qué es la tradición en el derecho de propiedad?",
+      "respuesta_referencia": "La tradición es el modo de transferir el dominio de las cosas (Art. 756 CC). En los bienes muebles puede hacerse por la entrega material o por la constitución en posesión. En los inmuebles, la tradición se efectúa por la inscripción en el registro de instrumentos públicos. Sin tradición no hay transferencia del dominio aunque exista título.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:09:54.429Z"
+    },
+    {
+      "id": "CIV-008",
+      "area": "civil",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuál es el plazo de prescripción de la acción de divorcio?",
+      "respuesta_referencia": "No existe un plazo de prescripción para la acción de divorcio como tal. El divorcio puede solicitarse cuando se configuren las causales (adulterio, maltrato, etc.) y no hay un término máximo desde el hecho. Sí hay plazos para ciertas causales (por ejemplo, el cese efectivo de la convivencia por más de dos años). La Ley 75 de 1968 y el Código Civil regulan las causales.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:10:00.779Z"
+    },
+    {
+      "id": "CIV-009",
+      "area": "civil",
+      "dificultad": "avanzado",
+      "pregunta": "¿Qué es la teoría de la imprevisión en los contratos?",
+      "respuesta_referencia": "La teoría de la imprevisión (o rebus sic stantibus) permite pedir la revisión o terminación del contrato cuando por hechos extraordinarios e imprevisibles la prestación se ha vuelto excesivamente onerosa para una parte. La jurisprudencia colombiana la ha admitido con restricciones. No está expresamente en el CC pero se ha desarrollado por la Corte Suprema y el Consejo de Estado.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:10:07.947Z"
+    },
+    {
+      "id": "CIV-010",
+      "area": "civil",
+      "dificultad": "basico",
+      "pregunta": "¿Quiénes son los herederos legítimos en la sucesión abintestato?",
+      "respuesta_referencia": "En la sucesión abintestato (sin testamento) del Código Civil, son llamados a suceder: los descendientes, los ascendientes, el cónyuge sobreviviente, los hermanos y los hijos de hermanos, y en último lugar el ICBF (Art. 1043 y ss. CC). El orden y las cuotas dependen de quiénes concurran.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:10:14.248Z"
+    },
+    {
+      "id": "CIV-011",
+      "area": "civil",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es la prenda sin desplazamiento?",
+      "respuesta_referencia": "La prenda sin desplazamiento (o prenda sobre cosas en poder del deudor) está regulada en el Código Civil y en normas comerciales. El deudor conserva la tenencia del bien pero se constituye un derecho real de garantía a favor del acreedor. Debe inscribirse en registro para oponibilidad a terceros. La Ley 1676 de 2013 desarrolla la prenda sin desplazamiento en el comercio.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:10:21.463Z"
+    },
+    {
+      "id": "CIV-012",
+      "area": "civil",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es el plazo de prescripción de la acción de responsabilidad civil extracontractual?",
+      "respuesta_referencia": "La acción de responsabilidad civil extracontractual prescribe en dos (2) años desde el daño (Art. 2532 CC). Si el hecho es constitutivo de delito, el plazo es el mismo que para la acción penal. La Corte ha dicho que el término corre desde que el afectado tuvo conocimiento del daño y del responsable.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:10:27.813Z"
+    },
+    {
+      "id": "CIV-013",
+      "area": "civil",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es la accesión de bienes inmuebles?",
+      "respuesta_referencia": "La accesión es el modo de adquirir el dominio por el cual el dueño de una cosa hace suyo lo que esta produce o se une a ella (Art. 715 CC). En inmuebles: aluvión, avulsión, formación de islas, edificaciones y plantaciones. Las reglas varían según si la construcción o siembra es de buena o mala fe.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:10:35.185Z"
+    },
+    {
+      "id": "CIV-014",
+      "area": "civil",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cuándo procede la resolución unilateral del contrato por incumplimiento?",
+      "respuesta_referencia": "En el Código Civil la resolución por incumplimiento (mora o incumplimiento de una obligación) puede estar pactada en el contrato (cláusula resolutoria) o puede declararse judicialmente. La Ley 1480 de 2011 (estatuto del consumidor) permite en algunos contratos la resolución unilateral con devolución. La parte afectada debe dar oportunidad de cumplimiento o exigir judicialmente la resolución.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:10:41.636Z"
+    },
+    {
+      "id": "CIV-015",
+      "area": "civil",
+      "dificultad": "basico",
+      "pregunta": "¿Qué es la usucapión y cuántos años se requieren para bienes inmuebles?",
+      "respuesta_referencia": "La usucapión (prescripción adquisitiva) es un modo de adquirir el dominio por la posesión continua y de buena fe durante el tiempo que la ley señala. Para bienes inmuebles en Colombia se requieren cinco (5) años de posesión continua e ininterrumpida cuando hay justo título y buena fe (Art. 2530 CC). Sin justo título son veinte (20) años.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:10:48.752Z"
+    },
+    {
+      "id": "PEN-003",
+      "area": "penal",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es la edad mínima de responsabilidad penal en Colombia?",
+      "respuesta_referencia": "En Colombia el sistema de responsabilidad penal para adolescentes (Ley 1098 de 2006) aplica a quienes al momento de cometer el hecho hayan cumplido 14 y no hayan cumplido 18 años. Los menores de 14 años no son penalmente responsables; se aplican medidas de protección.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:10:55.033Z"
+    },
+    {
+      "id": "PEN-004",
+      "area": "penal",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es la aceptación de cargos y qué beneficio otorga?",
+      "respuesta_referencia": "La aceptación de cargos está en el artículo 347 del Código de Procedimiento Penal (Ley 906 de 2004). El imputado puede aceptar los cargos en la audiencia de imputación a cambio de una rebaja de hasta la mitad (50%) de la pena. El juez debe verificar que la aceptación sea libre e informada y que los hechos sean constitutivos de delito.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:11:02.219Z"
+    },
+    {
+      "id": "PEN-005",
+      "area": "penal",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es la pena por homicidio simple en Colombia?",
+      "respuesta_referencia": "Según el artículo 323 del Código Penal (Ley 599 de 2000), el homicidio simple se sanciona con prisión de trece (13) a veinticinco (25) años. Es homicidio agravado (Art. 324) cuando se comete sobre menor, con sevicia, por precio, etc., y la pena es de veinticinco (25) a cuarenta (40) años.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:11:08.463Z"
+    },
+    {
+      "id": "PEN-006",
+      "area": "penal",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es la detención preventiva y cuánto puede durar?",
+      "respuesta_referencia": "La detención preventiva (medida de aseguramiento) está en la Ley 906 de 2004. El juez puede imponerla cuando haya riesgo de fuga, de obstaculización de la investigación o de reiteración. La duración máxima en investigación es de 36 meses (prorrogables en casos de delitos complejos). En etapa de juicio hay plazos adicionales. La Corte Constitucional ha fijado estándares de proporcionalidad.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:11:16.041Z"
+    },
+    {
+      "id": "PEN-007",
+      "area": "penal",
+      "dificultad": "basico",
+      "pregunta": "¿Qué delitos son de querella privada?",
+      "respuesta_referencia": "Los delitos de querella privada (o de instancia privada) solo se persiguen cuando la víctima o su representante presenta querella. Ejemplos en la Ley 599: injuria (Art. 220), calumnia (Art. 221), violencia intrafamiliar en algunos casos. Una vez radicada la querella, el proceso sigue de oficio.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:11:22.494Z"
+    },
+    {
+      "id": "PEN-008",
+      "area": "penal",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es la concusión y cuál es la pena?",
+      "respuesta_referencia": "La concusión (Art. 261 Ley 599/2000) es cuando un servidor público abusa de su cargo para exigir o hacer pagar indebidamente dineros o beneficios. La pena es de cuatro (4) a nueve (9) años de prisión e inhabilidad. Se diferencia del cohecho en que en la concusión el servidor toma la iniciativa de exigir.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:11:29.764Z"
+    },
+    {
+      "id": "PEN-009",
+      "area": "penal",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cuándo procede la extinción de la acción penal por muerte del imputado?",
+      "respuesta_referencia": "La muerte del imputado extingue la acción penal (no la responsabilidad civil, que puede dirigirse contra la sucesión). El proceso se termina. Si el imputado fallece durante la ejecución de la pena, se extingue la pena. La Ley 906 de 2004 y el Código Penal regulan la extinción.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:11:36.317Z"
+    },
+    {
+      "id": "PEN-010",
+      "area": "penal",
+      "dificultad": "basico",
+      "pregunta": "¿Qué es el principio de legalidad en materia penal?",
+      "respuesta_referencia": "El principio de legalidad (nullum crimen nulla poena sine lege) está en el artículo 29 de la Constitución y en el artículo 6 de la Ley 599. Nadie puede ser condenado por conducta que no esté descrita como delito en la ley anterior al hecho. La ley penal más favorable se aplica en el tiempo (principio de favorabilidad).",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:11:43.691Z"
+    },
+    {
+      "id": "TRI-003",
+      "area": "tributario",
+      "dificultad": "basico",
+      "pregunta": "¿Qué es el impuesto de industria y comercio y quién lo cobra?",
+      "respuesta_referencia": "El impuesto de industria y comercio (ICA) es un tributo municipal y distrital que grava las actividades industriales, comerciales y de servicios. Lo cobran los municipios y distritos. La tarifa y la base varían según el municipio. Está regulado por el Decreto Ley 1333 de 1986 y normas locales.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:11:49.825Z"
+    },
+    {
+      "id": "TRI-004",
+      "area": "tributario",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuál es el régimen simple de tributación y quiénes pueden acogerse?",
+      "respuesta_referencia": "El régimen simple de tributación (RST) fue creado por la Ley 2277 de 2022. Pueden acogerse personas naturales y jurídicas con ingresos brutos en el año anterior no superiores a 4.500 UVT (2024). Pagan un impuesto simplificado sobre ingresos. No aplica para grandes contribuyentes ni para quienes realicen ciertas actividades excluidas.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:11:57.001Z"
+    },
+    {
+      "id": "TRI-006",
+      "area": "tributario",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuál es el plazo para presentar la declaración de renta de personas naturales?",
+      "respuesta_referencia": "Para personas naturales el plazo de declaración de renta del año gravable suele ser entre abril y junio del año siguiente (la DIAN publica el calendario). Quienes tienen plazo en junio pueden extenderlo hasta agosto en condiciones. La presentación se hace en línea. El no declarar cuando se está obligado genera sanciones.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:12:20.246Z"
+    },
+    {
+      "id": "TRI-007",
+      "area": "tributario",
+      "dificultad": "avanzado",
+      "pregunta": "¿Qué es el precio de transferencia y cuándo se debe documentar?",
+      "respuesta_referencia": "Los precios de transferencia se refieren a operaciones entre partes relacionadas (grupos empresariales, matrices y filiales). El Estatuto Tributario (Ley 2010 de 2019 y normas anteriores) exige que esas operaciones se realicen a valor de mercado (arm's length). Debe llevarse documentación (master file, local file) y en ciertos casos presentar informe ante la DIAN.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:12:26.799Z"
+    },
+    {
+      "id": "TRI-008",
+      "area": "tributario",
+      "dificultad": "basico",
+      "pregunta": "¿Qué bienes y servicios están exentos de IVA en Colombia?",
+      "respuesta_referencia": "El Estatuto Tributario (Arts. 424-467) establece exclusiones y exenciones del IVA. Están exentos, entre otros: el pan, la leche, el transporte público, los servicios de salud, la educación, los libros, ciertos productos del campo. La lista es taxativa y ha sido modificada por leyes posteriores (Ley 1819/2016, Ley 2277/2022).",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:12:33.148Z"
+    },
+    {
+      "id": "TRI-009",
+      "area": "tributario",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuál es la sanción por no presentar declaración de renta a tiempo?",
+      "respuesta_referencia": "La sanción por extemporaneidad en la declaración de renta está en el artículo 652 del ET. Es el 5% sobre el impuesto a cargo por cada mes o fracción, con un máximo del 50%. Si no hay impuesto a cargo, la sanción puede ser en UVT. La mora también genera intereses. La DIAN puede imponer sanciones por incumplimiento de obligaciones formales.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:12:40.521Z"
+    },
+    {
+      "id": "TRI-010",
+      "area": "tributario",
+      "dificultad": "basico",
+      "pregunta": "¿Qué es el impuesto al patrimonio?",
+      "respuesta_referencia": "El impuesto al patrimonio grava el patrimonio líquido de las personas naturales y jurídicas que supere un monto en UVT (por ejemplo 72.000 UVT para 2024). Fue reintroducido por la Ley 2277 de 2022. La tarifa es progresiva. No aplica sobre el patrimonio invertido en activos productivos en condiciones que establece la ley.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:12:46.744Z"
+    },
+    {
+      "id": "TRI-011",
+      "area": "tributario",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es la devolución de IVA y quiénes pueden solicitarla?",
+      "respuesta_referencia": "La devolución de IVA procede cuando el contribuyente acredita un saldo a favor por IVA descontable superior al IVA causado en el mismo período. Los exportadores y quienes realicen actividades excluidas pueden solicitar devolución. La DIAN tiene plazos para resolver. Está regulada en el Estatuto Tributario (Libro III).",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:12:53.936Z"
+    },
+    {
+      "id": "TRI-012",
+      "area": "tributario",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cuándo prescribe la acción de la DIAN para determinar impuestos?",
+      "respuesta_referencia": "La acción de la administración tributaria para determinar impuestos prescribe en cinco (5) años contados desde la fecha en que expire el plazo para presentar la declaración del respectivo año o período (Art. 136 ET). En caso de declaración extemporánea, desde su presentación. La prescripción se interrumpe por actuaciones administrativas o judiciales.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:13:00.493Z"
+    },
+    {
+      "id": "TRI-013",
+      "area": "tributario",
+      "dificultad": "basico",
+      "pregunta": "¿Qué es el impuesto de timbre y cuándo se causa?",
+      "respuesta_referencia": "El impuesto de timbre nacional grava ciertos documentos (contratos de crédito, títulos valor, etc.) cuando se firman o se ponen en circulación. Está regulado por la Ley 1673 de 2013. La tarifa y la base dependen del tipo de documento. Algunos actos y documentos están exentos.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:13:07.863Z"
+    },
+    {
+      "id": "TRI-014",
+      "area": "tributario",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el impuesto sobre la renta para iguales?",
+      "respuesta_referencia": "El impuesto sobre la renta para iguales (antes CREE, hoy parte del impuesto de renta) o regímenes especiales aplican a ciertas entidades sin ánimo de lucro, fondos de empleados, cooperativas, bajo condiciones. La Ley 2277 de 2022 y el ET regulan tarifas y beneficios. El objetivo es equiparar la carga tributaria en sectores con tratamiento preferencial.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:13:14.074Z"
+    },
+    {
+      "id": "TRI-015",
+      "area": "tributario",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es la tarifa del IVA para productos de la canasta familiar?",
+      "respuesta_referencia": "Varios productos de la canasta familiar tienen tarifa preferencial de IVA del 5% o están exentos (0%). El pan, la leche, el huevo, el café, el arroz, entre otros, pueden estar en tarifa reducida o exentos según el artículo 468 y listas del ET. La Ley 1819 de 2016 y la Ley 2277 de 2022 han modificado las tarifas.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:13:21.379Z"
+    },
+    {
+      "id": "LAB-009",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuántas horas constituyen la jornada laboral máxima ordinaria en Colombia?",
+      "respuesta_referencia": "La jornada laboral máxima ordinaria es de 8 horas diarias y 48 horas semanales, según el Art. 161 del CST. La Ley 2101 de 2021 establece una reducción gradual a 42 horas semanales.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:13:27.555Z"
+    },
+    {
+      "id": "LAB-010",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuáles son los elementos esenciales del contrato de trabajo en Colombia?",
+      "respuesta_referencia": "El Art. 23 del CST establece tres elementos esenciales: prestación personal del servicio, continuada subordinación o dependencia del trabajador respecto al empleador, y salario como retribución del servicio.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:13:34.793Z"
+    },
+    {
+      "id": "LAB-012",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Qué recargo se aplica al trabajo nocturno en Colombia?",
+      "respuesta_referencia": "El trabajo nocturno (entre las 9:00 pm y las 6:00 am) tiene un recargo del 35% sobre el valor del trabajo ordinario diurno, según el Art. 168 del CST.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:13:57.629Z"
+    },
+    {
+      "id": "LAB-013",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuáles son los requisitos para que proceda la estabilidad laboral reforzada de un trabajador con discapacidad?",
+      "respuesta_referencia": "La estabilidad laboral reforzada de trabajadores con discapacidad requiere: (1) que el trabajador tenga una limitación física, sensorial o mental que limite su desempeño, (2) que el empleador conozca la condición, y (3) que el despido no tenga autorización del Ministerio del Trabajo. La Corte Constitucional ha extendido esta protección vía Sentencia C-458/2015 y SU-049/2017.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:14:03.994Z"
+    },
+    {
+      "id": "LAB-015",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuánto tiempo dura la licencia de paternidad en Colombia y quién la financia?",
+      "respuesta_referencia": "La licencia de paternidad fue ampliada por la Ley 2114 de 2021 a dos semanas (14 días hábiles). Es financiada por el sistema de seguridad social (EPS), no por el empleador, siempre que el padre cotizante haya pagado durante el período de gestación.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:14:27.426Z"
+    },
+    {
+      "id": "LAB-016",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿En qué consiste el contrato de trabajo a término fijo y cuál es su duración máxima?",
+      "respuesta_referencia": "El contrato a término fijo tiene una duración máxima de 3 años, renovable indefinidamente. Si dura menos de un año, puede renovarse hasta por 3 períodos iguales antes de considerarse indefinido. Requiere preaviso de 30 días para no renovar. Se regula en el Art. 46 del CST.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:14:33.877Z"
+    },
+    {
+      "id": "LAB-017",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuáles son los derechos del trabajador sindicalizado frente a un fuero sindical?",
+      "respuesta_referencia": "El fuero sindical protege a los fundadores de sindicatos, a los directivos sindicales y a los miembros de las juntas directivas. No pueden ser despedidos, trasladados ni desmejorados sin permiso judicial previo. El Art. 405 y siguientes del CST regulan el fuero.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:14:40.331Z"
+    },
+    {
+      "id": "LAB-018",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el acoso laboral y qué mecanismos de protección existen en Colombia?",
+      "respuesta_referencia": "El acoso laboral se define en la Ley 1010 de 2006 como conductas que causen daño a la integridad, dignidad o integridad física del trabajador. Los mecanismos incluyen: comités de convivencia laboral, demanda ante el juez laboral, medidas preventivas y sanciones al acosador.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:14:47.384Z"
+    },
+    {
+      "id": "LAB-022",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuántos días de licencia de maternidad tiene derecho una trabajadora en Colombia?",
+      "respuesta_referencia": "La licencia de maternidad es de 18 semanas (126 días), financiada por la EPS. Para tener derecho, la madre debe haber cotizado durante el período de gestación. Ley 1468 de 2011 amplió la licencia y el Art. 236 del CST la regula.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:15:44.535Z"
+    },
+    {
+      "id": "LAB-023",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuándo procede el reintegro de un trabajador despedido sin justa causa que goza de fuero de salud?",
+      "respuesta_referencia": "El reintegro procede cuando el empleador sabía de la condición de salud del trabajador al momento del despido y no obtuvo autorización del Ministerio del Trabajo. La Corte Constitucional exige reintegro, pago de salarios dejados de percibir y cotizaciones de seguridad social. Sentencia SU-049/2017.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:15:50.939Z"
+    },
+    {
+      "id": "CON-005",
+      "area": "constitucional",
+      "dificultad": "basico",
+      "pregunta": "¿Qué es el habeas corpus y en qué casos procede en Colombia?",
+      "respuesta_referencia": "El habeas corpus protege la libertad personal cuando alguien es privado ilegalmente de ella. Art. 30 de la Constitución y Ley 1095 de 2006 lo regulan. Procede cuando hay captura ilegal, vencimiento de términos de detención, o privación de libertad sin orden judicial.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:16:47.305Z"
+    },
+    {
+      "id": "CON-006",
+      "area": "constitucional",
+      "dificultad": "basico",
+      "pregunta": "¿Cuáles son los derechos fundamentales consagrados en la Constitución de 1991?",
+      "respuesta_referencia": "Los derechos fundamentales están en el Capítulo 1 del Título II de la Constitución (Art. 11 a 41). Incluyen: vida (Art. 11), igualdad (Art. 13), intimidad (Art. 15), libre desarrollo de la personalidad (Art. 16), libertad de conciencia (Art. 18), debido proceso (Art. 29), habeas corpus (Art. 30), petición (Art. 23).",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:16:53.654Z"
+    },
+    {
+      "id": "CON-007",
+      "area": "constitucional",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuándo procede la acción de cumplimiento y en qué se diferencia de la tutela?",
+      "respuesta_referencia": "La acción de cumplimiento (Art. 87 CP, Ley 393 de 1997) busca que autoridades ejecuten una ley o acto administrativo. A diferencia de la tutela, no protege derechos fundamentales sino que obliga a cumplir normas. No procede cuando hay otro medio judicial adecuado ni para proteger derechos protegibles por tutela.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:17:00.108Z"
+    },
+    {
+      "id": "CON-008",
+      "area": "constitucional",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el bloque de constitucionalidad y qué instrumentos lo integran?",
+      "respuesta_referencia": "El bloque de constitucionalidad (Art. 93 CP) integra al ordenamiento constitucional los tratados de derechos humanos ratificados por Colombia. Lo componen: Pacto Internacional de Derechos Civiles y Políticos, Convención Americana (Pacto de San José), convenios de la OIT sobre derechos fundamentales, entre otros.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:17:07.285Z"
+    },
+    {
+      "id": "CON-009",
+      "area": "constitucional",
+      "dificultad": "intermedio",
+      "pregunta": "¿En qué consiste el derecho al debido proceso en Colombia según la Constitución?",
+      "respuesta_referencia": "El Art. 29 de la Constitución establece el debido proceso: nadie puede ser juzgado sino conforme a leyes preexistentes, ante juez competente, con observancia de formas propias de cada juicio. Incluye presunción de inocencia, derecho a defensa, a presentar pruebas y a impugnar decisiones.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:17:13.622Z"
+    },
+    {
+      "id": "CON-010",
+      "area": "constitucional",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuándo puede declararse el estado de emergencia económica y cuáles son sus límites?",
+      "respuesta_referencia": "El Art. 215 de la Constitución permite declarar el estado de emergencia por perturbación del orden económico, social o ecológico. Duración máxima 30 días prorrogables (no más de 90 días al año). Los decretos legislativos no pueden suspender derechos fundamentales y el Congreso puede derogarlos.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:17:20.996Z"
+    },
+    {
+      "id": "CON-013",
+      "area": "constitucional",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cuál es el alcance de la protección constitucional del derecho a la salud como derecho fundamental autónomo?",
+      "respuesta_referencia": "La Corte Constitucional en Sentencia T-760/2008 reconoció la salud como derecho fundamental autónomo, no solo como derecho prestacional derivado de la vida. La Ley Estatutaria 1751 de 2015 lo consagró expresamente. Su núcleo esencial es la atención de urgencias y tratamientos de enfermedades amenazantes para la vida.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:18:00.625Z"
+    },
+    {
+      "id": "CON-014",
+      "area": "constitucional",
+      "dificultad": "basico",
+      "pregunta": "¿Qué es la acción popular y para qué se usa?",
+      "respuesta_referencia": "La acción popular (Art. 88 CP, Ley 472 de 1998) protege derechos e intereses colectivos como el medio ambiente, espacio público, patrimonio cultural y moralidad administrativa. Puede interponerla cualquier persona sin necesidad de demostrar daño personal.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:18:07.076Z"
+    },
+    {
+      "id": "CON-015",
+      "area": "constitucional",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuáles son las condiciones para que proceda la tutela contra particulares?",
+      "respuesta_referencia": "La tutela contra particulares procede en casos taxativos del Decreto 2591 de 1991: cuando el particular presta servicio público, actúa en posición de subordinación o indefensión frente al accionante, o cuando es el encargado de la guarda o custodia de personas. También contra organizaciones privadas que afecten derechos fundamentales.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:18:13.521Z"
+    },
+    {
+      "id": "CON-016",
+      "area": "constitucional",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cómo funciona el control de constitucionalidad por omisión legislativa relativa?",
+      "respuesta_referencia": "La omisión legislativa relativa ocurre cuando el legislador regula una materia excluyendo sin razón suficiente a quienes deberían estar incluidos. La Corte Constitucional puede extender la norma mediante sentencia integradora para incluir a los excluidos, sin crear derecho nuevo sino declarando inexequible la exclusión.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:18:20.901Z"
+    },
+    {
+      "id": "CON-017",
+      "area": "constitucional",
+      "dificultad": "basico",
+      "pregunta": "¿Qué derechos fundamentales tiene un niño en Colombia según la Constitución?",
+      "respuesta_referencia": "El Art. 44 de la Constitución consagra los derechos fundamentales de los niños: vida, integridad física, salud, seguridad social, alimentación equilibrada, nombre, nacionalidad, familia, educación y cultura. Los derechos de los niños prevalecen sobre los derechos de los demás.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:18:27.145Z"
+    },
+    {
+      "id": "CON-018",
+      "area": "constitucional",
+      "dificultad": "intermedio",
+      "pregunta": "¿En qué consiste el principio de proporcionalidad en el control constitucional colombiano?",
+      "respuesta_referencia": "El principio de proporcionalidad exige que las medidas que restringen derechos sean: (1) idóneas para lograr el fin perseguido, (2) necesarias porque no existen medidas alternativas menos restrictivas, y (3) proporcionales en sentido estricto entre el beneficio y el sacrificio del derecho. La Corte Constitucional lo aplica mediante el test de proporcionalidad.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:18:34.315Z"
+    },
+    {
+      "id": "ADM-005",
+      "area": "administrativo",
+      "dificultad": "basico",
+      "pregunta": "¿Cuáles son los recursos administrativos que puede interponer un ciudadano contra un acto administrativo?",
+      "respuesta_referencia": "El CPACA establece tres recursos: (1) Recurso de reposición ante quien lo expidió (plazo 10 días), (2) Recurso de apelación ante el superior jerárquico (plazo 10 días), y (3) Recurso de queja cuando se niega la apelación (plazo 5 días). El recurso de reposición es optativo y el de apelación es obligatorio antes de acudir a la vía judicial.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:19:14.558Z"
+    },
+    {
+      "id": "ADM-006",
+      "area": "administrativo",
+      "dificultad": "basico",
+      "pregunta": "¿Qué es el silencio administrativo y cuándo opera en Colombia?",
+      "respuesta_referencia": "El silencio administrativo negativo opera cuando la administración no responde en el plazo legal (3 meses para peticiones generales). Art. 83 CPACA: el solicitante puede interpretar la falta de respuesta como negativa y acudir a la vía judicial. El silencio positivo solo opera en casos expresamente previstos en la ley.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:19:21.111Z"
+    },
+    {
+      "id": "ADM-008",
+      "area": "administrativo",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuándo procede la nulidad simple de un acto administrativo según el CPACA?",
+      "respuesta_referencia": "La nulidad simple procede por las causales del Art. 137 CPACA: (1) expedición con infracción de normas, (2) expedición por funcionario incompetente, (3) expedición irregular, (4) desconocimiento del derecho de audiencias y defensa, (5) falsa motivación, (6) desviación de poder. No requiere demostrar perjuicio.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:19:45.073Z"
+    },
+    {
+      "id": "ADM-009",
+      "area": "administrativo",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es la responsabilidad extracontractual del Estado y cuáles son sus títulos de imputación?",
+      "respuesta_referencia": "El Art. 90 de la Constitución y la Ley 678 de 2001 regulan la responsabilidad estatal. Los títulos de imputación son: (1) falla en el servicio (omisión o irregularidad), (2) daño especial (actividades lícitas que causan perjuicio anormal), y (3) riesgo excepcional (actividades peligrosas del Estado).",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:19:51.626Z"
+    },
+    {
+      "id": "ADM-010",
+      "area": "administrativo",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuáles son los principios de la contratación estatal en Colombia?",
+      "respuesta_referencia": "La Ley 80 de 1993 (Estatuto General de Contratación) establece los principios: transparencia, economía, responsabilidad, y selección objetiva del contratista. La Ley 1150 de 2007 añadió eficiencia y los principios de la función administrativa. La licitación pública es la regla general.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:19:58.282Z"
+    },
+    {
+      "id": "ADM-011",
+      "area": "administrativo",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es la carrera administrativa y cuándo se puede desvincular a un empleado público de carrera?",
+      "respuesta_referencia": "La carrera administrativa (Ley 909 de 2004) es el sistema de mérito para el ingreso, permanencia y ascenso en el servicio público. Los empleados de carrera solo pueden ser desvinculados por: (1) calificación insatisfactoria de servicios, (2) restructuración del organismo, (3) supresión del cargo, o (4) faltas disciplinarias graves.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:20:05.655Z"
+    },
+    {
+      "id": "ADM-012",
+      "area": "administrativo",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuáles son las cláusulas exorbitantes en los contratos estatales?",
+      "respuesta_referencia": "Las cláusulas exorbitantes son potestades especiales de la administración en contratos estatales: interpretación unilateral, modificación unilateral, terminación unilateral, caducidad del contrato y reversión. Art. 14-18 de la Ley 80 de 1993. Son obligatorias en contratos de obra, concesión y servicios públicos.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:20:11.986Z"
+    },
+    {
+      "id": "ADM-013",
+      "area": "administrativo",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cómo funciona la acción de reparación directa y cuál es el plazo para interponerla?",
+      "respuesta_referencia": "La acción de reparación directa procede cuando el daño proviene de un hecho, omisión, operación administrativa o la ocupación temporal o permanente de inmueble. El plazo de caducidad es de 2 años contados desde el hecho dañoso (Art. 164 CPACA). Requiere conciliación prejudicial como requisito de procedibilidad.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:20:19.152Z"
+    },
+    {
+      "id": "ADM-015",
+      "area": "administrativo",
+      "dificultad": "basico",
+      "pregunta": "¿Qué principios rigen la función administrativa en Colombia según la Constitución?",
+      "respuesta_referencia": "El Art. 209 de la Constitución establece los principios de la función administrativa: igualdad, moralidad, eficacia, economía, celeridad, imparcialidad y publicidad. Las autoridades deben actuar bajo estos principios mediante la coordinación y colaboración.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:20:43.172Z"
+    },
+    {
+      "id": "ADM-016",
+      "area": "administrativo",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuál es el procedimiento de selección mediante licitación pública para contratos estatales?",
+      "respuesta_referencia": "La licitación pública (Art. 30 Ley 80/1993, modificado Ley 1150/2007) incluye: (1) apertura con publicación en SECOP, (2) pliego de condiciones definitivo, (3) audiencia de aclaración, (4) presentación de ofertas, (5) evaluación y publicación del informe, (6) audiencia de adjudicación, y (7) adjudicación. Mínimo 10 días hábiles entre apertura y cierre.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:20:49.791Z"
+    },
+    {
+      "id": "CIV-007",
+      "area": "civil",
+      "dificultad": "basico",
+      "pregunta": "¿Cuándo se adquiere la capacidad jurídica plena en Colombia?",
+      "respuesta_referencia": "La capacidad jurídica plena se adquiere a los 18 años (Ley 1306 de 2009 derogó la incapacidad de los menores entre 14 y 18). Los menores de 18 años tienen capacidad relativa para ciertos actos. Los interdictos (personas con discapacidad mental) tienen representación legal. Art. 1503 del CC regula la capacidad para contratar.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:21:30.136Z"
+    },
+    {
+      "id": "CIV-008",
+      "area": "civil",
+      "dificultad": "basico",
+      "pregunta": "¿Qué es el patrimonio de familia inembargable y qué bienes puede incluir?",
+      "respuesta_referencia": "El patrimonio de familia (Ley 70 de 1931 y Art. 42 CP) es la afectación de un bien inmueble para proteger el núcleo familiar, haciéndolo inembargable e inalienable. Puede incluir el inmueble donde reside la familia y los bienes destinados a la actividad agrícola familiar.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:21:36.589Z"
+    },
+    {
+      "id": "CIV-009",
+      "area": "civil",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuáles son los vicios del consentimiento en los contratos civiles?",
+      "respuesta_referencia": "Los vicios del consentimiento (Art. 1508 CC) son: error (sobre la esencia del objeto o calidades esenciales), fuerza (vis absoluta y vis relativa), y dolo (maniobras fraudulentas). El error debe ser determinante, la fuerza debe ser grave y el dolo debe ser obra de la otra parte y determinante del contrato.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:21:42.936Z"
+    },
+    {
+      "id": "CIV-010",
+      "area": "civil",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es la prescripción adquisitiva y cuáles son los plazos en Colombia?",
+      "respuesta_referencia": "La prescripción adquisitiva (usucapión) permite adquirir el dominio por posesión pública, pacífica e ininterrumpida. Para bienes inmuebles: prescripción ordinaria 5 años con buena fe y justo título; prescripción extraordinaria 10 años sin necesidad de justo título. Arts. 2512 y ss. del CC.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:21:50.013Z"
+    },
+    {
+      "id": "CIV-011",
+      "area": "civil",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuáles son las causales de divorcio en Colombia?",
+      "respuesta_referencia": "El Art. 154 del CC establece las causales de divorcio: relaciones sexuales extramatrimoniales, grave incumplimiento de deberes conyugales, ultrajes y malos tratos, embriaguez habitual, uso de sustancias alucinógenas, enfermedad grave e incurable del cónyuge, separación de cuerpos por más de 2 años, y consentimiento mutuo.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:21:56.250Z"
+    },
+    {
+      "id": "CIV-012",
+      "area": "civil",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es la responsabilidad civil extracontractual y cuáles son sus elementos?",
+      "respuesta_referencia": "La responsabilidad civil extracontractual (Art. 2341 CC) requiere: (1) hecho ilícito o culposo del demandado, (2) daño sufrido por el demandante, y (3) nexo causal entre el hecho y el daño. La culpa se presume en actividades peligrosas. El daño puede ser material (emergente y lucro cesante) o inmaterial (moral y vida en relación).",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:22:03.446Z"
+    },
+    {
+      "id": "CIV-015",
+      "area": "civil",
+      "dificultad": "basico",
+      "pregunta": "¿Qué derechos tiene el arrendatario en un contrato de arrendamiento de vivienda urbana?",
+      "respuesta_referencia": "La Ley 820 de 2003 regula el arrendamiento urbano. El arrendatario tiene derecho a: uso y goce del inmueble, al preaviso de 3 o 6 meses para la terminación, a la devolución del depósito, a recibir recibo de pago, y a que el arrendador no pueda aumentar el canon más del IPC anual. La renta no puede superar el 1% del valor comercial.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:22:43.251Z"
+    },
+    {
+      "id": "CIV-016",
+      "area": "civil",
+      "dificultad": "avanzado",
+      "pregunta": "¿Qué es la simulación en los contratos civiles y cómo se prueba?",
+      "respuesta_referencia": "La simulación (Art. 1766 CC) ocurre cuando las partes celebran un contrato aparente que oculta otro real (contraescritura). La simulación puede ser absoluta (no hay contrato real) o relativa (el real difiere del aparente). Se prueba con indicios, testigos o la contraescritura. La acción de simulación prescribe en 10 años.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:22:49.701Z"
+    },
+    {
+      "id": "CIV-017",
+      "area": "civil",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuáles son los efectos jurídicos del reconocimiento voluntario de hijo extramatrimonial?",
+      "respuesta_referencia": "El reconocimiento voluntario (Art. 90 CC mod. Ley 75/1968) establece la filiación extramatrimonial y genera todos los derechos del hijo: apellidos del padre, alimentos, sucesión, seguridad social. Es irrevocable. Si el padre se niega, procede la investigación de paternidad mediante prueba de ADN.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:22:55.948Z"
+    },
+    {
+      "id": "PEN-003",
+      "area": "penal",
+      "dificultad": "basico",
+      "pregunta": "¿Cuáles son los elementos estructurales del delito en el sistema penal colombiano?",
+      "respuesta_referencia": "El Código Penal (Ley 599 de 2000) establece que la conducta punible requiere: tipicidad (adecuación al tipo penal), antijuridicidad (lesión sin justificación) y culpabilidad (responsabilidad del agente). El Art. 9 CP establece la estructura del delito con estos tres elementos.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:23:03.166Z"
+    },
+    {
+      "id": "PEN-004",
+      "area": "penal",
+      "dificultad": "basico",
+      "pregunta": "¿Cuáles son las causales de ausencia de responsabilidad penal en Colombia?",
+      "respuesta_referencia": "El Art. 32 del Código Penal enumera las causales: caso fortuito o fuerza mayor, error invencible de tipo, consentimiento del titular, estado de necesidad, legítima defensa, insuperable coacción ajena, miedo insuperable, obediencia debida, actuación como agente encubierto. El error de prohibición invencible excluye la culpabilidad.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:23:09.416Z"
+    },
+    {
+      "id": "PEN-005",
+      "area": "penal",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuáles son los requisitos para que proceda la detención preventiva en Colombia?",
+      "respuesta_referencia": "La detención preventiva (Art. 308 CPP, Ley 906 de 2004) requiere: (1) inferencia razonable de autoría o participación, (2) que la medida sea necesaria para: evitar obstrucción de la justicia, proteger a la víctima o a la comunidad, o asegurar la comparecencia al proceso. Además, el delito debe tener pena mínima de 4 años.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:23:16.738Z"
+    },
+    {
+      "id": "PEN-006",
+      "area": "penal",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el principio de tipicidad estricta (nullum crimen sine lege) en el derecho penal colombiano?",
+      "respuesta_referencia": "El principio de tipicidad (Art. 10 CP, Art. 29 CP) exige que la conducta delictiva esté previamente definida de manera inequívoca, expresa y clara en la ley penal. La analogía in malam partem está prohibida. El tipo penal debe describir la conducta con precisión suficiente para que el ciudadano pueda conocer qué está prohibido.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:23:23.189Z"
+    },
+    {
+      "id": "PEN-007",
+      "area": "penal",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuáles son las penas principales en el Código Penal colombiano?",
+      "respuesta_referencia": "El Art. 35 del Código Penal establece las penas principales: prisión, multa, inhabilitación para el ejercicio de derechos y funciones públicas. La pena de muerte fue abolida en Colombia. La pena de prisión tiene un mínimo de 16 días y un máximo de 60 años (o 50 años para hechos anteriores a 2004).",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:23:30.563Z"
+    },
+    {
+      "id": "PEN-008",
+      "area": "penal",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuáles son las causales de extinción de la acción penal en Colombia?",
+      "respuesta_referencia": "El Art. 82 del CPP establece causales de extinción: muerte del procesado, desistimiento, amnistía, prescripción, oblación, caducidad de la querella, y aplicación del principio de oportunidad. La prescripción de la acción penal ocurre al transcurrir un tiempo igual al máximo de la pena, con un mínimo de 5 años.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:23:36.908Z"
+    },
+    {
+      "id": "PEN-009",
+      "area": "penal",
+      "dificultad": "avanzado",
+      "pregunta": "¿En qué consiste el principio de oportunidad en el sistema penal acusatorio colombiano?",
+      "respuesta_referencia": "El principio de oportunidad (Art. 321 CPP) permite a la Fiscalía suspender, interrumpir o renunciar a la acción penal en casos tasados por la ley (Art. 324 CPP), con control del juez de garantías. Opera en delitos de menor impacto social cuando la persecución penal no contribuye a la política criminal del Estado.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:23:44.076Z"
+    },
+    {
+      "id": "TRI-003",
+      "area": "tributario",
+      "dificultad": "basico",
+      "pregunta": "¿Qué es la retención en la fuente y quiénes son agentes de retención?",
+      "respuesta_referencia": "La retención en la fuente es un mecanismo de recaudo anticipado del impuesto de renta. Los agentes de retención (Art. 368 ET) son: sociedades y entidades públicas, personas naturales obligadas a llevar contabilidad, personas jurídicas extranjeras con domicilio en Colombia, y pagadores de salarios. El agente retiene al momento del pago.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:24:07.425Z"
+    },
+    {
+      "id": "TRI-004",
+      "area": "tributario",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es la diferencia entre bienes exentos y bienes excluidos del IVA en Colombia?",
+      "respuesta_referencia": "Los bienes excluidos de IVA (Art. 424 ET) no causan el impuesto; el vendedor no cobra IVA ni puede descontarlo. Los bienes exentos (Art. 477 ET) están gravados a tarifa 0%; el exportador o productor puede descontar el IVA pagado en sus insumos (derecho a devolución). La diferencia es clave para la recuperación del IVA en la cadena productiva.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:24:13.712Z"
+    },
+    {
+      "id": "TRI-005",
+      "area": "tributario",
+      "dificultad": "basico",
+      "pregunta": "¿Cuándo debe declarar renta una persona natural en Colombia?",
+      "respuesta_referencia": "Una persona natural debe declarar renta cuando supere los topes del Art. 592 ET: (1) ingresos brutos superiores a 1.400 UVT, (2) patrimonio bruto superior a 4.500 UVT, (3) compras y consumos superiores a 1.400 UVT, (4) consignaciones bancarias superiores a 1.400 UVT, o (5) cuando sea responsable de IVA.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:24:20.327Z"
+    },
+    {
+      "id": "TRI-006",
+      "area": "tributario",
+      "dificultad": "basico",
+      "pregunta": "¿Qué es el Gravamen a los Movimientos Financieros (GMF) y cuál es su tarifa?",
+      "respuesta_referencia": "El GMF (4 x 1000) se causa en transacciones financieras como retiros, pagos y transferencias (Art. 871 ET). La tarifa es del 4 por mil (0.4%) sobre el valor de la transacción. No aplica a transacciones dentro de la misma cuenta, ni a traslados entre cuentas de ahorro marcadas como exentas. Es un impuesto permanente desde 2004.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:24:27.531Z"
+    },
+    {
+      "id": "TRI-007",
+      "area": "tributario",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cómo se determina la base gravable del impuesto predial en Colombia?",
+      "respuesta_referencia": "El impuesto predial es un tributo municipal. La base gravable es el avalúo catastral del inmueble formado por el IGAC. La tarifa la fija el municipio dentro de los límites legales (entre 1 y 16 por mil para predios urbanos). La Ley 44 de 1990 y la Ley 1450 de 2011 regulan el ajuste catastral anual.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:24:33.811Z"
+    },
+    {
+      "id": "TRI-008",
+      "area": "tributario",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuáles son las principales sanciones tributarias por inexactitud y por no declarar?",
+      "respuesta_referencia": "Las sanciones del Estatuto Tributario incluyen: (1) sanción por inexactitud: 100% del mayor impuesto determinado (Art. 647 ET), reducible al 50% si acepta, (2) sanción por no declarar: 5% de los ingresos brutos por cada mes de retardo con un máximo del 200% del impuesto (Art. 643 ET). El Art. 640 ET establece reducción de sanciones por corrección.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:24:40.967Z"
+    },
+    {
+      "id": "TRI-009",
+      "area": "tributario",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el impuesto de industria y comercio (ICA) y quiénes son sus sujetos pasivos?",
+      "respuesta_referencia": "El ICA es un tributo municipal que grava actividades industriales, comerciales y de servicios en el municipio. Los sujetos pasivos son las personas naturales y jurídicas que realicen tales actividades dentro del territorio municipal. La base gravable son los ingresos brutos por actividades gravadas. Lo regula el Decreto 1333 de 1986 y cada municipio fija sus tarifas.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:24:47.266Z"
+    },
+    {
+      "id": "TRI-010",
+      "area": "tributario",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el beneficio de auditoría en el impuesto de renta y cuándo aplica?",
+      "respuesta_referencia": "El beneficio de auditoría (Art. 689-1 ET) permite que las declaraciones de renta queden en firme en un plazo reducido (6, 12 o 18 meses) si el impuesto neto aumenta en un porcentaje determinado respecto al año anterior. Si el impuesto aumenta 30% queda en firme en 6 meses; 20% en 12 meses; 17% en 18 meses.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:24:54.528Z"
+    },
+    {
+      "id": "TRI-011",
+      "area": "tributario",
+      "dificultad": "avanzado",
+      "pregunta": "¿En qué consisten los precios de transferencia y a qué empresas aplican?",
+      "respuesta_referencia": "Los precios de transferencia (Art. 260-1 ET) regulan las transacciones entre empresas vinculadas o con paraísos fiscales, exigiendo que se realicen a precios de mercado (principio arm's length). Aplican a contribuyentes del impuesto de renta con transacciones con vinculados del exterior o entidades ubicadas en jurisdicciones de baja tributación.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:25:00.589Z"
+    },
+    {
+      "id": "TRI-012",
+      "area": "tributario",
+      "dificultad": "avanzado",
+      "pregunta": "¿Qué es la norma general anti-abuso (GAAR) tributaria en Colombia?",
+      "respuesta_referencia": "El Art. 869 ET (Ley 1607 de 2012) establece la cláusula general anti-abuso: la DIAN puede desconocer efectos tributarios de operaciones o series de operaciones que carezcan de propósito económico y negocial diferente al ahorro tributario. Requiere declaración de abuso mediante resolución y procedimiento de imposición de sanción.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:25:07.589Z"
+    },
+    {
+      "id": "TRI-013",
+      "area": "tributario",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es la tarifa general del impuesto de renta para sociedades en Colombia?",
+      "respuesta_referencia": "La tarifa general del impuesto de renta para sociedades nacionales es del 35% para 2022 en adelante (Art. 240 ET, modificado por Ley 2277 de 2022). Para el sector financiero aplica una sobretasa del 3%. Las entidades del régimen tributario especial y las zonas francas tienen tarifas diferenciales.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-02-18T04:25:13.985Z"
+    },
+    {
+      "id": "TRI-014",
+      "area": "tributario",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cómo tributan los dividendos pagados a personas naturales en Colombia?",
+      "respuesta_referencia": "Los dividendos de utilidades gravadas pagados a personas naturales residentes tributan a tarifas progresivas (Art. 242 ET): hasta 300 UVT el 0%, de 300 a 600 UVT el 5%, más de 600 UVT el 10%. Los dividendos de utilidades no gravadas se gravan a tarifa del 35%. La Ley 2277 de 2022 ajustó las tarifas.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 405 Method Not Allowed",
+      "timestamp": "2026-02-18T04:25:21.122Z"
+    }
+  ]
+}

@@ -175,16 +175,16 @@ export async function POST(req: NextRequest) {
     // 2. Verificar autenticación de usuario (si hay header de usuario)
     const userHeader = req.headers.get('x-user-id')
     if (userHeader) {
-      const user = authenticateUser(userHeader)
+      const user = await authenticateUser(userHeader)
       if (user) {
         userId = user.id
-        userTier = getUserTier(userId)
+        userTier = await getUserTier(userId)
       }
     }
     
     // 3. Verificar límites de uso ANTES de ejecutar el pipeline (solo si hay userId)
     if (userId) {
-      const usageCheck = checkUsageLimit(userTier, userId)
+      const usageCheck = await checkUsageLimit(userTier, userId)
       if (!usageCheck.allowed) {
         logger.warn('Usage limit exceeded', { userId, userTier })
         return NextResponse.json(
@@ -263,7 +263,7 @@ export async function POST(req: NextRequest) {
       
       // Registrar consulta con metadata (incluso para cache hits)
       if (userId) {
-        const queryLogId = logQuery({
+        const queryLogId = await logQuery({
           userId,
           query: queryText,
           responseTime,
@@ -271,11 +271,9 @@ export async function POST(req: NextRequest) {
           legalArea,
           complexity
         })
-        
-        // Registrar métricas de calidad si están disponibles
         if (queryLogId > 0 && cached.answer && cached.citations) {
           const citationMetrics = calculateCitationPrecision(cached.answer, cached.citations)
-          logQualityMetrics({
+          await logQualityMetrics({
             queryLogId,
             citationPrecision: citationMetrics.precision,
             totalCitations: citationMetrics.totalCitations,
@@ -284,9 +282,7 @@ export async function POST(req: NextRequest) {
             chunksRetrieved: cached.retrieved || 0
           })
         }
-        
-        // Trackear uso (mantener compatibilidad)
-        trackUsage(userId, userTier, queryText, responseTime, true)
+        await trackUsage(userId, userTier, queryText, responseTime, true)
       }
       
       logger.logResponse('POST', '/api/rag', 200, responseTime, { requestId, cached: true })
@@ -326,7 +322,7 @@ export async function POST(req: NextRequest) {
     
     // Trackear uso después de consulta exitosa
     if (userId) {
-      trackUsage(userId, userTier, queryText, responseTime, true)
+      await trackUsage(userId, userTier, queryText, responseTime, true)
     }
     
     logger.logMetric('rag_response_time', responseTime, 'ms', { requestId, userTier })
@@ -361,7 +357,7 @@ export async function POST(req: NextRequest) {
       if (userId) {
         const legalArea = detectLegalArea(queryText)
         const complexity = detectComplexity(queryText)
-        logQuery({
+        await logQuery({
           userId,
           query: queryText,
           responseTime,
@@ -369,9 +365,8 @@ export async function POST(req: NextRequest) {
           legalArea,
           complexity
         })
+        await trackUsage(userId, userTier, queryText, responseTime, false)
       }
-      
-      trackUsage(userId, userTier, queryText, responseTime, false)
     }
     
     logger.error('Pipeline error', e, { 

@@ -12,7 +12,7 @@
  */
 
 import { describe, test, expect } from 'vitest';
-import { POST } from '@/app/api/query/route';
+import { POST } from '@/app/api/rag/route';
 import { NextRequest } from 'next/server';
 
 describe('Regression Tests', () => {
@@ -20,8 +20,9 @@ describe('Regression Tests', () => {
    * Helper para crear request simulado
    */
   function createRequest(query: string, options: any = {}) {
-    return new NextRequest('http://localhost:3000/api/query', {
+    return new NextRequest('http://localhost:3000/api/rag', {
       method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         query,
         ...options,
@@ -51,8 +52,9 @@ describe('Regression Tests', () => {
     });
 
     test('API debe rechazar requests malformados', async () => {
-      const req = new NextRequest('http://localhost:3000/api/query', {
+      const req = new NextRequest('http://localhost:3000/api/rag', {
         method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: 'invalid json',
       });
 
@@ -72,14 +74,14 @@ describe('Regression Tests', () => {
       console.log('✓ API maneja queries vacías');
     });
 
-    test('API debe retornar fuentes con las respuestas', async () => {
+    test('API debe retornar citas con las respuestas', async () => {
       const req = createRequest('¿Qué es una tutela?');
       const data = await getResponse(req);
 
-      expect(data).toHaveProperty('sources');
-      expect(Array.isArray(data.sources)).toBe(true);
+      expect(data).toHaveProperty('citations');
+      expect(Array.isArray(data.citations)).toBe(true);
       
-      console.log('✓ API retorna fuentes');
+      console.log('✓ API retorna citas');
     });
 
     test('API debe incluir metadata en la respuesta', async () => {
@@ -88,7 +90,8 @@ describe('Regression Tests', () => {
 
       // Verificar que tiene campos esperados
       expect(data).toHaveProperty('answer');
-      expect(data).toHaveProperty('sources');
+      expect(data).toHaveProperty('citations');
+      expect(data).toHaveProperty('requestId');
       
       console.log('✓ API incluye metadata');
     });
@@ -99,20 +102,21 @@ describe('Regression Tests', () => {
       const req = createRequest('acción de tutela');
       const data = await getResponse(req);
 
-      expect(data.sources).toBeDefined();
-      expect(data.sources.length).toBeGreaterThan(0);
+      expect(data.citations).toBeDefined();
+      expect(data.citations.length).toBeGreaterThan(0);
+      expect(data.retrieved).toBeGreaterThan(0);
       
-      console.log(`✓ Pipeline recuperó ${data.sources.length} documentos`);
+      console.log(`✓ Pipeline recuperó ${data.retrieved} chunks, ${data.citations.length} citas`);
     });
 
     test('Pipeline debe rankear documentos por relevancia', async () => {
       const req = createRequest('¿Qué es una tutela?');
       const data = await getResponse(req);
 
-      if (data.sources && data.sources.length > 1) {
-        // Verificar que tienen scores
-        const hasScores = data.sources.every((s: any) => 
-          typeof s.score === 'number' || s.score !== undefined
+      if (data.citations && data.citations.length > 1) {
+        // Verificar que tienen scores o están ordenados
+        const hasScores = data.citations.some((c: any) => 
+          typeof c.score === 'number' || c.score !== undefined
         );
         
         console.log('✓ Documentos rankeados por relevancia');
@@ -203,10 +207,14 @@ describe('Regression Tests', () => {
       );
       const data = await getResponse(req);
 
-      expect(data.sources).toBeDefined();
-      if (data.sources && data.sources.length > 0) {
+      expect(data.citations).toBeDefined();
+      if (data.citations && data.citations.length > 0) {
         // Fuentes constitucionales deberían tener prioridad
-        console.log('✓ Scoring por jerarquía funciona');
+        const hasConstitucion = data.citations.some((c: any) =>
+          c.title?.toLowerCase().includes('constitución') ||
+          c.title?.toLowerCase().includes('constitucion')
+        );
+        console.log('✓ Scoring por jerarquía funciona', hasConstitucion ? '(Constitución encontrada)' : '');
       }
     });
 
@@ -264,8 +272,8 @@ describe('Regression Tests', () => {
       const req = createRequest('sentencia corte constitucional');
       const data = await getResponse(req);
 
-      expect(data.sources).toBeDefined();
-      expect(data.sources.length).toBeGreaterThan(0);
+      expect(data.citations).toBeDefined();
+      expect(data.retrieved).toBeGreaterThan(0);
       
       console.log('✓ Jurisprudencia indexada correctamente');
     });
@@ -274,7 +282,7 @@ describe('Regression Tests', () => {
       const req = createRequest('decreto reglamentario');
       const data = await getResponse(req);
 
-      expect(data.sources).toBeDefined();
+      expect(data.citations).toBeDefined();
       // Debería encontrar decretos si están indexados
       console.log('✓ Decretos indexados correctamente');
     });
@@ -283,8 +291,8 @@ describe('Regression Tests', () => {
       const req = createRequest('procedimiento tutela');
       const data = await getResponse(req);
 
-      expect(data.sources).toBeDefined();
-      expect(data.sources.length).toBeGreaterThan(0);
+      expect(data.citations).toBeDefined();
+      expect(data.retrieved).toBeGreaterThan(0);
       
       console.log('✓ Procedimientos indexados correctamente');
     });
@@ -293,9 +301,10 @@ describe('Regression Tests', () => {
       const req = createRequest('acción de tutela');
       const data = await getResponse(req);
 
-      if (data.sources && data.sources.length > 0) {
-        const firstSource = data.sources[0];
-        expect(firstSource).toHaveProperty('content');
+      if (data.citations && data.citations.length > 0) {
+        const firstCitation = data.citations[0];
+        expect(firstCitation).toHaveProperty('title');
+        expect(firstCitation).toHaveProperty('id');
         
         console.log('✓ Metadata de documentos completa');
       }
@@ -374,8 +383,9 @@ describe('Regression Tests', () => {
 
     test('Sistema debe recuperarse de errores', async () => {
       // Intentar query que podría causar error
-      const badReq = new NextRequest('http://localhost:3000/api/query', {
+      const badReq = new NextRequest('http://localhost:3000/api/rag', {
         method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query: null }),
       });
       
@@ -398,7 +408,9 @@ describe('Regression Tests', () => {
 
       // Campos esenciales que siempre deben estar
       expect(data).toHaveProperty('answer');
-      expect(data).toHaveProperty('sources');
+      expect(data).toHaveProperty('citations');
+      expect(data).toHaveProperty('retrieved');
+      expect(data).toHaveProperty('requestId');
       
       console.log('✓ Formato de respuesta compatible');
     });
@@ -465,19 +477,19 @@ describe('Regression Tests', () => {
       console.log('✓ Respuestas determinísticas');
     });
 
-    test('Fuentes deben mantenerse estables', async () => {
+    test('Citas deben mantenerse estables', async () => {
       const query = 'artículo 86 constitución';
       
       const data = await getResponse(createRequest(query));
       
-      expect(data.sources).toBeDefined();
-      // Número de fuentes debería ser razonable y consistente
-      if (data.sources) {
-        expect(data.sources.length).toBeGreaterThan(0);
-        expect(data.sources.length).toBeLessThan(100);
+      expect(data.citations).toBeDefined();
+      // Número de citas debería ser razonable y consistente
+      if (data.citations) {
+        expect(data.citations.length).toBeGreaterThan(0);
+        expect(data.citations.length).toBeLessThan(100);
       }
       
-      console.log('✓ Fuentes estables');
+      console.log('✓ Citas estables');
     });
   });
 });

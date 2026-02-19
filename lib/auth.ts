@@ -1,12 +1,15 @@
 /**
- * Sistema de autenticación y métricas de uso con persistencia SQLite
- * Reemplaza la implementación en memoria para funcionar en producción
+ * Sistema de autenticación y métricas de uso.
+ * Persistencia: SQLite (local) o Neon Postgres cuando DATABASE_URL está definido (CU-03).
  */
 
 import Database from 'better-sqlite3'
 import path from 'path'
 import fs from 'fs'
 import { type UserTier } from './tiers'
+import * as pg from './db-postgres'
+
+const usePostgres = typeof process !== 'undefined' && !!process.env.DATABASE_URL
 
 export interface User {
   id: string
@@ -124,23 +127,17 @@ function getDb(): Database.Database {
 }
 
 /**
- * Crea un nuevo usuario (free tier por defecto)
+ * Crea un nuevo usuario (free tier por defecto). Async cuando DATABASE_URL (Postgres).
  */
-export function createUser(params: {
-  id: string
-  email?: string
-  tier?: UserTier
-}): User {
+function createUserSync(params: { id: string; email?: string; tier?: UserTier }): User {
   try {
     const database = getDb()
     const now = Date.now()
     const tier = params.tier || 'free'
-    
     database.prepare(`
       INSERT OR REPLACE INTO users (id, email, tier, created_at, queries_this_month, total_queries)
       VALUES (?, ?, ?, ?, 0, 0)
     `).run(params.id, params.email || null, tier, now)
-    
     return {
       id: params.id,
       email: params.email,
@@ -155,16 +152,19 @@ export function createUser(params: {
   }
 }
 
+export async function createUser(params: { id: string; email?: string; tier?: UserTier }): Promise<User> {
+  if (usePostgres) return pg.pgCreateUser(params)
+  return Promise.resolve(createUserSync(params))
+}
+
 /**
- * Obtiene un usuario por ID
+ * Obtiene un usuario por ID. Async cuando DATABASE_URL (Postgres).
  */
-export function getUser(userId: string): User | null {
+function getUserSync(userId: string): User | null {
   try {
     const database = getDb()
     const row = database.prepare('SELECT * FROM users WHERE id = ?').get(userId) as any
-    
     if (!row) return null
-    
     return {
       id: row.id,
       email: row.email || undefined,
@@ -180,26 +180,27 @@ export function getUser(userId: string): User | null {
   }
 }
 
-/**
- * Autentica un usuario por ID (simplificado)
- * En producción, esto debería validar tokens, sesiones, etc.
- */
-export function authenticateUser(userIdOrToken: string): User | null {
-  // Si es un ID de usuario directo, retornar el usuario
-  const user = getUser(userIdOrToken)
-  if (user) {
-    return user
+export async function getUser(userId: string): Promise<User | null> {
+  if (usePostgres) {
+    const row = await pg.pgGetUser(userId)
+    return row ? pg.mapRowToUser(row) : null
   }
-  
-  // En producción, aquí se validaría un token JWT, sesión, etc.
-  // Por ahora, crear un usuario temporal si no existe
+  return Promise.resolve(getUserSync(userId))
+}
+
+/**
+ * Autentica un usuario por ID (simplificado). Async cuando DATABASE_URL (Postgres).
+ */
+export async function authenticateUser(userIdOrToken: string): Promise<User | null> {
+  const user = await getUser(userIdOrToken)
+  if (user) return user
   return createUser({ id: userIdOrToken, tier: 'free' })
 }
 
 /**
- * Actualiza el tier de un usuario
+ * Actualiza el tier de un usuario. Async cuando DATABASE_URL (Postgres).
  */
-export function updateUserTier(userId: string, tier: UserTier): boolean {
+function updateUserTierSync(userId: string, tier: UserTier): boolean {
   try {
     const database = getDb()
     const result = database.prepare('UPDATE users SET tier = ? WHERE id = ?').run(tier, userId)
@@ -210,6 +211,11 @@ export function updateUserTier(userId: string, tier: UserTier): boolean {
   }
 }
 
+export async function updateUserTier(userId: string, tier: UserTier): Promise<boolean> {
+  if (usePostgres) return pg.pgUpdateUserTier(userId, tier)
+  return Promise.resolve(updateUserTierSync(userId, tier))
+}
+
 /**
  * Obtiene el número de consultas del mes actual para un usuario
  * Resetea el contador si es un nuevo mes
@@ -217,7 +223,7 @@ export function updateUserTier(userId: string, tier: UserTier): boolean {
 function getQueriesThisMonth(userId: string): number {
   try {
     const database = getDb()
-    const user = getUser(userId)
+    const user = getUserSync(userId)
     if (!user) return 0
     
     const now = new Date()
@@ -247,9 +253,9 @@ function getQueriesThisMonth(userId: string): number {
 }
 
 /**
- * Registra una consulta realizada por un usuario
+ * Registra una consulta realizada por un usuario. Async cuando DATABASE_URL (Postgres).
  */
-export function logQuery(params: {
+function logQuerySync(params: {
   userId: string
   query: string
   responseTime: number
@@ -263,10 +269,9 @@ export function logQuery(params: {
     const nowDate = new Date(now)
     
     // Obtener usuario actual
-    const user = getUser(params.userId)
+    const user = getUserSync(params.userId)
     if (!user) {
-      // Crear usuario si no existe
-      createUser({ id: params.userId })
+      createUserSync({ id: params.userId })
     }
     
     // Resetear contador mensual si es un nuevo mes
@@ -318,22 +323,31 @@ export function logQuery(params: {
   }
 }
 
+export async function logQuery(params: {
+  userId: string
+  query: string
+  responseTime: number
+  success: boolean
+  legalArea?: string
+  complexity?: 'simple' | 'medium' | 'complex'
+}): Promise<number> {
+  if (usePostgres) return pg.pgLogQuery(params)
+  return Promise.resolve(logQuerySync(params))
+}
+
 /**
- * Obtiene estadísticas de uso de un usuario
+ * Obtiene estadísticas de uso de un usuario. Async cuando DATABASE_URL (Postgres).
  */
-export function getUserStats(userId: string): {
+function getUserStatsSync(userId: string): {
   queriesThisMonth: number
   totalQueries: number
   tier: UserTier
   lastQueryAt?: Date
 } | null {
   try {
-    const user = getUser(userId)
+    const user = getUserSync(userId)
     if (!user) return null
-    
-    // Asegurar que queriesThisMonth está actualizado (resetear si es nuevo mes)
     const queriesThisMonth = getQueriesThisMonth(userId)
-    
     return {
       queriesThisMonth,
       totalQueries: user.totalQueries,
@@ -346,10 +360,30 @@ export function getUserStats(userId: string): {
   }
 }
 
+export async function getUserStats(userId: string): Promise<{
+  queriesThisMonth: number
+  totalQueries: number
+  tier: UserTier
+  lastQueryAt?: Date
+} | null> {
+  if (usePostgres) {
+    const user = await pg.pgGetUser(userId)
+    if (!user) return null
+    const queriesThisMonth = await pg.pgGetQueriesThisMonth(userId)
+    return {
+      queriesThisMonth,
+      totalQueries: user.total_queries,
+      tier: user.tier,
+      lastQueryAt: user.last_query_at != null ? new Date(user.last_query_at) : undefined
+    }
+  }
+  return Promise.resolve(getUserStatsSync(userId))
+}
+
 /**
- * Obtiene logs de consultas (útil para analytics)
+ * Obtiene logs de consultas (útil para analytics). Async cuando DATABASE_URL (Postgres).
  */
-export function getQueryLogs(params: {
+function getQueryLogsSync(params: {
   userId?: string
   startDate?: Date
   endDate?: Date
@@ -403,10 +437,20 @@ export function getQueryLogs(params: {
   }
 }
 
+export async function getQueryLogs(params: {
+  userId?: string
+  startDate?: Date
+  endDate?: Date
+  limit?: number
+}): Promise<Array<{ userId: string; query: string; timestamp: Date; responseTime: number; success: boolean }>> {
+  if (usePostgres) return pg.pgGetQueryLogs(params)
+  return Promise.resolve(getQueryLogsSync(params))
+}
+
 /**
- * Obtiene métricas agregadas del sistema
+ * Obtiene métricas agregadas del sistema. Async cuando DATABASE_URL (Postgres).
  */
-export function getSystemMetrics(): {
+function getSystemMetricsSync(): {
   totalUsers: number
   totalQueries: number
   queriesToday: number
@@ -474,23 +518,33 @@ export function getSystemMetrics(): {
   }
 }
 
+export async function getSystemMetrics(): Promise<{
+  totalUsers: number
+  totalQueries: number
+  queriesToday: number
+  averageResponseTime: number
+  successRate: number
+  tierDistribution: Record<UserTier, number>
+}> {
+  if (usePostgres) return pg.pgGetSystemMetrics()
+  return Promise.resolve(getSystemMetricsSync())
+}
+
 /**
- * Consultas por día (últimos N días) para gráficos
+ * Consultas por día (últimos N días) para gráficos. Async cuando DATABASE_URL (Postgres).
  */
-export function getQueriesPerDay(lastDays: number): Array<{ date: string; count: number }> {
+function getQueriesPerDaySync(lastDays: number): Array<{ date: string; count: number }> {
   try {
     const database = getDb()
     const start = new Date()
     start.setDate(start.getDate() - lastDays)
     start.setHours(0, 0, 0, 0)
     const startTs = start.getTime()
-
     const rows = database.prepare(`
       SELECT date(timestamp/1000, 'unixepoch', 'localtime') as day, COUNT(*) as count
       FROM query_logs WHERE timestamp >= ?
       GROUP BY day ORDER BY day ASC
     `).all(startTs) as Array<{ day: string; count: number }>
-
     return rows.map(r => ({ date: r.day, count: r.count }))
   } catch (error) {
     console.error('[auth] Error getting queries per day:', error)
@@ -498,83 +552,75 @@ export function getQueriesPerDay(lastDays: number): Array<{ date: string; count:
   }
 }
 
-/**
- * Autenticación básica por API key (para desarrollo)
- * En producción, usar JWT o OAuth
- */
-export function authenticateByApiKey(apiKey: string): User | null {
-  // En producción, esto debería verificar contra una base de datos
-  // Por ahora, asumimos que el API key es el userId
-  return getUser(apiKey) || null
+export async function getQueriesPerDay(lastDays: number): Promise<Array<{ date: string; count: number }>> {
+  if (usePostgres) return pg.pgGetQueriesPerDay(lastDays)
+  return Promise.resolve(getQueriesPerDaySync(lastDays))
 }
 
 /**
- * Registra métricas de calidad para una consulta
+ * Autenticación básica por API key (para desarrollo). Async cuando DATABASE_URL (Postgres).
  */
-export function logQualityMetrics(params: {
+export async function authenticateByApiKey(apiKey: string): Promise<User | null> {
+  const user = await getUser(apiKey)
+  return user ?? null
+}
+
+/**
+ * Registra métricas de calidad para una consulta. Async cuando DATABASE_URL (Postgres).
+ */
+export async function logQualityMetrics(params: {
   queryLogId: number
   citationPrecision?: number
   totalCitations?: number
   validCitations?: number
   responseLength?: number
   chunksRetrieved?: number
-}): void {
+}): Promise<void> {
+  if (usePostgres) {
+    await pg.pgLogQualityMetrics(params)
+    return
+  }
   try {
     const database = getDb()
     const now = Date.now()
-    
     database.prepare(`
-      INSERT INTO quality_metrics (
-        query_log_id, citation_precision, total_citations, valid_citations,
-        response_length, chunks_retrieved, timestamp
-      )
+      INSERT INTO quality_metrics (query_log_id, citation_precision, total_citations, valid_citations, response_length, chunks_retrieved, timestamp)
       VALUES (?, ?, ?, ?, ?, ?, ?)
-    `).run(
-      params.queryLogId,
-      params.citationPrecision ?? null,
-      params.totalCitations ?? null,
-      params.validCitations ?? null,
-      params.responseLength ?? null,
-      params.chunksRetrieved ?? null,
-      now
-    )
+    `).run(params.queryLogId, params.citationPrecision ?? null, params.totalCitations ?? null, params.validCitations ?? null, params.responseLength ?? null, params.chunksRetrieved ?? null, now)
   } catch (error) {
     console.error('[auth] Error logging quality metrics:', error)
   }
 }
 
 /**
- * Registra feedback de un usuario
+ * Registra feedback de un usuario. Async cuando DATABASE_URL (Postgres).
  */
-export function logUserFeedback(params: {
+export async function logUserFeedback(params: {
   queryLogId?: number
   userId?: string
   rating: number
   comment?: string
-}): void {
+}): Promise<void> {
+  if (usePostgres) {
+    await pg.pgLogUserFeedback(params)
+    return
+  }
   try {
     const database = getDb()
     const now = Date.now()
-    
     database.prepare(`
       INSERT INTO user_feedback (query_log_id, user_id, rating, comment, timestamp)
       VALUES (?, ?, ?, ?, ?)
-    `).run(
-      params.queryLogId ?? null,
-      params.userId ?? null,
-      params.rating,
-      params.comment ?? null,
-      now
-    )
+    `).run(params.queryLogId ?? null, params.userId ?? null, params.rating, params.comment ?? null, now)
   } catch (error) {
     console.error('[auth] Error logging user feedback:', error)
   }
 }
 
 /**
- * Obtiene métricas de calidad agregadas
+ * Obtiene métricas de calidad agregadas. Async cuando DATABASE_URL (Postgres).
  */
-export function getQualityMetrics(params?: {
+function getQualityMetricsSync(params?: {
   startDate?: Date
   endDate?: Date
   legalArea?: string
@@ -688,13 +734,28 @@ export function getQualityMetrics(params?: {
   }
 }
 
-/**
- * Obtiene métricas de satisfacción (feedback)
- */
-export function getSatisfactionMetrics(params?: {
+export async function getQualityMetrics(params?: {
   startDate?: Date
   endDate?: Date
-}): {
+  legalArea?: string
+}): Promise<{
+  averageCitationPrecision: number
+  totalQueriesWithMetrics: number
+  averageCitationsPerQuery: number
+  averageValidCitations: number
+  averageResponseLength: number
+  averageChunksRetrieved: number
+  precisionByArea: Record<string, { precision: number; count: number }>
+  precisionByComplexity: Record<string, { precision: number; count: number }>
+}> {
+  if (usePostgres) return pg.pgGetQualityMetrics(params)
+  return Promise.resolve(getQualityMetricsSync(params))
+}
+
+/**
+ * Obtiene métricas de satisfacción (feedback). Async cuando DATABASE_URL (Postgres).
+ */
+function getSatisfactionMetricsSync(params?: { startDate?: Date; endDate?: Date }): {
   averageRating: number
   totalFeedback: number
   ratingDistribution: Record<number, number>
@@ -754,12 +815,22 @@ export function getSatisfactionMetrics(params?: {
   }
 }
 
+export async function getSatisfactionMetrics(params?: { startDate?: Date; endDate?: Date }): Promise<{
+  averageRating: number
+  totalFeedback: number
+  ratingDistribution: Record<number, number>
+  feedbackWithComments: number
+}> {
+  if (usePostgres) return pg.pgGetSatisfactionMetrics(params)
+  return Promise.resolve(getSatisfactionMetricsSync(params))
+}
+
 /**
- * Sistema básico de A/B testing
+ * Sistema básico de A/B testing. Sync (sin DB en Postgres para asignación).
  */
 export function assignABTestVariant(testName: string, userId: string): 'A' | 'B' {
+  if (usePostgres) return pg.pgAssignABTestVariant(testName, userId)
   try {
-    // Usar hash del userId para asignación consistente
     const hash = userId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
     return hash % 2 === 0 ? 'A' : 'B'
   } catch (error) {
@@ -768,75 +839,51 @@ export function assignABTestVariant(testName: string, userId: string): 'A' | 'B'
   }
 }
 
-export function logABTest(params: {
+export async function logABTest(params: {
   testName: string
   variant: 'A' | 'B'
   userId?: string
   queryLogId?: number
-}): void {
+}): Promise<void> {
+  if (usePostgres) {
+    await pg.pgLogABTest(params)
+    return
+  }
   try {
     const database = getDb()
     const now = Date.now()
-    
     database.prepare(`
       INSERT INTO ab_tests (test_name, variant, user_id, query_log_id, timestamp)
       VALUES (?, ?, ?, ?, ?)
-    `).run(
-      params.testName,
-      params.variant,
-      params.userId ?? null,
-      params.queryLogId ?? null,
-      now
-    )
+    `).run(params.testName, params.variant, params.userId ?? null, params.queryLogId ?? null, now)
   } catch (error) {
     console.error('[auth] Error logging AB test:', error)
   }
 }
 
-export function getABTestResults(testName: string): {
+export async function getABTestResults(testName: string): Promise<{
   variantA: { count: number; avgResponseTime: number; avgSuccess: number }
   variantB: { count: number; avgResponseTime: number; avgSuccess: number }
-} {
+}> {
+  if (usePostgres) return pg.pgGetABTestResults(testName)
   try {
     const database = getDb()
-    
     const variantARow = database.prepare(`
-      SELECT 
-        COUNT(*) as count,
-        AVG(ql.response_time) as avg_response_time,
-        AVG(ql.success) as avg_success
-      FROM ab_tests ab
-      JOIN query_logs ql ON ab.query_log_id = ql.id
+      SELECT COUNT(*) as count, AVG(ql.response_time) as avg_response_time, AVG(ql.success) as avg_success
+      FROM ab_tests ab JOIN query_logs ql ON ab.query_log_id = ql.id
       WHERE ab.test_name = ? AND ab.variant = 'A'
     `).get(testName) as any
-    
     const variantBRow = database.prepare(`
-      SELECT 
-        COUNT(*) as count,
-        AVG(ql.response_time) as avg_response_time,
-        AVG(ql.success) as avg_success
-      FROM ab_tests ab
-      JOIN query_logs ql ON ab.query_log_id = ql.id
+      SELECT COUNT(*) as count, AVG(ql.response_time) as avg_response_time, AVG(ql.success) as avg_success
+      FROM ab_tests ab JOIN query_logs ql ON ab.query_log_id = ql.id
       WHERE ab.test_name = ? AND ab.variant = 'B'
     `).get(testName) as any
-    
-    return {
-      variantA: {
-        count: variantARow?.count || 0,
-        avgResponseTime: variantARow?.avg_response_time || 0,
-        avgSuccess: variantARow?.avg_success || 0
-      },
-      variantB: {
-        count: variantBRow?.count || 0,
-        avgResponseTime: variantBRow?.avg_response_time || 0,
-        avgSuccess: variantBRow?.avg_success || 0
-      }
-    }
+    return Promise.resolve({
+      variantA: { count: variantARow?.count || 0, avgResponseTime: variantARow?.avg_response_time || 0, avgSuccess: variantARow?.avg_success || 0 },
+      variantB: { count: variantBRow?.count || 0, avgResponseTime: variantBRow?.avg_response_time || 0, avgSuccess: variantBRow?.avg_success || 0 }
+    })
   } catch (error) {
     console.error('[auth] Error getting AB test results:', error)
-    return {
-      variantA: { count: 0, avgResponseTime: 0, avgSuccess: 0 },
-      variantB: { count: 0, avgResponseTime: 0, avgSuccess: 0 }
-    }
+    return { variantA: { count: 0, avgResponseTime: 0, avgSuccess: 0 }, variantB: { count: 0, avgResponseTime: 0, avgSuccess: 0 } }
   }
 }

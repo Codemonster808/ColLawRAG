@@ -16,6 +16,7 @@ type VigenciaNorma = { normaId: string; title: string; estado: string; derogadaP
 type ProcedureItem = { id: string; nombre: string; tipo?: string; resumen?: string }
 
 type Props = {
+  query?: string
   answer: string
   citations: Citation[]
   requestId?: string
@@ -25,6 +26,7 @@ type Props = {
 }
 
 export default function ResultsDisplay({
+  query = '',
   answer,
   citations,
   requestId,
@@ -41,6 +43,42 @@ export default function ResultsDisplay({
         body: JSON.stringify({ requestId, vote })
       })
     } catch {}
+  }
+
+  async function exportToPDF() {
+    if (!answer) return
+    
+    try {
+      const response = await fetch('/api/export-pdf', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          query,
+          answer,
+          citations,
+          calculations,
+          vigenciaValidation,
+          procedures,
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Error al generar PDF')
+      }
+
+      const blob = await response.blob()
+      const url = window.URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = `consulta-legal-${Date.now()}.pdf`
+      document.body.appendChild(a)
+      a.click()
+      document.body.removeChild(a)
+      window.URL.revokeObjectURL(url)
+    } catch (error) {
+      console.error('Error exportando PDF:', error)
+      alert('Error al exportar PDF. Por favor, intenta nuevamente.')
+    }
   }
 
   return (
@@ -76,11 +114,22 @@ export default function ResultsDisplay({
           </ul>
         </div>
       )}
-      {requestId && (
-        <div className="mt-4 flex items-center gap-2 text-sm text-gray-600">
-          <span>¿Útil?</span>
-          <button onClick={() => sendFeedback('up')} className="rounded-md border border-gray-300 px-3 py-1.5 hover:bg-gray-50">👍</button>
-          <button onClick={() => sendFeedback('down')} className="rounded-md border border-gray-300 px-3 py-1.5 hover:bg-gray-50">👎</button>
+      {answer && (
+        <div className="mt-4 flex items-center justify-between gap-4">
+          <button
+            onClick={exportToPDF}
+            className="flex items-center gap-2 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+          >
+            <span>📄</span>
+            <span>Exportar PDF</span>
+          </button>
+          {requestId && (
+            <div className="flex items-center gap-2 text-sm text-gray-600">
+              <span>¿Útil?</span>
+              <button onClick={() => sendFeedback('up')} className="rounded-md border border-gray-300 px-3 py-1.5 hover:bg-gray-50">👍</button>
+              <button onClick={() => sendFeedback('down')} className="rounded-md border border-gray-300 px-3 py-1.5 hover:bg-gray-50">👎</button>
+            </div>
+          )}
         </div>
       )}
     </section>

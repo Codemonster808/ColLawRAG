@@ -12,7 +12,7 @@
  */
 
 import { describe, test, expect, beforeAll } from 'vitest';
-import { POST } from '@/app/api/query/route';
+import { POST } from '@/app/api/rag/route';
 import { NextRequest } from 'next/server';
 
 describe('Performance Tests', () => {
@@ -24,8 +24,9 @@ describe('Performance Tests', () => {
    * Helper para crear request simulado
    */
   function createRequest(query: string, options: any = {}) {
-    return new NextRequest('http://localhost:3000/api/query', {
+    return new NextRequest('http://localhost:3000/api/rag', {
       method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         query,
         ...options,

@@ -1,0 +1,866 @@
+{
+  "fecha": "2026-02-17",
+  "api_url": "http://localhost:3001",
+  "modelo_juez": "deepseek/deepseek-v3.2",
+  "resumen": {
+    "total_casos": 20,
+    "evaluados": 20,
+    "errores": 0,
+    "score_promedio": "2.87",
+    "accuracy_porcentaje": "28.7%"
+  },
+  "veredictos": {
+    "INCORRECTO": 8,
+    "DEFICIENTE": 9,
+    "BUENO": 1,
+    "ACEPTABLE": 2
+  },
+  "promedio_criterios": {
+    "precision_normativa": "2.50",
+    "articulos_correctos": "1.45",
+    "interpretacion_valida": "2.85",
+    "completitud": "3.35",
+    "ausencia_alucinaciones": "4.20"
+  },
+  "por_area": {
+    "laboral": {
+      "promedio": "1.80",
+      "casos": 6,
+      "scores": [
+        0.8,
+        3.2,
+        3.6,
+        1.6,
+        1.6,
+        0
+      ]
+    },
+    "civil": {
+      "promedio": "4.75",
+      "casos": 4,
+      "scores": [
+        2.2,
+        2.4,
+        8,
+        6.4
+      ]
+    },
+    "penal": {
+      "promedio": "1.50",
+      "casos": 2,
+      "scores": [
+        2,
+        1
+      ]
+    },
+    "constitucional": {
+      "promedio": "3.60",
+      "casos": 3,
+      "scores": [
+        3.4,
+        5.2,
+        2.2
+      ]
+    },
+    "administrativo": {
+      "promedio": "2.93",
+      "casos": 3,
+      "scores": [
+        0,
+        6,
+        2.8
+      ]
+    },
+    "tributario": {
+      "promedio": "2.50",
+      "casos": 2,
+      "scores": [
+        3.2,
+        1.8
+      ]
+    }
+  },
+  "mejores_casos": [
+    {
+      "id": "CIV-003",
+      "area": "civil",
+      "score": 8
+    },
+    {
+      "id": "CIV-004",
+      "area": "civil",
+      "score": 6.4
+    },
+    {
+      "id": "ADM-002",
+      "area": "administrativo",
+      "score": 6
+    }
+  ],
+  "peores_casos": [
+    {
+      "id": "ADM-001",
+      "area": "administrativo",
+      "score": 0
+    },
+    {
+      "id": "LAB-006",
+      "area": "laboral",
+      "score": 0
+    },
+    {
+      "id": "LAB-001",
+      "area": "laboral",
+      "score": 0.8
+    }
+  ],
+  "alucinaciones_detectadas": [
+    {
+      "id": "LAB-001",
+      "alucinaciones": [
+        "Artículo 190 del Código Sustantivo del Trabajo (CST) - contenido incorrecto sobre vacaciones"
+      ]
+    },
+    {
+      "id": "LAB-003",
+      "alucinaciones": [
+        "Artículo 408 del CST (fuera de contexto)",
+        "Artículo 410 del CST (fuera de contexto)",
+        "Artículo 61 del CST (fuera de contexto)",
+        "Artículo 1110 del Código de Comercio",
+        "Artículo 1613 del Código Civil",
+        "Artículo 1614 del Código Civil",
+        "Artículo 1090 del Código de Comercio",
+        "Artículo 1122 del Código de Comercio"
+      ]
+    },
+    {
+      "id": "LAB-004",
+      "alucinaciones": [
+        "Artículo 124 de la Sentencia C-355/2006",
+        "Sentencia T-760/2008 (aplicada incorrectamente al tema)"
+      ]
+    },
+    {
+      "id": "LAB-005",
+      "alucinaciones": [
+        "Artículo 64 del Código Sustantivo del Trabajo (CST)",
+        "Artículo 155 CPA",
+        "Ley 100 de 1993"
+      ]
+    },
+    {
+      "id": "LAB-006",
+      "alucinaciones": [
+        "Artículo 254 de la Ley 1437 de 2011",
+        "Artículo 48 de la Ley 1437 de 2011",
+        "Código Penal (Ley 599 de 2000)",
+        "Código de Procedimiento Penal (Ley 906 de 2004)"
+      ]
+    },
+    {
+      "id": "CIV-001",
+      "alucinaciones": [
+        "Artículo 504",
+        "Artículo 522",
+        "Artículo 36",
+        "Artículo 375"
+      ]
+    },
+    {
+      "id": "CIV-002",
+      "alucinaciones": [
+        "Artículo 468 del Código General del Proceso (Ley 1564 de 2012)",
+        "Artículo 604 del Código General del Proceso (Ley 1564 de 2012)"
+      ]
+    },
+    {
+      "id": "CIV-003",
+      "alucinaciones": [
+        "Decreto 1382 de 2000 (no fue solicitado y puede confundir)",
+        "plazo de 20 días adicionales para segunda instancia (no es el foco principal de la pregunta)",
+        "plazo de ejecución de 48 horas (información adicional no solicitada)"
+      ]
+    },
+    {
+      "id": "CIV-004",
+      "alucinaciones": [
+        "Artículo 1006 del Código Civil"
+      ]
+    },
+    {
+      "id": "PEN-002",
+      "alucinaciones": [
+        "Artículo 310 del Código de Procedimiento Penal (contexto incorrecto)",
+        "Acuerdo 379 de 2008 (fuera de contexto)",
+        "Sentencia T-760/2008 (fuera de contexto)",
+        "Ley 1751 de 2015 (fuera de contexto)"
+      ]
+    },
+    {
+      "id": "CON-002",
+      "alucinaciones": [
+        "Artículo 1360 del Código Civil (albaceazgo)",
+        "Artículo 1361 del Código Civil (albaceazgo)",
+        "Artículo 829 del Código Civil (usufructo)",
+        "Artículo 48 de la Ley 1437 de 2011 (procedimientos administrativos)",
+        "Artículo 46 del CST (contratos laborales)"
+      ]
+    },
+    {
+      "id": "CON-003",
+      "alucinaciones": [
+        "Artículo 124",
+        "Artículo 48",
+        "Sentencia T-760/2008 (fuente incorrecta para el tema)"
+      ]
+    },
+    {
+      "id": "ADM-001",
+      "alucinaciones": [
+        "Artículo 189 de la Ley 1437 de 2011",
+        "Artículo 136 de la Ley 1564 de 2012",
+        "Artículo 186 de la Ley 600 de 2000"
+      ]
+    },
+    {
+      "id": "ADM-002",
+      "alucinaciones": [
+        "Art. 32 de la Ley 1437/2011 (extensión a privados con sanciones)",
+        "Art. 67 del Código Civil para cálculo de plazos del derecho de petición",
+        "Sentencia T-760/2008 como fuente principal"
+      ]
+    },
+    {
+      "id": "ADM-003",
+      "alucinaciones": [
+        "Artículo 142 de la Ley 1437 de 2011"
+      ]
+    },
+    {
+      "id": "TRI-001",
+      "alucinaciones": [
+        "Artículo 408 del Estatuto Tributario (Decreto 624 de 1989)",
+        "Artículo 20-3 del Estatuto Tributario"
+      ]
+    },
+    {
+      "id": "TRI-002",
+      "alucinaciones": [
+        "Artículo 915 ET (régimen SIMPLE)",
+        "Artículo 477 ET (devolución IVA)",
+        "Artículo 319 Código Penal (contrabando)"
+      ]
+    }
+  ],
+  "resultados_detallados": [
+    {
+      "id": "LAB-001",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuántos días de vacaciones tiene derecho un trabajador con un año de trabajo?",
+      "respuesta_referencia": "Según el artículo 186 del Código Sustantivo del Trabajo (CST), el trabajador tiene derecho a 15 días hábiles consecutivos de vacaciones remuneradas por cada año de servicio. Este derecho es irrenunciable según el artículo 189 del CST.",
+      "respuesta_rag": "**HECHOS RELEVANTES:**  \nUn trabajador ha cumplido un año de servicio continuo en una empresa y desea conocer cuántos días de vacaciones le corresponden por este período de trabajo.  \n\n**NORMAS APLICABLES:**  \n- **Artículo 190 del Código Sustantivo del Trabajo (CST)** [1]:  \n  1. Establece que el trabajador tiene derecho a un mínimo de **seis (6) días hábiles continuos de vacaciones anuales**, no acumulables.  \n  2. Permite la acumulación de días restantes de vacaciones hasta por dos años, salvo para trabajadores técnicos, especializados, de confianza, de manejo o extranjeros en condiciones específicas (hasta cuatro años).  \n  4. Si solo goza de 6 días en un año, se presume que acumula los días restantes para períodos posteriores.  \n\n**ANÁLISIS JURÍDICO:**  \nEl Artículo 190 CST [1] es claro al señalar que, **tras un año de trabajo**, el trabajador tiene derecho a **mínimo 6 días hábiles de vacaciones continuas**. Este derecho es irrenunciable y no requiere acuerdo entre las partes. La norma no especifica un máximo general, pero permite que, mediante convenio, se acumulen días adicionales (hasta 2 o 4 años según el tipo de trabajador). La presunción del numeral 4 indica que, si solo se disfrutan 6 días, los excedentes se acumulan automáticamente.  \n\n**CONCLUSIÓN:**  \nEl trabajador con un año de servicio tiene derecho a **6 días hábiles de vacaciones remuneradas**, conforme al Artículo 190 CST [1]. Este es el mínimo legal, pero podrían aplicarse días adicionales si existen pactos de acumulación o condiciones especiales del trabajador.  \n\n**RECOMENDACIÓN:**  \n1. **Verificar el contrato o convenios colectivos**: Podrían establecer vacaciones superiores a las mínimas legales.  \n2. **Solicitar por escrito**: El trabajador debe pedir el disfrute de vacaciones con al menos 15 días de antelación (práctica usual, aunque el CST no fija plazo).  \n3. **Documentar**: Si el empleador niega las vacaciones, acudir al Ministerio del Trabajo o a la jurisdicción laboral.  \n4. **Plazo para reclamar**: La prescripción de este derecho es de 3 años desde la terminación del contrato.  \n\n⚠️ *Nota*: Las fuentes disponibles no detallan el cálculo exacto de días adicionales por antigüedad, por lo que se recomienda consultar convenios sectoriales o asesoría legal para casos específicos.",
+      "evaluacion": {
+        "precision_normativa": 2,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 2,
+        "score_total": 0.8,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 186 CST",
+          "Art. 189 CST"
+        ],
+        "alucinaciones": [
+          "Artículo 190 del Código Sustantivo del Trabajo (CST) - contenido incorrecto sobre vacaciones"
+        ],
+        "comentario": "La respuesta del RAG es completamente incorrecta: cita el artículo 190 CST (que no existe para vacaciones) en lugar del 186, y establece 6 días en lugar de 15 días hábiles por año de servicio."
+      },
+      "error": null,
+      "timestamp": "2026-02-17T04:07:22.656Z"
+    },
+    {
+      "id": "LAB-002",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es el salario mínimo legal mensual vigente en Colombia para 2024?",
+      "respuesta_referencia": "Para el año 2024, el salario mínimo legal mensual vigente (SMLMV) en Colombia fue fijado en $1.300.000 mediante el Decreto 2613 de 2023, representando un incremento del 12% respecto al año anterior. Adicionalmente, el auxilio de transporte quedó en $162.000 mensuales.",
+      "respuesta_rag": "**HECHOS RELEVANTES:**  \nEl consultante pregunta por el salario mínimo legal mensual vigente en Colombia para el año 2024. Según la información disponible, el salario mínimo es una variable que se fija anualmente por decreto y no está regulado directamente en el Código Sustantivo del Trabajo.  \n\n**NORMAS APLICABLES:**  \n[1] Fuente [1] indica que el salario mínimo para 2024 es de aproximadamente $1.300.000, aunque no se especifica el decreto exacto que lo establece.  \n[2] Fuente [2] confirma que el salario mínimo se fija anualmente por decreto y no está contenido en el Código Sustantivo del Trabajo.  \n[3] Fuente [3] y [4] (Artículo 319 del Código Penal) hacen referencia a \"50 salarios mínimos legales mensuales\" como unidad de medida, pero no especifican el valor exacto del salario mínimo para 2024.  \n\n**ANÁLISIS JURÍDICO:**  \nAunque las fuentes disponibles no incluyen el decreto exacto que fija el salario mínimo para 2024, la Fuente [1] proporciona un valor aproximado de $1.300.000. Dado que el salario mínimo se ajusta anualmente mediante decreto gubernamental, es necesario consultar el decreto vigente para el año en cuestión. Las referencias en el Código Penal (Artículo 319) utilizan el salario mínimo como unidad de medida, pero no definen su valor actual.  \n\n**CONCLUSIÓN:**  \nSegún la información disponible, el salario mínimo legal mensual vigente en Colombia para 2024 es aproximadamente **$1.300.000**, aunque se recomienda verificar el decreto oficial emitido por el Gobierno Nacional para confirmar el valor exacto.  \n\n**RECOMENDACIÓN:**  \n1. Consultar el decreto anual emitido por el Gobierno Nacional que fija el salario mínimo para 2024 (generalmente publicado en diciembre del año anterior).  \n2. Verificar en el portal del Ministerio del Trabajo o la página oficial del Gobierno de Colombia para obtener el valor oficial actualizado.  \n3. En caso de dudas sobre su aplicación en contratos laborales o cálculos de prestaciones, se recomienda asesoría con un abogado laboralista.  \n\n⚠️ **Nota:** Si el consultante requiere el valor exacto con fines legales (liquidaciones, demandas, etc.), debe obtenerse directamente del decreto vigente, ya que las fuentes proporcionadas no lo especifican con precisión.\n\n⚠️ **Vigencia:** La norma \"Código Penal (Ley 599 de 2000)\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Código Penal (Ley 599 de 2000)\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Código Penal (Ley 599 de 2000)\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Código Penal (Ley 599 de 2000)\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Código Penal (Ley 599 de 2000)\" tiene artículos derogados o modificados; verifique vigencia específica.",
+      "evaluacion": {
+        "precision_normativa": 2,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 4,
+        "completitud": 3,
+        "ausencia_alucinaciones": 7,
+        "score_total": 3.2,
+        "veredicto": "DEFICIENTE",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Decreto 2613 de 2023",
+          "Art. 145 CST"
+        ],
+        "alucinaciones": [],
+        "comentario": "La respuesta RAG menciona el valor aproximado pero falla en citar las normas específicas requeridas (Decreto 2613/2023 y Art. 145 CST) y omite el auxilio de transporte, siendo incompleta y poco precisa jurídicamente."
+      },
+      "error": null,
+      "timestamp": "2026-02-17T04:08:12.971Z"
+    },
+    {
+      "id": "LAB-003",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuándo procede el despido sin justa causa y cuál es la indemnización?",
+      "respuesta_referencia": "Según el artículo 64 del CST, el empleador puede terminar el contrato sin justa causa pagando indemnización. Para contratos a término indefinido con trabajadores que ganen menos de 10 SMLMV: 30 días por el primer año y 20 días adicionales por cada año posterior. Para trabajadores con más de 10 SMLMV: 20 días por el primer año y 15 adicionales por cada año. El artículo 26 del Decreto 2351/65 modificó esta figura.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Cuándo procede el despido sin justa causa**\n\n\n\n**HECHOS RELEVANTES:**  \nLa consulta se refiere a las condiciones bajo las cuales procede el despido sin justa causa en el marco del derecho laboral colombiano. Se busca determinar en qué circunstancias un empleador puede terminar unilateralmente el contrato de trabajo sin invocar una justa causa y cuáles son las consecuencias legales de dicha acción.\n\n**NORMAS APLICABLES:**  \n1. **Artículo 64 del Código Sustantivo del Trabajo (CST) [2]:** Establece que, en caso de terminación unilateral del contrato sin justa causa por parte del empleador, este debe indemnizar al trabajador.  \n2. **Artículo 408 del CST [3]:** Señala que si un trabajador con fuero sindical es despedido sin justa causa, se ordenará su reintegro y el pago de salarios dejados de percibir.  \n3. **Artículo 410 del CST [4]:** Enumera las justas causas para el despido, incluyendo la liquidación o clausura definitiva de la empresa y las causales de los artículos 62 y 63 del CST.  \n4. **Artículo 61 del CST [8]:** Menciona situaciones como la suspensión de actividades por más de 120 días o sentencia ejecutoriada como causales de terminación del contrato.  \n\n**ANÁLISIS JURÍDICO:**  \nEl despido sin justa causa ocurre cuando el empleador termina el contrato de trabajo sin invocar ninguna de las causales previstas en la ley (Art. 410 CST [4]). En estos casos, el empleador está obligado a pagar una indemnización al trabajador (Art. 64 CST [2]). Si el trabajador tiene fuero sindical, el despido injustificado puede llevar a su reintegro y al pago de salarios caídos (Art. 408 CST [3]).  \n\nLas justas causas para el despido están limitadas a situaciones específicas, como la liquidación de la empresa, suspensiones prolongadas de actividades (más de 120 días), o causales relacionadas con el incumplimiento grave del trabajador (Art. 410 CST [4] y Art. 61 CST [8]). Si el empleador no puede demostrar una de estas causales, el despido se considera injustificado.  \n\n**CONCLUSIÓN:**  \nEl despido sin justa causa procede cuando el empleador termina el contrato de trabajo sin invocar ninguna de las causales legales previstas en el CST. En estos casos, el trabajador tiene derecho a una indemnización y, en situaciones de fuero sindical, puede exigir su reintegro.  \n\n**RECOMENDACIÓN:**  \n1. **Para el trabajador:**  \n   - Si considera que fue despedido sin justa causa, debe presentar una demanda ante la jurisdicción laboral dentro de los 3 años siguientes a la terminación del contrato (plazo de prescripción).  \n   - Reunir pruebas del despido (carta de terminación, comunicaciones, testigos).  \n2. **Para el empleador:**  \n   - Asegurarse de que la terminación del contrato se ajuste a las causales legales (Art. 410 CST [4]).  \n   - En caso de despido sin justa causa, calcular y pagar la indemnización correspondiente (Art. 64 CST [2]).  \n3. **Consultar un abogado laboralista** para evaluar la procedencia del despido y evitar sanciones o demandas.  \n\n⚠️ **Nota:** Si el caso involucra fuero sindical o maternidad, se recomienda asesoría especializada debido a las protecciones adicionales que aplican.\n\n⚠️ **Vigencia:** La norma \"Ley 100 de 1993 — Sistema General de Seguridad Social\" tiene artículos derogados o modificados; verifique vigencia específica.\n\n\n\n---\n\n\n\n**2. y cuál es la indemnización?**\n\n\n\n**HECHOS RELEVANTES:**  \nLa consulta se refiere a la determinación de la indemnización aplicable en un contexto no especificado, pero que parece relacionarse con un siniestro o incumplimiento contractual, dado que se citan normas sobre seguros y responsabilidad civil. No se proporcionan detalles concretos sobre el tipo de daño, si es contractual o extracontractual, ni sobre el acuerdo entre las partes.\n\n**NORMAS APLICABLES:**  \n1. **Artículo 1110 del Código de Comercio [1]:** Establece que la indemnización puede pagarse en dinero o mediante reposición/reparación, a elección del asegurador.  \n2. **Artículo 1613 del Código Civil [2]:** Define que la indemnización cubre daño emergente y lucro cesante, salvo que la ley limite expresamente al daño emergente.  \n3. **Artículo 1614 del Código Civil [2]:** Precisa los conceptos de daño emergente (pérdida actual) y lucro cesante (ganancia no obtenida).  \n4. **Artículo 1090 del Código de Comercio [3]:** Permite acordar el pago por valor de reposición/reemplazo del bien asegurado, sujeto al límite de la suma asegurada.  \n5. **Artículo 1122 del Código de Comercio [5]:** Indica que la suma asegurada puede incluir lucro cesante si así se pactó, y fija límites para daño emergente en transporte terrestre.  \n\n**ANÁLISIS JURÍDICO:**  \n- La indemnización dependerá del tipo de responsabilidad (contractual o extracontractual) y del acuerdo entre las partes. En seguros, el asegurador puede optar por pagar en dinero o reparar el daño (Art. 1110 [1]).  \n- Si hay incumplimiento contractual, se aplican los Arts. 1613 y 1614 [2], cubriendo tanto el daño emergente (pérdidas directas) como el lucro cesante (ganancias frustradas), a menos que la ley lo restrinja.  \n- En seguros, el valor de la indemnización puede pactarse como reposición (Art. 1090 [3]) e incluir lucro cesante si así se acordó (Art. 1122 [5]).  \n\n**CONCLUSIÓN:**  \nLa indemnización varía según el contexto:  \n1. **En seguros:** Puede ser en dinero o reposición (Art. 1110 [1]), con límites en la suma asegurada (Art. 1122 [5]).  \n2. **En responsabilidad civil:** Abarca daño emergente y lucro cesante (Arts. 1613-1614 [2]), salvo limitaciones legales.  \nSin más detalles del caso, no es posible precisar el monto, pero se deben aplicar estos principios.  \n\n**RECOMENDACIÓN:**  \n1. **Para seguros:** Revise la póliza para verificar si se pactó lucro cesante (Art. 1122 [5]) o reposición (Art. 1090 [3]).  \n2. **Para reclamos civiles:** Documente los daños (facturas, peritajes) y las ganancias no obtenidas (proyecciones financieras).  \n3. **Plazos:** En seguros, presente la reclamación dentro de los términos fijados en la póliza. En responsabilidad civil, el plazo general es de 10 años (Art. 2532 Código Civil, no incluido en fuentes).  \n4. **Acción:** Consulte un abogado para evaluar si procede demanda o reclamo directo ante la aseguradora.  \n\n⚠️ **Nota:** Para un cálculo exacto, se requiere análisis de documentos específicos (póliza, contratos, pruebas de daños).",
+      "evaluacion": {
+        "precision_normativa": 4,
+        "articulos_correctos": 4,
+        "interpretacion_valida": 3,
+        "completitud": 5,
+        "ausencia_alucinaciones": 2,
+        "score_total": 3.6,
+        "veredicto": "DEFICIENTE",
+        "normas_correctas": [
+          "Artículo 64 del Código Sustantivo del Trabajo (CST)"
+        ],
+        "normas_faltantes": [
+          "Artículo 65 CST",
+          "Decreto 2351/65"
+        ],
+        "alucinaciones": [
+          "Artículo 408 del CST (fuera de contexto)",
+          "Artículo 410 del CST (fuera de contexto)",
+          "Artículo 61 del CST (fuera de contexto)",
+          "Artículo 1110 del Código de Comercio",
+          "Artículo 1613 del Código Civil",
+          "Artículo 1614 del Código Civil",
+          "Artículo 1090 del Código de Comercio",
+          "Artículo 1122 del Código de Comercio"
+        ],
+        "comentario": "La respuesta del RAG es confusa y mezcla conceptos de derecho laboral con normas de seguros y responsabilidad civil, fallando en proporcionar la fórmula de indemnización específica y la diferencia por nivel salarial que solicita el criterio principal."
+      },
+      "error": null,
+      "timestamp": "2026-02-17T04:08:37.136Z"
+    },
+    {
+      "id": "LAB-004",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el fuero de maternidad y qué protección ofrece?",
+      "respuesta_referencia": "El fuero de maternidad, consagrado en el artículo 239 del CST y desarrollado por la Sentencia C-005 de 2017 de la Corte Constitucional, prohíbe el despido de la trabajadora embarazada o en período de lactancia sin la autorización previa del Inspector de Trabajo. Si se despide sin autorización, el despido es ineficaz y la trabajadora tiene derecho a ser reintegrada y al pago de salarios y prestaciones dejados de percibir. La protección aplica incluso en contratos a término fijo y de obra.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Qué es el fuero de maternidad**\n\n\n\n**HECHOS RELEVANTES:**  \nLa consulta se refiere al concepto de \"fuero de maternidad\" en el marco jurídico colombiano, específicamente en relación con la protección especial que reciben las mujeres durante el embarazo y después del parto.  \n\n**NORMAS APLICABLES:**  \n1. **Artículo 43 de la Constitución Política de Colombia** (citado en la Sentencia C-355/2006 [1] y [2]): Establece que la mujer durante el embarazo y después del parto gozará de especial asistencia y protección del Estado, incluyendo subsidio alimentario si está desempleada o desamparada.  \n2. **Artículo 124 de la Sentencia C-355/2006** [1] y [2]: Reconoce el \"fuero especial de maternidad\" como un mecanismo constitucional y legal para garantizar la protección especial a la maternidad, en concordancia con normas internacionales vinculantes (artículo 93 de la Constitución).  \n\n**ANÁLISIS JURÍDICO:**  \nEl \"fuero de maternidad\" es una figura jurídica que busca proteger a la mujer en estado de embarazo y en el período posterior al parto, garantizando sus derechos laborales, de salud y asistencia social. Según las fuentes citadas:  \n- La Constitución (artículo 43) y la jurisprudencia constitucional (Sentencia C-355/2006) reconocen este fuero como un derecho fundamental, derivado del principio de protección especial a la maternidad.  \n- Este fuero implica que el Estado, la sociedad y la familia deben brindar asistencia y protección integral a la mujer gestante, incluyendo subsidios en casos de desempleo o vulnerabilidad.  \n- La Sentencia menciona que este fuero se alinea con obligaciones internacionales vinculantes para Colombia (artículo 93 CP), reforzando su carácter imperativo.  \n\n**CONCLUSIÓN:**  \nEl fuero de maternidad es un derecho constitucional y legal que protege a las mujeres durante el embarazo y postparto, garantizando asistencia estatal, protección laboral y subsidios en situaciones de vulnerabilidad. Su fundamento principal está en el artículo 43 de la Constitución y en la jurisprudencia constitucional que lo desarrolla.  \n\n**RECOMENDACIÓN:**  \n1. **Para empleadoras/es:** Respetar el fuero de maternidad en el ámbito laboral (ejemplo: no despedir sin justa causa a una mujer embarazada).  \n2. **Para mujeres gestantes:**  \n   - Solicitar la protección ante empleadores o entidades como el Ministerio de Trabajo o la EPS correspondiente.  \n   - En caso de desempleo, acudir a la entidad territorial para reclamar el subsidio alimentario (requisitos: certificado médico de embarazo y declaración de desempleo).  \n3. **Plazos:** La protección aplica durante todo el embarazo y hasta después del parto (el período exacto puede requerir verificación en normas laborales específicas no incluidas en las fuentes proporcionadas).  \n\n*Nota:* Para detalles sobre duración del fuero laboral o procedimientos administrativos, se recomienda consultar el Código Sustantivo del Trabajo o asesoría jurídica especializada, ya que las fuentes disponibles no abordan estos aspectos específicos.\n\n\n\n---\n\n\n\n**2. y qué protección ofrece?**\n\n\n\n**HECHOS RELEVANTES:**  \nLa consulta general pregunta sobre la protección legal que se ofrece, sin especificar un caso concreto. Sin embargo, basado en la fuente disponible [1], se puede inferir que se trata de la protección especial que brinda el ordenamiento jurídico colombiano a los niños, niñas y adolescentes, particularmente en materia de salud, incluyendo acceso a servicios médicos, tratamientos, medicamentos, vacunas, y protección contra abusos por parte de entidades de salud.\n\n**NORMAS APLICABLES:**  \n[1] Sentencia T-760/2008 de la Corte Constitucional:  \n- Reconoce protección reforzada a los niños en salud, incluyendo acceso a cirugías plásticas para malformaciones, medicamentos para afecciones comunes (ej. conjuntivitis), vacunas preventivas, actualización de tratamientos médicos, diagnóstico oportuno, y prohibición de barreras como pagos moderadores injustificados.  \n- Protege a menores en condiciones de vulnerabilidad (ej. discapacidad), garantizando procedimientos médicos necesarios (ej. ligadura de trompas con autorización parental y debido proceso).  \n- Prohíbe a las EPS condicionar servicios del POS a periodos mínimos o retener menores por deudas.  \n\n**ANÁLISIS JURÍDICO:**  \nLa jurisprudencia constitucional colombiana establece un estándar elevado de protección para los menores, especialmente en salud, bajo el principio de interés superior del niño (implícito en la Sentencia T-760/2008). Esto incluye:  \n1. **Acceso sin barreras**: Servicios esenciales no pueden negarse por motivos económicos o administrativos (ej. pagos moderadores o exclusiones injustificadas del POS).  \n2. **Protección contra abusos**: Las EPS no pueden retener a menores por deudas o imponer condiciones arbitrarias.  \n3. **Enfoque en vulnerabilidad**: Casos con discapacidad o múltiples condiciones de vulnerabilidad reciben atención prioritaria y procesos adaptados (ej. consentimiento informado para procedimientos).  \n\n**CONCLUSIÓN:**  \nLa protección legal para niños, niñas y adolescentes en Colombia es amplia y prioritaria, especialmente en salud. La Corte Constitucional ha garantizado mediante tutelas el acceso a servicios médicos esenciales, la prevención de enfermedades, y la protección contra prácticas abusivas de las EPS, con énfasis en casos de vulnerabilidad.  \n\n**RECOMENDACIÓN:**  \nSi el consultante enfrenta una vulneración específica:  \n1. **Recolectar pruebas**: Documentos médicos, negativas por escrito de la EPS, facturas, etc.  \n2. **Acción inmediata**: Presentar una tutela (sin necesidad de abogado) ante un juez de la República, invocando la jurisprudencia citada. Plazo: dentro de los 4 meses siguientes al hecho violatorio.  \n3. **Entidades competentes**: Defensoría del Pueblo o Personería local para asesoría gratuita.  \n4. **Para casos complejos** (ej. discapacidad): Buscar apoyo de organizaciones especializadas en derechos de la infancia.  \n\n⚠️ **Nota**: Si la consulta refiere a otra área de protección (ej. educación, violencia), se requiere análisis con fuentes adicionales.",
+      "evaluacion": {
+        "precision_normativa": 2,
+        "articulos_correctos": 2,
+        "interpretacion_valida": 1,
+        "completitud": 3,
+        "ausencia_alucinaciones": 0,
+        "score_total": 1.6,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [
+          "Artículo 43 de la Constitución Política de Colombia"
+        ],
+        "normas_faltantes": [
+          "Art. 239 CST",
+          "Art. 240 CST",
+          "Sentencia C-005/2017"
+        ],
+        "alucinaciones": [
+          "Artículo 124 de la Sentencia C-355/2006",
+          "Sentencia T-760/2008 (aplicada incorrectamente al tema)"
+        ],
+        "comentario": "La respuesta del RAG es completamente errónea, ya que no aborda el fuero de maternidad laboral (CST) y en su lugar habla de protección constitucional general y derechos de menores, inventando normas y aplicando jurisprudencia incorrecta."
+      },
+      "error": null,
+      "timestamp": "2026-02-17T04:09:35.504Z"
+    },
+    {
+      "id": "LAB-005",
+      "area": "laboral",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cómo se calcula la liquidación de un trabajador que lleva 3 años y gana $2.000.000?",
+      "respuesta_referencia": "Para un trabajador con 3 años de antigüedad y salario de $2.000.000: (1) Cesantías: $2.000.000 × 3 años = $6.000.000; (2) Intereses sobre cesantías: $6.000.000 × 12% = $720.000; (3) Prima de servicios: $2.000.000 × 3 meses/12 = $500.000 (proporcional al último semestre); (4) Vacaciones: 15 días × $66.667/día = $1.000.000 (proporcional); (5) Si el auxilio de transporte aplica ($162.000/mes). El total aproximado antes de descuentos sería $8.220.000 más el auxilio de transporte proporcional.",
+      "respuesta_rag": "**HECHOS RELEVANTES:**  \nUn trabajador con un salario de $2.000.000 mensuales y 3 años de servicio continuo en una empresa solicita calcular su liquidación laboral. El salario está por debajo de 10 salarios mínimos mensuales legales (SMMLV), considerando que el SMMLV para 2024 es $1.300.000 (aproximadamente 1.53 SMMLV).  \n\n**NORMAS APLICABLES:**  \n- **Artículo 64 del Código Sustantivo del Trabajo (CST)** [3], [4], [6]: Establece el cálculo de la indemnización para contratos a término indefinido, diferenciando entre salarios inferiores y superiores a 10 SMMLV.  \n  - Literal a): Para salarios < 10 SMMLV:  \n    1. 30 días de salario por el primer año.  \n    2. 20 días adicionales por cada año subsiguiente (proporcional por fracción).  \n\n**ANÁLISIS JURÍDICO:**  \n1. **Salario base:** $2.000.000 (inferior a 10 SMMLV).  \n2. **Tiempo de servicio:** 3 años.  \n3. **Cálculo según Artículo 64 CST:**  \n   - **Primer año:** 30 días de salario = $2.000.000.  \n   - **Años 2 y 3:** 20 días por cada año = 40 días totales ($2.666.666, calculado como: (20 días × 2 años × $2.000.000) / 30).  \n   - **Total indemnización:** 70 días de salario = $4.666.666 (30 + 40 días).  \n\n**CONCLUSIÓN:**  \nEl trabajador tiene derecho a una indemnización equivalente a **70 días de salario** (aproximadamente $4.666.666), distribuidos en 30 días por el primer año y 40 días por los dos años siguientes.  \n\n**RECOMENDACIÓN:**  \n1. **Documentación requerida:**  \n   - Certificado laboral con fecha de ingreso y salario.  \n   - Copia del contrato de trabajo.  \n2. **Procedimiento:**  \n   - Solicitar la liquidación por escrito al empleador.  \n   - En caso de negativa, acudir a la **Inspección del Trabajo** o interponer una demanda laboral ante un juez competente (Artículo 155 CPA [5], si la cuantía no excede 1.000 SMMLV).  \n3. **Plazo:**  \n   - La acción para reclamar la indemnización prescribe en **3 años** (Artículo 64 CST).  \n\n⚠️ **Nota:** Verificar el SMMLV vigente al momento del cálculo, ya que el monto puede variar anualmente.\n\n⚠️ **Vigencia:** La norma \"Ley 100 de 1993 — Sistema General de Seguridad Social\" tiene artículos derogados o modificados; verifique vigencia específica.",
+      "evaluacion": {
+        "precision_normativa": 2,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 1,
+        "completitud": 3,
+        "ausencia_alucinaciones": 2,
+        "score_total": 1.6,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 249 CST",
+          "Art. 306 CST",
+          "Art. 186 CST",
+          "Ley 52/1975"
+        ],
+        "alucinaciones": [
+          "Artículo 64 del Código Sustantivo del Trabajo (CST)",
+          "Artículo 155 CPA",
+          "Ley 100 de 1993"
+        ],
+        "comentario": "La respuesta del RAG es completamente errónea, ya que calcula una indemnización por despido en lugar de la liquidación de prestaciones sociales solicitada, y cita normas incorrectas o irrelevantes."
+      },
+      "error": null,
+      "timestamp": "2026-02-17T04:10:23.681Z"
+    },
+    {
+      "id": "LAB-006",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es el período de prueba máximo permitido en Colombia?",
+      "respuesta_referencia": "Según el artículo 78 del CST, el período de prueba no puede exceder dos (2) meses. Para contratos a término fijo inferior a un año, el período de prueba no podrá ser superior a la quinta parte del término inicialmente pactado. Este período debe constar por escrito.",
+      "respuesta_rag": "**HECHOS RELEVANTES:**  \nLa consulta se refiere al período de prueba máximo permitido en Colombia, específicamente en el contexto de procedimientos administrativos y contencioso administrativos. No se proporcionan detalles adicionales sobre el tipo de procedimiento o las partes involucradas.\n\n**NORMAS APLICABLES:**  \n1. **Artículo 254 de la Ley 1437 de 2011 (Código de Procedimiento Administrativo y de lo Contencioso Administrativo)**: Establece que, si se decretan pruebas de oficio o a solicitud de parte, se señalará un término máximo de **treinta (30) días** para practicarlas [1], [2], [4].  \n2. **Artículo 48 de la Ley 1437 de 2011**: Indica que el período probatorio no será mayor a **treinta (30) días**, pero en casos con tres (3) o más investigados o cuando las pruebas deban practicarse en el exterior, el término podrá extenderse hasta **sesenta (60) días**. Adicionalmente, para procedimientos administrativos sancionatorios fiscales, el plazo máximo es de **diez (10) días** (o **treinta (30) días** en los supuestos excepcionales mencionados) [3].  \n\n**ANÁLISIS JURÍDICO:**  \n- El **período general de prueba** en procedimientos administrativos es de **30 días**, conforme al Artículo 254 [1], [2], [4].  \n- El Artículo 48 introduce excepciones:  \n  - **60 días** cuando hay múltiples investigados (3 o más) o pruebas en el exterior [3].  \n  - **Plazos reducidos** (10 días generales o 30 días excepcionales) para procedimientos sancionatorios fiscales [3].  \n- La normativa no menciona períodos de prueba en contextos laborales o civiles (fuera del ámbito administrativo), por lo que la respuesta se limita al marco de la Ley 1437 de 2011.  \n\n**CONCLUSIÓN:**  \nEl período máximo de prueba en procedimientos administrativos en Colombia es de **30 días**, con extensiones hasta **60 días** en casos excepcionales (múltiples investigados o pruebas en el exterior). Para procedimientos sancionatorios fiscales, el plazo se reduce a **10 días** (o **30 días** en los mismos supuestos excepcionales).  \n\n**RECOMENDACIÓN:**  \n1. **Verificar el tipo de procedimiento**: Si es administrativo general, sancionatorio fiscal o involucra condiciones excepcionales (ej. pruebas en el exterior).  \n2. **Documentar solicitudes de pruebas**: Asegurar que se decreten dentro de los plazos legales para evitar su inadmisión.  \n3. **Consultar abogado especializado**: Si el caso no se ajusta a los supuestos de las fuentes disponibles (ej. ámbito laboral o civil), se requiere análisis con normativa específica.  \n4. **Plazos fatales**: Cumplir estrictamente con los términos, ya que su vencimiento extingue el derecho a practicar pruebas.  \n\n⚠️ **Nota**: Las fuentes no cubren períodos de prueba en contratos laborales (ej. período de prueba del Código Sustantivo del Trabajo). Para ello, se necesitaría consultar normativa adicional.\n\n⚠️ **Vigencia:** La norma \"Código Penal (Ley 599 de 2000)\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Código de Procedimiento Penal (Ley 906 de 2004)\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Código Penal (Ley 599 de 2000)\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Código Penal (Ley 599 de 2000)\" tiene artículos derogados o modificados; verifique vigencia específica.",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 0,
+        "score_total": 0,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 78 CST",
+          "Art. 77 CST"
+        ],
+        "alucinaciones": [
+          "Artículo 254 de la Ley 1437 de 2011",
+          "Artículo 48 de la Ley 1437 de 2011",
+          "Código Penal (Ley 599 de 2000)",
+          "Código de Procedimiento Penal (Ley 906 de 2004)"
+        ],
+        "comentario": "La respuesta del RAG es completamente errónea, ya que aborda el período probatorio en procedimientos administrativos en lugar del período de prueba laboral, inventando normas que no corresponden a la pregunta."
+      },
+      "error": null,
+      "timestamp": "2026-02-17T04:10:51.709Z"
+    },
+    {
+      "id": "CIV-001",
+      "area": "civil",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es el plazo de prescripción de la acción ejecutiva en Colombia?",
+      "respuesta_referencia": "Según el artículo 2536 del Código Civil colombiano, la acción ejecutiva prescribe en cinco (5) años. La acción ordinaria prescribe en diez (10) años. La prescripción puede ser interrumpida por reconocimiento de deuda o por demanda judicial.",
+      "respuesta_rag": "**HECHOS RELEVANTES:**  \nLa consulta se refiere al plazo de prescripción de la acción ejecutiva en Colombia. Sin embargo, las fuentes proporcionadas no contienen información directa sobre este plazo específico, ya que se enfocan en temas de extradición, acción penal y procedimientos de pertenencia, pero no en la prescripción de acciones ejecutivas.\n\n**NORMAS APLICABLES:**  \nLas fuentes disponibles ([1] a [5]) no incluyen artículos que regulen expresamente el plazo de prescripción de la acción ejecutiva. Los artículos citados (504, 522, 36 y 375) abordan temas como:  \n- Entrega diferida en extradiciones ([1] Artículo 504, [2] Artículo 522).  \n- Requisitos para iniciar acción penal en delitos cometidos en el extranjero ([3] y [5] Artículo 36).  \n- Procedimientos de prescripción adquisitiva en materia de pertenencia ([4] Artículo 375).  \n\n**ANÁLISIS JURÍDICO:**  \nEl Código General del Proceso (Ley 1564 de 2012) y los códigos penales citados no contienen disposiciones sobre el plazo de prescripción de la acción ejecutiva. Esta figura suele estar regulada en normas civiles o comerciales (ej. Código Civil o Código de Comercio), las cuales no están incluidas en las fuentes proporcionadas.  \n\n**CONCLUSIÓN:**  \nLas fuentes disponibles no permiten determinar el plazo de prescripción de la acción ejecutiva en Colombia, ya que no abordan esta materia. Se requiere consultar normas específicas no incluidas en el contexto (ej. Código Civil, Código de Comercio o leyes especiales).  \n\n**RECOMENDACIÓN:**  \n1. Consultar el **Código Civil Colombiano** (Artículos 2532 y siguientes) para prescripción de obligaciones.  \n2. Revisar el **Código de Comercio** (Artículos 945 y siguientes) para acciones ejecutivas mercantiles.  \n3. En caso de deudas laborales, verificar el **Código Sustantivo del Trabajo**.  \n4. Acudir a un abogado especializado en derecho civil o comercial para un análisis preciso, ya que los plazos varían según el tipo de obligación (ej. 5 años para obligaciones civiles, 10 años para algunas comerciales).  \n\n⚠️ **Nota:** Los plazos de prescripción son fatales y su cálculo depende de factores como la fecha de exigibilidad de la obligación y posibles interrupciones.\n\n⚠️ **Vigencia:** La norma \"Código de Procedimiento Penal (Ley 906 de 2004)\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Código de Procedimiento Penal (Ley 906 de 2004)\" tiene artículos derogados o modificados; verifique vigencia específica.",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 1,
+        "completitud": 2,
+        "ausencia_alucinaciones": 8,
+        "score_total": 2.2,
+        "veredicto": "DEFICIENTE",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 2536 Código Civil",
+          "Art. 2535 Código Civil"
+        ],
+        "alucinaciones": [
+          "Artículo 504",
+          "Artículo 522",
+          "Artículo 36",
+          "Artículo 375"
+        ],
+        "comentario": "El sistema RAG no respondió la pregunta específica sobre el plazo de prescripción de la acción ejecutiva, reconociendo que sus fuentes no contenían la información relevante. Sin embargo, en su recomendación mencionó plazos (5 y 10 años) sin fundamentarlos en las normas correctas."
+      },
+      "error": null,
+      "timestamp": "2026-02-17T04:11:22.311Z"
+    },
+    {
+      "id": "CIV-002",
+      "area": "civil",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuáles son los requisitos para que un contrato de compraventa de inmueble sea válido?",
+      "respuesta_referencia": "Para la validez de la compraventa de inmueble en Colombia se requiere: (1) Capacidad de las partes (Art. 1502 CC); (2) Consentimiento libre de vicios (Arts. 1508-1516 CC); (3) Objeto lícito y determinado (Arts. 1517-1521 CC); (4) Causa lícita (Arts. 1524-1527 CC); (5) Solemnidad: escritura pública ante notario (Art. 1857 CC y Art. 12 Decreto 960/70); (6) Registro en la Oficina de Instrumentos Públicos para la tradición (Art. 756 CC).",
+      "respuesta_rag": "**HECHOS RELEVANTES:**  \nLa consulta se refiere a los requisitos legales para que un contrato de compraventa de inmueble sea válido en Colombia. No se proporcionan detalles específicos sobre el caso concreto, pero se solicita el marco normativo general aplicable.\n\n**NORMAS APLICABLES:**  \n1. **Artículo 468 del Código General del Proceso (Ley 1564 de 2012)**: Exige que, en demandas relacionadas con bienes inmuebles, se acompañe el título que otorgue mérito ejecutivo, certificados de propiedad y gravámenes del inmueble, con una antigüedad máxima de 10 años si es posible [1].  \n2. **Artículo 604 del Código General del Proceso (Ley 1564 de 2012)**: Establece requisitos para la caución hipotecaria, incluyendo la presentación de certificados notariales, títulos de propiedad, avalúos catastrales y documentos de tradición y libertad del inmueble [2], [3], [4].  \n\n**ANÁLISIS JURÍDICO:**  \nPara que un contrato de compraventa de inmueble sea válido, debe cumplir con los siguientes requisitos generales (aunque las fuentes disponibles no detallan específicamente el contrato en sí, sino los documentos asociados a su ejecución o garantía):  \n1. **Documentación del inmueble**: El vendedor debe acreditar su propiedad mediante título registrado y certificados de tradición y libertad (sin gravámenes no declarados), preferiblemente con antigüedad no mayor a 10 años [1], [2].  \n2. **Avalúo catastral**: Requerido para determinar el valor fiscal del inmueble, especialmente si se usa como garantía [2], [3].  \n3. **Formalización notarial**: Las escrituras públicas deben ser autenticadas por notario y registradas dentro de los plazos legales (6 días para ciertos trámites según [2]).  \n\nLas fuentes no mencionan expresamente requisitos como consentimiento, objeto lícito o capacidad jurídica, que son esenciales según el Código Civil, pero no están en las fuentes proporcionadas.  \n\n**CONCLUSIÓN:**  \nLos requisitos mínimos para la validez del contrato de compraventa de inmueble, según las fuentes disponibles, incluyen:  \n1. Título de propiedad y certificados de tradición y libertad (máx. 10 años).  \n2. Avalúo catastral actualizado.  \n3. Formalización notarial y registro oportuno.  \n\n**RECOMENDACIÓN:**  \n1. **Verificar propiedad**: Solicitar certificado de libertad y tradición en la Oficina de Registro de Instrumentos Públicos.  \n2. **Avalúo**: Realizar avalúo catastral o comercial para fijar el precio justo.  \n3. **Asesoría notarial**: Formalizar el contrato mediante escritura pública ante notario y registrar dentro de los 6 días hábiles siguientes.  \n4. **Consultar normas adicionales**: Dado que las fuentes no cubren todos los requisitos contractuales, se recomienda revisar el Código Civil (Arts. 1502 y ss.) y la Ley 153 de 1887 sobre formalidades de contratos.  \n\n⚠️ *Nota*: Las fuentes no abarcan todos los requisitos sustanciales del contrato, por lo que se sugiere complementar con asesoría legal especializada.",
+      "evaluacion": {
+        "precision_normativa": 2,
+        "articulos_correctos": 1,
+        "interpretacion_valida": 3,
+        "completitud": 4,
+        "ausencia_alucinaciones": 2,
+        "score_total": 2.4,
+        "veredicto": "DEFICIENTE",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 1857 CC",
+          "Art. 1502 CC",
+          "Art. 756 CC",
+          "Decreto 960/70"
+        ],
+        "alucinaciones": [
+          "Artículo 468 del Código General del Proceso (Ley 1564 de 2012)",
+          "Artículo 604 del Código General del Proceso (Ley 1564 de 2012)"
+        ],
+        "comentario": "La respuesta del RAG es deficiente porque cita normas procesales irrelevantes para la validez del contrato, omite todas las normas civiles sustanciales requeridas, y no aborda los elementos esenciales del contrato (capacidad, consentimiento, objeto, causa)."
+      },
+      "error": null,
+      "timestamp": "2026-02-17T04:11:49.032Z"
+    },
+    {
+      "id": "CIV-003",
+      "area": "civil",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es la acción de tutela y en qué plazo debe ser resuelta?",
+      "respuesta_referencia": "La acción de tutela, consagrada en el artículo 86 de la Constitución Política y reglamentada por el Decreto 2591 de 1991, es un mecanismo de protección inmediata de derechos fundamentales cuando no exista otro medio de defensa judicial eficaz. El juez debe resolver en un plazo de diez (10) días calendario. La sentencia puede ser impugnada dentro de los tres (3) días siguientes.",
+      "respuesta_rag": "**HECHOS RELEVANTES:**  \nLa consulta se refiere a la acción de tutela como mecanismo constitucional para proteger derechos fundamentales y al plazo máximo para su resolución. No se describen hechos específicos, sino que se busca una explicación general del instituto jurídico y su temporalidad procesal.\n\n**NORMAS APLICABLES:**  \n1. **Constitución Política - Artículo 86** [2]: Establece que la tutela es una acción para proteger derechos fundamentales, con fallo de inmediato cumplimiento. Señala que \"*en ningún caso podrán transcurrir más de diez días entre la solicitud de tutela y su resolución*\".  \n2. **Decreto 2591 de 1991 y Decreto 1382 de 2000** [1]: Regulan el procedimiento de la tutela, incluyendo plazos específicos para cada etapa (ej. 10 días para sentencia de primera instancia, 20 días adicionales si hay impugnación).  \n\n**ANÁLISIS JURÍDICO:**  \n- **Naturaleza de la tutela**: Es un mecanismo preferente y sumario para proteger derechos fundamentales cuando no exista otro medio de defensa judicial, o como medida transitoria para evitar perjuicios irremediables [1], [2].  \n- **Plazos**:  \n  - **Primera instancia**: El juez debe resolver máximo en **10 días** desde la presentación de la tutela [1], [2]. Este plazo es perentorio y de cumplimiento obligatorio.  \n  - **Segunda instancia**: Si hay impugnación, el tribunal superior tiene **20 días adicionales** para resolver [1].  \n  - **Ejecución**: Las órdenes deben cumplirse en **48 horas** desde la notificación de la sentencia firme [1].  \n- **Excepciones**: La Corte Constitucional puede revisar el fallo, pero esto no suspende su cumplimiento, salvo decisión en contrario [2].  \n\n**CONCLUSIÓN:**  \nLa acción de tutela es un recurso constitucional expedito para proteger derechos fundamentales, con un plazo máximo de **10 días** para su resolución en primera instancia y **20 días adicionales** en segunda instancia si se impugna. Los plazos son perentorios y su incumplimiento puede generar sanciones por desacato.  \n\n**RECOMENDACIÓN:**  \n1. **Presentación**: Redactar el escrito de tutela con identificación del accionante/accionado, hechos, derechos vulnerados y pruebas (si las hay) [1].  \n2. **Seguimiento**: Verificar que el juez cumpla los plazos (10 días para primera instancia).  \n3. **Impugnación**: En caso de inconformidad, interponer recurso dentro de los **3 días hábiles** posteriores a la notificación [1].  \n4. **Cumplimiento**: Exigir ejecución inmediata (48 horas) si la sentencia es favorable.  \n5. **Asesoría**: Consultar abogado si hay dudas sobre la procedencia o trámite, dado los plazos perentorios.  \n\n⚠️ **Nota**: Para casos específicos (ej. salud), revisar si aplican criterios especiales de la Corte Constitucional (como en la Sentencia T-760/2008 [3], [4], [5]).",
+      "evaluacion": {
+        "precision_normativa": 8,
+        "articulos_correctos": 6,
+        "interpretacion_valida": 9,
+        "completitud": 10,
+        "ausencia_alucinaciones": 7,
+        "score_total": 8,
+        "veredicto": "BUENO",
+        "normas_correctas": [
+          "Constitución Política - Artículo 86",
+          "Decreto 2591 de 1991"
+        ],
+        "normas_faltantes": [
+          "Art. 29 Decreto 2591"
+        ],
+        "alucinaciones": [
+          "Decreto 1382 de 2000 (no fue solicitado y puede confundir)",
+          "plazo de 20 días adicionales para segunda instancia (no es el foco principal de la pregunta)",
+          "plazo de ejecución de 48 horas (información adicional no solicitada)"
+        ],
+        "comentario": "La respuesta RAG es completa y precisa en la definición y plazo principal (10 días), pero añade información normativa no solicitada y omite una norma específica esperada (Art. 29 Decreto 2591)."
+      },
+      "error": null,
+      "timestamp": "2026-02-17T04:12:21.290Z"
+    },
+    {
+      "id": "CIV-004",
+      "area": "civil",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cuándo procede la acción popular y quién puede interponerla?",
+      "respuesta_referencia": "La acción popular está consagrada en el artículo 88 de la Constitución y regulada por la Ley 472 de 1998. Procede para proteger derechos e intereses colectivos como el medio ambiente, la moralidad administrativa, el espacio público, la salubridad pública, entre otros. Puede ser interpuesta por cualquier persona natural o jurídica, organizaciones no gubernamentales, entidades públicas y el Defensor del Pueblo. No requiere acreditar perjuicio personal.",
+      "respuesta_rag": "**HECHOS RELEVANTES:**  \nLa consulta se refiere a determinar en qué casos procede la acción popular y quiénes están legitimados para interponerla en Colombia, sin mencionar un caso concreto. Se busca claridad sobre los supuestos de procedencia y los sujetos activos de esta acción.\n\n**NORMAS APLICABLES:**  \n1. **Artículo 9o. de la Ley 472 de 1998 [8]:** Establece que las acciones populares proceden contra acciones u omisiones de autoridades públicas o particulares que violen o amenacen derechos e intereses colectivos.  \n2. **Artículo 13 de la Ley 472 de 1998 [7]:** Indica que pueden ejercer acciones populares los legitimados \"por sí mismos o por quien actúe en su nombre\", con posibilidad de intervención de la Defensoría del Pueblo si no hay apoderado judicial.  \n3. **Artículo 1006 del Código Civil [5]:** Señala que las acciones populares no excluyen las acciones individuales de los directamente afectados.  \n4. **Artículo 11 de la Ley 472 de 1998 [6]:** Regula los plazos para interponer la acción (5 años si busca restablecer el estado anterior).  \n\n**ANÁLISIS JURÍDICO:**  \n- **Procedencia:** Según el Artículo 9o. [8], la acción popular procede cuando hay vulneración o amenaza a derechos colectivos (ej. medio ambiente, moralidad administrativa, espacio público) por parte de autoridades o particulares. No requiere agotar vía gubernativa previa (Artículo 10 [6]).  \n- **Legitimación activa:** El Artículo 13 [7] permite que cualquier persona (natural o jurídica) interponga la acción, incluso sin apoderado, con apoyo opcional de la Defensoría. Esto incluye a organizaciones sociales, veedurías ciudadanas o particulares.  \n- **Plazos:** El Artículo 11 [6] establece que el término general es mientras subsista la amenaza, pero si se busca restituir el *statu quo ante*, el plazo es de 5 años desde el hecho generador.  \n\n**CONCLUSIÓN:**  \nLas acciones populares proceden ante violaciones o amenazas a derechos colectivos por actos de autoridades o particulares (Artículo 9o. [8]). Pueden ser interpuestas por cualquier persona u organización, individual o colectivamente (Artículo 13 [7]), sin necesidad de agotar recursos administrativos previos (Artículo 10 [6]).  \n\n**RECOMENDACIÓN:**  \n1. **Identificar el derecho colectivo afectado** (ej. salud pública, seguridad ciudadana).  \n2. **Recopilar pruebas** de la vulneración o amenaza (informes técnicos, testimonios).  \n3. **Presentar la demanda** ante un juez administrativo o civil (según el caso), adjuntando:  \n   - Descripción detallada del hecho.  \n   - Pruebas de legitimación (ej. personería jurídica si es una organización).  \n4. **Plazos clave:**  \n   - 5 años para restitución (Artículo 11 [6]).  \n   - No hay plazo si persiste la amenaza.  \n5. **Considerar apoyo de la Defensoría del Pueblo** si no se cuenta con abogado (Artículo 13 [7]).  \n\n⚠️ **Nota:** Para casos complejos (ej. daños ambientales masivos), se recomienda asesoría especializada en acciones constitucionales o ambientales.",
+      "evaluacion": {
+        "precision_normativa": 6,
+        "articulos_correctos": 4,
+        "interpretacion_valida": 8,
+        "completitud": 9,
+        "ausencia_alucinaciones": 5,
+        "score_total": 6.4,
+        "veredicto": "ACEPTABLE",
+        "normas_correctas": [
+          "Ley 472/1998 (Art. 9, 10, 11, 13)"
+        ],
+        "normas_faltantes": [
+          "Art. 88 CP"
+        ],
+        "alucinaciones": [
+          "Artículo 1006 del Código Civil"
+        ],
+        "comentario": "La respuesta del RAG contiene información sustancialmente correcta sobre la Ley 472/1998 y la legitimación amplia, pero falla al no mencionar el fundamento constitucional (Art. 88 CP) e incluye una norma inexistente (Art. 1006 CC)."
+      },
+      "error": null,
+      "timestamp": "2026-02-17T04:12:54.362Z"
+    },
+    {
+      "id": "PEN-001",
+      "area": "penal",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es la pena por el delito de hurto simple en Colombia?",
+      "respuesta_referencia": "Según el artículo 239 del Código Penal (Ley 599 de 2000), el hurto simple está sancionado con prisión de dos (2) a seis (6) años. Si el valor de lo hurtado no supera diez (10) salarios mínimos legales mensuales vigentes y el imputado no tiene antecedentes, puede acceder a mecanismos sustitutivos de prisión como la suspensión condicional de la ejecución de la pena.",
+      "respuesta_rag": "**HECHOS RELEVANTES:**  \nLa consulta se refiere a la determinación de la pena aplicable al delito de hurto simple en Colombia. Sin embargo, las fuentes proporcionadas no contienen información específica sobre el hurto simple ni su penalización en el Código Penal colombiano.  \n\n**NORMAS APLICABLES:**  \nLas fuentes disponibles ([1], [2], [3]) solo hacen referencia a los requisitos para iniciar la acción penal en casos de delitos cometidos en el extranjero, pero no mencionan el delito de hurto simple ni su pena correspondiente.  \n\n**ANÁLISIS JURÍDICO:**  \nDado que las fuentes proporcionadas no incluyen disposiciones sobre el hurto simple, no es posible determinar la pena aplicable a este delito con base en la información disponible. El hurto simple está regulado en el Código Penal colombiano (Ley 599 de 2000), pero este no está incluido en las fuentes citadas.  \n\n**CONCLUSIÓN:**  \nLas fuentes disponibles no permiten establecer la pena por el delito de hurto simple en Colombia, ya que no contienen referencias al Código Penal ni a las sanciones aplicables a este tipo de conductas.  \n\n**RECOMENDACIÓN:**  \nPara obtener una respuesta precisa, se recomienda consultar directamente el Código Penal colombiano (Ley 599 de 2000), específicamente los artículos relacionados con el hurto simple. Adicionalmente, se sugiere asesoría legal especializada para analizar el caso concreto, ya que la pena puede variar según factores como el valor de lo sustraído y las circunstancias del hecho.\n\n⚠️ **Vigencia:** La norma \"Código de Procedimiento Penal (Ley 906 de 2004)\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Código Penal (Ley 599 de 2000)\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Código Penal (Ley 599 de 2000)\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Ley 906 de 2004 (Código de Procedimiento Penal)\" tiene artículos derogados o modificados; verifique vigencia específica.",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 10,
+        "score_total": 2,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 239 Ley 599/2000",
+          "Art. 63 Ley 599/2000"
+        ],
+        "alucinaciones": [],
+        "comentario": "La respuesta del RAG es incorrecta porque no contiene información sobre el hurto simple, a pesar de que las fuentes deberían haber incluido el Art. 239 de la Ley 599/2000. Sin embargo, no inventó normas falsas."
+      },
+      "error": null,
+      "timestamp": "2026-02-17T04:13:24.286Z"
+    },
+    {
+      "id": "PEN-002",
+      "area": "penal",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el preacuerdo en materia penal y qué beneficios ofrece?",
+      "respuesta_referencia": "El preacuerdo está regulado en los artículos 348 a 354 del Código de Procedimiento Penal (Ley 906 de 2004). Es un mecanismo de terminación anticipada del proceso mediante el cual el fiscal y el imputado o acusado acuerdan la imputación y los cargos, a cambio de una rebaja de hasta la mitad de la pena (50%). El juez debe verificar que no se desconozcan garantías fundamentales. Difiere de la aceptación de cargos en que implica negociación sobre los hechos imputados.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Qué es el preacuerdo en materia penal**\n\n\n\n**HECHOS RELEVANTES:**  \nLa consulta se refiere al concepto de \"preacuerdo\" en materia penal, sin proporcionar detalles específicos sobre un caso concreto. El interés radica en comprender su definición y alcance dentro del sistema penal colombiano.\n\n**NORMAS APLICABLES:**  \nLas fuentes disponibles no incluyen disposiciones específicas sobre el \"preacuerdo\" en materia penal. Sin embargo, según el contexto general del sistema penal colombiano, este concepto suele relacionarse con mecanismos de negociación entre la Fiscalía y el imputado, previos a un juicio, aunque no está regulado explícitamente en las normas citadas [1]-[8].  \n\n**ANÁLISIS JURÍDICO:**  \nAunque las fuentes proporcionadas no contienen artículos que definan el \"preacuerdo\", en la práctica penal colombiana este término se asocia a acuerdos preliminares entre las partes (Fiscalía y defensa) para resolver un caso antes de llegar a juicio, como en la figura de la \"preclusión\" o \"principio de oportunidad\". El Artículo 310 del Código de Procedimiento Penal [1] menciona factores relevantes para decisiones procesales (como continuidad delictiva o antecedentes), que podrían influir en negociaciones previas. No obstante, el \"preacuerdo\" como tal no está formalizado en las normas disponibles.  \n\n**CONCLUSIÓN:**  \nEl \"preacuerdo\" en materia penal no está definido en las fuentes legales proporcionadas [1]-[8]. Su entendimiento deriva de prácticas jurisprudenciales y doctrinales, vinculadas a negociaciones previas al juicio, pero carece de regulación expresa en las normas citadas.  \n\n**RECOMENDACIÓN:**  \n1. Consultar jurisprudencia de la Corte Suprema de Justicia o Fiscalía General sobre aplicación práctica de preacuerdos.  \n2. Revisar el Código de Procedimiento Penal (Ley 906 de 2004) en su totalidad para identificar figuras afines (ej: principio de oportunidad).  \n3. Asesorarse con un abogado penalista para analizar su caso específico, ya que los preacuerdos suelen depender de criterios discrecionales de la Fiscalía.  \n\n⚠️ **Nota:** La información disponible es limitada; se sugiere ampliar la revisión a otras fuentes legales o jurisprudenciales.\n\n⚠️ **Vigencia:** La norma \"Código de Procedimiento Penal (Ley 906 de 2004)\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Código Penal (Ley 599 de 2000)\" tiene artículos derogados o modificados; verifique vigencia específica.\n\n\n\n---\n\n\n\n**2. y qué beneficios ofrece?**\n\n\n\n**HECHOS RELEVANTES:**  \nLa consulta general pregunta sobre los beneficios ofrecidos, pero no especifica el contexto (salud, seguridad social, laboral, etc.). Las fuentes disponibles [1] y [2] se refieren únicamente al sistema de salud colombiano, específicamente a la Unidad de Pago por Capitación (UPC), planes de beneficios (POS), y evaluaciones del derecho a la salud en el marco de la Sentencia T-760/2008 de la Corte Constitucional.  \n\n**NORMAS APLICABLES:**  \n1. **Fuente [1]**: Menciona el Acuerdo 379 de 2008, que fija el valor de la UPC para financiar el Plan Obligatorio de Salud (POS) y evalúa su suficiencia financiera [1].  \n2. **Fuente [2]**: Resalta la obligación del Ministerio de Protección Social (hoy Ministerio de Salud) de elaborar indicadores para medir el goce efectivo del derecho a la salud y reducir acciones de tutela [2].  \n\n**ANÁLISIS JURÍDICO:**  \n- Las fuentes disponibles no detallan beneficios específicos (e.g., subsidios, servicios médicos), sino mecanismos de financiación (UPC) y evaluación del sistema de salud.  \n- La Sentencia T-760/2008 enfatiza la protección del derecho a la salud mediante indicadores de acceso efectivo, pero no enumera beneficios concretos.  \n- El Acuerdo 379 [1] se centra en la viabilidad financiera del POS, no en el listado de prestaciones.  \n\n**CONCLUSIÓN:**  \nLas fuentes proporcionadas no contienen un catálogo de beneficios específicos. Se limitan a aspectos técnicos de financiación (UPC) y evaluación del sistema de salud, en cumplimiento de fallos constitucionales. Para conocer beneficios particulares (e.g., servicios cubiertos por el POS), se requiere consultar normas adicionales no incluidas en el contexto.  \n\n**RECOMENDACIÓN:**  \n1. **Si la consulta es sobre salud**:  \n   - Solicitar el Plan de Beneficios vigente (POS) al Ministerio de Salud o EPS.  \n   - Revisar resoluciones que actualicen el POS (ej. Resolución 2292 de 2023).  \n2. **Para otros beneficios (laborales, pensiones, etc.)**:  \n   - Especificar el ámbito de la consulta y proporcionar más datos para un análisis preciso.  \n3. **Plazo**: Las EPS deben responder solicitudes sobre beneficios en máximo 15 días hábiles (Ley 1751 de 2015, no incluida en fuentes).  \n\n⚠️ **Nota**: La respuesta está limitada por el contexto legal proporcionado. Se sugiere ampliar la consulta con normas específicas del área de interés.",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 2,
+        "ausencia_alucinaciones": 3,
+        "score_total": 1,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Arts. 348-354 Ley 906/2004"
+        ],
+        "alucinaciones": [
+          "Artículo 310 del Código de Procedimiento Penal (contexto incorrecto)",
+          "Acuerdo 379 de 2008 (fuera de contexto)",
+          "Sentencia T-760/2008 (fuera de contexto)",
+          "Ley 1751 de 2015 (fuera de contexto)"
+        ],
+        "comentario": "La respuesta del RAG es completamente incorrecta: no identifica el preacuerdo penal, confunde el tema con salud, y no cita las normas específicas requeridas (Arts. 348-354 Ley 906/2004)."
+      },
+      "error": null,
+      "timestamp": "2026-02-17T04:13:44.026Z"
+    },
+    {
+      "id": "CON-001",
+      "area": "constitucional",
+      "dificultad": "basico",
+      "pregunta": "¿Cuáles son los derechos fundamentales reconocidos en la Constitución de 1991?",
+      "respuesta_referencia": "La Constitución Política de 1991 reconoce en el Título II, Capítulo I (Arts. 11-44) los derechos fundamentales, entre ellos: derecho a la vida (Art. 11), prohibición de tortura (Art. 12), derecho a la igualdad (Art. 13), libertad de conciencia (Art. 18), libre desarrollo de la personalidad (Art. 16), derecho al debido proceso (Art. 29), libertad personal (Art. 28), habeas corpus (Art. 30), derecho de petición (Art. 23), entre otros. La Corte Constitucional ha ampliado este catálogo vía jurisprudencia.",
+      "respuesta_rag": "**HECHOS RELEVANTES:**  \nLa consulta busca identificar los derechos fundamentales reconocidos en la Constitución Política de Colombia de 1991. Sin embargo, las fuentes proporcionadas no contienen el texto constitucional ni enumeran específicamente dichos derechos, sino que hacen referencia genérica a \"[DERECHO]\" en el contexto de acciones judiciales.  \n\n**NORMAS APLICABLES:**  \nLas fuentes disponibles [1]-[5] mencionan el término \"derecho fundamental\" de manera genérica, pero no citan artículos específicos de la Constitución ni enumeran los derechos reconocidos. El Decreto 2591 de 1991 (citado en las fuentes) regula la acción de tutela como mecanismo de protección de derechos fundamentales, pero tampoco los define [1]-[5].  \n\n**ANÁLISIS JURÍDICO:**  \nAunque las fuentes no detallan los derechos fundamentales, se infiere que estos son aquellos esenciales para la dignidad humana, protegibles vía tutela según el Decreto 2591 de 1991. La jurisprudencia constitucional (referenciada genéricamente en las fuentes) ha desarrollado su contenido, pero para una respuesta precisa se requiere consultar directamente el texto constitucional (Título II, Capítulo 1) o jurisprudencia específica no incluida en el contexto proporcionado.  \n\n**CONCLUSIÓN:**  \nLas fuentes disponibles no permiten enumerar los derechos fundamentales reconocidos en la Constitución de 1991, ya que no contienen el texto constitucional ni sentencias que los especifiquen. Se requiere acceso a normas o jurisprudencia adicionales para responder con precisión.  \n\n**RECOMENDACIÓN:**  \n1. Consultar directamente el **Título II, Capítulo 1 de la Constitución Política de Colombia** (arts. 11 a 41), que enumera derechos como la vida, igualdad, intimidad, debido proceso, entre otros.  \n2. Revisar sentencias de unificación de la Corte Constitucional que desarrollen el concepto de derechos fundamentales (ej. T-406 de 1992, SU-1234 de 2018).  \n3. Para protección inmediata de un derecho vulnerado, presentar **acción de tutela** (Decreto 2591 de 1991), cumpliendo los requisitos de inmediatez y subsidiariedad. Plazo: 6 meses desde la vulneración.  \n\n*Nota: Esta respuesta se limita a las fuentes proporcionadas. Para un análisis completo, se necesitan los textos constitucionales y jurisprudenciales pertinentes.*",
+      "evaluacion": {
+        "precision_normativa": 2,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 4,
+        "completitud": 3,
+        "ausencia_alucinaciones": 8,
+        "score_total": 3.4,
+        "veredicto": "DEFICIENTE",
+        "normas_correctas": [
+          "Decreto 2591 de 1991"
+        ],
+        "normas_faltantes": [
+          "Título II, Capítulo 1 de la Constitución Política",
+          "Arts. 11-44 CP",
+          "Arts. 85-86 CP"
+        ],
+        "alucinaciones": [],
+        "comentario": "La respuesta RAG reconoce correctamente sus limitaciones y no inventa información, pero falla completamente en citar las normas constitucionales específicas que enumeran los derechos fundamentales, que era el núcleo de la pregunta."
+      },
+      "error": null,
+      "timestamp": "2026-02-17T04:14:26.625Z"
+    },
+    {
+      "id": "CON-002",
+      "area": "constitucional",
+      "dificultad": "intermedio",
+      "pregunta": "¿En qué consiste el estado de emergencia económica y cuánto puede durar?",
+      "respuesta_referencia": "El estado de emergencia económica, social y ecológica está consagrado en el artículo 215 de la Constitución Política. El Presidente puede declararlo cuando sobrevengan hechos distintos a los del Estado de Guerra o Conmoción Interior que perturben el orden económico, social o ecológico. Puede declararse por períodos de hasta treinta (30) días cada uno, sin que sumados excedan noventa (90) días en el año calendario. Durante su vigencia el Gobierno puede expedir decretos legislativos.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿En qué consiste el estado de emergencia económica**\n\n\n\n**HECHOS RELEVANTES:**  \nLa consulta se refiere a la definición y alcance del estado de emergencia económica en Colombia, específicamente en qué consiste este mecanismo constitucional y cómo se aplica según la normativa vigente.  \n\n**NORMAS APLICABLES:**  \n- **Artículo 215 de la Constitución Política de Colombia (1991)** [1], [2]:  \n  - Establece que el Gobierno puede declarar el estado de emergencia económica mediante decreto, señalando un término para el uso de facultades extraordinarias.  \n  - Obliga al Gobierno a convocar al Congreso dentro de los 10 días siguientes al vencimiento del término de emergencia si este no está reunido.  \n  - El Congreso debe examinar el informe motivado del Gobierno sobre las causas y medidas adoptadas, en un plazo de 30 días (prorrogable), y pronunciarse sobre su conveniencia.  \n  - El Congreso puede derogar, modificar o adicionar los decretos de emergencia durante el año siguiente a su declaratoria, en materias de iniciativa gubernamental.  \n\n**ANÁLISIS JURÍDICO:**  \nEl estado de emergencia económica es una herramienta excepcional que permite al Gobierno adoptar medidas urgentes para enfrentar crisis económicas graves. Según el Artículo 215 [1], [2]:  \n1. **Declaración**: El Gobierno emite un decreto con un término específico para ejercer facultades extraordinarias.  \n2. **Control político**: El Congreso debe revisar las medidas y pronunciarse sobre su pertinencia, garantizando un equilibrio de poderes.  \n3. **Vigencia temporal**: Las facultades son limitadas en el tiempo, y el Congreso puede modificar los decretos posteriormente.  \nLas fuentes disponibles no detallan las causas específicas para declarar la emergencia económica, pero resaltan el procedimiento y los mecanismos de control.  \n\n**CONCLUSIÓN:**  \nEl estado de emergencia económica consiste en la facultad del Gobierno para emitir decretos con fuerza de ley ante crisis económicas, sujetos a revisión y control por parte del Congreso. Su declaratoria sigue un procedimiento constitucional estricto para evitar abusos y garantizar transparencia.  \n\n**RECOMENDACIÓN:**  \n1. **Para ciudadanos/empresas**:  \n   - Monitorear los decretos emitidos durante la emergencia, ya que pueden afectar derechos económicos (ej. impuestos, regulaciones).  \n   - Revisar el informe del Gobierno y las decisiones del Congreso para evaluar la legalidad de las medidas.  \n2. **Para autoridades**:  \n   - Asegurar que la declaratoria cumpla con los requisitos del Artículo 215.  \n   - Presentar informes detallados al Congreso para facilitar su revisión.  \n3. **Consultar**: Abogados especializados en derecho constitucional o administrativo para casos concretos, dado que las fuentes no abarcan todos los aspectos sustanciales de la emergencia económica.  \n\n⚠️ **Nota**: Las fuentes no especifican las causales exactas para declarar la emergencia económica. Se recomienda complementar con jurisprudencia de la Corte Constitucional (ej. Sentencias sobre decretos de emergencia económica).\n\n\n\n---\n\n\n\n**2. y cuánto puede durar?**\n\n\n\n**HECHOS RELEVANTES:**  \nLa consulta no especifica el contexto exacto sobre el cual se pregunta \"cuánto puede durar\", pero se infiere que busca conocer la duración de algún tipo de procedimiento, contrato o figura jurídica. Las fuentes disponibles proporcionan información sobre plazos en diferentes ámbitos: albaceazgo, usufructo, términos probatorios en procedimientos administrativos y duración de contratos laborales.\n\n**NORMAS APLICABLES:**  \n1. **Albaceazgo**:  \n   - Artículo 1360 del Código Civil: Duración determinada por el testador.  \n   - Artículo 1361 del Código Civil: 1 año si no se fija plazo ([2]).  \n\n2. **Usufructo**:  \n   - Artículo 829 del Código Civil: Vida del usufructuario o máximo 30 años para corporaciones ([4]).  \n\n3. **Procedimientos administrativos**:  \n   - Artículo 48 de la Ley 1437 de 2011: Término probatorio de 30 días (hasta 60 días en casos complejos) ([3]).  \n\n4. **Contratos laborales**:  \n   - Artículo 46 del CST: Renovación automática hasta 4 años, con reglas específicas para prórrogas ([5]).  \n\n**ANÁLISIS JURÍDICO:**  \nLa duración depende de la figura jurídica en cuestión:  \n- **Albaceazgo**: Plazo fijado por el testador o 1 año por defecto.  \n- **Usufructo**: Indefinido (vida del usufructuario) o 30 años para entidades.  \n- **Procedimientos administrativos**: Términos probatorios de 10 a 60 días según complejidad.  \n- **Contratos laborales**: Máximo 4 años con prórrogas automáticas, salvo contratos por obra determinada.  \n\n**CONCLUSIÓN:**  \nSin un contexto específico, no es posible determinar un plazo único. Cada figura jurídica tiene regulaciones distintas sobre su duración, desde días (procedimientos) hasta años (contratos, usufructo) o incluso indefinidamente (usufructo vitalicio).  \n\n**RECOMENDACIÓN:**  \n1. Identificar la figura jurídica aplicable (ej. contrato, albaceazgo, usufructo).  \n2. Verificar los plazos en las normas citadas según el caso concreto.  \n3. Para contratos laborales, revisar el Artículo 46 del CST y documentar las prórrogas.  \n4. En procedimientos administrativos, cumplir con los términos del Artículo 48 de la Ley 1437 de 2011.  \n5. Consultar a un abogado si se requiere análisis de un caso específico no cubierto por estas normas.  \n\n*Nota: Si la consulta se refiere a un ámbito no mencionado (ej. procesos judiciales), se necesitarían fuentes adicionales.*",
+      "evaluacion": {
+        "precision_normativa": 6,
+        "articulos_correctos": 6,
+        "interpretacion_valida": 5,
+        "completitud": 4,
+        "ausencia_alucinaciones": 5,
+        "score_total": 5.2,
+        "veredicto": "DEFICIENTE",
+        "normas_correctas": [
+          "Artículo 215 de la Constitución Política de Colombia (1991)"
+        ],
+        "normas_faltantes": [
+          "Art. 215 CP (duración específica: 30 días por período, máximo 90 días al año, decretos legislativos)"
+        ],
+        "alucinaciones": [
+          "Artículo 1360 del Código Civil (albaceazgo)",
+          "Artículo 1361 del Código Civil (albaceazgo)",
+          "Artículo 829 del Código Civil (usufructo)",
+          "Artículo 48 de la Ley 1437 de 2011 (procedimientos administrativos)",
+          "Artículo 46 del CST (contratos laborales)"
+        ],
+        "comentario": "La respuesta RAG identifica correctamente el Art. 215 pero falla en especificar los plazos constitucionales (30/90 días) e introduce alucinaciones graves sobre otras figuras jurídicas no solicitadas."
+      },
+      "error": null,
+      "timestamp": "2026-02-17T04:14:52.058Z"
+    },
+    {
+      "id": "CON-003",
+      "area": "constitucional",
+      "dificultad": "avanzado",
+      "pregunta": "¿Qué es la excepción de inconstitucionalidad y cómo se aplica?",
+      "respuesta_referencia": "La excepción de inconstitucionalidad, consagrada en el artículo 4 de la Constitución Política, permite a cualquier operador jurídico inaplicar una norma que sea contraria a la Constitución en un caso concreto, sin que esto implique su derogatoria general. Difiere de la acción de inconstitucionalidad en que sus efectos son inter partes y no erga omnes. La Corte Constitucional ha señalado que es un deber del juez cuando la norma aplicable viola claramente preceptos constitucionales.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Qué es la excepción de inconstitucionalidad**\n\n\n\n**HECHOS RELEVANTES:**  \nLa consulta se refiere al concepto de \"excepción de inconstitucionalidad\", un mecanismo jurídico que permite cuestionar la validez de una norma por contravenir la Constitución. Las fuentes disponibles son extractos de la Sentencia C-355/2006 de la Corte Constitucional, que abordan temas relacionados con declaraciones de inconstitucionalidad, efectos de las sentencias y excepciones procesales.\n\n**NORMAS APLICABLES:**  \n1. **Artículo 124** (Fuente [1]): Establece los criterios para declarar la inconstitucionalidad total o parcial de una norma, sin que el juez pueda reescribirla.  \n2. **Artículo 48** (Fuente [2]): Define que la cosa juzgada constitucional depende de la decisión de la Corte, no de los cargos planteados en la demanda.  \n3. **Fuentes [3] y [4]**: Mencionan excepciones procesales como el \"pleito pendiente\" y el momento en que surten efectos las sentencias de constitucionalidad.  \n\n**ANÁLISIS JURÍDICO:**  \nLa \"excepción de inconstitucionalidad\" no está definida textualmente en las fuentes, pero se infiere como un mecanismo para impugnar normas contrarias a la Constitución, vinculado a:  \n- **Control constitucional** (Art. 124): La Corte analiza si la norma debe ser anulada total o parcialmente, respetando la intención legislativa.  \n- **Cosa juzgada** (Art. 48): La decisión de la Corte determina el alcance de la inconstitucionalidad, evitando revisiones infinitas.  \n- **Efectos de las sentencias** (Fuentes [3] y [4]): La declaratoria de inconstitucionalidad surte efectos desde la fecha de la decisión, no desde su notificación.  \n\n**CONCLUSIÓN:**  \nLa excepción de inconstitucionalidad es un instrumento procesal para desafiar normas que vulneran la Constitución, sujeto a los criterios de la Corte Constitucional sobre validez parcial/total, cosa juzgada y efectos temporales de sus fallos. Las fuentes no detallan su procedimiento, pero lo vinculan al control constitucional y a la seguridad jurídica.  \n\n**RECOMENDACIÓN:**  \n1. **Para invocarla**: Presentar una demanda ante la Corte Constitucional, fundamentada en cargos específicos de violación constitucional.  \n2. **Plazo**: Verificar términos procesales (no especificados en las fuentes; consultar Código de Procedimiento Administrativo y de lo Contencioso).  \n3. **Documentos**: Copia de la norma impugnada, análisis de su inconstitucionalidad y pruebas de la vulneración.  \n4. **Asesoría**: Consultar un abogado especializado en derecho constitucional para estructurar la demanda adecuadamente.  \n\n⚠️ **Nota**: Las fuentes no detallan el procedimiento exacto; se recomienda complementar con jurisprudencia reciente y normas procesales vigentes.\n\n\n\n---\n\n\n\n**2. y cómo se aplica?**\n\n\n\n**HECHOS RELEVANTES:**  \nLa consulta no especifica un caso concreto, pero se refiere a la aplicación de principios constitucionales y jurisprudenciales en materia de derechos fundamentales, particularmente en salud y discapacidad, basados en la Sentencia T-760/2008 de la Corte Constitucional. Se mencionan temas como: (1) obligación de contar con políticas públicas estructuradas para garantizar derechos, (2) violación al principio de eficacia administrativa cuando las EPS asumen cargas no incluidas en el POS, y (3) necesidad de indicadores para evaluar el goce efectivo del derecho a la salud.  \n\n**NORMAS APLICABLES:**  \n1. **Sentencia T-760/2008 [1]:** Establece que la ausencia de un plan o política pública para garantizar derechos fundamentales (como la libertad de locomoción de discapacitados) configura una violación constitucional.  \n2. **Sentencia T-760/2008 [2]:** Señala que las EPS no pueden ser obligadas a asumir costos de servicios no POS sin un mecanismo eficiente de compensación estatal.  \n3. **Sentencia T-760/2008 [3] y [4]:** Exige al Ministerio de Protección Social elaborar informes con indicadores de goce efectivo del derecho a la salud, vinculados a la reducción de tutelas.  \n\n**ANÁLISIS JURÍDICO:**  \n- **Políticas públicas:** Según [1], el Estado debe contar con planes estructurados para cumplir obligaciones prestacionales (ej. accesibilidad para discapacitados). Su ausencia activa la protección constitucional vía tutela.  \n- **Responsabilidad de EPS:** [2] indica que las órdenes judiciales que imponen cargas no POS a las EPS deben ir acompañadas de compensación estatal, bajo el principio de eficacia administrativa.  \n- **Evaluación del sistema de salud:** [3] y [4] destacan la obligación de medir el impacto de las políticas en el goce efectivo del derecho a la salud, vinculando esto a la reducción de litigios.  \n\n**CONCLUSIÓN:**  \nLa Sentencia T-760/2008 establece: (1) la obligación del Estado de crear políticas públicas efectivas para derechos fundamentales, (2) límites a las cargas impuestas a las EPS en servicios no POS, y (3) la necesidad de indicadores concretos para evaluar el sistema de salud. Su aplicación requiere acciones coordinadas entre entidades estatales y privadas, con mecanismos de compensación y seguimiento.  \n\n**RECOMENDACIÓN:**  \n1. **Para ciudadanos:** Si un derecho fundamental (ej. salud o accesibilidad) no es garantizado por falta de políticas, interponer tutela invocando [1].  \n2. **Para EPS:** Reclamar compensación estatal cuando se ordene cubrir servicios no POS, basándose en [2].  \n3. **Para entidades estatales:** Implementar indicadores de goce efectivo del derecho a la salud, como exige [3] y [4], y presentar informes periódicos.  \n*Nota:* Para casos específicos, consultar un abogado con acceso a todas las fuentes legales relevantes.",
+      "evaluacion": {
+        "precision_normativa": 2,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 3,
+        "completitud": 4,
+        "ausencia_alucinaciones": 2,
+        "score_total": 2.2,
+        "veredicto": "DEFICIENTE",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 4 CP",
+          "Art. 241 CP"
+        ],
+        "alucinaciones": [
+          "Artículo 124",
+          "Artículo 48",
+          "Sentencia T-760/2008 (fuente incorrecta para el tema)"
+        ],
+        "comentario": "La respuesta del RAG es confusa, mezcla conceptos y no cita las normas constitucionales fundamentales para la excepción de inconstitucionalidad, además de inventar artículos y usar jurisprudencia irrelevante."
+      },
+      "error": null,
+      "timestamp": "2026-02-17T04:15:42.297Z"
+    },
+    {
+      "id": "ADM-001",
+      "area": "administrativo",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es el plazo para interponer acción de nulidad y restablecimiento del derecho?",
+      "respuesta_referencia": "Según el artículo 164 del Código de Procedimiento Administrativo y de lo Contencioso Administrativo (CPACA - Ley 1437 de 2011), la demanda de nulidad y restablecimiento del derecho debe presentarse dentro de los cuatro (4) meses siguientes a la comunicación, notificación o publicación del acto administrativo. Para actos que no requieren publicación, el término corre desde el día siguiente al de la notificación.",
+      "respuesta_rag": "**HECHOS RELEVANTES:**  \nLa consulta se refiere al plazo para interponer una acción de nulidad y restablecimiento del derecho en el marco del ordenamiento jurídico colombiano. No se especifica si el caso es de naturaleza administrativa, civil o penal, pero se asume un enfoque general basado en las fuentes disponibles.\n\n**NORMAS APLICABLES:**  \n1. **Artículo 189 de la Ley 1437 de 2011 (Código de Procedimiento Administrativo y de lo Contencioso Administrativo)**: Regula procesos de nulidad y restablecimiento del derecho, mencionando plazos para solicitudes posteriores a sentencias (20 días hábiles) [1].  \n2. **Artículo 136 de la Ley 1564 de 2012 (Código General del Proceso)**: Establece condiciones para saneamiento de nulidades, incluyendo plazos de 5 días para alegar vicios procesales [2].  \n3. **Artículo 186 de la Ley 600 de 2000 (Código de Procedimiento Penal anterior)**: Indica plazos de 3 días para interponer recursos ordinarios [8].  \n\n**ANÁLISIS JURÍDICO:**  \n- **Acción de nulidad**: Según el Artículo 136 [2], las nulidades deben alegarse dentro de los **5 días siguientes** al cese de la causa que las generó (ej. interrupción del proceso). Este plazo es fatal y su incumplimiento conlleva saneamiento tácito.  \n- **Restablecimiento del derecho**: El Artículo 189 [1] señala un plazo de **20 días hábiles** para que la entidad demandada solicite una indemnización compensatoria cuando no sea posible reintegrar al demandante, pero no especifica el plazo para interponer la acción inicial.  \n- **Contexto penal**: En procesos penales (Artículo 186 [8]), los recursos ordinarios tienen un plazo de **3 días** desde la notificación.  \n\n**CONCLUSIÓN:**  \nEl plazo para interponer una acción de nulidad varía según el ámbito:  \n- **Procesos administrativos/contenciosos**: 5 días para alegar vicios (Artículo 136 [2]).  \n- **Restablecimiento del derecho**: No se especifica plazo inicial en las fuentes, pero posteriores solicitudes (ej. indemnización) tienen 20 días hábiles (Artículo 189 [1]).  \n- **Procesos penales**: 3 días para recursos (Artículo 186 [8]).  \n\n**RECOMENDACIÓN:**  \n1. **Identificar el tipo de proceso**:  \n   - Si es administrativo, allegar pruebas dentro de los 5 días para nulidades (Artículo 136 [2]).  \n   - Si es contencioso administrativo, verificar jurisprudencia complementaria para el plazo inicial de restablecimiento.  \n2. **Documentación**: Preparar demanda, pruebas y actos administrativos impugnados.  \n3. **Entidades competentes**: Jueces administrativos o contenciosos según el caso.  \n4. **Asesoría urgente**: Dado que los plazos son fatales, consultar inmediatamente con un abogado especializado en la materia específica (administrativa, penal o civil).  \n\n⚠️ **Nota**: Las fuentes no precisan el plazo exacto para interponer la acción inicial de restablecimiento del derecho, por lo que se recomienda analizar jurisprudencia de la Corte Suprema o Consejo de Estado para complementar esta información.\n\n⚠️ **Vigencia:** La norma \"Código de Procedimiento Penal (Ley 906 de 2004)\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Código de Procedimiento Penal (Ley 906 de 2004)\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Código de Procedimiento Penal (Ley 906 de 2004)\" tiene artículos derogados o modificados; verifique vigencia específica.",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 0,
+        "score_total": 0,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 164 Ley 1437/2011 CPACA"
+        ],
+        "alucinaciones": [
+          "Artículo 189 de la Ley 1437 de 2011",
+          "Artículo 136 de la Ley 1564 de 2012",
+          "Artículo 186 de la Ley 600 de 2000"
+        ],
+        "comentario": "La respuesta del RAG es completamente incorrecta, no menciona el plazo de 4 meses del Art. 164 CPACA y en su lugar cita normas irrelevantes o inexistentes para el caso."
+      },
+      "error": null,
+      "timestamp": "2026-02-17T04:16:31.245Z"
+    },
+    {
+      "id": "ADM-002",
+      "area": "administrativo",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el derecho de petición y cuál es el plazo para responderlo?",
+      "respuesta_referencia": "El derecho de petición está consagrado en el artículo 23 de la Constitución Política y regulado por la Ley 1755 de 2015 (que modificó el CPACA). Las entidades públicas deben resolver las peticiones en un plazo de quince (15) días hábiles para peticiones de carácter general. Las consultas tienen 30 días hábiles. Las quejas y reclamos: 15 días hábiles. El incumplimiento genera responsabilidad disciplinaria y puede dar lugar a tutela.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Qué es el derecho de petición**\n\n\n\n**HECHOS RELEVANTES:**  \nLa consulta se centra en entender qué es el derecho de petición en el marco jurídico colombiano, su alcance, modalidades y efectos. No se mencionan hechos específicos, sino que se busca una definición y explicación normativa del derecho de petición.  \n\n**NORMAS APLICABLES:**  \n1. **Artículo 13 de la Ley 1437 de 2011 (Código de Procedimiento Administrativo y de lo Contencioso Administrativo)** [1]:  \n   - Establece que toda persona tiene derecho a presentar peticiones respetuosas a las autoridades por motivos de interés general o particular, con derecho a obtener una respuesta pronta, completa y de fondo.  \n   - Incluye solicitudes como reconocimiento de derechos, intervención de entidades, requerimiento de información, copias de documentos, quejas, denuncias, entre otros.  \n\n2. **Artículo 32 de la Ley 1437 de 2011** [2]:  \n   - Extiende el derecho de petición a personas naturales en casos de indefensión o subordinación.  \n   - Obliga a entidades privadas a recibir y radicar peticiones respetuosas, bajo sanción de multas.  \n\n3. **Sentencia T-760/2008 de la Corte Constitucional** [3], [4]:  \n   - Reitera que las autoridades deben responder con congruencia y de fondo a las peticiones, especialmente cuando afectan derechos fundamentales como la salud.  \n\n**ANÁLISIS JURÍDICO:**  \nEl derecho de petición es un derecho fundamental consagrado en el artículo 23 de la Constitución Política y regulado por la Ley 1437 de 2011. Según el **Artículo 13** [1], es un mecanismo que permite a cualquier persona (sin necesidad de invocarlo expresamente) dirigirse a autoridades o entidades para:  \n- Solicitar información, documentos o resoluciones.  \n- Plantear quejas, reclamos o denuncias.  \n- Exigir el reconocimiento de derechos o la prestación de servicios.  \n\nEl **Artículo 32** [2] amplía su alcance a relaciones privadas con asimetría de poder (ej.: empleador-empleado), garantizando asistencia por parte de personeros y la Defensoría del Pueblo. La jurisprudencia constitucional (Sentencia T-760/2008) [3], [4] enfatiza que las respuestas deben ser congruentes, oportunas y sustanciales, so pena de configurar una violación al derecho.  \n\n**CONCLUSIÓN:**  \nEl derecho de petición es un instrumento jurídico que permite a las personas interactuar con autoridades y, en ciertos casos, con particulares, para solicitar información, actuaciones o resolver situaciones jurídicas. Las entidades están obligadas a responder de manera pronta, completa y de fondo, bajo sanciones si incumplen.  \n\n**RECOMENDACIÓN:**  \n1. **Al presentar una petición:**  \n   - Dirigirla por escrito a la entidad competente, con datos claros (nombre, documento, hechos y solicitud concreta).  \n   - Conservar copia con acuse de recibo o prueba de envío (correo certificado, radicado electrónico).  \n\n2. **Plazos:**  \n   - Las autoridades tienen **15 días hábiles** para responder (10 días si es sobre documentos). En casos complejos, podrán ampliarlo por 10 días más, notificándolo.  \n\n3. **Acciones ante incumplimiento:**  \n   - Denunciar ante la Procuraduría o personería local.  \n   - Interponer acción de tutela si la demora afecta derechos fundamentales.  \n\n4. **En casos con particulares:**  \n   - Acudir a la Defensoría del Pueblo o personería municipal para asistencia.  \n\n⚠️ **Nota:** Para peticiones relacionadas con salud (POS, EPS), priorizar el uso de mecanismos como la Superintendencia de Salud, dado el precedente de la Sentencia T-760/2008 [3], [4].\n\n\n\n---\n\n\n\n**2. y cuál es el plazo para responderlo?**\n\n\n\n**HECHOS RELEVANTES:**  \nLa consulta se refiere a la determinación del plazo para responder a un acto o documento legal, sin especificar el contexto procesal o administrativo particular. Se requiere clarificar cómo se calculan los plazos legales en Colombia según la normativa disponible.\n\n**NORMAS APLICABLES:**  \n- **Artículo 67 del Código Civil (Ley 84 de 1873)** [1], [2], [3], [4]:  \n  - Establece que los plazos de días, meses o años mencionados en leyes o decretos se entienden completos y corren hasta la medianoche del último día.  \n  - Precisa que el primer y último día del plazo deben coincidir en número dentro de sus respectivos meses (ejemplo: del 15 de enero al 15 de febrero).  \n  - Indica que los plazos se ajustan según el calendario (28, 29, 30 o 31 días para meses; 365 o 366 días para años).  \n  - Aplica a prescripciones, calificaciones de edad y cualquier plazo legal, salvo que otra norma disponga expresamente lo contrario.  \n\n**ANÁLISIS JURÍDICO:**  \nEl Artículo 67 del Código Civil es la norma general para calcular plazos legales en Colombia. Sin embargo:  \n1. **Falta de especificidad**: La consulta no indica el tipo de acto (judicial, administrativo, contractual) ni la norma que fija el plazo concreto. El Artículo 67 solo establece reglas de cómputo, no plazos específicos.  \n2. **Aplicación supletoria**: Este artículo opera cuando no hay disposiciones especiales. Por ejemplo, plazos procesales (como los del Código General del Proceso) o administrativos (Ley 1437 de 2011) pueden tener regulaciones particulares.  \n\n**CONCLUSIÓN:**  \nEl plazo para responder depende de la norma que lo establezca (procesal, administrativa, contractual, etc.). El Artículo 67 solo regula el método de cálculo (días completos, coincidencia de fechas, ajuste por meses/años), pero no determina la duración del plazo en sí. Se requiere identificar la norma específica que fija el plazo en cuestión.  \n\n**RECOMENDACIÓN:**  \n1. **Identificar la norma aplicable**: Verificar si el plazo deriva de:  \n   - Un proceso judicial (consultar Código General del Proceso).  \n   - Un trámite administrativo (Ley 1437 de 2011 o normas sectoriales).  \n   - Un contrato (plazos pactados entre partes).  \n2. **Calcular el plazo**: Una vez identificado el plazo en días/meses/años, aplicar las reglas del Artículo 67 para su cómputo exacto.  \n3. **Acción urgente**: Si el plazo está en curso, considerar:  \n   - Presentar la respuesta antes del vencimiento (hasta medianoche del último día).  \n   - Solicitar prórroga si la norma lo permite.  \n4. **Asesoría especializada**: Dada la generalidad de la consulta, se recomienda analizar el caso concreto con un abogado para evitar la pérdida de derechos por vencimiento de plazos.  \n\n⚠️ **Nota**: Las fuentes disponibles no permiten determinar plazos específicos, solo su método de cálculo. Se requiere información adicional sobre el acto al que debe responderse.",
+      "evaluacion": {
+        "precision_normativa": 6,
+        "articulos_correctos": 4,
+        "interpretacion_valida": 7,
+        "completitud": 8,
+        "ausencia_alucinaciones": 5,
+        "score_total": 6,
+        "veredicto": "ACEPTABLE",
+        "normas_correctas": [
+          "Art. 23 CP",
+          "Ley 1437/2011 (CPACA)"
+        ],
+        "normas_faltantes": [
+          "Ley 1755/2015",
+          "Arts. 13-33 CPACA"
+        ],
+        "alucinaciones": [
+          "Art. 32 de la Ley 1437/2011 (extensión a privados con sanciones)",
+          "Art. 67 del Código Civil para cálculo de plazos del derecho de petición",
+          "Sentencia T-760/2008 como fuente principal"
+        ],
+        "comentario": "La respuesta RAG contiene información útil sobre el derecho de petición pero mezcla normas incorrectas, omite la Ley 1755/2015 clave, y genera confusión al citar el Código Civil para plazos administrativos."
+      },
+      "error": null,
+      "timestamp": "2026-02-17T04:17:01.408Z"
+    },
+    {
+      "id": "ADM-003",
+      "area": "administrativo",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cuándo procede la acción de repetición contra un servidor público?",
+      "respuesta_referencia": "La acción de repetición, regulada por la Ley 678 de 2001 y el artículo 90 de la Constitución, procede cuando el Estado ha sido condenado a reparar un daño antijurídico y este fue causado por la conducta dolosa o gravemente culposa de un servidor público. Es obligatoria cuando la condena supera 500 SMLMV. Prescribe en dos (2) años contados desde el pago total o desde la última cuota pagada. El servidor público puede ser declarado responsable patrimonialmente.",
+      "respuesta_rag": "**HECHOS RELEVANTES:**  \nLa consulta se refiere a los supuestos en los que procede la acción de repetición contra un servidor público, es decir, cuándo el Estado puede exigir al funcionario que reponga los valores pagados por indemnizaciones derivadas de su conducta.\n\n**NORMAS APLICABLES:**  \n- **Artículo 142 de la Ley 1437 de 2011 (Código de Procedimiento Administrativo y de lo Contencioso Administrativo)** [1]: Establece que la acción de repetición procede cuando el Estado ha realizado un pago indemnizatorio debido a la conducta dolosa o gravemente culposa de un servidor público o particular en ejercicio de funciones públicas.  \n- Las fuentes disponibles no incluyen artículos adicionales específicos sobre la acción de repetición en otros contextos legales.  \n\n**ANÁLISIS JURÍDICO:**  \nSegún el **Artículo 142** [1], la acción de repetición es un mecanismo legal que permite al Estado recuperar los valores pagados en indemnizaciones cuando estas son consecuencia de:  \n1. **Conducta dolosa o gravemente culposa** del servidor público o exservidor.  \n2. **Formas de terminación de conflictos** como condenas judiciales, conciliaciones u otros acuerdos.  \nLa norma permite ejercer esta pretensión de dos formas:  \n- **Autónoma**: Iniciando un proceso específico de repetición, donde el certificado de pago emitido por el pagador o tesorero es prueba suficiente.  \n- **Llamamiento en garantía**: Dentro del proceso de responsabilidad contra la entidad pública, incluyendo al servidor como responsable solidario.  \n\n**CONCLUSIÓN:**  \nLa acción de repetición contra un servidor público procede exclusivamente cuando:  \n- El Estado ha pagado una indemnización derivada de una condena, conciliación u otro acuerdo.  \n- Dicho pago se debe a la conducta dolosa o gravemente culposa del servidor.  \n- No se requiere demostrar negligencia leve; solo casos de dolo o culpa grave.  \n\n**RECOMENDACIÓN:**  \n1. **Documentación**: Recopilar el certificado de pago emitido por la entidad (tesorero/pagador) como prueba del desembolso indemnizatorio.  \n2. **Plazo**: Verificar los términos de prescripción para ejercer la acción (no especificados en las fuentes disponibles; se sugiere consultar el Código Civil o jurisprudencia).  \n3. **Vía procesal**: Decidir si se inicia una demanda autónoma de repetición o se ejerce el llamamiento en garantía dentro del proceso principal.  \n4. **Asesoría**: Consultar con un abogado especializado en derecho administrativo o contencioso para evaluar la viabilidad y estrategia legal.  \n\n⚠️ **Nota**: Las fuentes no detallan plazos específicos ni requisitos adicionales. Se recomienda complementar con normativa sobre responsabilidad fiscal (ej. Ley 42 de 1993) y jurisprudencia de la Sección Tercera del Consejo de Estado.\n\n⚠️ **Vigencia:** La norma \"Código Penal (Ley 599 de 2000)\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Código Penal (Ley 599 de 2000)\" tiene artículos derogados o modificados; verifique vigencia específica.",
+      "evaluacion": {
+        "precision_normativa": 2,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 4,
+        "completitud": 3,
+        "ausencia_alucinaciones": 5,
+        "score_total": 2.8,
+        "veredicto": "DEFICIENTE",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 90 CP",
+          "Ley 678/2001"
+        ],
+        "alucinaciones": [
+          "Artículo 142 de la Ley 1437 de 2011"
+        ],
+        "comentario": "La respuesta del RAG falla en citar las normas específicas solicitadas (Art. 90 CP y Ley 678/2001), menciona una norma incorrecta y omite elementos clave como el monto obligatorio y el plazo de prescripción."
+      },
+      "error": null,
+      "timestamp": "2026-02-17T04:17:58.757Z"
+    },
+    {
+      "id": "TRI-001",
+      "area": "tributario",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es la tarifa general del impuesto de renta para personas jurídicas en Colombia?",
+      "respuesta_referencia": "Según el artículo 240 del Estatuto Tributario (ET), modificado por la Ley 2277 de 2022 (Reforma Tributaria), la tarifa general del impuesto sobre la renta para personas jurídicas es del 35% a partir del año gravable 2022. Existen tarifas especiales para ciertos sectores como el financiero (38%) y para zonas francas (20%). Las entidades del régimen tributario especial tienen tarifa del 20%.",
+      "respuesta_rag": "**HECHOS RELEVANTES:**  \nLa consulta se refiere a la tarifa general del impuesto de renta aplicable a personas jurídicas en Colombia. Las fuentes disponibles mencionan aspectos relacionados con retenciones en la fuente y tarifas específicas para personas no residentes, pero no indican explícitamente la tarifa general para personas jurídicas residentes en Colombia.  \n\n**NORMAS APLICABLES:**  \n[1] Artículo 408 del Estatuto Tributario (Decreto 624 de 1989): Se menciona la \"tarifa general del impuesto sobre la renta y complementarios para personas jurídicas\", pero no se especifica su porcentaje.  \n[2] Artículo 20-3 del Estatuto Tributario: Establece una tarifa del 3% para personas no residentes que opten por declarar ingresos brutos derivados de servicios digitales, pero no aplica a personas jurídicas residentes.  \n\n**ANÁLISIS JURÍDICO:**  \nLas fuentes proporcionadas no contienen información específica sobre la tarifa general del impuesto de renta para personas jurídicas residentes en Colombia. El Artículo 408 hace referencia genérica a la \"tarifa general\", pero no la cuantifica. Por otro lado, el Artículo 20-3 regula una situación particular (personas no residentes) con una tarifa del 3%, que no es aplicable al caso en cuestión.  \n\n**CONCLUSIÓN:**  \nLas fuentes disponibles no permiten determinar la tarifa general del impuesto de renta para personas jurídicas residentes en Colombia, ya que no se especifica en los artículos citados. Se requiere consultar otras disposiciones del Estatuto Tributario o normativa vigente para obtener esta información.  \n\n**RECOMENDACIÓN:**  \n1. Verificar el Artículo 240 del Estatuto Tributario (no incluido en las fuentes proporcionadas), que tradicionalmente regula las tarifas del impuesto de renta para personas jurídicas.  \n2. Consultar la última reforma tributaria (Ley 2277 de 2022 o normas posteriores) para confirmar posibles cambios en las tarifas.  \n3. Revisar el calendario tributario de la DIAN para plazos de declaración y pagos aplicables.  \n4. En caso de duda, solicitar asesoría profesional directa o consultar fuentes oficiales actualizadas (DIAN o Ministerio de Hacienda).  \n\n⚠️ *Nota: La tarifa general para personas jurídicas ha variado históricamente entre el 25% y el 35%, pero se requiere confirmación normativa actualizada.*",
+      "evaluacion": {
+        "precision_normativa": 2,
+        "articulos_correctos": 1,
+        "interpretacion_valida": 3,
+        "completitud": 2,
+        "ausencia_alucinaciones": 8,
+        "score_total": 3.2,
+        "veredicto": "DEFICIENTE",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 240 ET",
+          "Ley 2277/2022"
+        ],
+        "alucinaciones": [
+          "Artículo 408 del Estatuto Tributario (Decreto 624 de 1989)",
+          "Artículo 20-3 del Estatuto Tributario"
+        ],
+        "comentario": "La respuesta RAG no responde la pregunta, no cita las normas correctas y se basa en artículos irrelevantes, aunque evita inventar la tarifa específica."
+      },
+      "error": null,
+      "timestamp": "2026-02-17T04:18:27.125Z"
+    },
+    {
+      "id": "TRI-002",
+      "area": "tributario",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuándo se genera el IVA y cuál es la tarifa general en Colombia?",
+      "respuesta_referencia": "El Impuesto sobre las Ventas (IVA) está regulado en el Libro Tercero del Estatuto Tributario (Arts. 420-513 ET). Se genera en la venta de bienes corporales muebles no excluidos, prestación de servicios en el territorio nacional, importación de bienes corporales muebles y juegos de suerte y azar. La tarifa general es del 19% según el artículo 468 ET, modificado por la Ley 1819 de 2016. Existen tarifas diferenciales del 5% y bienes exentos (0%).",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Cuándo se genera el IVA**\n\n\n\nA continuación, se presenta el análisis jurídico estructurado según el formato requerido:\n\n**HECHOS RELEVANTES:**\nLa consulta busca determinar el momento en que se genera el Impuesto sobre las Ventas (IVA) según la normativa tributaria colombiana.\n\n**NORMAS APLICABLES:**\n[1] Artículo 915 del Estatuto Tributario (modificado por el artículo 74 de la Ley 2010 de 2019): Establece el régimen de IVA para contribuyentes bajo el sistema SIMPLE, incluyendo obligaciones de declaración anual consolidada y transferencia mensual del IVA mediante recibo electrónico.\n\n[2] Artículo 477 del Estatuto Tributario: Regula el procedimiento para solicitar devolución del IVA pagado, indicando plazos y requisitos para dichas solicitudes.\n\n**ANÁLISIS JURÍDICO:**\nDe acuerdo con las fuentes disponibles, el IVA se genera en los siguientes momentos:\n1. Para contribuyentes bajo régimen SIMPLE, el IVA se genera mensualmente según el artículo 915, con obligación de transferirlo mediante recibo electrónico, además de presentar declaración anual consolidada.\n2. El artículo 477 establece que las devoluciones de IVA pueden solicitarse dos veces al año, lo que implica que el impuesto se genera de manera continua durante las operaciones gravables.\n\nSin embargo, las fuentes proporcionadas no contienen disposición expresa que indique el momento exacto de generación del IVA (si al momento de la venta, facturación o pago). La normativa citada se enfoca más en los mecanismos de declaración y devolución que en la causación propiamente dicha.\n\n**CONCLUSIÓN:**\nLas fuentes disponibles no contienen disposición expresa que defina el momento exacto de generación del IVA. La normativa citada regula aspectos procedimentales de declaración y devolución, pero no establece claramente el hecho generador del impuesto.\n\n**RECOMENDACIÓN:**\n1. Consultar específicamente el artículo que define el hecho generador del IVA en el Estatuto Tributario (no incluido en las fuentes proporcionadas).\n2. Verificar la Resolución DIAN que regula los momentos de causación del IVA.\n3. Para casos específicos, solicitar concepto oficial a la DIAN mediante radicado electrónico.\n4. Revisar jurisprudencia del Consejo de Estado sobre interpretación del hecho generador del IVA.\n\nNota: La información proporcionada es general y podría requerir análisis adicional con normativa más específica no incluida en las fuentes citadas.\n\n\n\n---\n\n\n\n**2. y cuál es la tarifa general en Colombia?**\n\n\n\n**HECHOS RELEVANTES:**  \nLa consulta pregunta por la \"tarifa general en Colombia\", pero el contexto legal proporcionado solo incluye información sobre el delito de contrabando según el Artículo 319 del Código Penal (Ley 599 de 2000), modificado por la Ley 1762 de 2015. No se mencionan tarifas generales, impuestos, aranceles u otros conceptos económicos en las fuentes disponibles.  \n\n**NORMAS APLICABLES:**  \n- **Artículo 319 del Código Penal (Ley 599 de 2000)** [1], [2]: Establece las penas por contrabando (prisión de 4 a 8 años y multa del 200% al 300% del valor aduanero de las mercancías), pero no regula tarifas generales.  \n\n**ANÁLISIS JURÍDICO:**  \nLas fuentes proporcionadas no contienen información sobre \"tarifa general\" en Colombia, ya que este término podría referirse a múltiples conceptos (aranceles, impuestos, tasas aduaneras, etc.). El Artículo 319 citado solo se enfoca en sanciones penales por contrabando, sin abordar aspectos tributarios o aduaneros específicos.  \n\n**CONCLUSIÓN:**  \nNo es posible determinar la \"tarifa general en Colombia\" con las fuentes disponibles, pues estas se limitan al ámbito penal del contrabando. La consulta requiere normativa adicional (ej. Estatuto Tributario, regulación aduanera o leyes de presupuesto).  \n\n**RECOMENDACIÓN:**  \n1. Consultar la **Dirección de Impuestos y Aduanas Nacionales (DIAN)** para tarifas aduaneras o impuestos.  \n2. Revisar el **Estatuto Tributario** (Ley 1819 de 2016 y normas modificatorias) para tasas impositivas generales.  \n3. Si la duda es sobre aranceles, buscar el **Decreto 1165 de 2019** (Reglamento Aduanero).  \n4. Para asesoría precisa, acudir a un abogado especializado en derecho tributario o aduanero.  \n\n⚠️ **Nota:** La respuesta se limita a las fuentes proporcionadas. Se requiere información adicional para abordar el concepto de \"tarifa general\" en otros contextos.\n\n⚠️ **Vigencia:** La norma \"Código Penal (Ley 599 de 2000)\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Código Penal (Ley 599 de 2000)\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Código Penal (Ley 599 de 2000)\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Código Penal (Ley 599 de 2000)\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Código Penal (Ley 599 de 2000)\" tiene artículos derogados o modificados; verifique vigencia específica.",
+      "evaluacion": {
+        "precision_normativa": 2,
+        "articulos_correctos": 1,
+        "interpretacion_valida": 1,
+        "completitud": 2,
+        "ausencia_alucinaciones": 3,
+        "score_total": 1.8,
+        "veredicto": "INCORRECTO",
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 420 ET",
+          "Art. 468 ET",
+          "Ley 1819/2016"
+        ],
+        "alucinaciones": [
+          "Artículo 915 ET (régimen SIMPLE)",
+          "Artículo 477 ET (devolución IVA)",
+          "Artículo 319 Código Penal (contrabando)"
+        ],
+        "comentario": "La respuesta RAG es completamente incorrecta: no identifica el hecho generador del IVA, no menciona la tarifa del 19%, y cita normas irrelevantes o inventadas que no corresponden a la pregunta."
+      },
+      "error": null,
+      "timestamp": "2026-02-17T04:18:49.071Z"
+    }
+  ],
+  "errores": []
+}

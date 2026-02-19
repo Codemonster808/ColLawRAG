@@ -1,5 +1,6 @@
 import '../styles/globals.css'
 import type { Metadata } from 'next'
+import SessionProvider from '@/components/SessionProvider'
 
 export const metadata: Metadata = {
   title: 'RAG Derecho Colombiano',
@@ -14,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className="min-h-screen bg-gray-50 text-gray-900 antialiased">
-        {children}
+        <SessionProvider>{children}</SessionProvider>
       </body>
     </html>
   )

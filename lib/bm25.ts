@@ -178,9 +178,31 @@ export function hybridScore(
 
 /**
  * Serializes a BM25 index to a JSON string for persistence.
+ * For very large indices (>100k docs), use streamSerializeBM25Index to avoid RangeError.
  */
 export function serializeBM25Index(index: BM25Index): string {
   return JSON.stringify(index)
+}
+
+/**
+ * Serializes a BM25 index to a Node.js Writable stream to avoid building a single huge string (RangeError with 36k+ docs).
+ */
+export function streamSerializeBM25Index(
+  index: BM25Index,
+  stream: { write(chunk: string, encoding?: BufferEncoding, cb?: (err?: Error) => void): boolean }
+): void {
+  stream.write('{"df":')
+  stream.write(JSON.stringify(index.df))
+  stream.write(',"avgDL":' + index.avgDL + ',"docLengths":')
+  stream.write(JSON.stringify(index.docLengths))
+  stream.write(',"invertedIndex":{')
+  let first = true
+  for (const [term, postings] of Object.entries(index.invertedIndex)) {
+    if (!first) stream.write(',')
+    stream.write(JSON.stringify(term) + ':' + JSON.stringify(postings))
+    first = false
+  }
+  stream.write('},"totalDocs":' + index.totalDocs + '}')
 }
 
 /**

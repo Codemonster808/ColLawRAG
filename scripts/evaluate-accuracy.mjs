@@ -114,17 +114,36 @@ const blue = (txt) => color(C.blue, txt);
 
 // ─── Paso 1: Llamar al RAG ────────────────────────────────────────────────────
 
-async function queryRAG(question) {
+async function queryRAG(question, retries = 3) {
   const url = `${API_URL}/api/rag`;
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ query: question }),
-    signal: AbortSignal.timeout(120_000),
-  });
-  if (!res.ok) throw new Error(`RAG API error: ${res.status} ${res.statusText}`);
-  const data = await res.json();
-  return data.answer || data.response || data.text || JSON.stringify(data);
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query: question }),
+        signal: AbortSignal.timeout(180_000), // 3 min — HF cold start puede tardar
+      });
+      if (res.status === 429) {
+        // Rate limit — esperar y reintentar con backoff
+        const wait = attempt * 10_000;
+        process.stdout.write(yellow(` (429 rate limit, esperando ${wait/1000}s)... `));
+        await new Promise(r => setTimeout(r, wait));
+        continue;
+      }
+      if (!res.ok) throw new Error(`RAG API error: ${res.status} ${res.statusText}`);
+      const data = await res.json();
+      return data.answer || data.response || data.text || JSON.stringify(data);
+    } catch (err) {
+      if (attempt < retries && (err.name === 'TimeoutError' || err.name === 'AbortError')) {
+        process.stdout.write(yellow(` (timeout, reintentando ${attempt}/${retries})... `));
+        await new Promise(r => setTimeout(r, 5000));
+        continue;
+      }
+      throw err;
+    }
+  }
+  throw new Error('Máximo de reintentos alcanzado');
 }
 
 // ─── Paso 2: Construir prompt TOON para el juez ───────────────────────────────
@@ -197,7 +216,7 @@ Responde SIEMPRE con un JSON válido y nada más.`;
       temperature: 0.1,
       max_tokens: 600,
     }),
-    signal: AbortSignal.timeout(30_000),
+    signal: AbortSignal.timeout(60_000),
   });
 
   if (!res.ok) throw new Error(`Judge API error: ${res.status} ${await res.text()}`);
@@ -378,6 +397,10 @@ function printSummary(report) {
   console.log('\n' + '═'.repeat(60));
   console.log(bold('  📊 REPORTE DE ACCURACY — ColLawRAG vs Abogados'));
   console.log('═'.repeat(60));
+  if (report.error) {
+    console.log(red(`\n✗ ${report.error}`));
+    return;
+  }
 
   const r = report.resumen;
   const scoreNum = parseFloat(r.score_promedio);
@@ -479,21 +502,36 @@ async function main() {
     }
   }
 
-  // Evaluar casos con pausa entre solicitudes para no sobrecargar la API
-  const results = [];
-  const SAVE_EVERY = 10; // guardar checkpoint cada N casos
-  for (let i = 0; i < casos.length; i++) {
-    const result = await evaluateCase(casos[i], i, casos.length);
-    results.push(result);
-    // Guardar checkpoint parcial
-    if ((i + 1) % SAVE_EVERY === 0 || i === casos.length - 1) {
-      const partial = generateReport(results);
-      writeFileSync(OUTPUT_PATH, JSON.stringify(partial, null, 2));
-      console.log(gray(`  💾 Checkpoint guardado (${i + 1}/${casos.length} casos)`));
-    }
-    // Pausa entre casos (respetar rate limits)
-    if (i < casos.length - 1) await new Promise(r => setTimeout(r, 2000));
+  // Evaluar casos en paralelo (concurrencia controlada)
+  const isLocal = API_URL.includes('localhost') || API_URL.includes('127.0.0.1');
+  const CONCURRENCY = getArg('--concurrency', '1'); // HF rate limit: secuencial
+  const PAUSE_MS = parseInt(getArg('--pause', '2000')); // 2s entre requests (respetar HF rate limit)
+  const SAVE_EVERY = 5; // guardar checkpoint más frecuente
+  console.log(gray(`\n  ⚡ Concurrencia: ${CONCURRENCY} | Pausa: ${PAUSE_MS}ms | Timeout RAG: 180s (2 intentos)\n`));
+
+  const results = new Array(casos.length).fill(null);
+  let completed = 0;
+
+  // Pool de concurrencia
+  async function runWithPool(items, concurrency, fn) {
+    const queue = [...items.entries()];
+    const workers = Array.from({ length: Math.min(concurrency, items.length) }, async () => {
+      while (queue.length > 0) {
+        const [i, item] = queue.shift();
+        results[i] = await fn(item, i, items.length);
+        completed++;
+        if (completed % SAVE_EVERY === 0 || completed === items.length) {
+          const partial = generateReport(results.filter(Boolean));
+          writeFileSync(OUTPUT_PATH, JSON.stringify(partial, null, 2));
+          console.log(gray(`  💾 Checkpoint: ${completed}/${items.length} casos`));
+        }
+        if (PAUSE_MS > 0 && queue.length > 0) await new Promise(r => setTimeout(r, PAUSE_MS));
+      }
+    });
+    await Promise.all(workers);
   }
+
+  await runWithPool(casos, parseInt(CONCURRENCY), evaluateCase);
 
   // Generar reporte final
   const report = generateReport(results);
