@@ -356,8 +356,9 @@ IMPORTANTE: Solo puedes citar fuentes del 1 al ${Math.min(chunks.length, maxCita
 
 /**
  * Detecta la complejidad de una consulta con análisis más sofisticado
+ * FASE 0 - Tarea 0.2: Refactorizado para no requerir chunksCount (elimina doble retrieval)
  */
-export function detectComplexity(query: string, chunksCount: number): 'baja' | 'media' | 'alta' {
+export function detectComplexity(query: string): 'baja' | 'media' | 'alta' {
   const lowerQuery = query.toLowerCase()
   
   // Contador de indicadores de complejidad
@@ -431,9 +432,9 @@ export function detectComplexity(query: string, chunksCount: number): 'baja' | '
     complexityScore += 2 // Consultas multi-área son más complejas
   }
   
-  // Si hay pocas fuentes disponibles, aumenta la complejidad percibida
-  const sourceComplexity = chunksCount < 5 ? 2 : chunksCount < 8 ? 1 : 0
-  complexityScore += sourceComplexity
+  // FASE 0 - Tarea 0.2: Eliminado ajuste por chunksCount para evitar doble retrieval
+  // Anteriormente: const sourceComplexity = chunksCount < 5 ? 2 : chunksCount < 8 ? 1 : 0
+  // La complejidad ahora se basa SOLO en características de la query
   
   // Longitud de la consulta (consultas largas suelen ser más complejas)
   if (query.length > 200) {
@@ -457,13 +458,14 @@ export function detectComplexity(query: string, chunksCount: number): 'baja' | '
 
 /**
  * Genera prompts completos para el modelo de generación
+ * FASE 0 - Tarea 0.2: Actualizado para usar detectComplexity sin chunksCount
  */
 export function generatePrompts(context: PromptContext): {
   systemPrompt: string
   userPrompt: string
 } {
   const legalArea = context.legalArea || detectLegalArea(context.query)
-  const complexity = context.complexity || detectComplexity(context.query, context.chunks.length)
+  const complexity = context.complexity || detectComplexity(context.query)
   
   const updatedContext = {
     ...context,

@@ -266,20 +266,18 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
   logger.logPipelineStep('Legal area detected', requestId, { legalArea: detectedLegalArea })
 
   // 1.5 Detectar complejidad de la consulta para ajustar parámetros
-  // Detectar complejidad basada en la consulta (sin necesidad de retrieval previo)
-  // Hacemos un retrieval pequeño inicial solo para estimar disponibilidad de fuentes
-  const quickRetrieval = await retrieveRelevantChunks(query, filters, 5)
-  const detectedComplexity = detectComplexity(query, quickRetrieval.length)
+  // FASE 0 - Tarea 0.2: Eliminado quickRetrieval para reducir latencia ~40-50%
+  // La complejidad ahora se detecta SOLO analizando la query (sin retrieval previo)
+  const detectedComplexity = detectComplexity(query)
   
   // Top-K adaptativo según complejidad
   const adaptiveTopK = detectedComplexity === 'alta' ? 16 : detectedComplexity === 'media' ? 12 : 8
   logger.logPipelineStep('Complexity detected', requestId, { 
     complexity: detectedComplexity, 
-    adaptiveTopK,
-    quickRetrievalCount: quickRetrieval.length
+    adaptiveTopK
   })
 
-  // 2. Retrieval completo con re-ranking usando top-K adaptativo
+  // 2. Retrieval con re-ranking usando top-K adaptativo (UN SOLO retrieval)
   logger.logPipelineStep('Retrieving chunks', requestId)
   const retrieved = await retrieveRelevantChunks(query, filters, adaptiveTopK)
   logger.logPipelineStep('Chunks retrieved', requestId, { 
