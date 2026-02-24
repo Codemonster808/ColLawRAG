@@ -7,25 +7,29 @@ impacto_estimado: "Habilita medición iterativa; no mejora accuracy directo"
 esfuerzo: "3-5 días"
 dependencias: ninguna estricta; paralelo a otras fases
 
+avance_2026_02{estado,tareas_hechas,pending,siguiente_payload_para_trabajo}:
+  parcial,"5.5 (OpenClaw 2026-02-24)","5.1 5.2 5.3 5.4 (Cursor)","OpenClaw 5.5 completada. Cursor pendiente: 5.1-5.4. Scripts diagnóstico listos."
+
 autonomo{modo,ruta_proyecto,no_modificar,prerequisitos,siguiente_payload,al_fallar}:
   autonomo,ColLawRAG,"docs/mejoras/*.md","data/benchmarks/qa-abogados.json existe; scripts/evaluate-accuracy.mjs existe; npm install",ninguno,"reportar_y_continuar"
 
-multi_agente{habilitado,herramientas,sprint_id,paralelo_en_fase,post_fase_agente}:
-  true,"cursor,open_claw",Sprint_4_observabilidad,true,cursor
+multi_agente{habilitado,herramientas,sprint_id,paralelo_en_fase,post_fase_agente,token_budget}:
+  true,"cursor,open_claw",Sprint_4_observabilidad,true,cursor,"cursor=intensivo open_claw=ligero"
 
-asignacion_agente[5]{tarea_id,agente,archivos_exclusivos}:
-  5.1,cursor,"data/benchmarks/qa-abogados.json scripts/annotate-retrieval-ground-truth.mjs"
-  5.2,cursor,scripts/evaluate-retrieval.mjs
-  5.3,open_claw,"lib/tracing.ts lib/rag.ts"
-  5.4,cursor,scripts/evaluate-accuracy.mjs
-  5.5,open_claw,"scripts/full-diagnostic.mjs scripts/compare-diagnostics.mjs"
+asignacion_agente[5]{tarea_id,agente,archivos_exclusivos,intensidad_tokens}:
+  5.1,cursor,"data/benchmarks/qa-abogados.json scripts/annotate-retrieval-ground-truth.mjs",alta
+  5.2,cursor,scripts/evaluate-retrieval.mjs,alta
+  5.3,cursor,"lib/tracing.ts lib/rag.ts",alta
+  5.4,cursor,scripts/evaluate-accuracy.mjs,alta
+  5.5,open_claw,"scripts/full-diagnostic.mjs scripts/compare-diagnostics.mjs",baja
 
-grupos_paralelos[1]{ola,tareas,agentes,nota}:
-  1,"5.1 5.2 5.3 5.4 5.5","cursor open_claw","Paralelo total: cursor 5.1 5.2 5.4 (dataset retrieval juez); open_claw 5.3 5.5 (tracing diagnósticos). Sin archivos compartidos."
+grupos_paralelos[2]{ola,tareas,agentes,nota}:
+  1,"5.1 5.2 5.3 5.4",cursor,"Cursor: dataset ground truth, evaluate-retrieval, tracing, juez evaluate-accuracy"
+  2,5.5,open_claw,"OpenClaw: solo scripts full-diagnostic y compare-diagnostics (scripts cortos)"
 
 instruccion_herramienta[2]{herramienta,instruccion}:
-  cursor,"Ejecuta en paralelo con open_claw: tareas 5.1 (chunks_esperados dataset), 5.2 (evaluate-retrieval.mjs), 5.4 (juez evaluate-accuracy). No toques lib/tracing.ts lib/rag.ts full-diagnostic compare-diagnostics. Tras cerrar ejecuta post_fase_comando (evaluate-retrieval --limit 10) si 5.2 y 5.1 están listos."
-  open_claw,"Ejecuta en paralelo con cursor: tareas 5.3 (tracing + rag) y 5.5 (full-diagnostic compare-diagnostics). No toques qa-abogados.json evaluate-retrieval.mjs evaluate-accuracy.mjs. Puedes ejecutar post_fase_comando de diagnóstico si aplica."
+  cursor,"Ejecuta tareas 5.1 5.2 5.3 5.4 (dataset chunks_esperados, evaluate-retrieval.mjs, lib/tracing.ts + rag.ts, juez en evaluate-accuracy.mjs). No toques full-diagnostic ni compare-diagnostics. Ejecuta post_fase_comando (evaluate-retrieval --limit 10) si aplica."
+  open_claw,"Solo tarea 5.5 (ligera): CREAR scripts/full-diagnostic.mjs y scripts/compare-diagnostics.mjs (scripts acotados). No toques dataset evaluate-retrieval tracing rag evaluate-accuracy. No ejecutes post_fase_comando."
 
 cuellos_botella[1]{num,descripcion,archivo}:
   10,Evaluación ciega sin métricas por capa; juez 7B trunca 250 chars,scripts/evaluate-accuracy.mjs data/benchmarks/qa-abogados.json
