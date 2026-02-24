@@ -26,6 +26,9 @@ if (fs.existsSync(envPath)) {
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
+// Modelo unificado: misma variable que lib/embeddings.ts (FASE_0 tarea 0.1)
+const EMBEDDING_MODEL = process.env.EMBEDDING_MODEL || 'Xenova/paraphrase-multilingual-MiniLM-L12-v2'
+
 const DOCS_DIR = path.join(process.cwd(), 'data', 'documents')
 const OUT_PATH = path.join(process.cwd(), 'data', 'index.json')
 
@@ -451,17 +454,21 @@ function fakeEmbed(text, dim = 768) {
   return v.map(x => x / norm)
 }
 
+function getEmbedProvider() {
+  if (process.env.EMB_PROVIDER) return process.env.EMB_PROVIDER
+  return process.env.HUGGINGFACE_API_KEY ? 'hf' : 'xenova'
+}
+
 async function embedBatch(texts) {
-  const provider = process.env.EMB_PROVIDER || 'hf'
+  const provider = getEmbedProvider()
   if (provider === 'local') {
-    console.warn('⚠️  Usando embeddings locales (fake). Para embeddings reales, configure HUGGINGFACE_API_KEY y EMB_PROVIDER=hf')
+    console.warn('⚠️  Usando embeddings locales (fake). Use EMB_PROVIDER=xenova para embeddings reales locales.')
     return texts.map(t => fakeEmbed(t))
   }
   if (provider === 'xenova') {
     try {
       const { pipeline } = await import('@xenova/transformers')
-      const model = process.env.EMB_MODEL || 'Xenova/paraphrase-multilingual-MiniLM-L12-v2'
-      const extractor = await pipeline('feature-extraction', model)
+      const extractor = await pipeline('feature-extraction', EMBEDDING_MODEL)
       const outputs = await extractor(texts, { pooling: 'mean', normalize: true })
       // Tensor batch: shape [n, dim] — split correctly
       if (outputs?.dims?.length === 2) {
@@ -472,25 +479,23 @@ async function embedBatch(texts) {
       // Single text fallback
       return [Array.from(outputs.data || outputs)]
     } catch (e) {
-      console.error('⚠️  Error con Xenova, usando embeddings locales:', e.message)
+      console.error('⚠️  Error con Xenova, usando embeddings locales (fake):', e.message)
       return texts.map(t => fakeEmbed(t))
     }
   }
-  // Default: Hugging Face - requiere API key
+  // Hugging Face API — requiere API key
   if (!process.env.HUGGINGFACE_API_KEY) {
-    console.error('❌ HUGGINGFACE_API_KEY no configurada. Configure la variable de entorno para usar embeddings reales.')
-    console.error('   Usando embeddings locales (fake) como fallback.')
-    return texts.map(t => fakeEmbed(t))
+    console.error('❌ EMB_PROVIDER=hf requiere HUGGINGFACE_API_KEY. Use EMB_PROVIDER=xenova para embeddings locales.')
+    process.exit(1)
   }
   const { HfInference } = await import('@huggingface/inference')
-  const model = process.env.HF_EMBEDDING_MODEL || 'sentence-transformers/paraphrase-multilingual-mpnet-base-v2'
   const hf = new HfInference(process.env.HUGGINGFACE_API_KEY, {
     endpoint: 'https://router.huggingface.co'
   })
   const maxRetries = 3
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
-      const out = await hf.featureExtraction({ model, inputs: texts })
+      const out = await hf.featureExtraction({ model: EMBEDDING_MODEL, inputs: texts })
       return out
     } catch (err) {
       const is5xx = err?.httpResponse?.status >= 500 || err?.message?.includes('500')
@@ -532,12 +537,15 @@ async function upsertPinecone(chunks) {
 }
 
 async function main() {
-  // Validar configuración de embeddings
-  const provider = process.env.EMB_PROVIDER || 'hf'
+  // Validar configuración de embeddings (por defecto: xenova si no hay HF key)
+  const provider = getEmbedProvider()
   if (provider === 'hf' && !process.env.HUGGINGFACE_API_KEY) {
     console.error('❌ Error: EMB_PROVIDER=hf requiere HUGGINGFACE_API_KEY')
-    console.error('   Configure HUGGINGFACE_API_KEY en .env.local o use EMB_PROVIDER=local para desarrollo')
+    console.error('   Configure HUGGINGFACE_API_KEY en .env.local o deje sin definir para usar Xenova (embeddings locales)')
     process.exit(1)
+  }
+  if (provider === 'xenova') {
+    console.log('📦 Embeddings: Xenova (local, sin API HuggingFace)')
   }
 
   if (!fs.existsSync(DOCS_DIR)) {

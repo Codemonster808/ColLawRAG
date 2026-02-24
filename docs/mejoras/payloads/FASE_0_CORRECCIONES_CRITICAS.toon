@@ -1,0 +1,59 @@
+proyecto: ColLawRAG
+documento_base: docs/mejoras/FASE_0_CORRECCIONES_CRITICAS.md
+generado: 2026-02-23
+modo: autonomo
+prioridad: URGENTE
+impacto_estimado: "+15-25% accuracy"
+esfuerzo: "1-2 días"
+dependencias: ninguna
+
+autonomo{modo,ruta_proyecto,no_modificar,prerequisitos,siguiente_payload,al_fallar}:
+  autonomo,ColLawRAG,"docs/mejoras/*.md","node --version; test -f package.json; npm ci o npm install","docs/mejoras/payloads/FASE_1_RETRIEVAL_OPTIMIZADO.toon",abortar_fase
+
+multi_agente{habilitado,herramientas,sprint_id,paralelo_en_fase,post_fase_agente}:
+  true,"cursor,open_claw",Sprint_1_fundamentos,true,cursor
+
+asignacion_agente[3]{tarea_id,agente,archivos_exclusivos}:
+  0.1,cursor,"lib/embeddings.ts scripts/ingest.mjs .env.example"
+  0.2,open_claw,"lib/rag.ts lib/prompt-templates.ts"
+  0.3,cursor,lib/embeddings.ts
+
+grupos_paralelos[2]{ola,tareas,agentes}:
+  1,"0.1 0.2","cursor open_claw"
+  2,0.3,cursor
+
+instruccion_herramienta[2]{herramienta,instruccion}:
+  cursor,"Ejecuta solo tareas 0.1 y 0.3. No toques lib/rag.ts ni lib/prompt-templates.ts. Ola 1: haz 0.1. Tras sync con open_claw (ola 1 cerrada) haz 0.3. Al cerrar fase ejecuta post_fase_comando (re-indexar)."
+  open_claw,"Ejecuta solo tarea 0.2. No toques lib/embeddings.ts scripts/ingest.mjs .env.example. Ola 1: haz 0.2 en paralelo con cursor (0.1). No ejecutes post_fase_comando; lo hace cursor."
+
+cuellos_botella[3]{num,descripcion,archivo}:
+  1,Modelos embeddings incompatibles ingest vs query,lib/embeddings.ts scripts/ingest.mjs
+  2,Doble retrieval en pipeline por consulta,lib/rag.ts 271-284
+  3,Fallback a embeddings aleatorios sin advertencia,lib/embeddings.ts 32 48 108
+
+tareas[3]{id,titulo,archivos_afectados,validacion}:
+  0.1,Unificar modelo de embeddings,lib/embeddings.ts scripts/ingest.mjs,.env.example,Cosine similarity top-1 > 0.6; re-indexar obligatorio
+  0.2,Eliminar doble retrieval,lib/rag.ts lib/prompt-templates.ts,Latencia -40% a -50%; calidad igual
+  0.3,Warnings y eliminar fake embeddings en prod,lib/embeddings.ts,Log error si fakeEmbed; NODE_ENV=production falla; validar dimensiones vs índice
+
+archivos_modificar[5]{archivo,accion}:
+  lib/embeddings.ts,Unificar modelo default; warnings; validar dimensiones
+  scripts/ingest.mjs,Usar misma variable EMBEDDING_MODEL
+  lib/rag.ts,Eliminar quickRetrieval; refactor detectComplexity
+  lib/prompt-templates.ts,Ajustar detectComplexity sin chunksCount
+  .env.example,Agregar EMBEDDING_MODEL
+
+orden_ejecucion[3]{paso,tarea_id,nota}:
+  1,0.1,Re-indexar después obligatorio
+  2,0.2,Puede hacerse junto con 0.1
+  3,0.3,Verificar .env en prod
+
+criterio_exito[5]{item}:
+  Un solo modelo embeddings en ingest y query verificable por logs
+  Cosine similarity top-1 mayor 0.5 para queries de prueba
+  Latencia pipeline reducida mayor 30%
+  Zero fallbacks a fake embeddings en producción
+  Re-indexación completa ejecutada tras unificar modelos
+
+post_fase_comando[1]{orden,comando,descripcion}:
+  1,"cd ColLawRAG && node scripts/ingest.mjs","Re-indexar tras unificar modelos; obligatorio antes de dar fase por cerrada"

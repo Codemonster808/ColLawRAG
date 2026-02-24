@@ -15,11 +15,14 @@
  *   --output <path>     Ruta para guardar resultados (default: data/benchmarks/results-{date}.json)
  *   --limit <n>         Evaluar solo los primeros N casos
  *   --area <area>       Filtrar por área legal (laboral, civil, penal, etc.)
+ *   --stratify <key>    Muestreo estratificado: "area" o "dificultad" (proporcional)
+ *   --sample <n>        Con --stratify: tamaño total de la muestra (por defecto 30)
  *   --skip-rag          Omitir llamadas al RAG (evaluar respuestas ya guardadas)
  *   --verbose           Mostrar payloads TOON y respuestas completas
+ *   --copy-to-history   Copiar results al directorio data/benchmarks/history/
  */
 
-import { readFileSync, writeFileSync, existsSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 // Minimal TOON encoder (inline, no external deps)
@@ -69,8 +72,11 @@ const API_URL = hasFlag('--prod')
 const DATASET_PATH = getArg('--dataset', join(ROOT, 'data/benchmarks/qa-abogados.json'));
 const LIMIT = getArg('--limit', null);
 const AREA_FILTER = getArg('--area', null);
+const STRATIFY = getArg('--stratify', null); // 'area' | 'dificultad'
+const SAMPLE_SIZE = getArg('--sample', null);
 const VERBOSE = hasFlag('--verbose');
 const SKIP_RAG = hasFlag('--skip-rag');
+const COPY_TO_HISTORY = hasFlag('--copy-to-history');
 
 const TODAY = new Date().toISOString().split('T')[0];
 const OUTPUT_PATH = getArg(
@@ -88,8 +94,9 @@ const HF_KEY = process.env.HUGGINGFACE_API_KEY
     } catch { return null; }
   })();
 
-const JUDGE_MODEL = 'deepseek/deepseek-v3.2';
-const JUDGE_ENDPOINT = 'https://router.huggingface.co/novita/v3/openai/chat/completions';
+// Juez local via Ollama — sin rate limit, sin costo
+const JUDGE_MODEL = process.env.JUDGE_MODEL || 'qwen2.5:7b-instruct';
+const JUDGE_ENDPOINT = process.env.JUDGE_ENDPOINT || 'http://localhost:11434/v1/chat/completions';
 
 // ─── Colores terminal ─────────────────────────────────────────────────────────
 const C = {
@@ -146,88 +153,152 @@ async function queryRAG(question, retries = 3) {
   throw new Error('Máximo de reintentos alcanzado');
 }
 
-// ─── Paso 2: Construir prompt TOON para el juez ───────────────────────────────
+// ─── Paso 2: Construir prompt simplificado para el juez ──────────────────────
 
 function buildJudgePromptToon({ question, ragAnswer, referenceAnswer, area, normasClave, criterio }) {
-  const payload = encode({
-    tarea: 'evaluar_respuesta_juridica_colombiana',
-    instrucciones: [
-      'Compara la respuesta del sistema RAG con la respuesta de referencia del abogado experto',
-      'Evalúa cada criterio de 0 a 10 (10=perfecto, 0=incorrecto)',
-      'Responde ÚNICAMENTE con el JSON solicitado, sin texto adicional',
-    ],
-    area_legal: area,
-    normas_esperadas: normasClave,
-    criterio_principal: criterio,
-    pregunta: question,
-    respuestas: [
-      { fuente: 'RAG', texto: ragAnswer },
-      { fuente: 'abogado_experto', texto: referenceAnswer },
-    ],
-    criterios_evaluacion: [
-      { nombre: 'precision_normativa', descripcion: 'Cita las normas correctas (artículos, leyes, decretos)' },
-      { nombre: 'articulos_correctos', descripcion: 'Los números de artículos y leyes son exactos' },
-      { nombre: 'interpretacion_valida', descripcion: 'La interpretación jurídica es correcta' },
-      { nombre: 'completitud', descripcion: 'Responde todos los aspectos de la pregunta' },
-      { nombre: 'ausencia_alucinaciones', descripcion: 'No inventa normas o datos que no existen' },
-    ],
-    formato_respuesta: {
-      tipo: 'json_estricto',
-      estructura: {
-        precision_normativa: 'number (0-10)',
-        articulos_correctos: 'number (0-10)',
-        interpretacion_valida: 'number (0-10)',
-        completitud: 'number (0-10)',
-        ausencia_alucinaciones: 'number (0-10)',
-        score_total: 'number (0-10, promedio ponderado)',
-        veredicto: 'EXCELENTE|BUENO|ACEPTABLE|DEFICIENTE|INCORRECTO',
-        normas_correctas: 'array of strings (normas que el RAG citó correctamente)',
-        normas_faltantes: 'array of strings (normas que el RAG debió mencionar)',
-        alucinaciones: 'array of strings (normas o datos incorrectos que inventó)',
-        comentario: 'string (análisis breve 1-2 oraciones)',
-      }
-    }
-  });
+  // Compact prompt for local 7B models — clear scale definition, no hardcoded example values
+  const ragShort = ragAnswer.substring(0, 250).replace(/\n+/g, ' ');
+  const refShort = referenceAnswer.substring(0, 180).replace(/\n+/g, ' ');
+  const normas = Array.isArray(normasClave) ? normasClave.slice(0, 3).join(', ') : (normasClave || '');
 
-  return payload;
+  return `Evalúa la respuesta RAG vs la respuesta del experto en derecho colombiano.
+Área: ${area}. Normas clave esperadas: ${normas}.
+
+RESPUESTA RAG: ${ragShort}
+
+RESPUESTA EXPERTO: ${refShort}
+
+Puntúa cada criterio de 0 a 10 (0=incorrecto, 5=parcial, 10=perfecto):
+- precision_normativa: ¿cita las normas correctas?
+- articulos_correctos: ¿menciona los artículos exactos?
+- interpretacion_valida: ¿la interpretación jurídica es correcta?
+- completitud: ¿responde todo lo preguntado?
+- ausencia_alucinaciones: ¿no inventa normas inexistentes? (10=sin alucinaciones, 0=muchas)
+
+Responde SOLO con JSON válido, sin texto adicional:
+{"precision_normativa":0,"articulos_correctos":0,"interpretacion_valida":0,"completitud":0,"ausencia_alucinaciones":0,"normas_correctas":[],"normas_faltantes":[],"alucinaciones":[],"comentario":"breve"}`;
 }
 
 // ─── Paso 3: Llamar al LLM juez ───────────────────────────────────────────────
 
-async function callJudge(toonPrompt) {
-  if (!HF_KEY) throw new Error('HUGGINGFACE_API_KEY no configurada');
+/** Intenta reparar JSON truncado o con errores menores */
+function repairJSON(raw) {
+  // 1. Extraer el bloque JSON más largo posible
+  const match = raw.match(/\{[\s\S]+/);
+  if (!match) return null;
+  let s = match[0];
 
-  const systemPrompt = `Eres un abogado experto en derecho colombiano que evalúa la calidad de respuestas jurídicas.
-Tu tarea es comparar objetivamente la respuesta de un sistema RAG con la de un abogado experto.
-Responde SIEMPRE con un JSON válido y nada más.`;
+  // 2. Cerrar llaves/corchetes abiertos si fue truncado
+  const opens = (s.match(/\{/g) || []).length;
+  const closes = (s.match(/\}/g) || []).length;
+  if (opens > closes) s += '}'.repeat(opens - closes);
 
-  const res = await fetch(JUDGE_ENDPOINT, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${HF_KEY}`,
-    },
-    body: JSON.stringify({
-      model: JUDGE_MODEL,
-      messages: [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: '```toon\n' + toonPrompt + '\n```\n\nResponde con el JSON de evaluación:' },
-      ],
-      temperature: 0.1,
-      max_tokens: 600,
-    }),
-    signal: AbortSignal.timeout(60_000),
-  });
+  // 3. Eliminar trailing comma antes de cierre
+  s = s.replace(/,\s*([}\]])/g, '$1');
 
-  if (!res.ok) throw new Error(`Judge API error: ${res.status} ${await res.text()}`);
-  const data = await res.json();
-  const content = data.choices?.[0]?.message?.content || '';
+  try { return JSON.parse(s); } catch { return null; }
+}
 
-  // Extraer JSON de la respuesta
-  const jsonMatch = content.match(/\{[\s\S]+\}/);
-  if (!jsonMatch) throw new Error(`Judge no devolvió JSON válido:\n${content}`);
+/** Fallback: extraer scores individuales del texto si JSON falla */
+function extractScoresFallback(content) {
+  const getNum = (key) => {
+    const m = content.match(new RegExp(`"${key}"\\s*:\\s*(\\d+(?:\\.\\d+)?)`));
+    return m ? parseFloat(m[1]) : 5;
+  };
+  const scores = {
+    precision_normativa: getNum('precision_normativa'),
+    articulos_correctos: getNum('articulos_correctos'),
+    interpretacion_valida: getNum('interpretacion_valida'),
+    completitud: getNum('completitud'),
+    ausencia_alucinaciones: getNum('ausencia_alucinaciones'),
+    score_total: getNum('score_total'),
+    veredicto: content.match(/"veredicto"\s*:\s*"(\w+)"/)?.[1] || 'DESCONOCIDO',
+    normas_correctas: [],
+    normas_faltantes: [],
+    alucinaciones: [],
+    comentario: '[fallback-parse]',
+  };
+  // Si score_total no fue extraído, calcularlo como promedio
+  if (!content.match(/"score_total"/)) {
+    scores.score_total = parseFloat(
+      ((scores.precision_normativa + scores.articulos_correctos +
+        scores.interpretacion_valida + scores.completitud +
+        scores.ausencia_alucinaciones) / 5).toFixed(1)
+    );
+  }
+  return scores;
+}
 
-  return JSON.parse(jsonMatch[0]);
+async function callJudge(toonPrompt, retries = 3) {
+  const isLocal = JUDGE_ENDPOINT.includes('localhost') || JUDGE_ENDPOINT.includes('127.0.0.1');
+  if (!isLocal && !HF_KEY) throw new Error('HUGGINGFACE_API_KEY no configurada');
+
+  const systemPrompt = `Legal evaluator. Respond ONLY with valid JSON object, no markdown, no extra text. Start with { and end with }.`;
+
+  const headers = { 'Content-Type': 'application/json' };
+  if (!isLocal && HF_KEY) headers['Authorization'] = `Bearer ${HF_KEY}`;
+
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    const res = await fetch(JUDGE_ENDPOINT, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({
+        model: JUDGE_MODEL,
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: toonPrompt + '\n\nResponde SOLO con el JSON (sin texto adicional):' },
+        ],
+        temperature: 0.0,
+        max_tokens: 300,
+      }),
+      signal: AbortSignal.timeout(150_000),
+    });
+
+    if (!res.ok) throw new Error(`Judge API error: ${res.status} ${await res.text()}`);
+    const data = await res.json();
+    const content = data.choices?.[0]?.message?.content || '';
+
+    let parsed = null;
+
+    // Intento 1: parse directo
+    try {
+      const jsonMatch = content.match(/\{[\s\S]+\}/);
+      if (jsonMatch) parsed = JSON.parse(jsonMatch[0]);
+    } catch { /* sigue */ }
+
+    // Intento 2: reparar JSON truncado
+    if (!parsed) {
+      const repaired = repairJSON(content);
+      if (repaired) parsed = { ...repaired, comentario: (repaired.comentario || '') + ' [json-repaired]' };
+    }
+
+    // Intento 3: extraer scores por regex
+    if (!parsed) {
+      parsed = extractScoresFallback(content);
+    }
+
+    if (parsed) {
+      // Post-proceso: calcular score_total y veredicto en código para consistencia
+      const criteriaKeys = ['precision_normativa', 'articulos_correctos', 'interpretacion_valida', 'completitud', 'ausencia_alucinaciones'];
+      const criteriaScores = criteriaKeys.map(k => Math.max(0, Math.min(10, Number(parsed[k]) || 0)));
+      const avgScore = criteriaScores.reduce((a, b) => a + b, 0) / criteriaKeys.length;
+      parsed.score_total = parseFloat(avgScore.toFixed(1));
+      parsed.veredicto = avgScore >= 9 ? 'EXCELENTE'
+        : avgScore >= 7 ? 'BUENO'
+        : avgScore >= 5 ? 'ACEPTABLE'
+        : avgScore >= 3 ? 'REGULAR'
+        : 'DEFICIENTE';
+      return parsed;
+    }
+
+    // Reintentar si hubo respuesta vacía o inútil
+    if (attempt < retries) {
+      process.stdout.write(yellow(` (juez retry ${attempt}/${retries})... `));
+      await new Promise(r => setTimeout(r, 2000));
+    }
+  }
+
+  throw new Error('Juez no pudo generar JSON válido tras múltiples intentos');
 }
 
 // ─── Paso 4: Evaluar un caso ──────────────────────────────────────────────────
@@ -369,7 +440,61 @@ function generateReport(results) {
   const mejores = sorted.slice(0, 3).map(r => ({ id: r.id, area: r.area, score: r.evaluacion.score_total }));
   const peores = sorted.slice(-3).reverse().map(r => ({ id: r.id, area: r.area, score: r.evaluacion.score_total }));
 
+  const accuracyPct = parseFloat(((avgScore / 10) * 100).toFixed(1));
+
+  // Métricas estilo RAGAS (Fase 1.2): proxies desde el juez
+  const faithfulnessScores = valid.map(r => (r.evaluacion.ausencia_alucinaciones ?? 0) / 10);
+  const faithfulness = faithfulnessScores.length ? faithfulnessScores.reduce((a, b) => a + b, 0) / faithfulnessScores.length : 0;
+  const relevancyScores = valid.map(r => {
+    const p = (r.evaluacion.precision_normativa ?? 0) / 10;
+    const c = (r.evaluacion.completitud ?? 0) / 10;
+    return (p + c) / 2;
+  });
+  const answer_relevancy = relevancyScores.length ? relevancyScores.reduce((a, b) => a + b, 0) / relevancyScores.length : 0;
+  const ragas_style = {
+    faithfulness: Math.round(faithfulness * 100) / 100,
+    answer_relevancy: Math.round(answer_relevancy * 100) / 100,
+    context_recall: null,
+    context_precision: null,
+    overall: Math.round(((faithfulness + answer_relevancy) / 2) * 100) / 100,
+  };
+
+  // Export plano para comparación A/B y CI (Fase 1.1)
+  const metrics = {
+    fecha: TODAY,
+    api_url: API_URL,
+    modelo_juez: JUDGE_MODEL,
+    accuracy_porcentaje: accuracyPct,
+    score_promedio: parseFloat(avgScore.toFixed(2)),
+    total_casos: results.length,
+    evaluados: valid.length,
+    errores: errors.length,
+    por_area: Object.fromEntries(
+      Object.entries(promediosPorArea).map(([k, v]) => [k, { promedio: parseFloat(v.promedio), casos: v.casos }])
+    ),
+    por_dificultad: (() => {
+      const byDiff = {};
+      for (const r of valid) {
+        const d = r.dificultad || 'desconocido';
+        if (!byDiff[d]) byDiff[d] = [];
+        byDiff[d].push(r.evaluacion.score_total);
+      }
+      return Object.fromEntries(
+        Object.entries(byDiff).map(([k, scores]) => [
+          k,
+          {
+            promedio: (scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(2),
+            casos: scores.length,
+          },
+        ])
+      );
+    })(),
+    veredictos,
+    criterios: promCriterios,
+  };
+
   return {
+    ragas_style,
     fecha: TODAY,
     api_url: API_URL,
     modelo_juez: JUDGE_MODEL,
@@ -380,6 +505,7 @@ function generateReport(results) {
       score_promedio: avgScore.toFixed(2),
       accuracy_porcentaje: ((avgScore / 10) * 100).toFixed(1) + '%',
     },
+    metrics,
     veredictos,
     promedio_criterios: promCriterios,
     por_area: promediosPorArea,
@@ -451,6 +577,15 @@ function printSummary(report) {
     console.log(`  ${vc(v.padEnd(12))} ${count}`);
   }
 
+  if (report.ragas_style) {
+    console.log(`\n${bold('Métricas estilo RAGAS (proxy):')}`);
+    const rs = report.ragas_style;
+    console.log(gray(`  faithfulness: ${rs.faithfulness}  answer_relevancy: ${rs.answer_relevancy}  overall: ${rs.overall}`));
+    if (rs.context_recall != null || rs.context_precision != null) {
+      console.log(gray(`  context_recall: ${rs.context_recall ?? 'n/a'}  context_precision: ${rs.context_precision ?? 'n/a'}`));
+    }
+  }
+
   console.log('\n' + '─'.repeat(60));
   console.log(gray(`Resultados guardados en: ${OUTPUT_PATH}`));
   console.log('═'.repeat(60) + '\n');
@@ -476,10 +611,39 @@ async function main() {
   if (AREA_FILTER) casos = casos.filter(c => c.area === AREA_FILTER);
   if (LIMIT) casos = casos.slice(0, parseInt(LIMIT));
 
+  // Muestreo estratificado (Fase 1.1)
+  if (STRATIFY && (STRATIFY === 'area' || STRATIFY === 'dificultad')) {
+    const key = STRATIFY;
+    const n = SAMPLE_SIZE ? parseInt(SAMPLE_SIZE, 10) : 30;
+    const groups = {};
+    for (const c of casos) {
+      const k = c[key] || 'desconocido';
+      if (!groups[k]) groups[k] = [];
+      groups[k].push(c);
+    }
+    const totalAvailable = casos.length;
+    const sampled = [];
+    const strata = Object.keys(groups);
+    for (const stratum of strata) {
+      const size = groups[stratum].length;
+      const proportion = size / totalAvailable;
+      let take = Math.max(1, Math.round(n * proportion));
+      if (take > size) take = size;
+      const shuffled = [...groups[stratum]].sort(() => Math.random() - 0.5);
+      sampled.push(...shuffled.slice(0, take));
+    }
+    casos = sampled.sort((a, b) => (a.id || '').localeCompare(b.id || ''));
+    console.log(gray(`  Estratificado por "${key}": ${casos.length} casos (muestra de ${n} objetivo)`));
+  }
+
+  const isLocalJudge = JUDGE_ENDPOINT.includes('localhost') || JUDGE_ENDPOINT.includes('127.0.0.1');
   console.log(gray(`\n  → ${casos.length} casos a evaluar`));
-  if (!HF_KEY) {
+  if (!HF_KEY && !isLocalJudge) {
     console.error(red('\n✗ HUGGINGFACE_API_KEY no encontrada. Configura .env.local o variable de entorno.'));
     process.exit(1);
+  }
+  if (!HF_KEY && isLocalJudge) {
+    console.log(yellow('  ⚠ Sin HUGGINGFACE_API_KEY — usando juez local Ollama únicamente'));
   }
 
   // Verificar que el RAG está disponible
@@ -538,6 +702,19 @@ async function main() {
 
   // Guardar resultados finales
   writeFileSync(OUTPUT_PATH, JSON.stringify(report, null, 2));
+
+  // Copiar a history/ para reportes y tendencias (Fase 1.4)
+  if (COPY_TO_HISTORY && !report.error) {
+    const historyDir = join(ROOT, 'data', 'benchmarks', 'history');
+    try {
+      if (!existsSync(historyDir)) mkdirSync(historyDir, { recursive: true });
+      const historyPath = join(historyDir, `results-${TODAY}.json`);
+      writeFileSync(historyPath, JSON.stringify(report, null, 2));
+      console.log(gray(`  📁 Copia en historial: ${historyPath}`));
+    } catch (e) {
+      console.warn(yellow(`  ⚠ No se pudo copiar al historial: ${e.message}`));
+    }
+  }
 
   // Imprimir resumen
   printSummary(report);

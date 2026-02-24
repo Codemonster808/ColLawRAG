@@ -1,0 +1,65 @@
+proyecto: ColLawRAG
+documento_base: docs/mejoras/FASE_5_EVALUACION_Y_OBSERVABILIDAD.md
+generado: 2026-02-23
+modo: autonomo
+prioridad: Media
+impacto_estimado: "Habilita medición iterativa; no mejora accuracy directo"
+esfuerzo: "3-5 días"
+dependencias: ninguna estricta; paralelo a otras fases
+
+autonomo{modo,ruta_proyecto,no_modificar,prerequisitos,siguiente_payload,al_fallar}:
+  autonomo,ColLawRAG,"docs/mejoras/*.md","data/benchmarks/qa-abogados.json existe; scripts/evaluate-accuracy.mjs existe; npm install",ninguno,"reportar_y_continuar"
+
+multi_agente{habilitado,herramientas,sprint_id,paralelo_en_fase,post_fase_agente}:
+  true,"cursor,open_claw",Sprint_4_observabilidad,true,cursor
+
+asignacion_agente[5]{tarea_id,agente,archivos_exclusivos}:
+  5.1,cursor,"data/benchmarks/qa-abogados.json scripts/annotate-retrieval-ground-truth.mjs"
+  5.2,cursor,scripts/evaluate-retrieval.mjs
+  5.3,open_claw,"lib/tracing.ts lib/rag.ts"
+  5.4,cursor,scripts/evaluate-accuracy.mjs
+  5.5,open_claw,"scripts/full-diagnostic.mjs scripts/compare-diagnostics.mjs"
+
+grupos_paralelos[1]{ola,tareas,agentes,nota}:
+  1,"5.1 5.2 5.3 5.4 5.5","cursor open_claw","Paralelo total: cursor 5.1 5.2 5.4 (dataset retrieval juez); open_claw 5.3 5.5 (tracing diagnósticos). Sin archivos compartidos."
+
+instruccion_herramienta[2]{herramienta,instruccion}:
+  cursor,"Ejecuta en paralelo con open_claw: tareas 5.1 (chunks_esperados dataset), 5.2 (evaluate-retrieval.mjs), 5.4 (juez evaluate-accuracy). No toques lib/tracing.ts lib/rag.ts full-diagnostic compare-diagnostics. Tras cerrar ejecuta post_fase_comando (evaluate-retrieval --limit 10) si 5.2 y 5.1 están listos."
+  open_claw,"Ejecuta en paralelo con cursor: tareas 5.3 (tracing + rag) y 5.5 (full-diagnostic compare-diagnostics). No toques qa-abogados.json evaluate-retrieval.mjs evaluate-accuracy.mjs. Puedes ejecutar post_fase_comando de diagnóstico si aplica."
+
+cuellos_botella[1]{num,descripcion,archivo}:
+  10,Evaluación ciega sin métricas por capa; juez 7B trunca 250 chars,scripts/evaluate-accuracy.mjs data/benchmarks/qa-abogados.json
+
+tareas[5]{id,titulo,archivos_afectados,validacion,instruccion_concreta,comando_validacion}:
+  5.1,Ground truth retrieval en dataset,"data/benchmarks/qa-abogados.json scripts/annotate-retrieval-ground-truth.mjs",50 casos con chunks_esperados; 1 crítico por caso,"Añadir campo chunks_esperados a 50 casos en qa-abogados.json (array chunk ids); CREAR scripts/annotate-retrieval-ground-truth.mjs si ayuda. 1 chunk crítico por caso.","node -e \"const d=require('./data/benchmarks/qa-abogados.json'); console.log(d.questions?.filter(q=>q.chunks_esperados).length)\""
+  5.2,Métricas retrieval Recall Precision MRR NDCG,scripts/evaluate-retrieval.mjs,Script corre sobre dataset anotado; Recall@10 mayor Recall@5,"CREAR scripts/evaluate-retrieval.mjs: cargar dataset con chunks_esperados; ejecutar retrieval por pregunta; calcular Recall@K Precision@K MRR NDCG@K.","test -f scripts/evaluate-retrieval.mjs; node scripts/evaluate-retrieval.mjs --help 2>&1"
+  5.3,Tracing pipeline por request,lib/tracing.ts lib/rag.ts,Trace por paso; GET /api/debug/trace requestId,"CREAR lib/tracing.ts con PipelineTrace y TraceStep. En lib/rag.ts emitir trace por paso (embedding retrieval bm25 reranking generation). Endpoint GET /api/debug/trace?requestId= último 100 en dev.","grep -l TraceStep lib/tracing.ts lib/rag.ts"
+  5.4,Mejorar juez LLM no truncar modelo mayor,scripts/evaluate-accuracy.mjs,Respuestas 1500 chars juez; modelo 14B o 72B; max_tokens 500,"En scripts/evaluate-accuracy.mjs: juez con modelo mayor 14B; no truncar respuesta a 250 chars; permitir 1500 chars; criterio relevancia_contexto; max_tokens 500.","grep -E 'max_tokens|relevancia_contexto|1500' scripts/evaluate-accuracy.mjs"
+  5.5,Dashboard diagnóstico por capa,"scripts/full-diagnostic.mjs scripts/compare-diagnostics.mjs",Diagnóstico identifica cuello botella; A/B dos runs,"CREAR scripts/full-diagnostic.mjs: ejecutar pipeline por capa y guardar diagnostic-{fecha}.json. CREAR scripts/compare-diagnostics.mjs: comparar dos JSON y mostrar diff.","test -f scripts/full-diagnostic.mjs; test -f scripts/compare-diagnostics.mjs"
+
+archivos_modificar[7]{archivo,accion}:
+  data/benchmarks/qa-abogados.json,MODIFICAR agregar chunks_esperados
+  scripts/evaluate-retrieval.mjs,CREAR métricas retrieval
+  scripts/full-diagnostic.mjs,CREAR diagnóstico por capa
+  scripts/compare-diagnostics.mjs,CREAR comparación A/B
+  lib/tracing.ts,CREAR PipelineTrace TraceStep
+  lib/rag.ts,MODIFICAR emitir traces
+  scripts/evaluate-accuracy.mjs,MODIFICAR juez no truncar criterio retrieval
+
+orden_ejecucion[5]{paso,tarea_id,nota}:
+  1,5.1,Anotar 50 casos chunks esperados
+  2,5.2,Recall@K Precision@K MRR NDCG@K
+  3,5.3,TraceStep embedding retrieval bm25 reranking generation
+  4,5.4,Juez más capaz que modelo generación
+  5,5.5,diagnostic-{fecha}.json
+
+criterio_exito[6]{item}:
+  Dataset mayor 50 casos con ground truth retrieval
+  Métricas retrieval Recall Precision MRR NDCG implementadas
+  Tracing reconstruye request paso a paso
+  Juez mayor 14B; no trunca; criterio relevancia_contexto
+  Diagnóstico identifica cuello botella correcto
+  Comparación A/B funcional
+
+post_fase_comando[1]{orden,comando,descripcion}:
+  1,"cd ColLawRAG && node scripts/evaluate-retrieval.mjs --limit 10 2>&1","Ejecutar evaluación retrieval si dataset anotado existe"

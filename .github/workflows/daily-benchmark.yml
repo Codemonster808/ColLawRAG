@@ -1,0 +1,94 @@
+# Fase 1.3: Benchmark diario (o bajo demanda).
+# Requiere en Secrets: JUDGE_ENDPOINT y HUGGINGFACE_API_KEY (o juez Ollama en self-hosted runner).
+# Si no hay juez, el paso de benchmark fallará; puede desactivarse el schedule hasta configurarlo.
+
+name: Benchmark RAG
+
+on:
+  schedule:
+    # 2 AM UTC (ajustar según zona)
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      sample_size:
+        description: 'Tamaño muestra estratificada (0 = sin estratificar, usar --limit 10)'
+        required: false
+        default: '20'
+      limit:
+        description: 'Límite de casos (0 = sin límite)'
+        required: false
+        default: '20'
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run benchmark (muestra estratificada)
+        id: benchmark
+        env:
+          API_URL: https://col-law-rag.vercel.app
+          JUDGE_ENDPOINT: ${{ secrets.JUDGE_ENDPOINT }}
+          JUDGE_MODEL: ${{ secrets.JUDGE_MODEL || 'qwen2.5:7b-instruct' }}
+          HUGGINGFACE_API_KEY: ${{ secrets.HUGGINGFACE_API_KEY }}
+        run: |
+          SAMPLE="${{ github.event.inputs.sample_size || '20' }}"
+          LIMIT="${{ github.event.inputs.limit || '20' }}"
+          if [ "$SAMPLE" = "0" ]; then
+            node scripts/evaluate-accuracy.mjs --prod --limit ${LIMIT} --copy-to-history --output data/benchmarks/results-latest.json
+          else
+            node scripts/evaluate-accuracy.mjs --prod --stratify area --sample ${SAMPLE} --copy-to-history --output data/benchmarks/results-latest.json
+          fi
+
+      - name: Generate full report
+        run: node scripts/generate-full-report.mjs --output data/benchmarks/REPORTE_BENCHMARK.md
+
+      - name: Compare with baseline (if exists)
+        id: compare
+        run: |
+          if [ ! -f "data/benchmarks/baseline.json" ]; then
+            echo "No baseline.json; skipping comparison. Para activar alertas de regresión, copia results-latest.json a baseline.json en el repo."
+            exit 0
+          fi
+          node scripts/compare-benchmark-results.mjs \
+            --baseline data/benchmarks/baseline.json \
+            --candidate data/benchmarks/results-latest.json \
+            --regression-threshold 3
+
+      - name: Notify on regression (webhook opcional)
+        if: always() && steps.compare.outcome == 'failure'
+        env:
+          BENCHMARK_ALERT_WEBHOOK_URL: ${{ secrets.BENCHMARK_ALERT_WEBHOOK_URL }}
+        run: |
+          if [ -n "$BENCHMARK_ALERT_WEBHOOK_URL" ]; then
+            curl -sS -X POST -H "Content-Type: application/json" \
+              -d "{\"text\":\"⚠️ ColLawRAG benchmark: regresión detectada (caída >3%). Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}" \
+              "$BENCHMARK_ALERT_WEBHOOK_URL" || true
+          else
+            echo "BENCHMARK_ALERT_WEBHOOK_URL no configurado; omitiendo notificación."
+          fi
+
+      - name: Ensure artifacts dirs exist
+        run: |
+          mkdir -p data/benchmarks/history
+
+      - name: Upload results
+        uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-results-${{ github.run_id }}
+          path: |
+            data/benchmarks/results-latest.json
+            data/benchmarks/REPORTE_BENCHMARK.md
+            data/benchmarks/history/
+          if-no-files-found: ignore

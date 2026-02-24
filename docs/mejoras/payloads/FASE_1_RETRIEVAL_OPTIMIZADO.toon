@@ -1,0 +1,66 @@
+proyecto: ColLawRAG
+documento_base: docs/mejoras/FASE_1_RETRIEVAL_OPTIMIZADO.md
+generado: 2026-02-23
+modo: autonomo
+prioridad: Alta
+impacto_estimado: "+10-20% accuracy; -80% latencia búsqueda"
+esfuerzo: "3-5 días"
+dependencias: FASE_0 completada
+
+autonomo{modo,ruta_proyecto,no_modificar,prerequisitos,siguiente_payload,al_fallar}:
+  autonomo,ColLawRAG,"docs/mejoras/*.md","FASE_0 cerrada; embeddings unificados; índice actual; npm install","docs/mejoras/payloads/FASE_2_CHUNKING_SEMANTICO.toon",abortar_fase
+
+multi_agente{habilitado,herramientas,sprint_id,paralelo_en_fase,post_fase_agente}:
+  true,"cursor,open_claw",Sprint_1_fundamentos,true,cursor
+
+asignacion_agente[4]{tarea_id,agente,archivos_exclusivos}:
+  1.1,cursor,"lib/vector-index.ts scripts/ingest.mjs lib/retrieval.ts package.json"
+  1.2,cursor,"lib/retrieval.ts lib/bm25.ts"
+  1.3,open_claw,"lib/query-expansion.ts lib/retrieval.ts"
+  1.4,open_claw,lib/retrieval.ts
+
+grupos_paralelos[2]{ola,tareas,agentes,nota}:
+  1,"1.1 1.2",cursor,"Cursor primero: índice ANN y BM25 RRF; retrieval.ts base"
+  2,"1.3 1.4",open_claw,"OpenClaw después: query-expansion y boost; integra en retrieval.ts tras ola 1"
+
+archivos_compartidos[1]{archivo,orden_edicion}:
+  lib/retrieval.ts,"cursor (ola 1) luego open_claw (ola 2)"
+
+instruccion_herramienta[2]{herramienta,instruccion}:
+  cursor,"Ejecuta ola 1: tareas 1.1 y 1.2 (vector-index ingest retrieval bm25 RRF). No toques lib/query-expansion.ts. Tras cerrar ola 1, avisa o deja merge listo para open_claw. Ejecuta post_fase_comando (ingest) si regeneras índice."
+  open_claw,"Ejecuta ola 2 tras ola 1 cerrada: tareas 1.3 y 1.4 (query-expansion.ts nuevo e integración en retrieval.ts). No modifiques lib/vector-index.ts scripts/ingest.mjs lib/bm25.ts. No ejecutes post_fase_comando."
+
+cuellos_botella[3]{num,descripcion,archivo}:
+  4,Búsqueda lineal O(n) sobre 33k chunks,lib/retrieval.ts 313-317
+  5,BM25 solo sobre resultados vectoriales,lib/bm25.ts lib/retrieval.ts 321-332
+  6,Híbrido 70/30 sin calibración,lib/bm25.ts 161-174
+
+tareas[4]{id,titulo,archivos_afectados,validacion,instruccion_concreta,comando_validacion}:
+  1.1,Índice vectorial ANN HNSWLIB o Pinecone,"lib/vector-index.ts scripts/ingest.mjs lib/retrieval.ts package.json",Latencia retrieval menor 50ms top-20; Recall@20 mayor 0.9,"CREAR lib/vector-index.ts con HNSW; en ingest.mjs construir índice y persistir; en retrieval.ts usar índice en lugar de búsqueda lineal; package.json añadir hnswlib-node.","node -e \"require('./lib/vector-index.ts')\" 2>&1; npm run build 2>&1"
+  1.2,BM25 sobre corpus completo + RRF,lib/retrieval.ts lib/bm25.ts,Recall@3 mayor 0.8 queries terminología exacta,"En lib/bm25.ts indexar corpus completo; en lib/retrieval.ts fusionar resultados vectoriales y BM25 con RRF k=60.","grep -l RRF lib/retrieval.ts lib/bm25.ts"
+  1.3,Query expansion coloquial-legal,lib/query-expansion.ts lib/retrieval.ts,+20% Recall@5 queries coloquiales,"CREAR lib/query-expansion.ts con diccionario coloquial-legal colombiano; en lib/retrieval.ts llamar expansión antes de embedding/BM25.","test -f lib/query-expansion.ts; grep -l query-expansion lib/retrieval.ts"
+  1.4,Filtrado por metadata inteligente boost,lib/retrieval.ts,Queries laboral rankean laboral más alto,"En lib/retrieval.ts aplicar boost por metadata (ej. área laboral) sin excluir otros resultados.","grep -E 'boost|metadata' lib/retrieval.ts"
+
+archivos_modificar[6]{archivo,accion}:
+  lib/vector-index.ts,CREAR índice HNSW
+  lib/query-expansion.ts,CREAR expansión queries
+  lib/retrieval.ts,MODIFICAR ANN RRF filtros
+  lib/bm25.ts,MODIFICAR RRF BM25 corpus completo
+  scripts/ingest.mjs,MODIFICAR generar índice HNSW
+  package.json,Agregar hnswlib-node
+
+orden_ejecucion[4]{paso,tarea_id,nota}:
+  1,1.1,Opción A HNSWLIB recomendada
+  2,1.2,RRF k=60 estándar
+  3,1.3,Diccionario sinónimos legales colombianos
+  4,1.4,Boost no excluyente
+
+criterio_exito[5]{item}:
+  Latencia retrieval menor 100ms
+  Recall@10 mayor 0.85
+  Queries terminología exacta chunk correcto en top-3
+  Queries coloquiales chunks relevantes top-5
+  BM25 sobre corpus completo fusionado RRF
+
+post_fase_comando[1]{orden,comando,descripcion}:
+  1,"cd ColLawRAG && node scripts/ingest.mjs","Regenerar índice HNSW si se añadió; opcional si solo se cambió retrieval"

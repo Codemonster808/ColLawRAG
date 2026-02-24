@@ -2,7 +2,8 @@ import { Pinecone } from '@pinecone-database/pinecone'
 import { embedText } from './embeddings'
 import { type DocumentChunk, type RetrieveFilters } from './types'
 import { applyReranking, rerankWithHFSimilarity } from './reranking'
-import { calculateBM25, hybridScore, deserializeBM25Index, type BM25Index } from './bm25'
+import { calculateBM25, hybridScore, deserializeBM25Index, searchBM25, rrfMerge, type BM25Index } from './bm25'
+import { isHNSWAvailable, loadHNSWIndex, searchHNSW, getHNSWIdListPath, RRF_K } from './vector-index'
 import { consultarVigencia, inferNormaIdFromTitle } from './norm-vigencia'
 import fs from 'node:fs'
 import fsp from 'node:fs/promises'
@@ -307,28 +308,39 @@ export async function retrieveRelevantChunks(query: string, filters?: RetrieveFi
       score: m.score || 0
     }))
   } else {
-    // Local/Vercel fallback: load index from .json or .json.gz
+    // Local/Vercel: HNSW (FASE_1 1.1) or linear scan; BM25 full corpus + RRF (FASE_1 1.2)
     await ensureIndicesAvailableAtRuntime()
     const raw = await loadLocalIndex()
-    retrieved = raw
-      .filter(c => (filters?.type ? c.metadata.type === filters.type : true))
-      .map(c => ({ chunk: c, score: cosineSimilarity(queryEmbedding, c.embedding || []) }))
-      .sort((a, b) => b.score - a.score)
-      .slice(0, initialTopK)
-  }
+    const idMap = new Map(raw.map(c => [c.id, c]))
+    const k = Math.max(initialTopK * 2, 20)
 
-  // Apply BM25 hybrid scoring if enabled and index exists
-  const bm25Index = USE_BM25 ? loadBM25Index() : null
-  if (bm25Index && retrieved.length > 0) {
-    const allBM25Scores = retrieved.map(r =>
-      calculateBM25(query, r.chunk.id, bm25Index)
-    )
-    retrieved = retrieved
-      .map((r, i) => ({
-        ...r,
-        score: hybridScore(r.score, allBM25Scores[i], allBM25Scores, 0.7)
-      }))
-      .sort((a, b) => b.score - a.score)
+    let vectorList: Array<{ id: string; score: number }>
+    if (isHNSWAvailable()) {
+      if (!(globalThis as any).__hnswLoaded) {
+        loadHNSWIndex(getHNSWIdListPath()) && ((globalThis as any).__hnswLoaded = true)
+      }
+      vectorList = searchHNSW(queryEmbedding, k)
+    } else {
+      vectorList = raw
+        .map(c => ({ id: c.id, score: cosineSimilarity(queryEmbedding, c.embedding || []) }))
+        .sort((a, b) => b.score - a.score)
+        .slice(0, k)
+    }
+
+    const bm25Index = USE_BM25 ? loadBM25Index() : null
+    if (bm25Index && vectorList.length >= 0) {
+      const bm25List = searchBM25(query, bm25Index, k)
+      const merged = rrfMerge(vectorList, bm25List, RRF_K)
+      retrieved = merged
+        .slice(0, initialTopK)
+        .map(({ id, rrfScore }) => ({ chunk: idMap.get(id)!, score: rrfScore }))
+        .filter(r => r.chunk && (filters?.type ? r.chunk.metadata.type === filters.type : true))
+    } else {
+      retrieved = vectorList
+        .slice(0, initialTopK)
+        .map(({ id, score }) => ({ chunk: idMap.get(id)!, score }))
+        .filter(r => r.chunk && (filters?.type ? r.chunk.metadata.type === filters.type : true))
+    }
   }
 
   // Apply re-ranking if enabled

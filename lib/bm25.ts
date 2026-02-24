@@ -147,6 +147,60 @@ export function calculateBM25(
   return score
 }
 
+/**
+ * Search BM25 index over full corpus: returns top-k document ids by BM25 score.
+ * FASE_1 tarea 1.2: BM25 sobre corpus completo para fusionar con vector vía RRF.
+ */
+export function searchBM25(
+  query: string,
+  index: BM25Index,
+  k: number,
+  k1: number = 1.5,
+  b: number = 0.75
+): Array<{ id: string; score: number }> {
+  const queryTokens = tokenize(query)
+  if (queryTokens.length === 0) return []
+
+  const candidateIds = new Set<string>()
+  for (const term of queryTokens) {
+    const postings = index.invertedIndex[term]
+    if (postings) {
+      for (const docId of Object.keys(postings)) candidateIds.add(docId)
+    }
+  }
+  if (candidateIds.size === 0) return []
+
+  const scored = Array.from(candidateIds).map(docId => ({
+    id: docId,
+    score: calculateBM25(query, docId, index, k1, b)
+  }))
+  scored.sort((a, b) => b.score - a.score)
+  return scored.slice(0, k)
+}
+
+/**
+ * Reciprocal Rank Fusion (RRF) with constant k=60.
+ * Merges two ranked lists (vector and BM25) into one by RRF score: sum 1/(k + rank).
+ */
+export function rrfMerge(
+  listA: Array<{ id: string; score?: number }>,
+  listB: Array<{ id: string; score?: number }>,
+  k: number = 60
+): Array<{ id: string; rrfScore: number }> {
+  const scores = new Map<string, number>()
+  const add = (list: Array<{ id: string }>, kConst: number) => {
+    list.forEach((item, rank) => {
+      const rrf = 1 / (kConst + rank + 1)
+      scores.set(item.id, (scores.get(item.id) ?? 0) + rrf)
+    })
+  }
+  add(listA, k)
+  add(listB, k)
+  return Array.from(scores.entries())
+    .map(([id, rrfScore]) => ({ id, rrfScore }))
+    .sort((a, b) => b.rrfScore - a.rrfScore)
+}
+
 // ── Hybrid Scoring ─────────────────────────────────────────────────────
 
 /**

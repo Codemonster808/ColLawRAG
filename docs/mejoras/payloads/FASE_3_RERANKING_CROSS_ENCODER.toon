@@ -1,0 +1,64 @@
+proyecto: ColLawRAG
+documento_base: docs/mejoras/FASE_3_RERANKING_CROSS_ENCODER.md
+generado: 2026-02-23
+modo: autonomo
+prioridad: Alta
+impacto_estimado: "+10-15% accuracy"
+esfuerzo: "2-3 días"
+dependencias: FASE_0; mejora con FASE_1 y 2
+
+autonomo{modo,ruta_proyecto,no_modificar,prerequisitos,siguiente_payload,al_fallar}:
+  autonomo,ColLawRAG,"docs/mejoras/*.md","FASE_0 cerrada; lib/reranking.ts lib/retrieval.ts existen; npm install","docs/mejoras/payloads/FASE_4_GENERACION_Y_PROMPTS.toon",abortar_fase
+
+multi_agente{habilitado,herramientas,sprint_id,paralelo_en_fase,post_fase_agente}:
+  true,"cursor,open_claw",Sprint_2_pipeline,true,open_claw
+
+asignacion_agente[4]{tarea_id,agente,archivos_exclusivos}:
+  3.1,cursor,"lib/reranking.ts .env.example package.json"
+  3.2,cursor,lib/reranking.ts
+  3.3,open_claw,lib/reranking.ts
+  3.4,open_claw,"lib/reranking.ts lib/retrieval.ts"
+
+grupos_paralelos[2]{ola,tareas,agentes,nota}:
+  1,"3.1 3.2",cursor,"Cursor: cross-encoder API y recalibrar heurísticas en reranking.ts"
+  2,"3.3 3.4",open_claw,"OpenClaw después: batching/cache y penalización derogadas; integra en reranking y retrieval"
+
+archivos_compartidos[1]{archivo,orden_edicion}:
+  lib/reranking.ts,"cursor (ola 1) luego open_claw (ola 2)"
+
+instruccion_herramienta[2]{herramienta,instruccion}:
+  cursor,"Ejecuta ola 1: tareas 3.1 (cross-encoder .env package) y 3.2 (pesos heurísticas) en lib/reranking.ts. No toques lib/retrieval.ts. Tras ola 1, abrir a open_claw."
+  open_claw,"Ejecuta ola 2 tras ola 1: tareas 3.3 (batch cache) y 3.4 (derogadas + retrieval). Modifica lib/reranking.ts y lib/retrieval.ts. Al cerrar ejecuta post_fase_comando (npm run build)."
+
+cuellos_botella[1]{num,descripcion,archivo}:
+  8,Reranking heurístico hierarchyBoost hasta 0.60; sin cross-encoder real,lib/reranking.ts 22-37 246-318
+
+tareas[4]{id,titulo,archivos_afectados,validacion,instruccion_concreta,comando_validacion}:
+  3.1,Cross-encoder real via API HF o Cohere,lib/reranking.ts,Solo top-20 chunks; NDCG@5 mejora mayor 15%,"En lib/reranking.ts integrar cross-encoder (jeffwan/mmarco o BAAI/bge-reranker-v2-m3) vía API; aplicar solo a top-20 chunks. .env.example: RERANK_MODEL RERANK_PROVIDER.","grep -E 'cross|rerank|RERANK' lib/reranking.ts .env.example"
+  3.2,Recalibrar heurísticas como señal secundaria,lib/reranking.ts,Score final 0.70 cross más 0.15 hierarchy más 0.10 recency más 0.05 vigencia,"En lib/reranking.ts: peso cross_encoder 0.70; hierarchy 0.15; recency 0.10; vigencia 0.05. Eliminar normalización incorrecta (score+1)/2. Constitución no debe dominar otras áreas.","grep -E '0\\.70|0\\.15|hierarchy' lib/reranking.ts"
+  3.3,Optimizar latencia batching cache truncamiento,lib/reranking.ts,Latencia reranking menor 1s,"En lib/reranking.ts: batch de 20 pares; cache 5 min; truncar textos a largo máximo. Objetivo latencia rerank menor 1s.","grep -E 'batch|cache|truncat' lib/reranking.ts"
+  3.4,Penalización precisa normas derogadas,lib/reranking.ts,Derogada total -0.30; nota en chunk para LLM,"En lib/reranking.ts: penalización -0.30 por norma derogada total; metadata derogación parcial; añadir NOTA derogada en contenido del chunk pasado al LLM.","grep -E 'derogad|penaliz|NOTA' lib/reranking.ts"
+
+archivos_modificar[4]{archivo,accion}:
+  lib/reranking.ts,MODIFICAR cross-encoder recalibrar normalizar
+  lib/retrieval.ts,Integrar nuevo pipeline reranking
+  .env.example,Agregar RERANK_MODEL RERANK_PROVIDER
+  package.json,Cohere SDK si aplica
+
+orden_ejecucion[4]{paso,tarea_id,nota}:
+  1,3.1,Modelo jeffwan/mmarco o BAAI/bge-reranker-v2-m3
+  2,3.2,Eliminar normalización incorrecta score más 1 entre 2
+  3,3.3,Batch 20 pares; cache 5 min
+  4,3.4,Incluir NOTA derogada en contenido chunk
+
+criterio_exito[7]{item}:
+  Cross-encoder activo por defecto
+  NDCG@5 mejora mayor 15% vs heurístico solo
+  Constitución no domina cuando query otra área
+  Latencia reranking menor 1s
+  Score final cross-encoder mayor 70% peso
+  Normas derogadas penalizadas no eliminadas
+  evaluate-accuracy mejora precision_normativa ausencia_alucinaciones
+
+post_fase_comando[1]{orden,comando,descripcion}:
+  1,"cd ColLawRAG && npm run build","Verificar que build pasa tras cambios en reranking y retrieval"

@@ -1,0 +1,29 @@
+---
+description: Consultar y actualizar el registro de bugs resueltos antes y después de arreglar errores
+alwaysApply: true
+---
+
+# Registro de Bugs Resueltos
+
+## Antes de arreglar cualquier bug
+
+1. Leer `docs/bugs-resueltos/README.md` para ver el índice de bugs ya resueltos
+2. Buscar en `docs/bugs-resueltos/CURSOR/` si el error ya tiene un archivo `BUG-NNN-*.md`
+3. Si el bug ya fue resuelto, aplicar la solución documentada en lugar de diagnosticar desde cero
+
+## Después de arreglar un bug
+
+1. Crear `docs/bugs-resueltos/CURSOR/BUG-NNN-descripcion-corta.md` con este formato:
+   - **Síntoma / error**: mensaje exacto
+   - **Causa**: causa raíz
+   - **Solución aplicada**: qué se cambió y dónde
+   - **Cómo comprobar**: comando de verificación
+   - **Notas**: lecciones aprendidas y "no repetir"
+2. Actualizar el índice en `docs/bugs-resueltos/README.md`
+3. La numeración continúa desde el último BUG-NNN existente
+
+## Bugs críticos recurrentes (referencia rápida)
+
+- **BUG-003**: Scripts standalone no cargan `.env.local` — agregar carga manual al inicio
+- **BUG-007/008**: Índices >250MB en Vercel — usar `.gz` + descompresión en memoria + fallback a `/tmp`
+- **BUG-010**: Benchmark colgado en juez — verificar que Ollama/endpoint esté corriendo

@@ -1,0 +1,58 @@
+proyecto: ColLawRAG
+documento_base: docs/mejoras/PLAN_PRODUCTO_COMERCIAL.md
+generado: 2026-02-23
+modo: autonomo
+prioridad: Producto
+impacto_estimado: "Roadmap comercial y precios"
+esfuerzo: "Varios sprints"
+dependencias: Plan mejoras técnicas FASES 0-5
+
+autonomo{modo,ruta_proyecto,no_modificar,prerequisitos,siguiente_payload,al_fallar}:
+  autonomo,ColLawRAG,"docs/mejoras/*.md","FASES 0-5 implementadas o en curso",ninguno,reportar_y_continuar
+
+instruccion_agente{rol,accion}:
+  producto,"Este payload describe dimensiones y roadmap comercial. No sustituye a los payloads FASE_0 a FASE_5. Usar para priorizar corpus (C-1 a C-7) modelo (M-1 a M-6) y producto (P-1 a P-7). Implementación técnica sigue payloads de fases."
+
+dimensiones_corpus[7]{id,descripcion,estado}:
+  C-1,Código Civil completo,pendiente
+  C-2,Código de Comercio,pendiente
+  C-3,Código Penal y Procesal Penal,pendiente
+  C-4,Normativa laboral actualizada,parcial
+  C-5,Jurisprudencia Corte Constitucional seleccionada,pendiente
+  C-6,Contratos tipo y cláusulas,pendiente
+  C-7,Actualización trimestral normas,pendiente
+
+dimensiones_modelo[6]{id,descripcion,estado}:
+  M-1,Embeddings unificados alta calidad,pendiente FASE_0
+  M-2,Retrieval híbrido ANN BM25 RRF,pendiente FASE_1
+  M-3,Chunking semántico,pendiente FASE_2
+  M-4,Reranking cross-encoder,pendiente FASE_3
+  M-5,Generación 72B o API,pendiente FASE_4
+  M-6,Evaluación y observabilidad,pendiente FASE_5
+
+dimensiones_producto[7]{id,descripcion,estado}:
+  P-1,API REST estable versionada,pendiente
+  P-2,Web app consultas y historial,pendiente
+  P-3,Exportar respuestas PDF Word,pendiente
+  P-4,Multi-tenant y facturación,pendiente
+  P-5,SLAs y soporte,pendiente
+  P-6,Compliance y auditoría,pendiente
+  P-7,Onboarding y documentación,pendiente
+
+roadmap_sprints[4]{sprint,alcance,entregables}:
+  Sprint 1,FASE_0 FASE_1,Correcciones críticas; retrieval ANN BM25 RRF
+  Sprint 2,FASE_2 FASE_3,Chunking semántico; reranking cross-encoder
+  Sprint 3,FASE_4,FASE_5 parcial,Generación y prompts; evaluación retrieval
+  Sprint 4,FASE_5 producto,Observabilidad; API y producto mínimo
+
+costos_precios[4]{concepto,valor,nota}:
+  Costo infra estimado mensual,USD 200-500,Embeddings API modelo generación
+  Precio sugerido por consulta,USD 0.05-0.15,Según volumen
+  Precio suscripción básica,USD 99-199/mes,Límite consultas
+  Precio suscripción profesional,USD 299-499/mes,Mayor volumen y SLA
+
+criterio_exito_producto[4]{item}:
+  Corpus C-1 a C-4 indexado y evaluado
+  Modelo M-1 a M-5 implementado según plan mejoras
+  API y web app funcionales
+  Métricas accuracy y latencia dentro de objetivo

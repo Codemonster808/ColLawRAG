@@ -54,7 +54,7 @@ const CODIGOS = {
     tipo: 'estatuto',
     entidad: 'Presidencia de la República / DIAN',
     fecha_norma: '1989-03-30',
-    url_base: 'https://leyes.co/estatuto_tributario',
+    url_base: 'https://leyes.co/se_expide_el_estatuto_tributario_de_los_impuestos_administrados_por_la_direccion_general_de_impuestos_nacionales',
     url_indice: 'https://leyes.co/estatuto_tributario.htm',
     articulos_max: 960,
     output: 'codigo_estatuto_tributario.txt',

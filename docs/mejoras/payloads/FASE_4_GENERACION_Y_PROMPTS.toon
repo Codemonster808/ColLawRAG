@@ -1,0 +1,66 @@
+proyecto: ColLawRAG
+documento_base: docs/mejoras/FASE_4_GENERACION_Y_PROMPTS.md
+generado: 2026-02-23
+modo: autonomo
+prioridad: Media-Alta
+impacto_estimado: "+10-15% accuracy"
+esfuerzo: "3-4 días"
+dependencias: FASE_0; se beneficia FASES_1_2_3
+
+autonomo{modo,ruta_proyecto,no_modificar,prerequisitos,siguiente_payload,al_fallar}:
+  autonomo,ColLawRAG,"docs/mejoras/*.md","FASE_0 cerrada; lib/generation.ts lib/prompt-templates.ts existen; npm install","docs/mejoras/payloads/FASE_5_EVALUACION_Y_OBSERVABILIDAD.toon",reportar_y_continuar
+
+multi_agente{habilitado,herramientas,sprint_id,paralelo_en_fase,post_fase_agente}:
+  true,"cursor,open_claw",Sprint_3_pipeline,true,cursor
+
+asignacion_agente[5]{tarea_id,agente,archivos_exclusivos}:
+  4.1,cursor,lib/generation.ts
+  4.2,open_claw,lib/prompt-templates.ts
+  4.3,cursor,"lib/generation.ts .env.example"
+  4.4,open_claw,"lib/prompt-templates.ts lib/generation.ts"
+  4.5,cursor,lib/generation.ts
+
+grupos_paralelos[2]{ola,tareas,agentes,nota}:
+  1,"4.1 4.2","cursor open_claw","Paralelo: cursor contexto 12k/24k; open_claw system prompt 300 tokens"
+  2,"4.3 4.4 4.5","cursor open_claw","Ola 2: cursor 4.3 y 4.5 (modelo y fuentes); open_claw 4.4 (regeneraciones). Merge generation.ts si hay conflicto (cursor lider)."
+
+archivos_compartidos[1]{archivo,orden_edicion}:
+  lib/generation.ts,"cursor lider; open_claw solo 4.4 (regeneraciones); coordinar merge"
+
+instruccion_herramienta[2]{herramienta,instruccion}:
+  cursor,"Ola 1: tarea 4.1 (contexto 12k/24k en generation). Ola 2: 4.3 (modelo 72B .env) y 4.5 (vigencia jerarquía). Eres lider en lib/generation.ts; integra cambios de open_claw para 4.4 si los hay. Ejecuta post_fase_comando (evaluate-accuracy --limit 5)."
+  open_claw,"Ola 1: tarea 4.2 (prompt-templates menor 350 tokens). Ola 2: tarea 4.4 (few-shot HNAC máximo 1 regeneración en prompts y generation). No pises 4.1 4.3 4.5 en generation; solo toca generación para 4.4. No ejecutes post_fase_comando."
+
+cuellos_botella[1]{num,descripcion,archivo}:
+  9,Contexto limitado 4k-8k chars; system prompt 700 tokens; hasta 3 regeneraciones HNAC,lib/generation.ts lib/prompt-templates.ts
+
+tareas[5]{id,titulo,archivos_afectados,validacion,instruccion_concreta,comando_validacion}:
+  4.1,Expandir ventana contexto 12k-24k chars,lib/generation.ts,Complejidad recibe más chunks; respuestas no truncadas,"En lib/generation.ts: MAX_CONTEXT_CHARS_BASE 12000; COMPLEX 24000; pasar más chunks a complejidad alta.","grep -E '12000|24000|MAX_CONTEXT' lib/generation.ts"
+  4.2,Simplificar system prompt a 300 tokens,lib/prompt-templates.ts,Eliminar duplicaciones; comprimir HNAC; menos regeneraciones,"En lib/prompt-templates.ts: reducir system a menor 350 tokens; eliminar duplicaciones; mover advertencias a user prompt.","wc -c lib/prompt-templates.ts; grep -c getSystemPrompt lib/"
+  4.3,Mejor modelo generación 72B o API,lib/generation.ts .env.example,Benchmark interpretacion_valida y ausencia_alucinaciones mayor 7/10,"En lib/generation.ts y .env.example: modelo primario 72B o API (Qwen2.5-72B/DeepSeek/Novita); eliminar fallback 3B. Documentar en .env.example.","grep -E 'MODEL|72B|api' lib/generation.ts .env.example"
+  4.4,Reducir regeneraciones few-shot delimitadores,lib/prompt-templates.ts lib/generation.ts,Tasa regeneración menor 10%; máximo 1 regeneración,"En prompt-templates: ejemplo HNAC corto; delimitadores XML hechos/normas/analisis/conclusion. En generation: máximo 1 regeneración HNAC.","grep -E 'regenerat|HNAC|max.*1' lib/generation.ts lib/prompt-templates.ts"
+  4.5,Contexto enriquecido vigencia jerarquía score,lib/generation.ts,Fuentes con vigencia y jerarquía; precision_normativa mejora,"En lib/generation.ts: incluir en contexto de fuentes etiquetas VIGENTE/DEROGADO; jerarquía normativa; score relevancia.","grep -E 'VIGENTE|DEROGADO|jerarqu|score' lib/generation.ts"
+
+archivos_modificar[3]{archivo,accion}:
+  lib/generation.ts,MODIFICAR contexto regeneraciones enriquecido
+  lib/prompt-templates.ts,MODIFICAR simplificar few-shot delimitadores
+  .env.example,Documentar modelos recomendados
+
+orden_ejecucion[5]{paso,tarea_id,nota}:
+  1,4.1,MAX_CONTEXT_CHARS_BASE 12000 COMPLEX 24000
+  2,4.2,Mover advertencias a user prompt
+  3,4.3,Qwen2.5-72B o DeepSeek Novita; eliminar 3B fallback
+  4,4.4,Ejemplo HNAC corto; XML hechos normas analisis conclusion
+  5,4.5,VIGENTE DEROGADO en fuentes; score relevancia
+
+criterio_exito[7]{item}:
+  System prompt menor 350 tokens
+  Contexto legal mayor 12k base 24k complejo
+  Tasa regeneración HNAC menor 10%
+  Modelo primario score mayor 7/10 evaluate-accuracy
+  Respuestas con conclusión no truncadas
+  Fuentes con vigencia y jerarquía en contexto LLM
+  Latencia generación menor 15s
+
+post_fase_comando[1]{orden,comando,descripcion}:
+  1,"cd ColLawRAG && node scripts/evaluate-accuracy.mjs --limit 5","Verificar que evaluate-accuracy corre con nuevo contexto y modelo"

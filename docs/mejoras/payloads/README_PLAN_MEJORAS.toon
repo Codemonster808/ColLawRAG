@@ -1,0 +1,47 @@
+proyecto: ColLawRAG
+documento_base: docs/mejoras/README_PLAN_MEJORAS.md
+generado: 2026-02-23
+modo: autonomo
+prioridad: Referencia
+impacto_estimado: "Índice y orden del plan"
+esfuerzo: N/A
+dependencias: ninguna
+
+autonomo{modo,ruta_proyecto,no_modificar,prerequisitos,siguiente_payload,al_fallar}:
+  autonomo,ColLawRAG,"docs/mejoras/*.md",ninguno,"docs/mejoras/payloads/FASE_0_CORRECCIONES_CRITICAS.toon",reportar_y_continuar
+
+instruccion_agente{rol,accion}:
+  indice,"Este payload es el índice del plan. Ejecutar en orden los payloads listados en orden_fases: primero FASE_0 luego FASE_1 hasta FASE_5. Cargar cada payload por su path en siguiente_payload o en orden_fases[].payload."
+  multi_agente,"Cada payload de fase incluye multi_agente: asignacion_agente grupos_paralelos instruccion_herramienta. Cursor y OpenClaw pueden trabajar el mismo sprint a la vez: cada uno carga el mismo .toon y ejecuta solo las tareas de su herramienta según instruccion_herramienta[herramienta]. Respetar archivos_exclusivos y orden en archivos_compartidos."
+
+multi_agente_sprints[4]{sprint_id,fases,herramientas,paralelo}:
+  Sprint_1_fundamentos,"FASE_0 FASE_1","cursor open_claw",FASE_0 ola1 paralelo; FASE_1 ola1 luego ola2
+  Sprint_2_pipeline,"FASE_2 FASE_3","cursor open_claw",olas por fase; archivos compartidos con orden
+  Sprint_3_pipeline,"FASE_4","cursor open_claw",FASE_4 ola1 paralelo; ola2 con cursor lider en generation
+  Sprint_4_observabilidad,"FASE_5","cursor open_claw",paralelo total sin archivos compartidos
+
+orden_fases[6]{orden,fase,documento,payload,sprint_id,nota}:
+  1,FASE_0,FASE_0_CORRECCIONES_CRITICAS.md,FASE_0_CORRECCIONES_CRITICAS.toon,Sprint_1_fundamentos,URGENTE; base; ola1 cursor+open_claw paralelo
+  2,FASE_1,FASE_1_RETRIEVAL_OPTIMIZADO.md,FASE_1_RETRIEVAL_OPTIMIZADO.toon,Sprint_1_fundamentos,Requiere FASE_0; ola1 cursor ola2 open_claw
+  3,FASE_2,FASE_2_CHUNKING_SEMANTICO.md,FASE_2_CHUNKING_SEMANTICO.toon,Sprint_2_pipeline,Requiere FASE_0; olas cursor luego open_claw
+  4,FASE_3,FASE_3_RERANKING_CROSS_ENCODER.md,FASE_3_RERANKING_CROSS_ENCODER.toon,Sprint_2_pipeline,Requiere FASE_0; olas cursor luego open_claw
+  5,FASE_4,FASE_4_GENERACION_Y_PROMPTS.md,FASE_4_GENERACION_Y_PROMPTS.toon,Sprint_3_pipeline,Requiere FASE_0; ola1 paralelo ola2 cursor lider
+  6,FASE_5,FASE_5_EVALUACION_Y_OBSERVABILIDAD.md,FASE_5_EVALUACION_Y_OBSERVABILIDAD.toon,Sprint_4_observabilidad,Paralelo total cursor vs open_claw
+
+documentos_por_fase[6]{fase,documento_base,payload_toon}:
+  FASE_0,FASE_0_CORRECCIONES_CRITICAS.md,FASE_0_CORRECCIONES_CRITICAS.toon
+  FASE_1,FASE_1_RETRIEVAL_OPTIMIZADO.md,FASE_1_RETRIEVAL_OPTIMIZADO.toon
+  FASE_2,FASE_2_CHUNKING_SEMANTICO.md,FASE_2_CHUNKING_SEMANTICO.toon
+  FASE_3,FASE_3_RERANKING_CROSS_ENCODER.md,FASE_3_RERANKING_CROSS_ENCODER.toon
+  FASE_4,FASE_4_GENERACION_Y_PROMPTS.md,FASE_4_GENERACION_Y_PROMPTS.toon
+  FASE_5,FASE_5_EVALUACION_Y_OBSERVABILIDAD.md,FASE_5_EVALUACION_Y_OBSERVABILIDAD.toon
+
+metricas_actuales_vs_objetivo[4]{metrica,actual,objetivo_sprint1_3,objetivo_final}:
+  Accuracy QA,~55%,~70%,~85%
+  Latencia pipeline,~8-12s,~4-6s,~3-5s
+  Recall retrieval,N/A,Recall@10 mayor 0.85,Recall@10 mayor 0.90
+  Precision normativa,N/A,mayor 0.75,mayor 0.85
+
+notas[2]{item}:
+  Re-indexar obligatorio tras Sprint 1 (FASE_0) y tras Sprint 3 (FASE_2)
+  FASE_5 puede ejecutarse en paralelo para habilitar métricas desde el inicio

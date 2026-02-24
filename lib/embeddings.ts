@@ -1,6 +1,6 @@
-const HF_MODEL = process.env.HF_EMBEDDING_MODEL || 'sentence-transformers/paraphrase-multilingual-mpnet-base-v2'
+// Modelo unificado: una sola variable para ingest y query (FASE_0 tarea 0.1)
+const EMBEDDING_MODEL = process.env.EMBEDDING_MODEL || 'Xenova/paraphrase-multilingual-MiniLM-L12-v2'
 const EMB_PROVIDER = process.env.EMB_PROVIDER || 'hf'
-const EMB_MODEL = process.env.EMB_MODEL || 'Xenova/all-MiniLM-L6-v2'
 
 function stringHash(str: string): number {
   let hash = 2166136261
@@ -19,44 +19,80 @@ function seededRandom(seed: number) {
   }
 }
 
+/** Dimensión del embedding según el modelo configurado (para validación vs índice). */
+export function getEmbeddingDimension(): number {
+  const m = EMBEDDING_MODEL.toLowerCase()
+  if (m.includes('mpnet') || m.includes('768')) return 768
+  return 384 // MiniLM-L12 y similares
+}
+
 function fakeEmbed(text: string, dim = 768): number[] {
+  // Tarea 0.3: en producción no debe usarse; en dev log crítico
+  if (process.env.NODE_ENV === 'production') {
+    throw new Error('CRITICAL: Fake embeddings are not allowed in production. Set EMB_PROVIDER and HUGGINGFACE_API_KEY (or Xenova) correctly.')
+  }
+  console.error('[embeddings] CRITICAL: Using fake embeddings. Retrieval quality is zero.')
   const rand = seededRandom(stringHash(text))
   const v = Array.from({ length: dim }, () => rand() * 2 - 1)
-  // L2 normalize
   const norm = Math.sqrt(v.reduce((acc, x) => acc + x * x, 0)) || 1
   return v.map(x => x / norm)
 }
 
-export async function embedTexts(texts: string[]): Promise<number[][]> {
+export type EmbedTextsOptions = { expectedDimension?: number }
+
+function validateDimension(vectors: number[][], options?: EmbedTextsOptions): void {
+  if (options?.expectedDimension == null || !vectors[0]) return
+  if (vectors[0].length !== options.expectedDimension) {
+    throw new Error(`Embedding dimension mismatch: index has ${options.expectedDimension}d but model produces ${vectors[0].length}d. Set EMBEDDING_MODEL to match the model used for ingest.`)
+  }
+}
+
+export async function embedTexts(texts: string[], options?: EmbedTextsOptions): Promise<number[][]> {
   if (EMB_PROVIDER === 'local') {
-    return texts.map(t => fakeEmbed(t))
+    const out = texts.map(t => fakeEmbed(t, getEmbeddingDimension()))
+    if (options?.expectedDimension != null && out[0]?.length !== options.expectedDimension) {
+      throw new Error(`Embedding dimension mismatch: index has ${options.expectedDimension}d but model produces ${out[0]?.length ?? 0}d. Set EMBEDDING_MODEL to match the model used for ingest.`)
+    }
+    return out
   }
   if (EMB_PROVIDER === 'xenova') {
     try {
       const { pipeline } = await import('@xenova/transformers')
-      const extractor: any = await pipeline('feature-extraction', EMB_MODEL)
+      const extractor: any = await pipeline('feature-extraction', EMBEDDING_MODEL)
       const outputs: any = await extractor(texts, { pooling: 'mean', normalize: true })
       // Tensor batch: shape [n, dim] — split correctly
       if (outputs?.dims?.length === 2) {
         const [n, dim] = outputs.dims
         const flat = Array.from(outputs.data) as number[]
-        return Array.from({ length: n }, (_, i) => flat.slice(i * dim, (i + 1) * dim))
+        const result = Array.from({ length: n }, (_, i) => flat.slice(i * dim, (i + 1) * dim))
+        validateDimension(result, options)
+        return result
       }
       // Single text fallback
-      return [Array.from(outputs.data || outputs) as number[]]
+      const single = [Array.from(outputs.data || outputs) as number[]]
+      validateDimension(single, options)
+      return single
     } catch (e) {
-      return texts.map(t => fakeEmbed(t))
+      console.error('[embeddings] CRITICAL: Xenova failed, cannot use fake embeddings in production.', e)
+      if (process.env.NODE_ENV === 'production') {
+        throw new Error(`CRITICAL: Xenova embeddings failed in production. ${e instanceof Error ? e.message : String(e)}`)
+      }
+      return texts.map(t => fakeEmbed(t, getEmbeddingDimension()))
     }
   }
   // Default: Hugging Face
   if (!process.env.HUGGINGFACE_API_KEY) {
-    return texts.map(t => fakeEmbed(t))
+    console.error('[embeddings] CRITICAL: Using fake embeddings. Retrieval quality is zero.')
+    if (process.env.NODE_ENV === 'production') {
+      throw new Error('CRITICAL: HUGGINGFACE_API_KEY is required in production. Set EMB_PROVIDER and API key correctly.')
+    }
+    return texts.map(t => fakeEmbed(t, getEmbeddingDimension()))
   }
   try {
     // Use direct API call to router.huggingface.co for feature extraction
     // The router API format: https://router.huggingface.co/hf-inference/models/{model}/pipeline/feature-extraction
     const apiKey = process.env.HUGGINGFACE_API_KEY
-    const apiUrl = `https://router.huggingface.co/hf-inference/models/${HF_MODEL}/pipeline/feature-extraction`
+    const apiUrl = `https://router.huggingface.co/hf-inference/models/${EMBEDDING_MODEL}/pipeline/feature-extraction`
     console.log('[embeddings] Calling HF API:', apiUrl)
     
     // Configure timeout for embeddings API call
@@ -85,15 +121,16 @@ export async function embedTexts(texts: string[]): Promise<number[][]> {
       }
       
       const data = await response.json()
-      // Handle both array and object responses
+      let result: number[][]
       if (Array.isArray(data)) {
-        return data as number[][]
+        result = data as number[][]
+      } else if (Array.isArray(data[0])) {
+        result = data as number[][]
+      } else {
+        result = [data as number[]]
       }
-      // If single embedding, wrap in array
-      if (Array.isArray(data[0])) {
-        return data as number[][]
-      }
-      return [data as number[]]
+      validateDimension(result, options)
+      return result
     } catch (fetchError: any) {
       clearTimeout(timeoutId)
       if (fetchError.name === 'AbortError') {
@@ -104,8 +141,11 @@ export async function embedTexts(texts: string[]): Promise<number[][]> {
     }
   } catch (e) {
     console.error('[embeddings] HF API error:', e)
-    // Fallback to local embeddings if HF fails
-    return texts.map(t => fakeEmbed(t))
+    if (process.env.NODE_ENV === 'production') {
+      throw new Error(`CRITICAL: Hugging Face embeddings failed in production. ${e instanceof Error ? e.message : String(e)}`)
+    }
+    console.error('[embeddings] CRITICAL: Using fake embeddings. Retrieval quality is zero.')
+    return texts.map(t => fakeEmbed(t, getEmbeddingDimension()))
   }
 }
 

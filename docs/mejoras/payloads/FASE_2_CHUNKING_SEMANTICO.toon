@@ -1,0 +1,61 @@
+proyecto: ColLawRAG
+documento_base: docs/mejoras/FASE_2_CHUNKING_SEMANTICO.md
+generado: 2026-02-23
+modo: autonomo
+prioridad: Alta
+impacto_estimado: "+10-15% accuracy"
+esfuerzo: "3-4 días"
+dependencias: FASE_0; ideal FASE_1
+
+autonomo{modo,ruta_proyecto,no_modificar,prerequisitos,siguiente_payload,al_fallar}:
+  autonomo,ColLawRAG,"docs/mejoras/*.md","FASE_0 cerrada; scripts/ingest.mjs existe; npm install","docs/mejoras/payloads/FASE_3_RERANKING_CROSS_ENCODER.toon",abortar_fase
+
+multi_agente{habilitado,herramientas,sprint_id,paralelo_en_fase,post_fase_agente}:
+  true,"cursor,open_claw",Sprint_2_pipeline,true,cursor
+
+asignacion_agente[4]{tarea_id,agente,archivos_exclusivos}:
+  2.1,cursor,scripts/ingest.mjs
+  2.2,cursor,scripts/ingest.mjs
+  2.3,open_claw,"scripts/ingest.mjs lib/types.ts"
+  2.4,open_claw,scripts/ingest.mjs
+
+grupos_paralelos[2]{ola,tareas,agentes,nota}:
+  1,"2.1 2.2",cursor,"Cursor: prefijo jerárquico y unidad semántica en ingest"
+  2,"2.3 2.4",open_claw,"OpenClaw después: resúmenes (types + ingest) y overlap; ingest compartido"
+
+archivos_compartidos[1]{archivo,orden_edicion}:
+  scripts/ingest.mjs,"cursor (ola 1) luego open_claw (ola 2)"
+
+instruccion_herramienta[2]{herramienta,instruccion}:
+  cursor,"Ejecuta ola 1: tareas 2.1 y 2.2 en scripts/ingest.mjs (prefijo jerárquico; chunks por artículo/párrafo). No toques lib/types.ts. Tras ola 1, abrir paso a open_claw."
+  open_claw,"Ejecuta ola 2 tras ola 1: tareas 2.3 (lib/types.ts isOverview + ingest resúmenes) y 2.4 (overlap oraciones en ingest.mjs). No cambies lógica de 2.1/2.2. Ejecuta post_fase_comando solo si open_claw hizo re-index necesario; si no, lo hace cursor."
+
+cuellos_botella[1]{num,descripcion,archivo}:
+  7,Chunking por tamaño fijo corta artículos,scripts/ingest.mjs splitByArticles splitTextBySize splitLargeChunk
+
+tareas[4]{id,titulo,archivos_afectados,validacion,instruccion_concreta,comando_validacion}:
+  2.1,Prefijo contexto jerárquico en cada chunk,scripts/ingest.mjs,20 chunks aleatorios con prefijo correcto; metadata.articleHierarchy,"En scripts/ingest.mjs añadir prefijo por chunk: Ley > Título > Capítulo > Artículo; guardar en metadata.articleHierarchy.","node scripts/ingest.mjs --dry-run 2>&1 | head -5"
+  2.2,Chunks por unidad semántica artículo completo,scripts/ingest.mjs,Artículo menor 2000 chars un chunk; mayor dividir por párrafos/numerales; sin oraciones incompletas,"Modificar splitByArticles/splitTextBySize: unidad mínima artículo; si artículo > 2000 chars dividir por párrafos/numerales; nunca cortar oración a la mitad.","grep -E 'splitByArticles|splitLargeChunk' scripts/ingest.mjs"
+  2.3,Chunks resumen por ley y por título,scripts/ingest.mjs lib/types.ts,Query general retorna resumen top-3; query artículo retorna artículo no resumen,"En lib/types.ts añadir isOverview opcional en metadata. En ingest generar chunks de resumen por ley/título; marcar isOverview true.","grep isOverview lib/types.ts scripts/ingest.mjs"
+  2.4,Overlap inteligente por oraciones,scripts/ingest.mjs,Overlap 2-3 oraciones completas; 100-400 chars,"En scripts/ingest.mjs overlap por oraciones completas (regex fin oración); 2-3 oraciones; 100-400 chars.","grep -E 'overlap|sentence' scripts/ingest.mjs"
+
+archivos_modificar[2]{archivo,accion}:
+  scripts/ingest.mjs,MODIFICAR splitByArticles prefijos resumen overlap
+  lib/types.ts,Agregar isOverview opcional en metadata
+
+orden_ejecucion[4]{paso,tarea_id,nota}:
+  1,2.1,Prefijo formato Ley mayor Título mayor Capítulo mayor Artículo
+  2,2.2,Unidad mínima artículo; sub-unidad párrafo si artículo mayor 2000
+  3,2.3,isOverview true para resúmenes
+  4,2.4,splitBySentences regex fin oración
+
+criterio_exito[6]{item}:
+  90% más chunks corresponden a artículo o sub-unidad identificable
+  Cada chunk con prefijo jerárquico
+  Ningún chunk empieza con oración incompleta
+  Chunks de resumen por documento
+  Re-indexación completa
+  Accuracy mejora en articulos_correctos y completitud
+
+post_fase_comando[1]{orden,comando,descripcion}:
+  1,"cd ColLawRAG && node scripts/ingest.mjs","Re-indexar obligatorio tras cambiar chunking"

@@ -3,7 +3,25 @@ generado: 2026-02-16
 ejecutor: Cursor
 referencia: DIAGNOSTICO_COMERCIAL_2026-02-16.md
 diagnostico_documentos: DIAGNOSTICO_DOCUMENTOS_2026-02-18.md
+diagnostico_actual: DIAGNOSTICO_PROYECTO_2026-02-20.md
+diagnostico_benchmark: DIAGNOSTICO_BENCHMARK_2026-02-20.md
 url_produccion: https://col-law-rag.vercel.app
+tareas_benchmark: OC-A0 juez disponible | OC-A1 baseline | OC-A2 re-ingesta | OC-A3 benchmark post-fix (ver TAREAS_OPENCLAW.md y payloads ClawdBot)
+
+bugs_resueltos: plan-colaw/bugs-resueltos
+revisar_antes_implementar: Revisar plan-colaw/bugs-resueltos/INDEX.md y CURSOR|CLAWDBOT antes de implementar un fix; documentar ahí los bugs resueltos.
+
+payload_cursor_unificado_toon: plan-colaw/PAYLOAD_CURSOR_TOON.toon
+nota_openclaw: OpenClaw pausado hasta recarga de tokens semanales; Cursor usa PAYLOAD_CURSOR_TOON.toon con todas las tareas (CU-* completadas + OC-A0..OC-A3 pendientes).
+
+payloads_autonomos[4]{agente,archivo,base_diagnostico,nota}:
+  Cursor,plan-colaw/PAYLOAD_CURSOR_TOON.toon,DIAGNOSTICO_PROYECTO_2026-02-20.md,Toon unificado: CU completadas + OC-A0..OC-A3 pendientes (usar mientras OpenClaw pausado)
+  Cursor_txt,plan-colaw/PAYLOAD_CURSOR_AUTONOMO_REDEFINIDO.txt,DIAGNOSTICO_PROYECTO_2026-02-20.md,Alternativa texto
+  ClawdBot,plan-colaw/PAYLOAD_CLAWDBOT_AUTONOMO.txt,DIAGNOSTICO_PROYECTO_2026-02-20.md,Cuando OpenClaw tenga tokens; 7/7 + OC-A0..OC-A3
+  ClawdBot_paso_a_paso,plan-colaw/PAYLOAD_CLAWDBOT_PASO_A_PASO.txt,DIAGNOSTICO_PROYECTO_2026-02-20.md,Para modelo con menos parámetros
+
+logs_clawdbot: clawdbot/data/openclaw-refresh.log
+nota_clawdbot: ClawdBot NO usa Anthropic; dar payload_clawdbot_paso_a_paso para modelo con menos parámetros.
 
 sprints[4]{numero,nombre,objetivo_accuracy,semana}:
   1,Accuracy mínimo comercial,60-70% → 85%+,1-2
