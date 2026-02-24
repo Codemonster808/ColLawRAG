@@ -1,7 +1,7 @@
 import { Pinecone } from '@pinecone-database/pinecone'
 import { embedText } from './embeddings'
 import { type DocumentChunk, type RetrieveFilters } from './types'
-import { applyReranking, rerankWithHFSimilarity, addDerogadaNoteToChunk } from './reranking'
+import { applyReranking, applyRerankingWithCrossEncoder, rerankWithHFSimilarity, addDerogadaNoteToChunk } from './reranking'
 import { calculateBM25, hybridScore, deserializeBM25Index, searchBM25, rrfMerge, type BM25Index } from './bm25'
 import { isHNSWAvailable, loadHNSWIndex, searchHNSW, getHNSWIdListPath, RRF_K } from './vector-index'
 import { consultarVigencia, inferNormaIdFromTitle } from './norm-vigencia'
@@ -433,23 +433,34 @@ export async function retrieveRelevantChunks(query: string, filters?: RetrieveFi
 
   // Apply re-ranking if enabled
   if (USE_RERANKING && retrieved.length > 0) {
-    retrieved = applyReranking(retrieved, query, {
-      useAdvanced: true,
-      minScore: 0.05,
-      topK: topK * 2
-    })
-    // CU-06: opcional re-ranking con modelo HF (sentence similarity) para mejor relevancia top-K
-    if (USE_CROSS_ENCODER && process.env.HUGGINGFACE_API_KEY && retrieved.length > 0) {
-      const toRerank = retrieved.slice(0, 16)
-      const rest = retrieved.slice(16)
-      try {
-        const reranked = await rerankWithHFSimilarity(toRerank, query)
-        retrieved = [...reranked, ...rest].slice(0, topK)
-      } catch {
+    // I2: Si RERANK_PROVIDER=hf usar cross-encoder real (applyRerankingWithCrossEncoder)
+    const RERANK_PROVIDER = process.env.RERANK_PROVIDER || ''
+    if (RERANK_PROVIDER === 'hf' && process.env.HUGGINGFACE_API_KEY) {
+      // FASE_3 3.1: Cross-encoder real para top-20 chunks
+      retrieved = await applyRerankingWithCrossEncoder(retrieved, query, {
+        minScore: 0.05,
+        topK: topK
+      })
+    } else {
+      // Fallback: reranking con heurísticas (sin cross-encoder)
+      retrieved = applyReranking(retrieved, query, {
+        useAdvanced: true,
+        minScore: 0.05,
+        topK: topK * 2
+      })
+      // CU-06: opcional re-ranking con modelo HF (sentence similarity) para mejor relevancia top-K
+      if (USE_CROSS_ENCODER && process.env.HUGGINGFACE_API_KEY && retrieved.length > 0) {
+        const toRerank = retrieved.slice(0, 16)
+        const rest = retrieved.slice(16)
+        try {
+          const reranked = await rerankWithHFSimilarity(toRerank, query)
+          retrieved = [...reranked, ...rest].slice(0, topK)
+        } catch {
+          retrieved = retrieved.slice(0, topK)
+        }
+      } else {
         retrieved = retrieved.slice(0, topK)
       }
-    } else {
-      retrieved = retrieved.slice(0, topK)
     }
   } else {
     retrieved = retrieved.slice(0, topK)
