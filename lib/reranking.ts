@@ -1,6 +1,67 @@
 import { type DocumentChunk } from './types'
 import { consultarVigencia, inferNormaIdFromTitle } from './norm-vigencia'
 
+// FASE_3 3.2: Pesos del score final (cross-encoder principal; heurísticas secundarias)
+const WEIGHT_CROSS_ENCODER = 0.70
+const WEIGHT_HIERARCHY = 0.15
+const WEIGHT_RECENCY = 0.10
+const WEIGHT_VIGENCIA = 0.05
+const MAX_HIERARCHY_RAW = 0.60
+const MAX_RECENCY_RAW = 0.15
+const RERANK_TOP_N = 20
+
+const RERANK_MODEL = process.env.RERANK_MODEL || 'BAAI/bge-reranker-v2-m3'
+const RERANK_PROVIDER = process.env.RERANK_PROVIDER || ''
+
+// FASE_3 3.3: Cache y truncamiento para optimizar latencia
+const CACHE_TTL_MS = 5 * 60 * 1000 // 5 minutos
+const MAX_TEXT_LENGTH = 512 // Truncar textos para reducir latencia API
+const BATCH_SIZE = 20 // Batch de 20 pares (ya limitado por RERANK_TOP_N)
+
+// FASE_3 3.4: Penalización normas derogadas
+const PENALTY_DEROGADA_TOTAL = -0.30 // Penalización por norma totalmente derogada
+
+// FASE_3 3.3: Cache simple para cross-encoder scores (5 min TTL)
+interface CacheEntry {
+  scores: number[]
+  timestamp: number
+}
+const crossEncoderCache = new Map<string, CacheEntry>()
+
+function getCacheKey(query: string, chunkIds: string[]): string {
+  return `${query.slice(0, 100)}__${chunkIds.slice(0, 5).join('_')}`
+}
+
+function getCachedScores(cacheKey: string): number[] | null {
+  const entry = crossEncoderCache.get(cacheKey)
+  if (!entry) return null
+  
+  const now = Date.now()
+  if (now - entry.timestamp > CACHE_TTL_MS) {
+    crossEncoderCache.delete(cacheKey)
+    return null
+  }
+  
+  return entry.scores
+}
+
+function setCachedScores(cacheKey: string, scores: number[]): void {
+  crossEncoderCache.set(cacheKey, {
+    scores,
+    timestamp: Date.now()
+  })
+  
+  // Cleanup: eliminar entradas viejas si el cache crece mucho
+  if (crossEncoderCache.size > 100) {
+    const now = Date.now()
+    for (const [key, entry] of crossEncoderCache.entries()) {
+      if (now - entry.timestamp > CACHE_TTL_MS) {
+        crossEncoderCache.delete(key)
+      }
+    }
+  }
+}
+
 export interface RerankedChunk {
   chunk: DocumentChunk
   score: number
@@ -202,8 +263,59 @@ export function getRecencyScore(chunk: DocumentChunk): number {
 }
 
 /**
- * Re-ranking simple basado en scoring combinado
- * Combina: similitud semántica + jerarquía legal + recencia
+ * Cross-encoder real vía API HF (FASE_3 3.1). Aplica solo a top-20 chunks.
+ * FASE_3 3.3: Con cache (5 min), batching (20 pares) y truncamiento (512 chars).
+ * Retorna scores normalizados 0-1 o null si no está disponible.
+ */
+async function getCrossEncoderScores(
+  query: string,
+  chunks: Array<{ chunk: DocumentChunk; score: number }>
+): Promise<number[] | null> {
+  if (chunks.length === 0 || !process.env.HUGGINGFACE_API_KEY || RERANK_PROVIDER !== 'hf') return null
+  
+  // FASE_3 3.3: Batch de 20 pares (limitar a BATCH_SIZE)
+  const toRank = chunks.slice(0, Math.min(BATCH_SIZE, RERANK_TOP_N))
+  const chunkIds = toRank.map(r => r.chunk.id)
+  
+  // FASE_3 3.3: Check cache (5 min TTL)
+  const cacheKey = getCacheKey(query, chunkIds)
+  const cachedScores = getCachedScores(cacheKey)
+  if (cachedScores) {
+    return cachedScores
+  }
+  
+  // FASE_3 3.3: Truncar textos para reducir latencia API
+  const queryShort = query.slice(0, MAX_TEXT_LENGTH)
+  const texts = toRank.map(r => r.chunk.content.slice(0, MAX_TEXT_LENGTH))
+  
+  try {
+    const { HfInference } = await import('@huggingface/inference')
+    const hf = new HfInference(process.env.HUGGINGFACE_API_KEY)
+    const scores = await hf.sentenceSimilarity({
+      model: RERANK_MODEL,
+      inputs: { source_sentence: queryShort, sentences: texts }
+    }) as number[]
+    
+    if (!Array.isArray(scores) || scores.length !== toRank.length) return null
+    
+    // Normalizar scores a rango 0-1
+    const min = Math.min(...scores)
+    const max = Math.max(...scores)
+    const range = max - min || 1
+    const normalizedScores = scores.map(s => (s - min) / range)
+    
+    // FASE_3 3.3: Guardar en cache
+    setCachedScores(cacheKey, normalizedScores)
+    
+    return normalizedScores
+  } catch {
+    return null
+  }
+}
+
+/**
+ * Re-ranking simple basado en scoring combinado (FASE_3 3.2: sin normalización incorrecta)
+ * Combina: score original (0-1) + jerarquía + recencia con pesos recalibrados
  */
 export function rerankChunks(
   chunks: Array<{ chunk: DocumentChunk; score: number }>,
@@ -212,11 +324,87 @@ export function rerankChunks(
   const reranked: RerankedChunk[] = chunks.map(({ chunk, score }) => {
     const hierarchyBoost = getLegalHierarchyScore(chunk)
     const recencyBoost = getRecencyScore(chunk)
+    const vigenciaNorm = Math.max(0, Math.min(1, (recencyBoost + 0.05) / 0.2))
+    const baseNorm = Math.max(0, Math.min(1, score))
+    const finalScore =
+      WEIGHT_CROSS_ENCODER * baseNorm +
+      WEIGHT_HIERARCHY * (hierarchyBoost / MAX_HIERARCHY_RAW) +
+      WEIGHT_RECENCY * (Math.max(0, recencyBoost) / MAX_RECENCY_RAW) +
+      WEIGHT_VIGENCIA * vigenciaNorm
+    return {
+      chunk,
+      score: finalScore,
+      originalScore: score,
+      hierarchyBoost,
+      recencyBoost,
+      finalScore
+    }
+  })
+  reranked.sort((a, b) => b.finalScore - a.finalScore)
+  return reranked.map(({ chunk, finalScore }) => ({ chunk, score: finalScore }))
+}
+
+/**
+ * Re-ranking avanzado con cross-encoder real (FASE_3 3.1) y heurísticas recalibradas (3.2).
+ * Score final = 0.70 cross_encoder + 0.15 hierarchy + 0.10 recency + 0.05 vigencia.
+ * Sin normalización (score+1)/2; Constitución no domina (peso hierarchy cap 0.15).
+ */
+export async function rerankChunksAdvancedAsync(
+  chunks: Array<{ chunk: DocumentChunk; score: number }>,
+  query: string
+): Promise<Array<{ chunk: DocumentChunk; score: number }>> {
+  const crossScores = await getCrossEncoderScores(query, chunks)
+  const queryLower = query.toLowerCase()
+  const queryTerms = queryLower.split(/\s+/).filter(t => t.length > 2)
+
+  const reranked: RerankedChunk[] = chunks.map(({ chunk, score }, i) => {
+    const hierarchyBoost = getLegalHierarchyScore(chunk)
+    const recencyBoost = getRecencyScore(chunk)
+    let vigenciaNorm = 0.5
+    let penaltyDerogada = 0 // FASE_3 3.4: Penalización por norma derogada
     
-    // Score final = score original + boosts
-    // Normalizamos el score original a 0-1 si es necesario
-    const normalizedScore = Math.max(0, Math.min(1, (score + 1) / 2)) // Asumiendo scores entre -1 y 1
-    const finalScore = normalizedScore + hierarchyBoost + recencyBoost
+    try {
+      const normaId = inferNormaIdFromTitle(chunk.metadata.title)
+      if (normaId) {
+        const vigencia = consultarVigencia(normaId)
+        if (vigencia) {
+          vigenciaNorm = vigencia.vigente ? 1 : 0
+          // FASE_3 3.4: Aplicar penalización si está totalmente derogada
+          if (vigencia.estado === 'derogada') {
+            penaltyDerogada = PENALTY_DEROGADA_TOTAL
+          }
+        }
+      }
+    } catch {
+      vigenciaNorm = 0.5
+    }
+    
+    const retrievalNorm = Math.max(0, Math.min(1, score))
+    const crossNorm = crossScores && i < crossScores.length ? crossScores[i] : retrievalNorm
+    const hierarchyNorm = Math.min(1, hierarchyBoost / MAX_HIERARCHY_RAW)
+    const recencyNorm = Math.max(0, recencyBoost) / MAX_RECENCY_RAW
+
+    let keywordBoost = 0
+    const titleLower = chunk.metadata.title.toLowerCase()
+    const contentLower = chunk.content.toLowerCase()
+    for (const term of queryTerms) {
+      if (titleLower.includes(term)) keywordBoost += 0.02
+      else if (contentLower.includes(term)) keywordBoost += 0.01
+    }
+    const articleMatch = query.match(/art[íi]culo\s+(\d+)/i)
+    if (articleMatch && chunk.metadata.article) {
+      const chunkArticle = chunk.metadata.article.replace(/\D/g, '')
+      if (chunkArticle === articleMatch[1]) keywordBoost += 0.05
+    }
+    
+    // FASE_3 3.4: Score final incluye penalización por norma derogada
+    const finalScore =
+      WEIGHT_CROSS_ENCODER * crossNorm +
+      WEIGHT_HIERARCHY * hierarchyNorm +
+      WEIGHT_RECENCY * Math.min(1, recencyNorm) +
+      WEIGHT_VIGENCIA * vigenciaNorm +
+      Math.min(0.05, keywordBoost) +
+      penaltyDerogada // Penalización -0.30 si derogada
     
     return {
       chunk,
@@ -227,94 +415,53 @@ export function rerankChunks(
       finalScore
     }
   })
-  
-  // Ordenar por score final descendente
   reranked.sort((a, b) => b.finalScore - a.finalScore)
-  
-  // Retornar en formato original
-  return reranked.map(({ chunk, finalScore }) => ({
-    chunk,
-    score: finalScore
-  }))
+  return reranked.map(({ chunk, finalScore }) => ({ chunk, score: finalScore }))
 }
 
 /**
- * Re-ranking avanzado con cross-encoder (simulado)
- * En producción, esto debería usar un modelo cross-encoder real
- * Por ahora, usamos heurísticas mejoradas
+ * Re-ranking avanzado (síncrono): usa solo heurísticas con pesos recalibrados.
+ * Para cross-encoder real usar applyReranking que llama a la versión async.
  */
 export function rerankChunksAdvanced(
   chunks: Array<{ chunk: DocumentChunk; score: number }>,
   query: string
 ): Array<{ chunk: DocumentChunk; score: number }> {
-  const queryLower = query.toLowerCase()
-  const queryTerms = queryLower.split(/\s+/).filter(t => t.length > 2)
-  
-  const reranked: RerankedChunk[] = chunks.map(({ chunk, score }) => {
+  return chunks.map(({ chunk, score }) => {
     const hierarchyBoost = getLegalHierarchyScore(chunk)
     const recencyBoost = getRecencyScore(chunk)
+    const retrievalNorm = Math.max(0, Math.min(1, score))
+    const hierarchyNorm = Math.min(1, hierarchyBoost / MAX_HIERARCHY_RAW)
+    const recencyNorm = Math.max(0, recencyBoost) / MAX_RECENCY_RAW
+    let vigenciaNorm = 0.5
+    let penaltyDerogada = 0 // FASE_3 3.4: Penalización por norma derogada
     
-    // Penalización por documentos derogados o no vigentes
-    let vigenciaPenalty = 0
     try {
       const normaId = inferNormaIdFromTitle(chunk.metadata.title)
       if (normaId) {
         const vigencia = consultarVigencia(normaId)
-        if (vigencia && !vigencia.vigente) {
-          // Penalizar documentos no vigentes o derogados
-          vigenciaPenalty = -0.10
+        if (vigencia) {
+          vigenciaNorm = vigencia.vigente ? 1 : 0
+          // FASE_3 3.4: Aplicar penalización si está totalmente derogada
+          if (vigencia.estado === 'derogada') {
+            penaltyDerogada = PENALTY_DEROGADA_TOTAL
+          }
         }
       }
-    } catch (error) {
-      // Ignorar errores en consulta de vigencia
+    } catch {
+      vigenciaNorm = 0.5
     }
     
-    // Boost por matching de términos clave en título
-    let keywordBoost = 0
-    const titleLower = chunk.metadata.title.toLowerCase()
-    const contentLower = chunk.content.toLowerCase()
+    // FASE_3 3.4: Score final incluye penalización por norma derogada
+    const finalScore =
+      WEIGHT_CROSS_ENCODER * retrievalNorm +
+      WEIGHT_HIERARCHY * hierarchyNorm +
+      WEIGHT_RECENCY * Math.min(1, recencyNorm) +
+      WEIGHT_VIGENCIA * vigenciaNorm +
+      penaltyDerogada // Penalización -0.30 si derogada
     
-    for (const term of queryTerms) {
-      if (titleLower.includes(term)) {
-        keywordBoost += 0.05 // Término en título es muy relevante
-      } else if (contentLower.includes(term)) {
-        keywordBoost += 0.02 // Término en contenido es relevante
-      }
-    }
-    
-    // Boost por artículo específico mencionado en query
-    const articleMatch = query.match(/art[íi]culo\s+(\d+)/i)
-    if (articleMatch && chunk.metadata.article) {
-      const queryArticle = articleMatch[1]
-      const chunkArticle = chunk.metadata.article.replace(/\D/g, '')
-      if (chunkArticle === queryArticle) {
-        keywordBoost += 0.15 // Match exacto de artículo
-      }
-    }
-    
-    // Normalizar score original
-    const normalizedScore = Math.max(0, Math.min(1, (score + 1) / 2))
-    
-    // Score final con todos los boosts y penalizaciones
-    const finalScore = normalizedScore + hierarchyBoost + recencyBoost + keywordBoost + vigenciaPenalty
-    
-    return {
-      chunk,
-      score: finalScore,
-      originalScore: score,
-      hierarchyBoost,
-      recencyBoost,
-      finalScore
-    }
-  })
-  
-  // Ordenar por score final
-  reranked.sort((a, b) => b.finalScore - a.finalScore)
-  
-  return reranked.map(({ chunk, finalScore }) => ({
-    chunk,
-    score: finalScore
-  }))
+    return { chunk, score: finalScore }
+  }).sort((a, b) => b.score - a.score)
 }
 
 /**
@@ -328,7 +475,8 @@ export function filterChunksByRelevance(
 }
 
 /**
- * Aplica re-ranking y filtrado completo
+ * Aplica re-ranking y filtrado completo (síncrono; usa heurísticas con pesos FASE_3 3.2).
+ * Para cross-encoder real usar applyRerankingWithCrossEncoder (async) desde retrieval.
  */
 export function applyReranking(
   chunks: Array<{ chunk: DocumentChunk; score: number }>,
@@ -340,21 +488,71 @@ export function applyReranking(
   } = {}
 ): Array<{ chunk: DocumentChunk; score: number }> {
   const { useAdvanced = true, minScore = 0.05, topK } = options
-  
-  // Aplicar re-ranking
   let reranked = useAdvanced
     ? rerankChunksAdvanced(chunks, query)
     : rerankChunks(chunks, query)
-  
-  // Filtrar por score mínimo
   reranked = filterChunksByRelevance(reranked, minScore)
-  
-  // Limitar a topK si se especifica
-  if (topK !== undefined) {
-    reranked = reranked.slice(0, topK)
-  }
-  
+  if (topK !== undefined) reranked = reranked.slice(0, topK)
   return reranked
+}
+
+/**
+ * Re-ranking con cross-encoder real (FASE_3 3.1). Usar desde retrieval cuando RERANK_PROVIDER=hf.
+ * Aplica solo a top-20 chunks; combina con pesos 0.70 cross + 0.15 hierarchy + 0.10 recency + 0.05 vigencia.
+ */
+export async function applyRerankingWithCrossEncoder(
+  chunks: Array<{ chunk: DocumentChunk; score: number }>,
+  query: string,
+  options: { minScore?: number; topK?: number } = {}
+): Promise<Array<{ chunk: DocumentChunk; score: number }>> {
+  const { minScore = 0.05, topK } = options
+  let reranked = await rerankChunksAdvancedAsync(chunks, query)
+  reranked = filterChunksByRelevance(reranked, minScore)
+  if (topK !== undefined) reranked = reranked.slice(0, topK)
+  return reranked
+}
+
+/**
+ * FASE_3 3.4: Añade NOTA de norma derogada al contenido del chunk para que el LLM la vea.
+ * Modifica el contenido del chunk in-place agregando una advertencia al inicio.
+ * 
+ * @param chunk Chunk a modificar
+ * @returns Chunk modificado con NOTA si la norma está derogada
+ */
+export function addDerogadaNoteToChunk(chunk: DocumentChunk): DocumentChunk {
+  try {
+    const normaId = inferNormaIdFromTitle(chunk.metadata.title)
+    if (!normaId) return chunk
+    
+    const vigencia = consultarVigencia(normaId)
+    if (!vigencia) return chunk
+    
+    // NOTA para norma totalmente derogada
+    if (vigencia.estado === 'derogada') {
+      const derogadaPor = (vigencia as any).derogadaPor ? ` por ${(vigencia as any).derogadaPor}` : ''
+      const derogadaDesde = (vigencia as any).derogadaDesde ? ` desde ${(vigencia as any).derogadaDesde}` : ''
+      const nota = `⚠️ NOTA: Esta norma está DEROGADA${derogadaPor}${derogadaDesde}. No aplica a casos actuales.\n\n`
+      
+      return {
+        ...chunk,
+        content: nota + chunk.content
+      }
+    }
+    
+    // NOTA para norma parcialmente derogada
+    if (vigencia.estado === 'parcialmente_derogada') {
+      const nota = `⚠️ NOTA: Esta norma está PARCIALMENTE DEROGADA. Algunos artículos pueden no estar vigentes. Verificar vigencia específica.\n\n`
+      
+      return {
+        ...chunk,
+        content: nota + chunk.content
+      }
+    }
+    
+    return chunk
+  } catch {
+    return chunk
+  }
 }
 
 /** Máximo de caracteres por chunk a enviar al modelo de similitud (límite de contexto) */

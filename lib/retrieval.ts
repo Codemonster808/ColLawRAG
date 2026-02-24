@@ -1,7 +1,7 @@
 import { Pinecone } from '@pinecone-database/pinecone'
 import { embedText } from './embeddings'
 import { type DocumentChunk, type RetrieveFilters } from './types'
-import { applyReranking, rerankWithHFSimilarity } from './reranking'
+import { applyReranking, rerankWithHFSimilarity, addDerogadaNoteToChunk } from './reranking'
 import { calculateBM25, hybridScore, deserializeBM25Index, searchBM25, rrfMerge, type BM25Index } from './bm25'
 import { isHNSWAvailable, loadHNSWIndex, searchHNSW, getHNSWIdListPath, RRF_K } from './vector-index'
 import { consultarVigencia, inferNormaIdFromTitle } from './norm-vigencia'
@@ -459,6 +459,15 @@ export async function retrieveRelevantChunks(query: string, filters?: RetrieveFi
   const USE_VIGENCIA_FILTER = process.env.USE_VIGENCIA_FILTER !== 'false'
   if (USE_VIGENCIA_FILTER && retrieved.length > 0) {
     retrieved = filterChunksByVigencia(retrieved)
+  }
+
+  // FASE_3 3.4: Añadir NOTA de norma derogada en contenido del chunk para el LLM
+  const ADD_DEROGADA_NOTE = process.env.ADD_DEROGADA_NOTE !== 'false'
+  if (ADD_DEROGADA_NOTE && retrieved.length > 0) {
+    retrieved = retrieved.map(r => ({
+      ...r,
+      chunk: addDerogadaNoteToChunk(r.chunk)
+    }))
   }
 
   return retrieved
