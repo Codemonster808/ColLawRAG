@@ -151,9 +151,92 @@ function detectLegalAreaFromContent(title, content) {
   return 'general'
 }
 
+// FASE_2 tarea 2.2: dividir por párrafos u oraciones completas (nunca cortar oración).
+const MAX_ARTICLE_CHUNK_CHARS = 2000
+
 /**
- * Divide un texto en segmentos de máximo maxSize caracteres, con overlap de overlap chars.
- * Respeta líneas; usa las últimas líneas como solapamiento entre segmentos.
+ * Divide un artículo largo por unidades semánticas: párrafos (\n\n) o oraciones completas.
+ * FASE_2 2.2: Nunca corta por la mitad de una oración. maxSize por defecto 2000.
+ */
+function splitArticleBySemanticUnits(text, maxSize = MAX_ARTICLE_CHUNK_CHARS) {
+  if (!text || text.length <= maxSize) return [text]
+  const chunks = []
+  const paragraphs = text.split(/\n\s*\n/)
+  for (const para of paragraphs) {
+    const t = para.trim()
+    if (!t) continue
+    if (t.length <= maxSize) {
+      chunks.push(t)
+      continue
+    }
+    // Párrafo muy largo: dividir por oraciones (. ! ? seguido de espacio o fin)
+    const sentences = t.match(/[^.!?]*[.!?]\s*/g) || [t]
+    let current = ''
+    for (const sent of sentences) {
+      const s = sent.trim()
+      if (!s) continue
+      if (s.length > maxSize) {
+        if (current) chunks.push(current)
+        chunks.push(s)
+        current = ''
+        continue
+      }
+      if (current.length + s.length + 1 <= maxSize) {
+        current += (current ? ' ' : '') + s
+      } else {
+        if (current) chunks.push(current)
+        current = s
+      }
+    }
+    if (current) chunks.push(current)
+  }
+  return chunks.filter(Boolean)
+}
+
+/**
+ * FASE_2 tarea 2.4: Extrae las últimas 2-3 oraciones completas de un texto para overlap.
+ * Objetivo: 100-400 chars de overlap inteligente por oraciones (no por líneas).
+ * @param {string} text - Texto del cual extraer oraciones finales
+ * @param {number} minChars - Mínimo de caracteres deseados (default: 100)
+ * @param {number} maxChars - Máximo de caracteres deseados (default: 400)
+ * @returns {string} Las últimas 2-3 oraciones completas que cumplen el rango
+ */
+function getLastSentences(text, minChars = 100, maxChars = 400) {
+  if (!text) return ''
+  
+  // Regex para dividir por oraciones (. ! ? seguido de espacio/fin)
+  const sentences = text.match(/[^.!?]*[.!?](?:\s+|$)/g) || []
+  if (sentences.length === 0) return ''
+  
+  // Tomar las últimas 2-3 oraciones
+  let overlap = ''
+  let count = 0
+  for (let i = sentences.length - 1; i >= 0 && count < 3; i--) {
+    const sent = sentences[i].trim()
+    if (!sent) continue
+    
+    const candidate = sent + (overlap ? ' ' : '') + overlap
+    
+    // Si ya tenemos al menos minChars y agregar esta oración excede maxChars, parar
+    if (overlap.length >= minChars && candidate.length > maxChars) {
+      break
+    }
+    
+    overlap = candidate
+    count++
+    
+    // Si alcanzamos el rango deseado, parar
+    if (overlap.length >= minChars && overlap.length <= maxChars) {
+      break
+    }
+  }
+  
+  return overlap
+}
+
+/**
+ * Divide un texto en segmentos de máximo maxSize caracteres, con overlap inteligente.
+ * FASE_2 tarea 2.4: Usa overlap por oraciones completas (2-3 oraciones, 100-400 chars).
  */
 function splitTextBySize(text, maxSize = 1000, overlap = 150) {
   if (!text || text.length <= maxSize) return [text]
@@ -161,21 +244,19 @@ function splitTextBySize(text, maxSize = 1000, overlap = 150) {
   const segments = []
   let current = ''
   let currentLength = 0
-  let overlapBuffer = []
+  
   for (const line of lines) {
     const lineLength = line.length + 1 // +1 newline
     if (currentLength + lineLength > maxSize && current.length > 0) {
-      if (overlapBuffer.length > 0) current += '\n' + overlapBuffer.join('\n')
       segments.push(current)
-      const overlapText = overlapBuffer.join('\n')
+      
+      // FASE_2 2.4: Overlap por oraciones completas (100-400 chars)
+      const overlapText = getLastSentences(current, 100, 400)
       current = overlapText + (overlapText ? '\n' : '') + line
       currentLength = current.length
-      overlapBuffer = []
     } else {
       current += (current ? '\n' : '') + line
       currentLength += line.length + 1
-      overlapBuffer.push(line)
-      if (overlapBuffer.length > 10) overlapBuffer.shift()
     }
   }
   if (current.length > 0) segments.push(current)
@@ -314,7 +395,8 @@ function splitByArticles(content) {
     // Formato 1: "Artículo X" o "ARTÍCULO X"
     // Formato 2: "Art. X" o "Art X"
     // Formato 3: "Artículo X.-" (con guion)
-    const artMatch = line.match(/^(Art[íi]culo|ART[ÍI]CULO|Art\.?)\s+([0-9A-Za-z\.\-]+)/i)
+    // INICIO_TRABAJO I1: más formatos (espacios al inicio, "Art. 186.", "Artículo 186.", etc.)
+    const artMatch = line.match(/^\s*(Art[íi]culo|ART[ÍI]CULO|Art\.?)\s+([0-9A-Za-z\.\-]+)(?:\s*[\.\-–—])?/i)
     if (artMatch) {
       pushBuffer()
       currentArticle = `Artículo ${artMatch[2]}`
@@ -333,101 +415,43 @@ function splitByArticles(content) {
     buffer.push(line)
   }
   pushBuffer()
-  
-  // Función para dividir chunks muy grandes con overlap
-  function splitLargeChunk(chunk, maxSize = 1000, overlap = 150) {
-    if (chunk.text.length <= maxSize) {
-      return [chunk]
-    }
-    
-    const splits = []
-    const lines = chunk.text.split('\n')
-    let currentSplit = { ...chunk, text: '' }
-    let currentLength = 0
-    let overlapBuffer = []
-    
-    for (const line of lines) {
-      const lineLength = line.length + 1 // +1 for newline
-      
-      if (currentLength + lineLength > maxSize && currentSplit.text.length > 0) {
-        // Guardar el split actual con overlap
-        if (overlapBuffer.length > 0) {
-          currentSplit.text += '\n' + overlapBuffer.join('\n')
-        }
-        splits.push(currentSplit)
-        
-        // Crear nuevo split con overlap del anterior
-        const overlapText = overlapBuffer.join('\n')
-        currentSplit = {
-          ...chunk,
-          text: overlapText + (overlapText ? '\n' : '') + line
-        }
-        currentLength = currentSplit.text.length
-        overlapBuffer = []
-      } else {
-        currentSplit.text += (currentSplit.text ? '\n' : '') + line
-        currentLength += lineLength
-        
-        // Mantener últimas líneas para overlap
-        overlapBuffer.push(line)
-        if (overlapBuffer.length > 10) { // Mantener ~10 líneas para overlap
-          overlapBuffer.shift()
-        }
-      }
-    }
-    
-    // Agregar el último split
-    if (currentSplit.text.length > 0) {
-      splits.push(currentSplit)
-    }
-    
-    return splits.length > 0 ? splits : [chunk]
-  }
-  
-  // Mejorar la fusión de partes pequeñas
+
+  // FASE_2 2.2: Unidad mínima = artículo. Fusionar todas las partes del mismo artículo en una.
+  // La división por tamaño (artículo > 2000 chars) se hace en el caller con splitArticleBySemanticUnits.
   const merged = []
   let acc = null
-  
   for (const p of parts) {
-    if (!acc) { 
+    if (!acc) {
       acc = { ...p }
       continue
     }
-    
-    // Si ambas partes son del mismo artículo o muy pequeñas, fusionar
-    const sameArticle = acc.article === p.article
-    const totalLength = acc.text.length + p.text.length
-    
-    if (sameArticle && totalLength < 1500) {
-      // Fusionar partes del mismo artículo si no exceden el límite
+    const sameArticle = acc.article === p.article && acc.title === p.title && acc.chapter === p.chapter
+    if (sameArticle) {
       acc.text += '\n\n' + p.text
-    } else if (!sameArticle && totalLength < 800 && acc.text.length < 400) {
-      // Fusionar partes pequeñas de diferentes artículos si ambas son muy pequeñas
-      acc.text += '\n\n' + p.text
-      acc.article = acc.article ? `${acc.article} y ${p.article}` : p.article
     } else {
-      // Dividir chunk grande antes de guardarlo (max 1000 chars, overlap 150)
-      if (acc.text.length > 1000) {
-        const splits = splitLargeChunk(acc, 1000, 150)
-        merged.push(...splits)
-      } else {
-        merged.push(acc)
-      }
+      merged.push(acc)
       acc = { ...p }
     }
   }
-  
-  // Procesar el último acumulador
-  if (acc) {
-    if (acc.text.length > 1000) {
-      const splits = splitLargeChunk(acc, 1000, 150)
-      merged.push(...splits)
-    } else {
-      merged.push(acc)
-    }
-  }
-  
-  return merged
+  if (acc) merged.push(acc)
+
+  // INICIO_TRABAJO I1: fallback — rellenar article vacío desde el contenido del part
+  const withFallback = merged.map((p) => {
+    if (p.article) return p
+    const extracted = extractArticleFromText(p.text)
+    return extracted ? { ...p, article: extracted } : p
+  })
+  return withFallback
+}
+
+/**
+ * INICIO_TRABAJO I1: Extrae "Artículo N" del texto (primera ocurrencia) para rellenar metadata.article.
+ * Acepta: "Art. 186", "Artículo 186", "ARTÍCULO 186", "Art 249", "Art. 186.-"
+ */
+function extractArticleFromText(text) {
+  if (!text || typeof text !== 'string') return null
+  const m = text.match(/(?:Art[íi]culo|ART[ÍI]CULO|Art\.?)\s+([0-9A-Za-z\.\-]+)/i)
+  return m ? `Artículo ${m[1]}` : null
 }
 
 function stringHash(str) {
@@ -581,37 +605,42 @@ async function main() {
     const cleanContent = stripHeaderAndNav(raw)
     const articleChunks = splitByArticles(cleanContent)
     for (const part of articleChunks) {
-      // Construir jerarquía completa para mejor citación
+      // FASE_2 2.1: Jerarquía Ley > Título > Capítulo > Artículo (metadata + prefijo en contenido)
       const articleHierarchy = []
       if (part.title) articleHierarchy.push(part.title)
       if (part.chapter) articleHierarchy.push(part.chapter)
       if (part.section) articleHierarchy.push(part.section)
       if (part.article) articleHierarchy.push(part.article)
-      
+      const hierarchyStr = articleHierarchy.length > 0 ? articleHierarchy.join(' > ') : ''
+      const prefixLine = 'Ley: ' + title + (hierarchyStr ? ' | ' + hierarchyStr : '') + '\n\n'
+
       // Área: frontmatter > cabecera alternativa (Tema:/Tipo:) > detección por contenido
       const areaDetected = detectLegalAreaFromContent(title, part.text)
       const area = frontmatter.area || headerMeta.area || areaDetected || 'general'
       const entidadEmisora = detectEntityFromFilename(file)
       const fechaVigencia = extractVigenciaFromFilename(file)
-      
+
       const metadata = {
         id: `doc-${path.parse(file).name}`,
         title,
         type,
-        article: part.article,
-        articleHierarchy: articleHierarchy.length > 0 ? articleHierarchy.join(' > ') : undefined,
+        article: part.article || extractArticleFromText(part.text),
+        articleHierarchy: hierarchyStr || undefined,
         chapter: part.chapter,
         section: part.section,
-        area, // Para filtros en retrieval (antes areaLegal; frontmatter + detección)
+        area,
         entidadEmisora,
         fechaVigencia,
         url: undefined,
         sourcePath: `data/documents/${file}`
       }
-      // Asegurar que ningún chunk supere 1000 caracteres (split con overlap 150)
-      const contentParts = part.text.length > 1000 ? splitTextBySize(part.text, 1000, 150) : [part.text]
+      // FASE_2 2.2: Artículo ≤2000 chars un chunk; >2000 dividir por párrafos/oraciones (sin cortar oración)
+      const contentParts = part.text.length <= MAX_ARTICLE_CHUNK_CHARS
+        ? [part.text]
+        : splitArticleBySemanticUnits(part.text, MAX_ARTICLE_CHUNK_CHARS)
       for (const content of contentParts) {
-        chunks.push({ id: randomUUID(), content, metadata })
+        const contentWithPrefix = prefixLine + content.trim()
+        chunks.push({ id: randomUUID(), content: contentWithPrefix, metadata })
       }
     }
   }
