@@ -1,0 +1,71 @@
+{
+  "timestamp": "2026-02-24T10:00:00Z",
+  "corpus_stats": {
+    "total_chunks": 33053,
+    "by_type": {
+      "estatuto": 23709,
+      "jurisprudencia": 9344
+    },
+    "by_norm": {
+      "Sentencia C-355/2006 - Corte Constitucional": 4060,
+      "codigo estatuto tributario": 2612,
+      "codigo codigo general proceso ley1564": 2364,
+      "Sentencia T-760/2008 - Corte Constitucional": 2269,
+      "Ley 1581 de 2012 — Protección de Datos Personales": 1930,
+      "Código de Comercio (Decreto 410 de 1971)": 1900,
+      "codigo codigo civil": 1829,
+      "Ley 1712 de 2014 — Transparencia y Acceso a la Información": 1671,
+      "Constitución Política de Colombia de 1991": 1647,
+      "Código de Procedimiento Penal (Ley 906 de 2004)": 1412,
+      "Ley 100 de 1993 — Sistema General de Seguridad Social": 1183,
+      "codigo cpaca ley1437": 1151,
+      "Ley 600 de 2000 — Código de Procedimiento Penal (anterior)": 1136,
+      "codigo codigo penal ley599": 780,
+      "codigo codigo sustantivo trabajo": 748,
+      "Código de la Infancia y la Adolescencia (Ley 1098 de 2006)": 722,
+      "Ley 789 de 2002 — Apoyo al Empleo y Protección Social": 363,
+      "Ley 2466 de 2025 — Reforma Laboral": 353,
+      "Ley 1116 de 2006 — Régimen de Insolvencia Empresarial": 198,
+      "Ley 1562 de 2012 — Sistema General de Riesgos Laborales": 190
+    },
+    "articles_with_metadata": 27195,
+    "articles_percentage": 82.27694914228663
+  },
+  "test_results": [
+    {
+      "test_id": "LAB-001",
+      "exact_matches": 3,
+      "partial_matches": 48,
+      "found": true
+    },
+    {
+      "test_id": "LAB-002",
+      "exact_matches": 0,
+      "partial_matches": 51,
+      "found": false
+    },
+    {
+      "test_id": "LAB-003",
+      "exact_matches": 3,
+      "partial_matches": 48,
+      "found": true
+    },
+    {
+      "test_id": "TRI-001",
+      "exact_matches": 3,
+      "partial_matches": 2652,
+      "found": true
+    },
+    {
+      "test_id": "TRI-002",
+      "exact_matches": 0,
+      "partial_matches": 0,
+      "found": false
+    }
+  ],
+  "summary": {
+    "total_tests": 5,
+    "tests_with_matches": 3,
+    "success_rate": 60.0
+  }
+}
