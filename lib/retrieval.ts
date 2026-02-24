@@ -5,6 +5,7 @@ import { applyReranking, rerankWithHFSimilarity } from './reranking'
 import { calculateBM25, hybridScore, deserializeBM25Index, searchBM25, rrfMerge, type BM25Index } from './bm25'
 import { isHNSWAvailable, loadHNSWIndex, searchHNSW, getHNSWIdListPath, RRF_K } from './vector-index'
 import { consultarVigencia, inferNormaIdFromTitle } from './norm-vigencia'
+import { expandQuery, detectLegalArea } from './query-expansion'
 import fs from 'node:fs'
 import fsp from 'node:fs/promises'
 import path from 'node:path'
@@ -15,6 +16,8 @@ const USE_PINECONE = process.env.PINECONE_API_KEY && process.env.PINECONE_INDEX
 const USE_RERANKING = process.env.USE_RERANKING !== 'false' // Enabled by default
 const USE_BM25 = process.env.USE_BM25 !== 'false' // Enabled by default
 const USE_CROSS_ENCODER = process.env.USE_CROSS_ENCODER === 'true' // CU-06: rerank con HF sentence similarity
+const USE_QUERY_EXPANSION = process.env.USE_QUERY_EXPANSION !== 'false' // FASE 1.3: Enabled by default
+const USE_METADATA_BOOST = process.env.USE_METADATA_BOOST !== 'false' // FASE 1.4: Enabled by default
 
 // --- Carga de índices con soporte para .gz (Vercel serverless) ---
 
@@ -271,8 +274,84 @@ function cosineSimilarity(a: number[], b: number[]) {
   return dot / (Math.sqrt(na) * Math.sqrt(nb) + 1e-8)
 }
 
+/**
+ * FASE 1.4: Metadata Boost
+ * 
+ * Aplica boost a chunks cuya metadata coincide con el área legal detectada.
+ * Boost NO es excluyente: chunks de otras áreas se mantienen pero con menor prioridad.
+ * 
+ * Estrategia:
+ * - Si detectedArea coincide con metadata del chunk → boost +15%
+ * - Si metadata del chunk menciona término clave del área → boost +10%
+ * - Luego re-ordenar por score ajustado
+ * 
+ * @param retrieved Chunks recuperados con scores originales
+ * @param detectedArea Área legal detectada en la query (o null)
+ * @returns Chunks con scores ajustados y re-ordenados
+ */
+function applyMetadataBoost<T extends { chunk: DocumentChunk; score: number }>(
+  retrieved: T[],
+  detectedArea: string | null
+): T[] {
+  if (!detectedArea || retrieved.length === 0) {
+    return retrieved
+  }
+  
+  // Keywords por área para detectar coincidencias en metadata
+  const areaKeywords: Record<string, string[]> = {
+    'laboral': ['cst', 'código sustantivo del trabajo', 'trabajo', 'laboral', 'empleado'],
+    'tributario': ['estatuto tributario', 'tributario', 'impuesto', 'dian', 'renta'],
+    'civil': ['código civil', 'civil', 'contrato', 'propiedad', 'obligación'],
+    'penal': ['código penal', 'penal', 'delito', 'pena', 'tipo penal'],
+    'constitucional': ['constitución', 'constitucional', 'derechos fundamentales', 'tutela'],
+    'administrativo': ['cpaca', 'administrativo', 'acto administrativo', 'contencioso'],
+  }
+  
+  const keywords = areaKeywords[detectedArea.toLowerCase()] || []
+  
+  // Aplicar boost a cada chunk
+  const boosted = retrieved.map(item => {
+    const title = item.chunk.metadata?.title?.toLowerCase() || ''
+    const type = item.chunk.metadata?.type?.toLowerCase() || ''
+    
+    let boostFactor = 1.0
+    
+    // Boost si el título menciona keywords del área
+    for (const keyword of keywords) {
+      if (title.includes(keyword)) {
+        boostFactor = 1.15 // +15% boost
+        break
+      }
+    }
+    
+    // Boost adicional si el tipo coincide con el área
+    if (type === detectedArea.toLowerCase()) {
+      boostFactor = Math.max(boostFactor, 1.10) // +10% boost mínimo
+    }
+    
+    return {
+      ...item,
+      score: item.score * boostFactor,
+      _boosted: boostFactor > 1.0 // Flag para debugging
+    }
+  })
+  
+  // Re-ordenar por score ajustado (descendente)
+  return boosted.sort((a, b) => b.score - a.score)
+}
+
 export async function retrieveRelevantChunks(query: string, filters?: RetrieveFilters, topK = 8): Promise<Array<{ chunk: DocumentChunk; score: number }>> {
-  const queryEmbedding = await embedText(query)
+  // FASE 1.3: Query expansion (coloquial → legal)
+  const expandedQuery = USE_QUERY_EXPANSION ? expandQuery(query) : query
+  const detectedArea = USE_METADATA_BOOST ? detectLegalArea(query) : null
+  
+  // Log expansion for debugging (only in development)
+  if (process.env.NODE_ENV === 'development' && expandedQuery !== query) {
+    console.log(`[retrieval] Query expanded: "${query}" → "${expandedQuery.slice(0, 150)}..."`)
+    if (detectedArea) console.log(`[retrieval] Detected area: ${detectedArea}`)
+  }
+  
+  const queryEmbedding = await embedText(expandedQuery)
   
   // Retrieve more chunks initially if re-ranking is enabled (to allow re-ranking to select best)
   const initialTopK = USE_RERANKING ? Math.min(topK * 2, 20) : topK
@@ -329,7 +408,7 @@ export async function retrieveRelevantChunks(query: string, filters?: RetrieveFi
 
     const bm25Index = USE_BM25 ? loadBM25Index() : null
     if (bm25Index && vectorList.length >= 0) {
-      const bm25List = searchBM25(query, bm25Index, k)
+      const bm25List = searchBM25(expandedQuery, bm25Index, k)
       const merged = rrfMerge(vectorList, bm25List, RRF_K)
       retrieved = merged
         .slice(0, initialTopK)
@@ -340,6 +419,15 @@ export async function retrieveRelevantChunks(query: string, filters?: RetrieveFi
         .slice(0, initialTopK)
         .map(({ id, score }) => ({ chunk: idMap.get(id)!, score }))
         .filter(r => r.chunk && (filters?.type ? r.chunk.metadata.type === filters.type : true))
+    }
+  }
+
+  // FASE 1.4: Apply metadata boost (non-exclusive)
+  if (USE_METADATA_BOOST && detectedArea && retrieved.length > 0) {
+    retrieved = applyMetadataBoost(retrieved, detectedArea)
+    if (process.env.NODE_ENV === 'development') {
+      const boostedCount = retrieved.filter((r: any) => r._boosted).length
+      console.log(`[retrieval] Metadata boost applied: ${boostedCount}/${retrieved.length} chunks boosted for area: ${detectedArea}`)
     }
   }
 
