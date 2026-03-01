@@ -58,22 +58,37 @@ const COLOQUIAL_TO_LEGAL: Record<string, string[]> = {
   'renta': ['impuesto sobre la renta', 'declaración de renta', 'renta líquida'],
   'iva': ['impuesto sobre las ventas', 'IVA', 'tarifa general'],
   'ica': ['impuesto de industria y comercio', 'tributo municipal', 'Decreto 1333'],
+  'declaración': ['declaración tributaria', 'declaración de renta', 'obligación fiscal'],
+  'exención': ['beneficio tributario', 'exención fiscal', 'no gravado'],
+  'retención': ['retención en la fuente', 'agente retenedor', 'retención fiscal'],
   
   // Penal
   'robo': ['hurto', 'apoderamiento', 'delito contra el patrimonio'],
   'hurto': ['delito de hurto', 'Art. 239 CP', 'apoderamiento ilícito'],
   'golpear': ['lesiones personales', 'violencia', 'agresión'],
   'matar': ['homicidio', 'delito contra la vida', 'Art. 103 CP'],
+  'estafa': ['delito de estafa', 'fraude', 'Art. 246 CP'],
+  'secuestro': ['privación de la libertad', 'secuestro extorsivo', 'Art. 168 CP'],
   
   // Administrativo
   'derecho de petición': ['solicitud administrativa', 'Art. 23 Constitución', 'petición respetuosa'],
   'tutela': ['acción de tutela', 'amparo constitucional', 'protección derechos fundamentales'],
   'demanda': ['acción judicial', 'demanda contenciosa', 'proceso judicial'],
+  'recurso': ['recurso de reposición', 'recurso de apelación', 'medio de impugnación'],
+  'notificación': ['notificación personal', 'comunicación oficial', 'notificación judicial'],
+  
+  // Procedimientos
+  'plazo': ['término legal', 'término judicial', 'tiempo procesal'],
+  'prueba': ['medio probatorio', 'prueba documental', 'prueba testimonial'],
+  'sentencia': ['fallo judicial', 'providencia', 'decisión judicial'],
+  'apelación': ['recurso de apelación', 'segunda instancia', 'impugnación'],
   
   // Otros
   'abogado': ['profesional del derecho', 'apoderado', 'defensor'],
   'juez': ['funcionario judicial', 'autoridad judicial', 'judicatura'],
   'corte': ['tribunal', 'Corte Suprema', 'Corte Constitucional'],
+  'notario': ['notaría', 'escritura pública', 'fe pública'],
+  'registro': ['registro civil', 'registro mercantil', 'inscripción registral'],
 }
 
 // Sinónimos legales (expansión dentro del dominio legal)

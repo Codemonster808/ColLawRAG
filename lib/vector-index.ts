@@ -6,9 +6,12 @@
 
 import path from 'node:path'
 import fs from 'node:fs'
+import { createRequire } from 'node:module'
+
+const _require = typeof require !== 'undefined' ? require : createRequire(import.meta.url)
 
 const HNSW_PATH = path.join(process.cwd(), 'data', 'hnsw-index.dat')
-const RRF_K = 60
+const RRF_K = 40 // Sprint 3: ajustado de 60 a 40 para dar más peso a top-results
 
 let _hnsw: any = null
 let _idList: string[] | null = null
@@ -16,7 +19,7 @@ let _dim: number = 0
 
 function getHnswLib(): { HierarchicalNSW: any } | null {
   try {
-    return require('hnswlib-node')
+    return _require('hnswlib-node')
   } catch {
     return null
   }
@@ -109,4 +112,4 @@ export function getHNSWIdListPath(): string {
   return path.join(process.cwd(), 'data', 'hnsw-ids.txt')
 }
 
-export { RRF_K }
+export { RRF_K, HNSW_PATH }

@@ -319,14 +319,14 @@ function applyMetadataBoost<T extends { chunk: DocumentChunk; score: number }>(
     // Boost si el título menciona keywords del área
     for (const keyword of keywords) {
       if (title.includes(keyword)) {
-        boostFactor = 1.15 // +15% boost
+        boostFactor = 1.50 // +50% boost (Sprint 3: aumentado de 15% a 50%)
         break
       }
     }
     
     // Boost adicional si el tipo coincide con el área
     if (type === detectedArea.toLowerCase()) {
-      boostFactor = Math.max(boostFactor, 1.10) // +10% boost mínimo
+      boostFactor = Math.max(boostFactor, 1.40) // +40% boost mínimo (Sprint 3: aumentado de 10% a 40%)
     }
     
     return {
