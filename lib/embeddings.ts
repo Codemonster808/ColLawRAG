@@ -1,7 +1,7 @@
 // Modelo unificado: una sola variable para ingest y query (FASE_0 tarea 0.1)
 const EMBEDDING_MODEL = process.env.EMBEDDING_MODEL || 'Xenova/paraphrase-multilingual-MiniLM-L12-v2'
-// Auto-detect provider: Xenova models require 'xenova' provider, not HF API
-const EMB_PROVIDER = process.env.EMB_PROVIDER || (EMBEDDING_MODEL.startsWith('Xenova/') ? 'xenova' : 'hf')
+// Auto-detect provider: Xenova models ALWAYS use 'xenova', ignore EMB_PROVIDER if model is Xenova
+const EMB_PROVIDER = EMBEDDING_MODEL.startsWith('Xenova/') ? 'xenova' : (process.env.EMB_PROVIDER || 'hf')
 
 function stringHash(str: string): number {
   let hash = 2166136261
