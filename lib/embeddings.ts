@@ -1,6 +1,11 @@
 // Modelo unificado: una sola variable para ingest y query (FASE_0 tarea 0.1)
-const EMBEDDING_MODEL = process.env.EMBEDDING_MODEL || 'Xenova/paraphrase-multilingual-MiniLM-L12-v2'
-// Auto-detect provider: Xenova models ALWAYS use 'xenova', ignore EMB_PROVIDER if model is Xenova
+// Production (serverless): use HF API model (Xenova no funciona sin onnxruntime-node)
+// Local: use Xenova for offline
+const DEFAULT_MODEL = process.env.NODE_ENV === 'production' 
+  ? 'sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2'  // HF API compatible
+  : 'Xenova/paraphrase-multilingual-MiniLM-L12-v2'  // Local transformers.js
+const EMBEDDING_MODEL = process.env.EMBEDDING_MODEL || DEFAULT_MODEL
+// Auto-detect provider based on model name
 const EMB_PROVIDER = EMBEDDING_MODEL.startsWith('Xenova/') ? 'xenova' : (process.env.EMB_PROVIDER || 'hf')
 
 function stringHash(str: string): number {
