@@ -12,6 +12,7 @@ import { extractApplicableNorms } from './norm-extractor'
 import { validateLogicCoherence, generateCoherenceFeedback } from './logic-validator'
 import { compareSources } from './source-comparator'
 import { explainLegalHierarchy } from './hierarchy-explainer'
+import { getOrCreateTrace, startStep, endStep, setTraceResult } from './tracing'
 
 // Lazy load heavy modules to optimize cold starts
 // These are only imported when actually needed
@@ -219,6 +220,7 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
   } = params
 
   const requestId = uuidv4()
+  getOrCreateTrace(requestId, query)
   
   logger.logPipelineStep('Pipeline start', requestId, { queryLength: query.length, userId })
 
@@ -279,7 +281,13 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
 
   // 2. Retrieval con re-ranking usando top-K adaptativo (UN SOLO retrieval)
   logger.logPipelineStep('Retrieving chunks', requestId)
+  startStep(requestId, 'retrieval', { adaptiveTopK })
   const retrieved = await retrieveRelevantChunks(query, filters, adaptiveTopK)
+  endStep(requestId, 'retrieval', {
+    count: retrieved.length,
+    scores: retrieved.map(r => r.score.toFixed(3)),
+    chunkIds: retrieved.map(r => r.chunk.id),
+  })
   logger.logPipelineStep('Chunks retrieved', requestId, { 
     count: retrieved.length, 
     scores: retrieved.map(r => r.score.toFixed(3)),
@@ -327,6 +335,7 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
 
   // 3. Generación con prompts mejorados (ya integrado en generateAnswerSpanish)
   logger.logPipelineStep('Generating answer', requestId)
+  startStep(requestId, 'generation', { chunksCount: chunksForGeneration.length })
   // Habilitar validación HNAC por defecto (puede desactivarse con ENFORCE_HNAC=false)
   const enforceHNAC = process.env.ENFORCE_HNAC !== 'false'
   const answer = await generateAnswerSpanish({
@@ -338,6 +347,7 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
     complexity: detectedComplexity,
     enforceHNAC // Forzar estructura HNAC (Hechos, Normas, Análisis, Conclusión)
   })
+  endStep(requestId, 'generation', { answerLength: answer.length })
   logger.logPipelineStep('Answer generated', requestId, { answerLength: answer.length })
 
   // 4. Filtrar PII
@@ -436,11 +446,11 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
 
   // 9. Preparar citas (desde chunksForGeneration para incluir procedimientos si se inyectaron)
   const citations = chunksForGeneration.map((r) => ({
-    id: r.chunk.metadata.id || r.chunk.id,
-    title: r.chunk.metadata.title,
-    type: r.chunk.metadata.type,
-    url: r.chunk.metadata.url,
-    article: r.chunk.metadata.article,
+    id: r.chunk?.metadata?.id || r.chunk?.id || 'unknown',
+    title: r.chunk?.metadata?.title || 'Sin título',
+    type: r.chunk?.metadata?.type || 'unknown',
+    url: r.chunk?.metadata?.url,
+    article: r.chunk?.metadata?.article,
     score: r.score,
   }))
 
@@ -503,6 +513,7 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
 
   // 10. Calcular tiempo de respuesta
   const responseTime = Date.now() - startTime
+  setTraceResult(requestId, chunksForGeneration.map(r => r.chunk.id), responseTime)
 
   // 11. Construir respuesta final
   const response: RagResponse = {
