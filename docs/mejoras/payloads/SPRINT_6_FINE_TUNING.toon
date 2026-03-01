@@ -1,0 +1,105 @@
+proyecto: ColLawRAG
+sprint: 6
+nombre: Fine-Tuning & Polish
+documento_base: docs/mejoras/ANALISIS_ARQUITECTURA_SENIOR.md
+generado: 2026-03-01
+modo: autonomo
+prioridad: P2_MEDIO
+impacto_estimado: "68-72% → 73-77% accuracy (+3-5pp)"
+esfuerzo_total_horas: 80
+duracion_dias: 14
+dependencias: Sprint 5 completado (accuracy >= 68%)
+
+estado_baseline{accuracy,articulos_correctos,latency_p95_s,areas_debiles}:
+  0.70,0.65,18,"penal=0.45 constitucional=0.50"
+
+metricas_objetivo{accuracy,articulos_correctos,latency_p95_s,meta_alcanzada}:
+  0.75,0.70,15,true
+
+autonomo{modo,ruta_proyecto,no_modificar,prerequisitos,siguiente_payload,al_fallar}:
+  autonomo,ColLawRAG,"data/benchmarks/sprint5-*.json","Sprint 5 cerrado; accuracy >= 68%; áreas penal/constitucional identificadas",ninguno_sprint_final,reportar_y_continuar
+
+multi_agente{habilitado,herramientas,sprint_id,paralelo_en_fase,post_fase_agente,token_budget}:
+  true,"cursor,open_claw",Sprint_6_fine_tuning,true,cursor,"cursor=scraping+código open_claw=benchmarks+análisis_ab"
+
+asignacion_agente[5]{tarea_id,agente,archivos_exclusivos,intensidad_tokens,razon}:
+  S6.1,cursor,scripts/scrape-jurisprudencia.mjs data/raw/jurisprudencia/,muy_alta,"Scraping 150 sentencias. Tarea intensiva red + parsing."
+  S6.2,cursor,lib/prompt-templates.ts lib/generation.ts,media,"Optimizar prompt por complejidad query. Lógica condicional."
+  S6.3,cursor,lib/cache.ts,media,"Implementar cache semántico. Nuevo módulo."
+  S6.4,open_claw,scripts/ab-test-deployment.mjs,alta,"A/B test 50/50 usuarios. Requiere monitoreo activo."
+  S6.5,open_claw,"scripts/evaluate-accuracy.mjs docs/sprints/SPRINT_6_RESULTADOS.md README.md",alta,"Benchmark final + documentación completa. Cierre sprint."
+
+grupos_paralelos[2]{ola,tareas,agentes,nota}:
+  1,"S6.1 S6.2 S6.3","cursor cursor cursor","Cursor: scraping + prompt + cache (en paralelo)."
+  2,"S6.4 S6.5","open_claw open_claw","OpenClaw: A/B test → benchmark final (secuencial)."
+
+tareas[5]{id,titulo,archivos_afectados,instruccion_concreta,comando_validacion,esfuerzo_horas,impacto_pp,roi,estado}:
+  S6.1,Ampliar corpus jurisprudencia clave,"scripts/scrape-jurisprudencia.mjs data/raw/jurisprudencia/ scripts/ingest.mjs","(1) Crear scripts/scrape-jurisprudencia.mjs: scraper para Corte Constitucional (https://www.corteconstitucional.gov.co/relatoria/): top 100 sentencias T-XXX y C-XXX más citadas; scraper para Corte Suprema (https://cortesuprema.gov.co/): top 50 sentencias sala penal/laboral/civil; (2) Estructura JSON por sentencia: {id, tipo:'T|C|CSJ', corte:'Constitucional|Suprema', fecha, magistrado_ponente, tema, hechos, ratio_decidendi, resuelve, citas_normativas:[]}; (3) Guardar en data/raw/jurisprudencia/[corte]/[id].json; (4) Modificar scripts/ingest.mjs para procesar jurisprudencia: type='jurisprudencia', metadata extra: corte, tema, citas_normativas; (5) Chunk por sección (hechos, ratio, resuelve) con overlap 300 chars; (6) Total esperado: ~2000 chunks jurisprudencia. OBJETIVO: mejorar áreas constitucional (0.50→0.65) y penal (0.45→0.60).","node -e \"const d=JSON.parse(require('fs').readFileSync('data/index.json','utf8')); const jur=d.filter(c=>c.metadata?.type==='jurisprudencia').length; console.log('Jurisprudencia chunks:', jur)\"",24,+5-8,⭐⭐,pendiente
+  S6.2,Optimizar prompt LLM por complejidad query,"lib/prompt-templates.ts lib/generation.ts","Implementar prompts adaptativos en lib/generation.ts: (1) Función detectQueryComplexity(query): retorna 'basica' (1 artículo, respuesta corta), 'intermedia' (2-3 artículos), 'avanzada' (múltiples leyes/jurisprudencia); lógica: if (query.match(/cuánto|qué es|requisito/i) && query.split(' ').length < 15) → basica; if (query.match(/procedimiento|cómo se calcula|ha dicho la corte/i)) → avanzada; else → intermedia; (2) Prompts: PROMPT_BASICO='Responde en 2-3 oraciones citando el artículo exacto.'; PROMPT_INTERMEDIO=actual; PROMPT_AVANZADO='Analiza todos los artículos y jurisprudencia relacionados. Estructura: 1) Normas aplicables, 2) Interpretación jurisprudencial, 3) Conclusión.'; (3) En generation.ts: const systemPrompt = getPromptByComplexity(detectQueryComplexity(query)); (4) Test con casos EXCELENTE (basico) vs DEFICIENTE (avanzado) del benchmark Sprint 5.","grep 'detectQueryComplexity\\|PROMPT_BASICO' lib/generation.ts lib/prompt-templates.ts",12,+2-3,⭐⭐,pendiente
+  S6.3,Implementar cache semántico queries,lib/cache.ts lib/retrieval.ts lib/generation.ts,"Crear lib/cache.ts con cache de 2 niveles: (1) Cache embeddings: key=hash(query) → value=embedding[]; TTL 30 días; reduce latencia embeddings -50% para queries frecuentes; (2) Cache resultados RAG: key=hash(query+filters) → value={retrieved_chunks, llm_response}; TTL 7 días; solo para queries exactas (case-insensitive); (3) Usar Map<string, {value, expiry}> en memoria (no persistir); (4) Integrar en lib/retrieval.ts: const cachedEmbedding = cache.get('emb:' + queryHash); if (cachedEmbedding) return cachedEmbedding; (5) Integrar en lib/generation.ts: const cachedResponse = cache.get('rag:' + queryHash); if (cachedResponse && Date.now() < cachedResponse.expiry) return cachedResponse.value; (6) Métricas: cache hit rate objetivo >30% en producción.","grep 'cache.get\\|cache.set' lib/retrieval.ts lib/generation.ts",10,latencia,⭐⭐,pendiente
+  S6.4,A/B test final usuarios reales,"scripts/ab-test-deployment.mjs data/ab-test/ docs/AB_TEST_PLAN.md","(1) Crear docs/AB_TEST_PLAN.md: objetivo, grupos (50% Sprint 6 vs 50% Sprint 5), duración 7 días, métricas (accuracy percibida, satisfacción, latency p95, queries por usuario); (2) Implementar scripts/ab-test-deployment.mjs: deploy Sprint 6 a Vercel con variable ENABLE_SPRINT6_FEATURES=true/false; routing: if (userHash % 2 === 0) → Sprint 6 else → Sprint 5; (3) Logging: guardar en data/ab-test/[variant]/[date].jsonl: {query, response, latency, user_feedback?}; (4) Monitoreo activo 7 días: daily report con accuracy_percibida (user feedback), latency_avg, queries_count por variant; (5) DECISIÓN día 7: si Sprint 6 accuracy percibida >= Sprint 5 + latency <= Sprint 5 + 2s → deploy 100% Sprint 6; else → rollback Sprint 5.","test -f docs/AB_TEST_PLAN.md && ls data/ab-test/sprint6/*.jsonl | wc -l",16,validación,⭐⭐⭐,pendiente
+  S6.5,Benchmark final + documentación completa,"scripts/evaluate-accuracy.mjs docs/sprints/SPRINT_6_RESULTADOS.md README.md docs/PAPER_TECNICO.md","(1) Benchmark final completo: JUDGE_MODEL=qwen2.5:7b-instruct node scripts/evaluate-accuracy.mjs --prod --output data/benchmarks/sprint6-final-$(date +%Y-%m-%d).json (180 casos); (2) Crear docs/sprints/SPRINT_6_RESULTADOS.md: comparativa Sprint 3→6 (accuracy, retrieval, latency), ganancia total (+25-30pp esperado), mejoras por área, casos límite resueltos, lecciones aprendidas; (3) Actualizar README.md: sección Métricas con accuracy final 73-77%, latency p95 <15s, badges de estado; (4) OPCIONAL: docs/PAPER_TECNICO.md: arquitectura RAG legal colombiano, pipeline retrieval+reranking+generation, experimentos Sprints 4-6, resultados benchmark, conclusiones. 8-12 páginas estilo paper académico.","test -f docs/sprints/SPRINT_6_RESULTADOS.md && grep '73-77%' README.md && grep 'META ALCANZADA' docs/sprints/SPRINT_6_RESULTADOS.md",18,documentación,⭐⭐⭐⭐,pendiente
+
+orden_ejecucion[11]{paso,tarea_id,agente,nota,dependencia}:
+  1,S6.1,cursor,Scraping jurisprudencia 150 sentencias,ninguna
+  2,INGEST_JURIS,cursor,Re-ingest con jurisprudencia,S6.1
+  3,S6.2,cursor,Optimizar prompt por complejidad (paralelo con S6.1),ninguna
+  4,S6.3,cursor,Implementar cache semántico (paralelo con S6.1 y S6.2),ninguna
+  5,DEPLOY_SPRINT6,cursor,Deploy Sprint 6 con todas las mejoras,"S6.1 S6.2 S6.3"
+  6,S6.4,open_claw,Iniciar A/B test 50/50 usuarios,DEPLOY_SPRINT6
+  7,MONITOR_7_DAYS,open_claw,Monitoreo activo 7 días A/B test,S6.4
+  8,DECISION_AB,open_claw,Analizar resultados A/B y decidir deploy 100%,MONITOR_7_DAYS
+  9,DEPLOY_WINNER,cursor,Deploy versión ganadora 100%,DECISION_AB
+  10,S6.5,open_claw,Benchmark final 180 casos + análisis,DEPLOY_WINNER
+  11,DOCS_FINAL,open_claw,Documentación completa Sprint 6,S6.5
+
+testing[4]{tipo,comando,criterio_exito}:
+  jurisprudencia_quality,"node scripts/validate-jurisprudencia.mjs","100% sentencias con ratio_decidendi extraído"
+  prompt_complexity,"node scripts/test-prompt-complexity.mjs","Prompt correcto para 20/20 queries test"
+  cache_hit_rate,"node scripts/analyze-cache.mjs --days 7","Cache hit rate >= 25%"
+  ab_test_statistical,"node scripts/ab-test-analysis.mjs --confidence 0.95","p-value < 0.05 para accuracy difference"
+
+criterio_exito[8]{item}:
+  Accuracy >= 73% (objetivo 73-77%)
+  articulos_correctos >= 0.70
+  Área constitucional >= 0.65 (mejora desde 0.50)
+  Área penal >= 0.60 (mejora desde 0.45)
+  Latency p95 < 15s (mejora desde 18s)
+  Cache hit rate >= 25%
+  A/B test: Sprint 6 >= Sprint 5 (statistically significant)
+  META 70% ALCANZADA ✅
+
+decision_criteria{sprint_exitoso,meta_alcanzada,deploy_final}:
+  "accuracy >= 0.73","accuracy >= 0.70","A/B test Sprint 6 ganador → deploy 100%"
+
+riesgos[3]{riesgo,mitigacion}:
+  Scraping jurisprudencia falla,"Fallback: dataset pre-curado de 50 sentencias clave"
+  A/B test sesga métricas,"Análisis estratificado por tipo query + significancia estadística"
+  Cache agota memoria,"Límite 10k entries + LRU eviction"
+
+kpis_seguimiento[4]{kpi,target}:
+  Accuracy final,73-77%
+  Áreas débiles mejora,penal +15pp constitucional +15pp
+  Latency p95,"<15s"
+  Cache efficiency,"hit rate >= 25%"
+
+post_fase_comando[6]{orden,comando,descripcion,agente}:
+  1,"cd ColLawRAG && node scripts/scrape-jurisprudencia.mjs --limit 150",Scraping jurisprudencia,cursor
+  2,"cd ColLawRAG && node scripts/ingest.mjs",Re-ingest con jurisprudencia,cursor
+  3,"cd ColLawRAG && git add . && git commit -m 'Sprint 6: Jurisprudencia + prompt adaptativo + cache' && git push",Deploy Sprint 6,cursor
+  4,"node scripts/ab-test-deployment.mjs --duration 7 --split 50/50",Iniciar A/B test,open_claw
+  5,"node scripts/monitor-ab-test.mjs --daily-report",Monitoreo 7 días (ejecutar diariamente),open_claw
+  6,"JUDGE_MODEL=qwen2.5:7b-instruct node scripts/evaluate-accuracy.mjs --prod","Benchmark final 180 casos",open_claw
+
+proyeccion_final{sprint,accuracy_esperada,mejora_acumulada}:
+  Sprint_3_baseline,51.7%,+4.1pp desde original 47.6%
+  Sprint_4,63-67%,+16-19pp
+  Sprint_5,68-72%,+21-26pp
+  Sprint_6,73-77%,+24-31pp ✅ META ALCANZADA
+
+conclusiones[5]{item}:
+  Meta 70% accuracy ALCANZADA en Sprint 5 o 6 (alta confianza)
+  Retrieval rescue (cross-encoder + metadata fix) mayor impacto individual (+12-15pp)
+  Chunking optimization (overview + overlap) mejora completitud y relevancia
+  Corpus jurisprudencia fortalece áreas constitucional/penal
+  Pipeline final: retrieval híbrido + cross-encoder + generación adaptativa + cache

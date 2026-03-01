@@ -1,0 +1,89 @@
+proyecto: ColLawRAG
+sprint: 4
+nombre: Retrieval Rescue Advanced
+documento_base: docs/mejoras/ANALISIS_ARQUITECTURA_SENIOR.md
+generado: 2026-03-01
+modo: autonomo
+prioridad: P0_CRITICO
+impacto_estimado: "51.7% → 63-67% accuracy (+12-15pp)"
+esfuerzo_total_horas: 60
+duracion_dias: 14
+dependencias: Sprint 3 deployado (baseline 51.7% establecido)
+
+diagnostico{causa_raiz,metrica_afectada,impacto_pp,prioridad}:
+  Retrieval failure crítico,articulos_correctos=0.252,-25 a -30pp,P0
+  Metadata extraction failure,metadata.article=18% missing,-10 a -15pp,P1
+  Sin cross-encoder real,precision_normativa=0.235,-8 a -12pp,P1
+
+estado_baseline{accuracy,articulos_correctos,precision_normativa,retrieval_accuracy,groundedness}:
+  0.517,0.252,0.235,0.252,0.952
+
+metricas_objetivo{accuracy,articulos_correctos,precision_normativa,retrieval_accuracy,latency_p95_s}:
+  0.65,0.50,0.45,0.55,20
+
+autonomo{modo,ruta_proyecto,no_modificar,prerequisitos,siguiente_payload,al_fallar}:
+  autonomo,ColLawRAG,"docs/sprints/*.md data/benchmarks/results-2026-03-01.json","Sprint 3 deployado; baseline 51.7%; HUGGINGFACE_API_KEY configurado","docs/mejoras/payloads/SPRINT_5_CHUNKING_OPTIMIZATION.toon",reportar_y_continuar
+
+multi_agente{habilitado,herramientas,sprint_id,paralelo_en_fase,post_fase_agente,token_budget}:
+  true,"cursor,open_claw",Sprint_4_retrieval_advanced,true,cursor,"cursor=código_reranking+metadata_fix open_claw=query_expansion+benchmarks"
+
+asignacion_agente[5]{tarea_id,agente,archivos_exclusivos,intensidad_tokens,razon}:
+  S4.1,cursor,lib/reranking.ts lib/retrieval.ts,alta,"Implementar cross-encoder real con HuggingFace API. Cambio arquitectural crítico en reranking pipeline."
+  S4.2,cursor,scripts/ingest.mjs,alta,"Fix regex metadata.article extraction. Cambio en lógica de chunking."
+  S4.3,open_claw,lib/query-expansion.ts,media,"Ampliar query expansion domain-specific. Agregar +65 términos legales."
+  S4.4,open_claw,scripts/evaluate-accuracy.mjs,baja,"Ejecutar mini-benchmark 30 casos. Tarea de validación."
+  S4.5,open_claw,"CHANGELOG-SPRINT4.md KNOWN_ISSUES.md README.md",baja,"Documentación y deploy. Tarea administrativa."
+
+grupos_paralelos[2]{ola,tareas,agentes,nota}:
+  1,"S4.1 S4.2 S4.3","cursor cursor open_claw","Cursor: cross-encoder + fix metadata (paralelo). OpenClaw: query expansion."
+  2,"S4.4 S4.5","open_claw open_claw","OpenClaw: benchmark + documentación (secuencial)."
+
+tareas[5]{id,titulo,archivos_afectados,instruccion_concreta,comando_validacion,esfuerzo_horas,impacto_pp,roi,estado}:
+  S4.1,Implementar cross-encoder reranking HF API,"lib/reranking.ts lib/retrieval.ts .env.example","Crear función applyRerankingWithCrossEncoder() en lib/reranking.ts: (1) Provider: HuggingFace Inference API (endpoint: https://api-inference.huggingface.co/models/cross-encoder/ms-marco-MiniLM-L-6-v2); (2) Batch 20 pares (query, chunk) por request; (3) Cache 5 min para queries repetidas; (4) Fallback a applyReranking() si API falla; (5) En lib/retrieval.ts: if (RERANK_PROVIDER === 'hf' && process.env.HUGGINGFACE_API_KEY) → llamar applyRerankingWithCrossEncoder(); (6) Agregar RERANK_PROVIDER=hf en .env.example. Scoring esperado: cross-encoder retorna score 0-1 por cada par.","grep 'applyRerankingWithCrossEncoder' lib/reranking.ts && grep 'RERANK_PROVIDER' .env.example",16,+10-12,⭐⭐⭐⭐⭐,pendiente
+  S4.2,Fix metadata.article extraction en chunker,scripts/ingest.mjs,"Mejorar función extractArticleNumber(text, title) en scripts/ingest.mjs: (1) Regex mejorado: /(?:Art[íi]culo|Art\\.?)\\s+(\\d+(?:-[A-Z])?(?:\\s+bis)?)/gi para capturar variaciones (Art., Artículo, ART, art., Art. 123-A, Art. 77 bis); (2) Fallback: si !article && title.match(/Art/i) → extraer de title; (3) Validar con 100 chunks reales → objetivo >95% metadata.article correcto. DECISIÓN: Si validación mejora >5% metadata correcta → re-ingest completo (planear 2h downtime).","node -e \"const d=JSON.parse(require('fs').readFileSync('data/index.json','utf8')); const ok=d.filter(c=>c.metadata?.article && c.metadata.article!=='No article').length; console.log('Article OK:', ok, '/', d.length, '('+(100*ok/d.length).toFixed(1)+'%)')\"",12,+8-10,⭐⭐⭐⭐⭐,pendiente
+  S4.3,Query expansion domain-specific ampliada,lib/query-expansion.ts,"Ampliar diccionario COLOQUIAL_TO_LEGAL en lib/query-expansion.ts: (1) Tributario +30 términos: iva→[impuesto sobre las ventas, tarifa general, hecho generador], retencion→[retención en la fuente, agente retenedor, autorretenedor], declaracion→[declaración tributaria, obligación fiscal, vencimiento], exencion→[exención fiscal, no gravado, tarifa 0%], dian→[Dirección de Impuestos, sanción DIAN], rut→[registro único tributario, NIT], regimen→[régimen simple, responsable IVA], base→[base gravable, deducción], tarifa→[alícuota, porcentaje IVA]; (2) Penal +20 términos: estafa→[delito de estafa, fraude, Art. 246 CP], hurto→[apoderamiento, Art. 239 CP], homicidio→[matar, Art. 103 CP], pena→[sanción penal, prisión, multa], prescripcion→[prescripción acción penal, extinción], secuestro→[privación libertad, rapto], lesiones→[golpear, agresión], dosificacion→[dosificación pena, atenuantes]; (3) Procedimientos +15 términos: recurso→[recurso reposición, apelación, casación], apelacion→[segunda instancia, impugnación], casacion→[recurso extraordinario, Corte Suprema], tutela→[acción tutela, amparo], notificacion→[notificación personal, edicto], termino→[plazo procesal, término legal], prueba→[medio probatorio, prueba documental], sentencia→[fallo judicial, providencia], demanda→[acción judicial, escrito demanda]. Total: 55 → 120 términos.","grep -c 'iva\\|retencion\\|declaracion\\|estafa\\|hurto\\|recurso' lib/query-expansion.ts",10,+5-7,⭐⭐⭐⭐,pendiente
+  S4.4,Mini-benchmark Sprint 4 validación,scripts/evaluate-accuracy.mjs data/benchmarks/,"Ejecutar: JUDGE_MODEL=qwen2.5:7b-instruct node scripts/evaluate-accuracy.mjs --prod --limit 30 --output data/benchmarks/sprint4-mini-$(date +%Y-%m-%d).json. DECISIÓN: Si accuracy >60% → ejecutar benchmark completo 180 casos; Si <55% → revisar causas raíz antes de continuar.","test -f data/benchmarks/sprint4-mini-*.json && node -e \"const d=JSON.parse(require('fs').readFileSync(process.argv[1],'utf8')); console.log('Accuracy:', d.aggregate_metrics.accuracy)\" data/benchmarks/sprint4-mini-*.json",4,validación,⭐⭐⭐,pendiente
+  S4.5,Documentación y deploy,"CHANGELOG-SPRINT4.md KNOWN_ISSUES.md README.md","(1) Crear CHANGELOG-SPRINT4.md: cambios implementados, bugs resueltos, métricas alcanzadas; (2) Actualizar KNOWN_ISSUES.md si surgen bugs nuevos; (3) Actualizar README.md sección métricas con accuracy Sprint 4; (4) Git commit + push origin main; (5) Verificar deploy Vercel exitoso; (6) Health check producción.","test -f CHANGELOG-SPRINT4.md && grep '63-67%' README.md",8,documentación,⭐⭐,pendiente
+
+orden_ejecucion[8]{paso,tarea_id,agente,nota,dependencia}:
+  1,S4.1,cursor,Implementar cross-encoder HF API,ninguna
+  2,S4.2,cursor,Fix metadata.article extraction (paralelo con S4.1),ninguna
+  3,S4.3,open_claw,Ampliar query expansion (paralelo con S4.1 y S4.2),ninguna
+  4,VALIDAR,cursor,Validar S4.2: si mejora >5% metadata → re-ingest,"S4.2"
+  5,DEPLOY_CAMBIOS,cursor,Deploy a producción Vercel,"S4.1 S4.2 S4.3"
+  6,S4.4,open_claw,Mini-benchmark 30 casos,DEPLOY_CAMBIOS
+  7,DECISION,open_claw,Si accuracy >60% → benchmark completo; si <55% → investigar,S4.4
+  8,S4.5,open_claw,Documentación completa,"S4.4"
+
+testing[3]{tipo,comando,criterio_exito}:
+  unit_test,"npm test lib/reranking.test.ts","Cross-encoder retorna scores 0-1 para 20 pares"
+  integration_test,"RERANK_PROVIDER=hf node scripts/test-retrieval.mjs","Retrieval completo con cross-encoder funciona"
+  fallback_test,"HUGGINGFACE_API_KEY=invalid node scripts/test-retrieval.mjs","Fallback a heurísticas si API falla"
+
+criterio_exito[7]{item}:
+  Accuracy >= 60% (objetivo 63-67%)
+  articulos_correctos >= 0.45 (mejora desde 0.252)
+  precision_normativa >= 0.40 (mejora desde 0.235)
+  Metadata.article correcto >= 90% (mejora desde ~82%)
+  Cross-encoder latency < 2s por batch de 20
+  Groundedness >= 0.95 (mantener)
+  Sin regresión en latency p95 (<20s)
+
+decision_criteria{sprint_exitoso,sprint_bloqueante,continuar_sprint_5}:
+  "accuracy >= 0.60",accuracy < 0.55 → revisar causas raíz,accuracy >= 0.60
+
+riesgos[3]{riesgo,mitigacion}:
+  HuggingFace API rate limits,"Cache 5 min + fallback heurísticas"
+  Re-ingest completo downtime,"Planear 2h ventana mantenimiento"
+  Latencia cross-encoder alta,"Batch 20 pares + timeout 10s"
+
+kpis_seguimiento[3]{kpi,target}:
+  Accuracy semanal,+2-3pp/semana
+  Retrieval precision,+5pp/sprint
+  Latency p95,"<20s (mantener)"
+
+post_fase_comando[4]{orden,comando,descripcion,agente}:
+  1,"cd ColLawRAG && git add . && git commit -m 'Sprint 4: Cross-encoder + fix metadata + query expansion' && git push",Deploy código a GitHub,cursor
+  2,"sleep 120 && curl -s https://col-law-rag.vercel.app/api/health",Verificar deploy Vercel,open_claw
+  3,"JUDGE_MODEL=qwen2.5:7b-instruct node scripts/evaluate-accuracy.mjs --prod --limit 30",Mini-benchmark validación,open_claw
+  4,"node scripts/compare-benchmarks.mjs data/benchmarks/results-2026-03-01.json data/benchmarks/sprint4-mini-*.json",Comparar baseline vs Sprint 4,open_claw

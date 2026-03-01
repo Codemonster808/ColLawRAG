@@ -1,0 +1,85 @@
+proyecto: ColLawRAG
+sprint: 5
+nombre: Chunking Optimization
+documento_base: docs/mejoras/ANALISIS_ARQUITECTURA_SENIOR.md
+generado: 2026-03-01
+modo: autonomo
+prioridad: P1_ALTO
+impacto_estimado: "63-67% → 68-72% accuracy (+5-7pp)"
+esfuerzo_total_horas: 70
+duracion_dias: 14
+dependencias: Sprint 4 completado (accuracy >= 60%)
+
+estado_baseline{accuracy,completitud,relevancia_contexto,chunks_overview}:
+  0.65,0.513,0.674,0
+
+metricas_objetivo{accuracy,completitud,relevancia_contexto,chunks_overview,latency_p95_s}:
+  0.70,0.70,0.80,60,18
+
+autonomo{modo,ruta_proyecto,no_modificar,prerequisitos,siguiente_payload,al_fallar}:
+  autonomo,ColLawRAG,"data/benchmarks/sprint4-*.json","Sprint 4 cerrado; accuracy >= 60%; cross-encoder activo","docs/mejoras/payloads/SPRINT_6_FINE_TUNING.toon",reportar_y_continuar
+
+multi_agente{habilitado,herramientas,sprint_id,paralelo_en_fase,post_fase_agente,token_budget}:
+  true,"cursor,open_claw",Sprint_5_chunking_optimization,true,cursor,"cursor=código_ingest+retrieval open_claw=benchmarks+análisis"
+
+asignacion_agente[5]{tarea_id,agente,archivos_exclusivos,intensidad_tokens,razon}:
+  S5.1,cursor,scripts/ingest.mjs,alta,"Crear chunks overview/resumen. Cambio en lógica de chunking."
+  S5.2,cursor,scripts/ingest.mjs,media,"Optimizar overlap inteligente. Ajuste fino chunking."
+  S5.3,cursor,lib/retrieval.ts,media,"Recalibrar RRF weights BM25 vs Vector. Experimento A/B."
+  S5.4,cursor,lib/prompt-templates.ts,baja,"Mejorar prompt anti-repetición. Cambio menor prompt."
+  S5.5,open_claw,scripts/evaluate-accuracy.mjs data/benchmarks/,alta,"Benchmark completo 180 casos + análisis por área."
+
+grupos_paralelos[2]{ola,tareas,agentes,nota}:
+  1,"S5.1 S5.2","cursor cursor","Cursor: chunks overview + overlap (secuencial en mismo archivo)."
+  2,"S5.3 S5.4 S5.5","cursor cursor open_claw","Cursor: recalibrar RRF + prompt. OpenClaw: benchmark completo."
+
+tareas[5]{id,titulo,archivos_afectados,instruccion_concreta,comando_validacion,esfuerzo_horas,impacto_pp,roi,estado}:
+  S5.1,Chunks overview/resumen por ley y título,"scripts/ingest.mjs lib/types.ts","Crear chunks tipo isOverview: true en scripts/ingest.mjs: (1) 1 chunk overview por ley completa (CST, ET, CC, CP, CPACA, CGP) = 6 chunks; contenido: 'RESUMEN: [Nombre Ley]. Regula: [tema]. Artículos clave: [lista top 10]'; (2) 1 chunk overview por título dentro de cada ley (~50 chunks); contenido: 'TÍTULO [N]: [nombre]. Contiene artículos: [lista]. Tema: [resumen]'; (3) metadata: type='overview', scope='ley|titulo', law_name='CST|ET|CC|CP|CPACA|CGP'; (4) Boost +100% en retrieval para queries generales sin artículo específico (detectar con !query.match(/art/i)); (5) Total ~60 chunks overview. Agregar tipo en lib/types.ts: DocumentChunk { isOverview?: boolean }.","node -e \"const d=JSON.parse(require('fs').readFileSync('data/index.json','utf8')); const ov=d.filter(c=>c.isOverview).length; console.log('Overview chunks:', ov)\"",16,+3-5,⭐⭐⭐,pendiente
+  S5.2,Optimizar overlap inteligente,scripts/ingest.mjs,"Mejorar overlap en scripts/ingest.mjs para garantizar 100-400 chars siempre: (1) Actual: getLastSentences() a veces retorna <100 chars; (2) Cambio: preferir overlap por párrafos completos en lugar de oraciones; lógica: if (overlapText.length < 100) → incluir párrafo anterior completo hasta alcanzar 100-400 chars; (3) Validar con 100 chunks random → overlap medio debe ser 200-300 chars; (4) Objetivo: 0% chunks con overlap <100 chars.","node -e \"const d=JSON.parse(require('fs').readFileSync('data/index.json','utf8')); const stats=d.filter(c=>c.overlap).map(c=>c.overlap.length); console.log('Overlap avg:', Math.round(stats.reduce((a,b)=>a+b,0)/stats.length), 'min:', Math.min(...stats), 'max:', Math.max(...stats))\"",8,+1-2,⭐⭐⭐,pendiente
+  S5.3,Recalibrar RRF weights BM25 vs Vector,lib/retrieval.ts lib/bm25.ts,"Experimento A/B en lib/retrieval.ts para optimizar pesos BM25 vs Vector en hybrid search: (1) Configurar 3 combinaciones: 60/40 (BM25/Vector), 70/30, 55/45; (2) Para cada combinación: ejecutar evaluate-retrieval.mjs --limit 50 guardando resultados en data/benchmarks/ab-test-[ratio].json; (3) Métricas: Recall@10, precision@5, accuracy por área legal; (4) Seleccionar mejor combinación (target: Recall@10 >= 0.85); (5) Aplicar weights ganadores en retrieval.ts como constantes VECTOR_WEIGHT y BM25_WEIGHT. Hipótesis: BM25 podría necesitar más peso (70/30) para capturar matches léxicos de artículos.","grep 'VECTOR_WEIGHT\\|BM25_WEIGHT' lib/retrieval.ts",12,+2-3,⭐⭐⭐,pendiente
+  S5.4,Mejorar prompt anti-repetición,lib/prompt-templates.ts,"Agregar instrucciones anti-repetición en lib/prompt-templates.ts: (1) Al final de SYSTEM_PROMPT base: '\n\nREGLAS ADICIONALES:\n- NO repitas información ya mencionada.\n- Sé conciso: máximo 3-4 oraciones por punto.\n- Si múltiples artículos aplican, menciona solo los 2-3 más relevantes.'; (2) Test con queries que generan respuestas largas/repetitivas (ej: Q002 Ley 100); (3) Validar: response.length promedio debe reducirse ~20% sin perder completitud.","grep 'NO repitas' lib/prompt-templates.ts",6,+1,⭐⭐,pendiente
+  S5.5,Benchmark completo 180 casos + análisis,"scripts/evaluate-accuracy.mjs data/benchmarks/ docs/sprints/SPRINT_5_RESULTADOS.md","(1) Ejecutar benchmark completo: JUDGE_MODEL=qwen2.5:7b-instruct node scripts/evaluate-accuracy.mjs --prod --output data/benchmarks/sprint5-final-$(date +%Y-%m-%d).json (180 casos); (2) Análisis por área legal: calcular accuracy por categoría (laboral, tributario, civil, penal, administrativo, constitucional); (3) Identificar casos límite (score <3.0) para Sprint 6; (4) Crear docs/sprints/SPRINT_5_RESULTADOS.md con: accuracy antes/después Sprint 5, completitud mejora, relevancia_contexto mejora, efecto chunks overview, comparación áreas, top 5 mejores/peores casos.","test -f docs/sprints/SPRINT_5_RESULTADOS.md && grep 'accuracy.*70%' docs/sprints/SPRINT_5_RESULTADOS.md",12,validación,⭐⭐⭐⭐,pendiente
+
+orden_ejecucion[9]{paso,tarea_id,agente,nota,dependencia}:
+  1,S5.1,cursor,Crear chunks overview,ninguna
+  2,S5.2,cursor,Optimizar overlap,S5.1
+  3,S5.3,cursor,Recalibrar RRF weights (A/B test),S5.2
+  4,S5.4,cursor,Mejorar prompt anti-repetición (paralelo con S5.3),S5.2
+  5,RE_INGEST,cursor,Re-indexar con chunks overview + overlap optimizado,"S5.1 S5.2"
+  6,TEST_AB,cursor,Ejecutar A/B test RRF weights (3 combinaciones x 50 queries),RE_INGEST
+  7,APPLY_BEST,cursor,Aplicar weights ganadores en retrieval.ts,TEST_AB
+  8,DEPLOY_CAMBIOS,cursor,Deploy a producción,"S5.1 S5.2 S5.3 S5.4"
+  9,S5.5,open_claw,Benchmark completo 180 casos + análisis por área,DEPLOY_CAMBIOS
+
+testing[3]{tipo,comando,criterio_exito}:
+  overlap_validation,"node scripts/validate-overlap.mjs","0% chunks con overlap <100 chars"
+  ab_test_rrf,"node scripts/ab-test-rrf.mjs --ratios '60/40,70/30,55/45'","Recall@10 >= 0.85 en mejor ratio"
+  prompt_length,"node scripts/analyze-responses.mjs sprint5-final-*.json","response.length promedio -20% vs Sprint 4"
+
+criterio_exito[7]{item}:
+  Accuracy >= 68% (objetivo 68-72%)
+  Completitud >= 0.70 (mejora desde 0.51)
+  Relevancia contexto >= 0.80 (mejora desde 0.67)
+  Chunks overview creados ~60
+  Recall@10 >= 0.85 (mejora post A/B test)
+  Overlap promedio 200-300 chars
+  Sin regresión groundedness (<0.95)
+
+decision_criteria{sprint_exitoso,sprint_bloqueante,continuar_sprint_6}:
+  "accuracy >= 0.68","accuracy < 0.63 → revisar chunks overview",accuracy >= 0.68 && completitud >= 0.65
+
+riesgos[2]{riesgo,mitigacion}:
+  A/B test consume tiempo,"Limitar a 50 queries por ratio (total 150 queries)"
+  Chunks overview mal diseñados,"Validar con 10 queries generales antes de re-ingest"
+
+kpis_seguimiento[3]{kpi,target}:
+  Completitud semanal,+0.05-0.10/semana
+  Relevancia contexto,+0.10/sprint
+  Overlap coverage,"100% chunks >= 100 chars"
+
+post_fase_comando[5]{orden,comando,descripcion,agente}:
+  1,"cd ColLawRAG && node scripts/ingest.mjs","Re-indexar con overview + overlap optimizado",cursor
+  2,"cd ColLawRAG && node scripts/ab-test-rrf.mjs --ratios '60/40,70/30,55/45' --limit 50","A/B test RRF weights",cursor
+  3,"cd ColLawRAG && git add . && git commit -m 'Sprint 5: Chunks overview + overlap + RRF optimizado' && git push",Deploy código,cursor
+  4,"JUDGE_MODEL=qwen2.5:7b-instruct node scripts/evaluate-accuracy.mjs --prod","Benchmark completo 180 casos",open_claw
+  5,"node scripts/analyze-by-area.mjs data/benchmarks/sprint5-final-*.json","Análisis por área legal",open_claw
