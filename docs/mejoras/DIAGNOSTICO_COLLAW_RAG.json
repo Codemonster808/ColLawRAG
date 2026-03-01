@@ -1,0 +1,368 @@
+{
+  "diagnostic_request": {
+    "project": "ColLawRAG",
+    "phase": "sprint_3_post_deployment",
+    "timestamp": "2026-03-01T14:00:00-05:00",
+    "objective": "identificar_cuellos_de_botella_y_optimizar_accuracy_70_porciento",
+    "context": {
+      "project_description": "Sistema RAG open-source para consulta de legislación colombiana que permite a abogados y ciudadanos hacer preguntas en lenguaje natural sobre códigos, leyes, jurisprudencia y procedimientos legales. Deployment en Vercel con embeddings locales (Xenova) y generación vía Ollama/Groq.",
+      "current_architecture": {
+        "documents": {
+          "total_count": 33053,
+          "types": [
+            {"name": "CST", "description": "Código Sustantivo del Trabajo", "count": 5200, "size_mb": 45, "source": "leyes.co"},
+            {"name": "ET", "description": "Estatuto Tributario", "count": 910, "size_mb": 38, "source": "leyes.co"},
+            {"name": "CC", "description": "Código Civil", "count": 2675, "size_mb": 52, "source": "leyes.co"},
+            {"name": "CP", "description": "Código Penal", "count": 1800, "size_mb": 41, "source": "leyes.co"},
+            {"name": "CPACA", "description": "Código de Procedimiento Administrativo", "count": 580, "size_mb": 28, "source": "leyes.co"},
+            {"name": "CGP", "description": "Código General del Proceso", "count": 21888, "size_mb": 96, "source": "leyes.co"}
+          ],
+          "total_size_mb": 300,
+          "total_chunks": 33053
+        },
+        "chunking": {
+          "strategy": "semantic_by_article",
+          "chunk_size_range": [400, 1200],
+          "chunk_overlap_chars": 100,
+          "overlap_strategy": "last_sentences",
+          "separators": ["\\n\\n", "\\n", ". ", " "],
+          "metadata_enrichment": {
+            "article": "extracted_from_content",
+            "title": "document_title",
+            "type": "laboral|tributario|civil|penal|administrativo",
+            "chapter": "optional",
+            "section": "optional",
+            "url": "source_url"
+          },
+          "issues": [
+            "metadata.article extraction fails in ~18% chunks (shows 'No article')",
+            "overlap by sentences sometimes too short (<100 chars)",
+            "no isOverview chunks for law/title summaries"
+          ]
+        },
+        "embeddings": {
+          "model": "Xenova/paraphrase-multilingual-MiniLM-L12-v2",
+          "provider": "xenova",
+          "dimensions": 384,
+          "batch_size": 32,
+          "runtime": "transformers.js (local)",
+          "deployment": "serverless_compatible"
+        },
+        "vector_store": {
+          "type": "local_hnsw_bm25_hybrid",
+          "index_format": "hnswlib-node + BM25 inverted index",
+          "storage": "data/hnsw-index.dat + data/bm25-index.json.gz",
+          "metric": "cosine",
+          "hnsw_params": {
+            "ef_construction": 200,
+            "M": 16
+          },
+          "bm25_params": {
+            "k1": 1.5,
+            "b": 0.75,
+            "tokenizer": "spanish_stopwords_filtered"
+          },
+          "deployment": "vercel_blob (34MB compressed)"
+        },
+        "retrieval": {
+          "method": "hybrid_rrf",
+          "rrf_k": 40,
+          "k_documents": 8,
+          "vector_weight": 0.5,
+          "bm25_weight": 0.5,
+          "query_expansion": {
+            "enabled": true,
+            "terms_count": 55,
+            "strategy": "coloquial_to_legal_colombian",
+            "areas_covered": ["laboral", "tributario", "civil", "penal", "administrativo", "procedimientos"]
+          },
+          "metadata_boost": {
+            "enabled": true,
+            "boost_factor_title": 1.50,
+            "boost_factor_type": 1.40,
+            "non_exclusive": true
+          },
+          "reranking": {
+            "enabled": true,
+            "provider": "heuristic",
+            "fallback_cross_encoder": false,
+            "derogada_penalty": -0.30,
+            "vigencia_filter": true
+          },
+          "score_threshold": null
+        },
+        "llm": {
+          "provider_primary": "ollama",
+          "provider_fallback": "groq",
+          "model_ollama": "qwen2.5:7b-instruct",
+          "model_groq": "llama-3.1-8b-instant",
+          "temperature": 0.1,
+          "max_tokens": 2000,
+          "prompt_template": "Eres un asistente legal especializado en derecho colombiano. Tu objetivo es responder con precisión citando las normas aplicables.\n\nINSTRUCCIONES CRÍTICAS:\n1. Cita SIEMPRE los artículos y normas del contexto\n2. Si una norma está DEROGADA, indícalo explícitamente\n3. NO inventes información\n4. Si el contexto no tiene la respuesta, admítelo\n\nContexto legal:\n{context}\n\nPregunta: {question}\n\nRespuesta:"
+        }
+      }
+    },
+    "evaluation_dataset": {
+      "total_queries": 180,
+      "dataset_name": "qa-abogados.json",
+      "source": "data/benchmarks/qa-abogados.json",
+      "sample_queries": [
+        {
+          "id": "LAB-001",
+          "question": "¿Cuántos días de vacaciones tiene derecho un trabajador con un año de trabajo?",
+          "category": "laboral",
+          "difficulty": "basico",
+          "expected_documents": ["CST_Art_186"],
+          "expected_response_points": [
+            "15 días hábiles de vacaciones remuneradas",
+            "Por cada año de servicios",
+            "Art. 186 CST"
+          ],
+          "complexity": "baja"
+        },
+        {
+          "id": "LAB-007",
+          "question": "¿Cuántas horas máximas tiene la jornada ordinaria de trabajo en Colombia?",
+          "category": "laboral",
+          "difficulty": "basico",
+          "expected_documents": ["CST_Art_161"],
+          "expected_response_points": [
+            "8 horas diarias",
+            "48 horas semanales",
+            "Art. 161 CST"
+          ],
+          "complexity": "baja"
+        },
+        {
+          "id": "ADM-001",
+          "question": "¿Cuál es el plazo para interponer acción de nulidad y restablecimiento del derecho?",
+          "category": "administrativo",
+          "difficulty": "basico",
+          "expected_documents": ["CPACA_Art_164"],
+          "expected_response_points": [
+            "4 meses contados desde el día siguiente al de la publicación, notificación o ejecución del acto",
+            "Art. 164 CPACA"
+          ],
+          "complexity": "baja"
+        },
+        {
+          "id": "LAB-015",
+          "question": "¿Qué es la prima de servicios y cuándo se paga?",
+          "category": "laboral",
+          "difficulty": "basico",
+          "expected_documents": ["CST_Art_306"],
+          "expected_response_points": [
+            "Prestación social equivalente a 1 mes de salario por año",
+            "Se paga en dos cuotas: junio 30 y diciembre 20",
+            "Art. 306 CST"
+          ],
+          "complexity": "baja"
+        },
+        {
+          "id": "TRI-002",
+          "question": "¿Cuándo se genera el IVA y cuál es la tarifa general en Colombia?",
+          "category": "tributario",
+          "difficulty": "intermedio",
+          "expected_documents": ["ET_Art_420", "ET_Art_468"],
+          "expected_response_points": [
+            "Se genera en la venta de bienes y prestación de servicios",
+            "Tarifa general: 19%",
+            "Estatuto Tributario Art. 420 y 468"
+          ],
+          "complexity": "media"
+        }
+      ],
+      "evaluation_criteria": {
+        "retrieval_success": "articulos_correctos_en_top_8",
+        "groundedness_criteria": [
+          "precision_normativa: cada afirmación respaldada por artículo citado",
+          "ausencia_alucinaciones: no inventar normas o artículos",
+          "vigencia_correcta: no citar normas derogadas como vigentes"
+        ],
+        "correctness_criteria": [
+          "articulos_correctos: menciona artículos exactos esperados",
+          "interpretacion_juridica: interpretación válida del derecho",
+          "completitud: responde todos los puntos de la pregunta",
+          "relevancia: respuesta directa sin divagaciones"
+        ]
+      }
+    },
+    "current_performance_data": {
+      "latest_benchmark": {
+        "date": "2026-03-01",
+        "environment": "production_vercel",
+        "sprint": "sprint_3_baseline_without_sprint3_changes",
+        "cases_evaluated": 30,
+        "cases_valid": 23,
+        "cases_failed": 7
+      },
+      "retrieval_accuracy_sample": [
+        {
+          "query_id": "LAB-001",
+          "question": "¿Cuántos días de vacaciones tiene derecho un trabajador con un año de trabajo?",
+          "retrieved_docs_count": 8,
+          "relevant_retrieved": ["CST_Art_186"],
+          "missing_relevant": [],
+          "retrieval_score": 1.0,
+          "response_text": "Un trabajador con un año de trabajo tiene derecho a 15 días hábiles de vacaciones remuneradas según el Art. 186 del CST.",
+          "hallucinations_detected": [],
+          "grounding_issues": [],
+          "judge_score": 10.0,
+          "verdict": "EXCELENTE"
+        },
+        {
+          "query_id": "LAB-015",
+          "question": "¿Qué es la prima de servicios y cuándo se paga?",
+          "retrieved_docs_count": 8,
+          "relevant_retrieved": [],
+          "missing_relevant": ["CST_Art_306"],
+          "retrieval_score": 0.0,
+          "response_text": "No se encontraron documentos relevantes para tu consulta.",
+          "hallucinations_detected": [],
+          "grounding_issues": ["retrieval_failure"],
+          "judge_score": 1.7,
+          "verdict": "DEFICIENTE"
+        },
+        {
+          "query_id": "TRI-002",
+          "question": "¿Cuándo se genera el IVA y cuál es la tarifa general en Colombia?",
+          "retrieved_docs_count": 8,
+          "relevant_retrieved": ["ET_general_taxation"],
+          "missing_relevant": ["ET_Art_420"],
+          "retrieval_score": 0.3,
+          "response_text": "El IVA se genera en la venta de bienes. La tarifa general es 19%.",
+          "hallucinations_detected": [],
+          "grounding_issues": ["respuesta_incompleta", "falta_art_420"],
+          "judge_score": 2.8,
+          "verdict": "DEFICIENTE"
+        },
+        {
+          "query_id": "ADM-001",
+          "question": "¿Cuál es el plazo para interponer acción de nulidad y restablecimiento del derecho?",
+          "retrieved_docs_count": 8,
+          "relevant_retrieved": ["CPACA_Art_164"],
+          "missing_relevant": [],
+          "retrieval_score": 1.0,
+          "response_text": "El plazo es de 4 meses contados desde el día siguiente al de la publicación, notificación, comunicación o ejecución del acto administrativo, según el Art. 164 del CPACA.",
+          "hallucinations_detected": [],
+          "grounding_issues": [],
+          "judge_score": 10.0,
+          "verdict": "EXCELENTE"
+        },
+        {
+          "query_id": "LAB-007",
+          "question": "¿Cuántas horas máximas tiene la jornada ordinaria de trabajo en Colombia?",
+          "retrieved_docs_count": 8,
+          "relevant_retrieved": ["CST_Art_161"],
+          "missing_relevant": [],
+          "retrieval_score": 1.0,
+          "response_text": "La jornada ordinaria de trabajo es de máximo 8 horas al día y 48 horas a la semana, conforme al Art. 161 del CST.",
+          "hallucinations_detected": [],
+          "grounding_issues": [],
+          "judge_score": 10.0,
+          "verdict": "EXCELENTE"
+        }
+      ],
+      "aggregate_metrics": {
+        "accuracy": 0.517,
+        "retrieval_accuracy": 0.252,
+        "groundedness": 0.952,
+        "precision_normativa": 0.235,
+        "articulos_correctos": 0.252,
+        "interpretacion_juridica": 0.478,
+        "completitud": 0.513,
+        "relevancia_contexto": 0.674,
+        "ausencia_alucinaciones": 0.952,
+        "faithfulness": 0.95,
+        "answer_relevancy": 0.37,
+        "overall_ragas_proxy": 0.66
+      },
+      "performance_by_area": {
+        "administrativo": 0.617,
+        "laboral": 0.542,
+        "tributario": 0.490,
+        "civil": 0.488,
+        "penal": 0.330,
+        "constitucional": 0.280
+      },
+      "top_performing_cases": [
+        {"id": "ADM-001", "score": 10.0, "area": "administrativo"},
+        {"id": "LAB-007", "score": 10.0, "area": "laboral"},
+        {"id": "LAB-013", "score": 7.3, "area": "laboral"}
+      ],
+      "worst_performing_cases": [
+        {"id": "LAB-015", "score": 1.7, "area": "laboral", "issue": "retrieval_failure"},
+        {"id": "TRI-002", "score": 2.8, "area": "tributario", "issue": "retrieval_incomplete"},
+        {"id": "CON-003", "score": 2.8, "area": "constitucional", "issue": "chunks_irrelevantes"}
+      ],
+      "error_patterns_observed": [
+        "retrieval_failure_chunks_incorrectos_o_vacios (articulos_correctos=0.252)",
+        "query_expansion_insuficiente_para_terminologia_especifica",
+        "metadata_boost_ayuda_pero_no_suficiente_sin_cross_encoder_real",
+        "buen_desempeno_en_preguntas_factuales_simples_con_articulos_claros",
+        "dificultad_con_preguntas_que_requieren_relacionar_multiples_articulos",
+        "ausencia_alucinaciones_excelente_0.952_gracias_a_prompt_anti_alucinacion"
+      ]
+    },
+    "sprint_3_changes_deployed": {
+      "date": "2026-03-01T13:33:00-05:00",
+      "changes": [
+        "query_expansion_ampliada_40_a_55_terminos",
+        "metadata_boost_15_a_50_porciento",
+        "rrf_k_60_a_40_mas_peso_top_results",
+        "auto_detect_xenova_provider_fix_404_error"
+      ],
+      "commits": ["3d16be9", "1eec05d", "d21d088"],
+      "pending_validation": true,
+      "expected_improvement": "+5-10pp accuracy"
+    },
+    "specific_concerns": [
+      "Retrieval sigue siendo el cuello de botella #1 (articulos_correctos=0.252 muy bajo)",
+      "Query expansion mejorada pero aún insuficiente para terminología legal específica",
+      "Falta cross-encoder real para reranking fino (actual: solo heurísticas)",
+      "Metadata.article extraction falla en ~18% chunks",
+      "Sin chunks de overview/resumen por ley/título",
+      "Áreas Penal y Constitucional muy bajas (0.33 y 0.28) por corpus limitado"
+    ],
+    "development_constraints": {
+      "sprint_duration_days": 14,
+      "team_capacity_hours_per_sprint": 80,
+      "priority_focus": "llegar_a_70_porciento_accuracy_en_3_sprints",
+      "technical_skills_available": [
+        "typescript",
+        "nextjs",
+        "vercel",
+        "transformers.js",
+        "ollama",
+        "groq_api",
+        "hnswlib",
+        "bm25"
+      ],
+      "cannot_change_in_short_term": [
+        "modelo_embeddings_xenova_384d",
+        "infraestructura_vercel_serverless",
+        "corpus_actual_33k_chunks"
+      ],
+      "can_change": [
+        "reranking_strategy",
+        "chunking_metadata_extraction",
+        "query_expansion_terms",
+        "retrieval_weights_rrf",
+        "prompt_templates",
+        "add_cross_encoder_api"
+      ]
+    },
+    "output_requirements": {
+      "format": "diagnostico_estructurado_json",
+      "sections_needed": [
+        "analisis_causa_raiz_top_3",
+        "priorizacion_mejoras_por_impacto_esfuerzo",
+        "hoja_ruta_sprints_3_meses",
+        "metricas_objetivo_por_sprint",
+        "payloads_actualizados_sprint_4_5_6",
+        "estimacion_esfuerzo_horas_por_mejora"
+      ],
+      "priority_levels": ["P0_critico", "P1_alto", "P2_medio", "P3_bajo", "P4_futuro"]
+    }
+  }
+}
