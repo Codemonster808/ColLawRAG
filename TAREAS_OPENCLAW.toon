@@ -1,10 +1,16 @@
 proyecto: ColLawRAG
 actualizado: 2026-02-18
+actualizado_sprint1: 2026-02-25
 ejecutor: OpenClaw (Santis)
 url_produccion: https://col-law-rag.vercel.app
 accuracy_actual: 35.9%
 accuracy_baseline_original: 28.7%
 modelo_generacion: deepseek/deepseek-v3-0324 via novita
+
+payload_sprint1_openclaw[4]{archivo,estado,tareas_openclaw_hechas,tareas_openclaw_pendientes}:
+  docs/mejoras/payloads/SPRINT_1_FUNDAMENTOS.toon,parcial,ninguna,"S1.6 S1.7 S1.9 S1.10 S1.11"
+payload_para_openclaw_ahora[2]{archivo,instruccion}:
+  docs/mejoras/payloads/SPRINT_1_FUNDAMENTOS.toon,"Ejecutar solo tareas OpenClaw: S1.6 (test DeepSeek Novita), S1.7 (benchmark DeepSeek 30), S1.9 (benchmark Groq 30), S1.10 (benchmark 7B 30), S1.11 (tabla A/B ab-test-summary.md). No modificar lib/generation.ts ni .env.example. Juez: ollama pull qwen2.5:14b-instruct si hace falta."
 
 estado_general:
   completadas: OC-A1 OC-A2 OC-A3 OC-A4

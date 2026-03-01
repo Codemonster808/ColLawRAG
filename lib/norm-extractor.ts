@@ -305,7 +305,7 @@ export function extractApplicableNorms(
   
   if (chunks) {
     for (const { chunk } of chunks) {
-      const title = chunk.metadata.title
+      const title = chunk.metadata?.title
       const normaId = inferNormaIdFromTitle(title)
       
       if (normaId && !normasFromQuery.find(n => n.normaId === normaId)) {
@@ -401,11 +401,11 @@ function extractArticlesFromChunk(chunk: DocumentChunk): ExtractedArticle[] {
   
   // Si el chunk tiene metadata de artículo, usarlo
   if (chunk.metadata.article) {
-    const normaId = inferNormaIdFromTitle(chunk.metadata.title) || 'unknown'
+    const normaId = inferNormaIdFromTitle(chunk.metadata?.title) || 'unknown'
     articles.push({
       numero: chunk.metadata.article.replace(/\D/g, ''),
       normaId,
-      normaTitle: chunk.metadata.title,
+      normaTitle: chunk.metadata?.title,
       inciso: chunk.metadata.articleHierarchy?.includes('Inciso') ? 
         chunk.metadata.articleHierarchy.split('Inciso')[1]?.trim() : undefined
     })
@@ -416,14 +416,14 @@ function extractArticlesFromChunk(chunk: DocumentChunk): ExtractedArticle[] {
   for (const match of articuloMatches) {
     const numero = match[1]
     const inciso = match[2]
-    const normaId = inferNormaIdFromTitle(chunk.metadata.title) || 'unknown'
+    const normaId = inferNormaIdFromTitle(chunk.metadata?.title) || 'unknown'
     
     // Evitar duplicados
     if (!articles.find(a => a.numero === numero && a.normaId === normaId)) {
       articles.push({
         numero,
         normaId,
-        normaTitle: chunk.metadata.title,
+        normaTitle: chunk.metadata?.title,
         inciso: inciso || undefined
       })
     }

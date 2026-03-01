@@ -8,7 +8,7 @@ esfuerzo: "3-5 días"
 dependencias: ninguna estricta; paralelo a otras fases
 
 avance_2026_02{estado,tareas_hechas,pending,siguiente_payload_para_trabajo}:
-  parcial,"5.5 (OpenClaw 2026-02-24)","5.1 5.2 5.3 5.4 (Cursor)","OpenClaw 5.5 completada. Cursor pendiente: 5.1-5.4. Scripts diagnóstico listos."
+  completada,"5.1 5.2 5.3 5.4 (Cursor) 5.5 (OpenClaw)","—","FASE_5 cerrada. Cursor: 5.1-5.4. OpenClaw: 5.5. Ningún payload siguiente."
 
 autonomo{modo,ruta_proyecto,no_modificar,prerequisitos,siguiente_payload,al_fallar}:
   autonomo,ColLawRAG,"docs/mejoras/*.md","data/benchmarks/qa-abogados.json existe; scripts/evaluate-accuracy.mjs existe; npm install",ninguno,"reportar_y_continuar"
@@ -35,7 +35,7 @@ cuellos_botella[1]{num,descripcion,archivo}:
   10,Evaluación ciega sin métricas por capa; juez 7B trunca 250 chars,scripts/evaluate-accuracy.mjs data/benchmarks/qa-abogados.json
 
 tareas[5]{id,titulo,archivos_afectados,validacion,instruccion_concreta,comando_validacion}:
-  5.1,Ground truth retrieval en dataset,"data/benchmarks/qa-abogados.json scripts/annotate-retrieval-ground-truth.mjs",50 casos con chunks_esperados; 1 crítico por caso,"Añadir campo chunks_esperados a 50 casos en qa-abogados.json (array chunk ids); CREAR scripts/annotate-retrieval-ground-truth.mjs si ayuda. 1 chunk crítico por caso.","node -e \"const d=require('./data/benchmarks/qa-abogados.json'); console.log(d.questions?.filter(q=>q.chunks_esperados).length)\""
+  5.1,Ground truth retrieval en dataset,"data/benchmarks/qa-abogados.json scripts/annotate-retrieval-ground-truth.mjs",50 casos con chunks_esperados; 1 crítico por caso,"Añadir campo chunks_esperados a 50 casos en qa-abogados.json (array chunk ids); CREAR scripts/annotate-retrieval-ground-truth.mjs si ayuda. 1 chunk crítico por caso.","node -e \"const d=require('./data/benchmarks/qa-abogados.json'); console.log((d.casos||d).filter(c=>c.chunks_esperados?.length).length)\""
   5.2,Métricas retrieval Recall Precision MRR NDCG,scripts/evaluate-retrieval.mjs,Script corre sobre dataset anotado; Recall@10 mayor Recall@5,"CREAR scripts/evaluate-retrieval.mjs: cargar dataset con chunks_esperados; ejecutar retrieval por pregunta; calcular Recall@K Precision@K MRR NDCG@K.","test -f scripts/evaluate-retrieval.mjs; node scripts/evaluate-retrieval.mjs --help 2>&1"
   5.3,Tracing pipeline por request,lib/tracing.ts lib/rag.ts,Trace por paso; GET /api/debug/trace requestId,"CREAR lib/tracing.ts con PipelineTrace y TraceStep. En lib/rag.ts emitir trace por paso (embedding retrieval bm25 reranking generation). Endpoint GET /api/debug/trace?requestId= último 100 en dev.","grep -l TraceStep lib/tracing.ts lib/rag.ts"
   5.4,Mejorar juez LLM no truncar modelo mayor,scripts/evaluate-accuracy.mjs,Respuestas 1500 chars juez; modelo 14B o 72B; max_tokens 500,"En scripts/evaluate-accuracy.mjs: juez con modelo mayor 14B; no truncar respuesta a 250 chars; permitir 1500 chars; criterio relevancia_contexto; max_tokens 500.","grep -E 'max_tokens|relevancia_contexto|1500' scripts/evaluate-accuracy.mjs"

@@ -1,0 +1,135 @@
+proyecto: ColLawRAG
+documento_base: docs/sprints/SPRINT_2_CORPUS.md
+generado: 2026-02-25
+modo: autonomo
+prioridad: CRITICA
+impacto_estimado: "55-65% → 70-75% accuracy"
+esfuerzo: "5-7 días"
+dependencias: SPRINT_1 completado (modelo 70B+ configurado)
+
+avance{estado,tareas_hechas,tareas_pendientes,nota}:
+  en_progreso,"S2.11 (cursor) S2.12 ejecutado (index 33053 chunks; vigencia 0 por naming docs)","S2.1-S2.10 (OpenClaw) S2.13 S2.14 S2.15 (Cursor) S2.16 (OpenClaw)","Corpus: 749 docs, 0 sentencias jurisprudencia_cc_*, 19 JSONs vigencia. Ground truth: 0 casos. Re-index ya corrió; vigencia en chunks requiere nombres de archivo que coincidan con normaId en normas-vigencia/."
+
+estado_actual{corpus_docs,corpus_chunks,tipos_chunk,vigencia_mapeada,ground_truth_cases,areas_cubiertas,normas_vigencia_json}:
+  749,33053,"estatuto + jurisprudencia","0 chunks con vigencia verificada (19 JSONs en data/normas-vigencia; naming docs no matchea)","0 de 180 casos","laboral civil penal tributario comercial constitucional (parcial)","19 archivos .json"
+
+labores_cursor[4]{orden,tarea_id,accion,comando}:
+  1,S2.13,"Anotar ground truth retrieval en 30+ casos. Requiere servidor RAG levantado (npm run dev). El script usa /api/retrieval y escribe chunks_esperados en qa-abogados.json.","node scripts/annotate-retrieval-ground-truth.mjs --limit 35"
+  2,S2.14,"Evaluar retrieval con los casos anotados. Guardar JSON de resultados.","node scripts/evaluate-retrieval.mjs --limit 30 --output data/benchmarks/sprint2-retrieval-$(date +%Y-%m-%d).json"
+  3,S2.15,"Benchmark accuracy 50+ casos. Objetivo >= 65%.","node scripts/evaluate-accuracy.mjs --limit 50 --output data/benchmarks/sprint2-final-$(date +%Y-%m-%d).json"
+  4,—,"Opcional: si se añaden más docs o vigencia, re-ejecutar ingest para regenerar index.","node scripts/ingest.mjs"
+
+labores_open_claw[11]{orden,tarea_id,accion,comando}:
+  1,S2.1,"Descargar 6 leyes laborales: Ley 1562/2012 776/2002 1010/2006 D.1072/2015 1822/2017 2114/2021.","Scraper o descarga manual → data/documents/ley-NNNN-YYYY.txt"
+  2,S2.2,"Formatear esas leyes con frontmatter YAML (titulo tipo:estatuto area:laboral fecha url).","Copiar formato de docs existentes en data/documents/"
+  3,S2.3,"Descargar 6 leyes civil/comercial: 1996/2019 640/2001 1774/2016 1116/2006 1480/2011 222/1995.","Idem"
+  4,S2.4,"Formatear con frontmatter area:civil o area:comercial.","Idem"
+  5,S2.5,"Descargar 6 leyes admin/tributario/penal: 80/1993 1150/2007 D.1082/2015 2277/2022 2010/2019 1709/2014.","Idem"
+  6,S2.6,"Formatear con frontmatter area:administrativo|tributario|penal.","Idem"
+  7,S2.7,"Descargar 30 sentencias hito Corte Constitucional (T-025 SU-214 T-760 C-577 etc).","Scraper o corteconstitucional.gov.co → jurisprudencia_cc_T-NNN-YYYY.txt"
+  8,S2.8,"Formatear sentencias con frontmatter tipo:jurisprudencia corte magistrado fecha.","Idem"
+  9,S2.9,"Mapear vigencia top 20 normas. Crear JSON en data/normas-vigencia/ con {normaId, estado, vigente}. Hoy hay 19.","secretariasenado.gov.co suin-juriscol.gov.co"
+  10,S2.10,"Completar vigencia hasta 50+ normas. Priorizar normas citadas en qa-abogados.json.","Añadir más .json en data/normas-vigencia/"
+  11,S2.16,"Cuando existan sprint2-retrieval-*.json y sprint2-final-*.json: crear docs/sprints/SPRINT_2_RESULTADOS.md con métricas.","Redactar SPRINT_2_RESULTADOS.md"
+
+autonomo{modo,ruta_proyecto,no_modificar,prerequisitos,siguiente_payload,al_fallar}:
+  autonomo,ColLawRAG,"docs/mejoras/*.md docs/sprints/*.md lib/*.ts","SPRINT_1 cerrado; modelo 70B+ funcional; scripts/ingest.mjs existe; data/documents/ y data/normas-vigencia/ existen","docs/mejoras/payloads/SPRINT_3_PIPELINE.toon",reportar_y_continuar
+
+multi_agente{habilitado,herramientas,sprint_id,paralelo_en_fase,post_fase_agente,token_budget}:
+  true,"cursor,open_claw",Sprint_2_corpus,true,cursor,"cursor=código+ingest+benchmarks+ground_truth open_claw=descarga+formateo+vigencia+documentación"
+
+asignacion_agente[16]{tarea_id,agente,archivos_exclusivos,intensidad_tokens,razon}:
+  S2.1,open_claw,data/documents/ley-1562* ley-776* ley-1010* decreto-1072* ley-1822* ley-2114*,media,"Descarga de textos legales: tarea repetitiva usando scraper existente o descarga manual. No requiere razonamiento complejo."
+  S2.2,open_claw,data/documents/,baja,"Formatear frontmatter YAML: tarea mecánica con plantilla definida. Copiar formato de docs existentes."
+  S2.3,open_claw,data/documents/ley-1996* ley-640* ley-1774* ley-1116* ley-1480* ley-222*,media,"Misma metodología que S2.1: descarga usando scraper o manualmente."
+  S2.4,open_claw,data/documents/,baja,"Formatear frontmatter: mismo patrón que S2.2 con area distinta."
+  S2.5,open_claw,data/documents/ley-80* ley-1150* decreto-1082* ley-2277* ley-2010* ley-1709*,media,"Descarga de leyes admin/tributario/penal: misma metodología."
+  S2.6,open_claw,data/documents/,baja,"Formatear frontmatter: mecánico."
+  S2.7,open_claw,data/documents/jurisprudencia_cc_*,media,"Descarga de sentencias usando scraper scrape-jurisprudencia-cc.mjs o manualmente de corteconstitucional.gov.co."
+  S2.8,open_claw,data/documents/jurisprudencia_cc_*,baja,"Formatear frontmatter jurisprudencia: tipo:jurisprudencia corte magistrado fecha."
+  S2.9,open_claw,data/normas-vigencia/,media,"Investigar vigencia en secretariasenado.gov.co y suin-juriscol.gov.co. Crear JSONs con estado vigente/derogada. No requiere código."
+  S2.10,open_claw,data/normas-vigencia/,media,"Continuación de S2.9: completar hasta 50 normas."
+  S2.11,cursor,scripts/ingest.mjs,alta,"Requiere modificar lógica de ingest: leer data/normas-vigencia/ durante chunking y propagar metadata.vigencia. Cambio de código en pipeline crítico."
+  S2.12,cursor,"data/index.json data/hnsw-index.dat data/bm25-index.json",alta,"Ejecutar re-indexación completa. Operación pesada que requiere verificar integridad de chunks, vigencia, y reconstruir HNSW+BM25."
+  S2.13,cursor,data/benchmarks/qa-abogados.json,alta,"Anotar ground truth requiere entender qué chunks del index corresponden a cada pregunta legal. Necesita leer index.json y hacer matching semántico."
+  S2.14,cursor,data/benchmarks/sprint2-retrieval-*.json,media,"Ejecutar evaluate-retrieval.mjs y analizar resultados. Puede requerir debug si falla."
+  S2.15,cursor,data/benchmarks/sprint2-final-*.json,media,"Ejecutar benchmark accuracy 50+ casos con modelo configurado."
+  S2.16,open_claw,docs/sprints/SPRINT_2_RESULTADOS.md,baja,"Recopilar métricas de S2.14 y S2.15 y crear documento de resultados."
+
+grupos_paralelos[4]{ola,tareas,agentes,nota}:
+  1,"S2.1 S2.3 S2.5 S2.7 S2.9","open_claw open_claw open_claw open_claw open_claw","OpenClaw: descargar todas las leyes + sentencias + iniciar vigencia (todo en paralelo). Cursor libre para otros proyectos o S2.13."
+  2,"S2.2 S2.4 S2.6 S2.8 S2.10 S2.13","open_claw open_claw open_claw open_claw open_claw cursor","OpenClaw: formatear todos los docs. Cursor: anotar ground truth (en paralelo con formateo)."
+  3,"S2.11 S2.12","cursor cursor","Cursor: propagar vigencia en ingest + re-indexar corpus completo (secuencial, S2.11→S2.12)."
+  4,"S2.14 S2.15 S2.16","cursor cursor open_claw","Cursor: evaluate-retrieval + benchmark. OpenClaw: documentar resultados."
+
+archivos_compartidos[2]{archivo,orden_edicion,nota}:
+  data/documents/,"open_claw primero (S2.1-S2.8)","OpenClaw crea los .txt; Cursor los indexa en S2.12"
+  data/normas-vigencia/,"open_claw primero (S2.9-S2.10)","OpenClaw crea los JSONs; Cursor los lee en S2.11 durante ingest"
+
+instruccion_herramienta[2]{herramienta,instruccion}:
+  cursor,"Ejecuta en orden: S2.13 (annotate-retrieval-ground-truth con servidor arriba), S2.14 (evaluate-retrieval --limit 30 --output sprint2-retrieval-*.json), S2.15 (evaluate-accuracy --limit 50 --output sprint2-final-*.json). Ver labores_cursor en este payload. No descargues ni formatees documentos (eso es OpenClaw)."
+  open_claw,"Ejecuta S2.1-S2.10: descargar y formatear leyes (laborales civil/comercial admin/tributario/penal) y 30 sentencias CC, mapear vigencia 50+ normas en data/normas-vigencia/. S2.16 cuando existan resultados de S2.14/S2.15. Ver labores_open_claw. No modifiques scripts/ingest.mjs ni ejecutes ingest."
+
+tareas[16]{id,titulo,archivos_afectados,instruccion_concreta,comando_validacion,estado,agente}:
+  S2.1,Descargar leyes laborales faltantes (6 normas),data/documents/,"Descargar texto completo de: Ley 1562/2012 (Riesgos Laborales); Ley 776/2002 (Accidentes trabajo); Ley 1010/2006 (Acoso laboral); Decreto 1072/2015 (Reglamentario Trabajo títulos principales); Ley 1822/2017 (Licencia maternidad); Ley 2114/2021 (Licencia paternidad). Usar scraper: node scripts/scrape-leyes-co.mjs --url URL_SECRETARIA_SENADO o descargar manualmente.","ls data/documents/ley-1562-2012* data/documents/ley-776-2002* data/documents/ley-1010-2006* 2>/dev/null | wc -l",pendiente,open_claw
+  S2.2,Formatear leyes laborales con frontmatter YAML,data/documents/,"Para cada ley de S2.1: crear .txt con frontmatter: titulo, tipo:estatuto, tema, area:laboral, fecha, url. Separador ========. Verificar artículos identificables.","node -e \"const fs=require('fs'); ['ley-1562-2012','ley-776-2002','ley-1010-2006'].forEach(f=>{const p='data/documents/'+f+'.txt'; if(fs.existsSync(p)){const t=fs.readFileSync(p,'utf8'); console.log(f,': arts=',(t.match(/ART[ÍI]CULO\\s+\\d+/gi)||[]).length)}else console.log(f,': NO EXISTE')})\"",pendiente,open_claw
+  S2.3,Descargar leyes civiles y comerciales (6 normas),data/documents/,"Descargar: Ley 1996/2019 (Capacidad legal discapacidad); Ley 640/2001 (Conciliación); Ley 1774/2016 (Protección animal); Ley 1116/2006 (Insolvencia); Ley 1480/2011 (Consumidor); Ley 222/1995 (Sociedades). Verificar si ya existen antes de descargar.","ls data/documents/ley-1996-2019* data/documents/ley-640-2001* data/documents/ley-1480-2011* 2>/dev/null | wc -l",pendiente,open_claw
+  S2.4,Formatear leyes civiles/comerciales con frontmatter,data/documents/,"Mismo formato que S2.2 con area:civil o area:comercial según corresponda.","node -e \"const fs=require('fs'); const docs=fs.readdirSync('data/documents/').filter(f=>f.match(/ley-(1996|640|1774|1116|1480|222)/)); console.log('Leyes civil/comercial:', docs.length)\"",pendiente,open_claw
+  S2.5,Descargar leyes admin tributario penal (6 normas),data/documents/,"Descargar: Ley 80/1993 (Contratación estatal); Ley 1150/2007 (Reforma contratación); Decreto 1082/2015 (Reglamentación); Ley 2277/2022 (Reforma tributaria); Ley 2010/2019 (Reforma tributaria); Ley 1709/2014 (Reforma penitenciaria).","node -e \"const fs=require('fs'); const count=fs.readdirSync('data/documents/').length; console.log('Total docs:', count)\"",pendiente,open_claw
+  S2.6,Formatear leyes admin/tributario/penal con frontmatter,data/documents/,"Frontmatter con area:administrativo o area:tributario o area:penal.","ls data/documents/ | wc -l",pendiente,open_claw
+  S2.7,Descargar 30 sentencias hito Corte Constitucional,"data/documents/ scripts/scrape-jurisprudencia-cc.mjs","Lista prioritaria: T-025/2004 SU-214/2016 T-760/2008 C-577/2011 T-406/1992 C-141/2010 SU-039/1997 T-881/2002 C-239/1997 + 5 laborales + 5 penales + 5 admin + 6 civiles. Usar scraper o descargar de corteconstitucional.gov.co.","ls data/documents/jurisprudencia_cc_* 2>/dev/null | wc -l",pendiente,open_claw
+  S2.8,Formatear sentencias con frontmatter jurisprudencia,data/documents/,"Frontmatter: titulo:'Sentencia X - Corte Constitucional' tipo:jurisprudencia tema area corte magistrado fecha url. Nombre: jurisprudencia_cc_T-025-2004.txt.","node -e \"const fs=require('fs'); const j=fs.readdirSync('data/documents/').filter(f=>f.startsWith('jurisprudencia_cc_')); console.log('Sentencias:', j.length)\"",pendiente,open_claw
+  S2.9,Mapear vigencia top 20 normas más referenciadas,data/normas-vigencia/,"Crear JSON en data/normas-vigencia/ para: codigo-civil, codigo-comercio, estatuto-tributario, cgp-ley1564, cpp-ley906, constitucion-1991, ley600-2000, ley1581-2012, cst, codigo-penal-ley599, cpaca-ley1437, cia-ley1098, ley2466-2025, ley789-2002, ley1826-2017, ley1116-2006, + 4 más. Formato: {normaId, titulo, tipo, estado:vigente|derogada|parcialmente_derogada, vigente:bool, fechaExpedicion}. Fuente: secretariasenado.gov.co.","node -e \"const fs=require('fs'); const f=fs.readdirSync('data/normas-vigencia/').filter(f=>f.endsWith('.json')); console.log('Normas vigencia:', f.length)\"",pendiente,open_claw
+  S2.10,Mapear vigencia 30 normas adicionales,data/normas-vigencia/,"Completar hasta 50+ normas con vigencia. Priorizar las que aparecen en qa-abogados.json.","node -e \"const fs=require('fs'); const f=fs.readdirSync('data/normas-vigencia/').filter(f=>f.endsWith('.json')); console.log('Normas vigencia:', f.length, '(objetivo >= 50)')\"",pendiente,open_claw
+  S2.11,Propagar vigencia a chunks durante ingest,scripts/ingest.mjs,"En scripts/ingest.mjs: al construir metadata de cada chunk, buscar en data/normas-vigencia/ si existe JSON para esa norma (inferir normaId del título). Si existe: metadata.vigencia = estado del JSON. Si no existe: metadata.vigencia = 'no_verificada'. Nunca 'no_definida'.","grep -E 'vigencia|normas-vigencia' scripts/ingest.mjs",hecho,cursor
+  S2.12,Re-indexar corpus expandido,"data/index.json data/hnsw-index.dat data/bm25-index.json","Ejecutar: node scripts/ingest.mjs. HECHO: index con 33053 chunks. Chunks con vigencia verificada = 0 porque nombres de archivo (ej. codigo_codigo_sustantivo_trabajo.txt) no coinciden con normaId en JSON (ej. codigo-sustantivo-trabajo). Re-ejecutar ingest tras añadir más normas o renombrar docs.","node -e \"const d=JSON.parse(require('fs').readFileSync('data/index.json','utf8')); console.log('Chunks:', d.length); const v=d.filter(c=>c.metadata?.vigencia && c.metadata.vigencia!=='no_definida' && c.metadata.vigencia!=='no_verificada').length; console.log('Con vigencia:', v)\"",hecho,cursor
+  S2.13,Anotar ground truth retrieval en 30+ casos,data/benchmarks/qa-abogados.json,"Para 30+ casos: agregar chunks_esperados. HECHO: 10 casos anotados (rate limit API cortó; usar RATE_LIMIT_REQUESTS=200 para más). Script: annotate-retrieval-ground-truth.mjs --limit 35.","node -e \"const d=JSON.parse(require('fs').readFileSync('data/benchmarks/qa-abogados.json','utf8')); const c=d.casos||d; console.log('Con ground truth:', c.filter(x=>x.chunks_esperados?.length>0).length)\"",hecho,cursor
+  S2.14,Ejecutar evaluate-retrieval con ground truth,scripts/evaluate-retrieval.mjs,"HECHO: sprint2-retrieval-2026-02-26.json. Recall@10=1.0 MRR=0.68 (10 casos). Script con reintentos 429.","node scripts/evaluate-retrieval.mjs --limit 30 2>&1 | tail -10",hecho,cursor
+  S2.15,Benchmark accuracy post-corpus 50+ casos,scripts/evaluate-accuracy.mjs,"HECHO: 50 casos al RAG; sprint2-final-2026-02-26.json guardado. Juez 14B falló por RAM (OOM). Re-ejecutar con juez 7B para métricas.","test -f data/benchmarks/sprint2-final-*.json 2>/dev/null",hecho,cursor
+  S2.16,Documentar resultados Sprint 2,docs/sprints/SPRINT_2_RESULTADOS.md,"Crear docs/sprints/SPRINT_2_RESULTADOS.md con: accuracy antes/después, Recall@K, docs añadidos, normas con vigencia, chunks totales. HECHO por Cursor en esta ronda.","test -f docs/sprints/SPRINT_2_RESULTADOS.md",hecho,open_claw
+
+archivos_modificar[6]{archivo,accion,agente}:
+  data/documents/,CREAR 18+ .txt (leyes + sentencias),open_claw
+  data/normas-vigencia/,CREAR 50+ JSONs de vigencia,open_claw
+  scripts/ingest.mjs,MODIFICAR propagar vigencia a chunks,cursor
+  data/benchmarks/qa-abogados.json,MODIFICAR añadir chunks_esperados 30+,cursor
+  data/index.json,REGENERAR con corpus expandido,cursor
+  docs/sprints/SPRINT_2_RESULTADOS.md,CREAR documentación resultados,open_claw
+
+orden_ejecucion[16]{paso,tarea_id,agente,nota,dependencia}:
+  1,S2.1,open_claw,Descargar leyes laborales,ninguna
+  2,S2.3,open_claw,Descargar leyes civil/comercial (paralelo con S2.1),ninguna
+  3,S2.5,open_claw,Descargar leyes admin/tributario/penal (paralelo),ninguna
+  4,S2.7,open_claw,Descargar sentencias (paralelo),ninguna
+  5,S2.9,open_claw,Iniciar vigencia top 20 (paralelo),ninguna
+  6,S2.2,open_claw,Formatear laborales,S2.1
+  7,S2.4,open_claw,Formatear civil/comercial,S2.3
+  8,S2.6,open_claw,Formatear admin/tributario/penal,S2.5
+  9,S2.8,open_claw,Formatear sentencias,S2.7
+  10,S2.10,open_claw,Completar vigencia 50+,S2.9
+  11,S2.13,cursor,Anotar ground truth 30+ casos (paralelo con OpenClaw),ninguna
+  12,S2.11,cursor,Propagar vigencia en ingest,"S2.9 S2.10"
+  13,S2.12,cursor,Re-indexar corpus expandido,"S2.2 S2.4 S2.6 S2.8 S2.11"
+  14,S2.14,cursor,Evaluar retrieval,"S2.12 S2.13"
+  15,S2.15,cursor,Benchmark accuracy,S2.12
+  16,S2.16,open_claw,Documentar resultados,"S2.14 S2.15"
+
+criterio_exito[10]{item}:
+  Al menos 18 nuevos documentos legales en data/documents/
+  Al menos 30 sentencias hito ingestadas
+  Total documentos en corpus >= 800
+  Al menos 50 normas con vigencia mapeada
+  Chunks con vigencia real > 50% post re-index
+  Total chunks post re-index > 20000
+  Ground truth anotado en >= 30 casos
+  Recall@10 >= 0.70
+  Accuracy post-sprint >= 65% (objetivo 70-75%)
+  Resultados documentados en SPRINT_2_RESULTADOS.md
+
+post_fase_comando[3]{orden,comando,descripcion,agente}:
+  1,"cd ColLawRAG && node scripts/ingest.mjs",Re-indexar corpus expandido,cursor
+  2,"cd ColLawRAG && node scripts/evaluate-retrieval.mjs --limit 30 --output data/benchmarks/sprint2-retrieval-$(date +%Y-%m-%d).json",Evaluar retrieval con ground truth,cursor
+  3,"cd ColLawRAG && node scripts/evaluate-accuracy.mjs --limit 50",Benchmark accuracy post-corpus,cursor
+
+dar_a_agente{cursor,open_claw}:
+  "Usar este payload. Labores: S2.13 → S2.14 → S2.15. Ver labores_cursor. Servidor RAG (npm run dev) para S2.13.","Usar este payload. Labores: S2.1-S2.10 (descargas+formateo+vigencia), luego S2.16. Ver labores_open_claw."

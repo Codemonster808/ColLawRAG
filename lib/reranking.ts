@@ -10,7 +10,7 @@ const MAX_HIERARCHY_RAW = 0.60
 const MAX_RECENCY_RAW = 0.15
 const RERANK_TOP_N = 20
 
-const RERANK_MODEL = process.env.RERANK_MODEL || 'BAAI/bge-reranker-v2-m3'
+const RERANK_MODEL = process.env.RERANK_MODEL || 'cross-encoder/ms-marco-MiniLM-L-6-v2'
 const RERANK_PROVIDER = process.env.RERANK_PROVIDER || ''
 
 // FASE_3 3.3: Cache y truncamiento para optimizar latencia
@@ -102,7 +102,7 @@ const LEGAL_HIERARCHY_BOOST: Record<string, number> = {
  * Retorna un score de boost basado en la pirámide normativa colombiana
  */
 export function getLegalHierarchyScore(chunk: DocumentChunk): number {
-  const title = chunk.metadata.title.toLowerCase()
+  const title = chunk.metadata?.title.toLowerCase()
   const content = chunk.content.toLowerCase().slice(0, 500) // Solo revisar inicio
   const type = chunk.metadata.type
   
@@ -197,7 +197,7 @@ export function getRecencyScore(chunk: DocumentChunk): number {
   
   // 2. Si no hay fechaVigencia, buscar en el título
   if (year === null) {
-    const title = chunk.metadata.title
+    const title = chunk.metadata?.title
     const yearMatch = title.match(/(19|20)\d{2}/)
     if (yearMatch) {
       year = parseInt(yearMatch[0])
@@ -242,7 +242,7 @@ export function getRecencyScore(chunk: DocumentChunk): number {
   // 4. Si no hay información de fecha, verificar vigencia usando norm-vigencia
   // Consultar sistema de vigencia para determinar si el documento está vigente
   try {
-    const normaId = inferNormaIdFromTitle(chunk.metadata.title)
+    const normaId = inferNormaIdFromTitle(chunk.metadata?.title)
     if (normaId) {
       const vigencia = consultarVigencia(normaId)
       if (vigencia && vigencia.vigente) {
@@ -364,7 +364,7 @@ export async function rerankChunksAdvancedAsync(
     let penaltyDerogada = 0 // FASE_3 3.4: Penalización por norma derogada
     
     try {
-      const normaId = inferNormaIdFromTitle(chunk.metadata.title)
+      const normaId = inferNormaIdFromTitle(chunk.metadata?.title)
       if (normaId) {
         const vigencia = consultarVigencia(normaId)
         if (vigencia) {
@@ -385,7 +385,7 @@ export async function rerankChunksAdvancedAsync(
     const recencyNorm = Math.max(0, recencyBoost) / MAX_RECENCY_RAW
 
     let keywordBoost = 0
-    const titleLower = chunk.metadata.title.toLowerCase()
+    const titleLower = chunk.metadata?.title.toLowerCase()
     const contentLower = chunk.content.toLowerCase()
     for (const term of queryTerms) {
       if (titleLower.includes(term)) keywordBoost += 0.02
@@ -437,7 +437,7 @@ export function rerankChunksAdvanced(
     let penaltyDerogada = 0 // FASE_3 3.4: Penalización por norma derogada
     
     try {
-      const normaId = inferNormaIdFromTitle(chunk.metadata.title)
+      const normaId = inferNormaIdFromTitle(chunk.metadata?.title)
       if (normaId) {
         const vigencia = consultarVigencia(normaId)
         if (vigencia) {
@@ -521,7 +521,7 @@ export async function applyRerankingWithCrossEncoder(
  */
 export function addDerogadaNoteToChunk(chunk: DocumentChunk): DocumentChunk {
   try {
-    const normaId = inferNormaIdFromTitle(chunk.metadata.title)
+    const normaId = inferNormaIdFromTitle(chunk.metadata?.title)
     if (!normaId) return chunk
     
     const vigencia = consultarVigencia(normaId)

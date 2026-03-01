@@ -14,6 +14,8 @@ export type DocumentMetadata = {
   fechaVigencia?: string      // Fecha aproximada de vigencia (YYYY-MM-DD)
   url?: string
   sourcePath?: string
+  /** FASE_2 2.3: true si el chunk es un resumen por ley o por título (query general → top resúmenes) */
+  isOverview?: boolean
 }
 
 export type DocumentChunk = {

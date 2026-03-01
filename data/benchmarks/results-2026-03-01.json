@@ -1,0 +1,637 @@
+{
+  "ragas_style": {
+    "faithfulness": 0.85,
+    "answer_relevancy": 0.36,
+    "context_recall": null,
+    "context_precision": null,
+    "overall": 0.6
+  },
+  "fecha": "2026-03-01",
+  "api_url": "https://col-law-rag.vercel.app",
+  "modelo_juez": "qwen2.5:7b-instruct",
+  "resumen": {
+    "total_casos": 30,
+    "evaluados": 8,
+    "errores": 22,
+    "score_promedio": "4.76",
+    "accuracy_porcentaje": "47.6%"
+  },
+  "metrics": {
+    "fecha": "2026-03-01",
+    "api_url": "https://col-law-rag.vercel.app",
+    "modelo_juez": "qwen2.5:7b-instruct",
+    "accuracy_porcentaje": 47.6,
+    "score_promedio": 4.76,
+    "total_casos": 30,
+    "evaluados": 8,
+    "errores": 22,
+    "por_area": {
+      "laboral": {
+        "promedio": 3.6,
+        "casos": 3
+      },
+      "penal": {
+        "promedio": 8,
+        "casos": 1
+      },
+      "constitucional": {
+        "promedio": 5.6,
+        "casos": 2
+      },
+      "administrativo": {
+        "promedio": 5.3,
+        "casos": 1
+      },
+      "tributario": {
+        "promedio": 2.8,
+        "casos": 1
+      }
+    },
+    "por_dificultad": {
+      "intermedio": {
+        "promedio": "4.82",
+        "casos": 6
+      },
+      "avanzado": {
+        "promedio": "5.20",
+        "casos": 1
+      },
+      "basico": {
+        "promedio": "4.00",
+        "casos": 1
+      }
+    },
+    "veredictos": {
+      "REGULAR": 2,
+      "DEFICIENTE": 2,
+      "BUENO": 1,
+      "ACEPTABLE": 3
+    },
+    "criterios": {
+      "precision_normativa": "3.50",
+      "articulos_correctos": "2.38",
+      "interpretacion_valida": "4.00",
+      "completitud": "3.63",
+      "relevancia_contexto": "6.63",
+      "ausencia_alucinaciones": "8.50"
+    }
+  },
+  "veredictos": {
+    "REGULAR": 2,
+    "DEFICIENTE": 2,
+    "BUENO": 1,
+    "ACEPTABLE": 3
+  },
+  "promedio_criterios": {
+    "precision_normativa": "3.50",
+    "articulos_correctos": "2.38",
+    "interpretacion_valida": "4.00",
+    "completitud": "3.63",
+    "relevancia_contexto": "6.63",
+    "ausencia_alucinaciones": "8.50"
+  },
+  "por_area": {
+    "laboral": {
+      "promedio": "3.60",
+      "casos": 3,
+      "scores": [
+        4,
+        2.8,
+        4
+      ]
+    },
+    "penal": {
+      "promedio": "8.00",
+      "casos": 1,
+      "scores": [
+        8
+      ]
+    },
+    "constitucional": {
+      "promedio": "5.60",
+      "casos": 2,
+      "scores": [
+        6,
+        5.2
+      ]
+    },
+    "administrativo": {
+      "promedio": "5.30",
+      "casos": 1,
+      "scores": [
+        5.3
+      ]
+    },
+    "tributario": {
+      "promedio": "2.80",
+      "casos": 1,
+      "scores": [
+        2.8
+      ]
+    }
+  },
+  "mejores_casos": [
+    {
+      "id": "PEN-002",
+      "area": "penal",
+      "score": 8
+    },
+    {
+      "id": "CON-002",
+      "area": "constitucional",
+      "score": 6
+    },
+    {
+      "id": "ADM-002",
+      "area": "administrativo",
+      "score": 5.3
+    }
+  ],
+  "peores_casos": [
+    {
+      "id": "TRI-002",
+      "area": "tributario",
+      "score": 2.8
+    },
+    {
+      "id": "LAB-004",
+      "area": "laboral",
+      "score": 2.8
+    },
+    {
+      "id": "LAB-015",
+      "area": "laboral",
+      "score": 4
+    }
+  ],
+  "alucinaciones_detectadas": [
+    {
+      "id": "ADM-002",
+      "alucinaciones": [
+        "No se pudo generar respuesta para esta parte de la consulta: ¿Qué es el derecho de petición ---",
+        "y cuál es el plazo para responderlo?"
+      ]
+    }
+  ],
+  "resultados_detallados": [
+    {
+      "id": "LAB-003",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuándo procede el despido sin justa causa y cuál es la indemnización?",
+      "respuesta_referencia": "Según el artículo 64 del CST, el empleador puede terminar el contrato sin justa causa pagando indemnización. Para contratos a término indefinido con trabajadores que ganen menos de 10 SMLMV: 30 días por el primer año y 20 días adicionales por cada año posterior. Para trabajadores con más de 10 SMLMV: 20 días por el primer año y 15 adicionales por cada año. El artículo 26 del Decreto 2351/65 modificó esta figura.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Cuándo procede el despido sin justa causa**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Cuándo procede el despido sin justa causa\n\n\n\n---\n\n\n\n**2. y cuál es la indemnización?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y cuál es la indemnización?",
+      "evaluacion": {
+        "precision_normativa": 2,
+        "articulos_correctos": 1,
+        "interpretacion_valida": 3,
+        "completitud": 4,
+        "relevancia_contexto": 5,
+        "ausencia_alucinaciones": 9,
+        "normas_correctas": [
+          "Art. 64 CST",
+          "Art. 26 Decreto 2351/65"
+        ],
+        "normas_faltantes": [],
+        "alucinaciones": [],
+        "comentario": "Respuesta RAG no proporciona información relevante y omite mencionar el Art. 65 CST.",
+        "score_total": 4,
+        "veredicto": "REGULAR"
+      },
+      "error": null,
+      "timestamp": "2026-03-01T21:40:34.560Z"
+    },
+    {
+      "id": "LAB-004",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el fuero de maternidad y qué protección ofrece?",
+      "respuesta_referencia": "El fuero de maternidad, consagrado en el artículo 239 del CST y desarrollado por la Sentencia C-005 de 2017 de la Corte Constitucional, prohíbe el despido de la trabajadora embarazada o en período de lactancia sin la autorización previa del Inspector de Trabajo. Si se despide sin autorización, el despido es ineficaz y la trabajadora tiene derecho a ser reintegrada y al pago de salarios y prestaciones dejados de percibir. La protección aplica incluso en contratos a término fijo y de obra.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Qué es el fuero de maternidad**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Qué es el fuero de maternidad\n\n\n\n---\n\n\n\n**2. y qué protección ofrece?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y qué protección ofrece?",
+      "evaluacion": {
+        "precision_normativa": 2,
+        "articulos_correctos": 1,
+        "interpretacion_valida": 2,
+        "completitud": 3,
+        "relevancia_contexto": 4,
+        "ausencia_alucinaciones": 5,
+        "normas_correctas": [
+          "Art. 239 CST",
+          "Sentencia C-005/2017"
+        ],
+        "normas_faltantes": [],
+        "alucinaciones": [],
+        "comentario": "La respuesta RAG no proporciona información precisa y completa sobre el fuero de maternidad, ni cita correctamente las normas.",
+        "score_total": 2.8,
+        "veredicto": "DEFICIENTE"
+      },
+      "error": null,
+      "timestamp": "2026-03-01T21:42:01.532Z"
+    },
+    {
+      "id": "PEN-002",
+      "area": "penal",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el preacuerdo en materia penal y qué beneficios ofrece?",
+      "respuesta_referencia": "El preacuerdo está regulado en los artículos 348 a 354 del Código de Procedimiento Penal (Ley 906 de 2004). Es un mecanismo de terminación anticipada del proceso mediante el cual el fiscal y el imputado o acusado acuerdan la imputación y los cargos, a cambio de una rebaja de hasta la mitad de la pena (50%). El juez debe verificar que no se desconozcan garantías fundamentales. Difiere de la aceptación de cargos en que implica negociación sobre los hechos imputados.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Qué es el preacuerdo en materia penal**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Qué es el preacuerdo en materia penal\n\n\n\n---\n\n\n\n**2. y qué beneficios ofrece?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y qué beneficios ofrece?",
+      "evaluacion": {
+        "precision_normativa": 5,
+        "articulos_correctos": 10,
+        "interpretacion_valida": 8,
+        "completitud": 5,
+        "relevancia_contexto": 10,
+        "ausencia_alucinaciones": 10,
+        "normas_correctas": [
+          "Art. 348-354 Ley 906/2004"
+        ],
+        "normas_faltantes": [],
+        "alucinaciones": [],
+        "comentario": "La respuesta RAG no proporciona información precisa y completa sobre el preacuerdo en materia penal, ni menciona los artículos específicos de la ley. El experto sí cita correctamente los artículos y ofrece una interpretación válida.",
+        "score_total": 8,
+        "veredicto": "BUENO"
+      },
+      "error": null,
+      "timestamp": "2026-03-01T21:44:04.048Z"
+    },
+    {
+      "id": "CON-002",
+      "area": "constitucional",
+      "dificultad": "intermedio",
+      "pregunta": "¿En qué consiste el estado de emergencia económica y cuánto puede durar?",
+      "respuesta_referencia": "El estado de emergencia económica, social y ecológica está consagrado en el artículo 215 de la Constitución Política. El Presidente puede declararlo cuando sobrevengan hechos distintos a los del Estado de Guerra o Conmoción Interior que perturben el orden económico, social o ecológico. Puede declararse por períodos de hasta treinta (30) días cada uno, sin que sumados excedan noventa (90) días en el año calendario. Durante su vigencia el Gobierno puede expedir decretos legislativos.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿En qué consiste el estado de emergencia económica**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿En qué consiste el estado de emergencia económica\n\n\n\n---\n\n\n\n**2. y cuánto puede durar?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y cuánto puede durar?",
+      "evaluacion": {
+        "precision_normativa": 5,
+        "articulos_correctos": 1,
+        "interpretacion_valida": 5,
+        "completitud": 5,
+        "relevancia_contexto": 10,
+        "ausencia_alucinaciones": 10,
+        "normas_correctas": [
+          "Art. 215 CP"
+        ],
+        "normas_faltantes": [],
+        "alucinaciones": [],
+        "comentario": "La respuesta RAG no aborda correctamente la pregunta y carece de información relevante, mientras que el experto sí menciona el artículo correcto pero no cita directamente el texto del mismo.",
+        "score_total": 6,
+        "veredicto": "ACEPTABLE"
+      },
+      "error": null,
+      "timestamp": "2026-03-01T21:45:51.498Z"
+    },
+    {
+      "id": "CON-003",
+      "area": "constitucional",
+      "dificultad": "avanzado",
+      "pregunta": "¿Qué es la excepción de inconstitucionalidad y cómo se aplica?",
+      "respuesta_referencia": "La excepción de inconstitucionalidad, consagrada en el artículo 4 de la Constitución Política, permite a cualquier operador jurídico inaplicar una norma que sea contraria a la Constitución en un caso concreto, sin que esto implique su derogatoria general. Difiere de la acción de inconstitucionalidad en que sus efectos son inter partes y no erga omnes. La Corte Constitucional ha señalado que es un deber del juez cuando la norma aplicable viola claramente preceptos constitucionales.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Qué es la excepción de inconstitucionalidad**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Qué es la excepción de inconstitucionalidad\n\n\n\n---\n\n\n\n**2. y cómo se aplica?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y cómo se aplica?",
+      "evaluacion": {
+        "precision_normativa": 5,
+        "articulos_correctos": 1,
+        "interpretacion_valida": 5,
+        "completitud": 2,
+        "relevancia_contexto": 8,
+        "ausencia_alucinaciones": 10,
+        "normas_correctas": [
+          "Art. 4 CP"
+        ],
+        "normas_faltantes": [],
+        "alucinaciones": [],
+        "comentario": "La respuesta RAG no aborda correctamente las preguntas planteadas y omite información relevante.",
+        "score_total": 5.2,
+        "veredicto": "ACEPTABLE"
+      },
+      "error": null,
+      "timestamp": "2026-03-01T21:47:26.607Z"
+    },
+    {
+      "id": "ADM-002",
+      "area": "administrativo",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el derecho de petición y cuál es el plazo para responderlo?",
+      "respuesta_referencia": "El derecho de petición está consagrado en el artículo 23 de la Constitución Política y regulado por la Ley 1755 de 2015 (que modificó el CPACA). Las entidades públicas deben resolver las peticiones en un plazo de quince (15) días hábiles para peticiones de carácter general. Las consultas tienen 30 días hábiles. Las quejas y reclamos: 15 días hábiles. El incumplimiento genera responsabilidad disciplinaria y puede dar lugar a tutela.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Qué es el derecho de petición**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Qué es el derecho de petición\n\n\n\n---\n\n\n\n**2. y cuál es el plazo para responderlo?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y cuál es el plazo para responderlo?",
+      "evaluacion": {
+        "precision_normativa": 5,
+        "articulos_correctos": 3,
+        "interpretacion_valida": 4,
+        "completitud": 2,
+        "relevancia_contexto": 8,
+        "ausencia_alucinaciones": 10,
+        "normas_correctas": [
+          "Art. 23 CP",
+          "Ley 1755/2015"
+        ],
+        "normas_faltantes": [],
+        "alucinaciones": [
+          "No se pudo generar respuesta para esta parte de la consulta: ¿Qué es el derecho de petición ---",
+          "y cuál es el plazo para responderlo?"
+        ],
+        "comentario": "La respuesta RAG menciona las normas pero no proporciona información precisa o completa sobre el derecho de petición, sus tipos y plazos específicos.",
+        "score_total": 5.3,
+        "veredicto": "ACEPTABLE"
+      },
+      "error": null,
+      "timestamp": "2026-03-01T21:49:06.565Z"
+    },
+    {
+      "id": "TRI-002",
+      "area": "tributario",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuándo se genera el IVA y cuál es la tarifa general en Colombia?",
+      "respuesta_referencia": "El Impuesto sobre las Ventas (IVA) está regulado en el Libro Tercero del Estatuto Tributario (Arts. 420-513 ET). Se genera en la venta de bienes corporales muebles no excluidos, prestación de servicios en el territorio nacional, importación de bienes corporales muebles y juegos de suerte y azar. La tarifa general es del 19% según el artículo 468 ET, modificado por la Ley 1819 de 2016. Existen tarifas diferenciales del 5% y bienes exentos (0%).",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Cuándo se genera el IVA**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Cuándo se genera el IVA\n\n\n\n---\n\n\n\n**2. y cuál es la tarifa general en Colombia?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y cuál es la tarifa general en Colombia?",
+      "evaluacion": {
+        "precision_normativa": 2,
+        "articulos_correctos": 1,
+        "interpretacion_valida": 2,
+        "completitud": 3,
+        "relevancia_contexto": 4,
+        "ausencia_alucinaciones": 5,
+        "normas_correctas": [
+          "Art. 420 ET",
+          "Art. 468 ET"
+        ],
+        "normas_faltantes": [],
+        "alucinaciones": [],
+        "comentario": "La respuesta RAG no proporciona información precisa y completa sobre el IVA en Colombia, mientras que la del experto sí.",
+        "score_total": 2.8,
+        "veredicto": "DEFICIENTE"
+      },
+      "error": null,
+      "timestamp": "2026-03-01T21:50:58.406Z"
+    },
+    {
+      "id": "LAB-015",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Qué es la prima de servicios y cuándo se paga?",
+      "respuesta_referencia": "La prima de servicios está en el artículo 306 del CST. Es un salario adicional que se paga en dos pagas al año: la primera antes del 30 de junio (por el primer semestre) y la segunda antes del 20 de diciembre (por el segundo semestre). Equivale a 15 días de salario por cada semestre trabajado.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Qué es la prima de servicios**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: ¿Qué es la prima de servicios\n\n\n\n---\n\n\n\n**2. y cuándo se paga?**\n\n\n\nNo se pudo generar respuesta para esta parte de la consulta: y cuándo se paga?",
+      "evaluacion": {
+        "precision_normativa": 2,
+        "articulos_correctos": 1,
+        "interpretacion_valida": 3,
+        "completitud": 5,
+        "relevancia_contexto": 4,
+        "ausencia_alucinaciones": 9,
+        "normas_correctas": [
+          "Art. 306 CST"
+        ],
+        "normas_faltantes": [],
+        "alucinaciones": [],
+        "comentario": "Respuesta RAG no proporcionó información relevante y no citó correctamente la normativa.",
+        "score_total": 4,
+        "veredicto": "REGULAR"
+      },
+      "error": null,
+      "timestamp": "2026-03-01T21:53:00.983Z"
+    }
+  ],
+  "errores": [
+    {
+      "id": "LAB-001",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuántos días de vacaciones tiene derecho un trabajador con un año de trabajo?",
+      "respuesta_referencia": "Según el artículo 186 del Código Sustantivo del Trabajo (CST), el trabajador tiene derecho a 15 días hábiles consecutivos de vacaciones remuneradas por cada año de servicio. Este derecho es irrenunciable según el artículo 189 del CST.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-03-01T21:40:20.916Z"
+    },
+    {
+      "id": "LAB-002",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es el salario mínimo legal mensual vigente en Colombia para 2024?",
+      "respuesta_referencia": "Para el año 2024, el salario mínimo legal mensual vigente (SMLMV) en Colombia fue fijado en $1.300.000 mediante el Decreto 2613 de 2023, representando un incremento del 12% respecto al año anterior. Adicionalmente, el auxilio de transporte quedó en $162.000 mensuales.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-03-01T21:40:31.694Z"
+    },
+    {
+      "id": "LAB-005",
+      "area": "laboral",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cómo se calcula la liquidación de un trabajador que lleva 3 años y gana $2.000.000?",
+      "respuesta_referencia": "Para un trabajador con 3 años de antigüedad y salario de $2.000.000: (1) Cesantías: $2.000.000 × 3 años = $6.000.000; (2) Intereses sobre cesantías: $6.000.000 × 12% = $720.000; (3) Prima de servicios: $2.000.000 × 3 meses/12 = $500.000 (proporcional al último semestre); (4) Vacaciones: 15 días × $66.667/día = $1.000.000 (proporcional); (5) Si el auxilio de transporte aplica ($162.000/mes). El total aproximado antes de descuentos sería $8.220.000 más el auxilio de transporte proporcional.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-03-01T21:43:41.909Z"
+    },
+    {
+      "id": "LAB-006",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es el período de prueba máximo permitido en Colombia?",
+      "respuesta_referencia": "Según el artículo 78 del CST, el período de prueba no puede exceder dos (2) meses. Para contratos a término fijo inferior a un año, el período de prueba no podrá ser superior a la quinta parte del término inicialmente pactado. Este período debe constar por escrito.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-03-01T21:43:48.917Z"
+    },
+    {
+      "id": "CIV-001",
+      "area": "civil",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es el plazo de prescripción de la acción ejecutiva en Colombia?",
+      "respuesta_referencia": "Según el artículo 2536 del Código Civil colombiano, la acción ejecutiva prescribe en cinco (5) años. La acción ordinaria prescribe en diez (10) años. La prescripción puede ser interrumpida por reconocimiento de deuda o por demanda judicial.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-03-01T21:43:51.281Z"
+    },
+    {
+      "id": "CIV-002",
+      "area": "civil",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuáles son los requisitos para que un contrato de compraventa de inmueble sea válido?",
+      "respuesta_referencia": "Para la validez de la compraventa de inmueble en Colombia se requiere: (1) Capacidad de las partes (Art. 1502 CC); (2) Consentimiento libre de vicios (Arts. 1508-1516 CC); (3) Objeto lícito y determinado (Arts. 1517-1521 CC); (4) Causa lícita (Arts. 1524-1527 CC); (5) Solemnidad: escritura pública ante notario (Art. 1857 CC y Art. 12 Decreto 960/70); (6) Registro en la Oficina de Instrumentos Públicos para la tradición (Art. 756 CC).",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-03-01T21:43:53.835Z"
+    },
+    {
+      "id": "CIV-003",
+      "area": "civil",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es la acción de tutela y en qué plazo debe ser resuelta?",
+      "respuesta_referencia": "La acción de tutela, consagrada en el artículo 86 de la Constitución Política y reglamentada por el Decreto 2591 de 1991, es un mecanismo de protección inmediata de derechos fundamentales cuando no exista otro medio de defensa judicial eficaz. El juez debe resolver en un plazo de diez (10) días calendario. La sentencia puede ser impugnada dentro de los tres (3) días siguientes.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-03-01T21:43:56.549Z"
+    },
+    {
+      "id": "CIV-004",
+      "area": "civil",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cuándo procede la acción popular y quién puede interponerla?",
+      "respuesta_referencia": "La acción popular está consagrada en el artículo 88 de la Constitución y regulada por la Ley 472 de 1998. Procede para proteger derechos e intereses colectivos como el medio ambiente, la moralidad administrativa, el espacio público, la salubridad pública, entre otros. Puede ser interpuesta por cualquier persona natural o jurídica, organizaciones no gubernamentales, entidades públicas y el Defensor del Pueblo. No requiere acreditar perjuicio personal.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-03-01T21:43:59.161Z"
+    },
+    {
+      "id": "PEN-001",
+      "area": "penal",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es la pena por el delito de hurto simple en Colombia?",
+      "respuesta_referencia": "Según el artículo 239 del Código Penal (Ley 599 de 2000), el hurto simple está sancionado con prisión de dos (2) a seis (6) años. Si el valor de lo hurtado no supera diez (10) salarios mínimos legales mensuales vigentes y el imputado no tiene antecedentes, puede acceder a mecanismos sustitutivos de prisión como la suspensión condicional de la ejecución de la pena.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-03-01T21:44:01.514Z"
+    },
+    {
+      "id": "CON-001",
+      "area": "constitucional",
+      "dificultad": "basico",
+      "pregunta": "¿Cuáles son los derechos fundamentales reconocidos en la Constitución de 1991?",
+      "respuesta_referencia": "La Constitución Política de 1991 reconoce en el Título II, Capítulo I (Arts. 11-44) los derechos fundamentales, entre ellos: derecho a la vida (Art. 11), prohibición de tortura (Art. 12), derecho a la igualdad (Art. 13), libertad de conciencia (Art. 18), libre desarrollo de la personalidad (Art. 16), derecho al debido proceso (Art. 29), libertad personal (Art. 28), habeas corpus (Art. 30), derecho de petición (Art. 23), entre otros. La Corte Constitucional ha ampliado este catálogo vía jurisprudencia.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-03-01T21:45:43.941Z"
+    },
+    {
+      "id": "ADM-001",
+      "area": "administrativo",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es el plazo para interponer acción de nulidad y restablecimiento del derecho?",
+      "respuesta_referencia": "Según el artículo 164 del Código de Procedimiento Administrativo y de lo Contencioso Administrativo (CPACA - Ley 1437 de 2011), la demanda de nulidad y restablecimiento del derecho debe presentarse dentro de los cuatro (4) meses siguientes a la comunicación, notificación o publicación del acto administrativo. Para actos que no requieren publicación, el término corre desde el día siguiente al de la notificación.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-03-01T21:48:59.587Z"
+    },
+    {
+      "id": "ADM-003",
+      "area": "administrativo",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cuándo procede la acción de repetición contra un servidor público?",
+      "respuesta_referencia": "La acción de repetición, regulada por la Ley 678 de 2001 y el artículo 90 de la Constitución, procede cuando el Estado ha sido condenado a reparar un daño antijurídico y este fue causado por la conducta dolosa o gravemente culposa de un servidor público. Es obligatoria cuando la condena supera 500 SMLMV. Prescribe en dos (2) años contados desde el pago total o desde la última cuota pagada. El servidor público puede ser declarado responsable patrimonialmente.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-03-01T21:50:52.830Z"
+    },
+    {
+      "id": "TRI-001",
+      "area": "tributario",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es la tarifa general del impuesto de renta para personas jurídicas en Colombia?",
+      "respuesta_referencia": "Según el artículo 240 del Estatuto Tributario (ET), modificado por la Ley 2277 de 2022 (Reforma Tributaria), la tarifa general del impuesto sobre la renta para personas jurídicas es del 35% a partir del año gravable 2022. Existen tarifas especiales para ciertos sectores como el financiero (38%) y para zonas francas (20%). Las entidades del régimen tributario especial tienen tarifa del 20%.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-03-01T21:50:55.744Z"
+    },
+    {
+      "id": "LAB-007",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuántas horas máximas tiene la jornada ordinaria de trabajo en Colombia?",
+      "respuesta_referencia": "Según el artículo 161 del CST, la jornada ordinaria de trabajo es de máximo ocho (8) horas al día y cuarenta y ocho (48) horas a la semana.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-03-01T21:52:36.745Z"
+    },
+    {
+      "id": "LAB-008",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿A cuánto equivalen las horas extras en el día ordinario?",
+      "respuesta_referencia": "Según el artículo 168 del CST, las horas extras diurnas se pagan con un recargo del 25% sobre el valor de la hora ordinaria. Las nocturnas (entre 10pm y 6am) con 75% de recargo.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-03-01T21:52:43.693Z"
+    },
+    {
+      "id": "LAB-009",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es la estabilidad laboral reforzada y quiénes la tienen?",
+      "respuesta_referencia": "La estabilidad laboral reforzada está en el artículo 26 del CST. La tienen los trabajadores con más de diez (10) años de servicio continuos en la empresa. El empleador no puede despedirlos sin justa causa probada ni sin autorización del Inspector de Trabajo.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-03-01T21:52:46.339Z"
+    },
+    {
+      "id": "LAB-010",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuándo se pagan las cesantías al trabajador?",
+      "respuesta_referencia": "Según el artículo 249 del CST, las cesantías se pagan al terminar el contrato. Durante la vigencia del contrato a término indefinido, el empleador debe consignar las cesantías antes del 14 de febrero de cada año (o en el primer mes al cumplir el trabajador un año).",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-03-01T21:52:48.745Z"
+    },
+    {
+      "id": "LAB-011",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el auxilio de cesantías y quiénes tienen derecho?",
+      "respuesta_referencia": "El auxilio de cesantías está regulado en los artículos 249 a 252 del CST. Es un derecho de los trabajadores de servicio doméstico y de los que devenguen hasta dos (2) salarios mínimos. Se paga al finalizar el contrato: un mes de salario si laboró de 1 a 5 años; 20 días por año si laboró más de 5 años.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-03-01T21:52:51.299Z"
+    },
+    {
+      "id": "LAB-012",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿El empleador puede descontar del salario por daños en herramientas?",
+      "respuesta_referencia": "Según el artículo 150 del CST, el empleador no puede hacer descuentos por pérdida o deterioro de herramientas o elementos de trabajo, salvo que medie autorización por escrito del trabajador o fallo judicial. Los descuentos por cuotas sindicales o cooperativas sí están permitidos con autorización.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-03-01T21:52:53.714Z"
+    },
+    {
+      "id": "LAB-013",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuál es el plazo para reclamar prestaciones sociales ante la conciliación?",
+      "respuesta_referencia": "Según el artículo 392 del CST, las controversias sobre prestaciones sociales prescriben en tres (3) años contados desde el día siguiente a la terminación del contrato. Antes de demandar, es obligatorio acudir a la conciliación ante el Inspector de Trabajo o centro de conciliación.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-03-01T21:52:56.170Z"
+    },
+    {
+      "id": "LAB-014",
+      "area": "laboral",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cómo se calcula la indemnización por despido sin justa causa para un trabajador con 5 años y salario de 15 SMMLV?",
+      "respuesta_referencia": "Para trabajadores que devenguen más de 10 SMMLV (Art. 64 CST): 20 días por el primer año y 15 días por cada año siguiente. Con 5 años: 20 + (15×4) = 80 días. Con salario de 15 SMMLV ($19.500.000 en 2024): 80 × ($19.500.000/30) ≈ $52.000.000.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-03-01T21:52:58.525Z"
+    },
+    {
+      "id": "LAB-016",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué derechos tiene un trabajador en período de prueba al ser despedido?",
+      "respuesta_referencia": "Durante el período de prueba (máximo 2 meses, Art. 78 CST) cualquiera de las partes puede terminar el contrato sin expresión de causa y sin indemnización. El trabajador tiene derecho a que se le paguen los salarios y prestaciones proporcionales al tiempo laborado. No aplica indemnización por despido sin justa causa.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 500 Internal Server Error",
+      "timestamp": "2026-03-01T21:54:20.953Z"
+    }
+  ]
+}

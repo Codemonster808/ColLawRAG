@@ -1,0 +1,257 @@
+{
+  "ragas_style": {
+    "faithfulness": 0.82,
+    "answer_relevancy": 0.2,
+    "context_recall": null,
+    "context_precision": null,
+    "overall": 0.51
+  },
+  "fecha": "2026-02-24",
+  "api_url": "http://localhost:3000",
+  "modelo_juez": "qwen2.5:7b-instruct",
+  "resumen": {
+    "total_casos": 5,
+    "evaluados": 5,
+    "errores": 0,
+    "score_promedio": "2.96",
+    "accuracy_porcentaje": "29.6%"
+  },
+  "metrics": {
+    "fecha": "2026-02-24",
+    "api_url": "http://localhost:3000",
+    "modelo_juez": "qwen2.5:7b-instruct",
+    "accuracy_porcentaje": 29.6,
+    "score_promedio": 2.96,
+    "total_casos": 5,
+    "evaluados": 5,
+    "errores": 0,
+    "por_area": {
+      "laboral": {
+        "promedio": 2.96,
+        "casos": 5
+      }
+    },
+    "por_dificultad": {
+      "basico": {
+        "promedio": "3.00",
+        "casos": 2
+      },
+      "intermedio": {
+        "promedio": "3.40",
+        "casos": 2
+      },
+      "avanzado": {
+        "promedio": "2.00",
+        "casos": 1
+      }
+    },
+    "veredictos": {
+      "ACEPTABLE": 1,
+      "DEFICIENTE": 2,
+      "REGULAR": 2
+    },
+    "criterios": {
+      "precision_normativa": "2.00",
+      "articulos_correctos": "0.60",
+      "interpretacion_valida": "2.00",
+      "completitud": "2.00",
+      "ausencia_alucinaciones": "8.20"
+    }
+  },
+  "veredictos": {
+    "ACEPTABLE": 1,
+    "DEFICIENTE": 2,
+    "REGULAR": 2
+  },
+  "promedio_criterios": {
+    "precision_normativa": "2.00",
+    "articulos_correctos": "0.60",
+    "interpretacion_valida": "2.00",
+    "completitud": "2.00",
+    "ausencia_alucinaciones": "8.20"
+  },
+  "por_area": {
+    "laboral": {
+      "promedio": "2.96",
+      "casos": 5,
+      "scores": [
+        5.2,
+        0.8,
+        3.4,
+        3.4,
+        2
+      ]
+    }
+  },
+  "mejores_casos": [
+    {
+      "id": "LAB-001",
+      "area": "laboral",
+      "score": 5.2
+    },
+    {
+      "id": "LAB-003",
+      "area": "laboral",
+      "score": 3.4
+    },
+    {
+      "id": "LAB-004",
+      "area": "laboral",
+      "score": 3.4
+    }
+  ],
+  "peores_casos": [
+    {
+      "id": "LAB-002",
+      "area": "laboral",
+      "score": 0.8
+    },
+    {
+      "id": "LAB-005",
+      "area": "laboral",
+      "score": 2
+    },
+    {
+      "id": "LAB-004",
+      "area": "laboral",
+      "score": 3.4
+    }
+  ],
+  "alucinaciones_detectadas": [],
+  "resultados_detallados": [
+    {
+      "id": "LAB-001",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuántos días de vacaciones tiene derecho un trabajador con un año de trabajo?",
+      "respuesta_referencia": "Según el artículo 186 del Código Sustantivo del Trabajo (CST), el trabajador tiene derecho a 15 días hábiles consecutivos de vacaciones remuneradas por cada año de servicio. Este derecho es irrenunciable según el artículo 189 del CST.",
+      "respuesta_rag": "**HECHOS RELEVANTES:**  \nUn trabajador con un año de servicio laboral inquiere sobre el número de días de vacaciones a los que tiene derecho.\n\n**NORMAS APLICABLES:**  \n- Artículo 186 del Código Sustantivo del Trabajo (CST) [Fuente 2]: Establece el derecho a **15 días hábiles consecutivos de vacaciones remuneradas por cada año de servicio**.  \n- Artículo 190 del CST [Fuente 4]: Precisa que, como mínimo, el trabajador debe gozar de **6 días hábiles continuos anuales** (no acumulables), pudiendo acumular el resto hasta por 2 años (o 4 años en casos excepcionales).  \n\n**ANÁLISIS JURÍDICO:**  \n1. **Derecho básico**: Según el Artículo 186 [2], el trabajador con un año completo de servicio tiene derecho a **15 días hábiles de vacaciones remuneradas**.  \n2. **Mínimo no acumulable**: El Artículo 190 [4] exige que, al menos, **6 días sean disfrutados anualmente** sin posibilidad de acumulación. Los 9 días restantes pueden acumularse por acuerdo entre las partes.  \n3. **Remuneración**: Durante las vacaciones, el trabajador recibe su salario ordinario (Artículo 192 [3]), excluyendo solo pagos por horas extras o trabajo en días festivos.  \n\n**CONCLUSIÓN:**  \nEl trabajador con un año de servicio tiene derecho a **15 días hábiles de vacaciones remuneradas**, de los cuales **6 días deben disfrutarse obligatoriamente en el año**. Los 9 días restantes pueden acumularse hasta por 2 años (o 4 en casos excepcionales).  \n\n**RECOMENDACIÓN:**  \n1. Verificar que el empleador haya registrado correctamente la fecha de ingreso y el cálculo de vacaciones (Artículo 187 [5]).  \n2. Si el empleador niega el derecho, exigir el disfrute mínimo de 6 días y negociar la acumulación del resto por escrito.  \n3. En caso de incumplimiento, acudir a una inspección laboral o asesoría legal para iniciar reclamo (plazo de prescripción: 3 años desde la terminación del contrato).  \n\n⚠️ **Nota**: No se menciona en las fuentes proporcionadas ningún cambio en el número de días por la Ley 2101 de 2021 (reducción de jornada) [1].",
+      "evaluacion": {
+        "precision_normativa": 5,
+        "articulos_correctos": 1,
+        "interpretacion_valida": 5,
+        "completitud": 5,
+        "ausencia_alucinaciones": 10,
+        "normas_correctas": [
+          "Art. 186 CST"
+        ],
+        "normas_faltantes": [],
+        "alucinaciones": [],
+        "comentario": "Respuesta RAG menciona el artículo correcto pero no completa la información como lo hace el experto.",
+        "score_total": 5.2,
+        "veredicto": "ACEPTABLE"
+      },
+      "error": null,
+      "timestamp": "2026-02-24T22:54:23.566Z"
+    },
+    {
+      "id": "LAB-002",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es el salario mínimo legal mensual vigente en Colombia para 2024?",
+      "respuesta_referencia": "Para el año 2024, el salario mínimo legal mensual vigente (SMLMV) en Colombia fue fijado en $1.300.000 mediante el Decreto 2613 de 2023, representando un incremento del 12% respecto al año anterior. Adicionalmente, el auxilio de transporte quedó en $162.000 mensuales.",
+      "respuesta_rag": "**HECHOS RELEVANTES:**  \nConsulta sobre el salario mínimo legal mensual vigente (SMLMV) en Colombia para 2024.  \n\n**NORMAS APLICABLES:**  \nLas fuentes proporcionadas no contienen información directa sobre el valor del SMLMV para 2024. Sin embargo, se menciona repetidamente el concepto de \"salarios mínimos legales mensuales vigentes\" como referencia en multas y sanciones (ej. [1], [2], [3], [4], [5], [6], [7]). La única norma laboral citada ([8] - Artículo 22) establece que los internos de medicina deben recibir una remuneración no inferior a un SMLMV, pero no especifica su valor.  \n\n**ANÁLISIS JURÍDICO:**  \nPara determinar el SMLMV vigente en 2024, se requiere consultar fuentes oficiales como:  \n1. Decreto anual del Gobierno Nacional que fija el salario mínimo (no incluido en las fuentes proporcionadas).  \n2. Comunicados del Ministerio del Trabajo o el Consejo Nacional de Salarios.  \n\nLas fuentes disponibles solo usan el SMLMV como unidad de medida para sanciones penales ([1]-[7]) o como base de remuneración en casos específicos ([8]), mas no indican su valor actualizado.  \n\n**CONCLUSIÓN:**  \nNo es posible determinar el valor exacto del SMLMV 2024 con las fuentes proporcionadas.  \n\n**RECOMENDACIÓN:**  \n1. Verificar el decreto anual que fija el salario mínimo (publicado en diciembre de 2023 para vigencia 2024).  \n2. Consultar fuentes oficiales como:  \n   - Ministerio del Trabajo de Colombia.  \n   - DIAN o Superintendencia Financiera.  \n3. En caso de litigios laborales, aplicar el principio de favorabilidad (Artículo 53 Constitución Política).  \n\n*Nota:* Las fuentes citadas solo permiten confirmar que el SMLMV es una unidad de referencia legal, pero no su valor actual.\n\n⚠️ **Vigencia:** La norma \"codigo codigo penal ley599\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"codigo codigo penal ley599\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"codigo codigo penal ley599\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"codigo codigo penal ley599\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"codigo codigo penal ley599\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"codigo codigo penal ley599\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"codigo codigo penal ley599\" tiene artículos derogados o modificados; verifique vigencia específica.",
+      "evaluacion": {
+        "precision_normativa": 1,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 1,
+        "completitud": 1,
+        "ausencia_alucinaciones": 1,
+        "normas_correctas": [
+          "Decreto 2613 de 2023"
+        ],
+        "normas_faltantes": [],
+        "alucinaciones": [],
+        "comentario": "La respuesta del experto menciona el valor específico del SMLMV para 2024, pero no cita el artículo exacto.",
+        "score_total": 0.8,
+        "veredicto": "DEFICIENTE"
+      },
+      "error": null,
+      "timestamp": "2026-02-24T22:56:15.704Z"
+    },
+    {
+      "id": "LAB-003",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuándo procede el despido sin justa causa y cuál es la indemnización?",
+      "respuesta_referencia": "Según el artículo 64 del CST, el empleador puede terminar el contrato sin justa causa pagando indemnización. Para contratos a término indefinido con trabajadores que ganen menos de 10 SMLMV: 30 días por el primer año y 20 días adicionales por cada año posterior. Para trabajadores con más de 10 SMLMV: 20 días por el primer año y 15 adicionales por cada año. El artículo 26 del Decreto 2351/65 modificó esta figura.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Cuándo procede el despido sin justa causa**\n\n\n\n**HECHOS RELEVANTES:**  \nConsulta sobre cuándo procede el despido sin justa causa en el ámbito laboral colombiano.  \n\n**NORMAS APLICABLES:**  \n- **Artículo 410 del Código Sustantivo del Trabajo [8]:** Establece las justas causas para el despido de trabajadores con fuero, incluyendo la liquidación o clausura definitiva de la empresa o causales previstas en los artículos 62 y 63 del CST (no disponibles en el contexto).  \n- **Artículo 1327 del Código de Comercio [6]:** Menciona la terminación del contrato por justa causa provocada por el empresario, con obligación de indemnizar.  \n\n**ANÁLISIS JURÍDICO:**  \n1. **Despido sin justa causa:** En el ámbito laboral colombiano, el despido sin justa causa es aquel que no se fundamenta en las causales legales previstas en el CST (Art. 62, 63 o 410 [8]).  \n2. **Consecuencias:** Si el empleador despide sin justa causa, debe pagar las indemnizaciones legales (prestaciones sociales, prima de servicios, etc.) y, en casos de trabajadores con fuero, requiere autorización judicial (Art. 410 [8]).  \n3. **Relación con otras normas:** El Art. 1327 del Código de Comercio [6] refuerza la obligación de indemnizar cuando la terminación es injusta, aunque aplica específicamente a agentes comerciales.  \n\n**CONCLUSIÓN:**  \nEl despido sin justa causa procede cuando el empleador no acredita una causal legal válida (Art. 410 [8]). En estos casos, el trabajador tiene derecho a todas las indemnizaciones laborales.  \n\n**RECOMENDACIÓN:**  \n1. Verificar si el trabajador tiene fuero sindical, de maternidad o de salud (plazos críticos indicados).  \n2. Revisar si el despido cumple con las causales del CST (Art. 62, 63 o 410 [8]).  \n3. En caso de despido injusto, el trabajador puede demandar el pago de indemnizaciones (plazo de prescripción: 3 años).  \n4. Consultar un abogado laboralista para analizar documentos de terminación y posibles acciones legales.  \n\n⚠️ **Nota:** Para un análisis completo, se requieren los artículos 62 y 63 del CST (no incluidos en las fuentes proporcionadas).\n\n⚠️ **Vigencia:** La norma \"codigo codigo penal ley599\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"codigo codigo penal ley599\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Código de Procedimiento Penal (Ley 906 de 2004)\" tiene artículos derogados o modificados; verifique vigencia específica.\n\n\n\n---\n\n\n\n**2. y cuál es la indemnización?**\n\n\n\n**HECHOS RELEVANTES:**  \nConsulta sobre el monto o criterios para determinar una indemnización sin especificar el tipo de daño o contexto (contractual, penal, etc.).  \n\n**NORMAS APLICABLES:**  \n1. **Código Penal (Artículo 97 [1]):** Establece que la indemnización por daños derivados de una conducta punible puede llegar hasta 1000 salarios mínimos legales mensuales, considerando la naturaleza de la conducta y la magnitud del daño.  \n2. **Código de Comercio (Artículo 1110 [3]):** Indica que la indemnización puede pagarse en dinero o mediante reposición/reparación, a elección del deudor (ej. asegurador).  \n3. **Constitución Política (Artículo TRANSITORIO [7]):** En casos de conflicto armado, la reparación debe ser integral y priorizar víctimas con enfoque diferencial.  \n\n**ANÁLISIS JURÍDICO:**  \n- **Ámbito Penal ([1]):** La indemnización tiene un tope de 1000 SMMLV y requiere prueba del daño.  \n- **Ámbito Contractual ([3]):** Flexible en la forma de pago (dinero o reparación material).  \n- **Casos Especiales ([7]):** Para víctimas de violaciones de DDHH, la reparación es integral y estatal.  \n\n**CONCLUSIÓN:**  \nLa indemnización varía según el ámbito:  \n- **Penal:** Máximo 1000 SMMLV + criterios de gravedad.  \n- **Civil/Comercial:** Sin tope fijo, flexible en modalidad.  \n- **DDHH/DIH:** Reparación integral estatal.  \n\n**RECOMENDACIÓN:**  \n1. Identificar el tipo de daño (penal, contractual, etc.).  \n2. Reunir pruebas del perjuicio ([1]).  \n3. Consultar abogado para calcular montos exactos según salarios mínimos vigentes y normas aplicables.  \n\n*Nota:* Para casos de conflicto armado, acudir al Sistema Integral de Reparación ([7]).\n\n⚠️ **Vigencia:** La norma \"codigo codigo penal ley599\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Código de Procedimiento Penal (Ley 906 de 2004)\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Código de Procedimiento Penal (Ley 906 de 2004)\" tiene artículos derogados o modificados; verifique vigencia específica.",
+      "evaluacion": {
+        "precision_normativa": 2,
+        "articulos_correctos": 1,
+        "interpretacion_valida": 2,
+        "completitud": 2,
+        "ausencia_alucinaciones": 10,
+        "normas_correctas": [
+          "Art. 64 CST"
+        ],
+        "normas_faltantes": [
+          "Art. 65 CST",
+          "Decreto 2351/65"
+        ],
+        "alucinaciones": [],
+        "comentario": "La respuesta RAG no menciona todos los artículos y normas solicitados, ni proporciona una interpretación detallada.",
+        "score_total": 3.4,
+        "veredicto": "REGULAR"
+      },
+      "error": null,
+      "timestamp": "2026-02-24T22:57:59.721Z"
+    },
+    {
+      "id": "LAB-004",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el fuero de maternidad y qué protección ofrece?",
+      "respuesta_referencia": "El fuero de maternidad, consagrado en el artículo 239 del CST y desarrollado por la Sentencia C-005 de 2017 de la Corte Constitucional, prohíbe el despido de la trabajadora embarazada o en período de lactancia sin la autorización previa del Inspector de Trabajo. Si se despide sin autorización, el despido es ineficaz y la trabajadora tiene derecho a ser reintegrada y al pago de salarios y prestaciones dejados de percibir. La protección aplica incluso en contratos a término fijo y de obra.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Qué es el fuero de maternidad**\n\n\n\n**HECHOS RELEVANTES:**  \nConsulta sobre el concepto y alcance del \"fuero de maternidad\" en el marco normativo colombiano.\n\n**NORMAS APLICABLES:**  \n1. **Artículo 306 del Código Sustantivo del Trabajo (CST)** (citado en [2] y [5]): Prohíbe el despido por embarazo y establece la licencia de maternidad.  \n2. **Sentencia C-355/2006, Artículo 124** ([4]): Reconoce la maternidad como una \"opción de vida\" protegida constitucionalmente, prohibiendo normas que la desincentiven o traten desfavorablemente a la mujer por ejercerla.  \n3. **Artículo 22 de la Ley 2121 de 2021** ([1]): Garantiza derechos como horas de lactancia y licencia de maternidad sin desmejoramiento laboral.  \n\n**ANÁLISIS JURÍDICO:**  \nEl \"fuero de maternidad\" es una protección legal que:  \n- **Prohíbe el despido** de la mujer durante el embarazo y posparto (Artículo 306 CST [2], [5]).  \n- **Garantiza derechos laborales** como la licencia de maternidad (18 semanas) y horas de lactancia (Artículo 22, Ley 2121/2021 [1]).  \n- **Se fundamenta en derechos constitucionales** (Sentencia C-355/2006 [4]), al considerar la maternidad como parte del libre desarrollo de la personalidad, prohibiendo discriminación por esta condición.  \n\n**CONCLUSIÓN:**  \nEl fuero de maternidad es un mecanismo de protección laboral y constitucional que salvaguarda a la mujer trabajadora durante el embarazo, parto y posparto, evitando despidos injustificados y garantizando condiciones laborales especiales.  \n\n**RECOMENDACIÓN:**  \n1. **En caso de despido durante el embarazo:** Demandar por estabilidad laboral reforzada ante un juez laboral, invocando el Artículo 306 CST [2].  \n2. **Para reclamar derechos vulnerados:** Acudir a la Dirección Territorial del Ministerio del Trabajo o a una tutela (por violación a derechos fundamentales, basado en [4]).  \n3. **Documentar todo:** Conservar pruebas del embarazo (certificados médicos) y comunicaciones con el empleador.  \n\n⚠️ **Nota:** Para un análisis completo de plazos y procedimientos, se requiere consultar normas adicionales no incluidas en las fuentes proporcionadas.\n\n\n\n---\n\n\n\n**2. y qué protección ofrece?**\n\n\n\n**HECHOS RELEVANTES:**  \nLa consulta general pregunta sobre \"qué protección ofrece\" sin especificar el ámbito (penal, comercial, protección al consumidor, etc.).  \n\n**NORMAS APLICABLES:**  \n1. **Protección en materia penal:**  \n   - Medidas de seguridad como internación psiquiátrica, libertad vigilada, etc. (Artículo 69 CP [1]).  \n   - Aseguramiento y custodia de evidencias para evitar alteraciones (Artículo 216 CPP [2]).  \n\n2. **Protección en materia comercial:**  \n   - Seguro de incendio para mercancías depositadas (Artículo 1187 Código de Comercio [3]).  \n   - Asunción de riesgos por parte del asegurador (Artículo 1056 Código de Comercio [4]).  \n\n3. **Protección a la infancia y adolescencia:**  \n   - Derecho a protección integral (Artículo 7o. Ley 1098 de 2006 [5]).  \n   - Solidaridad familiar para protección permanente (Artículo 67 Ley 1098 de 2006 [6]).  \n\n4. **Protección al consumidor:**  \n   - Garantías de calidad, idoneidad y seguridad en productos/servicios (Artículo 60 Estatuto del Consumidor [7]).  \n   - Sanciones como multas, cierre temporal o retiro de productos peligrosos (Artículo 60 Estatuto del Consumidor [8]).  \n\n**ANÁLISIS JURÍDICO:**  \nLa protección jurídica varía según el ámbito:  \n- **Penal:** Se enfoca en medidas de seguridad y preservación de pruebas.  \n- **Comercial:** Cubre riesgos asociados a mercancías y seguros.  \n- **Infancia:** Garantiza derechos integrales y mecanismos de cuidado.  \n- **Consumidor:** Ofrece garantías sobre productos/servicios y sanciones ante incumplimientos.  \n\n**CONCLUSIÓN:**  \nEl sistema jurídico colombiano establece protecciones específicas según la materia, desde medidas de seguridad penal hasta garantías comerciales y de consumo, pasando por la protección especial a menores.  \n\n**RECOMENDACIÓN:**  \nPara una respuesta precisa, se requiere especificar el ámbito de protección consultado (ej. penal, familiar, comercial, etc.). Si la duda es sobre derechos del consumidor, se recomienda invocar las garantías del Artículo 60 [7] y denunciar ante la SIC en caso de vulneración.\n\n⚠️ **Vigencia:** La norma \"codigo codigo penal ley599\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Código de Procedimiento Penal (Ley 906 de 2004)\" tiene artículos derogados o modificados; verifique vigencia específica.",
+      "evaluacion": {
+        "precision_normativa": 2,
+        "articulos_correctos": 1,
+        "interpretacion_valida": 2,
+        "completitud": 2,
+        "ausencia_alucinaciones": 10,
+        "normas_correctas": [
+          "Art. 239 CST"
+        ],
+        "normas_faltantes": [
+          "Sentencia C-005/2017",
+          "Art. 240 CST"
+        ],
+        "alucinaciones": [],
+        "comentario": "La respuesta RAG no es completa y precisa, pero menciona correctamente una norma.",
+        "score_total": 3.4,
+        "veredicto": "REGULAR"
+      },
+      "error": null,
+      "timestamp": "2026-02-24T22:59:43.176Z"
+    },
+    {
+      "id": "LAB-005",
+      "area": "laboral",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cómo se calcula la liquidación de un trabajador que lleva 3 años y gana $2.000.000?",
+      "respuesta_referencia": "Para un trabajador con 3 años de antigüedad y salario de $2.000.000: (1) Cesantías: $2.000.000 × 3 años = $6.000.000; (2) Intereses sobre cesantías: $6.000.000 × 12% = $720.000; (3) Prima de servicios: $2.000.000 × 3 meses/12 = $500.000 (proporcional al último semestre); (4) Vacaciones: 15 días × $66.667/día = $1.000.000 (proporcional); (5) Si el auxilio de transporte aplica ($162.000/mes). El total aproximado antes de descuentos sería $8.220.000 más el auxilio de transporte proporcional.",
+      "respuesta_rag": "**HECHOS RELEVANTES:**  \n- Trabajador con 3 años de servicio.  \n- Salario mensual: $2.000.000 (sin mención de auxilio de transporte).  \n- Consulta sobre liquidación laboral al terminar el contrato.  \n\n**NORMAS APLICABLES:**  \n1. **Cesantías**: Artículo 1 (Fuente [2]) – Un mes de salario por cada año de servicios.  \n2. **Intereses sobre cesantías**: Artículo 1 (Fuente [2]) – 12% anual sobre el saldo de cesantías.  \n3. **Prima de servicios**: Artículo 1 (Fuente [2]) – Un mes de salario al año (mitad en junio, mitad en diciembre).  \n4. **Vacaciones**: Artículo 1 (Fuente [2]) – 15 días hábiles por año, compensables solo al terminar el contrato.  \n\n**ANÁLISIS JURÍDICO:**  \n1. **Cesantías**:  \n   - 3 años × $2.000.000 = **$6.000.000**.  \n   - Base: Salario mensual (no se menciona auxilio de transporte).  \n\n2. **Intereses sobre cesantías**:  \n   - 12% anual sobre el total acumulado de cesantías.  \n   - Cálculo anualizado: $6.000.000 × 12% = **$720.000** (total por 3 años).  \n\n3. **Prima de servicios**:  \n   - 3 años × $2.000.000 = **$6.000.000**.  \n   - Base: Salario promedio (en este caso, $2.000.000 constante).  \n\n4. **Vacaciones**:  \n   - 15 días por año × 3 años = 45 días.  \n   - Valor diario: $2.000.000 ÷ 30 = $66.666.  \n   - Total: 45 × $66.666 = **$3.000.000**.  \n\n**CONCLUSIÓN:**  \nLa liquidación total incluye:  \n1. Cesantías: $6.000.000.  \n2. Intereses sobre cesantías: $720.000.  \n3. Prima de servicios: $6.000.000.  \n4. Vacaciones: $3.000.000.  \n**Total estimado: $15.720.000** (sin incluir posibles auxilios o dotación).  \n\n**RECOMENDACIÓN:**  \n1. Verificar si el salario incluye auxilio de transporte (afectaría la base de cálculo).  \n2. Confirmar si el empleador consignó cesantías anualmente (evitar doble pago).  \n3. Solicitar certificación de liquidación al empleador con desglose detallado.  \n\n⚠️ **Nota:** Si el trabajador pertenece a regímenes especiales (ej. servicio doméstico o construcción), aplicar normas específicas de los Artículos 252, 254 o 310 (Fuentes [3], [4], [5]).",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "ausencia_alucinaciones": 10,
+        "normas_correctas": [],
+        "normas_faltantes": [
+          "Art. 249 CST",
+          "Art. 306 CST",
+          "Art. 186 CST"
+        ],
+        "alucinaciones": [],
+        "comentario": "La respuesta no menciona ni cita las normas específicas requeridas y omite la interpretación de intereses sobre cesantías.",
+        "score_total": 2,
+        "veredicto": "DEFICIENTE"
+      },
+      "error": null,
+      "timestamp": "2026-02-24T23:01:28.883Z"
+    }
+  ],
+  "errores": []
+}

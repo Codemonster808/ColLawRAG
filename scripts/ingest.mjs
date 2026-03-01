@@ -31,6 +31,32 @@ const EMBEDDING_MODEL = process.env.EMBEDDING_MODEL || 'Xenova/paraphrase-multil
 
 const DOCS_DIR = path.join(process.cwd(), 'data', 'documents')
 const OUT_PATH = path.join(process.cwd(), 'data', 'index.json')
+const NORMAS_VIGENCIA_DIR = path.join(process.cwd(), 'data', 'normas-vigencia')
+
+/** S2.11: Cargar mapa normaId -> estado (vigente | derogada | parcialmente_derogada) desde data/normas-vigencia/*.json */
+function loadVigenciaMap() {
+  const map = new Map()
+  if (!fs.existsSync(NORMAS_VIGENCIA_DIR)) return map
+  const files = fs.readdirSync(NORMAS_VIGENCIA_DIR).filter(f => f.endsWith('.json'))
+  for (const file of files) {
+    try {
+      const full = path.join(NORMAS_VIGENCIA_DIR, file)
+      const data = JSON.parse(fs.readFileSync(full, 'utf-8'))
+      const normaId = (data.normaId || path.basename(file, '.json')).toLowerCase()
+      const estado = data.estado || (data.vigente === false ? 'derogada' : 'vigente')
+      map.set(normaId, estado)
+    } catch (e) {
+      // ignorar JSONs mal formados
+    }
+  }
+  return map
+}
+
+/** S2.11: Inferir normaId desde el nombre del archivo de documento (ley_100_1993 -> ley-100-1993). */
+function inferNormaIdFromFileName(fileName) {
+  const base = path.parse(fileName).name
+  return base.replace(/_/g, '-').toLowerCase()
+}
 
 function guessTypeFromFilename(name) {
   const lower = name.toLowerCase()
@@ -391,15 +417,12 @@ function splitByArticles(content) {
       continue
     }
     
-    // Detectar Artículos con múltiples formatos
-    // Formato 1: "Artículo X" o "ARTÍCULO X"
-    // Formato 2: "Art. X" o "Art X"
-    // Formato 3: "Artículo X.-" (con guion)
-    // INICIO_TRABAJO I1: más formatos (espacios al inicio, "Art. 186.", "Artículo 186.", etc.)
-    const artMatch = line.match(/^\s*(Art[íi]culo|ART[ÍI]CULO|Art\.?)\s+([0-9A-Za-z\.\-]+)(?:\s*[\.\-–—])?/i)
+    // Detectar Artículos con múltiples formatos (S4.2: incluye N-A, N bis)
+    // Formato: "Artículo X", "Art. X", "Art X", "Artículo 123-A", "Art. 77 bis", "Artículo 186.-"
+    const artMatch = line.match(/^\s*(Art[íi]culo|ART[ÍI]CULO|Art\.?)\s+(\d+(?:-[A-Z])?(?:\s+bis)?)(?:\s*[\.\-–—])?/i)
     if (artMatch) {
       pushBuffer()
-      currentArticle = `Artículo ${artMatch[2]}`
+      currentArticle = `Artículo ${artMatch[2].trim()}`
       buffer.push(line)
       continue
     }
@@ -435,23 +458,42 @@ function splitByArticles(content) {
   }
   if (acc) merged.push(acc)
 
-  // INICIO_TRABAJO I1: fallback — rellenar article vacío desde el contenido del part
+  // INICIO_TRABAJO I1 + S4.2: fallback — rellenar article vacío desde contenido o título
   const withFallback = merged.map((p) => {
     if (p.article) return p
-    const extracted = extractArticleFromText(p.text)
+    const extracted = extractArticleFromText(p.text, p.title)
     return extracted ? { ...p, article: extracted } : p
   })
   return withFallback
 }
 
 /**
- * INICIO_TRABAJO I1: Extrae "Artículo N" del texto (primera ocurrencia) para rellenar metadata.article.
- * Acepta: "Art. 186", "Artículo 186", "ARTÍCULO 186", "Art 249", "Art. 186.-"
+ * S4.2: Regex mejorado para Artículo N, N-A, N bis. Fallback desde title si no hay match en text.
+ * Acepta: "Art. 186", "Artículo 186", "ART 249", "Art. 123-A", "Art. 77 bis", "Artículo 186.-"
  */
-function extractArticleFromText(text) {
-  if (!text || typeof text !== 'string') return null
-  const m = text.match(/(?:Art[íi]culo|ART[ÍI]CULO|Art\.?)\s+([0-9A-Za-z\.\-]+)/i)
-  return m ? `Artículo ${m[1]}` : null
+function extractArticleFromText(text, title) {
+  const regex = /(?:Art[íi]culo|Art\.?)\s+(\d+(?:-[A-Z])?(?:\s+bis)?)/i
+  if (text && typeof text === 'string') {
+    const m = text.match(regex)
+    if (m) return `Artículo ${m[1].trim()}`
+  }
+  if (title && typeof title === 'string' && /Art/i.test(title)) {
+    const m = title.match(regex)
+    if (m) return `Artículo ${m[1].trim()}`
+  }
+  return null
+
+/** FASE_2 2.3: Trunca texto a maxChars cortando en el último fin de oración (. ! ?) */
+function truncateToSentence(text, maxChars) {
+  if (!text || text.length <= maxChars) return (text || '').trim()
+  const block = text.slice(0, maxChars + 1)
+  const lastSentenceEnd = Math.max(
+    block.lastIndexOf('.'),
+    block.lastIndexOf('!'),
+    block.lastIndexOf('?')
+  )
+  if (lastSentenceEnd > maxChars * 0.5) return block.slice(0, lastSentenceEnd + 1).trim()
+  return block.slice(0, maxChars).trim()
 }
 
 function stringHash(str) {
@@ -552,6 +594,7 @@ async function upsertPinecone(chunks) {
         article: b.metadata.article,
         url: b.metadata.url,
         sourcePath: b.metadata.sourcePath,
+        isOverview: b.metadata.isOverview === true ? 'true' : 'false'
       }
     })))
     process.stdout.write('+')
@@ -590,6 +633,11 @@ async function main() {
   
   console.log(`📚 Procesando ${files.length} documento(s) con provider=${provider}`)
 
+  const vigenciaMap = loadVigenciaMap()
+  if (vigenciaMap.size > 0) {
+    console.log(`📋 Vigencia cargada: ${vigenciaMap.size} normas en data/normas-vigencia/`)
+  }
+
   const chunks = []
 
   for (const file of files) {
@@ -604,6 +652,29 @@ async function main() {
     // Limpiar contenido antes de chunking (--- o ======== + TOC)
     const cleanContent = stripHeaderAndNav(raw)
     const articleChunks = splitByArticles(cleanContent)
+
+    // FASE_2 2.3: Resumen por ley — un chunk isOverview por documento
+    const areaDoc = frontmatter.area || headerMeta.area || detectLegalAreaFromContent(extractTitle(raw, path.parse(file).name), cleanContent.slice(0, 2000)) || 'general'
+    const normaIdDoc = inferNormaIdFromFileName(file)
+    const vigenciaDoc = vigenciaMap.get(normaIdDoc) || 'no_verificada'
+    const metaOverviewLey = {
+      id: `doc-${path.parse(file).name}`,
+      title,
+      type: frontmatter.tipo || headerMeta.type || typeFromFilename,
+      article: undefined,
+      articleHierarchy: 'Resumen',
+      area: areaDoc,
+      entidadEmisora: detectEntityFromFilename(file),
+      fechaVigencia: extractVigenciaFromFilename(file),
+      vigencia: vigenciaDoc,
+      url: undefined,
+      sourcePath: `data/documents/${file}`,
+      isOverview: true
+    }
+    const summaryLeyContent = 'Resumen (Ley: ' + title + '):\n\n' + truncateToSentence(cleanContent, 700)
+    chunks.push({ id: randomUUID(), content: summaryLeyContent, metadata: metaOverviewLey })
+
+    const seenTitles = new Set()
     for (const part of articleChunks) {
       // FASE_2 2.1: Jerarquía Ley > Título > Capítulo > Artículo (metadata + prefijo en contenido)
       const articleHierarchy = []
@@ -624,16 +695,31 @@ async function main() {
         id: `doc-${path.parse(file).name}`,
         title,
         type,
-        article: part.article || extractArticleFromText(part.text),
+        article: part.article || extractArticleFromText(part.text, part.title),
         articleHierarchy: hierarchyStr || undefined,
         chapter: part.chapter,
         section: part.section,
         area,
         entidadEmisora,
         fechaVigencia,
+        vigencia: vigenciaDoc,
         url: undefined,
         sourcePath: `data/documents/${file}`
       }
+
+      // FASE_2 2.3: Resumen por título — un chunk isOverview la primera vez que vemos este título en el doc
+      if (part.title && !seenTitles.has(part.title)) {
+        seenTitles.add(part.title)
+        const metaOverviewTitle = {
+          ...metadata,
+          article: undefined,
+          articleHierarchy: part.title,
+          isOverview: true
+        }
+        const summaryTitleContent = 'Resumen (Ley: ' + title + ' | ' + part.title + '):\n\n' + truncateToSentence(part.text, 500)
+        chunks.push({ id: randomUUID(), content: summaryTitleContent, metadata: metaOverviewTitle })
+      }
+
       // FASE_2 2.2: Artículo ≤2000 chars un chunk; >2000 dividir por párrafos/oraciones (sin cortar oración)
       const contentParts = part.text.length <= MAX_ARTICLE_CHUNK_CHARS
         ? [part.text]

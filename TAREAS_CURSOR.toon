@@ -1,5 +1,6 @@
 proyecto: ColLawRAG
 generado: 2026-02-16
+actualizado: 2026-02-25
 ejecutor: Cursor
 referencia: DIAGNOSTICO_COMERCIAL_2026-02-16.md
 diagnostico_documentos: DIAGNOSTICO_DOCUMENTOS_2026-02-18.md
@@ -7,6 +8,11 @@ diagnostico_actual: DIAGNOSTICO_PROYECTO_2026-02-20.md
 diagnostico_benchmark: DIAGNOSTICO_BENCHMARK_2026-02-20.md
 url_produccion: https://col-law-rag.vercel.app
 tareas_benchmark: OC-A0 juez disponible | OC-A1 baseline | OC-A2 re-ingesta | OC-A3 benchmark post-fix (ver TAREAS_OPENCLAW.md y payloads ClawdBot)
+
+payload_sprint1_cursor[4]{archivo,estado,tareas_cursor_hechas,tareas_cursor_pendientes}:
+  docs/mejoras/payloads/SPRINT_1_FUNDAMENTOS.toon,parcial,"S1.1 S1.2 S1.3 S1.4 S1.5 S1.8 S1.12",ninguna
+payload_para_cursor_ahora[2]{archivo,instruccion}:
+  docs/mejoras/payloads/SPRINT_2_CORPUS.toon,"Sprint 1 tareas Cursor cerradas. Usar SPRINT_2_CORPUS.toon para siguiente trabajo (o el payload que indique multi_agente para Cursor)."
 
 bugs_resueltos: plan-colaw/bugs-resueltos
 revisar_antes_implementar: Revisar plan-colaw/bugs-resueltos/INDEX.md y CURSOR|CLAWDBOT antes de implementar un fix; documentar ahí los bugs resueltos.

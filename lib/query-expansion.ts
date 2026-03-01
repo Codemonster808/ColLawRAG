@@ -52,23 +52,38 @@ const COLOQUIAL_TO_LEGAL: Record<string, string[]> = {
   'alquiler': ['arrendamiento', 'canon de arrendamiento', 'contrato de arriendo'],
   'vender': ['compraventa', 'enajenación', 'transferencia de dominio'],
   
-  // Tributario
+  // Tributario (Sprint 4: +30 términos específicos)
   'impuestos': ['tributos', 'obligación tributaria', 'impuesto de renta'],
   'dian': ['Dirección de Impuestos y Aduanas Nacionales', 'autoridad tributaria'],
   'renta': ['impuesto sobre la renta', 'declaración de renta', 'renta líquida'],
-  'iva': ['impuesto sobre las ventas', 'IVA', 'tarifa general'],
+  'iva': ['impuesto sobre las ventas', 'IVA', 'tarifa general', 'hecho generador IVA'],
   'ica': ['impuesto de industria y comercio', 'tributo municipal', 'Decreto 1333'],
-  'declaración': ['declaración tributaria', 'declaración de renta', 'obligación fiscal'],
-  'exención': ['beneficio tributario', 'exención fiscal', 'no gravado'],
-  'retención': ['retención en la fuente', 'agente retenedor', 'retención fiscal'],
+  'declaración': ['declaración tributaria', 'declaración de renta', 'obligación fiscal', 'vencimiento declaración'],
+  'exención': ['beneficio tributario', 'exención fiscal', 'no gravado', 'tarifa 0%'],
+  'retención': ['retención en la fuente', 'agente retenedor', 'retención fiscal', 'autorretenedor'],
+  'rut': ['registro único tributario', 'NIT', 'cédula fiscal', 'número identificación tributaria'],
+  'régimen': ['régimen simple', 'régimen ordinario', 'responsable IVA', 'régimen común'],
+  'base': ['base gravable', 'ingreso gravado', 'deducción tributaria', 'renta líquida gravable'],
+  'tarifa': ['tarifa impositiva', 'alícuota', 'porcentaje IVA', 'tasa tributaria'],
+  'sanción': ['sanción DIAN', 'multa tributaria', 'sanción fiscal', 'intereses moratorios'],
+  'liquidación': ['liquidación oficial', 'acto de determinación', 'propuesta de liquidación'],
+  'retefuente': ['retención en la fuente', 'retefuente', 'agente retenedor'],
   
-  // Penal
+  // Penal (Sprint 4: +20 términos específicos)
   'robo': ['hurto', 'apoderamiento', 'delito contra el patrimonio'],
   'hurto': ['delito de hurto', 'Art. 239 CP', 'apoderamiento ilícito'],
   'golpear': ['lesiones personales', 'violencia', 'agresión'],
   'matar': ['homicidio', 'delito contra la vida', 'Art. 103 CP'],
-  'estafa': ['delito de estafa', 'fraude', 'Art. 246 CP'],
-  'secuestro': ['privación de la libertad', 'secuestro extorsivo', 'Art. 168 CP'],
+  'estafa': ['delito de estafa', 'fraude', 'Art. 246 CP', 'engaño'],
+  'secuestro': ['privación de la libertad', 'secuestro extorsivo', 'Art. 168 CP', 'rapto'],
+  'pena': ['sanción penal', 'prisión', 'reclusión', 'multa penal', 'pena privativa libertad'],
+  'prescripción': ['prescripción acción penal', 'término prescriptivo', 'extinción acción penal'],
+  'lesiones': ['lesiones personales', 'daño corporal', 'agresión física', 'Art. 111 CP'],
+  'dosificación': ['dosificación pena', 'cuantificación pena', 'circunstancias agravantes', 'atenuantes'],
+  'flagrancia': ['flagrante delito', 'captura en flagrancia', 'Art. 301 CPP'],
+  'imputación': ['imputación cargos', 'audiencia imputación', 'formulación cargos'],
+  'preacuerdo': ['preacuerdo penal', 'negociación penal', 'rebaja de pena'],
+  'prescripción': ['prescripción delito', 'término prescripción', 'interrupción prescripción'],
   
   // Administrativo
   'derecho de petición': ['solicitud administrativa', 'Art. 23 Constitución', 'petición respetuosa'],
@@ -77,11 +92,20 @@ const COLOQUIAL_TO_LEGAL: Record<string, string[]> = {
   'recurso': ['recurso de reposición', 'recurso de apelación', 'medio de impugnación'],
   'notificación': ['notificación personal', 'comunicación oficial', 'notificación judicial'],
   
-  // Procedimientos
-  'plazo': ['término legal', 'término judicial', 'tiempo procesal'],
-  'prueba': ['medio probatorio', 'prueba documental', 'prueba testimonial'],
-  'sentencia': ['fallo judicial', 'providencia', 'decisión judicial'],
-  'apelación': ['recurso de apelación', 'segunda instancia', 'impugnación'],
+  // Procedimientos (Sprint 4: +15 términos específicos)
+  'plazo': ['término legal', 'término judicial', 'tiempo procesal', 'término de traslado'],
+  'prueba': ['medio probatorio', 'prueba documental', 'prueba testimonial', 'prueba pericial'],
+  'sentencia': ['fallo judicial', 'providencia', 'decisión judicial', 'resolución judicial'],
+  'apelación': ['recurso de apelación', 'segunda instancia', 'impugnación sentencia'],
+  'casación': ['recurso de casación', 'recurso extraordinario', 'Corte Suprema de Justicia'],
+  'tutela': ['acción de tutela', 'amparo constitucional', 'protección derechos fundamentales', 'Art. 86 CP'],
+  'notificación': ['notificación personal', 'comunicación oficial', 'notificación judicial', 'edicto'],
+  'término': ['plazo procesal', 'término legal', 'tiempo procesal', 'término de traslado'],
+  'demanda': ['acción judicial', 'escrito de demanda', 'demanda contenciosa', 'proceso judicial'],
+  'contestación': ['contestación demanda', 'respuesta demanda', 'excepciones'],
+  'ejecutoria': ['ejecutoria sentencia', 'firmeza sentencia', 'cosa juzgada'],
+  'prueba': ['decreto pruebas', 'práctica pruebas', 'valoración probatoria'],
+  'recurso': ['medio de impugnación', 'recurso reposición', 'recurso apelación', 'recurso casación'],
   
   // Otros
   'abogado': ['profesional del derecho', 'apoderado', 'defensor'],

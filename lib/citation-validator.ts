@@ -71,7 +71,7 @@ function validateCitationRef(
   return {
     citationRef,
     isValid: true,
-    sourceTitle: chunk.metadata.title,
+    sourceTitle: chunk.metadata?.title,
     articleMatch: true, // Por ahora asumimos que si existe el chunk, el artículo es válido
     confidence: 1.0,
     expectedIndex: index,

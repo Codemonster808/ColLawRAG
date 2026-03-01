@@ -1,0 +1,105 @@
+proyecto: ColLawRAG
+documento_base: docs/sprints/SPRINT_1_FUNDAMENTOS.md
+generado: 2026-02-25
+modo: autonomo
+prioridad: URGENTE
+impacto_estimado: "29.6% → 55-65% accuracy"
+esfuerzo: "3-5 días"
+dependencias: ninguna
+
+avance{estado,tareas_hechas,tareas_pendientes,nota}:
+  parcial,"S1.1 S1.2 S1.3 S1.4 S1.5 S1.8 S1.12 (Cursor) | S1.10 (OpenClaw)","S1.6 S1.7 S1.9 S1.11 (OpenClaw)","Cursor: todo su bloque hecho. OpenClaw: falta DeepSeek test+benchmark (S1.6 S1.7), Groq benchmark (S1.9), tabla A/B (S1.11). ab-qwen7b-2026-02-24.json ya existe."
+
+estado_actual{accuracy,chunks,corpus_docs,vigencia_mapeada,modelo_gen,juez_benchmark,benchmarks_existentes}:
+  "29.6%",33053,749,"19 normas en data/normas-vigencia (index sin vigencia por naming)","Qwen2.5-7B o llama-3.3-70b (env)","qwen2.5:7b-instruct (Ollama)","ab-qwen7b-2026-02-24.json sprint1-final-2026-02-25.json diagnostico-regresion.md"
+
+labores_cursor[3]{orden,tarea_id,accion,comando}:
+  1,ninguna,"Sprint 1 Cursor cerrado. No hay tareas pendientes para Cursor en este payload.","—"
+  2,—,"Si OpenClaw entrega ab-test-summary.md: configurar modelo ganador en .env y re-ejecutar benchmark final 50+.","node scripts/evaluate-accuracy.mjs --limit 50"
+  3,—,"Siguiente payload Cursor: SPRINT_2_CORPUS.toon (S2.13 S2.14 S2.15).","Ver docs/mejoras/payloads/SPRINT_2_CORPUS.toon"
+
+labores_open_claw[5]{orden,tarea_id,accion,comando}:
+  1,S1.6,"Configurar .env.local para DeepSeek (Novita): GEN_PROVIDER=novita HF_GENERATION_MODEL=deepseek/deepseek-v3. Probar 1 query manual.","curl -X POST http://localhost:3000/api/rag -H 'Content-Type: application/json' -d '{\"query\":\"cuántos días de vacaciones\"}'"
+  2,S1.7,"Benchmark DeepSeek 30 casos. Guardar en data/benchmarks/ab-deepseek-v3-YYYY-MM-DD.json.","node scripts/evaluate-accuracy.mjs --limit 30 (con .env de S1.6); copiar resultado a ab-deepseek-v3-*.json"
+  3,S1.9,"Configurar .env.local para Groq: GEN_PROVIDER=groq GROQ_API_KEY=... HF_GENERATION_MODEL=llama-3.3-70b-versatile. Benchmark 30 casos.","node scripts/evaluate-accuracy.mjs --limit 30; guardar como ab-groq-70b-*.json"
+  4,S1.10,"YA HECHO: ab-qwen7b-2026-02-24.json existe. Nada que hacer.","—"
+  5,S1.11,"Crear tabla A/B: ejecutar compare-ab-test.mjs con los 3 JSON y --output ab-test-summary.md.","node scripts/compare-ab-test.mjs data/benchmarks/ab-qwen7b-*.json data/benchmarks/ab-deepseek-*.json data/benchmarks/ab-groq-*.json --output data/benchmarks/ab-test-summary.md"
+
+autonomo{modo,ruta_proyecto,no_modificar,prerequisitos,siguiente_payload,al_fallar}:
+  autonomo,ColLawRAG,"docs/mejoras/*.md docs/sprints/*.md","node --version; npm install; test -f data/index.json","docs/mejoras/payloads/SPRINT_2_CORPUS.toon",reportar_y_continuar
+
+multi_agente{habilitado,herramientas,sprint_id,paralelo_en_fase,post_fase_agente,token_budget}:
+  true,"cursor,open_claw",Sprint_1_fundamentos,true,cursor,"cursor=código_nuevo+análisis+benchmarks open_claw=config+test_manuales+documentación"
+
+asignacion_agente[8]{tarea_id,agente,archivos_exclusivos,intensidad_tokens,razon}:
+  S1.5,cursor,scripts/evaluate-accuracy.mjs,alta,"Requiere análisis profundo de regresión: comparar benchmarks, revisar logs, diagnosticar causa raíz"
+  S1.6,open_claw,.env.local,baja,"Solo configurar variables de entorno y ejecutar 1 query manual de verificación"
+  S1.7,open_claw,data/benchmarks/ab-deepseek-v3-*.json,baja,"Ejecutar script existente con configuración de S1.6; guardar resultado"
+  S1.8,cursor,"lib/generation.ts .env.example",alta,"Código nuevo: bloque provider groq en generateWithModel con fetch API Groq OpenAI-compatible"
+  S1.9,open_claw,data/benchmarks/ab-groq-70b-*.json,baja,"Configurar .env.local con GROQ_API_KEY y ejecutar benchmark; no requiere código nuevo"
+  S1.10,open_claw,data/benchmarks/ab-qwen7b-*.json,baja,"Ejecutar benchmark con config por defecto 7B; solo correr script"
+  S1.11,open_claw,data/benchmarks/ab-test-summary.md,baja,"Ejecutar compare-benchmark-results.mjs y crear tabla markdown con resultados"
+  S1.12,cursor,".env.example .env.local",media,"Configurar modelo ganador como default y ejecutar benchmark final 50+ casos; decisión técnica"
+
+grupos_paralelos[3]{ola,tareas,agentes,nota}:
+  1,"S1.5 S1.8 S1.10","cursor cursor open_claw","Cursor: investigar regresión + integrar Groq. OpenClaw: benchmark baseline 7B en paralelo."
+  2,"S1.6 S1.7 S1.9","open_claw open_claw open_claw","OpenClaw: testear DeepSeek (S1.6→S1.7) y benchmarkear Groq (S1.9). Cursor libre para revisar código si necesario."
+  3,"S1.11 S1.12","open_claw cursor","OpenClaw: tabla comparativa. Cursor: decisión final y benchmark 50+."
+
+archivos_compartidos[2]{archivo,orden_edicion,nota}:
+  lib/generation.ts,"cursor primero (S1.8)","Cursor añade provider groq; OpenClaw no toca este archivo"
+  .env.example,"cursor primero (S1.8 S1.12)","Cursor documenta Groq y modelo ganador; OpenClaw no toca"
+
+instruccion_herramienta[2]{herramienta,instruccion}:
+  cursor,"Sprint 1 Cursor está cerrado. Ver labores_cursor en este payload (solo post-fase opcional y siguiente payload). No modifiques data/benchmarks/ab-*.json; los genera OpenClaw."
+  open_claw,"Ejecuta en orden: S1.6 (config .env Novita + 1 query), S1.7 (benchmark DeepSeek 30 → ab-deepseek-v3-*.json), S1.9 (config Groq + benchmark 30 → ab-groq-70b-*.json), S1.11 (tabla A/B → ab-test-summary.md). S1.10 ya hecho (ab-qwen7b existe). No modifiques lib/generation.ts ni .env.example."
+
+tareas[12]{id,titulo,archivos_afectados,instruccion_concreta,comando_validacion,estado,agente}:
+  S1.1,Unificar modelo embeddings (ingest=query),"lib/embeddings.ts scripts/ingest.mjs .env.example","YA HECHO: EMBEDDING_MODEL unificado como Xenova/paraphrase-multilingual-MiniLM-L12-v2 (384d).","grep EMBEDDING_MODEL lib/embeddings.ts",completada,cursor
+  S1.2,Eliminar doble retrieval del pipeline,"lib/rag.ts lib/prompt-templates.ts","YA HECHO: quickRetrieval eliminado en rag.ts:271.","grep -c retrieveRelevantChunks lib/rag.ts",completada,cursor
+  S1.3,Bloquear fake embeddings en producción,lib/embeddings.ts,"YA HECHO: fakeEmbed lanza Error en NODE_ENV=production.","grep 'production' lib/embeddings.ts",completada,cursor
+  S1.4,Re-indexar corpus con embeddings correctos,"data/index.json data/hnsw-index.dat data/bm25-index.json","YA HECHO: 16430 chunks, HNSW 27MB, BM25 46MB.","test -f data/hnsw-index.dat && wc -l data/hnsw-ids.txt",completada,cursor
+  S1.5,Investigar regresión accuracy 32.7→29.6,scripts/evaluate-accuracy.mjs,"Ejecutar benchmark con 20+ casos y documentar en data/benchmarks/diagnostico-regresion.md. HECHO: diagnostico-regresion.md creado; causa = cambio de juez (DeepSeek V3.2 → qwen2.5:7b). Ollama sin 14B en esta máquina.","test -f data/benchmarks/diagnostico-regresion.md",completada,cursor
+  S1.6,Verificar y testear DeepSeek V3 via Novita,.env.local,"Provider Novita ya existe en generation.ts. Configurar .env.local: GEN_PROVIDER=novita HF_GENERATION_MODEL=deepseek/deepseek-v3. Ejecutar 1 query manual: curl -X POST http://localhost:3000/api/rag -H 'Content-Type: application/json' -d '{\"query\":\"cuántos días de vacaciones\"}'. Verificar respuesta coherente y con citas de artículos.","curl -s http://localhost:3000/api/rag -X POST -H 'Content-Type: application/json' -d '{\"query\":\"test\"}' | head -c 200",pendiente,open_claw
+  S1.7,Benchmark DeepSeek V3 (30+ casos),data/benchmarks/ab-deepseek-v3-*.json,"Con GEN_PROVIDER=novita y HF_GENERATION_MODEL=deepseek/deepseek-v3 en .env.local: ejecutar node scripts/evaluate-accuracy.mjs --limit 30. Guardar resultado como data/benchmarks/ab-deepseek-v3-$(date +%Y-%m-%d).json.","test -f data/benchmarks/ab-deepseek-v3-*.json",pendiente,open_claw
+  S1.8,Integrar Groq como provider de generación,"lib/generation.ts .env.example","HECHO: Bloque if (provider === 'groq') en generateWithModel con api.groq.com/openai/v1/chat/completions, GROQ_API_KEY, timeout. .env.example documenta Groq y modelo ganador.","grep 'groq' lib/generation.ts",completada,cursor
+  S1.9,Testear y benchmark Groq Llama 3.3 70B,data/benchmarks/ab-groq-70b-*.json,"Configurar .env.local: GEN_PROVIDER=groq GROQ_API_KEY=gsk_... HF_GENERATION_MODEL=llama-3.3-70b-versatile. Ejecutar 1 query manual para verificar. Luego: node scripts/evaluate-accuracy.mjs --limit 30. Guardar como data/benchmarks/ab-groq-70b-$(date +%Y-%m-%d).json.","test -f data/benchmarks/ab-groq-70b-*.json",pendiente,open_claw
+  S1.10,Benchmark modelo actual 7B (baseline),data/benchmarks/ab-qwen7b-*.json,"Con GEN_PROVIDER=hf y HF_GENERATION_MODEL=Qwen/Qwen2.5-7B-Instruct en .env.local: ejecutar node scripts/evaluate-accuracy.mjs --limit 30. Guardar como data/benchmarks/ab-qwen7b-$(date +%Y-%m-%d).json. Requiere juez Ollama (ej. ollama pull qwen2.5:14b-instruct).","test -f data/benchmarks/ab-qwen7b-*.json",completada,open_claw
+  S1.11,Crear tabla comparativa A/B test,data/benchmarks/ab-test-summary.md,"Tras tener ab-qwen7b-*.json, ab-deepseek-*.json y ab-groq-*.json: node scripts/compare-ab-test.mjs data/benchmarks/ab-qwen7b-*.json data/benchmarks/ab-deepseek-*.json data/benchmarks/ab-groq-*.json --output data/benchmarks/ab-test-summary.md. El script escribe la tabla y el modelo ganador en el .md.","test -f data/benchmarks/ab-test-summary.md",pendiente,open_claw
+  S1.12,Configurar modelo ganador y benchmark final,".env.example .env.local","HECHO (parcial): .env.example documenta modelo ganador (configurar tras ab-test-summary.md). Benchmark final ejecutado: data/benchmarks/sprint1-final-2026-02-25.json (re-ejecutar con juez 14B para accuracy válida).","test -f data/benchmarks/sprint1-final-*.json",completada,cursor
+
+archivos_modificar[4]{archivo,accion}:
+  lib/generation.ts,MODIFICAR añadir provider groq (cursor)
+  .env.example,MODIFICAR documentar Groq DeepSeek modelo ganador (cursor)
+  data/benchmarks/ab-test-summary.md,CREAR tabla comparativa A/B (open_claw)
+  data/benchmarks/sprint1-final-*.json,CREAR benchmark final sprint (cursor)
+
+orden_ejecucion[12]{paso,tarea_id,agente,nota,dependencia}:
+  1,S1.1,cursor,YA HECHO,ninguna
+  2,S1.2,cursor,YA HECHO,ninguna
+  3,S1.3,cursor,YA HECHO,ninguna
+  4,S1.4,cursor,YA HECHO,ninguna
+  5,S1.5,cursor,CRITICO: diagnosticar regresión,ninguna
+  6,S1.8,cursor,Código nuevo: provider Groq,ninguna
+  7,S1.10,open_claw,Benchmark baseline 7B (paralelo con S1.5 S1.8),ninguna
+  8,S1.6,open_claw,Testear DeepSeek (después de S1.5 para saber si servidor OK),S1.5
+  9,S1.7,open_claw,Benchmark DeepSeek 30 casos,S1.6
+  10,S1.9,open_claw,Benchmark Groq 30 casos (después de que Cursor integre),S1.8
+  11,S1.11,open_claw,Tabla comparativa con 3 resultados,"S1.7 S1.9 S1.10"
+  12,S1.12,cursor,Modelo ganador + benchmark final 50+,S1.11
+
+criterio_exito[7]{item}:
+  Regresión accuracy investigada y causa documentada
+  Provider Groq integrado y funcional en lib/generation.ts
+  3 benchmarks ejecutados con 30+ casos cada uno (7B DeepSeek Groq)
+  Tabla comparativa A/B creada con scores latencia costo
+  Modelo ganador configurado como default
+  Benchmark final con 50+ casos ejecutado
+  Accuracy post-sprint >= 50% (objetivo 55-65%)
+
+post_fase_comando[2]{orden,comando,descripcion,agente}:
+  1,"cd ColLawRAG && node scripts/evaluate-accuracy.mjs --limit 50",Benchmark final sprint 1,cursor
+  2,"echo 'Sprint 1 completado. Siguiente: SPRINT_2_CORPUS.toon'",Indicar siguiente paso,cursor
+
+dar_a_agente{cursor,open_claw}:
+  "Usar este payload. Labores: ver labores_cursor (Sprint 1 cerrado; opcional post-fase y siguiente payload).","Usar este payload. Labores: S1.6 S1.7 S1.9 S1.11 en ese orden. Ver labores_open_claw."

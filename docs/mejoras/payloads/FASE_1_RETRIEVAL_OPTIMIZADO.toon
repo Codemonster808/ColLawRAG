@@ -7,28 +7,31 @@ impacto_estimado: "+10-20% accuracy; -80% latencia búsqueda"
 esfuerzo: "3-5 días"
 dependencias: FASE_0 completada
 
+avance_2026_02{estado,tareas_hechas,pending,siguiente_payload_para_trabajo}:
+  completada,"1.1 1.2 1.3 1.4","ninguna","Usar INICIO_TRABAJO.toon o FASE_2 para continuar"
+
 autonomo{modo,ruta_proyecto,no_modificar,prerequisitos,siguiente_payload,al_fallar}:
   autonomo,ColLawRAG,"docs/mejoras/*.md","FASE_0 cerrada; embeddings unificados; índice actual; npm install","docs/mejoras/payloads/FASE_2_CHUNKING_SEMANTICO.toon",abortar_fase
 
-multi_agente{habilitado,herramientas,sprint_id,paralelo_en_fase,post_fase_agente}:
-  true,"cursor,open_claw",Sprint_1_fundamentos,true,cursor
+multi_agente{habilitado,herramientas,sprint_id,paralelo_en_fase,post_fase_agente,token_budget}:
+  true,"cursor,open_claw",Sprint_1_fundamentos,true,cursor,"cursor=intensivo open_claw=ligero"
 
-asignacion_agente[4]{tarea_id,agente,archivos_exclusivos}:
-  1.1,cursor,"lib/vector-index.ts scripts/ingest.mjs lib/retrieval.ts package.json"
-  1.2,cursor,"lib/retrieval.ts lib/bm25.ts"
-  1.3,open_claw,"lib/query-expansion.ts lib/retrieval.ts"
-  1.4,open_claw,lib/retrieval.ts
+asignacion_agente[4]{tarea_id,agente,archivos_exclusivos,intensidad_tokens}:
+  1.1,cursor,"lib/vector-index.ts scripts/ingest.mjs lib/retrieval.ts package.json",muy_alta
+  1.2,cursor,"lib/retrieval.ts lib/bm25.ts",alta
+  1.3,cursor,"lib/query-expansion.ts lib/retrieval.ts",alta
+  1.4,open_claw,lib/retrieval.ts,baja
 
 grupos_paralelos[2]{ola,tareas,agentes,nota}:
-  1,"1.1 1.2",cursor,"Cursor primero: índice ANN y BM25 RRF; retrieval.ts base"
-  2,"1.3 1.4",open_claw,"OpenClaw después: query-expansion y boost; integra en retrieval.ts tras ola 1"
+  1,"1.1 1.2 1.3",cursor,"Cursor: HNSW + BM25 RRF + query-expansion (todo el código nuevo)"
+  2,1.4,open_claw,"OpenClaw: solo aplicar boost por metadata en retrieval (pocas líneas)"
 
 archivos_compartidos[1]{archivo,orden_edicion}:
-  lib/retrieval.ts,"cursor (ola 1) luego open_claw (ola 2)"
+  lib/retrieval.ts,"cursor (ola 1) luego open_claw (ola 2 solo boost)"
 
 instruccion_herramienta[2]{herramienta,instruccion}:
-  cursor,"Ejecuta ola 1: tareas 1.1 y 1.2 (vector-index ingest retrieval bm25 RRF). No toques lib/query-expansion.ts. Tras cerrar ola 1, avisa o deja merge listo para open_claw. Ejecuta post_fase_comando (ingest) si regeneras índice."
-  open_claw,"Ejecuta ola 2 tras ola 1 cerrada: tareas 1.3 y 1.4 (query-expansion.ts nuevo e integración en retrieval.ts). No modifiques lib/vector-index.ts scripts/ingest.mjs lib/bm25.ts. No ejecutes post_fase_comando."
+  cursor,"Ejecuta ola 1: tareas 1.1 1.2 1.3 (vector-index ingest retrieval bm25 RRF query-expansion). Crear lib/query-expansion.ts e integrar en retrieval. Ejecuta post_fase_comando (ingest) si regeneras índice."
+  open_claw,"Solo tarea 1.4 (ligera): en lib/retrieval.ts añadir applyMetadataBoost tras retrieval; pocas líneas. No toques vector-index ingest bm25 query-expansion. No ejecutes post_fase_comando."
 
 cuellos_botella[3]{num,descripcion,archivo}:
   4,Búsqueda lineal O(n) sobre 33k chunks,lib/retrieval.ts 313-317

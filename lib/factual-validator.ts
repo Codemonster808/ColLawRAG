@@ -124,7 +124,7 @@ export function verifyNumberInChunks(
       // Buscar porcentaje con tolerancia
       const pattern = new RegExp(`(${value}(?:\\.\\d+)?)\\s*%`, 'i')
       if (pattern.test(content)) {
-        sources.push(chunk.metadata.title)
+        sources.push(chunk.metadata?.title)
       }
     } else if (type === 'number') {
       // Buscar número (con diferentes formatos)
@@ -136,14 +136,14 @@ export function verifyNumberInChunks(
       
       for (const pattern of patterns) {
         if (pattern.test(content)) {
-          sources.push(chunk.metadata.title)
+          sources.push(chunk.metadata?.title)
           break
         }
       }
     } else if (type === 'date') {
       // Buscar año
       if (content.includes(value)) {
-        sources.push(chunk.metadata.title)
+        sources.push(chunk.metadata?.title)
       }
     }
   }
@@ -177,7 +177,7 @@ export function validateFactual(
       const verification = verifyArticleInChunk(article, chunk)
       if (verification.exists) {
         found = true
-        source = chunk.metadata.title
+        source = chunk.metadata?.title
         break
       }
     }

@@ -162,134 +162,31 @@ export function generateLegalWarnings(complexity: 'baja' | 'media' | 'alta', leg
 
 /**
  * Genera el prompt del sistema especializado por área legal
+ * FASE_4 4.2: Comprimido a ≤350 tokens; 4.4: ejemplo HNAC corto con secciones claras
  */
 export function generateSystemPrompt(legalArea: LegalArea, maxCitations: number, complexity: 'baja' | 'media' | 'alta' = 'media'): string {
-  const areaPrompts: Record<LegalArea, string> = {
-    laboral: `Eres un abogado laboralista especializado en derecho del trabajo colombiano. Tu expertise incluye:
-- Código Sustantivo del Trabajo y sus decretos reglamentarios
-- Jurisprudencia de la Corte Constitucional y Corte Suprema en materia laboral
-- Prestaciones sociales, jornadas laborales, y relaciones laborales
-- Procedimientos ante el Ministerio del Trabajo y jurisdicción laboral
-
-Debes estructurar tu respuesta de forma profesional en estas secciones obligatorias:
-- HECHOS RELEVANTES: identificación clara de los hechos que inciden en la solución legal
-- NORMAS APLICABLES: normas y jurisprudencia aplicables con citas [1], [2], etc.
-- ANÁLISIS JURÍDICO: aplicación de las normas a los hechos concretos
-- CONCLUSIÓN: conclusión jurídica clara y fundamentada
-- RECOMENDACIÓN: pasos concretos a seguir (plazos, documentos, entidades) cuando aplique.`,
-    
-    comercial: `Eres un abogado comercialista especializado en derecho comercial colombiano. Tu expertise incluye:
-- Código de Comercio y leyes comerciales especiales
-- Sociedades comerciales y contratos mercantiles
-- Jurisprudencia comercial de la Corte Suprema
-- Regulación de entidades financieras y superintendencias
-Responde siempre estructurando: HECHOS RELEVANTES, NORMAS APLICABLES, ANÁLISIS JURÍDICO, CONCLUSIÓN y RECOMENDACIÓN (pasos concretos cuando aplique).`,
-    
-    civil: `Eres un abogado civilista especializado en derecho civil colombiano. Tu expertise incluye:
-- Código Civil y leyes civiles
-- Contratos, propiedad, y sucesiones
-- Responsabilidad civil y obligaciones
-- Jurisprudencia civil de la Corte Suprema
-Responde siempre estructurando: HECHOS RELEVANTES, NORMAS APLICABLES, ANÁLISIS JURÍDICO, CONCLUSIÓN y RECOMENDACIÓN (pasos concretos cuando aplique).`,
-    
-    penal: `Eres un abogado penalista especializado en derecho penal colombiano. Tu expertise incluye:
-- Código Penal y leyes penales especiales
-- Procedimiento penal y garantías procesales
-- Jurisprudencia penal de la Corte Suprema
-- Sistema de responsabilidad penal
-Responde siempre estructurando: HECHOS RELEVANTES, NORMAS APLICABLES, ANÁLISIS JURÍDICO, CONCLUSIÓN y RECOMENDACIÓN (pasos concretos cuando aplique).`,
-    
-    administrativo: `Eres un abogado administrativista especializado en derecho administrativo colombiano. Tu expertise incluye:
-- Actos administrativos y procedimientos administrativos
-- Acciones constitucionales (tutela, cumplimiento, populares)
-- Jurisprudencia del Consejo de Estado y Corte Constitucional
-- Contratación estatal y función pública
-Responde siempre estructurando: HECHOS RELEVANTES, NORMAS APLICABLES, ANÁLISIS JURÍDICO, CONCLUSIÓN y RECOMENDACIÓN (pasos concretos cuando aplique).`,
-    
-    tributario: `Eres un abogado tributario especializado en derecho tributario colombiano. Tu expertise incluye:
-- Estatuto Tributario y normas tributarias
-- Jurisprudencia del Consejo de Estado en materia tributaria
-- Procedimientos ante la DIAN
-- Planeación tributaria y cumplimiento
-Responde siempre estructurando: HECHOS RELEVANTES, NORMAS APLICABLES, ANÁLISIS JURÍDICO, CONCLUSIÓN y RECOMENDACIÓN (pasos concretos cuando aplique).`,
-    
-    constitucional: `Eres un abogado constitucionalista especializado en derecho constitucional colombiano. Tu expertise incluye:
-- Constitución Política y bloque de constitucionalidad
-- Jurisprudencia de la Corte Constitucional
-- Acciones constitucionales y mecanismos de protección
-- Control de constitucionalidad
-Responde siempre estructurando: HECHOS RELEVANTES, NORMAS APLICABLES, ANÁLISIS JURÍDICO, CONCLUSIÓN y RECOMENDACIÓN (pasos concretos cuando aplique).`,
-    
-    general: `Eres un abogado especializado en la normativa colombiana con conocimiento integral del ordenamiento jurídico. Responde siempre estructurando: HECHOS RELEVANTES, NORMAS APLICABLES, ANÁLISIS JURÍDICO, CONCLUSIÓN y RECOMENDACIÓN (pasos concretos cuando aplique).`
+  const areaOneLine: Record<LegalArea, string> = {
+    laboral: 'Eres abogado laboralista colombiano (CST, prestaciones, jurisprudencia laboral).',
+    comercial: 'Eres abogado comercialista colombiano (Código de Comercio, sociedades, contratos).',
+    civil: 'Eres abogado civilista colombiano (Código Civil, contratos, sucesiones).',
+    penal: 'Eres abogado penalista colombiano (Código Penal, garantías procesales).',
+    administrativo: 'Eres abogado administrativista colombiano (actos administrativos, tutela, Consejo de Estado).',
+    tributario: 'Eres abogado tributario colombiano (Estatuto Tributario, DIAN).',
+    constitucional: 'Eres abogado constitucionalista colombiano (CP, Corte Constitucional).',
+    general: 'Eres abogado especializado en normativa colombiana.'
   }
-  
-  const basePrompt = areaPrompts[legalArea]
-  
-  // Instrucciones adicionales para consultas complejas
-  const complexQueryInstructions = complexity === 'alta' ? `
-6. CONSULTAS COMPLEJAS - INSTRUCCIONES ESPECIALES:
-   - Si la consulta tiene múltiples partes, responde cada parte de forma estructurada
-   - Si es una consulta comparativa, organiza la respuesta en secciones claras para cada elemento comparado
-   - Si es una consulta procedimental, detalla TODOS los pasos en orden cronológico
-   - Si hay contradicciones entre fuentes, explícalas claramente y prioriza según jerarquía legal (Constitución > Ley > Decreto)
-   - Si la consulta requiere información de múltiples áreas legales, integra la información de forma coherente
-   - Para consultas que requieren jurisprudencia, cita los criterios específicos de las sentencias relevantes
-   - Si la información disponible no cubre todos los aspectos de la consulta, indícalo explícitamente en cada sección afectada` : ''
-  
-  return `${basePrompt}
+  const base = areaOneLine[legalArea]
+  const complexNote = complexity === 'alta' ? ' Consultas complejas: responde por partes, prioriza jerarquía Constitución > Ley > Decreto.' : ''
+  const example = `
+Ejemplo de formato (usa estos títulos exactos):
+**HECHOS RELEVANTES:** [hechos clave de la consulta.]
+**NORMAS APLICABLES:** [normas con citas [1], [2].]
+**ANÁLISIS JURÍDICO:** [aplicación de normas a hechos.]
+**CONCLUSIÓN:** [conclusión jurídica clara.]
+**RECOMENDACIÓN:** [pasos concretos si aplica.]`
+  return `${base}${complexNote}
 
-INSTRUCCIONES CRÍTICAS - ESTRUCTURA OBLIGATORIA HNAC:
-1. **DEBES** estructurar tu respuesta EXACTAMENTE con estas secciones en este orden (NO omitas ninguna):
-   
-   **HECHOS RELEVANTES:**
-   [Identifica claramente los hechos clave de la consulta. Mínimo 20 caracteres. Describe la situación específica.]
-   
-   **NORMAS APLICABLES:**
-   [Cita las normas legales relevantes con referencias [1], [2], etc. Mínimo 20 caracteres. Incluye artículos específicos cuando sea posible.]
-   
-   **ANÁLISIS JURÍDICO:**
-   [Aplica las normas a los hechos específicos. Mínimo 30 caracteres. Explica cómo las normas se relacionan con los hechos.]
-   
-   **CONCLUSIÓN:**
-   [Resume la respuesta legal de forma clara y fundamentada. Mínimo 20 caracteres. Debe ser una conclusión jurídica específica.]
-   
-   **RECOMENDACIÓN:**
-   [Proporciona pasos concretos a seguir, plazos, documentos necesarios, entidades competentes. Opcional pero altamente recomendado.]
-
-2. **FORMATO REQUERIDO**: Usa exactamente estos títulos de sección (con ** para negrita):
-   - **HECHOS RELEVANTES:**
-   - **NORMAS APLICABLES:**
-   - **ANÁLISIS JURÍDICO:**
-   - **CONCLUSIÓN:**
-   - **RECOMENDACIÓN:**
-
-3. **VALIDACIÓN**: Tu respuesta será validada automáticamente. Si falta alguna sección requerida o no cumple el formato, se rechazará y deberás regenerarla.
-
-2. CITAS: Solo puedes citar fuentes del 1 al ${maxCitations}. NUNCA cites fuera de este rango.
-   - Si necesitas más fuentes, indica que la información disponible es limitada
-   - Cada cita debe ser relevante y precisa
-   - Las citas deben aparecer en la sección **NORMAS APLICABLES:**
-
-⚠️ REGLA ANTI-ALUCINACIÓN — OBLIGATORIA:
-   - SOLO puedes mencionar artículos, leyes, decretos y sentencias que aparezcan TEXTUALMENTE en las fuentes [1]-[${maxCitations}] del contexto.
-   - PROHIBIDO inventar o recordar artículos de tu entrenamiento. Si el Art. X no aparece en las fuentes, NO lo menciones.
-   - Si el contexto no contiene el artículo exacto, di: "Las fuentes disponibles no incluyen el artículo específico, pero según [fuente X]..."
-   - NUNCA cites artículos inexistentes como Art. 190 CST, Art. 408 CST, etc. Solo cita lo que está en las fuentes.
-
-3. PRECISIÓN:
-   - Los artículos que cites DEBEN aparecer en el texto de las fuentes proporcionadas arriba
-   - Si mencionas números o porcentajes, deben ser exactos según las fuentes
-   - Si hay contradicciones entre fuentes, menciónalas explícitamente
-
-4. LENGUAJE:
-   - Usa español jurídico claro y preciso
-   - Evita jerga innecesaria pero mantén precisión técnica
-   - Sé específico: menciona plazos exactos, documentos necesarios, entidades competentes
-
-5. LIMITACIONES:
-   - Si la información disponible es insuficiente, indícalo claramente
-   - No inventes información que no esté en las fuentes proporcionadas
-   - Si el caso requiere análisis específico, recomienda asesoría profesional${complexQueryInstructions}`
+Responde SIEMPRE con las secciones anteriores en este orden. Solo cita fuentes [1] a [${maxCitations}]. No inventes artículos que no estén en el contexto.${example}`
 }
 
 /**
@@ -308,7 +205,7 @@ export function generateUserPrompt(context: PromptContext): string {
     const chapterInfo = r.chunk.metadata.chapter 
       ? ` (${r.chunk.metadata.chapter})` 
       : ''
-    const block = `Fuente [${i + 1}] (${r.chunk.metadata.title}${articleInfo}${chapterInfo}):\n${r.chunk.content}`
+    const block = `Fuente [${i + 1}] (${r.chunk.metadata?.title}${articleInfo}${chapterInfo}):\n${r.chunk.content}`
     contextBlocks += (i > 0 ? '\n\n' : '') + block
   }
   
@@ -351,7 +248,7 @@ ${contextBlocks}${citationWarning}
 INSTRUCCIONES:
 Responde como un abogado profesional especializado en ${legalArea || 'derecho colombiano'}, estructurando tu respuesta según el formato indicado.${warnings}${complexInstructions}
 
-IMPORTANTE: Solo puedes citar fuentes del 1 al ${Math.min(chunks.length, maxCitations)}. Si necesitas más información, indica que la consulta requiere análisis adicional con más fuentes legales.${articlesList}`
+IMPORTANTE: Solo puedes citar fuentes del 1 al ${Math.min(chunks.length, maxCitations)}. Solo menciona artículos que aparezcan en el contexto; no inventes normas. Si necesitas más información, indica que la consulta requiere análisis adicional con más fuentes legales.${articlesList}`
 }
 
 /**

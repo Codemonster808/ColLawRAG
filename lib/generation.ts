@@ -2,12 +2,12 @@ import { type DocumentChunk } from './types'
 import { generatePrompts, type PromptContext } from './prompt-templates'
 import { logger } from './logger'
 import { validateHNACStructure, generateHNACErrorFeedback, type HNACValidationResult } from './hnac-validator'
+import { consultarVigencia, inferNormaIdFromTitle } from './norm-vigencia'
 
 // Default model para testing gratuito: Qwen2.5-7B-Instruct via HF serverless (sin créditos)
-// Para producción comercial: deepseek/deepseek-v3.2 via Novita (requiere créditos HF)
-// El SDK @huggingface/inference usa hf-inference serverless automáticamente (gratis, plan free)
+// FASE_4 4.3: Para producción usar HF_GENERATION_MODEL=72B o API (DeepSeek/Novita); sin fallback 3B
 const HF_MODEL_GENERATION_DEFAULT = 'Qwen/Qwen2.5-7B-Instruct'
-const HF_MODEL_FALLBACK_DEFAULT = 'meta-llama/Llama-3.2-3B-Instruct'
+const HF_MODEL_FALLBACK_DEFAULT = 'mistralai/Mistral-7B-Instruct-v0.3'
 
 // Helper function to sleep
 function sleep(ms: number): Promise<void> {
@@ -39,9 +39,10 @@ function isRetryableError(error: any): boolean {
 // Maximum number of citations to include in context (base, can be increased for complex queries)
 const MAX_CITATIONS_BASE = 8
 const MAX_CITATIONS_COMPLEX = 16
-// Limit context to avoid API errors (base ~4000 chars, can be increased for complex queries)
-const MAX_CONTEXT_CHARS_BASE = 4000
-const MAX_CONTEXT_CHARS_COMPLEX = 8000
+// FASE_4 4.1: Ventana de contexto ampliada (12k base, 24k complejo)
+const MAX_CONTEXT_CHARS_BASE = 12000
+const MAX_CONTEXT_CHARS_COMPLEX = 24000
+const MAX_CONTEXT_CHARS_MEDIA = 12000
 
 /**
  * Generate answer using a specific model with retry logic
@@ -53,10 +54,52 @@ async function generateWithModel(
   maxTokens: number,
   timeoutMs: number
 ): Promise<string> {
+  const provider = (process.env.GEN_PROVIDER || 'hf').toLowerCase()
+
+  // Groq: API OpenAI-compatible (Llama 3.3 70B, etc.) — S1.8
+  if (provider === 'groq') {
+    const apiKey = process.env.GROQ_API_KEY
+    if (!apiKey) throw new Error('GROQ_API_KEY not set (required when GEN_PROVIDER=groq)')
+    const apiUrl = 'https://api.groq.com/openai/v1/chat/completions'
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), timeoutMs)
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model,
+          messages: [
+            { role: 'system', content: systemPrompt },
+            { role: 'user', content: userPrompt },
+          ],
+          max_tokens: maxTokens,
+          temperature: 0.1,
+        }),
+        signal: controller.signal,
+      })
+      clearTimeout(timeoutId)
+      if (!response.ok) {
+        const errorText = await response.text()
+        const error = new Error(`Groq API error: ${response.status} - ${errorText}`)
+        ;(error as any).statusCode = response.status
+        throw error
+      }
+      const data = await response.json() as { choices?: Array<{ message?: { content?: string } }> }
+      if (data.choices?.[0]?.message?.content) return data.choices[0].message.content.trim()
+      throw new Error('No content in response')
+    } catch (err: any) {
+      clearTimeout(timeoutId)
+      if (err.name === 'AbortError') throw new Error(`Generation timeout after ${timeoutMs}ms`)
+      throw err
+    }
+  }
+
   const apiKey = process.env.HUGGINGFACE_API_KEY
   if (!apiKey) throw new Error('HUGGINGFACE_API_KEY not set')
-
-  const provider = (process.env.GEN_PROVIDER || 'hf').toLowerCase()
 
   // Novita: modelos de pago (DeepSeek V3, etc.) via router.huggingface.co/novita
   if (provider === 'novita') {
@@ -279,7 +322,7 @@ export async function generateAnswerSpanish(params: {
 
   // Ajustar límites según complejidad
   const maxCitations = complexity === 'alta' ? MAX_CITATIONS_COMPLEX : complexity === 'media' ? 12 : MAX_CITATIONS_BASE
-  const maxContextChars = complexity === 'alta' ? MAX_CONTEXT_CHARS_COMPLEX : complexity === 'media' ? 6000 : MAX_CONTEXT_CHARS_BASE
+  const maxContextChars = complexity === 'alta' ? MAX_CONTEXT_CHARS_COMPLEX : complexity === 'media' ? MAX_CONTEXT_CHARS_MEDIA : MAX_CONTEXT_CHARS_BASE
   
   logger.debug('Generation parameters', {
     requestId,
@@ -295,7 +338,20 @@ export async function generateAnswerSpanish(params: {
   
   for (let i = 0; i < Math.min(chunks.length, maxCitations); i++) {
     const r = chunks[i]
-    const block = `Fuente [${i + 1}] (${r.chunk.metadata.title}${r.chunk.metadata.article ? ` — ${r.chunk.metadata.article}` : ''}):\n${r.chunk.content}`
+    // FASE_4 4.5: Incluir vigencia, jerarquía y score en cada fuente para el LLM
+    const title = r.chunk.metadata.title || ''
+    const article = r.chunk.metadata.article
+    const hierarchy = r.chunk.metadata.articleHierarchy
+    const normaId = inferNormaIdFromTitle(title)
+    const vigencia = normaId ? consultarVigencia(normaId) : null
+    const vigenciaLabel = vigencia?.estado === 'derogada' ? 'DEROGADO' : vigencia?.estado === 'parcialmente_derogada' ? 'PARCIALMENTE DEROGADO' : 'VIGENTE'
+    const scoreStr = typeof r.score === 'number' ? r.score.toFixed(2) : ''
+    const metaParts = [title]
+    if (article) metaParts.push(article)
+    metaParts.push(vigenciaLabel)
+    if (hierarchy) metaParts.push(hierarchy)
+    if (scoreStr) metaParts.push(`relevancia ${scoreStr}`)
+    const block = `Fuente [${i + 1}] (${metaParts.join(' — ')}):\n${r.chunk.content}`
     const blockSize = block.length + (i > 0 ? 2 : 0) // +2 for \n\n
     
     // Si es el primer chunk y es muy grande, truncarlo en lugar de omitirlo
@@ -551,8 +607,8 @@ export async function generateAnswerSpanish(params: {
                 score: validation.score
               })
               
-              // Re-generar con feedback mejorado (máximo 2 intentos)
-              const maxRegenerationAttempts = 2
+              // FASE_4 4.4: Máximo 1 regeneración HNAC (fallback model)
+              const maxRegenerationAttempts = 1
               let regeneratedResult = result
               let lastValidation = validation
               

@@ -20,6 +20,11 @@
  *   --skip-rag          Omitir llamadas al RAG (evaluar respuestas ya guardadas)
  *   --verbose           Mostrar payloads TOON y respuestas completas
  *   --copy-to-history   Copiar results al directorio data/benchmarks/history/
+ *
+ * Juez (LLM-as-judge):
+ *   Por defecto usa Ollama local (JUDGE_ENDPOINT, JUDGE_MODEL). Para Groq:
+ *   JUDGE_PROVIDER=groq  GROQ_API_KEY=gsk_...  [JUDGE_MODEL=llama-3.3-70b-versatile]
+ *   El script usará api.groq.com como juez sin necesidad de Ollama.
  */
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
@@ -94,9 +99,24 @@ const HF_KEY = process.env.HUGGINGFACE_API_KEY
     } catch { return null; }
   })();
 
-// Juez local via Ollama — sin rate limit, sin costo
-const JUDGE_MODEL = process.env.JUDGE_MODEL || 'qwen2.5:7b-instruct';
-const JUDGE_ENDPOINT = process.env.JUDGE_ENDPOINT || 'http://localhost:11434/v1/chat/completions';
+const GROQ_KEY = process.env.GROQ_API_KEY
+  || (() => {
+    try {
+      const env = readFileSync(join(ROOT, '.env.local'), 'utf8');
+      const m = env.match(/GROQ_API_KEY=(.+)/);
+      return m ? m[1].trim() : null;
+    } catch { return null; }
+  })();
+
+// JUDGE_PROVIDER: 'ollama' | 'groq'. Si es 'groq', se usa Groq Cloud como juez (OpenAI-compatible).
+const JUDGE_PROVIDER = (process.env.JUDGE_PROVIDER || 'ollama').toLowerCase();
+const isJudgeGroq = JUDGE_PROVIDER === 'groq';
+
+// Juez: Ollama (local) o Groq (cloud)
+const JUDGE_MODEL = process.env.JUDGE_MODEL || (isJudgeGroq ? 'llama-3.3-70b-versatile' : 'qwen2.5:14b-instruct');
+const JUDGE_ENDPOINT = isJudgeGroq
+  ? 'https://api.groq.com/openai/v1/chat/completions'
+  : (process.env.JUDGE_ENDPOINT || 'http://localhost:11434/v1/chat/completions');
 
 // ─── Colores terminal ─────────────────────────────────────────────────────────
 const C = {
@@ -156,9 +176,9 @@ async function queryRAG(question, retries = 3) {
 // ─── Paso 2: Construir prompt simplificado para el juez ──────────────────────
 
 function buildJudgePromptToon({ question, ragAnswer, referenceAnswer, area, normasClave, criterio }) {
-  // Compact prompt for local 7B models — clear scale definition, no hardcoded example values
-  const ragShort = ragAnswer.substring(0, 250).replace(/\n+/g, ' ');
-  const refShort = referenceAnswer.substring(0, 180).replace(/\n+/g, ' ');
+  // FASE_5 5.4: No truncar a 250 chars; permitir hasta 1500 chars para contexto completo del juez
+  const ragShort = ragAnswer.substring(0, 1500).replace(/\n+/g, ' ');
+  const refShort = referenceAnswer.substring(0, 800).replace(/\n+/g, ' ');
   const normas = Array.isArray(normasClave) ? normasClave.slice(0, 3).join(', ') : (normasClave || '');
 
   return `Evalúa la respuesta RAG vs la respuesta del experto en derecho colombiano.
@@ -173,10 +193,11 @@ Puntúa cada criterio de 0 a 10 (0=incorrecto, 5=parcial, 10=perfecto):
 - articulos_correctos: ¿menciona los artículos exactos?
 - interpretacion_valida: ¿la interpretación jurídica es correcta?
 - completitud: ¿responde todo lo preguntado?
+- relevancia_contexto: ¿la respuesta se apoya en el contexto legal proporcionado y es relevante para la pregunta?
 - ausencia_alucinaciones: ¿no inventa normas inexistentes? (10=sin alucinaciones, 0=muchas)
 
 Responde SOLO con JSON válido, sin texto adicional:
-{"precision_normativa":0,"articulos_correctos":0,"interpretacion_valida":0,"completitud":0,"ausencia_alucinaciones":0,"normas_correctas":[],"normas_faltantes":[],"alucinaciones":[],"comentario":"breve"}`;
+{"precision_normativa":0,"articulos_correctos":0,"interpretacion_valida":0,"completitud":0,"relevancia_contexto":0,"ausencia_alucinaciones":0,"normas_correctas":[],"normas_faltantes":[],"alucinaciones":[],"comentario":"breve"}`;
 }
 
 // ─── Paso 3: Llamar al LLM juez ───────────────────────────────────────────────
@@ -210,6 +231,7 @@ function extractScoresFallback(content) {
     articulos_correctos: getNum('articulos_correctos'),
     interpretacion_valida: getNum('interpretacion_valida'),
     completitud: getNum('completitud'),
+    relevancia_contexto: getNum('relevancia_contexto'),
     ausencia_alucinaciones: getNum('ausencia_alucinaciones'),
     score_total: getNum('score_total'),
     veredicto: content.match(/"veredicto"\s*:\s*"(\w+)"/)?.[1] || 'DESCONOCIDO',
@@ -218,12 +240,12 @@ function extractScoresFallback(content) {
     alucinaciones: [],
     comentario: '[fallback-parse]',
   };
-  // Si score_total no fue extraído, calcularlo como promedio
+  const criteriaCount = 6;
   if (!content.match(/"score_total"/)) {
     scores.score_total = parseFloat(
       ((scores.precision_normativa + scores.articulos_correctos +
         scores.interpretacion_valida + scores.completitud +
-        scores.ausencia_alucinaciones) / 5).toFixed(1)
+        (scores.relevancia_contexto ?? 5) + scores.ausencia_alucinaciones) / criteriaCount).toFixed(1)
     );
   }
   return scores;
@@ -231,12 +253,17 @@ function extractScoresFallback(content) {
 
 async function callJudge(toonPrompt, retries = 3) {
   const isLocal = JUDGE_ENDPOINT.includes('localhost') || JUDGE_ENDPOINT.includes('127.0.0.1');
-  if (!isLocal && !HF_KEY) throw new Error('HUGGINGFACE_API_KEY no configurada');
+  if (isJudgeGroq) {
+    if (!GROQ_KEY) throw new Error('JUDGE_PROVIDER=groq requiere GROQ_API_KEY en .env.local o variable de entorno');
+  } else if (!isLocal && !HF_KEY) {
+    throw new Error('HUGGINGFACE_API_KEY no configurada');
+  }
 
   const systemPrompt = `Legal evaluator. Respond ONLY with valid JSON object, no markdown, no extra text. Start with { and end with }.`;
 
   const headers = { 'Content-Type': 'application/json' };
-  if (!isLocal && HF_KEY) headers['Authorization'] = `Bearer ${HF_KEY}`;
+  if (isJudgeGroq) headers['Authorization'] = `Bearer ${GROQ_KEY}`;
+  else if (!isLocal && HF_KEY) headers['Authorization'] = `Bearer ${HF_KEY}`;
 
   for (let attempt = 1; attempt <= retries; attempt++) {
     const res = await fetch(JUDGE_ENDPOINT, {
@@ -249,7 +276,7 @@ async function callJudge(toonPrompt, retries = 3) {
           { role: 'user', content: toonPrompt + '\n\nResponde SOLO con el JSON (sin texto adicional):' },
         ],
         temperature: 0.0,
-        max_tokens: 300,
+        max_tokens: 500,
       }),
       signal: AbortSignal.timeout(150_000),
     });
@@ -279,7 +306,7 @@ async function callJudge(toonPrompt, retries = 3) {
 
     if (parsed) {
       // Post-proceso: calcular score_total y veredicto en código para consistencia
-      const criteriaKeys = ['precision_normativa', 'articulos_correctos', 'interpretacion_valida', 'completitud', 'ausencia_alucinaciones'];
+      const criteriaKeys = ['precision_normativa', 'articulos_correctos', 'interpretacion_valida', 'completitud', 'relevancia_contexto', 'ausencia_alucinaciones'];
       const criteriaScores = criteriaKeys.map(k => Math.max(0, Math.min(10, Number(parsed[k]) || 0)));
       const avgScore = criteriaScores.reduce((a, b) => a + b, 0) / criteriaKeys.length;
       parsed.score_total = parseFloat(avgScore.toFixed(1));
@@ -366,7 +393,7 @@ async function evaluateCase(caso, index, total) {
 
     // Mostrar detalles
     const ev = result.evaluacion;
-    console.log(gray(`  Normas: ${ev.precision_normativa}/10 | Artículos: ${ev.articulos_correctos}/10 | Interpretación: ${ev.interpretacion_valida}/10 | Completitud: ${ev.completitud}/10 | Sin aluc: ${ev.ausencia_alucinaciones}/10`));
+    console.log(gray(`  Normas: ${ev.precision_normativa}/10 | Artículos: ${ev.articulos_correctos}/10 | Interpretación: ${ev.interpretacion_valida}/10 | Completitud: ${ev.completitud}/10 | Relevancia: ${ev.relevancia_contexto ?? '-'}/10 | Sin aluc: ${ev.ausencia_alucinaciones}/10`));
     if (ev.alucinaciones?.length > 0) {
       console.log(red(`  ⚠ Alucinaciones: ${ev.alucinaciones.join(', ')}`));
     }
@@ -415,7 +442,7 @@ function generateReport(results) {
   );
 
   // Criterios promedio
-  const criterios = ['precision_normativa', 'articulos_correctos', 'interpretacion_valida', 'completitud', 'ausencia_alucinaciones'];
+  const criterios = ['precision_normativa', 'articulos_correctos', 'interpretacion_valida', 'completitud', 'relevancia_contexto', 'ausencia_alucinaciones'];
   const promCriterios = Object.fromEntries(
     criterios.map(c => [
       c,
@@ -550,6 +577,7 @@ function printSummary(report) {
     articulos_correctos: '🔢 Artículos correctos',
     interpretacion_valida: '🧠 Interpretación',
     completitud: '✅ Completitud',
+    relevancia_contexto: '🎯 Relevancia contexto',
     ausencia_alucinaciones: '🚫 Sin alucinaciones',
   };
   for (const [criterio, promedio] of Object.entries(report.promedio_criterios)) {
@@ -597,7 +625,7 @@ async function main() {
   console.log('\n' + bold(cyan('🔬 ColLawRAG — Evaluador de Accuracy')));
   console.log(gray(`  API: ${API_URL}`));
   console.log(gray(`  Dataset: ${DATASET_PATH}`));
-  console.log(gray(`  Modelo juez: ${JUDGE_MODEL}`));
+  console.log(gray(`  Juez: ${JUDGE_PROVIDER} — modelo ${JUDGE_MODEL}`));
 
   // Cargar dataset
   if (!existsSync(DATASET_PATH)) {
@@ -638,7 +666,13 @@ async function main() {
 
   const isLocalJudge = JUDGE_ENDPOINT.includes('localhost') || JUDGE_ENDPOINT.includes('127.0.0.1');
   console.log(gray(`\n  → ${casos.length} casos a evaluar`));
-  if (!HF_KEY && !isLocalJudge) {
+  if (isJudgeGroq) {
+    if (!GROQ_KEY) {
+      console.error(red('\n✗ JUDGE_PROVIDER=groq requiere GROQ_API_KEY. Configura .env.local o variable de entorno.'));
+      process.exit(1);
+    }
+    console.log(gray('  Juez: Groq Cloud (no se usa HUGGINGFACE_API_KEY para el juez)'));
+  } else if (!HF_KEY && !isLocalJudge) {
     console.error(red('\n✗ HUGGINGFACE_API_KEY no encontrada. Configura .env.local o variable de entorno.'));
     process.exit(1);
   }

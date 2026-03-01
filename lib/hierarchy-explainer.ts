@@ -34,7 +34,7 @@ export async function explainLegalHierarchy(
   const hierarchyData = await Promise.all(
     chunks.map(async ({ chunk, score }) => {
       const hierarchyScore = getLegalHierarchyScore(chunk)
-      const normaId = inferNormaIdFromTitle(chunk.metadata.title)
+      const normaId = inferNormaIdFromTitle(chunk.metadata?.title)
       const vigencia = normaId ? consultarVigencia(normaId) : null
 
       return {
@@ -42,8 +42,8 @@ export async function explainLegalHierarchy(
         score,
         hierarchyScore,
         vigencia: vigencia as any, // Tipo dinámico de consultarVigencia
-        type: getHierarchyType(chunk.metadata.title),
-        hierarchyLevel: getHierarchyLevel(chunk.metadata.title)
+        type: getHierarchyType(chunk.metadata?.title),
+        hierarchyLevel: getHierarchyLevel(chunk.metadata?.title)
       }
     })
   )
@@ -76,9 +76,9 @@ export async function explainLegalHierarchy(
   return {
     explanation,
     hierarchyOrder: hierarchyData.map(({ chunk, hierarchyScore, type, vigencia }) => ({
-      title: chunk.metadata.title,
+      title: chunk.metadata?.title,
       type,
-      hierarchyLevel: getHierarchyLevel(chunk.metadata.title),
+      hierarchyLevel: getHierarchyLevel(chunk.metadata?.title),
       hierarchyScore,
       vigencia: vigencia
         ? {
@@ -121,7 +121,7 @@ async function generateHierarchyExplanation(
       : vigencia?.estado || 'no verificada'
 
     parts.push(
-      `${i + 1}. **${chunk.metadata.title}** (${type})`
+      `${i + 1}. **${chunk.metadata?.title}** (${type})`
     )
 
     if (!vigenciaStatus || vigenciaStatus !== 'vigente') {
@@ -131,7 +131,7 @@ async function generateHierarchyExplanation(
       }
     }
 
-    parts.push(`   - Nivel de jerarquía: ${getHierarchyLevelName(getHierarchyLevel(chunk.metadata.title))}`)
+    parts.push(`   - Nivel de jerarquía: ${getHierarchyLevelName(getHierarchyLevel(chunk.metadata?.title))}`)
     parts.push('')
   }
 
@@ -141,10 +141,10 @@ async function generateHierarchyExplanation(
 
   if (highestVigente) {
     parts.push(
-      `**Norma que prevalece:** ${highest.chunk.metadata.title}\n`
+      `**Norma que prevalece:** ${highest.chunk.metadata?.title}\n`
     )
     parts.push(
-      `Esta norma tiene la mayor jerarquía normativa (${getHierarchyLevelName(getHierarchyLevel(highest.chunk.metadata.title))}) y está vigente, por lo que prevalece sobre las demás fuentes consultadas.`
+      `Esta norma tiene la mayor jerarquía normativa (${getHierarchyLevelName(getHierarchyLevel(highest.chunk.metadata?.title))}) y está vigente, por lo que prevalece sobre las demás fuentes consultadas.`
     )
   } else {
     // Buscar la primera vigente
@@ -154,10 +154,10 @@ async function generateHierarchyExplanation(
 
     if (firstVigente) {
       parts.push(
-        `**Norma que prevalece:** ${firstVigente.chunk.metadata.title}\n`
+        `**Norma que prevalece:** ${firstVigente.chunk.metadata?.title}\n`
       )
       parts.push(
-        `Aunque ${highest.chunk.metadata.title} tiene mayor jerarquía, esta norma no está vigente. Por lo tanto, ${firstVigente.chunk.metadata.title} prevalece por ser la norma vigente de mayor jerarquía.`
+        `Aunque ${highest.chunk.metadata?.title} tiene mayor jerarquía, esta norma no está vigente. Por lo tanto, ${firstVigente.chunk.metadata?.title} prevalece por ser la norma vigente de mayor jerarquía.`
       )
     } else {
       parts.push(
@@ -191,10 +191,10 @@ function formatHierarchyExplanation(
 
   for (let i = 0; i < hierarchyData.length; i++) {
     const { chunk, type } = hierarchyData[i]
-    const level = getHierarchyLevel(chunk.metadata.title)
+    const level = getHierarchyLevel(chunk.metadata?.title)
     const levelName = getHierarchyLevelName(level)
 
-    sections.push(`| ${i + 1} | ${chunk.metadata.title} | ${type} | ${levelName} |`)
+    sections.push(`| ${i + 1} | ${chunk.metadata?.title} | ${type} | ${levelName} |`)
   }
 
   sections.push('')
@@ -218,8 +218,8 @@ function identifyConstitutionalPrinciples(
 
   // Verificar si hay Constitución
   const hasConstitution = hierarchyData.some(
-    d => d.chunk.metadata.title.toLowerCase().includes('constitución') ||
-         d.chunk.metadata.title.toLowerCase().includes('constitucion')
+    d => d.chunk.metadata?.title.toLowerCase().includes('constitución') ||
+         d.chunk.metadata?.title.toLowerCase().includes('constitucion')
   )
 
   if (hasConstitution) {
@@ -228,12 +228,12 @@ function identifyConstitutionalPrinciples(
 
   // Verificar jerarquía entre normas
   const hasLey = hierarchyData.some(
-    d => d.chunk.metadata.title.match(/\bley\s+\d+/i) ||
-         (d.chunk.metadata.type === 'estatuto' && d.chunk.metadata.title.toLowerCase().includes('ley'))
+    d => d.chunk.metadata?.title.match(/\bley\s+\d+/i) ||
+         (d.chunk.metadata.type === 'estatuto' && d.chunk.metadata?.title.toLowerCase().includes('ley'))
   )
 
   const hasDecreto = hierarchyData.some(
-    d => d.chunk.metadata.title.toLowerCase().includes('decreto')
+    d => d.chunk.metadata?.title.toLowerCase().includes('decreto')
   )
 
   if (hasLey && hasDecreto) {
@@ -243,7 +243,7 @@ function identifyConstitutionalPrinciples(
   // Verificar si hay jurisprudencia constitucional
   const hasJurisprudenciaCC = hierarchyData.some(
     d => d.chunk.metadata.type === 'jurisprudencia' &&
-         (d.chunk.metadata.title.toLowerCase().includes('corte constitucional') ||
+         (d.chunk.metadata?.title.toLowerCase().includes('corte constitucional') ||
           d.chunk.content.toLowerCase().includes('corte constitucional'))
   )
 
@@ -253,7 +253,7 @@ function identifyConstitutionalPrinciples(
 
   // Principio de vigencia
   const hasVigente = hierarchyData.some(
-    d => d.chunk.metadata.fechaVigencia || d.chunk.metadata.title.match(/\d{4}/)
+    d => d.chunk.metadata.fechaVigencia || d.chunk.metadata?.title.match(/\d{4}/)
   )
 
   if (hasVigente) {

@@ -1,0 +1,420 @@
+{
+  "ragas_style": {
+    "faithfulness": 0.96,
+    "answer_relevancy": 0.38,
+    "context_recall": null,
+    "context_precision": null,
+    "overall": 0.67
+  },
+  "fecha": "2026-02-25",
+  "api_url": "http://localhost:3000",
+  "modelo_juez": "qwen2.5:7b-instruct",
+  "resumen": {
+    "total_casos": 10,
+    "evaluados": 8,
+    "errores": 2,
+    "score_promedio": "4.24",
+    "accuracy_porcentaje": "42.4%"
+  },
+  "metrics": {
+    "fecha": "2026-02-25",
+    "api_url": "http://localhost:3000",
+    "modelo_juez": "qwen2.5:7b-instruct",
+    "accuracy_porcentaje": 42.4,
+    "score_promedio": 4.24,
+    "total_casos": 10,
+    "evaluados": 8,
+    "errores": 2,
+    "por_area": {
+      "laboral": {
+        "promedio": 3.98,
+        "casos": 5
+      },
+      "civil": {
+        "promedio": 4.67,
+        "casos": 3
+      }
+    },
+    "por_dificultad": {
+      "basico": {
+        "promedio": "3.75",
+        "casos": 4
+      },
+      "intermedio": {
+        "promedio": "4.37",
+        "casos": 3
+      },
+      "avanzado": {
+        "promedio": "5.80",
+        "casos": 1
+      }
+    },
+    "veredictos": {
+      "REGULAR": 6,
+      "ACEPTABLE": 2
+    },
+    "criterios": {
+      "precision_normativa": "3.63",
+      "articulos_correctos": "2.00",
+      "interpretacion_valida": "2.63",
+      "completitud": "3.88",
+      "relevancia_contexto": "3.63",
+      "ausencia_alucinaciones": "9.63"
+    }
+  },
+  "veredictos": {
+    "REGULAR": 6,
+    "ACEPTABLE": 2
+  },
+  "promedio_criterios": {
+    "precision_normativa": "3.63",
+    "articulos_correctos": "2.00",
+    "interpretacion_valida": "2.63",
+    "completitud": "3.88",
+    "relevancia_contexto": "3.63",
+    "ausencia_alucinaciones": "9.63"
+  },
+  "por_area": {
+    "laboral": {
+      "promedio": "3.98",
+      "casos": 5,
+      "scores": [
+        4,
+        3.2,
+        5.7,
+        3.7,
+        3.3
+      ]
+    },
+    "civil": {
+      "promedio": "4.67",
+      "casos": 3,
+      "scores": [
+        4.5,
+        3.7,
+        5.8
+      ]
+    }
+  },
+  "mejores_casos": [
+    {
+      "id": "CIV-004",
+      "area": "civil",
+      "score": 5.8
+    },
+    {
+      "id": "LAB-003",
+      "area": "laboral",
+      "score": 5.7
+    },
+    {
+      "id": "CIV-001",
+      "area": "civil",
+      "score": 4.5
+    }
+  ],
+  "peores_casos": [
+    {
+      "id": "LAB-002",
+      "area": "laboral",
+      "score": 3.2
+    },
+    {
+      "id": "LAB-006",
+      "area": "laboral",
+      "score": 3.3
+    },
+    {
+      "id": "CIV-003",
+      "area": "civil",
+      "score": 3.7
+    }
+  ],
+  "alucinaciones_detectadas": [
+    {
+      "id": "LAB-002",
+      "alucinaciones": [
+        "Artículo 492 del Código Sustantivo del Trabajo",
+        "Artículo 399, Artículo 297 y Artículo 410 del Código Penal"
+      ]
+    },
+    {
+      "id": "LAB-003",
+      "alucinaciones": [
+        "Art. 409 y 410 del Código Sustantivo del Trabajo"
+      ]
+    },
+    {
+      "id": "LAB-004",
+      "alucinaciones": [
+        "fuero de maternidad"
+      ]
+    },
+    {
+      "id": "CIV-004",
+      "alucinaciones": [
+        "Artículo 9o.",
+        "Artículo 13.",
+        "Artículo 10.",
+        "Artículo 14."
+      ]
+    }
+  ],
+  "resultados_detallados": [
+    {
+      "id": "LAB-001",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuántos días de vacaciones tiene derecho un trabajador con un año de trabajo?",
+      "respuesta_referencia": "Según el artículo 186 del Código Sustantivo del Trabajo (CST), el trabajador tiene derecho a 15 días hábiles consecutivos de vacaciones remuneradas por cada año de servicio. Este derecho es irrenunciable según el artículo 189 del CST.",
+      "respuesta_rag": "**HECHOS RELEVANTES:** Un trabajador con un año de trabajo solicita conocer su derecho a vacaciones.\n\n**NORMAS APLICABLES:** Según el Artículo 190 del Código Sustantivo del Trabajo [2], el trabajador gozará anualmente de al menos seis (6) días hábiles continuos de vacaciones. Además, el Artículo 310 [3] establece que los trabajadores de obras o actividades de construcción tienen derecho a vacaciones remuneradas de quince (15) días hábiles y consecutivos por cada año de servicios, pero esto parece aplicar específicamente a trabajadores de construcción. Para trabajadores en general, el Artículo 46 [5] menciona el derecho al pago de vacaciones y prestaciones sociales en proporción al tiempo laborado.\n\n**ANÁLISIS JURÍDICO:** Considerando el Artículo 190 [2], el trabajador tiene derecho a un mínimo de seis (6) días hábiles continuos de vacaciones. Sin embargo, para determinar si el trabajador tiene derecho a más días de vacaciones, es necesario considerar si se aplica el Artículo 310 [3] o si el trabajador es de otro sector. Dado que no se especifica el sector del trabajador, se asume que el Artículo 190 [2] es aplicable. Por lo tanto, el trabajador tiene derecho a al menos seis (6) días hábiles continuos de vacaciones.\n\n**CONCLUSIÓN:** Un trabajador con un año de trabajo tiene derecho a al menos seis (6) días hábiles continuos de vacaciones, según el Artículo 190 del Código Sustantivo del Trabajo [2].\n\n**RECOMENDACIÓN:** Para una respuesta más precisa, sería necesario conocer el sector o tipo de trabajo del empleado, ya que diferentes artículos del Código Sustantivo del Trabajo [2, 3, 5] podrían aplicar. Sin embargo, con la información proporcionada, el trabajador tiene derecho a un mínimo de seis (6) días hábiles continuos de vacaciones.",
+      "evaluacion": {
+        "precision_normativa": 2,
+        "articulos_correctos": 1,
+        "interpretacion_valida": 3,
+        "completitud": 4,
+        "relevancia_contexto": 5,
+        "ausencia_alucinaciones": 9,
+        "normas_correctas": [
+          "Art. 186 CST"
+        ],
+        "normas_faltantes": [
+          "Art. 189 CST"
+        ],
+        "alucinaciones": [],
+        "comentario": "La respuesta RAG cita correctamente el Artículo 190, pero no menciona los Artículos 186 y 189 del CST como lo requiere la pregunta. La interpretación es parcialmente correcta, ya que omite el derecho irrenunciable según el Artículo 189. La respuesta es incompleta al no considerar todos los aspectos requeridos y relevante en su contexto general pero no precisa.",
+        "score_total": 4,
+        "veredicto": "REGULAR"
+      },
+      "error": null,
+      "timestamp": "2026-02-25T20:20:00.787Z"
+    },
+    {
+      "id": "LAB-002",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es el salario mínimo legal mensual vigente en Colombia para 2024?",
+      "respuesta_referencia": "Para el año 2024, el salario mínimo legal mensual vigente (SMLMV) en Colombia fue fijado en $1.300.000 mediante el Decreto 2613 de 2023, representando un incremento del 12% respecto al año anterior. Adicionalmente, el auxilio de transporte quedó en $162.000 mensuales.",
+      "respuesta_rag": "**HECHOS RELEVANTES:** La consulta busca determinar el salario mínimo legal mensual vigente en Colombia para 2024. Sin embargo, las fuentes proporcionadas no contienen información directa sobre el salario mínimo vigente para 2024.\n\n**NORMAS APLICABLES:** Las fuentes proporcionadas se refieren a diferentes aspectos del derecho laboral y tributario, pero no especifican el salario mínimo legal mensual vigente para 2024. El Artículo 492 del Código Sustantivo del Trabajo [7] menciona que quedan vigentes las normas que regulan el salario mínimo, pero no proporciona el valor específico del salario mínimo.\n\n**ANÁLISIS JURÍDICO:** Dado que las fuentes proporcionadas no contienen información sobre el salario mínimo legal mensual vigente en Colombia para 2024, no es posible determinar el valor exacto del salario mínimo con la información disponible. Es importante destacar que el Artículo 399 del Código Penal [1], el Artículo 297 del Código Penal [2] y el Artículo 410 del Código Penal [3] mencionan el concepto de \"salarios mínimos legales mensuales vigentes\", pero no proporcionan el valor específico del salario mínimo.\n\n**CONCLUSIÓN:** La consulta requiere análisis adicional con más fuentes legales para determinar el salario mínimo legal mensual vigente en Colombia para 2024, ya que las fuentes proporcionadas no contienen información suficiente para proporcionar una respuesta precisa.\n\n**RECOMENDACIÓN:** Se recomienda buscar fuentes actualizadas y oficiales que proporcionen información sobre el salario mínimo legal mensual vigente en Colombia para 2024, como el Ministerio del Trabajo o la página oficial del Gobierno de Colombia.\n\n⚠️ **Vigencia:** La norma \"codigo codigo penal ley599\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"codigo codigo penal ley599\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"codigo codigo penal ley599\" tiene artículos derogados o modificados; verifique vigencia específica.",
+      "evaluacion": {
+        "precision_normativa": 1,
+        "articulos_correctos": 2,
+        "interpretacion_valida": 1,
+        "completitud": 3,
+        "relevancia_contexto": 2,
+        "ausencia_alucinaciones": 10,
+        "normas_correctas": [
+          "Decreto 2613 de 2023"
+        ],
+        "normas_faltantes": [],
+        "alucinaciones": [
+          "Artículo 492 del Código Sustantivo del Trabajo",
+          "Artículo 399, Artículo 297 y Artículo 410 del Código Penal"
+        ],
+        "comentario": "La respuesta experta es más precisa y relevante al contexto legal proporcionado.",
+        "score_total": 3.2,
+        "veredicto": "REGULAR"
+      },
+      "error": null,
+      "timestamp": "2026-02-25T20:22:19.457Z"
+    },
+    {
+      "id": "LAB-003",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuándo procede el despido sin justa causa y cuál es la indemnización?",
+      "respuesta_referencia": "Según el artículo 64 del CST, el empleador puede terminar el contrato sin justa causa pagando indemnización. Para contratos a término indefinido con trabajadores que ganen menos de 10 SMLMV: 30 días por el primer año y 20 días adicionales por cada año posterior. Para trabajadores con más de 10 SMLMV: 20 días por el primer año y 15 adicionales por cada año. El artículo 26 del Decreto 2351/65 modificó esta figura.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Cuándo procede el despido sin justa causa**\n\n\n\n**HECHOS RELEVANTES:** La consulta se refiere a la procedencia del despido sin justa causa en el contexto laboral colombiano. No se proporcionan detalles específicos sobre el caso, por lo que se asumirá un enfoque general.\n\n**NORMAS APLICABLES:** Según el Artículo 410 del Código Sustantivo del Trabajo [2], se establecen las justas causas para el despido de un trabajador amparado por el fuero. Sin embargo, para abordar el despido sin justa causa, es crucial entender que el Artículo 410 [2] se centra en las justas causas, lo que implica que el despido sin justa causa no se encuentra explícitamente regulado en las fuentes proporcionadas. El Artículo 409 [2] menciona excepciones, pero no se refiere directamente al despido sin justa causa.\n\n**ANÁLISIS JURÍDICO:** Dado que las fuentes proporcionadas no abordan directamente el despido sin justa causa, es necesario considerar que la legislación laboral colombiana generalmente protege los derechos de los trabajadores, estableciendo causales específicas para el despido con justa causa. El despido sin justa causa puede implicar responsabilidades para el empleador, como el pago de indemnizaciones. Sin embargo, las fuentes disponibles [1] a [8] no ofrecen una base legal directa para analizar el despido sin justa causa, ya que se centran en aspectos procesales, civiles, penales y de protección de datos, sin abordar específicamente este tema laboral.\n\n**CONCLUSIÓN:** La consulta requiere análisis adicional con más fuentes legales específicas del derecho laboral colombiano, ya que las fuentes proporcionadas no cubren directamente el tema del despido sin justa causa. Es importante considerar la legislación laboral vigente y la jurisprudencia relevante para determinar las condiciones y consecuencias del despido sin justa causa.\n\n**RECOMENDACIÓN:** Se recomienda consultar fuentes legales adicionales, como el Código Sustantivo del Trabajo y la jurisprudencia laboral colombiana, para obtener una comprensión más completa del tema. Además, es aconsejable buscar asesoramiento de un abogado laboralista especializado para evaluar cada caso de manera individual y proporcionar orientación basada en la legislación y la jurisprudencia actualizada.\n\n\n\n---\n\n\n\n**2. y cuál es la indemnización?**\n\n\n\n**HECHOS RELEVANTES:** La consulta se refiere a la indemnización en un contexto que no se especifica claramente, pero se menciona la pérdida parcial y la necesidad de determinar el monto de la indemnización.\n\n**NORMAS APLICABLES:** Según el Artículo 1031 del Código de Comercio [2], si la pérdida fuere parcial, el monto de la indemnización se determinará de acuerdo con la proporción que la mercancía perdida represente frente al total del despacho. Además, el Artículo 1567 del Código de Comercio [4] establece que los privilegios indicados en el artículo anterior podrán hacerse efectivos sobre las indemnizaciones debidas por pérdida o deterioro de las cosas cargadas.\n\n**ANÁLISIS JURÍDICO:** La determinación del monto de la indemnización dependerá de la proporción de la mercancía perdida en relación con el total del despacho, según lo establecido en el Artículo 1031 [2]. Es importante considerar que las partes pueden pactar un límite indemnizable, que no puede ser inferior al 75% del valor declarado. Además, es relevante considerar los privilegios que pueden hacerse efectivos sobre las indemnizaciones debidas por pérdida o deterioro de las cosas cargadas, como se establece en el Artículo 1567 [4].\n\n**CONCLUSIÓN:** La indemnización por pérdida parcial se determinará según la proporción de la mercancía perdida en relación con el total del despacho, y las partes pueden pactar un límite indemnizable. Es importante considerar los privilegios que pueden hacerse efectivos sobre las indemnizaciones debidas por pérdida o deterioro de las cosas cargadas.\n\n**RECOMENDACIÓN:** Se recomienda revisar el contrato o acuerdo específico que regula la relación entre las partes para determinar si se ha establecido un límite indemnizable o si se han pactado condiciones específicas para la indemnización. Además, es importante considerar la legislación vigente y consultar con un abogado especializado para asegurarse de que se cumplan con los requisitos legales aplicables. La consulta requiere análisis adicional con más fuentes legales para determinar la indemnización específica en este caso.\n\n⚠️ **Vigencia:** La norma \"Código de Procedimiento Penal (Ley 906 de 2004)\" tiene artículos derogados o modificados; verifique vigencia específica.",
+      "evaluacion": {
+        "precision_normativa": 10,
+        "articulos_correctos": 5,
+        "interpretacion_valida": 2,
+        "completitud": 3,
+        "relevancia_contexto": 4,
+        "ausencia_alucinaciones": 10,
+        "normas_correctas": [
+          "Art. 64 CST",
+          "Art. 65 CST"
+        ],
+        "normas_faltantes": [],
+        "alucinaciones": [
+          "Art. 409 y 410 del Código Sustantivo del Trabajo"
+        ],
+        "comentario": "La respuesta RAG no aborda directamente el despido sin justa causa, mientras que la experto lo hace correctamente.",
+        "score_total": 5.7,
+        "veredicto": "ACEPTABLE"
+      },
+      "error": null,
+      "timestamp": "2026-02-25T20:24:30.439Z"
+    },
+    {
+      "id": "LAB-004",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el fuero de maternidad y qué protección ofrece?",
+      "respuesta_referencia": "El fuero de maternidad, consagrado en el artículo 239 del CST y desarrollado por la Sentencia C-005 de 2017 de la Corte Constitucional, prohíbe el despido de la trabajadora embarazada o en período de lactancia sin la autorización previa del Inspector de Trabajo. Si se despide sin autorización, el despido es ineficaz y la trabajadora tiene derecho a ser reintegrada y al pago de salarios y prestaciones dejados de percibir. La protección aplica incluso en contratos a término fijo y de obra.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Qué es el fuero de maternidad**\n\n\n\n**HECHOS RELEVANTES:** La consulta se refiere al concepto de \"fuero de maternidad\", sin embargo, las fuentes proporcionadas se centran en la regulación del aborto y las circunstancias en las que se permite. No se menciona explícitamente el término \"fuero de maternidad\" en las fuentes [1] a [8].\n\n**NORMAS APLICABLES:** Según las fuentes proporcionadas, se mencionan varios artículos relacionados con el aborto, como el Artículo 124 [1], [2], [8], que establecen circunstancias en las que se permite el aborto, como el riesgo para la salud física o mental de la madre [1], [2], [5]. También se menciona el Artículo 142 [4], [5], [6], que se refiere a la protección de la vida y la salud de la mujer embarazada.\n\n**ANÁLISIS JURÍDICO:** Aunque las fuentes no mencionan explícitamente el \"fuero de maternidad\", se puede inferir que el concepto se relaciona con la protección y los derechos de las mujeres embarazadas. Sin embargo, para proporcionar una respuesta precisa y completa, se requiere más información y análisis de fuentes adicionales que se refieran específicamente al \"fuero de maternidad\".\n\n**CONCLUSIÓN:** La consulta requiere análisis adicional con más fuentes legales para proporcionar una respuesta clara y precisa sobre el concepto de \"fuero de maternidad\". Las fuentes proporcionadas se centran en la regulación del aborto y no ofrecen información directa sobre el tema.\n\n**RECOMENDACIÓN:** Se recomienda consultar fuentes adicionales y buscar asesoría jurídica personalizada para obtener una comprensión más completa y precisa del concepto de \"fuero de maternidad\" y su regulación en la legislación colombiana.\n\n\n\n---\n\n\n\n**2. y qué protección ofrece?**\n\n\n\n**HECHOS RELEVANTES:** La consulta se refiere a la protección ofrecida por las normas legales colombianas, específicamente en relación con la seguridad y el aseguramiento. No se proporcionan detalles específicos sobre un caso o situación concreta, por lo que se analizarán las normas generales relacionadas con la protección y el aseguramiento.\n\n**NORMAS APLICABLES:** Según el Artículo 69 del Código Penal [1], se establecen medidas de seguridad como la internación en establecimiento psiquiátrico, la internación en casa de estudio o trabajo, y la libertad vigilada. En el ámbito del aseguramiento, el Artículo 1074 del Código de Comercio [2] obliga al asegurado a evitar la extensión y propagación del siniestro y a proveer al salvamento de las cosas aseguradas. El Artículo 1082 [3] clasifica los seguros en de daños o de personas, y el Artículo 1083 [3] define el interés asegurable. Además, el Artículo 1096 [4] establece la subrogación del asegurador que paga la indemnización, y el Artículo 1055 [5] y el Artículo 1056 [5] regulan los riesgos inasegurables y la asunción de riesgos.\n\n**ANÁLISIS JURÍDICO:** La protección ofrecida por estas normas se centra en la seguridad y el aseguramiento. En el ámbito penal, se establecen medidas de seguridad para proteger a la sociedad y al individuo. En el ámbito del aseguramiento, se regulan las obligaciones del asegurado y del asegurador, y se establecen los principios para la subrogación y la asunción de riesgos. La protección integral de los niños, niñas y adolescentes se establece en el Artículo 7o. de la Ley 1098 de 2006 [6], y la protección de datos personales se regula en el Artículo 26 de la Ley 1581 de 2012 [8].\n\n**CONCLUSIÓN:** La protección ofrecida por estas normas legales colombianas se centra en la seguridad, el aseguramiento y la protección de los derechos de los individuos, especialmente de los niños, niñas y adolescentes, y de los titulares de datos personales.\n\n**RECOMENDACIÓN:** Para una consulta más específica y detallada, se requiere más información sobre el caso o situación concreta. Es importante verificar la vigencia actual de las normas citadas y consultar con un abogado especializado antes de tomar decisiones legales importantes. La consulta requiere análisis adicional con más fuentes legales para proporcionar una respuesta más precisa y completa.\n\n⚠️ **Vigencia:** La norma \"codigo codigo penal ley599\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Ley 100 de 1993 — Sistema General de Seguridad Social\" tiene artículos derogados o modificados; verifique vigencia específica.",
+      "evaluacion": {
+        "precision_normativa": 2,
+        "articulos_correctos": 1,
+        "interpretacion_valida": 3,
+        "completitud": 4,
+        "relevancia_contexto": 3,
+        "ausencia_alucinaciones": 9,
+        "normas_correctas": [
+          "Art. 239 CST"
+        ],
+        "normas_faltantes": [],
+        "alucinaciones": [
+          "fuero de maternidad"
+        ],
+        "comentario": "La respuesta RAG no aborda correctamente el concepto de fuero de maternidad, aunque menciona normas relacionadas con el aborto.",
+        "score_total": 3.7,
+        "veredicto": "REGULAR"
+      },
+      "error": null,
+      "timestamp": "2026-02-25T20:26:54.804Z"
+    },
+    {
+      "id": "LAB-006",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es el período de prueba máximo permitido en Colombia?",
+      "respuesta_referencia": "Según el artículo 78 del CST, el período de prueba no puede exceder dos (2) meses. Para contratos a término fijo inferior a un año, el período de prueba no podrá ser superior a la quinta parte del término inicialmente pactado. Este período debe constar por escrito.",
+      "respuesta_rag": "**HECHOS RELEVANTES:** La consulta se refiere al período de prueba máximo permitido en Colombia, sin proporcionar detalles adicionales sobre el contexto específico en el que se aplicaría esta norma.\n\n**NORMAS APLICABLES:** Según el Artículo 254 del Código de Procedimiento Administrativo y de lo Contencioso Administrativo [1], si se decretaren pruebas de oficio o a solicitud de parte, se señalará un término máximo de treinta (30) días para practicarlas.\n\n**ANÁLISIS JURÍDICO:** El análisis se centra en la interpretación del Artículo 254 [1], que establece un término máximo de 30 días para la práctica de pruebas. No se encontraron otras normas en las fuentes proporcionadas que establezcan períodos de prueba máximos de manera general. Es importante considerar que este artículo se refiere específicamente al Código de Procedimiento Administrativo y de lo Contencioso Administrativo, por lo que su aplicación podría estar limitada a procedimientos administrativos y contenciosos administrativos.\n\n**CONCLUSIÓN:** Basado en la normativa proporcionada, el período de prueba máximo permitido en Colombia, específicamente en el contexto del Código de Procedimiento Administrativo y de lo Contencioso Administrativo, es de treinta (30) días, según lo establecido en el Artículo 254 [1].\n\n**RECOMENDACIÓN:** Para una aplicación más precisa y considerando otros contextos legales, se recomienda consultar fuentes adicionales y buscar asesoría jurídica especializada, ya que la normativa puede variar dependiendo del ámbito de aplicación (civil, laboral, penal, etc.). La consulta requiere análisis adicional con más fuentes legales para abarcar todos los posibles contextos en los que se podría aplicar un período de prueba.",
+      "evaluacion": {
+        "precision_normativa": 2,
+        "articulos_correctos": 1,
+        "interpretacion_valida": 2,
+        "completitud": 3,
+        "relevancia_contexto": 2,
+        "ausencia_alucinaciones": 10,
+        "normas_correctas": [
+          "Art. 254 del Código de Procedimiento Administrativo y de lo Contencioso Administrativo"
+        ],
+        "normas_faltantes": [
+          "Art. 78 CST"
+        ],
+        "alucinaciones": [],
+        "comentario": "La respuesta RAG se centra en un contexto administrativo, mientras que la pregunta y el experto se refieren a derecho laboral.",
+        "score_total": 3.3,
+        "veredicto": "REGULAR"
+      },
+      "error": null,
+      "timestamp": "2026-02-25T20:31:52.900Z"
+    },
+    {
+      "id": "CIV-001",
+      "area": "civil",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es el plazo de prescripción de la acción ejecutiva en Colombia?",
+      "respuesta_referencia": "Según el artículo 2536 del Código Civil colombiano, la acción ejecutiva prescribe en cinco (5) años. La acción ordinaria prescribe en diez (10) años. La prescripción puede ser interrumpida por reconocimiento de deuda o por demanda judicial.",
+      "respuesta_rag": "**HECHOS RELEVANTES:** La consulta se refiere al plazo de prescripción de la acción ejecutiva en Colombia, sin proporcionar detalles adicionales sobre el contexto específico de la acción ejecutiva en cuestión.\n\n**NORMAS APLICABLES:** Desafortunadamente, las fuentes proporcionadas [1] a [10] no contienen información directa sobre el plazo de prescripción de la acción ejecutiva. Los artículos mencionados en estas fuentes se refieren a aspectos como el emplazamiento previo por no declarar [1], el régimen tributario especial [3], la realización de costos [4], la revocatoria directa [5], el traslado del acta de visita de inspección tributaria [6], el régimen sancionatorio tributario [7], la suspensión del término para notificar el requerimiento especial [8], la certificación por contador público y revisor fiscal [9], y el régimen de entidades controladas del exterior sin residencia fiscal en Colombia [10].\n\n**ANÁLISIS JURÍDICO:** Dado que las fuentes proporcionadas no abordan directamente el tema de la prescripción de la acción ejecutiva, no es posible realizar un análisis jurídico detallado con la información disponible. La prescripción de la acción ejecutiva es un tema que generalmente se encuentra regulado en el Código General del Proceso o en leyes específicas relacionadas con la materia objeto de la acción ejecutiva.\n\n**CONCLUSIÓN:** La consulta requiere análisis adicional con más fuentes legales para determinar el plazo de prescripción de la acción ejecutiva en Colombia, ya que las fuentes proporcionadas no contienen la información necesaria para proporcionar una respuesta precisa.\n\n**RECOMENDACIÓN:** Se recomienda consultar fuentes legales adicionales, como el Código General del Proceso o leyes específicas relacionadas con la materia objeto de la acción ejecutiva, para obtener información precisa sobre el plazo de prescripción aplicable. Es importante buscar asesoría jurídica personalizada para garantizar que se considere la legislación vigente y los detalles específicos del caso en cuestión.",
+      "evaluacion": {
+        "precision_normativa": 5,
+        "articulos_correctos": 2,
+        "interpretacion_valida": 3,
+        "completitud": 4,
+        "relevancia_contexto": 3,
+        "ausencia_alucinaciones": 10,
+        "normas_correctas": [
+          "Art. 2536 Código Civil"
+        ],
+        "normas_faltantes": [
+          "Art. 2535 Código Civil"
+        ],
+        "alucinaciones": [],
+        "comentario": "La respuesta RAG no cita correctamente las normas y la interpretación es parcial, mientras que la respuesta del experto es más precisa y completa.",
+        "score_total": 4.5,
+        "veredicto": "REGULAR"
+      },
+      "error": null,
+      "timestamp": "2026-02-25T20:33:58.722Z"
+    },
+    {
+      "id": "CIV-003",
+      "area": "civil",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es la acción de tutela y en qué plazo debe ser resuelta?",
+      "respuesta_referencia": "La acción de tutela, consagrada en el artículo 86 de la Constitución Política y reglamentada por el Decreto 2591 de 1991, es un mecanismo de protección inmediata de derechos fundamentales cuando no exista otro medio de defensa judicial eficaz. El juez debe resolver en un plazo de diez (10) días calendario. La sentencia puede ser impugnada dentro de los tres (3) días siguientes.",
+      "respuesta_rag": "**HECHOS RELEVANTES:** La acción de tutela es un mecanismo constitucional para la protección inmediata de derechos fundamentales, según lo establecido en la Constitución Política de Colombia, específicamente en el Artículo 86 [7]. Este artículo define la acción de tutela como un procedimiento preferente y sumario para reclamar ante los jueces la protección de derechos constitucionales fundamentales cuando estos resulten vulnerados o amenazados por la acción o la omisión de cualquier autoridad pública.\n\n**NORMAS APLICABLES:** La Constitución Política de Colombia, en su Artículo 86 [7], establece que la acción de tutela procede para proteger derechos constitucionales fundamentales. Además, este artículo especifica que en ningún caso podrán transcurrir más de diez días entre la solicitud de tutela y su resolución. La Ley también regula aspectos relacionados con la protección de derechos, como se menciona en la Ley 1581 de 2012, Artículo 34 [10], aunque este artículo se refiere específicamente a la protección de datos personales y no directamente a la acción de tutela.\n\n**ANÁLISIS JURÍDICO:** La acción de tutela es un mecanismo constitucional diseñado para la protección inmediata de derechos fundamentales. Según el Artículo 86 de la Constitución Política [7], esta acción debe ser resuelta dentro de los diez días siguientes a su presentación. Esto refleja la naturaleza preferente y sumaria de la tutela, destinada a ofrecer una protección rápida y efectiva contra la vulneración de derechos fundamentales. La jurisprudencia constitucional, como se refleja en las sentencias mencionadas en las fuentes [2] a [6], reitera la importancia de analizar la procedencia de la acción, el derecho fundamental presuntamente vulnerado, y la conducta de la autoridad accionada en casos de tutela.\n\n**CONCLUSIÓN:** La acción de tutela es un mecanismo constitucional para la protección inmediata de derechos fundamentales, con un plazo máximo de resolución de diez días desde su presentación, según lo establecido en el Artículo 86 de la Constitución Política de Colombia [7]. Este plazo subraya la importancia de una respuesta rápida y efectiva para proteger los derechos fundamentales de los ciudadanos.\n\n**RECOMENDACIÓN:** Para aquellos que buscan proteger sus derechos fundamentales a través de la acción de tutela, es crucial presentar la solicitud de manera oportuna y completa, asegurándose de incluir todos los documentos y pruebas necesarias para sustentar la vulneración de derechos. Es importante tener en cuenta el plazo de diez días para la resolución de la tutela y estar preparado para cualquier impugnación o recurso que pueda ser necesario. Si se requiere asesoramiento específico, se recomienda consultar a un abogado especializado en derecho administrativo y constitucional.",
+      "evaluacion": {
+        "precision_normativa": 2,
+        "articulos_correctos": 1,
+        "interpretacion_valida": 3,
+        "completitud": 4,
+        "relevancia_contexto": 3,
+        "ausencia_alucinaciones": 9,
+        "normas_correctas": [
+          "Art. 86 CP"
+        ],
+        "normas_faltantes": [
+          "Decreto 2591/1991",
+          "Art. 29 Decreto 2591"
+        ],
+        "alucinaciones": [],
+        "comentario": "La respuesta incluye la norma principal pero omite otras relevantes y no menciona el plazo específico del artículo 86.",
+        "score_total": 3.7,
+        "veredicto": "REGULAR"
+      },
+      "error": null,
+      "timestamp": "2026-02-25T20:38:44.551Z"
+    },
+    {
+      "id": "CIV-004",
+      "area": "civil",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cuándo procede la acción popular y quién puede interponerla?",
+      "respuesta_referencia": "La acción popular está consagrada en el artículo 88 de la Constitución y regulada por la Ley 472 de 1998. Procede para proteger derechos e intereses colectivos como el medio ambiente, la moralidad administrativa, el espacio público, la salubridad pública, entre otros. Puede ser interpuesta por cualquier persona natural o jurídica, organizaciones no gubernamentales, entidades públicas y el Defensor del Pueblo. No requiere acreditar perjuicio personal.",
+      "respuesta_rag": "**HECHOS RELEVANTES:** La consulta se refiere a la procedencia de la acción popular y quién puede interponerla. La acción popular es un mecanismo jurídico que permite a los ciudadanos proteger los derechos e intereses colectivos.\n\n**NORMAS APLICABLES:** Según la Ley 472 de 1998, en su Artículo 9o., las acciones populares proceden contra toda acción u omisión de las autoridades públicas o de los particulares, que hayan violado o amenacen violar los derechos e intereses colectivos [4]. Además, el Artículo 13. de la misma ley establece que los legitimados para ejercer acciones populares pueden hacerlo por sí mismos o por quien actúe en su nombre [6].\n\n**ANÁLISIS JURÍDICO:** La acción popular es un derecho fundamental que permite a los ciudadanos proteger los derechos e intereses colectivos. Según el Artículo 8o. de la Ley 472 de 1998, las acciones populares pueden incoarse y tramitarse en todo tiempo [4]. El Artículo 10. de la misma ley establece que no es necesario interponer previamente los recursos administrativos como requisito para intentar la acción popular [5]. Además, el Artículo 14. de la Ley 472 de 1998 establece que la acción popular se dirigirá contra el particular, persona natural o jurídica, o la autoridad pública cuya actuación u omisión se considere que amenaza, viola o ha violado el derecho o interés colectivo [6].\n\n**CONCLUSIÓN:** La acción popular procede contra toda acción u omisión de las autoridades públicas o de los particulares, que hayan violado o amenacen violar los derechos e intereses colectivos. Cualquier persona natural o jurídica puede interponer una acción popular, ya sea por sí misma o a través de un apoderado judicial.\n\n**RECOMENDACIÓN:** Si se considera que una acción u omisión de una autoridad pública o particular ha violado o amenaza violar un derecho o interés colectivo, se recomienda interponer una acción popular ante el juez competente, siguiendo los procedimientos establecidos en la Ley 472 de 1998. Es importante tener en cuenta que la acción popular puede incoarse y tramitarse en todo tiempo, y que no es necesario interponer previamente los recursos administrativos.",
+      "evaluacion": {
+        "precision_normativa": 5,
+        "articulos_correctos": 3,
+        "interpretacion_valida": 4,
+        "completitud": 6,
+        "relevancia_contexto": 7,
+        "ausencia_alucinaciones": 10,
+        "normas_correctas": [
+          "Art. 88 CP",
+          "Ley 472/1998"
+        ],
+        "normas_faltantes": [],
+        "alucinaciones": [
+          "Artículo 9o.",
+          "Artículo 13.",
+          "Artículo 10.",
+          "Artículo 14."
+        ],
+        "comentario": "La respuesta RAG menciona la Ley 472 de 1998 pero no cita el Artículo 88 CP, que es clave en este contexto. Incluye artículos incorrectos y falta precisión en la interpretación y aplicación de las normas.",
+        "score_total": 5.8,
+        "veredicto": "ACEPTABLE"
+      },
+      "error": null,
+      "timestamp": "2026-02-25T20:41:00.293Z"
+    }
+  ],
+  "errores": [
+    {
+      "id": "LAB-005",
+      "area": "laboral",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cómo se calcula la liquidación de un trabajador que lleva 3 años y gana $2.000.000?",
+      "respuesta_referencia": "Para un trabajador con 3 años de antigüedad y salario de $2.000.000: (1) Cesantías: $2.000.000 × 3 años = $6.000.000; (2) Intereses sobre cesantías: $6.000.000 × 12% = $720.000; (3) Prima de servicios: $2.000.000 × 3 meses/12 = $500.000 (proporcional al último semestre); (4) Vacaciones: 15 días × $66.667/día = $1.000.000 (proporcional); (5) Si el auxilio de transporte aplica ($162.000/mes). El total aproximado antes de descuentos sería $8.220.000 más el auxilio de transporte proporcional.",
+      "respuesta_rag": "**HECHOS RELEVANTES:** El trabajador lleva 3 años laborando y gana $2.000.000 al mes. Se requiere calcular la liquidación de este trabajador.\n\n**NORMAS APLICABLES:** Según el Artículo 249 [3] del Código Sustantivo del Trabajo, todo empleador está obligado a pagar a sus trabajadores, al terminar el contrato de trabajo, como auxilio de cesantía, un mes de salario por cada año de servicios y proporcionalmente por fracción de año. Además, el Artículo 253 [2] establece que para liquidar el auxilio de cesantía se toma como base el último salario mensual devengado por el trabajador.\n\n**ANÁLISIS JURÍDICO:** Dado que el trabajador lleva 3 años laborando y gana $2.000.000 al mes, se puede calcular la cesantía como un mes de salario por cada año de servicios. Por lo tanto, la cesantía sería de $2.000.000 por año, lo que equivale a $6.000.000 para 3 años de servicios. Además, se debe considerar la prima de servicios establecida en el Artículo 306 [5], que corresponde a 30 días de salario por año, lo que sería $1.500.000 por año, y $4.500.000 para 3 años de servicios.\n\n**CONCLUSIÓN:** La liquidación del trabajador sería la suma de la cesantía y la prima de servicios, lo que equivale a $10.500.000 ($6.000.000 de cesantía + $4.500.000 de prima de servicios).\n\n**RECOMENDACIÓN:** Es importante verificar la vigencia actual de las normas citadas y considerar cualquier otra prestación o beneficio que el trabajador pueda tener derecho. La consulta requiere análisis adicional con más fuentes legales para determinar si hay otros factores que puedan afectar la liquidación del trabajador. Se recomienda consultar con un abogado especializado para obtener asesoría jurídica personalizada.",
+      "evaluacion": null,
+      "error": "Judge error: The operation was aborted due to timeout",
+      "timestamp": "2026-02-25T20:29:17.180Z"
+    },
+    {
+      "id": "CIV-002",
+      "area": "civil",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuáles son los requisitos para que un contrato de compraventa de inmueble sea válido?",
+      "respuesta_referencia": "Para la validez de la compraventa de inmueble en Colombia se requiere: (1) Capacidad de las partes (Art. 1502 CC); (2) Consentimiento libre de vicios (Arts. 1508-1516 CC); (3) Objeto lícito y determinado (Arts. 1517-1521 CC); (4) Causa lícita (Arts. 1524-1527 CC); (5) Solemnidad: escritura pública ante notario (Art. 1857 CC y Art. 12 Decreto 960/70); (6) Registro en la Oficina de Instrumentos Públicos para la tradición (Art. 756 CC).",
+      "respuesta_rag": "**HECHOS RELEVANTES:** La consulta se refiere a los requisitos para que un contrato de compraventa de inmueble sea válido. No se proporcionan detalles específicos sobre el contrato en cuestión, pero se busca entender los requisitos generales aplicables a este tipo de contratos.\n\n**NORMAS APLICABLES:** Según el Artículo 1611 del Código Civil [6], para que una promesa de celebrar un contrato sea válida, deben concurrir ciertas circunstancias, como que la promesa conste por escrito, que el contrato no sea ineficaz por falta de requisitos legales, que contenga un plazo o condición para su celebración, y que el contrato esté suficientemente determinado. Además, el Artículo 871 del Código de Comercio [2] establece que los contratos deben celebrarse y ejecutarse de buena fe.\n\n**ANÁLISIS JURÍDICO:** La validez de un contrato de compraventa de inmueble depende de varios factores, incluyendo la existencia de un consentimiento válido entre las partes, la capacidad de las partes para contratar, y el cumplimiento de los requisitos legales específicos para este tipo de contratos. El Artículo 1611 [6] proporciona una base para entender los requisitos de la promesa de celebrar un contrato, lo que puede ser aplicable a la compraventa de inmuebles. Además, el principio de buena fe establecido en el Artículo 871 [2] es fundamental para la validez y ejecución de cualquier contrato.\n\n**CONCLUSIÓN:** Para que un contrato de compraventa de inmueble sea válido, deben cumplirse los requisitos legales generales para los contratos, incluyendo el consentimiento válido, la capacidad de las partes, y el cumplimiento de los requisitos específicos establecidos por la ley, como los relacionados con la promesa de celebrar un contrato. Es importante considerar el principio de buena fe en la celebración y ejecución del contrato.\n\n**RECOMENDACIÓN:** Se recomienda revisar detalladamente el contrato de compraventa de inmueble para asegurarse de que cumple con todos los requisitos legales aplicables, incluyendo aquellos relacionados con la promesa de celebrar un contrato y el principio de buena fe. Si es necesario, se debe consultar con un profesional legal para asegurarse de que el contrato cumple con todas las normas y requisitos legales pertinentes. La consulta requiere análisis adicional con más fuentes legales para proporcionar una respuesta exhaustiva y precisa.",
+      "evaluacion": null,
+      "error": "Judge error: The operation was aborted due to timeout",
+      "timestamp": "2026-02-25T20:36:08.793Z"
+    }
+  ]
+}

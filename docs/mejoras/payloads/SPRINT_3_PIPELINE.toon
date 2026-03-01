@@ -1,0 +1,90 @@
+proyecto: ColLawRAG
+documento_base: docs/sprints/SPRINT_3_PIPELINE.md
+generado: 2026-02-25
+modo: autonomo
+prioridad: Alta
+impacto_estimado: "70-75% → 80-85% accuracy"
+esfuerzo: "3-4 días"
+dependencias: SPRINT_2 completado (corpus expandido y re-indexado)
+
+avance{estado,tareas_hechas,tareas_pendientes,nota}:
+  mayormente_completado,"S3.1 S3.2 S3.3 S3.4 S3.5 S3.6 S3.7 S3.8","S3.9 S3.10 S3.11 S3.12 S3.13","FASES completaron chunking jerárquico, BM25+RRF, reranking cross-encoder, ventana contexto, prompt simplificado. Pendiente: limpiar chunks tiny, verificar vigencia en reranking, re-indexar limpio, benchmark."
+
+estado_actual{chunks_con_hierarchy,chunks_overview,chunks_tiny,bm25_rrf,cross_encoder,context_window,prompt_tokens}:
+  "98.9% (16262/16430)",835,"2010 chunks < 200 chars","activo (searchBM25+rrfMerge)","activo si RERANK_PROVIDER=hf","12k base / 24k complejo","reducido (sin duplicaciones)"
+
+autonomo{modo,ruta_proyecto,no_modificar,prerequisitos,siguiente_payload,al_fallar}:
+  autonomo,ColLawRAG,"docs/mejoras/*.md docs/sprints/*.md","SPRINT_2 cerrado; corpus expandido; data/normas-vigencia/ >= 50 JSONs; modelo 70B+ configurado","docs/mejoras/payloads/SPRINT_4_PRODUCTO.toon",reportar_y_continuar
+
+multi_agente{habilitado,herramientas,sprint_id,paralelo_en_fase,post_fase_agente,token_budget}:
+  true,"cursor,open_claw",Sprint_3_pipeline,true,cursor,"cursor=código_ingest+reranking+benchmarks open_claw=verificación+documentación"
+
+asignacion_agente[5]{tarea_id,agente,archivos_exclusivos,intensidad_tokens,razon}:
+  S3.9,cursor,scripts/ingest.mjs,alta,"Modificar lógica de chunking en ingest.mjs: filtrar chunks < 100 chars, fusionar chunks 100-200 con anterior. Cambio de código crítico en pipeline de ingesta."
+  S3.10,open_claw,lib/reranking.ts,baja,"Verificar que el campo metadata.vigencia (propagado en Sprint 2) coincide con lo que espera la penalización en reranking.ts. Si no coincide, ajustar string matching. Cambio mínimo."
+  S3.11,cursor,"data/index.json data/hnsw-index.dat data/bm25-index.json",alta,"Re-indexar completo: operación pesada. Verificar integridad: chunks tiny eliminados, vigencia propagada."
+  S3.12,cursor,data/benchmarks/sprint3-retrieval-*.json,media,"Ejecutar evaluate-retrieval y analizar resultados. Puede requerir debug."
+  S3.13,open_claw,docs/sprints/SPRINT_3_RESULTADOS.md,baja,"Recopilar métricas de S3.12 y benchmark accuracy para crear documento de resultados. Tarea de documentación."
+
+grupos_paralelos[2]{ola,tareas,agentes,nota}:
+  1,"S3.9 S3.10","cursor open_claw","Cursor: limpiar chunks tiny en ingest. OpenClaw: verificar vigencia en reranking. En paralelo."
+  2,"S3.11 S3.12 S3.13","cursor cursor open_claw","Cursor: re-indexar (S3.11) → evaluate-retrieval (S3.12) → benchmark accuracy. OpenClaw: documentar resultados (S3.13)."
+
+archivos_compartidos[1]{archivo,orden_edicion,nota}:
+  scripts/ingest.mjs,"solo cursor (S3.9)","OpenClaw no toca ingest"
+
+instruccion_herramienta[2]{herramienta,instruccion}:
+  cursor,"Ejecuta S3.9 (modificar scripts/ingest.mjs: filtrar chunks content.length < 100, fusionar 100-200 con chunk anterior si mismo artículo), S3.11 (re-indexar: node scripts/ingest.mjs), S3.12 (evaluate-retrieval --limit 30) y benchmark accuracy (node scripts/evaluate-accuracy.mjs --limit 50). Post-fase: ejecutar benchmarks y reportar métricas."
+  open_claw,"Ejecuta S3.10 (verificar en lib/reranking.ts que la penalización por norma derogada funciona con metadata.vigencia de Sprint 2; si el campo se llama distinto ajustar el string matching) y S3.13 (crear docs/sprints/SPRINT_3_RESULTADOS.md con accuracy, Recall@K, chunks limpiados, comparación por área). No toques scripts/ingest.mjs ni ejecutes ingest."
+
+tareas[13]{id,titulo,archivos_afectados,instruccion_concreta,comando_validacion,estado,agente}:
+  S3.1,Chunking: prefijo jerárquico en cada chunk,scripts/ingest.mjs,"YA HECHO: 98.9% con articleHierarchy.","node -e \"const d=JSON.parse(require('fs').readFileSync('data/index.json','utf8')); console.log('Hierarchy:', d.filter(c=>c.metadata?.articleHierarchy).length, '/', d.length)\"",completada,cursor
+  S3.2,Chunking: chunks 2000 chars corte oraciones,scripts/ingest.mjs,"YA HECHO: avg 923 chars.","node -e \"const d=JSON.parse(require('fs').readFileSync('data/index.json','utf8')); console.log('Avg:', Math.round(d.reduce((a,c)=>a+(c.content||'').length,0)/d.length))\"",completada,cursor
+  S3.3,BM25 sobre corpus completo con RRF,lib/retrieval.ts lib/bm25.ts,"YA HECHO: searchBM25 + rrfMerge activos.","grep -E 'searchBM25|rrfMerge' lib/retrieval.ts",completada,cursor
+  S3.4,Reranking cross-encoder recalibrado,"lib/reranking.ts lib/retrieval.ts","YA HECHO: cross-encoder 70% + hierarchy 15% + recency 10% + vigencia 5%.","grep 'WEIGHT_CROSS' lib/reranking.ts",completada,cursor
+  S3.5,Generación: ventana contexto 12k/24k,lib/generation.ts,"YA HECHO: 12000/24000/12000.","grep 'MAX_CONTEXT_CHARS' lib/generation.ts",completada,cursor
+  S3.6,Generación: system prompt simplificado,lib/prompt-templates.ts,"YA HECHO: sin duplicaciones.","wc -c lib/prompt-templates.ts",completada,cursor
+  S3.7,Query expansion coloquial→legal,lib/query-expansion.ts,"YA HECHO: integrado en retrieval.","test -f lib/query-expansion.ts",completada,cursor
+  S3.8,Metadata boost por área legal,lib/retrieval.ts,"YA HECHO: applyMetadataBoost activo.","grep 'MetadataBoost' lib/retrieval.ts",completada,open_claw
+  S3.9,Limpiar chunks tiny: filtrar/fusionar < 200 chars,scripts/ingest.mjs,"En scripts/ingest.mjs: después de crear todos los chunks de un documento, filtrar: (1) eliminar chunks con content.length < 100 (ruido puro: headers, separadores); (2) chunks 100-200 chars: fusionar con chunk anterior si comparten mismo artículo/sección en metadata, o eliminar si son aislados. Objetivo: < 2% del total sean < 200 chars (actual: 12%).","node -e \"const d=JSON.parse(require('fs').readFileSync('data/index.json','utf8')); const t=d.filter(c=>(c.content||'').length<200).length; console.log('Tiny:', t, '/', d.length, '('+(100*t/d.length).toFixed(1)+'%)')\"",pendiente,cursor
+  S3.10,Verificar vigencia funciona en reranking,lib/reranking.ts,"Verificar en lib/reranking.ts que la penalización -0.30 por norma derogada funciona con el campo metadata.vigencia propagado en Sprint 2 S2.11. Buscar donde se lee vigencia del chunk: si espera metadata.vigencia === 'derogada' verificar que S2.11 escribe exactamente ese valor. Si no coincide, ajustar el string matching. Verificar también que addDerogadaNoteToChunk funciona.","grep -E 'vigencia|derogad' lib/reranking.ts | head -10",pendiente,open_claw
+  S3.11,Re-indexar con chunks limpiados + vigencia,"data/index.json data/hnsw-index.dat data/bm25-index.json","Ejecutar: node scripts/ingest.mjs. Verificar: (1) chunks < 200 chars < 2%; (2) chunks con vigencia real > 50%; (3) total chunks coherente. Reconstruir HNSW y BM25.","node -e \"const d=JSON.parse(require('fs').readFileSync('data/index.json','utf8')); const t=d.filter(c=>(c.content||'').length<200).length; const v=d.filter(c=>c.metadata?.vigencia && !['no_definida','no_verificada'].includes(c.metadata.vigencia)).length; console.log('Tiny:', t, 'Vigencia:', v, 'Total:', d.length)\"",pendiente,cursor
+  S3.12,Evaluar retrieval post-pipeline,scripts/evaluate-retrieval.mjs,"Ejecutar: node scripts/evaluate-retrieval.mjs --limit 30 --output data/benchmarks/sprint3-retrieval-$(date +%Y-%m-%d).json. Recall@10 objetivo >= 0.80. Si Recall < 0.70 investigar qué queries fallan.","node scripts/evaluate-retrieval.mjs --limit 30 2>&1 | tail -10",pendiente,cursor
+  S3.13,Benchmark accuracy + documentar resultados,"scripts/evaluate-accuracy.mjs docs/sprints/SPRINT_3_RESULTADOS.md","Cursor ejecuta: node scripts/evaluate-accuracy.mjs --limit 50 --output data/benchmarks/sprint3-final-$(date +%Y-%m-%d).json. OpenClaw crea docs/sprints/SPRINT_3_RESULTADOS.md con: accuracy antes/después, Recall@K, chunks limpiados, efecto vigencia, comparación por área.","test -f docs/sprints/SPRINT_3_RESULTADOS.md",pendiente,open_claw
+
+archivos_modificar[5]{archivo,accion,agente}:
+  scripts/ingest.mjs,MODIFICAR filtrar/fusionar chunks tiny,cursor
+  lib/reranking.ts,VERIFICAR string matching vigencia,open_claw
+  data/index.json,REGENERAR post limpieza,cursor
+  data/benchmarks/sprint3-retrieval-*.json,CREAR evaluación retrieval,cursor
+  docs/sprints/SPRINT_3_RESULTADOS.md,CREAR documentación resultados,open_claw
+
+orden_ejecucion[13]{paso,tarea_id,agente,nota,dependencia}:
+  1,S3.1,cursor,YA HECHO,ninguna
+  2,S3.2,cursor,YA HECHO,ninguna
+  3,S3.3,cursor,YA HECHO,ninguna
+  4,S3.4,cursor,YA HECHO,ninguna
+  5,S3.5,cursor,YA HECHO,ninguna
+  6,S3.6,cursor,YA HECHO,ninguna
+  7,S3.7,cursor,YA HECHO,ninguna
+  8,S3.8,open_claw,YA HECHO,ninguna
+  9,S3.9,cursor,Limpiar chunks tiny en ingest,ninguna
+  10,S3.10,open_claw,Verificar vigencia en reranking (paralelo con S3.9),ninguna
+  11,S3.11,cursor,Re-indexar limpio,"S3.9 S3.10"
+  12,S3.12,cursor,Evaluar retrieval,S3.11
+  13,S3.13,open_claw,Documentar resultados (Cursor corre benchmark; OpenClaw documenta),S3.12
+
+criterio_exito[8]{item}:
+  Chunks < 200 chars < 2% del total
+  Vigencia metadata funciona en reranking
+  Re-indexación sin errores
+  Recall@10 >= 0.80
+  Accuracy >= 75% (objetivo 80-85%)
+  Latencia pipeline < 10 segundos
+  Resultados en SPRINT_3_RESULTADOS.md
+  Pipeline verificado end-to-end con corpus expandido
+
+post_fase_comando[3]{orden,comando,descripcion,agente}:
+  1,"cd ColLawRAG && node scripts/ingest.mjs",Re-indexar con chunks limpiados,cursor
+  2,"cd ColLawRAG && node scripts/evaluate-retrieval.mjs --limit 30",Evaluar retrieval post-pipeline,cursor
+  3,"cd ColLawRAG && node scripts/evaluate-accuracy.mjs --limit 50",Benchmark accuracy post-pipeline,cursor

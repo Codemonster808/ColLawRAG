@@ -1,0 +1,55 @@
+proyecto: ColLawRAG
+documento_base: docs/mejoras/payloads/DIAGNOSTICO_AVANCE.md
+generado: 2026-02-25
+modo: autonomo
+prioridad: URGENTE
+impacto_estimado: "Recuperar accuracy 32.7% → 45-50%+; desbloquear metadata boost"
+esfuerzo: "1-2 días"
+dependencias: FASE_0 y FASE_1 completadas (ya están hechas)
+
+avance_actual{resumen}:
+  "INICIO_TRABAJO cerrado: I1 I2 I3 hechos. Siguiente: FASE_4 (Cursor 4.1-4.5; OpenClaw sin tareas)."
+
+autonomo{modo,ruta_proyecto,no_modificar,prerequisitos,siguiente_payload,al_fallar}:
+  autonomo,ColLawRAG,"docs/mejoras/*.md","FASE_0 y FASE_1 cerradas; scripts/ingest.mjs lib/retrieval.ts lib/reranking.ts existen","docs/mejoras/payloads/FASE_4_GENERACION_Y_PROMPTS.toon",reportar_y_continuar
+
+multi_agente{habilitado,herramientas,sprint_id,paralelo_en_fase,post_fase_agente,token_budget}:
+  true,"cursor,open_claw",Sprint_inicio,true,cursor,"cursor=intensivo open_claw=ligero"
+
+asignacion_agente[3]{tarea_id,agente,archivos_exclusivos,intensidad_tokens}:
+  I1,cursor,scripts/ingest.mjs,alta
+  I2,open_claw,lib/retrieval.ts,baja
+  I3,cursor,scripts/ingest.mjs,media
+
+grupos_paralelos[2]{ola,tareas,agentes,nota}:
+  1,I1,cursor,"Cursor: mejorar extracción metadata.article en ingest (bloqueante)"
+  2,"I2 I3",open_claw cursor,"OpenClaw: integración applyRerankingWithCrossEncoder en retrieval; Cursor: re-ingest (post_fase)"
+
+archivos_compartidos[1]{archivo,orden_edicion}:
+  lib/retrieval.ts,"solo open_claw para I2; cursor no toca retrieval en este payload"
+
+instruccion_herramienta[2]{herramienta,instruccion}:
+  cursor,"Ejecuta I1: en scripts/ingest.mjs mejorar extracción de metadata.article en splitByArticles (más formatos de línea Artículo/Art.; fallback: extraer Art. N del contenido del chunk y rellenar metadata.article). Objetivo: reducir chunks con article vacío. Tras I1, ejecuta post_fase_comando (re-ingest + build-hnsw + build-bm25) para regenerar índices. Opcional I3: si ya hiciste I1 y open_claw hizo I2, puedes ejecutar ingest de nuevo."
+  open_claw,"Ejecuta solo I2 (ligera): en lib/retrieval.ts cuando RERANK_PROVIDER=hf (y HUGGINGFACE_API_KEY) usar applyRerankingWithCrossEncoder en lugar de applyReranking para top-20. Cambio mínimo. No ejecutes ingest ni post_fase_comando."
+
+cuellos_botella[1]{num,descripcion,archivo}:
+  1,Metadata article vacía en mayoría de chunks; retrieval y boost no aprovechan,scripts/ingest.mjs splitByArticles
+
+tareas[3]{id,titulo,archivos_afectados,validacion,instruccion_concreta,comando_validacion}:
+  I1,Mejorar extracción metadata.article en chunker,scripts/ingest.mjs,Menos chunks con article vacío; sample 20 chunks con article no vacío,"En splitByArticles y/o al construir metadata: (1) ampliar regex para Artículo/Art. en más formatos; (2) fallback: buscar en part.text o primera línea patrón Art\\.?\\s*\\d+ o Artículo\\s+\\d+ y asignar a metadata.article.","node -e \"const fs=require('fs'); const d=JSON.parse(fs.readFileSync('data/index.json','utf8')); const withArt=d.filter(c=>c.metadata?.article && c.metadata.article!=='No article').length; console.log('Chunks con article:', withArt, '/', d.length)\""
+  I2,Usar applyRerankingWithCrossEncoder en retrieval si RERANK_PROVIDER=hf,lib/retrieval.ts,Cuando RERANK_PROVIDER=hf se llama applyRerankingWithCrossEncoder,"En lib/retrieval.ts: si RERANK_PROVIDER==='hf' y HUGGINGFACE_API_KEY usar await applyRerankingWithCrossEncoder(retrieved.slice(0,20), query) y combinar con resto.","grep -E 'applyRerankingWithCrossEncoder|RERANK_PROVIDER' lib/retrieval.ts"
+  I3,Re-ingest y regenerar índices,scripts/ingest.mjs,data/index.json y HNSW/BM25 actualizados,"Tras I1: npm run ingest (o node scripts/ingest.mjs && npm run build-hnsw && npm run build-bm25).","test -f data/index.json; ls data/*.hnsw 2>/dev/null || true"
+
+orden_ejecucion[3]{paso,tarea_id,nota}:
+  1,I1,Cursor primero; desbloquea metadata
+  2,I2,OpenClaw en paralelo o después (opcional)
+  3,I3,Cursor post_fase tras I1
+
+criterio_exito[4]{item}:
+  Porción de chunks con metadata.article no vacío aumenta de forma medible
+  Re-ingest completado sin errores
+  retrieval usa cross-encoder cuando RERANK_PROVIDER=hf (si se hizo I2)
+  Benchmark evaluate-accuracy listo para ejecutar (objetivo recuperar >35%)
+
+post_fase_comando[1]{orden,comando,descripcion}:
+  1,"cd ColLawRAG && npm run ingest","Re-ingest + build-bm25 + build-hnsw (todo en uno) tras I1"

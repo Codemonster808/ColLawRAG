@@ -1,0 +1,111 @@
+proyecto: ColLawRAG
+documento_base: docs/sprints/SPRINT_4_PRODUCTO.md
+generado: 2026-02-25
+modo: autonomo
+prioridad: Alta
+impacto_estimado: "80-85% → 85-90% accuracy ajustado"
+esfuerzo: "5-7 días"
+dependencias: SPRINT_3 completado (pipeline optimizado, vigencia propagada)
+
+avance{estado,tareas_hechas,tareas_pendientes,nota}:
+  no_iniciado,"ninguna","S4.1 a S4.15","Ninguna feature de producto implementada. No hay abstención, confianza UI, citas verificables, ni feedback loop. Código de vigencia en generation.ts existe pero depende de datos de Sprint 2."
+
+estado_actual{abstencion,confianza_ui,citas_verificables,feedback_loop,vigencia_en_contexto}:
+  "no implementada","no implementado","sin excerpt ni hierarchy","no funcional","código existe pero depende de vigencia Sprint 2"
+
+autonomo{modo,ruta_proyecto,no_modificar,prerequisitos,siguiente_payload,al_fallar}:
+  autonomo,ColLawRAG,"docs/mejoras/*.md docs/sprints/*.md","SPRINT_3 cerrado; accuracy >= 75%; Recall@10 >= 0.80; vigencia propagada; modelo 70B+ activo",ninguno,reportar_y_continuar
+
+multi_agente{habilitado,herramientas,sprint_id,paralelo_en_fase,post_fase_agente,token_budget}:
+  true,"cursor,open_claw",Sprint_4_producto,true,cursor,"cursor=lógica_backend+pipeline+benchmarks open_claw=tipos+api_route+frontend+feedback+documentación"
+
+asignacion_agente[15]{tarea_id,agente,archivos_exclusivos,intensidad_tokens,razon}:
+  S4.1,cursor,lib/rag.ts,alta,"Función nueva calculateRetrievalConfidence con lógica de umbrales sobre scores de retrieval. Requiere entender el pipeline y calibrar umbrales."
+  S4.2,cursor,lib/rag.ts,alta,"Integrar abstención en runRagPipeline: retornar respuesta especial si confidence=insuficiente. Modifica flujo principal del pipeline."
+  S4.3,cursor,lib/rag.ts,media,"Agregar advertencia post-generación si confidence=baja. Modifica el return del pipeline."
+  S4.4,open_claw,lib/types.ts,baja,"Agregar campo confidence opcional a RagResponse: cambio de 3 líneas en un tipo TypeScript."
+  S4.5,open_claw,app/api/rag/route.ts,baja,"Incluir result.confidence en JSON de respuesta API: verificar que se pasa el campo, cambio mínimo."
+  S4.6,open_claw,components/ResultsDisplay.tsx,media,"Badge visual de confianza: div con className condicional (verde/amarillo/naranja/rojo). Componente frontend acotado."
+  S4.7,cursor,lib/rag.ts,media,"Enriquecer citas con excerpt y hierarchy donde se construyen las citations. Requiere entender la estructura de chunks y citations."
+  S4.8,open_claw,lib/types.ts,baja,"Agregar excerpt? hierarchy? score? a tipo Citation: cambio de 3 líneas."
+  S4.9,open_claw,components/ResultsDisplay.tsx,media,"Citas expandibles: <details><summary> con excerpt de la norma. Componente frontend."
+  S4.10,open_claw,app/api/feedback/route.ts,baja,"Verificar que endpoint POST /api/feedback existe y funciona. Si falta, crearlo: acepta {requestId, type, timestamp}."
+  S4.11,open_claw,components/ResultsDisplay.tsx,media,"Botones thumbs up/down: dos buttons con onClick que llaman fetch /api/feedback. Deshabilitar post-click."
+  S4.12,open_claw,"app/api/feedback/route.ts data/eval/",baja,"Guardar feedback negativo en data/eval/negative-feedback.jsonl (append). Crear directorio si no existe. Cambio mínimo en route handler."
+  S4.13,cursor,lib/generation.ts,media,"Verificar que contexto LLM muestra [VIGENTE]/[DEROGADA]. Buscar consultarVigencia. Si funciona con datos de Sprint 2, OK. Si no, debuggear."
+  S4.14,cursor,"scripts/evaluate-accuracy.mjs scripts/evaluate-retrieval.mjs",media,"Benchmark final 50+ casos con todas las features activas (abstención, confianza). Calcular accuracy bruto y ajustado."
+  S4.15,open_claw,docs/sprints/SPRINT_4_RESULTADOS.md,baja,"Crear doc con tabla progresión Sprint 1→4, tasa abstención, distribución confianza, feedbacks."
+
+grupos_paralelos[3]{ola,tareas,agentes,nota}:
+  1,"S4.1 S4.4 S4.7 S4.8 S4.10","cursor open_claw cursor open_claw open_claw","Cursor: crear función confianza (S4.1) + enriquecer citas (S4.7). OpenClaw: tipos (S4.4 S4.8) + verificar feedback endpoint (S4.10). Todo en paralelo."
+  2,"S4.2 S4.3 S4.5 S4.6 S4.9 S4.11 S4.12 S4.13","cursor cursor open_claw open_claw open_claw open_claw open_claw cursor","Cursor: integrar abstención pipeline (S4.2→S4.3) + verificar vigencia (S4.13). OpenClaw: API route (S4.5) + frontend completo (S4.6 S4.9 S4.11 S4.12)."
+  3,"S4.14 S4.15","cursor open_claw","Cursor: benchmark final. OpenClaw: documentar resultados."
+
+archivos_compartidos[3]{archivo,orden_edicion,nota}:
+  lib/rag.ts,"solo cursor (S4.1 S4.2 S4.3 S4.7)","Cursor tiene exclusividad sobre rag.ts: abstención + citas"
+  lib/types.ts,"open_claw (S4.4 S4.8)","OpenClaw añade campos a tipos; Cursor los usa pero no edita types.ts"
+  components/ResultsDisplay.tsx,"solo open_claw (S4.6 S4.9 S4.11)","OpenClaw tiene exclusividad sobre el componente frontend"
+
+instruccion_herramienta[2]{herramienta,instruccion}:
+  cursor,"Ejecuta S4.1 (función calculateRetrievalConfidence en lib/rag.ts), S4.2 (integrar abstención si confidence=insuficiente), S4.3 (advertencia si confidence=baja), S4.7 (enriquecer citations con excerpt+hierarchy en lib/rag.ts), S4.13 (verificar vigencia en generation.ts), S4.14 (benchmarks finales). No toques lib/types.ts, components/ResultsDisplay.tsx, ni app/api/feedback/route.ts (esos son de OpenClaw). Post-fase: benchmark final 50+."
+  open_claw,"Ejecuta S4.4 (agregar confidence a RagResponse en types.ts), S4.5 (exponer confidence en API route), S4.6 (badge confianza en ResultsDisplay.tsx), S4.8 (agregar excerpt/hierarchy a Citation en types.ts), S4.9 (citas expandibles en ResultsDisplay.tsx), S4.10 (verificar endpoint feedback), S4.11 (botones thumbs up/down en ResultsDisplay.tsx), S4.12 (guardar feedback negativo), S4.15 (documentar resultados). No toques lib/rag.ts ni lib/generation.ts (esos son de Cursor)."
+
+tareas[15]{id,titulo,archivos_afectados,instruccion_concreta,comando_validacion,estado,agente}:
+  S4.1,Crear función calculateRetrievalConfidence,lib/rag.ts,"Crear función en lib/rag.ts: calculateRetrievalConfidence(retrieved: Array<{chunk: DocumentChunk; score: number}>): {level: 'alta'|'media'|'baja'|'insuficiente', score: number, reason: string}. Si retrieved.length===0 → insuficiente. topScore=retrieved[0].score, avgTop3=media top 3. topScore<0.25 o avgTop3<0.20 → insuficiente. topScore<0.45 o avgTop3<0.35 → baja. topScore<0.65 o avgTop3<0.50 → media. Sino → alta. Exportar función.","grep 'calculateRetrievalConfidence' lib/rag.ts",pendiente,cursor
+  S4.2,Integrar abstención en pipeline,lib/rag.ts,"En runRagPipeline después del retrieval: const confidence = calculateRetrievalConfidence(retrieved). Si level==='insuficiente': retornar {answer: 'No tengo información suficiente...', citations:[], retrieved:0, confidence:{level,score}}. No ejecutar generación.","grep -E 'insuficiente|abstención' lib/rag.ts",pendiente,cursor
+  S4.3,Advertencia confianza baja post-generación,lib/rag.ts,"Después de generar respuesta: si confidence.level==='baja', prepend: 'Advertencia: La información disponible puede ser incompleta.' al answer. Incluir confidence en return de RagResponse.","grep 'confianza.*baja' lib/rag.ts || grep 'Advertencia' lib/rag.ts",pendiente,cursor
+  S4.4,Agregar tipo confidence a RagResponse,lib/types.ts,"En lib/types.ts interfaz RagResponse: agregar confidence?: {level: 'alta'|'media'|'baja'|'insuficiente', score: number}. Campo opcional para no romper contratos existentes.","grep 'confidence' lib/types.ts",pendiente,open_claw
+  S4.5,Exponer confidence en API route,app/api/rag/route.ts,"En app/api/rag/route.ts: verificar que result.confidence se pasa en la respuesta JSON. Si la respuesta se construye manualmente, agregar confidence: result.confidence.","grep 'confidence' app/api/rag/route.ts",pendiente,open_claw
+  S4.6,Badge de confianza en UI,components/ResultsDisplay.tsx,"En ResultsDisplay.tsx: antes de la respuesta, si result.confidence: <div className condicional> alta→bg-green-100/text-green-800 'Alta confianza'; media→bg-yellow-100/text-yellow-800 'Confianza media'; baja→bg-orange-100/text-orange-800 'Baja confianza'; insuficiente→bg-red-100/text-red-800 'Información insuficiente'. Rounded-full, px-3 py-1, text-sm font-medium.","grep 'confidence' components/ResultsDisplay.tsx",pendiente,open_claw
+  S4.7,Enriquecer citas con excerpt y hierarchy,lib/rag.ts,"En lib/rag.ts donde se construyen citations (buscar .map sobre chunksForGeneration): agregar excerpt: r.chunk.content.substring(0,300) + (r.chunk.content.length>300 ? '...' : ''), hierarchy: r.chunk.metadata.articleHierarchy || '', score: r.score.","grep 'excerpt' lib/rag.ts",pendiente,cursor
+  S4.8,Actualizar tipo Citation en types.ts,lib/types.ts,"Agregar a tipo citations en RagResponse: excerpt?: string, hierarchy?: string, score?: number. Campos opcionales.","grep -E 'excerpt|hierarchy' lib/types.ts",pendiente,open_claw
+  S4.9,UI citas expandibles con texto fuente,components/ResultsDisplay.tsx,"Para cada citation con excerpt: <details><summary className='cursor-pointer text-blue-600 text-sm'>Ver texto fuente</summary><blockquote className='mt-2 pl-3 border-l-2 border-gray-300 text-sm text-gray-600 italic'>{citation.excerpt}</blockquote></details>. Mostrar hierarchy si existe encima del excerpt.","grep -E 'details|excerpt' components/ResultsDisplay.tsx",pendiente,open_claw
+  S4.10,Verificar endpoint feedback existente,app/api/feedback/route.ts,"Leer app/api/feedback/route.ts. Debe aceptar POST con {requestId, type:'positive'|'negative', timestamp}. Si no existe crearlo. Guardar en memoria o file-based.","test -f app/api/feedback/route.ts && grep 'POST' app/api/feedback/route.ts",pendiente,open_claw
+  S4.11,Botones feedback thumbs up/down,components/ResultsDisplay.tsx,"Después de cada respuesta: div flex gap-3 mt-4 pt-4 border-t. Button 'Sí fue útil' (green border) y 'No fue útil' (red border). onClick llama fetch('/api/feedback',{method:'POST', body:JSON.stringify({requestId,type,timestamp})}). Deshabilitar post-click, mostrar 'Gracias'. Estado local useState para tracking.","grep -E 'feedback|thumbs' components/ResultsDisplay.tsx",pendiente,open_claw
+  S4.12,Guardar feedback negativo para revisión,"app/api/feedback/route.ts data/eval/",Cuando type==='negative': append a data/eval/negative-feedback.jsonl una línea JSON con requestId y timestamp. fs.appendFileSync. Crear data/eval/ si no existe.,"test -d data/eval 2>/dev/null || echo 'Crear data/eval/'",pendiente,open_claw
+  S4.13,Verificar contexto enriquecido vigencia,lib/generation.ts,"Verificar en lib/generation.ts que consultarVigencia e inferNormaIdFromTitle se usan al construir contexto. Ejecutar 1 query manual y revisar logs: el contexto debe mostrar [VIGENTE] o [DEROGADA] por fuente. Si falla con datos de Sprint 2, debuggear.","grep -E 'VIGENTE|DEROGAD|consultarVigencia' lib/generation.ts",pendiente,cursor
+  S4.14,Benchmark final 50+ casos,"scripts/evaluate-accuracy.mjs scripts/evaluate-retrieval.mjs","Ejecutar: (1) evaluate-retrieval --limit 30; (2) evaluate-accuracy --limit 50. Calcular accuracy bruto y ajustado (sin abstenciones). accuracy_ajustado = correctas / (total - abstenciones). Guardar como sprint4-final.","test -f data/benchmarks/sprint4-final-*.json 2>/dev/null",pendiente,cursor
+  S4.15,Documentar resultados finales,docs/sprints/SPRINT_4_RESULTADOS.md,"Crear doc con: tabla Sprint 1→4 (accuracy, Recall@K, modelo, corpus), tasa abstención (objetivo 5-15%), distribución confianza, accuracy bruto vs ajustado, feedbacks recibidos.","test -f docs/sprints/SPRINT_4_RESULTADOS.md",pendiente,open_claw
+
+archivos_modificar[8]{archivo,accion,agente}:
+  lib/rag.ts,MODIFICAR abstención + confidence + citas,cursor
+  lib/types.ts,MODIFICAR agregar confidence y campos citation,open_claw
+  app/api/rag/route.ts,MODIFICAR exponer confidence,open_claw
+  components/ResultsDisplay.tsx,MODIFICAR badge + citas + feedback,open_claw
+  app/api/feedback/route.ts,VERIFICAR/CREAR endpoint feedback,open_claw
+  data/eval/negative-feedback.jsonl,CREAR log feedback negativo,open_claw
+  lib/generation.ts,VERIFICAR contexto vigencia,cursor
+  docs/sprints/SPRINT_4_RESULTADOS.md,CREAR documentación final,open_claw
+
+orden_ejecucion[15]{paso,tarea_id,agente,nota,dependencia}:
+  1,S4.1,cursor,Función confianza (backend),ninguna
+  2,S4.4,open_claw,Tipo confidence (paralelo con S4.1),ninguna
+  3,S4.7,cursor,Enriquecer citas (paralelo con S4.1),ninguna
+  4,S4.8,open_claw,Tipo citation (paralelo con S4.7),ninguna
+  5,S4.10,open_claw,Verificar feedback endpoint (paralelo),ninguna
+  6,S4.2,cursor,Integrar abstención pipeline,S4.1
+  7,S4.3,cursor,Advertencia baja confianza,S4.2
+  8,S4.5,open_claw,Exponer en API,"S4.4"
+  9,S4.6,open_claw,Badge confianza UI,"S4.5"
+  10,S4.9,open_claw,Citas expandibles UI,"S4.8"
+  11,S4.11,open_claw,Botones feedback UI,S4.10
+  12,S4.12,open_claw,Guardar feedback negativo,S4.10
+  13,S4.13,cursor,Verificar vigencia contexto,ninguna
+  14,S4.14,cursor,Benchmark final,"S4.3 S4.13"
+  15,S4.15,open_claw,Documentar resultados,S4.14
+
+criterio_exito[10]{item}:
+  Abstención inteligente funcional (insuficiente retorna abstención)
+  Badge de confianza visible en UI (verde/amarillo/naranja/rojo)
+  Citas con excerpt expandible y hierarchy
+  Botones feedback funcionales
+  Feedback negativo guardado en data/eval/
+  Contexto LLM incluye VIGENTE/DEROGADA por fuente
+  Tasa abstención 5-15%
+  Accuracy bruto >= 80%
+  Accuracy ajustado >= 85%
+  Recall@10 >= 0.85
+
+post_fase_comando[2]{orden,comando,descripcion,agente}:
+  1,"cd ColLawRAG && node scripts/evaluate-accuracy.mjs --limit 50",Benchmark final producto,cursor
+  2,"cd ColLawRAG && npm run build",Verificar build completo,cursor

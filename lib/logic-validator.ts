@@ -192,8 +192,8 @@ function validateCitationConsistency(
   // Verificar que las normas mencionadas están en los chunks
   for (const title of mentionedTitles) {
     const foundInChunks = chunks.some(({ chunk }) => 
-      chunk.metadata.title.toLowerCase().includes(title) || 
-      title.includes(chunk.metadata.title.toLowerCase())
+      chunk.metadata?.title.toLowerCase().includes(title) || 
+      title.includes(chunk.metadata?.title.toLowerCase())
     )
     
     if (!foundInChunks) {

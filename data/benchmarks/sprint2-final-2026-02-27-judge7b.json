@@ -1,0 +1,814 @@
+{
+  "ragas_style": {
+    "faithfulness": 0.83,
+    "answer_relevancy": 0.45,
+    "context_recall": null,
+    "context_precision": null,
+    "overall": 0.64
+  },
+  "fecha": "2026-02-27",
+  "api_url": "http://localhost:3000",
+  "modelo_juez": "qwen2.5:7b-instruct",
+  "resumen": {
+    "total_casos": 50,
+    "evaluados": 8,
+    "errores": 42,
+    "score_promedio": "5.24",
+    "accuracy_porcentaje": "52.4%"
+  },
+  "metrics": {
+    "fecha": "2026-02-27",
+    "api_url": "http://localhost:3000",
+    "modelo_juez": "qwen2.5:7b-instruct",
+    "accuracy_porcentaje": 52.4,
+    "score_promedio": 5.24,
+    "total_casos": 50,
+    "evaluados": 8,
+    "errores": 42,
+    "por_area": {
+      "laboral": {
+        "promedio": 4.8,
+        "casos": 4
+      },
+      "constitucional": {
+        "promedio": 5.67,
+        "casos": 4
+      }
+    },
+    "por_dificultad": {
+      "basico": {
+        "promedio": "5.38",
+        "casos": 4
+      },
+      "intermedio": {
+        "promedio": "5.07",
+        "casos": 3
+      },
+      "avanzado": {
+        "promedio": "5.20",
+        "casos": 1
+      }
+    },
+    "veredictos": {
+      "BUENO": 1,
+      "REGULAR": 1,
+      "ACEPTABLE": 1,
+      "DEFICIENTE": 3,
+      "EXCELENTE": 2
+    },
+    "criterios": {
+      "precision_normativa": "3.50",
+      "articulos_correctos": "3.13",
+      "interpretacion_valida": "5.13",
+      "completitud": "5.50",
+      "relevancia_contexto": "5.88",
+      "ausencia_alucinaciones": "8.25"
+    }
+  },
+  "veredictos": {
+    "BUENO": 1,
+    "REGULAR": 1,
+    "ACEPTABLE": 1,
+    "DEFICIENTE": 3,
+    "EXCELENTE": 2
+  },
+  "promedio_criterios": {
+    "precision_normativa": "3.50",
+    "articulos_correctos": "3.13",
+    "interpretacion_valida": "5.13",
+    "completitud": "5.50",
+    "relevancia_contexto": "5.88",
+    "ausencia_alucinaciones": "8.25"
+  },
+  "por_area": {
+    "laboral": {
+      "promedio": "4.80",
+      "casos": 4,
+      "scores": [
+        7,
+        4.2,
+        5.2,
+        2.8
+      ]
+    },
+    "constitucional": {
+      "promedio": "5.67",
+      "casos": 4,
+      "scores": [
+        10,
+        1,
+        1.7,
+        10
+      ]
+    }
+  },
+  "mejores_casos": [
+    {
+      "id": "CON-004",
+      "area": "constitucional",
+      "score": 10
+    },
+    {
+      "id": "CON-010",
+      "area": "constitucional",
+      "score": 10
+    },
+    {
+      "id": "LAB-022",
+      "area": "laboral",
+      "score": 7
+    }
+  ],
+  "peores_casos": [
+    {
+      "id": "CON-005",
+      "area": "constitucional",
+      "score": 1
+    },
+    {
+      "id": "CON-006",
+      "area": "constitucional",
+      "score": 1.7
+    },
+    {
+      "id": "LAB-025",
+      "area": "laboral",
+      "score": 2.8
+    }
+  ],
+  "alucinaciones_detectadas": [],
+  "resultados_detallados": [
+    {
+      "id": "LAB-022",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuántos días de incapacidad paga el empleador directamente?",
+      "respuesta_referencia": "Según el artículo 199 del CST, el empleador paga directamente los dos (2) primeros días de incapacidad. A partir del tercer día, paga el Instituto de Seguros Sociales (o la EPS) hasta el día 90; después del día 90, la incapacidad la asume la entidad aseguradora según normativa de riesgos profesionales.",
+      "respuesta_rag": "No fue posible generar la respuesta en este momento. Intenta nuevamente más tarde.",
+      "evaluacion": {
+        "precision_normativa": 1,
+        "articulos_correctos": 1,
+        "interpretacion_valida": 10,
+        "completitud": 10,
+        "relevancia_contexto": 10,
+        "ausencia_alucinaciones": 10,
+        "normas_correctas": [
+          "Art. 199 CST"
+        ],
+        "normas_faltantes": [],
+        "alucinaciones": [],
+        "comentario": "Respuesta precisa, completa y relevante.",
+        "score_total": 7,
+        "veredicto": "BUENO"
+      },
+      "error": null,
+      "timestamp": "2026-02-27T21:26:08.930Z"
+    },
+    {
+      "id": "LAB-023",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué requisitos debe cumplir un despido por justa causa?",
+      "respuesta_referencia": "Las causales de despido con justa causa están en el artículo 62 del CST: fraude, violencia, embriaguez habitual, etc. El empleador debe dar al trabajador la oportunidad de presentar descargos (Art. 60). El despido debe notificarse por escrito con expresión de los hechos y la causal. Si no se cumple el procedimiento, el despido puede declararse ineficaz.",
+      "respuesta_rag": "No fue posible generar la respuesta en este momento. Intenta nuevamente más tarde.\n\n⚠️ **Vigencia:** La norma \"Ley 100 de 1993 — Sistema General de Seguridad Social\" tiene artículos derogados o modificados; verifique vigencia específica.",
+      "evaluacion": {
+        "precision_normativa": 2,
+        "articulos_correctos": 1,
+        "interpretacion_valida": 3,
+        "completitud": 4,
+        "relevancia_contexto": 5,
+        "ausencia_alucinaciones": 10,
+        "normas_correctas": [
+          "Art. 62 CST"
+        ],
+        "normas_faltantes": [
+          "Art. 60 CST"
+        ],
+        "alucinaciones": [],
+        "comentario": "La respuesta RAG no proporciona información relevante y menciona una ley incorrecta, mientras que la experta cita correctamente los artículos relevantes pero omite Art. 60.",
+        "score_total": 4.2,
+        "veredicto": "REGULAR"
+      },
+      "error": null,
+      "timestamp": "2026-02-27T21:27:47.384Z"
+    },
+    {
+      "id": "LAB-024",
+      "area": "laboral",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cómo se calculan los intereses sobre cesantías y quién los paga?",
+      "respuesta_referencia": "Los intereses sobre cesantías están en el artículo 99 del CST. El empleador debe pagar al trabajador un 12% anual sobre el valor de las cesantías, o proporcional al tiempo laborado. Se pagan junto con las cesantías al terminar el contrato, o anualmente si el trabajador lo solicita. La liquidación se hace sobre el saldo de cesantías a 31 de diciembre.",
+      "respuesta_rag": "No fue posible generar la respuesta en este momento. Intenta nuevamente más tarde.\n\n⚠️ **Vigencia:** La norma \"Ley 100 de 1993 — Sistema General de Seguridad Social\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Ley 100 de 1993 — Sistema General de Seguridad Social\" tiene artículos derogados o modificados; verifique vigencia específica. La norma \"Ley 100 de 1993 — Sistema General de Seguridad Social\" tiene artículos derogados o modificados; verifique vigencia específica.",
+      "evaluacion": {
+        "precision_normativa": 2,
+        "articulos_correctos": 1,
+        "interpretacion_valida": 5,
+        "completitud": 6,
+        "relevancia_contexto": 7,
+        "ausencia_alucinaciones": 10,
+        "normas_correctas": [
+          "Ley 100 de 1993"
+        ],
+        "normas_faltantes": [],
+        "alucinaciones": [],
+        "comentario": "La respuesta RAG no proporciona información relevante y se repite. La respuesta del experto menciona el artículo correcto pero omite citar la norma específica.",
+        "score_total": 5.2,
+        "veredicto": "ACEPTABLE"
+      },
+      "error": null,
+      "timestamp": "2026-02-27T21:29:28.960Z"
+    },
+    {
+      "id": "LAB-025",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Qué es el trabajo en dominical o festivo y cómo se paga?",
+      "respuesta_referencia": "Según el artículo 177 del CST, el trabajo en domingo y festivos se remunera con un recargo del 75% sobre el valor del trabajo en día ordinario. Si el trabajador no descansa en la semana, además tiene derecho al descanso compensado remunerado. Las festividades son las que señale la ley (Art. 177).",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Qué es el trabajo en dominical o festivo**\n\n\n\nNo fue posible generar la respuesta en este momento. Intenta nuevamente más tarde.\n\n\n\n---\n\n\n\n**2. y cómo se paga?**\n\n\n\nNo fue posible generar la respuesta en este momento. Intenta nuevamente más tarde.",
+      "evaluacion": {
+        "precision_normativa": 2,
+        "articulos_correctos": 1,
+        "interpretacion_valida": 2,
+        "completitud": 3,
+        "relevancia_contexto": 4,
+        "ausencia_alucinaciones": 5,
+        "normas_correctas": [
+          "Art. 177 CST"
+        ],
+        "normas_faltantes": [],
+        "alucinaciones": [],
+        "comentario": "La respuesta RAG no aborda correctamente las preguntas planteadas y omite citar el artículo 177 del CST, mientras que la respuesta del experto sí lo hace.",
+        "score_total": 2.8,
+        "veredicto": "DEFICIENTE"
+      },
+      "error": null,
+      "timestamp": "2026-02-27T21:31:22.616Z"
+    },
+    {
+      "id": "CON-004",
+      "area": "constitucional",
+      "dificultad": "basico",
+      "pregunta": "¿Qué es el habeas corpus y en qué artículo está?",
+      "respuesta_referencia": "El habeas corpus está en el artículo 30 de la Constitución. Toda persona detenida tiene derecho a que se le informe de las razones de la detención y a que se le juzgue dentro de las libertades constitucionales. Puede invocarse ante cualquier autoridad judicial para que se examine la legalidad de la privación de la libertad.",
+      "respuesta_rag": "No fue posible generar la respuesta en este momento. Intenta nuevamente más tarde.",
+      "evaluacion": {
+        "precision_normativa": 10,
+        "articulos_correctos": 10,
+        "interpretacion_valida": 10,
+        "completitud": 10,
+        "relevancia_contexto": 10,
+        "ausencia_alucinaciones": 10,
+        "normas_correctas": [
+          "Art. 30 CP"
+        ],
+        "normas_faltantes": [],
+        "alucinaciones": [],
+        "comentario": "La respuesta del experto es precisa y completa.",
+        "score_total": 10,
+        "veredicto": "EXCELENTE"
+      },
+      "error": null,
+      "timestamp": "2026-02-27T21:33:10.313Z"
+    },
+    {
+      "id": "CON-005",
+      "area": "constitucional",
+      "dificultad": "intermedio",
+      "pregunta": "¿Quién puede presentar una demanda de inconstitucionalidad contra una ley?",
+      "respuesta_referencia": "Según el artículo 241 de la Constitución, pueden demandar la inconstitucionalidad de leyes: (1) los ciudadanos (por el 5% del censo o 30% de los concejales/diputados); (2) el Presidente; (3) los magistrados de la Corte Suprema, del Consejo de Estado y del Consejo Superior de la Judicatura; (4) el Procurador General; (5) el Defensor del Pueblo; (6) los ministros.",
+      "respuesta_rag": "No fue posible generar la respuesta en este momento. Intenta nuevamente más tarde.",
+      "evaluacion": {
+        "precision_normativa": 1,
+        "articulos_correctos": 1,
+        "interpretacion_valida": 1,
+        "completitud": 1,
+        "relevancia_contexto": 1,
+        "ausencia_alucinaciones": 1,
+        "normas_correctas": [
+          "Art. 241 CP"
+        ],
+        "normas_faltantes": [],
+        "alucinaciones": [],
+        "comentario": "Respuesta precisa, completa y relevante.",
+        "score_total": 1,
+        "veredicto": "DEFICIENTE"
+      },
+      "error": null,
+      "timestamp": "2026-02-27T21:34:41.725Z"
+    },
+    {
+      "id": "CON-006",
+      "area": "constitucional",
+      "dificultad": "basico",
+      "pregunta": "¿Cuántos artículos tiene la Constitución de 1991?",
+      "respuesta_referencia": "La Constitución Política de Colombia de 1991 tiene 380 artículos en su parte dogmática y orgánica, organizados en 13 títulos. Incluye disposiciones transitorias. El preámbulo y los artículos 1 a 380 conforman el texto principal.",
+      "respuesta_rag": "No fue posible generar la respuesta en este momento. Intenta nuevamente más tarde.",
+      "evaluacion": {
+        "precision_normativa": 0,
+        "articulos_correctos": 0,
+        "interpretacion_valida": 0,
+        "completitud": 0,
+        "relevancia_contexto": 0,
+        "ausencia_alucinaciones": 10,
+        "normas_correctas": [],
+        "normas_faltantes": [],
+        "alucinaciones": [],
+        "comentario": "Respuesta RAG no proporcionó información relevante y fue inútil, mientras que la respuesta del experto proporcionó un resumen general pero sin citar normas específicas.",
+        "score_total": 1.7,
+        "veredicto": "DEFICIENTE"
+      },
+      "error": null,
+      "timestamp": "2026-02-27T21:36:11.081Z"
+    },
+    {
+      "id": "CON-010",
+      "area": "constitucional",
+      "dificultad": "intermedio",
+      "pregunta": "¿Quién elige a los magistrados de la Corte Constitucional?",
+      "respuesta_referencia": "Según el artículo 239 de la Constitución, la Corte Constitucional se compone de nueve (9) magistrados elegidos por el Senado de la República por periodos de ocho (8) años, de sendas ternas enviadas por el Presidente, la Corte Suprema de Justicia y el Consejo de Estado. No son reelegibles.",
+      "respuesta_rag": "**HECHOS RELEVANTES:** La consulta se refiere a la elección de los magistrados de la Corte Constitucional en Colombia. Se busca determinar quién es el encargado de realizar esta elección.\n\n**NORMAS APLICABLES:** Según el Artículo 239 de la Constitución Política de Colombia [1], los Magistrados de la Corte Constitucional serán elegidos por el Senado de la República para períodos individuales de ocho años, de sendas ternas que le presenten el Presidente de la República, la Corte Suprema de Justicia y el Consejo de Estado.\n\n**ANÁLISIS JURÍDICO:** El Artículo 239 [1] establece claramente que la elección de los magistrados de la Corte Constitucional es responsabilidad del Senado de la República. Sin embargo, la presentación de las ternas es realizada por el Presidente de la República, la Corte Suprema de Justicia y el Consejo de Estado. Esto sugiere un proceso de selección que involucra a diferentes ramas del poder público.\n\n**CONCLUSIÓN:** La elección de los magistrados de la Corte Constitucional es realizada por el Senado de la República, a partir de ternas presentadas por el Presidente de la República, la Corte Suprema de Justicia y el Consejo de Estado, según lo establecido en el Artículo 239 de la Constitución Política de Colombia [1].\n\n**RECOMENDACIÓN:** Para obtener más información detallada sobre el proceso de elección y los requisitos para ser magistrado de la Corte Constitucional, se recomienda consultar el Artículo 240 [4] y otros artículos relacionados con la Corte Constitucional en la Constitución Política de Colombia. Sin embargo, con las fuentes proporcionadas, el Artículo 239 [1] es suficiente para determinar quién elige a los magistrados de la Corte Constitucional.",
+      "evaluacion": {
+        "precision_normativa": 10,
+        "articulos_correctos": 10,
+        "interpretacion_valida": 10,
+        "completitud": 10,
+        "relevancia_contexto": 10,
+        "ausencia_alucinaciones": 10,
+        "normas_correctas": [
+          "Art. 239 CP"
+        ],
+        "normas_faltantes": [],
+        "alucinaciones": [],
+        "comentario": "La respuesta es precisa, completa y relevante.",
+        "score_total": 10,
+        "veredicto": "EXCELENTE"
+      },
+      "error": null,
+      "timestamp": "2026-02-27T21:45:40.719Z"
+    }
+  ],
+  "errores": [
+    {
+      "id": "LAB-001",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuántos días de vacaciones tiene derecho un trabajador con un año de trabajo?",
+      "respuesta_referencia": "Según el artículo 186 del Código Sustantivo del Trabajo (CST), el trabajador tiene derecho a 15 días hábiles consecutivos de vacaciones remuneradas por cada año de servicio. Este derecho es irrenunciable según el artículo 189 del CST.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: The operation was aborted due to timeout",
+      "timestamp": "2026-02-27T21:06:35.265Z"
+    },
+    {
+      "id": "LAB-002",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es el salario mínimo legal mensual vigente en Colombia para 2024?",
+      "respuesta_referencia": "Para el año 2024, el salario mínimo legal mensual vigente (SMLMV) en Colombia fue fijado en $1.300.000 mediante el Decreto 2613 de 2023, representando un incremento del 12% respecto al año anterior. Adicionalmente, el auxilio de transporte quedó en $162.000 mensuales.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: The operation was aborted due to timeout",
+      "timestamp": "2026-02-27T21:15:47.274Z"
+    },
+    {
+      "id": "LAB-003",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuándo procede el despido sin justa causa y cuál es la indemnización?",
+      "respuesta_referencia": "Según el artículo 64 del CST, el empleador puede terminar el contrato sin justa causa pagando indemnización. Para contratos a término indefinido con trabajadores que ganen menos de 10 SMLMV: 30 días por el primer año y 20 días adicionales por cada año posterior. Para trabajadores con más de 10 SMLMV: 20 días por el primer año y 15 adicionales por cada año. El artículo 26 del Decreto 2351/65 modificó esta figura.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 404 Not Found",
+      "timestamp": "2026-02-27T21:24:59.282Z"
+    },
+    {
+      "id": "LAB-004",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el fuero de maternidad y qué protección ofrece?",
+      "respuesta_referencia": "El fuero de maternidad, consagrado en el artículo 239 del CST y desarrollado por la Sentencia C-005 de 2017 de la Corte Constitucional, prohíbe el despido de la trabajadora embarazada o en período de lactancia sin la autorización previa del Inspector de Trabajo. Si se despide sin autorización, el despido es ineficaz y la trabajadora tiene derecho a ser reintegrada y al pago de salarios y prestaciones dejados de percibir. La protección aplica incluso en contratos a término fijo y de obra.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 404 Not Found",
+      "timestamp": "2026-02-27T21:25:01.334Z"
+    },
+    {
+      "id": "LAB-005",
+      "area": "laboral",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cómo se calcula la liquidación de un trabajador que lleva 3 años y gana $2.000.000?",
+      "respuesta_referencia": "Para un trabajador con 3 años de antigüedad y salario de $2.000.000: (1) Cesantías: $2.000.000 × 3 años = $6.000.000; (2) Intereses sobre cesantías: $6.000.000 × 12% = $720.000; (3) Prima de servicios: $2.000.000 × 3 meses/12 = $500.000 (proporcional al último semestre); (4) Vacaciones: 15 días × $66.667/día = $1.000.000 (proporcional); (5) Si el auxilio de transporte aplica ($162.000/mes). El total aproximado antes de descuentos sería $8.220.000 más el auxilio de transporte proporcional.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 404 Not Found",
+      "timestamp": "2026-02-27T21:25:03.383Z"
+    },
+    {
+      "id": "LAB-006",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es el período de prueba máximo permitido en Colombia?",
+      "respuesta_referencia": "Según el artículo 78 del CST, el período de prueba no puede exceder dos (2) meses. Para contratos a término fijo inferior a un año, el período de prueba no podrá ser superior a la quinta parte del término inicialmente pactado. Este período debe constar por escrito.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 404 Not Found",
+      "timestamp": "2026-02-27T21:25:05.447Z"
+    },
+    {
+      "id": "CIV-001",
+      "area": "civil",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es el plazo de prescripción de la acción ejecutiva en Colombia?",
+      "respuesta_referencia": "Según el artículo 2536 del Código Civil colombiano, la acción ejecutiva prescribe en cinco (5) años. La acción ordinaria prescribe en diez (10) años. La prescripción puede ser interrumpida por reconocimiento de deuda o por demanda judicial.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 404 Not Found",
+      "timestamp": "2026-02-27T21:25:07.496Z"
+    },
+    {
+      "id": "CIV-002",
+      "area": "civil",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuáles son los requisitos para que un contrato de compraventa de inmueble sea válido?",
+      "respuesta_referencia": "Para la validez de la compraventa de inmueble en Colombia se requiere: (1) Capacidad de las partes (Art. 1502 CC); (2) Consentimiento libre de vicios (Arts. 1508-1516 CC); (3) Objeto lícito y determinado (Arts. 1517-1521 CC); (4) Causa lícita (Arts. 1524-1527 CC); (5) Solemnidad: escritura pública ante notario (Art. 1857 CC y Art. 12 Decreto 960/70); (6) Registro en la Oficina de Instrumentos Públicos para la tradición (Art. 756 CC).",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 404 Not Found",
+      "timestamp": "2026-02-27T21:25:09.539Z"
+    },
+    {
+      "id": "CIV-003",
+      "area": "civil",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es la acción de tutela y en qué plazo debe ser resuelta?",
+      "respuesta_referencia": "La acción de tutela, consagrada en el artículo 86 de la Constitución Política y reglamentada por el Decreto 2591 de 1991, es un mecanismo de protección inmediata de derechos fundamentales cuando no exista otro medio de defensa judicial eficaz. El juez debe resolver en un plazo de diez (10) días calendario. La sentencia puede ser impugnada dentro de los tres (3) días siguientes.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 404 Not Found",
+      "timestamp": "2026-02-27T21:25:11.591Z"
+    },
+    {
+      "id": "CIV-004",
+      "area": "civil",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cuándo procede la acción popular y quién puede interponerla?",
+      "respuesta_referencia": "La acción popular está consagrada en el artículo 88 de la Constitución y regulada por la Ley 472 de 1998. Procede para proteger derechos e intereses colectivos como el medio ambiente, la moralidad administrativa, el espacio público, la salubridad pública, entre otros. Puede ser interpuesta por cualquier persona natural o jurídica, organizaciones no gubernamentales, entidades públicas y el Defensor del Pueblo. No requiere acreditar perjuicio personal.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 404 Not Found",
+      "timestamp": "2026-02-27T21:25:13.637Z"
+    },
+    {
+      "id": "PEN-001",
+      "area": "penal",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es la pena por el delito de hurto simple en Colombia?",
+      "respuesta_referencia": "Según el artículo 239 del Código Penal (Ley 599 de 2000), el hurto simple está sancionado con prisión de dos (2) a seis (6) años. Si el valor de lo hurtado no supera diez (10) salarios mínimos legales mensuales vigentes y el imputado no tiene antecedentes, puede acceder a mecanismos sustitutivos de prisión como la suspensión condicional de la ejecución de la pena.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 404 Not Found",
+      "timestamp": "2026-02-27T21:25:15.720Z"
+    },
+    {
+      "id": "PEN-002",
+      "area": "penal",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el preacuerdo en materia penal y qué beneficios ofrece?",
+      "respuesta_referencia": "El preacuerdo está regulado en los artículos 348 a 354 del Código de Procedimiento Penal (Ley 906 de 2004). Es un mecanismo de terminación anticipada del proceso mediante el cual el fiscal y el imputado o acusado acuerdan la imputación y los cargos, a cambio de una rebaja de hasta la mitad de la pena (50%). El juez debe verificar que no se desconozcan garantías fundamentales. Difiere de la aceptación de cargos en que implica negociación sobre los hechos imputados.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 404 Not Found",
+      "timestamp": "2026-02-27T21:25:17.767Z"
+    },
+    {
+      "id": "CON-001",
+      "area": "constitucional",
+      "dificultad": "basico",
+      "pregunta": "¿Cuáles son los derechos fundamentales reconocidos en la Constitución de 1991?",
+      "respuesta_referencia": "La Constitución Política de 1991 reconoce en el Título II, Capítulo I (Arts. 11-44) los derechos fundamentales, entre ellos: derecho a la vida (Art. 11), prohibición de tortura (Art. 12), derecho a la igualdad (Art. 13), libertad de conciencia (Art. 18), libre desarrollo de la personalidad (Art. 16), derecho al debido proceso (Art. 29), libertad personal (Art. 28), habeas corpus (Art. 30), derecho de petición (Art. 23), entre otros. La Corte Constitucional ha ampliado este catálogo vía jurisprudencia.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 404 Not Found",
+      "timestamp": "2026-02-27T21:25:19.814Z"
+    },
+    {
+      "id": "CON-002",
+      "area": "constitucional",
+      "dificultad": "intermedio",
+      "pregunta": "¿En qué consiste el estado de emergencia económica y cuánto puede durar?",
+      "respuesta_referencia": "El estado de emergencia económica, social y ecológica está consagrado en el artículo 215 de la Constitución Política. El Presidente puede declararlo cuando sobrevengan hechos distintos a los del Estado de Guerra o Conmoción Interior que perturben el orden económico, social o ecológico. Puede declararse por períodos de hasta treinta (30) días cada uno, sin que sumados excedan noventa (90) días en el año calendario. Durante su vigencia el Gobierno puede expedir decretos legislativos.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 404 Not Found",
+      "timestamp": "2026-02-27T21:25:21.860Z"
+    },
+    {
+      "id": "CON-003",
+      "area": "constitucional",
+      "dificultad": "avanzado",
+      "pregunta": "¿Qué es la excepción de inconstitucionalidad y cómo se aplica?",
+      "respuesta_referencia": "La excepción de inconstitucionalidad, consagrada en el artículo 4 de la Constitución Política, permite a cualquier operador jurídico inaplicar una norma que sea contraria a la Constitución en un caso concreto, sin que esto implique su derogatoria general. Difiere de la acción de inconstitucionalidad en que sus efectos son inter partes y no erga omnes. La Corte Constitucional ha señalado que es un deber del juez cuando la norma aplicable viola claramente preceptos constitucionales.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 404 Not Found",
+      "timestamp": "2026-02-27T21:25:23.905Z"
+    },
+    {
+      "id": "ADM-001",
+      "area": "administrativo",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es el plazo para interponer acción de nulidad y restablecimiento del derecho?",
+      "respuesta_referencia": "Según el artículo 164 del Código de Procedimiento Administrativo y de lo Contencioso Administrativo (CPACA - Ley 1437 de 2011), la demanda de nulidad y restablecimiento del derecho debe presentarse dentro de los cuatro (4) meses siguientes a la comunicación, notificación o publicación del acto administrativo. Para actos que no requieren publicación, el término corre desde el día siguiente al de la notificación.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 404 Not Found",
+      "timestamp": "2026-02-27T21:25:25.945Z"
+    },
+    {
+      "id": "ADM-002",
+      "area": "administrativo",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el derecho de petición y cuál es el plazo para responderlo?",
+      "respuesta_referencia": "El derecho de petición está consagrado en el artículo 23 de la Constitución Política y regulado por la Ley 1755 de 2015 (que modificó el CPACA). Las entidades públicas deben resolver las peticiones en un plazo de quince (15) días hábiles para peticiones de carácter general. Las consultas tienen 30 días hábiles. Las quejas y reclamos: 15 días hábiles. El incumplimiento genera responsabilidad disciplinaria y puede dar lugar a tutela.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 404 Not Found",
+      "timestamp": "2026-02-27T21:25:27.987Z"
+    },
+    {
+      "id": "ADM-003",
+      "area": "administrativo",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cuándo procede la acción de repetición contra un servidor público?",
+      "respuesta_referencia": "La acción de repetición, regulada por la Ley 678 de 2001 y el artículo 90 de la Constitución, procede cuando el Estado ha sido condenado a reparar un daño antijurídico y este fue causado por la conducta dolosa o gravemente culposa de un servidor público. Es obligatoria cuando la condena supera 500 SMLMV. Prescribe en dos (2) años contados desde el pago total o desde la última cuota pagada. El servidor público puede ser declarado responsable patrimonialmente.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 404 Not Found",
+      "timestamp": "2026-02-27T21:25:30.029Z"
+    },
+    {
+      "id": "TRI-001",
+      "area": "tributario",
+      "dificultad": "basico",
+      "pregunta": "¿Cuál es la tarifa general del impuesto de renta para personas jurídicas en Colombia?",
+      "respuesta_referencia": "Según el artículo 240 del Estatuto Tributario (ET), modificado por la Ley 2277 de 2022 (Reforma Tributaria), la tarifa general del impuesto sobre la renta para personas jurídicas es del 35% a partir del año gravable 2022. Existen tarifas especiales para ciertos sectores como el financiero (38%) y para zonas francas (20%). Las entidades del régimen tributario especial tienen tarifa del 20%.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 404 Not Found",
+      "timestamp": "2026-02-27T21:25:32.085Z"
+    },
+    {
+      "id": "TRI-002",
+      "area": "tributario",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuándo se genera el IVA y cuál es la tarifa general en Colombia?",
+      "respuesta_referencia": "El Impuesto sobre las Ventas (IVA) está regulado en el Libro Tercero del Estatuto Tributario (Arts. 420-513 ET). Se genera en la venta de bienes corporales muebles no excluidos, prestación de servicios en el territorio nacional, importación de bienes corporales muebles y juegos de suerte y azar. La tarifa general es del 19% según el artículo 468 ET, modificado por la Ley 1819 de 2016. Existen tarifas diferenciales del 5% y bienes exentos (0%).",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 404 Not Found",
+      "timestamp": "2026-02-27T21:25:34.129Z"
+    },
+    {
+      "id": "LAB-007",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuántas horas máximas tiene la jornada ordinaria de trabajo en Colombia?",
+      "respuesta_referencia": "Según el artículo 161 del CST, la jornada ordinaria de trabajo es de máximo ocho (8) horas al día y cuarenta y ocho (48) horas a la semana.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 404 Not Found",
+      "timestamp": "2026-02-27T21:25:36.200Z"
+    },
+    {
+      "id": "LAB-008",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿A cuánto equivalen las horas extras en el día ordinario?",
+      "respuesta_referencia": "Según el artículo 168 del CST, las horas extras diurnas se pagan con un recargo del 25% sobre el valor de la hora ordinaria. Las nocturnas (entre 10pm y 6am) con 75% de recargo.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 404 Not Found",
+      "timestamp": "2026-02-27T21:25:38.249Z"
+    },
+    {
+      "id": "LAB-009",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es la estabilidad laboral reforzada y quiénes la tienen?",
+      "respuesta_referencia": "La estabilidad laboral reforzada está en el artículo 26 del CST. La tienen los trabajadores con más de diez (10) años de servicio continuos en la empresa. El empleador no puede despedirlos sin justa causa probada ni sin autorización del Inspector de Trabajo.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 404 Not Found",
+      "timestamp": "2026-02-27T21:25:40.294Z"
+    },
+    {
+      "id": "LAB-010",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuándo se pagan las cesantías al trabajador?",
+      "respuesta_referencia": "Según el artículo 249 del CST, las cesantías se pagan al terminar el contrato. Durante la vigencia del contrato a término indefinido, el empleador debe consignar las cesantías antes del 14 de febrero de cada año (o en el primer mes al cumplir el trabajador un año).",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 404 Not Found",
+      "timestamp": "2026-02-27T21:25:42.343Z"
+    },
+    {
+      "id": "LAB-011",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el auxilio de cesantías y quiénes tienen derecho?",
+      "respuesta_referencia": "El auxilio de cesantías está regulado en los artículos 249 a 252 del CST. Es un derecho de los trabajadores de servicio doméstico y de los que devenguen hasta dos (2) salarios mínimos. Se paga al finalizar el contrato: un mes de salario si laboró de 1 a 5 años; 20 días por año si laboró más de 5 años.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 404 Not Found",
+      "timestamp": "2026-02-27T21:25:44.392Z"
+    },
+    {
+      "id": "LAB-012",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿El empleador puede descontar del salario por daños en herramientas?",
+      "respuesta_referencia": "Según el artículo 150 del CST, el empleador no puede hacer descuentos por pérdida o deterioro de herramientas o elementos de trabajo, salvo que medie autorización por escrito del trabajador o fallo judicial. Los descuentos por cuotas sindicales o cooperativas sí están permitidos con autorización.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 404 Not Found",
+      "timestamp": "2026-02-27T21:25:46.449Z"
+    },
+    {
+      "id": "LAB-013",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Cuál es el plazo para reclamar prestaciones sociales ante la conciliación?",
+      "respuesta_referencia": "Según el artículo 392 del CST, las controversias sobre prestaciones sociales prescriben en tres (3) años contados desde el día siguiente a la terminación del contrato. Antes de demandar, es obligatorio acudir a la conciliación ante el Inspector de Trabajo o centro de conciliación.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 404 Not Found",
+      "timestamp": "2026-02-27T21:25:48.492Z"
+    },
+    {
+      "id": "LAB-014",
+      "area": "laboral",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cómo se calcula la indemnización por despido sin justa causa para un trabajador con 5 años y salario de 15 SMMLV?",
+      "respuesta_referencia": "Para trabajadores que devenguen más de 10 SMMLV (Art. 64 CST): 20 días por el primer año y 15 días por cada año siguiente. Con 5 años: 20 + (15×4) = 80 días. Con salario de 15 SMMLV ($19.500.000 en 2024): 80 × ($19.500.000/30) ≈ $52.000.000.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 404 Not Found",
+      "timestamp": "2026-02-27T21:25:50.538Z"
+    },
+    {
+      "id": "LAB-015",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Qué es la prima de servicios y cuándo se paga?",
+      "respuesta_referencia": "La prima de servicios está en el artículo 306 del CST. Es un salario adicional que se paga en dos pagas al año: la primera antes del 30 de junio (por el primer semestre) y la segunda antes del 20 de diciembre (por el segundo semestre). Equivale a 15 días de salario por cada semestre trabajado.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 404 Not Found",
+      "timestamp": "2026-02-27T21:25:53.069Z"
+    },
+    {
+      "id": "LAB-016",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué derechos tiene un trabajador en período de prueba al ser despedido?",
+      "respuesta_referencia": "Durante el período de prueba (máximo 2 meses, Art. 78 CST) cualquiera de las partes puede terminar el contrato sin expresión de causa y sin indemnización. El trabajador tiene derecho a que se le paguen los salarios y prestaciones proporcionales al tiempo laborado. No aplica indemnización por despido sin justa causa.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 404 Not Found",
+      "timestamp": "2026-02-27T21:25:56.352Z"
+    },
+    {
+      "id": "LAB-017",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Cuántos días de licencia de maternidad tiene una trabajadora en Colombia?",
+      "respuesta_referencia": "Según el artículo 236 del CST, la trabajadora tiene derecho a dieciocho (18) semanas de licencia de maternidad, de las cuales una (1) puede ser transferida al padre. La licencia es remunerada y se cuenta desde la fecha del parto o desde que el médico certifique el embarazo en los casos de parto prematuro.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: RAG API error: 404 Not Found",
+      "timestamp": "2026-02-27T21:25:58.866Z"
+    },
+    {
+      "id": "LAB-018",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es la causal objetiva de despido y cuál es la indemnización?",
+      "respuesta_referencia": "Las causales objetivas están en el artículo 62 del CST: cierre de la empresa, suspensión de actividades por más de 120 días, muerte del empleador natural, etc. La indemnización es la misma que para despido sin justa causa: 30+20×(años-1) para quienes ganen menos de 10 SMMLV, o 20+15×(años-1) para quienes ganen más.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: fetch failed",
+      "timestamp": "2026-02-27T21:26:00.914Z"
+    },
+    {
+      "id": "LAB-019",
+      "area": "laboral",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cómo se liquida la pensión de jubilación en un contrato de trabajo?",
+      "respuesta_referencia": "La pensión de jubilación en el régimen de ahorro individual (Ley 100) se liquida con el saldo acumulado en la cuenta del afiliado. En el CST no hay pensión de jubilación pagada por el empleador; el trabajador cotiza a Colpensiones o fondo privado. Al retiro por edad (62 años hombres, 57 mujeres) o por el monto de semanas requeridas, se accede a la mesada pensional.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: fetch failed",
+      "timestamp": "2026-02-27T21:26:02.919Z"
+    },
+    {
+      "id": "LAB-020",
+      "area": "laboral",
+      "dificultad": "basico",
+      "pregunta": "¿Puede un empleador cambiar unilateralmente el lugar de trabajo?",
+      "respuesta_referencia": "El cambio de lugar de trabajo está regulado en el artículo 24 del CST. Si el contrato no lo prevé, el empleador puede trasladar al trabajador siempre que el nuevo lugar esté en la misma población. Si implica cambio de residencia, el trabajador puede aceptar (con auxilio de traslado) o dar por terminado el contrato con indemnización.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: fetch failed",
+      "timestamp": "2026-02-27T21:26:04.923Z"
+    },
+    {
+      "id": "LAB-021",
+      "area": "laboral",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el pacto de no concurrencia y cuándo es válido?",
+      "respuesta_referencia": "El pacto de no concurrencia (no competir después de terminar el contrato) está en el artículo 27 del CST. Es válido solo si se limita a actividades similares, a un tiempo no mayor de dos (2) años y a un territorio determinado. Debe constar por escrito y el empleador debe pagar una contraprestación no inferior al 50% del último salario durante el período pactado.",
+      "respuesta_rag": null,
+      "evaluacion": null,
+      "error": "RAG error: fetch failed",
+      "timestamp": "2026-02-27T21:26:06.928Z"
+    },
+    {
+      "id": "CON-007",
+      "area": "constitucional",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es el bloque de constitucionalidad?",
+      "respuesta_referencia": "El bloque de constitucionalidad es la doctrina según la cual no solo la Constitución escrita sino también los tratados internacionales de derechos humanos ratificados por Colombia (Art. 93 CP) y parte de la jurisprudencia constitucional integran el parámetro de control. La Corte Constitucional lo ha desarrollado para que los derechos de los tratados operen como límite material.",
+      "respuesta_rag": "**HECHOS RELEVANTES:** \nEl bloque de constitucionalidad es un concepto jurídico que se refiere a un conjunto de normas que integran el referente para el juicio de constitucionalidad en un país. En el contexto colombiano, este concepto ha sido desarrollado por la Corte Constitucional a través de varias sentencias, como la C-355/2006 y la C-205 de 2003, donde se establece que el bloque de constitucionalidad constituye un límite a la libertad de configuración del legislador en materia penal.\n\n**NORMAS APLICABLES:** \nSegún la Sentencia C-355/2006 [1], [2], [4] y [6], el bloque de constitucionalidad es un conjunto de normas que incluye disposiciones de carácter internacionalmente obligatorio. La Corte Constitucional ha distinguido entre las disposiciones que integran el bloque de constitucionalidad y aquellas que no forman parte de él [4]. Además, el Artículo 124 [1], [2], [3], [4] y [6] se menciona en relación con el bloque de constitucionalidad.\n\n**ANÁLISIS JURÍDICO:** \nEl bloque de constitucionalidad es un concepto fundamental en el derecho colombiano, ya que establece los límites y parámetros para la interpretación y aplicación de las normas jurídicas en el país. La Corte Constitucional ha desarrollado una jurisprudencia constante en relación con el bloque de constitucionalidad, estableciendo que no todas las disposiciones de derecho internacional integran el bloque de constitucionalidad [4]. La Sentencia T-760/2008 [7] también se refiere al bloque de constitucionalidad en relación con el derecho a la salud.\n\n**CONCLUSIÓN:** \nEl bloque de constitucionalidad es un concepto jurídico que se refiere a un conjunto de normas que integran el referente para el juicio de constitucionalidad en Colombia. La Corte Constitucional ha establecido que el bloque de constitucionalidad constituye un límite a la libertad de configuración del legislador en materia penal y ha desarrollado una jurisprudencia constante en relación con este concepto.\n\n**RECOMENDACIÓN:** \nEs importante consultar las sentencias de la Corte Constitucional y las normas legales vigentes para obtener una comprensión más profunda del concepto de bloque de constitucionalidad en Colombia. La consulta requiere análisis adicional con más fuentes legales para obtener una visión completa del tema.",
+      "evaluacion": null,
+      "error": "Judge error: The operation was aborted due to timeout",
+      "timestamp": "2026-02-27T21:37:41.323Z"
+    },
+    {
+      "id": "CON-008",
+      "area": "constitucional",
+      "dificultad": "avanzado",
+      "pregunta": "¿Cuál es la diferencia entre estado de excepción y estado de conmoción interior?",
+      "respuesta_referencia": "El estado de guerra exterior está en el Art. 212 CP; el de conmoción interior en el Art. 213. La conmoción interior procede cuando hay grave perturbación del orden público que atente contra la estabilidad institucional, la seguridad del Estado o la convivencia ciudadana. Cada período es de hasta 90 días, prorrogables por 90 más. El de guerra no tiene ese límite único. Ambos permiten decretos legislativos con límites constitucionales.",
+      "respuesta_rag": "Esta consulta contiene múltiples preguntas. A continuación se responden cada una:\n\n\n\n**1. ¿Cuál es la entre estado de excepción**\n\n\n\n**HECHOS RELEVANTES:** La consulta se refiere a la excepción en el estado de excepción, pero no proporciona detalles específicos sobre el contexto o el tipo de excepción que se está solicitando. Sin embargo, se pueden analizar las fuentes proporcionadas para entender mejor el concepto de excepción en el marco legal colombiano.\n\n**NORMAS APLICABLES:** Según el Artículo 282 [3] del Código General del Proceso, las excepciones deben ser reconocidas oficiosamente por el juez cuando se prueben los hechos que las constituyen, salvo las de prescripción, compensación y nulidad relativa, que deben ser alegadas en la contestación de la demanda. Además, el Artículo 832 [4] del Estatuto Tributario establece el trámite para decidir sobre las excepciones en el ámbito tributario. En cuanto a la protección de datos personales, el Artículo 2 [5] y [7] de la Ley 1581 de 2012 establecen que las excepciones deben estar previstas en la ley y ser interpretadas de manera restrictiva.\n\n**ANÁLISIS JURÍDICO:** La excepción en el estado de excepción no se encuentra directamente regulada en las fuentes proporcionadas. Sin embargo, se puede inferir que las excepciones en general deben ser previstas en la ley y ser objeto de interpretación restrictiva, como se establece en la Ley 1581 de 2012 [5] y [7]. El Artículo 505 [2] de la Ley 906 de 2004, aunque parcialmente derogado, establece criterios para la concesión de extradición, lo que podría ser relevante en ciertos contextos de excepción. El Artículo 175 [1] del Código de Procedimiento Administrativo y de lo Contencioso Administrativo establece la posibilidad de declarar excepciones mediante sentencia anticipada.\n\n**CONCLUSIÓN:** La consulta requiere análisis adicional con más fuentes legales para determinar el alcance y la aplicación de las excepciones en el estado de excepción. Sin embargo, se puede concluir que las excepciones en general deben ser previstas en la ley y ser objeto de interpretación restrictiva.\n\n**RECOMENDACIÓN:** Se recomienda consultar fuentes legales adicionales, como la Constitución Política de Colombia y leyes específicas relacionadas con el estado de excepción, para obtener una comprensión más completa del tema. Además, es importante verificar la vigencia actual de las normas citadas y considerar la asesoría de un abogado especializado para tomar decisiones legales informadas.\n\n⚠️ **Vigencia:** La norma \"Código de Procedimiento Penal (Ley 906 de 2004)\" tiene artículos derogados o modificados; verifique vigencia específica.\n\n\n\n---\n\n\n\n**2. ¿Cuál es la estado de conmoción interior?**\n\n\n\n**HECHOS RELEVANTES:** La consulta se refiere al estado de conmoción interior, sin proporcionar detalles específicos sobre el contexto o los hechos concretos que rodean esta situación. Es importante destacar que la conmoción interior puede estar relacionada con diversas situaciones, como el estrés, la angustia psicológica o el shock físico o psicológico, según se menciona en algunas de las fuentes proporcionadas.\n\n**NORMAS APLICABLES:** Según la Sentencia C-355/2006 - Corte Constitucional, en su Artículo 53, se hace referencia a la salud mental y se incluye la angustia psicológica que puede causar una violación o un incesto, o el diagnóstico del daño fetal [5]. Además, el Artículo 57 del Código Penal, aunque parcialmente derogado, menciona el estado de ira o intenso dolor como una circunstancia que puede influir en la pena [1]. La Sentencia C-355/2006 también se refiere a la crisis severa en su Artículo 124, entendida como un estado de shock físico o psicológico severo o una situación social imposible [7].\n\n**ANÁLISIS JURÍDICO:** El análisis de la conmoción interior requiere considerar las normas relacionadas con la salud mental y el bienestar psicológico. La Ley 2466 de 2025, en su Artículo 9o, menciona las condiciones de trabajo y locativas que pueden afectar la salud, incluyendo aspectos psicológicos como el estrés y la angustia [2]. La Sentencia T-760/2008 - Corte Constitucional, aunque no proporciona detalles específicos sobre la conmoción interior, analiza problemas jurídicos concretos [4] y [6]. La Ley 1010 de 2006, en su Artículo 7o, se refiere al acoso laboral y menciona actos de agresión física y expresiones injuriosas que pueden causar conmoción interior [8].\n\n**CONCLUSIÓN:** La conmoción interior puede ser considerada en el contexto de la salud mental y el bienestar psicológico, según las normas y sentencias mencionadas. Sin embargo, la consulta requiere análisis adicional con más fuentes legales para determinar la aplicación específica de estas normas a la situación concreta.\n\n**RECOMENDACIÓN:** Se recomienda consultar con un abogado especializado para analizar la situación concreta y determinar la aplicación de las normas legales relevantes. Es importante considerar la vigencia actual de las normas citadas y buscar asesoría jurídica personalizada para tomar decisiones legales informadas.\n\n⚠️ **Vigencia:** La norma \"codigo codigo penal ley599\" tiene artículos derogados o modificados; verifique vigencia específica.",
+      "evaluacion": null,
+      "error": "Judge error: The operation was aborted due to timeout",
+      "timestamp": "2026-02-27T21:40:21.672Z"
+    },
+    {
+      "id": "CON-009",
+      "area": "constitucional",
+      "dificultad": "basico",
+      "pregunta": "¿Qué dice el artículo 15 de la Constitución sobre la intimidad?",
+      "respuesta_referencia": "El artículo 15 de la Constitución establece que todas las personas tienen derecho al reconocimiento de su personalidad jurídica y que tienen derecho a conocer, actualizar y rectificar las informaciones que se hayan recogido sobre ellas en bancos de datos y en archivos de entidades públicas y privadas. También consagra el habeas data y el derecho a la intimidad.",
+      "respuesta_rag": "**HECHOS RELEVANTES:** La consulta se refiere a la interpretación del artículo 15 de la Constitución Política de Colombia en relación con el derecho a la intimidad. Las fuentes proporcionadas incluyen leyes y artículos relacionados con la protección de datos personales y el acceso a la información pública.\n\n**NORMAS APLICABLES:** Según la Fuente [4], el artículo 15 de la Constitución de 1991 reconoció explícitamente el derecho a conocer, actualizar y rectificar las informaciones que se hayan recogido sobre una persona en bancos de datos y en archivos de entidades públicas y privadas, y dispuso que en la recolección, tratamiento y circulación de datos se respetará la libertad y demás garantías consagradas en la Constitución [4]. Además, la Fuente [2] menciona que la ley contiene regulaciones que comprometen elementos estructurales del derecho de acceso a la información pública, así como de los derechos fundamentales de petición, a la intimidad, a la libertad de expresión, la libertad de prensa y del derecho de informar y recibir información veraz e imparcial, dada la conexidad axiológica que los caracteriza, lo cual resulta conforme a los artículos 15, 20, 23, 74 y 78 CP [2].\n\n**ANÁLISIS JURÍDICO:** El artículo 15 de la Constitución Política de Colombia establece el derecho a la intimidad y la protección de los datos personales. Según la Fuente [4], este artículo ha dado lugar al reconocimiento de un derecho fundamental autónomo catalogado como derecho al habeas data, y en algunas oportunidades, como derecho a la autodeterminación informativa o informática [4]. La Fuente [5] también menciona que el derecho de toda persona a la intimidad es una limitación propia que impone la condición de servidor público, en concordancia con lo estipulado por el artículo 24 de la Ley 1437 de 2011 [5].\n\n**CONCLUSIÓN:** El artículo 15 de la Constitución Política de Colombia establece el derecho a la intimidad y la protección de los datos personales, lo que incluye el derecho a conocer, actualizar y rectificar las informaciones que se hayan recogido sobre una persona en bancos de datos y en archivos de entidades públicas y privadas.\n\n**RECOMENDACIÓN:** Para una interpretación más detallada y precisa del artículo 15 de la Constitución Política de Colombia en relación con el derecho a la intimidad, se requiere análisis adicional con más fuentes legales, incluyendo la Constitución Política de Colombia y leyes relacionadas con la protección de datos personales y el acceso a la información pública.",
+      "evaluacion": null,
+      "error": "Judge error: The operation was aborted due to timeout",
+      "timestamp": "2026-02-27T21:43:03.447Z"
+    },
+    {
+      "id": "CON-011",
+      "area": "constitucional",
+      "dificultad": "basico",
+      "pregunta": "¿Qué derechos protege la acción de tutela?",
+      "respuesta_referencia": "La acción de tutela (Art. 86 CP) protege los derechos fundamentales. La Corte ha dicho que son fundamentales los expresamente reconocidos en la Constitución y los que por su conexidad o por el principio de dignidad humana lo sean. No procede cuando existan otros medios de defensa judicial efectivos, salvo que se trate de evitar un perjuicio irremediable.",
+      "respuesta_rag": "**HECHOS RELEVANTES:** La consulta se refiere a la acción de tutela y los derechos fundamentales que protege. La acción de tutela es un mecanismo constitucional para la protección inmediata de derechos fundamentales, según el Artículo 86 de la Constitución Política.\n\n**NORMAS APLICABLES:** La acción de tutela se encuentra regulada en la Constitución Política, específicamente en el Artículo 86 [1], y en el Decreto 2591 de 1991 [1]. Además, la Corte Constitucional ha desarrollado jurisprudencia sobre la materia, como se puede ver en la Sentencia T-760/2008 [2], [4], [5] y [6], que establecen la protección de derechos fundamentales como la vida, la integridad física, la salud y la seguridad social. La Sentencia C-355/2006 [3] y [7] también se refiere a la protección de derechos fundamentales en el contexto de la acción de tutela.\n\n**ANÁLISIS JURÍDICO:** La acción de tutela protege derechos fundamentales como la vida, la integridad física, la salud y la seguridad social, entre otros. La Corte Constitucional ha establecido que la acción de tutela es un mecanismo preferente y sumario para la protección de estos derechos [2]. La Sentencia T-760/2008 [4] y [5] establecen que el derecho a la salud de los niños es un derecho fundamental que debe ser protegido de manera inmediata. La Sentencia C-355/2006 [3] y [7] también se refiere a la protección de derechos fundamentales en el contexto de la acción de tutela.\n\n**CONCLUSIÓN:** La acción de tutela protege derechos fundamentales como la vida, la integridad física, la salud y la seguridad social, entre otros. La Corte Constitucional ha establecido que la acción de tutela es un mecanismo preferente y sumario para la protección de estos derechos.\n\n**RECOMENDACIÓN:** Si se considera que un derecho fundamental ha sido vulnerado, se recomienda interponer una acción de tutela ante el juez competente, siguiendo el procedimiento establecido en el Decreto 2591 de 1991 [1] y la jurisprudencia de la Corte Constitucional. Es importante tener en cuenta los plazos y términos establecidos en la ley para interponer la acción de tutela y para cumplir con los requisitos y trámites necesarios.",
+      "evaluacion": null,
+      "error": "Judge error: The operation was aborted due to timeout",
+      "timestamp": "2026-02-27T21:48:05.656Z"
+    },
+    {
+      "id": "CON-012",
+      "area": "constitucional",
+      "dificultad": "intermedio",
+      "pregunta": "¿Qué es la sustitución de la Constitución y quién la controla?",
+      "respuesta_referencia": "La Corte Constitucional en sentencia C-551 de 2003 estableció que hay un límite al poder de reforma: no se puede sustituir la Constitución, es decir, cambiar sus elementos definitorios (Estado social de derecho, democracia, derechos fundamentales, etc.). El control de sustitución lo ejerce la Corte al revisar actos legislativos y referendos.",
+      "respuesta_rag": "**HECHOS RELEVANTES:** La consulta se refiere a la sustitución de la Constitución y quién la controla. La Constitución Política de Colombia de 1991 establece en el Artículo 374 que la Constitución puede ser reformada por el Congreso, por una Asamblea Constituyente o por el pueblo mediante referendo [1]. Además, el Artículo 241 de la misma Constitución establece que la Corte Constitucional es la encargada de velar por la integridad y supremacía de la Constitución [2].\n\n**NORMAS APLICABLES:** Según el Artículo 374 de la Constitución Política de Colombia, la Constitución puede ser reformada por diferentes medios [1]. El Artículo 241 establece que la Corte Constitucional tiene la función de decidir sobre las demandas de inconstitucionalidad contra los actos reformatorios de la Constitución, así como sobre la constitucionalidad de la convocatoria a un referendo o a una Asamblea Constituyente para reformar la Constitución [2]. No hay normas específicas en las fuentes proporcionadas que se refieran directamente a la \"sustitución\" de la Constitución, pero el concepto de reforma puede ser relevante en este contexto.\n\n**ANÁLISIS JURÍDICO:** La Corte Constitucional juega un papel crucial en la garantía de la integridad de la Constitución, incluyendo el control sobre los procesos de reforma constitucional [2]. Aunque las fuentes proporcionadas no abordan explícitamente la \"sustitución\" de la Constitución, el control sobre la reforma constitucional implica que la Corte Constitucional tiene un papel importante en asegurar que cualquier cambio en la Constitución se realice de acuerdo con los procedimientos y principios establecidos en la misma [1] y [2].\n\n**CONCLUSIÓN:** La sustitución de la Constitución, en el sentido de reformarla profundamente, está sujeta al control de la Corte Constitucional, especialmente en lo que respecta a los vicios de procedimiento en su formación. La Corte Constitucional es la encargada de garantizar que cualquier reforma a la Constitución se realice de acuerdo con los procedimientos establecidos en la Constitución misma.\n\n**RECOMENDACIÓN:** Para una comprensión más profunda de los mecanismos de reforma y control constitucional, sería necesario consultar fuentes adicionales que aborden específicamente los procedimientos de reforma constitucional y el papel de la Corte Constitucional en este contexto. La consulta requiere análisis adicional con más fuentes legales para proporcionar una respuesta exhaustiva.",
+      "evaluacion": null,
+      "error": "Judge error: The operation was aborted due to timeout",
+      "timestamp": "2026-02-27T21:50:41.872Z"
+    },
+    {
+      "id": "CON-013",
+      "area": "constitucional",
+      "dificultad": "avanzado",
+      "pregunta": "¿En qué casos la Corte Constitucional tiene competencia para revisar fallos de tutela?",
+      "respuesta_referencia": "Según el artículo 86 y la Ley 153 de 2012 (estatutaria de la administración de justicia), la Corte Constitucional selecciona para revisión las sentencias de tutela de los tribunales. No revisa todas; elige por criterios de importancia (unificación de jurisprudencia, temas novedosos, etc.). Los fallos de la Corte en revisión de tutela son de obligatorio cumplimiento.",
+      "respuesta_rag": "**HECHOS RELEVANTES:** La consulta se refiere a la competencia de la Corte Constitucional para revisar fallos de tutela. No se proporcionan detalles específicos sobre el caso, pero se menciona la necesidad de analizar la procedencia de la acción, el derecho fundamental presuntamente vulnerado y la conducta de la autoridad accionada, según la jurisprudencia constitucional [1], [2], [3], [4], [5], [6], [7] y [8].\n\n**NORMAS APLICABLES:** De acuerdo con las fuentes proporcionadas, la Corte Constitucional debe analizar tres aspectos clave en casos de tutela: la procedencia de la acción, el derecho fundamental presuntamente vulnerado y la conducta de la autoridad accionada [1], [2], [3], [4], [5], [6], [7] y [8]. Sin embargo, no se menciona explícitamente en las fuentes proporcionadas los casos específicos en los que la Corte Constitucional tiene competencia para revisar fallos de tutela.\n\n**ANÁLISIS JURÍDICO:** La Corte Constitucional tiene competencia para revisar fallos de tutela en casos donde se vulneran derechos fundamentales, según la Constitución Política de Colombia. Sin embargo, las fuentes proporcionadas no ofrecen una respuesta clara y directa sobre los casos específicos en los que la Corte Constitucional tiene competencia para revisar fallos de tutela. Es necesario considerar la jurisprudencia constitucional y la legislación vigente para determinar la competencia de la Corte Constitucional en cada caso concreto.\n\n**CONCLUSIÓN:** La Corte Constitucional tiene competencia para revisar fallos de tutela en casos donde se vulneran derechos fundamentales, pero es necesario analizar cada caso concreto y considerar la jurisprudencia constitucional y la legislación vigente para determinar la competencia de la Corte Constitucional.\n\n**RECOMENDACIÓN:** Se requiere análisis adicional con más fuentes legales para determinar los casos específicos en los que la Corte Constitucional tiene competencia para revisar fallos de tutela. Es importante considerar la Constitución Política de Colombia, la Ley 270 de 1996 y la jurisprudencia constitucional para obtener una respuesta más precisa y completa.",
+      "evaluacion": null,
+      "error": "Judge error: The operation was aborted due to timeout",
+      "timestamp": "2026-02-27T21:53:20.721Z"
+    },
+    {
+      "id": "CON-014",
+      "area": "constitucional",
+      "dificultad": "basico",
+      "pregunta": "¿Qué dice el artículo 29 sobre el debido proceso?",
+      "respuesta_referencia": "El artículo 29 de la Constitución consagra el derecho al debido proceso: toda persona se presume inocente mientras no se le haya declarado judicialmente culpable. Quien sea sindicado tiene derecho a la defensa, a un juicio público sin dilaciones injustificadas, a presentar pruebas y a impugnar la sentencia. Nadie podrá ser juzgado dos veces por el mismo hecho.",
+      "respuesta_rag": "**HECHOS RELEVANTES:** La consulta se refiere al artículo 29 y su relación con el debido proceso. Según la Fuente [1], el artículo 29 de la Ley 1712 de 2014 establece que el sujeto obligado debe soportar la carga de la prueba en el acceso a la información pública, lo que garantiza el debido proceso.\n\n**NORMAS APLICABLES:** El artículo 29 de la Ley 1712 de 2014 [1] y [6] establece que el sujeto obligado debe soportar la carga de la prueba en el acceso a la información pública. Esto se relaciona con el debido proceso, como se menciona en la Fuente [1].\n\n**ANÁLISIS JURÍDICO:** El artículo 29 de la Ley 1712 de 2014 garantiza el debido proceso en el acceso a la información pública, al establecer que el sujeto obligado debe soportar la carga de la prueba. Esto significa que la entidad responsable de la información debe demostrar que la información solicitada debe permanecer en reserva, con base en alguna de las excepciones contenidas en los artículos 19 y 20 del proyecto de ley 264, como se menciona en la Fuente [6].\n\n**CONCLUSIÓN:** El artículo 29 de la Ley 1712 de 2014 establece que el sujeto obligado debe soportar la carga de la prueba en el acceso a la información pública, lo que garantiza el debido proceso.\n\n**RECOMENDACIÓN:** Para obtener más información sobre el debido proceso en el acceso a la información pública, se recomienda consultar la Ley 1712 de 2014 y sus regulaciones relacionadas. Es importante tener en cuenta que la consulta requiere análisis adicional con más fuentes legales para obtener una comprensión más completa del tema.",
+      "evaluacion": null,
+      "error": "Judge error: The operation was aborted due to timeout",
+      "timestamp": "2026-02-27T21:55:57.034Z"
+    }
+  ]
+}
