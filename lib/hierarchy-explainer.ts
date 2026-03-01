@@ -218,8 +218,8 @@ function identifyConstitutionalPrinciples(
 
   // Verificar si hay Constitución
   const hasConstitution = hierarchyData.some(
-    d => d.chunk.metadata?.title.toLowerCase().includes('constitución') ||
-         d.chunk.metadata?.title.toLowerCase().includes('constitucion')
+    d => d.chunk.(metadata?.title || '').toLowerCase().includes('constitución') ||
+         d.chunk.(metadata?.title || '').toLowerCase().includes('constitucion')
   )
 
   if (hasConstitution) {
@@ -229,11 +229,11 @@ function identifyConstitutionalPrinciples(
   // Verificar jerarquía entre normas
   const hasLey = hierarchyData.some(
     d => d.chunk.metadata?.title.match(/\bley\s+\d+/i) ||
-         (d.chunk.metadata.type === 'estatuto' && d.chunk.metadata?.title.toLowerCase().includes('ley'))
+         (d.chunk.metadata.type === 'estatuto' && d.chunk.(metadata?.title || '').toLowerCase().includes('ley'))
   )
 
   const hasDecreto = hierarchyData.some(
-    d => d.chunk.metadata?.title.toLowerCase().includes('decreto')
+    d => d.chunk.(metadata?.title || '').toLowerCase().includes('decreto')
   )
 
   if (hasLey && hasDecreto) {
@@ -243,7 +243,7 @@ function identifyConstitutionalPrinciples(
   // Verificar si hay jurisprudencia constitucional
   const hasJurisprudenciaCC = hierarchyData.some(
     d => d.chunk.metadata.type === 'jurisprudencia' &&
-         (d.chunk.metadata?.title.toLowerCase().includes('corte constitucional') ||
+         (d.chunk.(metadata?.title || '').toLowerCase().includes('corte constitucional') ||
           d.chunk.content.toLowerCase().includes('corte constitucional'))
   )
 

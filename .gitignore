@@ -90,4 +90,5 @@ tsconfig.tsbuildinfo
 
 # Archivos del sistema
 .DS_Store
-Thumbs.db
+Thumbs.dbdata/index.json.broken
+data/hnsw-index.dat

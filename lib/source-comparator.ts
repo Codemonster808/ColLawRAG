@@ -104,13 +104,13 @@ function groupChunksByTopic(
 
     // Buscar chunks similares
     const keywords1 = extractKeywords(chunks[i].chunk.content)
-    const title1 = chunks[i].chunk.metadata?.title.toLowerCase()
+    const title1 = chunks[i].chunk.(metadata?.title || '').toLowerCase()
 
     for (let j = i + 1; j < chunks.length; j++) {
       if (processed.has(j)) continue
 
       const keywords2 = extractKeywords(chunks[j].chunk.content)
-      const title2 = chunks[j].chunk.metadata?.title.toLowerCase()
+      const title2 = chunks[j].chunk.(metadata?.title || '').toLowerCase()
 
       // Verificar similitud de tema
       const similarity = calculateTopicSimilarity(keywords1, keywords2, title1, title2)
