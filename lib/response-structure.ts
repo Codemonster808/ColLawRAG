@@ -17,14 +17,15 @@ export function structureResponse(
   chunks: Array<{ chunk: DocumentChunk; score: number }>
 ): StructuredResponse {
   const structured: StructuredResponse = {}
+  const text = answer ?? ''
   
   // Intentar detectar secciones en la respuesta
-  const hechosMatch = answer.match(/(?:HECHOS|HECHOS RELEVANTES|SITUACI[OÓ]N)[:\s]+(.*?)(?=\n\n|NORMAS|AN[ÁA]LISIS|CONCLUSI[OÓ]N|RECOMENDACI[OÓ]N|$)/is)
+  const hechosMatch = text.match(/(?:HECHOS|HECHOS RELEVANTES|SITUACI[OÓ]N)[:\s]+(.*?)(?=\n\n|NORMAS|AN[ÁA]LISIS|CONCLUSI[OÓ]N|RECOMENDACI[OÓ]N|$)/is)
   if (hechosMatch) {
     structured.hechosRelevantes = hechosMatch[1].trim()
   }
   
-  const normasMatch = answer.match(/(?:NORMAS|NORMAS APLICABLES|MARCO LEGAL)[:\s]+(.*?)(?=\n\n|AN[ÁA]LISIS|CONCLUSI[OÓ]N|RECOMENDACI[OÓ]N|$)/is)
+  const normasMatch = text.match(/(?:NORMAS|NORMAS APLICABLES|MARCO LEGAL)[:\s]+(.*?)(?=\n\n|AN[ÁA]LISIS|CONCLUSI[OÓ]N|RECOMENDACI[OÓ]N|$)/is)
   if (normasMatch) {
     structured.normasAplicables = normasMatch[1].trim()
   }
@@ -34,19 +35,19 @@ export function structureResponse(
     structured.analisisJuridico = analisisMatch[1].trim()
   }
   
-  const conclusionMatch = answer.match(/(?:CONCLUSI[OÓ]N|CONCLUSIONES)[:\s]+(.*?)(?=\n\n|RECOMENDACI[OÓ]N|$)/is)
+  const conclusionMatch = text.match(/(?:CONCLUSI[OÓ]N|CONCLUSIONES)[:\s]+(.*?)(?=\n\n|RECOMENDACI[OÓ]N|$)/is)
   if (conclusionMatch) {
     structured.conclusion = conclusionMatch[1].trim()
   }
   
-  const recomendacionMatch = answer.match(/(?:RECOMENDACI[OÓ]N|RECOMENDACIONES|PASOS)[:\s]+(.*?)$/is)
+  const recomendacionMatch = text.match(/(?:RECOMENDACI[OÓ]N|RECOMENDACIONES|PASOS)[:\s]+(.*?)$/is)
   if (recomendacionMatch) {
     structured.recomendacion = recomendacionMatch[1].trim()
   }
   
   // Si no se detectaron secciones, intentar dividir por párrafos
   if (!structured.hechosRelevantes && !structured.normasAplicables) {
-    const paragraphs = answer.split(/\n\n+/).filter(p => p.trim().length > 0)
+    const paragraphs = text.split(/\n\n+/).filter(p => p.trim().length > 0)
     
     if (paragraphs.length >= 2) {
       // Primer párrafo podría ser hechos o contexto

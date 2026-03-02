@@ -228,7 +228,7 @@ function identifyConstitutionalPrinciples(
 
   // Verificar jerarquía entre normas
   const hasLey = hierarchyData.some(
-    d => d.chunk.metadata?.title.match(/\bley\s+\d+/i) ||
+    d => (d.chunk.metadata?.title ?? '').match(/\bley\s+\d+/i) ||
          (d.chunk.metadata.type === 'estatuto' && (d.chunk.metadata?.title ?? '').toLowerCase().includes('ley'))
   )
 
@@ -253,7 +253,7 @@ function identifyConstitutionalPrinciples(
 
   // Principio de vigencia
   const hasVigente = hierarchyData.some(
-    d => d.chunk.metadata?.fechaVigencia || d.chunk.metadata?.title.match(/\d{4}/)
+    d => d.chunk.metadata?.fechaVigencia || (d.chunk.metadata?.title ?? '').match(/\d{4}/)
   )
 
   if (hasVigente) {

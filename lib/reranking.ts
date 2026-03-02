@@ -197,7 +197,7 @@ export function getRecencyScore(chunk: DocumentChunk): number {
   
   // 2. Si no hay fechaVigencia, buscar en el título
   if (year === null) {
-    const title = chunk.metadata?.title
+    const title = chunk.metadata?.title ?? ''
     const yearMatch = title.match(/(19|20)\d{2}/)
     if (yearMatch) {
       year = parseInt(yearMatch[0])
