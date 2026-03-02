@@ -373,6 +373,26 @@ export async function rerankChunksAdvancedAsync(
           if (vigencia.estado === 'derogada') {
             penaltyDerogada = PENALTY_DEROGADA_TOTAL
           }
+        } else {
+          // S3.10: Fallback a metadata.vigencia propagado por Sprint 2 (ingest)
+          const metaVig = (chunk.metadata?.vigencia ?? '').toString().toLowerCase()
+          if (metaVig === 'derogada') {
+            vigenciaNorm = 0
+            penaltyDerogada = PENALTY_DEROGADA_TOTAL
+          } else if (metaVig === 'vigente') {
+            vigenciaNorm = 1
+          } else if (metaVig === 'parcialmente_derogada') {
+            vigenciaNorm = 0.5
+          }
+        }
+      } else {
+        // S3.10: Sin normaId inferido, usar metadata.vigencia si existe
+        const metaVig = (chunk.metadata?.vigencia ?? '').toString().toLowerCase()
+        if (metaVig === 'derogada') {
+          vigenciaNorm = 0
+          penaltyDerogada = PENALTY_DEROGADA_TOTAL
+        } else if (metaVig === 'vigente') {
+          vigenciaNorm = 1
         }
       }
     } catch {
@@ -446,7 +466,21 @@ export function rerankChunksAdvanced(
           if (vigencia.estado === 'derogada') {
             penaltyDerogada = PENALTY_DEROGADA_TOTAL
           }
+        } else {
+          // S3.10: Fallback a metadata.vigencia propagado por Sprint 2
+          const metaVig = (chunk.metadata?.vigencia ?? '').toString().toLowerCase()
+          if (metaVig === 'derogada') {
+            vigenciaNorm = 0
+            penaltyDerogada = PENALTY_DEROGADA_TOTAL
+          } else if (metaVig === 'vigente') vigenciaNorm = 1
+          else if (metaVig === 'parcialmente_derogada') vigenciaNorm = 0.5
         }
+      } else {
+        const metaVig = (chunk.metadata?.vigencia ?? '').toString().toLowerCase()
+        if (metaVig === 'derogada') {
+          vigenciaNorm = 0
+          penaltyDerogada = PENALTY_DEROGADA_TOTAL
+        } else if (metaVig === 'vigente') vigenciaNorm = 1
       }
     } catch {
       vigenciaNorm = 0.5
@@ -522,9 +556,13 @@ export async function applyRerankingWithCrossEncoder(
 export function addDerogadaNoteToChunk(chunk: DocumentChunk): DocumentChunk {
   try {
     const normaId = inferNormaIdFromTitle(chunk.metadata?.title)
-    if (!normaId) return chunk
-    
-    const vigencia = consultarVigencia(normaId)
+    let vigencia = normaId ? consultarVigencia(normaId) : null
+    // S3.10: Fallback a metadata.vigencia propagado por Sprint 2 (ingest)
+    if (!vigencia && chunk.metadata?.vigencia) {
+      const v = String(chunk.metadata.vigencia).toLowerCase()
+      if (v === 'derogada') vigencia = { vigente: false, estado: 'derogada' as const }
+      else if (v === 'parcialmente_derogada') vigencia = { vigente: true, estado: 'parcialmente_derogada' as const }
+    }
     if (!vigencia) return chunk
     
     // NOTA para norma totalmente derogada

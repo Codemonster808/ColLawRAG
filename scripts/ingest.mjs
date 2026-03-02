@@ -482,6 +482,7 @@ function extractArticleFromText(text, title) {
     if (m) return `Artículo ${m[1].trim()}`
   }
   return null
+}
 
 /** FASE_2 2.3: Trunca texto a maxChars cortando en el último fin de oración (. ! ?) */
 function truncateToSentence(text, maxChars) {
@@ -518,6 +519,37 @@ function fakeEmbed(text, dim = 768) {
   const v = Array.from({ length: dim }, () => rand() * 2 - 1)
   const norm = Math.sqrt(v.reduce((acc, x) => acc + x * x, 0)) || 1
   return v.map(x => x / norm)
+}
+
+/**
+ * S3.9: Filtrar chunks tiny para reducir ruido (headers, separadores).
+ * - Eliminar chunks con content.length < 100 (ruido puro)
+ * - Chunks 100-200 chars: fusionar con anterior si comparten mismo artículo/sección, sino eliminar
+ * Objetivo: < 2% del total sean < 200 chars
+ */
+function filterAndMergeTinyChunks(chunkList) {
+  const MIN_KEEP = 100
+  const MAX_TINY = 200
+  const result = []
+  for (const c of chunkList) {
+    const len = (c.content || '').length
+    if (len < MIN_KEEP) continue // eliminar ruido puro
+    if (len < MAX_TINY) {
+      const prev = result[result.length - 1]
+      const sameContext = prev && (
+        (prev.metadata?.article && prev.metadata?.article === c.metadata?.article) ||
+        (prev.metadata?.articleHierarchy && prev.metadata?.articleHierarchy === c.metadata?.articleHierarchy) ||
+        (prev.metadata?.id === c.metadata?.id && !prev.metadata?.article && !c.metadata?.article)
+      )
+      if (sameContext) {
+        prev.content = (prev.content || '') + '\n\n' + (c.content || '').trim()
+        continue
+      }
+      continue // eliminar tiny aislado
+    }
+    result.push(c)
+  }
+  return result
 }
 
 function getEmbedProvider() {
@@ -729,6 +761,16 @@ async function main() {
         chunks.push({ id: randomUUID(), content: contentWithPrefix, metadata })
       }
     }
+  }
+
+  // S3.9: Filtrar chunks tiny (< 100 chars) y fusionar 100-200 con anterior si mismo artículo
+  const beforeFilter = chunks.length
+  const filtered = filterAndMergeTinyChunks(chunks)
+  chunks.length = 0
+  chunks.push(...filtered)
+  const removed = beforeFilter - chunks.length
+  if (removed > 0) {
+    console.log(`S3.9: Chunks tiny filtrados/fusionados: ${removed} eliminados (${beforeFilter} → ${chunks.length})`)
   }
 
   console.log(`Chunking listo: ${chunks.length} fragmentos`)

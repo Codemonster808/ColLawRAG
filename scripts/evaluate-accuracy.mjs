@@ -30,6 +30,24 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+
+// Cargar .env.local al inicio (como ingest.mjs) para que GROQ_API_KEY esté disponible
+const __dirnameEval = dirname(fileURLToPath(import.meta.url));
+const envPath = join(__dirnameEval, '..', '.env.local');
+if (existsSync(envPath)) {
+  const envContent = readFileSync(envPath, 'utf-8');
+  for (const line of envContent.split('\n')) {
+    const trimmed = line.trim();
+    if (trimmed && !trimmed.startsWith('#')) {
+      const [key, ...valueParts] = trimmed.split('=');
+      if (key && valueParts.length > 0) {
+        const value = valueParts.join('=').trim().replace(/^["']|["']$/g, '');
+        if (!process.env[key]) process.env[key] = value;
+      }
+    }
+  }
+}
+
 // Minimal TOON encoder (inline, no external deps)
 function encode(obj, indent = '') {
   const lines = [];
@@ -113,7 +131,11 @@ const JUDGE_PROVIDER = (process.env.JUDGE_PROVIDER || 'ollama').toLowerCase();
 const isJudgeGroq = JUDGE_PROVIDER === 'groq';
 
 // Juez: Ollama (local) o Groq (cloud)
-const JUDGE_MODEL = process.env.JUDGE_MODEL || (isJudgeGroq ? 'llama-3.3-70b-versatile' : 'qwen2.5:14b-instruct');
+// Si JUDGE_PROVIDER=groq y JUDGE_MODEL es de Ollama (qwen*, :), usar modelo Groq por defecto
+const rawModel = process.env.JUDGE_MODEL || (isJudgeGroq ? 'llama-3.3-70b-versatile' : 'qwen2.5:14b-instruct');
+const JUDGE_MODEL = isJudgeGroq && (rawModel.includes(':') || /^qwen/i.test(rawModel))
+  ? 'llama-3.3-70b-versatile'
+  : rawModel;
 const JUDGE_ENDPOINT = isJudgeGroq
   ? 'https://api.groq.com/openai/v1/chat/completions'
   : (process.env.JUDGE_ENDPOINT || 'http://localhost:11434/v1/chat/completions');
