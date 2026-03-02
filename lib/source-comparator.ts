@@ -268,8 +268,8 @@ async function compareStatements(
   const hierarchy2 = getLegalHierarchyScore(chunk2)
 
   // Verificar vigencia
-  const normaId1 = inferNormaIdFromTitle(chunk1.metadata.title)
-  const normaId2 = inferNormaIdFromTitle(chunk2.metadata.title)
+  const normaId1 = inferNormaIdFromTitle(chunk1.metadata?.title)
+  const normaId2 = inferNormaIdFromTitle(chunk2.metadata?.title)
   const vigencia1 = normaId1 ? consultarVigencia(normaId1) : null
   const vigencia2 = normaId2 ? consultarVigencia(normaId2) : null
 
@@ -433,8 +433,8 @@ function generateExplanation(
   vigencia2: any,
   prevailingSource: 'source1' | 'source2' | 'indeterminado'
 ): string {
-  const title1 = chunk1.metadata.title
-  const title2 = chunk2.metadata.title
+  const title1 = chunk1.metadata?.title ?? ''
+  const title2 = chunk2.metadata?.title ?? ''
 
   if (prevailingSource === 'indeterminado') {
     return `Ambas fuentes (${title1} y ${title2}) tienen jerarquía similar y vigencia equivalente. Se recomienda consultar con un abogado especializado para determinar cuál norma aplica en el caso específico.`
@@ -451,9 +451,9 @@ function generateExplanation(
 
   // Razón por jerarquía
   if (prevailingHierarchy > otherHierarchy) {
-    const hierarchyType = getHierarchyType(prevailing.metadata.title)
+    const hierarchyType = getHierarchyType(prevailing.metadata?.title ?? '')
     reasons.push(
-      `${prevailing.metadata.title} tiene mayor jerarquía normativa (${hierarchyType}) que ${other.metadata.title} según la pirámide normativa colombiana.`
+      `${prevailing.metadata?.title ?? ''} tiene mayor jerarquía normativa (${hierarchyType}) que ${other.metadata?.title ?? ''} según la pirámide normativa colombiana.`
     )
   }
 

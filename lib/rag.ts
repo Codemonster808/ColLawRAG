@@ -438,8 +438,8 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
   const procedures = procedureChunks.length > 0
     ? procedureChunks.map(p => ({
         id: p.chunk.id,
-        nombre: p.chunk.metadata.title,
-        tipo: p.chunk.metadata.type,
+        nombre: p.chunk.metadata?.title ?? '',
+        tipo: p.chunk.metadata?.type ?? '',
         resumen: p.chunk.content.slice(0, 500) + (p.chunk.content.length > 500 ? '...' : '')
       }))
     : undefined
@@ -580,11 +580,11 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
     response.sourceComparison = {
       contradictions: sourceComparison.contradictions.map(c => ({
         source1: {
-          title: c.source1.chunk.metadata.title,
+          title: c.source1.chunk.metadata?.title ?? '',
           statement: c.source1.statement
         },
         source2: {
-          title: c.source2.chunk.metadata.title,
+          title: c.source2.chunk.metadata?.title ?? '',
           statement: c.source2.statement
         },
         topic: c.topic,

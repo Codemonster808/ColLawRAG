@@ -339,9 +339,9 @@ export async function generateAnswerSpanish(params: {
   for (let i = 0; i < Math.min(chunks.length, maxCitations); i++) {
     const r = chunks[i]
     // FASE_4 4.5: Incluir vigencia, jerarquía y score en cada fuente para el LLM
-    const title = r.chunk.metadata.title || ''
-    const article = r.chunk.metadata.article
-    const hierarchy = r.chunk.metadata.articleHierarchy
+    const title = r.chunk.metadata?.title ?? ''
+    const article = r.chunk.metadata?.article
+    const hierarchy = r.chunk.metadata?.articleHierarchy
     const normaId = inferNormaIdFromTitle(title)
     const vigencia = normaId ? consultarVigencia(normaId) : null
     const vigenciaLabel = vigencia?.estado === 'derogada' ? 'DEROGADO' : vigencia?.estado === 'parcialmente_derogada' ? 'PARCIALMENTE DEROGADO' : 'VIGENTE'
@@ -359,7 +359,7 @@ export async function generateAnswerSpanish(params: {
       // Truncar el contenido del primer chunk si es necesario
       const maxFirstChunkSize = maxContextChars - 200 // Dejar espacio para metadata
       const truncatedContent = r.chunk.content.substring(0, maxFirstChunkSize) + '...'
-      const truncatedBlock = `Fuente [${i + 1}] (${r.chunk.metadata.title}${r.chunk.metadata.article ? ` — ${r.chunk.metadata.article}` : ''}):\n${truncatedContent}`
+      const truncatedBlock = `Fuente [${i + 1}] (${r.chunk.metadata?.title ?? ''}${r.chunk.metadata?.article ? ` — ${r.chunk.metadata.article}` : ''}):\n${truncatedContent}`
       limitedChunks.push(r)
       totalChars += truncatedBlock.length
       break
