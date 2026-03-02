@@ -23,7 +23,7 @@ export interface PromptContext {
  * Detecta el área legal de una consulta
  */
 export function detectLegalArea(query: string): LegalArea {
-  const lowerQuery = query.toLowerCase()
+  const lowerQuery = (query ?? '').toLowerCase()
   
   // Laboral
   if (lowerQuery.match(/\b(trabajo|empleado|empleador|contrato laboral|prestaciones|cesant[ií]as|vacaciones|despido|horas extras|jornada|salario)\b/)) {
@@ -256,7 +256,7 @@ IMPORTANTE: Solo puedes citar fuentes del 1 al ${Math.min(chunks.length, maxCita
  * FASE 0 - Tarea 0.2: Refactorizado para no requerir chunksCount (elimina doble retrieval)
  */
 export function detectComplexity(query: string): 'baja' | 'media' | 'alta' {
-  const lowerQuery = query.toLowerCase()
+  const lowerQuery = (query ?? '').toLowerCase()
   
   // Contador de indicadores de complejidad
   let complexityScore = 0

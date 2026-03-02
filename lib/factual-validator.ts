@@ -74,7 +74,7 @@ export function verifyArticleInChunk(
   article: string,
   chunk: DocumentChunk
 ): { exists: boolean; matches: number } {
-  const content = chunk.content.toLowerCase()
+  const content = (chunk.content ?? '').toLowerCase()
   const metadata = chunk.metadata
   
   // Buscar el artículo en el contenido
@@ -93,8 +93,8 @@ export function verifyArticleInChunk(
   }
   
   // También verificar metadata
-  if (metadata.article) {
-    const metaArticle = metadata.article.replace(/\D/g, '').toLowerCase()
+  if (metadata?.article) {
+    const metaArticle = (metadata.article as string).replace(/\D/g, '').toLowerCase()
     const searchArticle = article.replace(/\D/g, '').toLowerCase()
     if (metaArticle === searchArticle) {
       matches++

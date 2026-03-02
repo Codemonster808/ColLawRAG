@@ -32,8 +32,8 @@ function detectCalculationNeeds(query: string, answer: string): {
   calculationType?: 'prestaciones' | 'horas_extras' | 'recargo_dominical' | 'indemnizacion' | 'general'
   extractedParams?: Record<string, any>
 } {
-  const lowerQuery = query.toLowerCase()
-  const lowerAnswer = answer.toLowerCase()
+  const lowerQuery = (query ?? '').toLowerCase()
+  const lowerAnswer = (answer ?? '').toLowerCase()
   
   // Detectar menciones de cálculos
   const calculationKeywords = {

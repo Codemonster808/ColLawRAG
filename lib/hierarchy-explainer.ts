@@ -218,8 +218,8 @@ function identifyConstitutionalPrinciples(
 
   // Verificar si hay Constitución
   const hasConstitution = hierarchyData.some(
-    d => d.chunk.(metadata?.title || '').toLowerCase().includes('constitución') ||
-         d.chunk.(metadata?.title || '').toLowerCase().includes('constitucion')
+    d => (d.chunk.metadata?.title ?? '').toLowerCase().includes('constitución') ||
+         (d.chunk.metadata?.title ?? '').toLowerCase().includes('constitucion')
   )
 
   if (hasConstitution) {
@@ -229,11 +229,11 @@ function identifyConstitutionalPrinciples(
   // Verificar jerarquía entre normas
   const hasLey = hierarchyData.some(
     d => d.chunk.metadata?.title.match(/\bley\s+\d+/i) ||
-         (d.chunk.metadata.type === 'estatuto' && d.chunk.(metadata?.title || '').toLowerCase().includes('ley'))
+         (d.chunk.metadata.type === 'estatuto' && (d.chunk.metadata?.title ?? '').toLowerCase().includes('ley'))
   )
 
   const hasDecreto = hierarchyData.some(
-    d => d.chunk.(metadata?.title || '').toLowerCase().includes('decreto')
+    d => (d.chunk.metadata?.title ?? '').toLowerCase().includes('decreto')
   )
 
   if (hasLey && hasDecreto) {
@@ -242,9 +242,9 @@ function identifyConstitutionalPrinciples(
 
   // Verificar si hay jurisprudencia constitucional
   const hasJurisprudenciaCC = hierarchyData.some(
-    d => d.chunk.metadata.type === 'jurisprudencia' &&
-         (d.chunk.(metadata?.title || '').toLowerCase().includes('corte constitucional') ||
-          d.chunk.content.toLowerCase().includes('corte constitucional'))
+    d => d.chunk.metadata?.type === 'jurisprudencia' &&
+         ((d.chunk.metadata?.title ?? '').toLowerCase().includes('corte constitucional') ||
+          (d.chunk.content ?? '').toLowerCase().includes('corte constitucional'))
   )
 
   if (hasJurisprudenciaCC) {
@@ -266,8 +266,8 @@ function identifyConstitutionalPrinciples(
 /**
  * Obtiene el tipo de jerarquía de un documento
  */
-function getHierarchyType(title: string): string {
-  const lower = title.toLowerCase()
+function getHierarchyType(title: string | undefined): string {
+  const lower = (title ?? '').toLowerCase()
   if (lower.includes('constitución') || lower.includes('constitucion')) return 'Constitución Política'
   if (lower.includes('código') || lower.includes('codigo')) return 'Código'
   if (lower.includes('ley orgánica') || lower.includes('ley organica')) return 'Ley Orgánica'
@@ -283,8 +283,8 @@ function getHierarchyType(title: string): string {
 /**
  * Obtiene el nivel numérico de jerarquía (1 = más alto, 10 = más bajo)
  */
-function getHierarchyLevel(title: string): number {
-  const lower = title.toLowerCase()
+function getHierarchyLevel(title: string | undefined): number {
+  const lower = (title ?? '').toLowerCase()
   if (lower.includes('constitución') || lower.includes('constitucion')) return 1
   if (lower.includes('código') || lower.includes('codigo')) return 2
   if (lower.includes('ley orgánica') || lower.includes('ley organica')) return 3

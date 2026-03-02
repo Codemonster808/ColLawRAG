@@ -96,8 +96,8 @@ export function validateLogicCoherence(
   const inconsistencies: Inconsistency[] = []
   const warnings: string[] = []
   
-  const answerLower = answer.toLowerCase()
-  const queryLower = query.toLowerCase()
+  const answerLower = (answer ?? '').toLowerCase()
+  const queryLower = (query ?? '').toLowerCase()
   
   // 1. Detectar contradicciones explícitas
   for (const pattern of CONTRADICTION_INDICATORS) {
@@ -192,8 +192,8 @@ function validateCitationConsistency(
   // Verificar que las normas mencionadas están en los chunks
   for (const title of mentionedTitles) {
     const foundInChunks = chunks.some(({ chunk }) => 
-      chunk.(metadata?.title || '').toLowerCase().includes(title) || 
-      title.includes(chunk.(metadata?.title || '').toLowerCase())
+      (chunk.metadata?.title ?? '').toLowerCase().includes(title) || 
+      title.includes((chunk.metadata?.title ?? '').toLowerCase())
     )
     
     if (!foundInChunks) {
@@ -232,8 +232,9 @@ function validateNormConsistency(
     
     if (constitucion && decreto) {
       // Verificar si la respuesta sugiere que el decreto prevalece sobre la constitución
-      const answerLower = answer.toLowerCase()
-      if (answerLower.includes(decreto.title.toLowerCase()) && 
+      const answerLower = (answer ?? '').toLowerCase()
+      const decretoTitle = (decreto.title ?? '').toLowerCase()
+      if (answerLower.includes(decretoTitle) && 
           answerLower.includes('prevalece') &&
           !answerLower.includes('constitución')) {
         inconsistencies.push({
@@ -249,8 +250,9 @@ function validateNormConsistency(
     // Verificar si hay normas derogadas siendo citadas como vigentes
     for (const norma of normas) {
       if (norma.vigencia && !norma.vigencia.vigente) {
-        const answerLower = answer.toLowerCase()
-        if (answerLower.includes(norma.title.toLowerCase()) && 
+        const answerLower = (answer ?? '').toLowerCase()
+        const normaTitle = (norma.title ?? '').toLowerCase()
+        if (answerLower.includes(normaTitle) && 
             !answerLower.includes('derogada') && 
             !answerLower.includes('vigente')) {
           inconsistencies.push({

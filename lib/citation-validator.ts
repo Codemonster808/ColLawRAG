@@ -92,7 +92,7 @@ function validateArticleMentions(
   }
 
   const chunk = chunks[citationValidation.expectedIndex].chunk
-  const content = chunk.content.toLowerCase()
+  const content = (chunk.content ?? '').toLowerCase()
   const metadata = chunk.metadata
 
   // Buscar menciones de artículos en el texto cerca de la cita

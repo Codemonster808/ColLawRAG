@@ -102,9 +102,9 @@ const LEGAL_HIERARCHY_BOOST: Record<string, number> = {
  * Retorna un score de boost basado en la pirámide normativa colombiana
  */
 export function getLegalHierarchyScore(chunk: DocumentChunk): number {
-  const title = chunk.(metadata?.title || '').toLowerCase()
-  const content = chunk.content.toLowerCase().slice(0, 500) // Solo revisar inicio
-  const type = chunk.metadata.type
+  const title = (chunk.metadata?.title ?? '').toLowerCase()
+  const content = (chunk.content ?? '').toLowerCase().slice(0, 500) // Solo revisar inicio
+  const type = chunk.metadata?.type
   
   // Constitución tiene máxima jerarquía
   if (title.includes('constitución') || title.includes('constitucion')) {
@@ -385,8 +385,8 @@ export async function rerankChunksAdvancedAsync(
     const recencyNorm = Math.max(0, recencyBoost) / MAX_RECENCY_RAW
 
     let keywordBoost = 0
-    const titleLower = chunk.(metadata?.title || '').toLowerCase()
-    const contentLower = chunk.content.toLowerCase()
+    const titleLower = (chunk.metadata?.title ?? '').toLowerCase()
+    const contentLower = (chunk.content ?? '').toLowerCase()
     for (const term of queryTerms) {
       if (titleLower.includes(term)) keywordBoost += 0.02
       else if (contentLower.includes(term)) keywordBoost += 0.01

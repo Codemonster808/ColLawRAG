@@ -6,7 +6,7 @@
  * Detecta el área legal de una consulta
  */
 export function detectLegalArea(query: string): string | undefined {
-  const lowerQuery = query.toLowerCase()
+  const lowerQuery = (query ?? '').toLowerCase()
   
   // Áreas legales comunes en Colombia
   const areas: Record<string, string[]> = {

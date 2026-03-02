@@ -240,7 +240,7 @@ export function extractNormsFromQuery(query: string): ApplicableNorm[] {
     
     for (const norma of normas.values()) {
       // Si el artículo está cerca de la mención de la norma, asociarlo
-      const normaIndex = queryLower.indexOf(norma.title.toLowerCase())
+      const normaIndex = queryLower.indexOf((norma.title ?? '').toLowerCase())
       const articuloIndex = queryLower.indexOf(`artículo ${numero}`)
       
       if (normaIndex !== -1 && articuloIndex !== -1) {
@@ -368,8 +368,8 @@ export function extractApplicableNorms(
 /**
  * Infiere el tipo de norma desde el título
  */
-function inferNormTypeFromTitle(title: string): ApplicableNorm['type'] {
-  const titleLower = title.toLowerCase()
+function inferNormTypeFromTitle(title: string | undefined): ApplicableNorm['type'] {
+  const titleLower = (title ?? '').toLowerCase()
   
   if (titleLower.includes('constitución') || titleLower.includes('constitucion')) {
     return 'constitucion'
