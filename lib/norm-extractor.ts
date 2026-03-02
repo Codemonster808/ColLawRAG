@@ -400,10 +400,10 @@ function extractArticlesFromChunk(chunk: DocumentChunk): ExtractedArticle[] {
   const articles: ExtractedArticle[] = []
   
   // Si el chunk tiene metadata de artículo, usarlo
-  if (chunk.metadata.article) {
+  if (chunk.metadata?.article) {
     const normaId = inferNormaIdFromTitle(chunk.metadata?.title) || 'unknown'
     articles.push({
-      numero: chunk.metadata.article.replace(/\D/g, ''),
+      numero: (chunk.metadata.article as string).replace(/\D/g, ''),
       normaId,
       normaTitle: chunk.metadata?.title,
       inciso: chunk.metadata.articleHierarchy?.includes('Inciso') ? 

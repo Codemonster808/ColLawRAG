@@ -392,8 +392,8 @@ export async function rerankChunksAdvancedAsync(
       else if (contentLower.includes(term)) keywordBoost += 0.01
     }
     const articleMatch = query.match(/art[íi]culo\s+(\d+)/i)
-    if (articleMatch && chunk.metadata.article) {
-      const chunkArticle = chunk.metadata.article.replace(/\D/g, '')
+    if (articleMatch && chunk.metadata?.article) {
+      const chunkArticle = (chunk.metadata.article as string).replace(/\D/g, '')
       if (chunkArticle === articleMatch[1]) keywordBoost += 0.05
     }
     

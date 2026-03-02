@@ -199,13 +199,13 @@ export function generateUserPrompt(context: PromptContext): string {
   let contextBlocks = ''
   for (let i = 0; i < chunks.length && i < maxCitations; i++) {
     const r = chunks[i]
-    const articleInfo = r.chunk.metadata.article 
+    const articleInfo = r.chunk.metadata?.article 
       ? ` — ${r.chunk.metadata.article}` 
       : ''
-    const chapterInfo = r.chunk.metadata.chapter 
+    const chapterInfo = r.chunk.metadata?.chapter 
       ? ` (${r.chunk.metadata.chapter})` 
       : ''
-    const block = `Fuente [${i + 1}] (${r.chunk.metadata?.title}${articleInfo}${chapterInfo}):\n${r.chunk.content}`
+    const block = `Fuente [${i + 1}] (${r.chunk.metadata?.title ?? ''}${articleInfo}${chapterInfo}):\n${r.chunk.content ?? ''}`
     contextBlocks += (i > 0 ? '\n\n' : '') + block
   }
   
@@ -217,7 +217,7 @@ export function generateUserPrompt(context: PromptContext): string {
   // Lista de artículos disponibles en las fuentes (para reducir alucinaciones)
   const availableArticles = chunks
     .slice(0, maxCitations)
-    .map(r => r.chunk.metadata.article)
+    .map(r => r.chunk.metadata?.article)
     .filter(Boolean)
   const articlesList = availableArticles.length > 0
     ? `\n\n📋 ARTÍCULOS DISPONIBLES EN LAS FUENTES (solo cita estos): ${[...new Set(availableArticles)].join(', ')}`
