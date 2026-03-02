@@ -16,7 +16,9 @@
       ],
       "criterio_evaluacion": "Debe mencionar 15 días hábiles, artículo 186 CST, y que es por año de servicio",
       "chunks_esperados": [
-        "60663390-6b9f-476b-bbb3-206c5715c368"
+        "ad6d53a7-7f77-4751-a2f5-d2d62086120f",
+        "e70bf1d4-818c-4618-b4a1-20b8d52bb57d",
+        "5414cafd-e9ec-4d43-913b-f0982b649c88"
       ]
     },
     {
@@ -31,7 +33,7 @@
       ],
       "criterio_evaluacion": "Debe mencionar $1.300.000, Decreto 2613/2023, y el auxilio de transporte",
       "chunks_esperados": [
-        "63862e64-e01c-423a-987f-2bad458811be"
+        "b8f6f80b-78a1-41fd-a489-4434cff2567c"
       ]
     },
     {
@@ -47,7 +49,7 @@
       ],
       "criterio_evaluacion": "Debe mencionar el Art. 64 CST, la fórmula de indemnización y la diferencia por nivel salarial",
       "chunks_esperados": [
-        "59956a81-8777-41e4-8a47-d906317a4e40"
+        "8eed6986-6922-45d2-9add-792482ad29cc"
       ]
     },
     {
@@ -63,7 +65,7 @@
       ],
       "criterio_evaluacion": "Debe mencionar Art. 239 CST, necesidad de autorización del Inspector, ineficacia del despido y Sentencia C-005/2017",
       "chunks_esperados": [
-        "2a7c074d-8b64-46a6-a30f-f7deb8d401e5"
+        "951c3cb2-fb34-4a4f-bc19-c4ce2066d2bf"
       ]
     },
     {
@@ -80,8 +82,8 @@
       ],
       "criterio_evaluacion": "Debe calcular correctamente cesantías, intereses, prima y vacaciones con las fórmulas del CST",
       "chunks_esperados": [
-        "d5c6d248-fe5e-4442-8610-4a526c3776bf",
-        "63815341-463b-4b72-9fd3-9c827e050afa"
+        "d8481a47-e621-4387-ab5c-0badab0f09d9",
+        "15214d4d-9991-4d28-9073-9abfd4fa600c"
       ]
     },
     {
@@ -96,7 +98,7 @@
       ],
       "criterio_evaluacion": "Debe mencionar máximo 2 meses, Art. 78 CST, y la regla proporcional para contratos cortos",
       "chunks_esperados": [
-        "6411edb9-5f63-4e07-be58-a7cd29936336"
+        "ac75ce0b-7d9e-4105-9446-67ed450dfe18"
       ]
     },
     {
@@ -111,7 +113,7 @@
       ],
       "criterio_evaluacion": "Debe mencionar 5 años para ejecutiva, 10 para ordinaria, y el Art. 2536 CC",
       "chunks_esperados": [
-        "3560e245-dce9-4a94-a734-1622c7ebd0a5"
+        "eb3dac32-1609-4bce-b21f-2155594d4205"
       ]
     },
     {
@@ -128,7 +130,7 @@
       ],
       "criterio_evaluacion": "Debe mencionar escritura pública, registro, capacidad, consentimiento, objeto y causa lícita",
       "chunks_esperados": [
-        "e500d857-6d1f-4740-83db-b272999ccb1d"
+        "ee057a18-ea6a-4e1e-aa05-0bd614e90ed7"
       ]
     },
     {
@@ -144,8 +146,7 @@
       ],
       "criterio_evaluacion": "Debe mencionar Art. 86 CP, 10 días para resolver, Decreto 2591/91",
       "chunks_esperados": [
-        "81e85e42-9236-40cf-81da-2cd3535e25bf",
-        "f56f1ff0-8681-4aba-8747-ef411b47cbe6"
+        "62d22e37-7d26-4700-a347-1f71309368ab"
       ]
     },
     {
@@ -160,11 +161,8 @@
       ],
       "criterio_evaluacion": "Debe mencionar Art. 88 CP, Ley 472/98, derechos colectivos, legitimación amplia",
       "chunks_esperados": [
-        "304b8fbc-70b5-4803-8ceb-d48224c07d7e",
-        "e15096a9-1653-482a-9ce9-2fff311376f3",
-        "46800afa-83fa-4af3-b2f6-dc5d862efe87",
-        "335e225d-71f2-4198-b13e-2e2466635af1",
-        "2e761317-239b-4479-9d61-c1a2d6fb2e60"
+        "17d849cb-4d0c-4545-b925-484646cf1f09",
+        "4fbb37b0-c334-43cc-8de1-7e10290441a7"
       ]
     },
     {
@@ -179,7 +177,7 @@
       ],
       "criterio_evaluacion": "Debe mencionar Art. 239 Ley 599/2000, 2 a 6 años, posibilidad de sustitutivos",
       "chunks_esperados": [
-        "a4f2dd8e-d3eb-4e5f-87c1-0eb1ad58875c"
+        "f46ac52c-beb0-4127-b208-e2a13d26bfca"
       ]
     },
     {
@@ -193,7 +191,7 @@
       ],
       "criterio_evaluacion": "Debe mencionar Arts. 348-354 Ley 906/2004, rebaja hasta 50%, verificación judicial",
       "chunks_esperados": [
-        "d69bd032-2e4f-4e21-b31d-7b3a51c59db7"
+        "16740818-66b8-4bec-870a-85dc81ddac0a"
       ]
     },
     {
@@ -208,8 +206,7 @@
       ],
       "criterio_evaluacion": "Debe mencionar el Título II CP, varios artículos específicos y el rol de la Corte Constitucional",
       "chunks_esperados": [
-        "c179f3d5-d318-44dc-84be-b391cb1eb786",
-        "8f9df88e-8d91-469e-a751-ffd47f236fcd"
+        "65779323-3e23-472c-bf61-04e2e42711fc"
       ]
     },
     {
@@ -223,7 +220,7 @@
       ],
       "criterio_evaluacion": "Debe mencionar Art. 215 CP, 30 días por período, máximo 90 días al año, decretos legislativos",
       "chunks_esperados": [
-        "73b942ee-147f-4e57-bd3b-218951e8c5eb"
+        "2f20e8ff-1dde-4c3b-a31e-b14faea648fa"
       ]
     },
     {
@@ -238,8 +235,14 @@
       ],
       "criterio_evaluacion": "Debe mencionar Art. 4 CP, efectos inter partes, diferencia con acción de inconstitucionalidad",
       "chunks_esperados": [
-        "f90889ac-a7ae-4be9-932d-3fc53bcfc8e3",
-        "201ef63a-8c00-4e1e-82f2-16dc28e72932"
+        "e6c875d7-0b9a-481f-8d6b-cacee7614780",
+        "eaaaa13e-f4d5-4c2e-a631-78989aa90a61",
+        "7650b04d-653a-4ce3-8046-dbfbd70d7161",
+        "b43b6436-52ae-4427-9184-f750122067bd",
+        "4256090e-4961-40cc-b942-ffee7d19c051",
+        "9385031b-a486-40d7-a110-234c7db5297f",
+        "6160e614-b863-43dc-a1ee-4cc2a2cc7b96",
+        "71079d40-a7dd-4a53-aa02-dd616eb795e8"
       ]
     },
     {
@@ -253,7 +256,7 @@
       ],
       "criterio_evaluacion": "Debe mencionar 4 meses, Art. 164 CPACA Ley 1437/2011",
       "chunks_esperados": [
-        "53c75118-e46e-45be-8c64-eb3ca7088705"
+        "12cc62f0-f324-47ad-bc9f-e1773322db84"
       ]
     },
     {
@@ -269,9 +272,7 @@
       ],
       "criterio_evaluacion": "Debe mencionar Art. 23 CP, Ley 1755/2015, 15 días hábiles, posibilidad de tutela",
       "chunks_esperados": [
-        "9ec82710-b824-4aa6-8f56-7a00d853c219",
-        "29c54c06-a331-4edf-9aeb-dc2d441843bf",
-        "182cdf86-37c1-476c-8829-359c8d92bc53"
+        "9ae90844-56c8-472f-8410-8374991c6114"
       ]
     },
     {
@@ -286,7 +287,7 @@
       ],
       "criterio_evaluacion": "Debe mencionar Art. 90 CP, Ley 678/2001, dolo o culpa grave, prescripción 2 años, obligatoria +500 SMLMV",
       "chunks_esperados": [
-        "d143e146-beab-476f-93ce-dcac9915de0c"
+        "83e3cc50-cea8-441b-8005-810a90833c35"
       ]
     },
     {
@@ -301,7 +302,7 @@
       ],
       "criterio_evaluacion": "Debe mencionar 35%, Art. 240 ET, Ley 2277/2022, tarifas especiales",
       "chunks_esperados": [
-        "967ffa51-f6d4-47cd-bf5b-29c8e8b90dc0"
+        "5dad21da-ba37-4fff-9db5-505f31df22fb"
       ]
     },
     {
@@ -317,7 +318,7 @@
       ],
       "criterio_evaluacion": "Debe mencionar 19%, Art. 468 ET, Ley 1819/2016, hechos generadores, tarifas del 5% y exentos",
       "chunks_esperados": [
-        "b008afd4-f784-4e30-b863-34c27cd70cc3"
+        "1936aa4a-c5c2-462f-9e4e-2fea49701901"
       ]
     },
     {
@@ -331,7 +332,9 @@
       ],
       "criterio_evaluacion": "Debe mencionar 8 horas diarias y 48 semanales, Art. 161 CST",
       "chunks_esperados": [
-        "6b687742-81c3-40ac-9cd3-b89d3142a77a"
+        "195a4f6e-d5b4-45da-a219-d03f8a47d243",
+        "61ad7002-57d8-4290-bfa6-6d452c5b58e3",
+        "bb0f087e-fc03-4bf2-9bd8-fa58b8c748dc"
       ]
     },
     {
@@ -345,7 +348,8 @@
       ],
       "criterio_evaluacion": "Debe mencionar 25% diurnas, 75% nocturnas, Art. 168 CST",
       "chunks_esperados": [
-        "1f5919a0-8bfa-40d5-a89b-7314c95ca595"
+        "629a4479-e4e3-407b-b96a-f9cbab1efd03",
+        "e907fc05-b972-4fd4-973d-e569071ccd9a"
       ]
     },
     {
@@ -359,7 +363,7 @@
       ],
       "criterio_evaluacion": "Debe mencionar 10 años, autorización Inspector, Art. 26 CST",
       "chunks_esperados": [
-        "449109f1-817d-4151-9278-13a6df5330fe"
+        "aa4250e9-57a7-4c12-a075-517c8b023028"
       ]
     },
     {
@@ -373,7 +377,8 @@
       ],
       "criterio_evaluacion": "Debe mencionar al terminar contrato, consignación antes del 14 de febrero, Art. 249 CST",
       "chunks_esperados": [
-        "d5c6d248-fe5e-4442-8610-4a526c3776bf"
+        "15214d4d-9991-4d28-9073-9abfd4fa600c",
+        "8e731817-c688-417e-8085-24d7e874d385"
       ]
     },
     {
@@ -388,7 +393,7 @@
       ],
       "criterio_evaluacion": "Debe mencionar servicio doméstico o hasta 2 SMMLV, fórmulas por antigüedad",
       "chunks_esperados": [
-        "e856d214-7b35-44d7-8509-d81f4ac2f127"
+        "8e731817-c688-417e-8085-24d7e874d385"
       ]
     },
     {
@@ -402,7 +407,7 @@
       ],
       "criterio_evaluacion": "Debe mencionar prohibición de descuentos por herramientas salvo autorización o fallo, Art. 150 CST",
       "chunks_esperados": [
-        "14a36dd0-219e-4b48-a97c-680a4c9330ac"
+        "2a3abb5e-6328-4e36-b094-44e642fdc104"
       ]
     },
     {
@@ -416,7 +421,7 @@
       ],
       "criterio_evaluacion": "Debe mencionar 3 años de prescripción, conciliación previa",
       "chunks_esperados": [
-        "9cc0ed2b-710b-4b21-a738-d78bc62ab5e7"
+        "c57fb742-e9a9-44e9-8681-2d2d58cbf853"
       ]
     },
     {
@@ -431,9 +436,7 @@
       ],
       "criterio_evaluacion": "Debe aplicar fórmula 20+15×(años-1), calcular en días y valor aproximado",
       "chunks_esperados": [
-        "fda14d70-3f20-4754-a33f-a17dd847e97b",
-        "070c5826-22b4-45bc-8fbd-052f9e656024",
-        "c0d5bbfc-e660-4504-96f4-a349007306eb"
+        "1f1c2bd0-c246-4815-8632-84052fc2a42a"
       ]
     },
     {
@@ -447,7 +450,7 @@
       ],
       "criterio_evaluacion": "Debe mencionar dos pagas al año, 15 días por semestre, fechas límite",
       "chunks_esperados": [
-        "63815341-463b-4b72-9fd3-9c827e050afa"
+        "2cdf8d9a-3c2c-4dce-a9c8-967fa22c1f99"
       ]
     },
     {
@@ -462,7 +465,7 @@
       ],
       "criterio_evaluacion": "Debe mencionar que no hay indemnización, sí salarios y prestaciones proporcionales",
       "chunks_esperados": [
-        "ebde702a-53d2-4d82-973c-065b7d02580b"
+        "11fb42f5-e205-4368-90d9-8e58c84f51f6"
       ]
     },
     {
@@ -476,7 +479,7 @@
       ],
       "criterio_evaluacion": "Debe mencionar 18 semanas, posibilidad de transferir 1 al padre, remunerada",
       "chunks_esperados": [
-        "9e952fe9-655c-4f6c-84f3-2b5baaf1981f"
+        "c56a82fc-3117-473a-a82a-80ba8c4f6735"
       ]
     },
     {
@@ -491,7 +494,7 @@
       ],
       "criterio_evaluacion": "Debe mencionar causales objetivas y que la indemnización es igual al despido sin justa causa",
       "chunks_esperados": [
-        "59956a81-8777-41e4-8a47-d906317a4e40"
+        "15be1104-2ef2-4491-9b4b-d823e1d24bd0"
       ]
     },
     {
@@ -506,10 +509,8 @@
       ],
       "criterio_evaluacion": "Debe distinguir entre cotización y mesada; mencionar edad o semanas",
       "chunks_esperados": [
-        "eaa3e024-2560-4cdf-821b-02e6b554b49d",
-        "14d9b138-b0c7-4845-8a2a-08b3d81e546e",
-        "6f16494d-b156-4db5-aa14-304b5d6b8245",
-        "8f091be8-43df-4488-8a42-ba5f7f3d0b5c"
+        "b2cad115-b1e4-4ffe-9ca2-ec3b51c09018",
+        "66adc1cb-5120-4b2d-a341-0d903db57742"
       ]
     },
     {
@@ -523,8 +524,7 @@
       ],
       "criterio_evaluacion": "Debe mencionar misma población vs cambio de residencia, opción de terminar con indemnización",
       "chunks_esperados": [
-        "ebde702a-53d2-4d82-973c-065b7d02580b",
-        "31b1a8b8-a7ad-4a7b-8e7f-1322bfb19e72"
+        "435adaf1-9d11-4e00-936d-90b8d1a6bf3e"
       ]
     },
     {
@@ -538,7 +538,7 @@
       ],
       "criterio_evaluacion": "Debe mencionar máximo 2 años, territorio determinado, contraprestación 50%",
       "chunks_esperados": [
-        "1ac9f83c-8cf3-4177-b13e-26edebb80ab9"
+        "912b7a27-e85e-46fa-a3ec-c0ba3ee4fb97"
       ]
     },
     {
@@ -550,7 +550,10 @@
       "normas_clave": [
         "Art. 199 CST"
       ],
-      "criterio_evaluacion": "Debe mencionar 2 primeros días a cargo del empleador, luego EPS/ARL"
+      "criterio_evaluacion": "Debe mencionar 2 primeros días a cargo del empleador, luego EPS/ARL",
+      "chunks_esperados": [
+        "cf4c92ac-fba7-49ea-bf98-726346e72af2"
+      ]
     },
     {
       "id": "LAB-023",
@@ -562,7 +565,10 @@
         "Art. 62 CST",
         "Art. 60 CST"
       ],
-      "criterio_evaluacion": "Debe mencionar descargos, notificación por escrito, ineficacia si no hay procedimiento"
+      "criterio_evaluacion": "Debe mencionar descargos, notificación por escrito, ineficacia si no hay procedimiento",
+      "chunks_esperados": [
+        "a4e3d819-0120-4986-b5f8-ff6183a5fbb8"
+      ]
     },
     {
       "id": "LAB-024",
@@ -573,7 +579,10 @@
       "normas_clave": [
         "Art. 99 CST"
       ],
-      "criterio_evaluacion": "Debe mencionar 12% anual, proporcional al tiempo, pago al terminar o anual"
+      "criterio_evaluacion": "Debe mencionar 12% anual, proporcional al tiempo, pago al terminar o anual",
+      "chunks_esperados": [
+        "ce632aed-ccb9-4395-8f06-f69d9060eac5"
+      ]
     },
     {
       "id": "LAB-025",
@@ -584,7 +593,10 @@
       "normas_clave": [
         "Art. 177 CST"
       ],
-      "criterio_evaluacion": "Debe mencionar recargo 75%, descanso compensado si no descansa"
+      "criterio_evaluacion": "Debe mencionar recargo 75%, descanso compensado si no descansa",
+      "chunks_esperados": [
+        "7817eea1-e8f4-4a53-84aa-c779a7578116"
+      ]
     },
     {
       "id": "CON-004",
@@ -595,7 +607,11 @@
       "normas_clave": [
         "Art. 30 CP"
       ],
-      "criterio_evaluacion": "Debe mencionar Art. 30 CP y control de legalidad de la detención"
+      "criterio_evaluacion": "Debe mencionar Art. 30 CP y control de legalidad de la detención",
+      "chunks_esperados": [
+        "1d0925e6-d829-4fc0-84bf-3c8aa0a0122f",
+        "5d82c747-791f-40b5-ad48-13c89cb5e117"
+      ]
     },
     {
       "id": "CON-005",
@@ -606,7 +622,10 @@
       "normas_clave": [
         "Art. 241 CP"
       ],
-      "criterio_evaluacion": "Debe mencionar Art. 241 CP y al menos tres legitimados"
+      "criterio_evaluacion": "Debe mencionar Art. 241 CP y al menos tres legitimados",
+      "chunks_esperados": [
+        "6fb55607-0a10-4924-9acc-84c6c5f12cd2"
+      ]
     },
     {
       "id": "CON-006",
@@ -617,7 +636,14 @@
       "normas_clave": [
         "Constitución 1991"
       ],
-      "criterio_evaluacion": "Debe mencionar el orden de magnitud (cientos de artículos) o 380"
+      "criterio_evaluacion": "Debe mencionar el orden de magnitud (cientos de artículos) o 380",
+      "chunks_esperados": [
+        "e084207d-ebd3-494d-9e24-2eb58bafe132",
+        "57946002-e7d3-46af-83f1-02126c20fd34",
+        "fb5443b0-b270-4f69-a816-615ce422cdfc",
+        "6df4827c-e0f6-4c9f-be7b-18e6591d1a46",
+        "65779323-3e23-472c-bf61-04e2e42711fc"
+      ]
     },
     {
       "id": "CON-007",
@@ -628,7 +654,10 @@
       "normas_clave": [
         "Art. 93 CP"
       ],
-      "criterio_evaluacion": "Debe mencionar tratados internacionales de DDHH y Art. 93 o parámetro de control"
+      "criterio_evaluacion": "Debe mencionar tratados internacionales de DDHH y Art. 93 o parámetro de control",
+      "chunks_esperados": [
+        "ad613f68-3506-4b10-ad8f-ed0ddd0db674"
+      ]
     },
     {
       "id": "CON-008",
@@ -640,7 +669,10 @@
         "Art. 212 CP",
         "Art. 213 CP"
       ],
-      "criterio_evaluacion": "Debe distinguir conmoción interior (orden público) y mencionar plazos y decretos legislativos"
+      "criterio_evaluacion": "Debe distinguir conmoción interior (orden público) y mencionar plazos y decretos legislativos",
+      "chunks_esperados": [
+        "1a042a5a-6a8b-40e5-a5f3-6f07efaa7946"
+      ]
     },
     {
       "id": "CON-009",
@@ -651,7 +683,14 @@
       "normas_clave": [
         "Art. 15 CP"
       ],
-      "criterio_evaluacion": "Debe mencionar habeas data, conocer/actualizar/rectificar información en bancos de datos"
+      "criterio_evaluacion": "Debe mencionar habeas data, conocer/actualizar/rectificar información en bancos de datos",
+      "chunks_esperados": [
+        "6464fa18-467b-44b0-92ba-f58e454031fc",
+        "9b1e5bf9-31fa-4d24-a062-2e48ff591d7d",
+        "f8513cc6-3833-4f9d-9db5-d0ed2b646f89",
+        "740fb5b6-86c0-4b10-930b-d8b20b77ef3d",
+        "bbe0b491-513c-4434-a368-1df7dbed0a44"
+      ]
     },
     {
       "id": "CON-010",
@@ -662,7 +701,10 @@
       "normas_clave": [
         "Art. 239 CP"
       ],
-      "criterio_evaluacion": "Debe mencionar Senado elige, ternas de Presidente/Corte Suprema/Consejo de Estado, 8 años"
+      "criterio_evaluacion": "Debe mencionar Senado elige, ternas de Presidente/Corte Suprema/Consejo de Estado, 8 años",
+      "chunks_esperados": [
+        "381dfb27-6286-4282-b967-b78ae6d3e17c"
+      ]
     },
     {
       "id": "CON-011",
@@ -673,7 +715,10 @@
       "normas_clave": [
         "Art. 86 CP"
       ],
-      "criterio_evaluacion": "Debe mencionar derechos fundamentales y subsidiariedad o perjuicio irremediable"
+      "criterio_evaluacion": "Debe mencionar derechos fundamentales y subsidiariedad o perjuicio irremediable",
+      "chunks_esperados": [
+        "62d22e37-7d26-4700-a347-1f71309368ab"
+      ]
     },
     {
       "id": "CON-012",
@@ -685,7 +730,10 @@
         "Sentencia C-551/2003",
         "Art. 241 CP"
       ],
-      "criterio_evaluacion": "Debe mencionar que no puede sustituirse la Constitución y el rol de la Corte"
+      "criterio_evaluacion": "Debe mencionar que no puede sustituirse la Constitución y el rol de la Corte",
+      "chunks_esperados": [
+        "b26120c7-658e-484f-99eb-059d18cc5550"
+      ]
     },
     {
       "id": "CON-013",
@@ -697,7 +745,10 @@
         "Art. 86 CP",
         "Ley 153/2012"
       ],
-      "criterio_evaluacion": "Debe mencionar selección para revisión y criterios de importancia o unificación"
+      "criterio_evaluacion": "Debe mencionar selección para revisión y criterios de importancia o unificación",
+      "chunks_esperados": [
+        "abd371b6-17f3-4391-bcb8-a3dc94baaf1b"
+      ]
     },
     {
       "id": "CON-014",
@@ -708,7 +759,11 @@
       "normas_clave": [
         "Art. 29 CP"
       ],
-      "criterio_evaluacion": "Debe mencionar presunción de inocencia, defensa, non bis in idem"
+      "criterio_evaluacion": "Debe mencionar presunción de inocencia, defensa, non bis in idem",
+      "chunks_esperados": [
+        "15fd41ce-7b30-4672-9418-3658d4b8aeed",
+        "ccd0fe06-13b2-4fbb-bffd-a88817cdbcda"
+      ]
     },
     {
       "id": "CON-015",

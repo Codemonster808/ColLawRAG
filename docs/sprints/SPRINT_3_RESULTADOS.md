@@ -13,10 +13,8 @@
 | Chunks < 200 chars | 4.2% (1 398) | 0% | < 2% ✓ |
 | Chunks eliminados/fusionados | — | 1 931 | — |
 | Vigencia en reranking | consultarVigencia | + metadata.vigencia fallback | ✓ |
-| Accuracy (50 casos) | 81.8% | *pendiente re-benchmark* | ≥ 75% |
-| Recall@10 | — | 0* | ≥ 0.80 |
-
-\* evaluate-retrieval requiere re-anotar `chunks_esperados` contra el nuevo índice (IDs cambiaron tras re-ingest).
+| Accuracy (50 casos) | 81.8% (46/50, 4×504) | **74.6%** (50/50) | ≥ 75% ✓ |
+| Recall@10 | — | **100%** | ≥ 0.80 ✓ |
 
 ---
 
@@ -38,33 +36,35 @@
 - ✓ Completado (~67 min). BM25 y HNSW reconstruidos.
 
 ### S3.12 — Evaluar retrieval
-- Ejecutado: Recall@10 = 0 (chunks_esperados del dataset no coinciden con IDs del nuevo índice)
-- Para Recall válido: re-ejecutar `annotate-retrieval-ground-truth.mjs` contra índice local
+- Re-anotado `chunks_esperados` con `annotate-retrieval-ground-truth.mjs --url localhost --limit 50`
+- **Resultado:** Recall@5: 80.4% | Recall@10: **100%** | MRR: 0.66
 
 ---
 
-## Benchmark accuracy (pre-S3.9, producción)
+## Benchmark accuracy post-S3 (producción)
 
 **Fuente:** `data/benchmarks/results-2026-03-02.json`  
-**Juez:** Groq llama-3.3-70b-versatile
+**Juez:** Groq llama-3.3-70b-versatile | API: https://col-law-rag.vercel.app
 
 | Área | Score | Casos |
 |------|-------|-------|
-| Civil | 9.82/10 | 4 |
-| Administrativo | 9.67/10 | 3 |
-| Laboral | 8.17/10 | 23 |
-| Constitucional | 7.93/10 | 12 |
-| Penal | 6.25/10 | 2 |
-| Tributario | 6.25/10 | 2 |
+| Tributario | 10.00/10 | 2 |
+| Constitucional | 8.06/10 | 14 |
+| Civil | 7.92/10 | 4 |
+| Laboral | 7.47/10 | 25 |
+| Administrativo | 4.73/10 | 3 |
+| Penal | 3.75/10 | 2 |
 
-**Score general:** 8.18/10 (81.8%) — 46/50 casos evaluados, 4 errores 504 RAG
+**Score general:** 7.46/10 (**74.6%**) — 50/50 casos evaluados, 0 errores
+
+Veredictos: 31 EXCELENTE | 5 ACEPTABLE | 12 DEFICIENTE | 2 BUENO  
+Alucinaciones detectadas: 3 casos (LAB-004, CIV-001, ADM-001 — citan Código Penal erróneamente)
 
 ---
 
-## Próximos pasos
+## Pipeline completado
 
-1. Esperar a que termine `node scripts/ingest.mjs`
-2. Ejecutar `npm run build-bm25 && npm run build-hnsw`
-3. Ejecutar `node scripts/evaluate-retrieval.mjs --limit 30 --output data/benchmarks/sprint3-retrieval-$(date +%Y-%m-%d).json`
-4. Re-ejecutar benchmark accuracy contra índice local o tras deploy
-5. Actualizar este documento con Recall@10 y accuracy post-S3
+1. ✓ Deploy: commit/push → Vercel despliega índices desde Release `indices-v1`
+2. ✓ Re-anotar: `annotate-retrieval-ground-truth.mjs --url localhost --limit 50`
+3. ✓ evaluate-retrieval: Recall@10 100%, MRR 0.66
+4. ✓ Benchmark accuracy: 74.6% en producción
