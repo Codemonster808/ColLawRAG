@@ -188,8 +188,8 @@ export function getRecencyScore(chunk: DocumentChunk): number {
   let year: number | null = null
   
   // 1. Intentar obtener año de fechaVigencia en metadata
-  if (chunk.metadata.fechaVigencia) {
-    const vigenciaMatch = chunk.metadata.fechaVigencia.match(/(\d{4})/)
+  if (chunk.metadata?.fechaVigencia) {
+    const vigenciaMatch = chunk.metadata?.fechaVigencia.match(/(\d{4})/)
     if (vigenciaMatch) {
       year = parseInt(vigenciaMatch[1])
     }

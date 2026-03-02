@@ -253,7 +253,7 @@ function identifyConstitutionalPrinciples(
 
   // Principio de vigencia
   const hasVigente = hierarchyData.some(
-    d => d.chunk.metadata.fechaVigencia || d.chunk.metadata?.title.match(/\d{4}/)
+    d => d.chunk.metadata?.fechaVigencia || d.chunk.metadata?.title.match(/\d{4}/)
   )
 
   if (hasVigente) {
