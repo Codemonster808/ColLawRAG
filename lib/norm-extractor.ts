@@ -406,13 +406,13 @@ function extractArticlesFromChunk(chunk: DocumentChunk): ExtractedArticle[] {
       numero: (chunk.metadata.article as string).replace(/\D/g, ''),
       normaId,
       normaTitle: chunk.metadata?.title,
-      inciso: chunk.metadata.articleHierarchy?.includes('Inciso') ? 
-        chunk.metadata.articleHierarchy.split('Inciso')[1]?.trim() : undefined
+      inciso: (chunk.metadata?.articleHierarchy ?? '').includes('Inciso') ? 
+        (chunk.metadata?.articleHierarchy ?? '').split('Inciso')[1]?.trim() : undefined
     })
   }
   
   // También buscar artículos en el contenido
-  const articuloMatches = Array.from(chunk.content.matchAll(NORM_PATTERNS.articulo))
+  const articuloMatches = Array.from((chunk.content ?? '').matchAll(NORM_PATTERNS.articulo))
   for (const match of articuloMatches) {
     const numero = match[1]
     const inciso = match[2]

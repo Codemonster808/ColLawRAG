@@ -126,7 +126,7 @@ function validateArticleMentions(
     ...citationValidation,
     articleMatch,
     confidence,
-    errorMessage: articleMatch ? undefined : `Artículo mencionado no encontrado en ${metadata.title}`
+    errorMessage: articleMatch ? undefined : `Artículo mencionado no encontrado en ${metadata?.title ?? 'Sin título'}`
   }
 }
 

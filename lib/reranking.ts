@@ -211,7 +211,7 @@ export function getRecencyScore(chunk: DocumentChunk): number {
     // Documentos de los últimos 3 años: boost máximo (x1.3 para jurisprudencia)
     if (age <= 3) {
       // Boost adicional para jurisprudencia reciente
-      if (chunk.metadata.type === 'jurisprudencia') {
+      if (chunk.metadata?.type === 'jurisprudencia') {
         return 0.15 // Boost alto para jurisprudencia reciente
       }
       return 0.12 // Boost alto para otros documentos recientes
@@ -219,7 +219,7 @@ export function getRecencyScore(chunk: DocumentChunk): number {
     
     // Documentos de 3-5 años: boost alto
     if (age <= 5) {
-      if (chunk.metadata.type === 'jurisprudencia') {
+      if (chunk.metadata?.type === 'jurisprudencia') {
         return 0.10
       }
       return 0.08
