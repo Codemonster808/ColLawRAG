@@ -16,6 +16,9 @@ const COLOQUIAL_TO_LEGAL: Record<string, string[]> = {
   'cesantías': ['auxilio de cesantías', 'Art. 249 CST', 'prestaciones sociales'],
   'prima': ['prima de servicios', 'Art. 306 CST', 'prestaciones sociales'],
   'vacaciones': ['descanso remunerado', 'Art. 186 CST', 'vacaciones anuales'],
+  'licencia': ['licencia remunerada', 'permiso laboral', 'licencia de maternidad', 'licencia de paternidad'],
+  'incapacidad': ['incapacidad laboral', 'licencia médica', 'enfermedad general'],
+  'auxilio de transporte': ['subsidio de transporte', 'auxilio transporte', 'Art. 7 Ley 1'],
   
   // Laboral - Despido
   'me echaron': ['despido', 'terminación contrato', 'despido sin justa causa'],
@@ -45,6 +48,9 @@ const COLOQUIAL_TO_LEGAL: Record<string, string[]> = {
   'separarse': ['separación de cuerpos', 'divorcio', 'disolución matrimonial'],
   'pensión alimenticia': ['cuota alimentaria', 'alimentos', 'obligación alimentaria'],
   'alimentos': ['cuota alimentaria', 'pensión de alimentos', 'obligación alimentaria'],
+  'custodia': ['custodia de menores', 'patria potestad', 'cuidado personal'],
+  'sucesión': ['sucesión intestada', 'sucesión testamentaria', 'herencia', 'masa hereditaria'],
+  'liquidación de sociedad conyugal': ['gananciales', 'bienes sociales', 'régimen patrimonial'],
   
   // Civil - Contratos
   'contrato': ['negocio jurídico', 'acuerdo de voluntades', 'obligación contractual'],
@@ -93,6 +99,16 @@ const COLOQUIAL_TO_LEGAL: Record<string, string[]> = {
   'flagrancia': ['flagrante delito', 'captura en flagrancia', 'Art. 301 CPP'],
   'imputación': ['imputación cargos', 'audiencia imputación', 'formulación cargos'],
   'preacuerdo': ['preacuerdo penal', 'negociación penal', 'rebaja de pena'],
+  'principio de oportunidad': ['suspensión procedimiento', 'renuncia persecución penal', 'Art. 324 CPP'],
+  'oportunidad': ['principio de oportunidad', 'suspensión procedimiento', 'fiscalía'],
+  'acusación': ['escrito de acusación', 'formulación acusación', 'etapa de juzgamiento'],
+  'juicio oral': ['audiencia de juicio', 'etapa de juzgamiento', 'práctica de pruebas'],
+  'audiencia preparatoria': ['audiencia preparatoria', 'descubrimiento probatorio', 'juicio oral'],
+  'indagatoria': ['interrogatorio', 'declaración imputado', 'versión libre'],
+  'captura': ['aprehensión', 'detención preventiva', 'captura en flagrancia'],
+  'medida de aseguramiento': ['detención preventiva', 'prisión domiciliaria', 'libertad'],
+  'fiscalía': ['Fiscalía General', 'ente acusador', 'investigación penal'],
+  'defensa': ['defensor', 'abogado defensor', 'derecho a la defensa'],
   
   // Administrativo
   'derecho de petición': ['solicitud administrativa', 'Art. 23 Constitución', 'petición respetuosa'],
@@ -100,6 +116,26 @@ const COLOQUIAL_TO_LEGAL: Record<string, string[]> = {
   'demanda': ['acción judicial', 'demanda contenciosa', 'proceso judicial'],
   'recurso': ['recurso de reposición', 'recurso de apelación', 'medio de impugnación'],
   'notificación': ['notificación personal', 'comunicación oficial', 'notificación judicial'],
+  'acción de nulidad': ['demanda nulidad', 'control de legalidad', 'nulidad acto administrativo'],
+  'nulidad': ['acción de nulidad', 'nulidad simple', 'nulidad y restablecimiento'],
+  'restablecimiento': ['restablecimiento del derecho', 'nulidad y restablecimiento', 'reparación directa'],
+  'cpaca': ['Código Contencioso Administrativo', 'Ley 1437', 'proceso administrativo'],
+  'término procesal': ['plazo administrativo', 'término legal', 'vencimiento término'],
+  'acto administrativo': ['decisión administrativa', 'resolución administrativa', 'acto ejecutorio'],
+  'revocatoria': ['revocatoria directa', 'revocación acto administrativo', 'nulidad de oficio'],
+  
+  // Constitucional (Sprint 5 S5.1: +10 términos)
+  'estado de emergencia': ['emergencia económica', 'emergencia social', 'estado de excepción', 'Art. 215 CP'],
+  'emergencia': ['estado de emergencia', 'conmoción interior', 'estado de excepción'],
+  'excepción de inconstitucionalidad': ['control difuso', 'inaplicación norma', 'Art. 4 CP'],
+  'bloque de constitucionalidad': ['normas constitucionales', 'tratados derechos humanos', 'Art. 93 CP'],
+  'sustitución de la constitución': ['vicio competencia', 'reforma constitucional', 'acto legislativo'],
+  'sustitucion': ['sustitución constitución', 'vicio de competencia', 'reforma constitucional'],
+  'conmoción interior': ['estado de conmoción', 'orden público', 'grave perturbación', 'Art. 213 CP'],
+  'conmocion': ['conmoción interior', 'estado de excepción', 'orden público'],
+  'control de constitucionalidad': ['control abstracto', 'demanda inconstitucionalidad', 'Corte Constitucional'],
+  'inconstitucionalidad': ['demanda inconstitucionalidad', 'control constitucional', 'vicio formal'],
+  'derechos fundamentales': ['garantías constitucionales', 'dignidad humana', 'debido proceso'],
   
   // Procedimientos (Sprint 4: +15 términos específicos)
   'plazo': ['término legal', 'término judicial', 'tiempo procesal', 'término de traslado'],
@@ -120,6 +156,14 @@ const COLOQUIAL_TO_LEGAL: Record<string, string[]> = {
   'ejecutoria': ['ejecutoria sentencia', 'firmeza sentencia', 'cosa juzgada'],
   'prueba': ['medio probatorio', 'prueba documental', 'decreto pruebas', 'práctica pruebas', 'valoración probatoria'],
   'recurso': ['medio de impugnación', 'recurso reposición', 'recurso apelación', 'recurso casación'],
+  'excepción': ['excepción previa', 'excepción de fondo', 'medio de defensa'],
+  'excepcion': ['excepción previa', 'medio de defensa', 'contestación'],
+  'cosa juzgada': ['sentencia ejecutoriada', 'firmeza', 'inmutabilidad'],
+  'prescripción': ['extinción acción', 'término prescriptivo', 'caducidad'],
+  'caducidad': ['caducidad acción', 'término perentorio', 'pérdida derecho'],
+  'medida cautelar': ['embargo', 'secuestro', 'inscripción demanda'],
+  'embargo': ['medida cautelar', 'embargo preventivo', 'afectación bienes'],
+  'mandamiento de pago': ['proceso ejecutivo', 'título ejecutivo', 'cobro coactivo'],
 
   // Otros
   'abogado': ['profesional del derecho', 'apoderado', 'defensor'],
