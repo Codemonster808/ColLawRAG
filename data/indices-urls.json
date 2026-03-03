@@ -1,6 +1,6 @@
 {
   "indexUrl": "https://github.com/Codemonster808/ColLawRAG/releases/download/indices-v1/index.json.gz",
   "bm25Url": "https://github.com/Codemonster808/ColLawRAG/releases/download/indices-v1/bm25-index.json.gz",
-  "updatedAt": "2026-03-03T14:27:50.891Z",
+  "updatedAt": "2026-03-03T18:37:07.793Z",
   "version": "1.0"
 }
