@@ -1,0 +1,40 @@
+# PAYLOAD CURSOR — Sprint 5-6 (Time-to-Market)
+# DAR ESTE ARCHIVO A CURSOR para continuar tareas
+
+proyecto: ColLawRAG
+agente: cursor
+fecha: 2026-03-03
+referencia: SPRINT_5_ACTUALIZADO.toon, SPRINT_6_ACTUALIZADO.toon, TARGETS_MERCADO.md
+
+contexto:
+  Producción: 64.9% accuracy, 0 alucinaciones. Gate mercado: 70%.
+  Objetivo: Ejecutar S5.2, deploy, y luego S6.2.
+
+# TAREAS CURSOR (orden)
+tareas[4]{id,titulo,archivo,comando_validacion,estado}:
+  S5.2,Prompts específicos por área legal,lib/prompt-templates.ts,"grep 'PROMPT_PENAL\\|PROMPT_ADMIN' lib/prompt-templates.ts",completada
+  DEPLOY_S5,Deploy Sprint 5,—,git push origin main,pendiente
+  S6.2,Prompt anti-repetición,lib/prompt-templates.ts,"grep 'NO repitas' lib/prompt-templates.ts",completada
+  DEPLOY_S6,Deploy Sprint 6,—,git push origin main,pendiente
+
+# INSTRUCCIONES S5.2
+instruccion_s52:
+  Crear en lib/prompt-templates.ts:
+  - PROMPT_PENAL: "Contexto: Derecho penal colombiano. Cita artículos del Código Penal (Ley 599/2000) con exactitud. Incluye penas, tipos penales, elementos del delito."
+  - PROMPT_ADMINISTRATIVO: "Contexto: Derecho administrativo colombiano. Cita CPACA (Ley 1437/2011) y Ley 80/1993. Incluye términos, recursos, procedimientos."
+  - PROMPT_CONSTITUCIONAL: "Contexto: Derecho constitucional. Cita Constitución 1991 y sentencias Corte Constitucional."
+  - getPromptByArea(query): detectar área por keywords:
+    penal: delito, hurto, estafa, pena, delincuente
+    admin: nulidad, recurso, petición, CPACA, término
+    constitucional: tutela, emergencia, Corte Constitucional, derechos fundamentales
+
+# INSTRUCCIONES S6.2
+instruccion_s62:
+  Agregar al SYSTEM_PROMPT en lib/prompt-templates.ts:
+  "\n\nREGLAS:\n- NO repitas información.\n- Sé conciso: máximo 3-4 oraciones por punto.\n- Si múltiples artículos aplican, menciona solo los 2-3 más relevantes."
+
+# TAREA OPCIONAL (solo si benchmark <68% tras S5)
+S5.3_opcional:
+  Scraping 20-30 sentencias penal+admin. Diferir si time-to-market es prioridad.
+
+orden: S5.2 → DEPLOY_S5 → (OpenClaw S5.4 benchmark) → S6.2 → DEPLOY_S6 → (OpenClaw S6.4)

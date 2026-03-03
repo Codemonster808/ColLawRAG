@@ -19,6 +19,31 @@ export interface PromptContext {
   complexity: 'baja' | 'media' | 'alta'
 }
 
+// S5.2: Prompts especializados por área legal (penal, administrativo, constitucional)
+const PROMPT_PENAL =
+  'Contexto: Derecho penal colombiano. Cita artículos del Código Penal (Ley 599/2000) con exactitud. Incluye penas, tipos penales y elementos del delito. Menciona jurisprudencia de la Corte Suprema si aplica.'
+
+const PROMPT_ADMINISTRATIVO =
+  'Contexto: Derecho administrativo colombiano. Cita CPACA (Ley 1437/2011) y Ley 80/1993. Incluye términos, recursos y procedimientos. Menciona jurisprudencia del Consejo de Estado si aplica.'
+
+const PROMPT_CONSTITUCIONAL =
+  'Contexto: Derecho constitucional colombiano. Cita Constitución 1991 y sentencias de tutela/constitucionalidad de la Corte Constitucional. Incluye derechos fundamentales, estados de excepción y control constitucional.'
+
+/** S5.2: Retorna el prompt específico por área para penal, admin, constitucional; null para otras áreas. */
+export function getPromptByArea(query: string): string | null {
+  const area = detectLegalArea(query)
+  switch (area) {
+    case 'penal':
+      return PROMPT_PENAL
+    case 'administrativo':
+      return PROMPT_ADMINISTRATIVO
+    case 'constitucional':
+      return PROMPT_CONSTITUCIONAL
+    default:
+      return null
+  }
+}
+
 /**
  * Detecta el área legal de una consulta
  */
@@ -40,24 +65,24 @@ export function detectLegalArea(query: string): LegalArea {
     return 'civil'
   }
   
-  // Penal
-  if (lowerQuery.match(/\b(delito|pena|c[oó]digo penal|crimen|homicidio|robo|fraude)\b/)) {
+  // Penal (S5.2: +hurto, estafa, delincuente)
+  if (lowerQuery.match(/\b(delito|pena|c[oó]digo penal|crimen|homicidio|robo|fraude|hurto|estafa|delincuente)\b/)) {
     return 'penal'
   }
-  
-  // Administrativo
-  if (lowerQuery.match(/\b(acto administrativo|recurso|tutela|cumplimiento|entidad p[uú]blica|licencia)\b/)) {
+
+  // Constitucional (antes de admin: tutela/emergencia pueden ser constitucional)
+  if (lowerQuery.match(/\b(constituci[oó]n|derechos fundamentales|acci[oó]n de tutela|corte constitucional|emergencia|estado de excepci[oó]n|bloque constitucionalidad)\b/)) {
+    return 'constitucional'
+  }
+
+  // Administrativo (S5.2: +nulidad, petición, CPACA, término)
+  if (lowerQuery.match(/\b(acto administrativo|recurso|tutela|cumplimiento|entidad p[uú]blica|licencia|nulidad|restablecimiento del derecho|derecho de petici[oó]n|petici[oó]n|cpaca|1437|t[eé]rmino procesal)\b/)) {
     return 'administrativo'
   }
   
   // Tributario
   if (lowerQuery.match(/\b(impuesto|renta|iva|dian|declaraci[oó]n tributaria|retenci[oó]n)\b/)) {
     return 'tributario'
-  }
-  
-  // Constitucional
-  if (lowerQuery.match(/\b(constituci[oó]n|derechos fundamentales|acci[oó]n de tutela|corte constitucional)\b/)) {
-    return 'constitucional'
   }
   
   return 'general'
@@ -160,11 +185,20 @@ export function generateLegalWarnings(complexity: 'baja' | 'media' | 'alta', leg
   return warnings.length > 0 ? '\n\n' + warnings.join('\n') : ''
 }
 
+// S6.2: Reglas anti-repetición
+const ANTI_REPETITION_RULES = `
+
+REGLAS:
+- NO repitas información.
+- Sé conciso: máximo 3-4 oraciones por punto.
+- Si múltiples artículos aplican, menciona solo los 2-3 más relevantes.`
+
 /**
  * Genera el prompt del sistema especializado por área legal
- * FASE_4 4.2: Comprimido a ≤350 tokens; 4.4: ejemplo HNAC corto con secciones claras
+ * S5.2: Usa PROMPT_PENAL/ADMIN/CONSTITUCIONAL cuando aplica
+ * S6.2: Añade reglas anti-repetición al final
  */
-export function generateSystemPrompt(legalArea: LegalArea, maxCitations: number, complexity: 'baja' | 'media' | 'alta' = 'media'): string {
+export function generateSystemPrompt(legalArea: LegalArea, maxCitations: number, complexity: 'baja' | 'media' | 'alta' = 'media', query?: string): string {
   const areaOneLine: Record<LegalArea, string> = {
     laboral: 'Eres abogado laboralista colombiano (CST, prestaciones, jurisprudencia laboral).',
     comercial: 'Eres abogado comercialista colombiano (Código de Comercio, sociedades, contratos).',
@@ -175,7 +209,8 @@ export function generateSystemPrompt(legalArea: LegalArea, maxCitations: number,
     constitucional: 'Eres abogado constitucionalista colombiano (CP, Corte Constitucional).',
     general: 'Eres abogado especializado en normativa colombiana.'
   }
-  const base = areaOneLine[legalArea]
+  const areaSpecific = query ? getPromptByArea(query) : null
+  const base = areaSpecific ?? areaOneLine[legalArea]
   const complexNote = complexity === 'alta' ? ' Consultas complejas: responde por partes, prioriza jerarquía Constitución > Ley > Decreto.' : ''
   const example = `
 Ejemplo de formato (usa estos títulos exactos):
@@ -186,7 +221,7 @@ Ejemplo de formato (usa estos títulos exactos):
 **RECOMENDACIÓN:** [pasos concretos si aplica.]`
   return `${base}${complexNote}
 
-Responde SIEMPRE con las secciones anteriores en este orden. Solo cita fuentes [1] a [${maxCitations}]. No inventes artículos que no estén en el contexto.${example}`
+Responde SIEMPRE con las secciones anteriores en este orden. Solo cita fuentes [1] a [${maxCitations}]. No inventes artículos que no estén en el contexto.${example}${ANTI_REPETITION_RULES}`
 }
 
 /**
@@ -371,7 +406,7 @@ export function generatePrompts(context: PromptContext): {
   }
   
   return {
-    systemPrompt: generateSystemPrompt(legalArea, context.maxCitations, complexity),
+    systemPrompt: generateSystemPrompt(legalArea, context.maxCitations, complexity, context.query),
     userPrompt: generateUserPrompt(updatedContext)
   }
 }
