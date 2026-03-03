@@ -15,6 +15,8 @@ type CalculationItem = { type: string; amount: number; formula: string; breakdow
 type VigenciaNorma = { normaId: string; title: string; estado: string; derogadaPor?: string; derogadaDesde?: string }
 type ProcedureItem = { id: string; nombre: string; tipo?: string; resumen?: string }
 
+type ConfidenceLevel = 'alta' | 'media' | 'baja' | 'insuficiente'
+
 type Props = {
   query?: string
   answer: string
@@ -23,6 +25,28 @@ type Props = {
   calculations?: CalculationItem[]
   vigenciaValidation?: { warnings: string[]; byNorma: VigenciaNorma[] } | null
   procedures?: ProcedureItem[]
+  /** S4.6: Nivel de confianza del retrieval para badge */
+  confidence?: { level: ConfidenceLevel; score: number }
+}
+
+function ConfidenceBadge({ level, score }: { level: ConfidenceLevel; score: number }) {
+  const styles: Record<ConfidenceLevel, string> = {
+    alta: 'bg-green-100 text-green-800 border-green-200',
+    media: 'bg-yellow-100 text-yellow-800 border-yellow-200',
+    baja: 'bg-orange-100 text-orange-800 border-orange-200',
+    insuficiente: 'bg-red-100 text-red-800 border-red-200'
+  }
+  const labels: Record<ConfidenceLevel, string> = {
+    alta: 'Alta confianza',
+    media: 'Confianza media',
+    baja: 'Confianza baja',
+    insuficiente: 'Información insuficiente'
+  }
+  return (
+    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${styles[level]}`}>
+      {labels[level]} {(score * 100).toFixed(0)}%
+    </span>
+  )
 }
 
 export default function ResultsDisplay({
@@ -32,7 +56,8 @@ export default function ResultsDisplay({
   requestId,
   calculations = [],
   vigenciaValidation = null,
-  procedures = []
+  procedures = [],
+  confidence
 }: Props) {
   async function sendFeedback(vote: 'up' | 'down') {
     if (!requestId) return
@@ -83,6 +108,12 @@ export default function ResultsDisplay({
 
   return (
     <section className="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+      {confidence && (
+        <div className="mb-3 flex items-center gap-2">
+          <span className="text-sm text-gray-500">Confianza:</span>
+          <ConfidenceBadge level={confidence.level as ConfidenceLevel} score={confidence.score} />
+        </div>
+      )}
       {answer && (
         <div className="prose prose-sm max-w-none prose-headings:text-gray-900 prose-p:text-gray-700">
           <h2 className="text-xl font-semibold mb-3 text-gray-800">Respuesta</h2>

@@ -117,7 +117,7 @@ async function createOrUpdateRelease(repo, files) {
   const urls = stdout.trim().split('\n')
   
   return {
-    indexUrl: urls.find(u => u.includes('index.json.gz')),
+    indexUrl: urls.find(u => u.endsWith('/index.json.gz') || /\/index\.json\.gz($|\?)/.test(u)),
     bm25Url: urls.find(u => u.includes('bm25-index.json.gz'))
   }
 }

@@ -31,6 +31,7 @@ export default function AppPage() {
   const [calculations, setCalculations] = useState<CalculationItem[]>([])
   const [vigenciaValidation, setVigenciaValidation] = useState<{ warnings: string[]; byNorma: VigenciaNorma[] } | null>(null)
   const [procedures, setProcedures] = useState<ProcedureItem[]>([])
+  const [confidence, setConfidence] = useState<{ level: string; score: number } | undefined>(undefined)
 
   const onSearch = async () => {
     const startTime = Date.now()
@@ -42,6 +43,7 @@ export default function AppPage() {
     setCalculations([])
     setVigenciaValidation(null)
     setProcedures([])
+    setConfidence(undefined)
     try {
       const res = await fetch('/api/rag', {
         method: 'POST',
@@ -74,6 +76,7 @@ export default function AppPage() {
       setCalculations(data.calculations ?? [])
       setVigenciaValidation(data.vigenciaValidation ?? null)
       setProcedures(data.procedures ?? [])
+      setConfidence(data.confidence)
       
       // Guardar en historial local (temporal hasta que CU-03 y CU-04 estén completas)
       try {
@@ -171,6 +174,7 @@ export default function AppPage() {
           calculations={calculations}
           vigenciaValidation={vigenciaValidation}
           procedures={procedures}
+          confidence={confidence}
         />
       )}
 

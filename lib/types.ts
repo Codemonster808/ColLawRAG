@@ -42,8 +42,12 @@ export type RagQuery = {
   userId?: string // Para tracking y límites de tier
 }
 
+export type ConfidenceLevel = 'alta' | 'media' | 'baja' | 'insuficiente'
+
 export type RagResponse = {
   answer: string
+  /** S4.4: Nivel de confianza del retrieval (alta/media/baja/insuficiente) */
+  confidence?: { level: ConfidenceLevel; score: number }
   citations: Array<{
     id: string
     title: string

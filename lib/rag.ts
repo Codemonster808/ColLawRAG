@@ -1,4 +1,33 @@
 import { v4 as uuidv4 } from 'uuid'
+
+/** S4.1: Nivel de confianza del retrieval según score del top chunk */
+export type RetrievalConfidenceLevel = 'alta' | 'media' | 'baja' | 'insuficiente'
+
+export type RetrievalConfidence = {
+  level: RetrievalConfidenceLevel
+  score: number
+  reason: string
+}
+
+/** S4.1: Calcula confianza del retrieval según scores de chunks recuperados */
+export function calculateRetrievalConfidence(retrieved: Array<{ chunk: DocumentChunk; score: number }>): RetrievalConfidence {
+  if (!retrieved || retrieved.length === 0) {
+    return { level: 'insuficiente', score: 0, reason: 'No se recuperaron chunks' }
+  }
+  const topScore = retrieved[0].score
+  const avgScore = retrieved.reduce((s, r) => s + r.score, 0) / retrieved.length
+
+  if (topScore < 0.25) {
+    return { level: 'insuficiente', score: topScore, reason: `Score top chunk muy bajo (${(topScore * 100).toFixed(1)}%)` }
+  }
+  if (topScore < 0.45) {
+    return { level: 'baja', score: topScore, reason: `Relevancia limitada (${(topScore * 100).toFixed(1)}%)` }
+  }
+  if (topScore < 0.65) {
+    return { level: 'media', score: topScore, reason: `Relevancia moderada (${(topScore * 100).toFixed(1)}%)` }
+  }
+  return { level: 'alta', score: topScore, reason: `Buen match (${(topScore * 100).toFixed(1)}%)` }
+}
 import { retrieveRelevantChunks } from './retrieval'
 import { generateAnswerSpanish } from './generation'
 import { filterSensitivePII } from './pii'
@@ -300,7 +329,21 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
       citations: [],
       retrieved: 0,
       requestId,
-      detectedLegalArea
+      detectedLegalArea,
+      confidence: { level: 'insuficiente' as const, score: 0, reason: 'No se recuperaron chunks' }
+    }
+  }
+
+  // S4.1-S4.2: Calcular confianza del retrieval; abstención si insuficiente
+  const confidence = calculateRetrievalConfidence(retrieved)
+  if (confidence.level === 'insuficiente') {
+    return {
+      answer: 'No tengo información suficiente para responder esta consulta con la debida precisión legal. Te recomiendo reformular tu pregunta o consultar a un abogado para casos concretos.',
+      citations: [],
+      retrieved: retrieved.length,
+      requestId,
+      detectedLegalArea,
+      confidence
     }
   }
 
@@ -515,13 +558,19 @@ export async function runRagPipeline(params: RagQuery): Promise<RagResponse> {
   const responseTime = Date.now() - startTime
   setTraceResult(requestId, chunksForGeneration.map(r => r.chunk.id), responseTime)
 
+  // S4.3: Advertencia si confianza baja
+  const finalAnswer = confidence.level === 'baja'
+    ? 'Advertencia: La información disponible puede ser incompleta.\n\n' + safeAnswer
+    : safeAnswer
+
   // 11. Construir respuesta final
   const response: RagResponse = {
-    answer: safeAnswer,
+    answer: finalAnswer,
     citations,
     retrieved: chunksForGeneration.length,
     requestId,
     detectedLegalArea,
+    confidence: { level: confidence.level, score: confidence.score },
     metadata: {
       responseTime,
       complexity: 'media' // Podría detectarse automáticamente

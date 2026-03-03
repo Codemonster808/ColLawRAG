@@ -321,15 +321,52 @@ function extractVigenciaFromFilename(name) {
   return undefined
 }
 
+/** P0 T1+T2: Mapeo filename (sin extensión) → título legible. Elimina "codigo codigo X". */
+const MAP_FILENAME_TO_TITLE = {
+  codigo_codigo_penal_ley599: 'Código Penal (Ley 599/2000)',
+  codigo_codigo_civil: 'Código Civil',
+  codigo_codigo_sustantivo_trabajo: 'Código Sustantivo del Trabajo',
+  codigo_codigo_comercio: 'Código de Comercio',
+  codigo_codigo_general_proceso_ley1564: 'Código General del Proceso (Ley 1564/2012)',
+  codigo_codigo_infancia_adolescencia_ley1098: 'Código de la Infancia y la Adolescencia (Ley 1098/2006)',
+  codigo_codigo_procedimiento_penal_ley906: 'Código de Procedimiento Penal (Ley 906/2004)',
+  constitucion_constitucion_politica_1991: 'Constitución Política de 1991',
+}
+
+/** P0 T1: Normaliza títulos con "codigo codigo" o "constitucion constitucion" duplicado. */
+function normalizeMetadataTitle(title) {
+  if (!title || typeof title !== 'string') return title
+  let t = title
+  // constitucion constitucion → Constitución
+  t = t.replace(/\bconstitucion\s+constitucion\b/gi, 'Constitución')
+  if (t.includes('constitucion politica')) t = t.replace(/\bconstitucion\s+politica\b/gi, 'Constitución Política')
+  if (t.includes('1991')) t = t.replace(/\b1991\b/, 'de 1991')
+  // codigo codigo X → Código X
+  t = t.replace(/\bcodigo\s+codigo\s+penal\s+ley(\d+)/gi, 'Código Penal (Ley $1)')
+  t = t.replace(/\bcodigo\s+codigo\s+penal\b/gi, 'Código Penal')
+  t = t.replace(/\bcodigo\s+codigo\s+civil\b/gi, 'Código Civil')
+  t = t.replace(/\bcodigo\s+codigo\s+sustantivo\s+trabajo\b/gi, 'Código Sustantivo del Trabajo')
+  t = t.replace(/\bcodigo\s+codigo\s+comercio\b/gi, 'Código de Comercio')
+  t = t.replace(/\bcodigo\s+codigo\s+general\s+proceso\s+ley(\d+)/gi, 'Código General del Proceso (Ley $1)')
+  t = t.replace(/\bcodigo\s+codigo\s+infancia\s+adolescencia\s+ley(\d+)/gi, 'Código de la Infancia y la Adolescencia (Ley $1)')
+  t = t.replace(/\bcodigo\s+codigo\s+procedimiento\s+penal\s+ley(\d+)/gi, 'Código de Procedimiento Penal (Ley $1)')
+  t = t.replace(/\bcodigo\s+codigo\s+(\w+)/gi, (_, rest) => 'Código ' + rest.charAt(0).toUpperCase() + rest.slice(1).toLowerCase())
+  return t.trim()
+}
+
 function extractTitle(content, fallback) {
   const lines = content.split(/\r?\n/)
   for (const l of lines.slice(0, 5)) {
     const m1 = l.match(/^#\s*(.+)$/i)
-    if (m1) return m1[1].trim()
+    if (m1) return normalizeMetadataTitle(m1[1].trim())
     const m2 = l.match(/^t[íi]tulo\s*:\s*(.+)$/i)
-    if (m2) return m2[1].trim()
+    if (m2) return normalizeMetadataTitle(m2[1].trim())
   }
-  return fallback.replace(/[_-]/g, ' ')
+  const baseName = fallback.replace(/\.[^.]+$/, '') // sin extensión si vino con .txt
+  const mapped = MAP_FILENAME_TO_TITLE[baseName]
+  if (mapped) return mapped
+  const fromFallback = fallback.replace(/[_-]/g, ' ')
+  return normalizeMetadataTitle(fromFallback)
 }
 
 /**

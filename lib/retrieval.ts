@@ -309,26 +309,39 @@ function applyMetadataBoost<T extends { chunk: DocumentChunk; score: number }>(
   
   const keywords = areaKeywords[detectedArea.toLowerCase()] || []
   
+  // P0 T3: Áreas no-penal que no deben traer chunks de Código Penal (laboral, civil, administrativo)
+  const NON_PENAL_AREAS = ['laboral', 'civil', 'administrativo', 'tributario', 'comercial', 'constitucional']
+  const isQueryNonPenal = NON_PENAL_AREAS.includes(detectedArea.toLowerCase())
+
   // Aplicar boost a cada chunk
   const boosted = retrieved.map(item => {
     const title = item.chunk.metadata?.title?.toLowerCase() || ''
     const type = item.chunk.metadata?.type?.toLowerCase() || ''
-    
+    const chunkArea = (item.chunk.metadata?.area || '').toLowerCase()
+
     let boostFactor = 1.0
-    
-    // Boost si el título menciona keywords del área
-    for (const keyword of keywords) {
-      if (title.includes(keyword)) {
-        boostFactor = 1.50 // +50% boost (Sprint 3: aumentado de 15% a 50%)
-        break
+
+    // P0 T3: Penalizar chunks penal cuando la query es claramente de otra área (LAB-004, CIV-001, ADM-001)
+    const isChunkPenal = chunkArea === 'penal' || title.includes('código penal') || title.includes('codigo penal')
+    if (isQueryNonPenal && isChunkPenal) {
+      boostFactor = 0.35 // Penalización fuerte: chunks penal bajan en ranking para queries laboral/civil/admin
+    }
+
+    // Boost si el título menciona keywords del área (solo si no penalizamos)
+    if (boostFactor >= 1.0) {
+      for (const keyword of keywords) {
+        if (title.includes(keyword)) {
+          boostFactor = 1.50 // +50% boost (Sprint 3: aumentado de 15% a 50%)
+          break
+        }
       }
     }
-    
+
     // Boost adicional si el tipo coincide con el área
-    if (type === detectedArea.toLowerCase()) {
+    if (boostFactor >= 1.0 && type === detectedArea.toLowerCase()) {
       boostFactor = Math.max(boostFactor, 1.40) // +40% boost mínimo (Sprint 3: aumentado de 10% a 40%)
     }
-    
+
     return {
       ...item,
       score: item.score * boostFactor,
