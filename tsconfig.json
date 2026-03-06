@@ -19,14 +19,26 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
+      "@/app/*": [
+        "src/app/*"
+      ],
       "@/components/*": [
-        "components/*"
+        "src/components/*"
+      ],
+      "@/styles/*": [
+        "src/styles/*"
       ],
       "@/lib/*": [
         "lib/*"
       ],
       "@/data/*": [
         "data/*"
+      ],
+      "@/contexts/*": [
+        "src/contexts/*"
+      ],
+      "@/shared/*": [
+        "src/shared/*"
       ]
     },
     "plugins": [

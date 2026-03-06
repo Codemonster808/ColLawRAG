@@ -2,11 +2,12 @@
 const config = {
   preset: 'ts-jest',
   testEnvironment: 'node',
-  roots: ['<rootDir>/tests'],
+  roots: ['<rootDir>/src/tests'],
   testMatch: ['**/*.test.ts'],
   collectCoverageFrom: [
-    'lib/**/*.ts',
-    'app/api/**/*.ts',
+    'src/contexts/**/*.ts',
+    'src/shared/**/*.ts',
+    'src/app/api/**/*.ts',
     '!**/*.d.ts',
     '!**/node_modules/**'
   ],
@@ -16,7 +17,7 @@ const config = {
     '^@/(.*)$': '<rootDir>/$1'
   },
   testTimeout: 30000,
-  setupFilesAfterEnv: ['<rootDir>/tests/setup.ts']
+  setupFilesAfterEnv: ['<rootDir>/src/tests/setup.ts']
 }
 
 module.exports = config
