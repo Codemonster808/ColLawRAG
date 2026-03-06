@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { stripe } from '@/contexts/subscription/infrastructure/StripeAdapter'
 
 export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
 
 /**
  * GET /api/stripe/session?session_id=cs_xxx
