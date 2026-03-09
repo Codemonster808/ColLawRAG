@@ -205,18 +205,29 @@ export function generateLegalWarnings(complexity: 'baja' | 'media' | 'alta', leg
   return warnings.length > 0 ? '\n\n' + warnings.join('\n') : ''
 }
 
-// S6.2: Reglas anti-repetición
-const ANTI_REPETITION_RULES = `
+// S14 P2.1: Suavizar anti-repetición — instrucciones de completitud (las reglas restrictivas recortaban respuestas válidas)
+const COMPLETENESS_INSTRUCTIONS = `
 
-REGLAS:
-- NO repitas información.
-- Sé conciso: máximo 3-4 oraciones por punto.
-- Si múltiples artículos aplican, menciona solo los 2-3 más relevantes.`
+INSTRUCCIONES DE FORMATO:
+- Cita TODOS los artículos relevantes con número exacto y ley/código.
+- Explica cada artículo citado y su aplicación al caso.
+- Si hay múltiples artículos aplicables inclúyelos todos.
+- Organiza: norma aplicable → contenido → interpretación.
+- Sé completo: preferible respuesta larga y completa a corta e incompleta.`
+
+// S14 P2.3: Regla de citación obligatoria
+const CITATION_RULES = `
+
+CITACIÓN OBLIGATORIA:
+- Cada afirmación legal DEBE incluir [Artículo X Ley/Código Y].
+- Si mencionas plazo, monto o requisito, cita el artículo exacto.
+- Formato: "Según el artículo 64 del CST modificado por el artículo 28 de la Ley 789 de 2002 la indemnización es..."
+- NUNCA digas "la ley establece" sin citar qué ley y qué artículo.`
 
 /**
  * Genera el prompt del sistema especializado por área legal
  * S5.2: Usa PROMPT_PENAL/ADMIN/CONSTITUCIONAL cuando aplica
- * S6.2: Añade reglas anti-repetición al final
+ * S14 P2.1/P2.3: Citación obligatoria + completitud (suplantan anti-repetición)
  */
 export function generateSystemPrompt(legalArea: LegalArea, maxCitations: number, complexity: 'baja' | 'media' | 'alta' = 'media', query?: string, usePromptByArea = true): string {
   const areaOneLine: Record<LegalArea, string> = {
@@ -239,11 +250,29 @@ Ejemplo de formato (usa estos títulos exactos):
 **ANÁLISIS JURÍDICO:** [aplicación de normas a hechos.]
 **CONCLUSIÓN:** [conclusión jurídica clara.]
 **RECOMENDACIÓN:** [pasos concretos si aplica.]`
-  return `${base}${complexNote}
+
+  // S14 P2.2: Few-shot para derecho laboral
+  const fewShotLaboral = legalArea === 'laboral' ? `
+
+EJEMPLO FEW-SHOT (derecho laboral):
+**HECHOS RELEVANTES:** Un trabajador con contrato a término indefinido es despedido sin justa causa después de 3 años de servicio. Gana $2.500.000 mensuales (3 SMLMV).
+**NORMAS APLICABLES:**
+[1] Artículo 64 del Código Sustantivo del Trabajo (CST) - Terminación unilateral del contrato sin justa causa.
+[2] Artículo 28 de la Ley 789 de 2002 - Modifica el artículo 64 del CST.
+[3] Artículo 1 del Decreto 2351 de 1965 - Indemnización por despido sin justa causa.
+**ANÁLISIS JURÍDICO:** Según el Art. 64 del CST modificado por el Art. 28 de la Ley 789/2002, el empleador puede terminar el contrato sin justa causa pagando indemnización. Para contratos a término indefinido con trabajadores que ganen menos de 10 SMLMV, la indemnización es de 30 días por el primer año y 20 días por cada año subsiguiente. Con 3 años de servicio: (30 días × 1 año) + (20 días × 2 años) = 70 días de indemnización. Salario diario: $2.500.000 / 30 = $83.333. Indemnización total: 70 × $83.333 = $5.833.310.
+**CONCLUSIÓN:** El trabajador tiene derecho a una indemnización de aproximadamente $5.833.310 por los 3 años de servicio, más el pago de vacaciones y cesantías proporcionales.
+**RECOMENDACIÓN:** El trabajador debe presentar reclamación ante el inspector de trabajo o demandar ante el juez laboral dentro de los 3 años siguientes a la terminación del contrato (prescripción).
+
+` : ''
+
+  return `${base}${complexNote}${fewShotLaboral}
 
 Responde SIEMPRE con las secciones anteriores en este orden. Solo cita fuentes [1] a [${maxCitations}].
 
-REGLA CRÍTICA: SOLO menciona artículos y normas que aparezcan TEXTUALMENTE en las fuentes proporcionadas. Si un artículo no aparece literalmente en las fuentes, NO lo menciones. Si no encuentras la norma exacta para responder, di "No se encontró la norma específica en las fuentes consultadas" en lugar de inventar un artículo. Jamás cites artículos de áreas legales distintas a la pregunta (ej: no cites CPACA para preguntas laborales).${example}${ANTI_REPETITION_RULES}`
+REGLA CRÍTICA: SOLO menciona artículos y normas que aparezcan TEXTUALMENTE en las fuentes proporcionadas. Si un artículo no aparece literalmente en las fuentes, NO lo menciones. Si no encuentras la norma exacta para responder, di "No se encontró la norma específica en las fuentes consultadas" en lugar de inventar un artículo. Jamás cites artículos de áreas legales distintas a la pregunta (ej: no cites CPACA para preguntas laborales).
+
+ADVERTENCIA DE VIGENCIA: Si citas una norma que puede haber sido modificada o derogada, indica explícitamente: "Nota: verificar vigencia actual de [norma]" cuando no puedas confirmar su vigencia. NUNCA presentes una norma como vigente sin certeza.${example}${CITATION_RULES}${COMPLETENESS_INSTRUCTIONS}`
 }
 
 /**
