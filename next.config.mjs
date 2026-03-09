@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Evita descarga de libvips que causa timeout en Vercel (sharp: Request timed out)
+  images: { unoptimized: true },
   // Errores de TS pre-existentes (next-auth no instalado, tests con vitest, etc.)
   // no bloquean el build de producción — se detectan en desarrollo.
   typescript: {
